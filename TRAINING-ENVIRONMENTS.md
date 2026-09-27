@@ -129,3 +129,29 @@ Measure separately:
 - total rollout throughput per host.
 
 Only after that benchmark should the talk or company narrative attach numeric speedups to fork-reset.
+
+
+## World models versus executable worlds
+
+There are two different “CWM” references around this topic and they must not be conflated:
+
+- **Contrastive World Models** — Bonnie Li, arXiv:2609.22175 (2026), a Dreamer-style latent-dynamics approach that replaces pixel reconstruction with a contrastive / InfoMax-style objective to retain future-predictive information and ignore visual nuisance factors.
+- **Code World Model** — Meta FAIR (2025), a code-generation model trained on Python execution traces and agentic container trajectories and post-trained with RL in verifiable coding/software-engineering environments.
+
+The Cambridge bridge uses **Contrastive World Models** for the representation argument and **Meta Code World Model** only as evidence that executable environments matter for code learning.
+
+### The systems inversion
+
+World-model methods make imagined rollouts cheap when direct interaction is costly, unsafe, or scarce. Forkable sandboxes attack the complementary term for software: make **real executable interaction** cheap enough to branch directly.
+
+> World models make imagination cheap. Forkable sandboxes make interaction cheap.
+
+A forked software rollout avoids learned transition-model error for the transition actually executed inside the captured boundary. This is not a claim that all external reality is captured. Network services, clocks, hardware, randomness, production state and incomplete tests may remain outside the snapshot.
+
+### Benchmark extension
+
+In addition to cold build / cached container restart / snapshot restore / snapshot fork, add a fifth axis where appropriate:
+
+5. learned / predicted rollout used for proposal or pruning, followed by executable forked validation.
+
+That hybrid benchmark would answer a more interesting question than “model or sandbox?”: **how should learned imagination choose branches, and how cheaply can executable forks ground them?**
