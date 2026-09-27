@@ -1,98 +1,78 @@
-\begin{frame}{Fork $\ne$ independence: the cold-liar problem}
+\begin{frame}{Four clones do not make four witnesses}
+\begin{columns}[T,onlytextwidth]
+\column{0.46\textwidth}
 \Large
-A child should not return a naked score.
-
-\vspace{0.4em}
 \begin{center}
-\Large
-$r_k=(\hat\theta_k,\; J_k,\; n_k,\; \mathcal{E}_k,\; \mathcal{L}_k,\; m_k)$
+$S_0 \rightarrow \{w_1,w_2,w_3,w_4\}$
 \end{center}
 
-\vspace{0.5em}
-\normalsize
+\vspace{0.3em}
+\normalsize They may share:
 \begin{itemize}
-  \item $\hat\theta_k$: estimate or candidate result
-  \item $J_k, n_k$: precision / sample size; in the Gaussian reduce, $\beta_k \equiv n_k$
-  \item $\mathcal{E}_k, \mathcal{L}_k$: evidence IDs and fork lineage
-  \item $m_k$: method / model / harness identity
+  \item the same prompt and model
+  \item the same cached artifact
+  \item the same hidden bad fixture
+  \item the same ancestor state
 \end{itemize}
 
-\begin{block}{Cold liar}
-If a worker can forge high precision, it hijacks the pool. Isolation does not authenticate $n_k$.
+\column{0.48\textwidth}
+\begin{block}{So a worker returns more than a score}
+\centering
+\large result + precision + evidence IDs + lineage
 \end{block}
 
-\source{Evidence-Aware MapReduce / Boltzmann MapReduce: Eliaz, arXiv:2607.09689.}
+\vspace{0.45em}
+\begin{block}{Cold liar}
+If a worker can claim absurd confidence, it can dominate a reducer even when it is wrong.
+\end{block}
+\end{columns}
+
+\vspace{0.55em}
+\centering\Large \hilite{Fork makes search cheap. It does not manufacture independent evidence.}
+\source{Evidence-Aware / Boltzmann MapReduce: Eliaz, arXiv:2607.09689.}
 \end{frame}
 
 % -------------------------------------------------------------------
-\begin{frame}{Annealing is schedule language, not mysticism}
+\begin{frame}{Three factories. Same loop.}
+\centering
+\large
+\texttt{snapshot -> fork -> search -> verify -> reduce -> promote -> burn}
+
+\vspace{0.8em}
 \normalsize
-\begin{tabular}{p{0.24\textwidth}p{0.64\textwidth}}
+\begin{tabular}{p{0.18\textwidth}p{0.24\textwidth}p{0.25\textwidth}p{0.22\textwidth}}
 \toprule
-\textbf{Cousin} & \textbf{Factory translation} \\
+\textbf{Factory} & \textbf{Search} & \textbf{Oracle / reduce} & \textbf{Scarce tip} \\
 \midrule
-Simulated annealing & hot exploration -> cooler gates -> $T\to0$ promote \\
-Metropolis-Hastings & propose $\Delta$ in child; keep = accept; revert = burn \\
-SGD / Langevin & noisy local ascent on one path; step/noise policy outside worker \\
-RL temperature & entropy / KL exploration is an Epoch policy; checkpoint is the tip \\
+Software & candidate patches & tests + evidence lineage & merge to main \\
+RL training & rollout trajectories & reward / verifier & policy checkpoint \\
+HIL / science & sim / hypotheses & measured evidence & robot / wet / paper \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.8em}
-\begin{block}{Thermostat rule}
-The worker may propose. The controller owns $T$, $\beta$, energy, acceptance, and the schedule digest.
+\begin{block}{The isomorphism}
+\centering Same runtime contract. Different nouns. The farther right you go, the more expensive a bad promote becomes.
 \end{block}
-
-\vspace{0.4em}
-\centering \large Factory = driven/open system; promote = absorbing sink, not equilibrium proof.
 \end{frame}
 
 % -------------------------------------------------------------------
-\begin{frame}{Capability contract: Fork, Reduce, Promote}
+\begin{frame}{The capability contract is only three verbs}
 \centering
-\begin{tikzpicture}[node distance=1.8cm,>=Latex]
-  \tikzset{capnode/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=3.2cm,minimum height=1cm,align=center,font=\large\bfseries}}
-  \node[capnode] (fork) at (0,0) {Fork\\\normalsize make worlds cheap};
-  \node[capnode] (reduce) at (4.2,0) {Reduce\\\normalsize pool only evidence};
-  \node[capnode,fill=WarmAmber!25] (promote) at (8.4,0) {Promote\\\normalsize authority once};
-  \draw[->,very thick,SignalCyan] (fork) -- (reduce);
-  \draw[->,very thick,SignalCyan] (reduce) -- (promote);
-  \node[align=center,color=Muted] at (0,-1.4) {FS + memory + process\\wire is scoped};
-  \node[align=center,color=Muted] at (4.2,-1.4) {lineage, precision, abstain\\not majority theater};
-  \node[align=center,color=Muted] at (8.4,-1.4) {merge / checkpoint / robot hour\\outside child};
+\begin{tikzpicture}[>=Latex]
+  \tikzset{capnode/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=3.3cm,minimum height=1.2cm,align=center,font=\Large\bfseries}}
+  \node[capnode] (f) at (-4.2,0) {Fork\\\normalsize make worlds cheap};
+  \node[capnode] (r) at (0,0) {Reduce\\\normalsize keep evidence honest};
+  \node[capnode,fill=WarmAmber!23] (p) at (4.2,0) {Promote\\\normalsize spend authority once};
+  \draw[->,very thick,SignalCyan] (f) -- (r);
+  \draw[->,very thick,SignalCyan] (r) -- (p);
 \end{tikzpicture}
 
-\vspace{0.9em}
-\begin{block}{API claim}
-Forkable sandbox is not a faster VM benchmark. It is a capability contract for controlled search.
-\end{block}
-\end{frame}
-
-% -------------------------------------------------------------------
-\begin{frame}{Invariants: Search $\ne$ Authority}
-\begin{columns}[T,onlytextwidth]
-\column{0.48\textwidth}
-\begin{itemize}
-  \item immutable parent snapshot $S_0$
-  \item frozen objective digest
-  \item controller-owned schedule
-  \item no ambient credential inheritance
-\end{itemize}
-\column{0.48\textwidth}
-\begin{itemize}
-  \item evidence carries lineage
-  \item abstain is a valid verdict
-  \item one promote bit
-  \item burn runners after promote
-\end{itemize}
-\end{columns}
-
-\vspace{0.7em}
+\vspace{1em}
 \begin{center}
-\Large \law
+\large \law
 \end{center}
 
-\vspace{0.4em}
-\centering
-Create entropy where exploration pays; destroy entropy before promotion.
+\vspace{0.45em}
+\Large Search may be stochastic. \hilite{Authority may not be ambient.}
 \end{frame}
