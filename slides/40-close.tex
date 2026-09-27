@@ -1,0 +1,35 @@
+\begin{frame}{Open problems for SRG}
+\begin{enumerate}
+  \item \term{Fork $\ne$ independence}: how should reducers estimate correlation across CoW siblings?
+  \item \term{Credential leases}: what is the right remint/revoke API on fork?
+  \item \term{Warmth vs side channels}: where may caches live without becoming a wire?
+  \item \term{Sealed oracles}: how do we keep tests/rewards writable enough for science, but not writable by the subject?
+  \item \term{World diff}: what is the Git analogue for machines, not files?
+  \item \term{Promote-once}: how do children outlive parents without inheriting authority?
+\end{enumerate}
+
+\vspace{0.4em}
+\begin{block}{Close}
+Burn the runner. Keep the proof. Fork the machine, not the trust.
+\end{block}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{Selected sources and claim fence}
+\footnotesize
+\begin{tabular}{p{0.24\textwidth}p{0.68\textwidth}}
+\toprule
+Firecracker & Agache et al., \textit{Firecracker: Lightweight Virtualization for Serverless Applications}, NSDI 2020. \\
+DeltaBox & Dong et al., \textit{Scaling Stateful AI Agents with Millisecond-Level Sandbox Checkpoint/Rollback}, arXiv:2605.22781. \\
+Shepherd & Yu et al., \textit{Enabling Programmable Meta-Agents via Reversible Agentic Execution Traces}, arXiv:2605.10913. \\
+Evidence-aware reduce & Eliaz, \textit{Evidence-Aware MapReduce / Boltzmann MapReduce}, arXiv:2607.09689. \\
+Reward / escape fences & Rebound to Remedy, arXiv:2604.01476; SandboxEscapeBench, arXiv:2603.02277; SWE-bench, arXiv:2310.06770. \\
+Training environments & SWE-smith, arXiv:2504.21798; Meta CWM, arXiv:2510.02387; Prime Intellect Environments Hub; Scale / Surge / Mercor RL environments. \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.8em}
+\begin{block}{Do not overclaim}
+Physics is algebra and schedule language. Do not claim Gibbs ensembles, detailed balance, thermalization, or that fork guarantees independent evidence.
+\end{block}
+\end{frame}
