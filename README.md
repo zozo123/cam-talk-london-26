@@ -3,6 +3,7 @@
 The talk now has one reproducible stage source:
 
 - [talk.tex](talk.tex) + [slides/](slides/) — final Beamer deck.
+- [talk.pdf](talk.pdf) — checked-in compiled 16:9 PDF; CI also rebuilds it as an artifact.
 - [FINAL-DECK.md](FINAL-DECK.md) — 45-minute stage path, cut order, timing and claim fence.
 - [TOPICS.md](TOPICS.md) — complete repo-wide topic map.
 - [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis, current landscape, honesty fence and benchmark design.
@@ -14,7 +15,7 @@ Build locally with `make`; GitHub Actions compiles `talk.pdf` and uploads it as 
 
 # Forkable Sandboxes: The Runtime Layer for AI Software Factories
 
-> **SCRATCH PAD** for Cambridge CompLab Systems Research Group · not the final deck · living speaker notebook
+> **FINAL TALK REPO** for Cambridge CompLab Systems Research Group · canonical stage deck + research notebook
 
 | | |
 |---|---|
@@ -25,7 +26,7 @@ Build locally with `make`; GitHub Actions compiles `talk.pdf` and uploads it as 
 | **Where** | FW11 (+ Microsoft Teams) |
 | **Contact** | Yaman Rawas-Kalaji |
 | **Speaker** | Yossi Eliaz |
-| **Repo status** | Scratch pad — story, physics lens, papers, claim fences, timed outline |
+| **Repo status** | **Final stage deck is `talk.tex` + `slides/`; research notes remain under `scratch/` and `swarm/`** |
 
 **DST note:** UK falls back **25 Oct 2026**. Slot is still **BST** — never label GMT/UTC+0. Verified against talks.cam `dtstart=20261015T150000` (no `Z`). Detail: [`scratch/TIME.md`](scratch/TIME.md).
 
