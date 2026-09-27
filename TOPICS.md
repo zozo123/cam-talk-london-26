@@ -116,3 +116,14 @@ This is the repo-wide map for Forkable Sandboxes: The Runtime Layer for AI Softw
 - TRAINING-ENVIRONMENTS.md — coding-RL environment/reset landscape and systems thesis.
 - scratch/ — story depth, bibliography, glossary, paper draft, speaker notes and timing.
 - swarm/A–P — sixteen independent research lenses plus ROUNDTABLE.md synthesis.
+
+
+## K. World models ↔ executable worlds
+
+73. Two ways to make futures cheap — learned imagination (Dreamer / Contrastive World Models) versus forked executable interaction.
+74. Executable counterfactuals — one authenticated S0, different interventions, actual software transitions inside the captured boundary.
+75. Snapshot versus latent — compact learned predictive state versus explicit, overcomplete executable continuation state; both expose a sufficiency question.
+76. Filtering dual — CWM asks what a representation should forget; sandboxing asks what state/authority a child must never inherit; analogy, not theorem.
+77. Model/world crossover — the research question of when fork/reset cost makes executable interaction preferable to learned dynamics for a given horizon/fidelity.
+
+**Nomenclature:** Contrastive World Models (Bonnie Li, arXiv:2609.22175) and Meta Code World Model (2025) are separate works. Expand the name on stage; do not use ambiguous “CWM”.
