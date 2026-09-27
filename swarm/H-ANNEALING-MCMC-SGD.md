@@ -225,3 +225,69 @@ S0'     = Authority.promote(Pool.mode, Epoch)  # T→0 act
 ---
 
 *Researcher H pass · 2026-09-27 (Asia/Jerusalem) · claim fence aligned with B/PARALLEL-WORLDS; β≡n from arXiv 2607.09689v3; Epoch/Search≠Authority from G; liquid/swfactory methodology as inspiration only.*
+
+
+---
+
+## Addendum — Non-equilibrium drive (open systems)
+
+**Claim fence (restated):** this is schedule / systems language for *driven* factories — **not** a claim that agent sandboxes obey non-equilibrium statistical mechanics of nature, Onsager reciprocity, or a measured entropy-production theorem.
+
+### Driven open systems, not closed Gibbs boxes
+
+Liquid factories continuously inject work: new issues, fresh `S0` snapshots, oracle evaluations, human/HITL tips, GPU hours. They dump heat by burning runners and expiring leases. That is an **open, driven** picture — closer to a continuously forced Markov process than to a closed canonical ensemble relaxing to equilibrium.
+
+| Closed / equilibrium rhetoric (avoid) | Open / driven systems reading (prefer) |
+|---|---|
+| Swarm “thermalizes” to \(\pi\propto e^{-\beta E}\) | Controller keeps pumping proposals + oracles; measure never sits still |
+| \(Z\) is the lab’s free energy | \(Z_g\) stays B’s **pool diagnostic** only |
+| Detailed balance as shipped invariant | Frozen Obj ≈ *local* honesty condition for MH rhetoric; global drive breaks balance by design |
+| Equilibrium replicas | Correlated CoW siblings under ongoing Epoch policy |
+
+**Spoken:** “Our factories are open systems under continuous drive — not a magnet cooling in a fridge.”
+
+### Promote = absorbing sink
+
+In the path picture, **promote** is an **absorbing** authority transition: once the tip is spent (merge / checkpoint / wet slot / robot hour / paper claim), sibling worlds are archival; runners burn; the control plane does not keep sampling as if the mode were still in the bulk.
+
+- Search measure = transient / recurrent exploration under Epoch \(T\).  
+- Promote = sink: probability mass that hits authority stays there (one bit, G invariant 4).  
+- Reject / abstain / burn = other exits that do *not* mint a tip.  
+- Two-phase promote (D/G): `Promote.compute` may still be reversible archival keep; `Promote.tip` is the scarce absorbing burn.
+
+This is why zero-\(T\) language is useful **at the gate** without claiming the whole swarm equilibrated: absorption is an authority act, not a thermodynamic limit of \(K\to\infty\) forks.
+
+### Hamiltonian only as proposal generator
+
+If a “Hamiltonian” / energy appears in factory talk, treat it as a **proposal and scoring device**, not as the conserved generator of real-time dynamics:
+
+- \(E\) / reward / loss = oracle score under frozen Obj (C + G).  
+- Proposal kernel (Cell Δ, SGD step, Tree-RL branch, Langevin noise) may be *inspired* by \(-\nabla E\) or by a heuristic Hamiltonian Monte-Carlo story — but the runtime’s job is **sample → measure → reduce → promote**, not integrate symplectic equations on the guest.  
+- Do **not** say microVMs evolve under a Hamiltonian flow; do say “Hamiltonian / energy is how we *name* the oracle the proposal is aiming at.”
+
+Matches H §3–4: MH needs \(E\) for accept/reject; Langevin/SGD need noisy gradients — both are **generators of proposals and weights**, not claims of microscopic energy conservation in the sandbox.
+
+### Entropy production ≈ lineage (algebra, not Clausius)
+
+B’s ledger already carries fork lineage \(\mathcal{L}\) and evidence IDs \(\mathcal{E}\). H’s non-eq reading: **irreversible history is the systems twin of entropy production**.
+
+| Non-eq intuition | Factory ledger |
+|---|---|
+| Forward path vs time-reverse | BRANCH / commit / promote record that has no cheap undo once tip I/O fired |
+| Entropy production along a trajectory | Append-only \(\mathcal{L}\) + sealed oracle receipts + burn events |
+| Housekeeping heat | Dispose runners, revoke leases (E), scrub warm CoW credential surface |
+| Drive strength | Epoch exploration budget / \(T\) / fan-out \(K\) set by authority |
+
+**Teeth:** we do **not** compute a numerical \(\dot{S}\) for SRG. We say: *lineage + burn + absorbing promote are how the factory makes irreversibility auditable* — the algebraic cousin of entropy production, owned jointly with B’s \(\mathcal{L}\) and G’s burn invariant.
+
+### Tie-back to β / Epoch (B + G)
+
+- Reduce \(\beta\equiv n\) (2607.09689) remains an **information weight**, not a thermostat of a closed system.  
+- Factory \(T\) / `anneal_schedule_id` remains an **Epoch drive knob** (H→G wire ask).  
+- Cooling toward promote = shrinking the transient measure into an absorbing tip — liquid entropy destroy — under continuous external drive, not equilibration.
+
+**Do-not-say extras:** ❌ “we measured entropy production of the swarm”; ❌ “promote is the thermodynamic arrow of time in nature”; ❌ “Hamiltonian Monte Carlo is what Firecracker runs.”
+
+---
+
+*Addendum · Researcher H · 2026-09-27 (Asia/Jerusalem) · non-equilibrium drive / absorbing promote / Hamiltonian-as-proposal / lineage≈entropy-production — claim-fenced.*
