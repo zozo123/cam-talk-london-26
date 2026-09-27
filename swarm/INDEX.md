@@ -14,6 +14,7 @@ Repo: https://github.com/zozo123/cam-talk-london-26
 | G | Universal factory API | [G-FACTORY-API.md](G-FACTORY-API.md) |
 | H | Annealing / MCMC / SGD | [H-ANNEALING-MCMC-SGD.md](H-ANNEALING-MCMC-SGD.md) |
 | I | Non-eq / Hamiltonian / driven | [I-NONEQUILIBRIUM-HAMILTONIAN.md](I-NONEQUILIBRIUM-HAMILTONIAN.md) |
+| K | Deep bibliography (books + papers) | [K-BOOKS-PAPERS-DEEP.md](K-BOOKS-PAPERS-DEEP.md) |
 
 Peer debate: [ROUNDTABLE.md](ROUNDTABLE.md)
 
