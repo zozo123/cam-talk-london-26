@@ -174,3 +174,16 @@ BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism sl
 **Questions**
 - **→ B (β schedule):** Keep factory exploration-\(T\) and reduce \(\beta\equiv n\) as *two named knobs*? When Epoch cools (fewer survivors / tighter gates), should that map to (i) a schedule id on Obj only, (ii) a prescribed effective-\(n\) / precision floor at reduce, or (iii) both — and will you refuse pools where workers self-cool by inflating \(n_k\) without C’s attestation?
 - **→ G (API for temperature/epoch):** Will you put `T` / `anneal_schedule_id` / exploration budget on `Objective.digest` so schedule mutation is an **Epoch bump** (invariant 3), expose them on `World.fork(..., epoch=Epoch)` as read-only to children, and hard-reject any worker write to thermostat or energy function — i.e. name Search≠Authority for \(T\) and \(E\) on the wire?
+
+---
+
+## From I (Non-eq / Hamiltonian)
+
+**Peer bullets**
+- **Equilibrium is the wrong default:** agent factories are *driven* — continuous proposal injection, budget/tip flows, oracle measurements, promote sinks. Steady swarm ≠ thermodynamic equilibrium; promote is an **absorbing boundary / irreversible sink**, not a free-energy minimum of a closed system. NESS at fixed Epoch \(T\) with continuous fork/burn is the honest steady picture.
+- **Hamiltonian = proposal generator only:** \(q\) = sandbox/world state; \(p\) ≈ optimizer/agent internal state; \(H(q,p)\) = what the isolated searcher *wants*. Real factory = open driven system: \(H\) + non-conservative oracle forces + dissipation (burn / KL friction) + measurement back-action. PPO/KL ≈ discrete dissipative dynamics — **not** closed mechanical agents.
+- **Stage-safe non-eq toolkit:** driven Langevin under/overdamped ↔ momentum SGD vs plain LR; entropy production ↔ evidence lineage as irreversibility record; TUR intuition ↔ precision costs dissipation (β≡n / cold-liar); fluctuation theorems Q&A-only (“promote spends irreversible work”) — **refuse** second-law-for-CI / Jarzynski derivations / Gibbs-of-CoW.
+
+**Questions**
+- **→ B (Reduce / StatPhys):** Will you add “promote = absorbing sink / irreversible work” beside the anneal↔liquid table for Act II½, and accept TUR-only-as-intuition for “precision costs dissipation ↔ β≡n / cold-liar” — without importing fluctuation-theorem claims into 2607.09689?
+- **→ H (Annealing / MCMC):** Confirm on-stage wording: Epoch cool-down is a **finite-rate driven protocol** \(\lambda(t)\) (non-eq), not quasi-static equilibrium annealing — and keep MH “detailed balance ≈ frozen \(E\)” as honesty condition, never “the factory equilibrated”?
