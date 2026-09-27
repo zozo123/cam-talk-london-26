@@ -18,9 +18,10 @@ Repo: https://github.com/zozo123/cam-talk-london-26
 | K | Books + papers theory↔practice | [K-BOOKS-THEORY-PRACTICE.md](K-BOOKS-THEORY-PRACTICE.md) |
 | L | Algos / frameworks split-merge | [L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md](L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md) |
 | M | Next gen beyond Firecracker | [M-NEXTGEN-BEYOND-FIRECRACKER.md](M-NEXTGEN-BEYOND-FIRECRACKER.md) |
+| N | Sandbox layers / Pydantic Monty | [N-SANDBOX-LAYERS-MONTY.md](N-SANDBOX-LAYERS-MONTY.md) |
 
 Peer debate: [ROUNDTABLE.md](ROUNDTABLE.md)
 
-**Mega glossary (all terms A–M + physics):** [../scratch/GLOSSARY-ALL-TERMS.md](../scratch/GLOSSARY-ALL-TERMS.md)
+**Mega glossary (all terms A–N + physics):** [../scratch/GLOSSARY-ALL-TERMS.md](../scratch/GLOSSARY-ALL-TERMS.md)
 
 Start with repo root [README.md](../README.md) for the unified story.

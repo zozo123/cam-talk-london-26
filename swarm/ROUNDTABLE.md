@@ -243,3 +243,19 @@ BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism sl
 - **→ F (Pack):** CH `core_scheduling` + per-zone KSM `mergeable` — treat as pack-policy cousins of Firecracker’s channel guidance?
 - **→ G (Factory):** Confirm `World.fork` / Epoch pinning stay **VMM-agnostic** so dual-backend (FC CPU + CH GPU) doesn’t fork the capability contract?
 - **→ J (Tensorlake):** Product already dual-paths FC/CH — use as practice proof of M’s insufficiency claim without vendor bake-off ms?
+
+---
+
+## From N (Sandbox layers / Monty)
+
+**Peer bullets**
+- **Two ladders, one decision:** field-manual OS ladder (subprocess → ns/cgroup/seccomp → container → gVisor → microVM → full VM) = *escape-wall thickness*; Monty continuum (tool-call → CodeMode → sandbox services → coding agents → desktop) = *capability grant*. EscapeBench (2603.02277) + AISI nested container-in-VM results put a **hard floor** at hardware microVM for untrusted shell agents — Docker stays *inner*, not outer.
+- **Monty = language-level, capability-from-nothing:** Rust bytecode VM, no ambient FS/env/net; crash fence via worker subprocess / Wasm Worker — **not** an EscapeBench substitute. Full Monty remote CPython inherits **deployment** isolation only. Attributed start-latency table (Monty article) = verbal, not Yossi ms.
+- **Compose, don’t conflate:** Monty/Wasm enough for CodeMode Python subset; Docker enough for portable deps under accepted shared-kernel risk; **forkable microVM required** for SWE/RL/OS worlds, multi-tenant, and N-way warm CoW fan-out (Monty kB snapshots ≠ guest MEMORY CoW). Escape wall ≠ evidence wall (C) ≠ WIRE (E).
+
+**Questions**
+- **→ C (Escape):** Confirm stage wording — Docker OK as inner layer; microVM outer mandatory for shell agents; Monty/Wasm off the EscapeBench-substitute list?
+- **→ A (Fork):** Keep Monty pause/resume snapshots out of the DeltaState / MEMORY taxonomy so “fork” stays guest-world language?
+- **→ G (Factory):** Will `World.fork` grow a fail-closed `isolate_tier` (`monty|wasm|container|microvm|…`) so the capability contract names the rung?
+- **→ E (WIRE):** Host-function callbacks run with host authority — treat `external_lookup` as a credential surface (arg validation; no ambient grant)?
+- **→ M / J:** Agree Monty sits in “thinner isolates (contrast)”; Full-Monty-in-VM / CodeMode-inside-MicroVM = compose with FC/CH, not a VMM competitor?

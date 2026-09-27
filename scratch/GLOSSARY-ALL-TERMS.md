@@ -1,9 +1,9 @@
-# Glossary — all terms (swarm A–M + physics)
+# Glossary — all terms (swarm A–N + physics)
 **Talk:** Cambridge CL SRG · Forkable Sandboxes · 15 Oct 2026  
 **Purpose:** One mega note so deck, Q&A, and papers share vocabulary.  
 **Fence:** Physics terms = *interpretation with teeth* (algebra + schedule), not Gibbs-of-nature. Vendor ms verbal only.
 
-Alphabetized within sections. Cross-refs: `swarm/A`…`M`, `CLAIM-FENCE.md`, `PARALLEL-WORLDS-STATPHYS.md`.
+Alphabetized within sections. Cross-refs: `swarm/A`…`N`, `CLAIM-FENCE.md`, `PARALLEL-WORLDS-STATPHYS.md`.
 
 ---
 
@@ -246,6 +246,27 @@ See `swarm/L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md` — MapReduce→Ray lineage; CRDT�
 
 ---
 
+
+## N. Isolation ladder / Monty (pointer)
+
+See `swarm/N-SANDBOX-LAYERS-MONTY.md` — classic OS ladder × Monty continuum; EscapeBench floor; when Wasm/Docker suffice vs forkable microVM.
+
+| Term | Meaning | Home |
+|---|---|---|
+| **Capability continuum** | tool-call → Monty CodeMode → sandbox services → coding agents → desktop use (Colvin) | N |
+| **Capability-from-nothing** | Start with zero ambient authority; opt-in mounts/host fns — opposite of lock-down-from-full | N · Monty |
+| **CodeMode** | LLM writes Python that calls host tools instead of sequential tool-calls | N · Monty / Cloudflare |
+| **EscapeBench / SandboxEscapeBench** | Nested container-in-VM CTF: frontier models escape Docker-class walls → microVM floor | N, C · 2603.02277 |
+| **Field-manual ladder** | subprocess → namespaces → container → gVisor → microVM → full VM (Yossi sandboxes-why-how-when) | N |
+| **Full Monty** | Commercial WS pool of Monty workers ± proxy to CPython in container/VM — deployment owns isolation on CPython path | N |
+| **isolate_tier** | Proposed factory enum naming the rung (`monty|wasm|container|microvm|…`), fail-closed | N → G |
+| **Language-level sandbox** | Isolation by interpreter (no op exists), not by OS container/VM | N · Monty |
+| **Monty** | Pydantic’s Rust Python subset VM for AI code — language sandbox + worker/Wasm crash fence | N |
+| **Monty worker subprocess** | Default Python/JS pool child over monty-proto; empty env; crash ≠ host death | N |
+| **OS ladder vs continuum** | Escape-wall thickness ≠ capability grant — compose, don’t equate | N |
+| **Wasm Monty Worker** | Browser/edge deploy of Monty; soft crash fence; not full Linux ABI | N |
+
+---
 ## L–Z quick symbols
 
 | Symbol / short | Gloss |
@@ -282,7 +303,11 @@ See `swarm/L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md` — MapReduce→Ray lineage; CRDT�
 | Suspend | Snapshot / fork |
 | Hafnium | Dense CoW microVM fork factory |
 | Gibbs naming | Agents thermalize like magnets |
+| Monty language sandbox | EscapeBench / Firecracker outer wall |
+| Monty kB interpreter snapshot | Guest MEMORY / DeltaState CoW fork |
+| Full Monty remote CPython | Monty security-page guarantees |
+| Docker as sole outer wall | Hardened inner layer under microVM |
 
 ---
 
-*Mega glossary · 2026-09-27 (IDT) · covers swarm A–M + physics companions*
+*Mega glossary · 2026-09-27 (IDT) · covers swarm A–N + physics companions*
