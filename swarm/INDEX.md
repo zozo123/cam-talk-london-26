@@ -1,6 +1,6 @@
-# Eleven-researcher swarm — Cambridge SRG
+# Twelve-researcher swarm — Cambridge SRG
 
-Best-minds panel for **Forkable Sandboxes** (CL SRG · 15 Oct 2026).
+Best-minds notes for **Forkable Sandboxes** (CL SRG · 15 Oct 2026).  
 Repo: https://github.com/zozo123/cam-talk-london-26
 
 | ID | Lens | File |
@@ -17,7 +17,10 @@ Repo: https://github.com/zozo123/cam-talk-london-26
 | J | Tensorlake practice / fork fabric | [J-TENSORLAKE-PRACTICE.md](J-TENSORLAKE-PRACTICE.md) |
 | K | Books + papers theory↔practice | [K-BOOKS-THEORY-PRACTICE.md](K-BOOKS-THEORY-PRACTICE.md) |
 | L | Algos / frameworks split-merge | [L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md](L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md) |
+| M | Next gen beyond Firecracker | [M-NEXTGEN-BEYOND-FIRECRACKER.md](M-NEXTGEN-BEYOND-FIRECRACKER.md) |
 
 Peer debate: [ROUNDTABLE.md](ROUNDTABLE.md)
+
+**Mega glossary (all terms A–M + physics):** [../scratch/GLOSSARY-ALL-TERMS.md](../scratch/GLOSSARY-ALL-TERMS.md)
 
 Start with repo root [README.md](../README.md) for the unified story.

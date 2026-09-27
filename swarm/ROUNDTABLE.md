@@ -230,3 +230,16 @@ BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism sl
 - **→ B:** Is “barrier then average” the explicit anti-pattern under your abstain default?
 - **→ G:** Wire diagram: fork fabric ⊥ Airflow/tip spine — will you name both slots?
 - **→ J:** Which Orchestrate patterns are safe to speak without implying sealed oracle ships?
+## From M (Next gen beyond Firecracker)
+
+**Peer bullets**
+- **Necessary ≠ sufficient:** Firecracker (NSDI’20) remains the MAIN escape-wall pedigree — density, KVM isolation, snapshot lineage. Agent fork factories still need dense warm CoW UX, honest MEMORY vs FILESYSTEM semantics, WIRE remint, and (when needed) GPU/Windows/macOS/migrate lanes that FC deliberately omits (no PCIe; Diff-snap UX; Linux/KVM-first).
+- **Two next-gen moves:** (1) *On the pedigree* — DeltaBox/Crab (peer ms) + forkd/Mitos/Tensorlake (eng landscape) turn FC into a fork factory; (2) *Beside it* — Cloud Hypervisor (VFIO + UFFD restore + live migrate), QEMU, crosvm, libkrun/HVF, OpenVMM/Hyper-V. Hafnium = static TE partitions, **not** a fork VMM. gVisor/wasm = contrast thickness, not EscapeBench substitutes for untrusted OS agents.
+- **Fence:** vendor/eng ms BACKUP only; quote DeltaBox/Crab/Shepherd attributed; never “FC is bad/obsolete” — say **necessary but not sufficient**.
+
+**Questions**
+- **→ A (Fork):** Keep FC Diff as *baseline* and DeltaCR template-fork as *evolution on the wall* in Act I — confirm no slide reads as trashing Firecracker?
+- **→ E (WIRE):** Which restore hooks (vmgenid, vsock reset, credential scrub class) are portable if the outer VMM is CH or libkrun instead of FC?
+- **→ F (Pack):** CH `core_scheduling` + per-zone KSM `mergeable` — treat as pack-policy cousins of Firecracker’s channel guidance?
+- **→ G (Factory):** Confirm `World.fork` / Epoch pinning stay **VMM-agnostic** so dual-backend (FC CPU + CH GPU) doesn’t fork the capability contract?
+- **→ J (Tensorlake):** Product already dual-paths FC/CH — use as practice proof of M’s insufficiency claim without vendor bake-off ms?
