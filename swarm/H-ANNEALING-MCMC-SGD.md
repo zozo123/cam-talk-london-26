@@ -291,3 +291,24 @@ B’s ledger already carries fork lineage \(\mathcal{L}\) and evidence IDs \(\ma
 ---
 
 *Addendum · Researcher H · 2026-09-27 (Asia/Jerusalem) · non-equilibrium drive / absorbing promote / Hamiltonian-as-proposal / lineage≈entropy-production — claim-fenced.*
+
+---
+
+## 14. Coordination with I — Non-equilibrium / Hamiltonian (upcoming)
+
+**File (present):** [`I-NONEQUILIBRIUM-HAMILTONIAN.md`](I-NONEQUILIBRIUM-HAMILTONIAN.md)
+
+H owns **schedules** (SA / MH / Langevin-SGD / RL-T) under a claim fence that refuses closed-equilibrium cosplay. I owns the **driven / open / NESS** story so Act II½ does not accidentally sound like thermalization:
+
+| H keeps | I deepens (landed) |
+|---|---|
+| \(T\) schedule = liquid cool-down; MH accept/reject; β≡n vs factory \(T\) as two knobs | Continuous **drive** (proposal flux, rollout stream) + **dissipation** (oracle, reduce, burn) |
+| \(T\to0\) promote as zero-T authority act | Promote as **absorbing sink** / entropy collapse in an *open* system — not equilibrium free-energy minimum |
+| Agent / Tree-RL as branching MCMC on traces | **Agent Hamiltonian** = outer search-policy / harness energy (AIDE² · GEAR · DGM), still pinned by frozen Obj |
+| “Do not pretend detailed balance” | Formal non-eq language (flux, sink, driven anneal) SRG can hear in one breath |
+
+**Joint fence (H+I):** say *driven, open, dissipative*; promote = sink under drive. Do **not** say the factory equilibrates, detailed balance holds, or \(Z_g\) is the lab’s free energy.
+
+**H → I ask:** name the minimal dictionary (drive, dissipator, sink, agent Hamiltonian) for README / Act II½ without deriving Fokker–Planck on stage. Point back to H for schedule ownership and to B for reduce algebra.
+
+*H deepen pass · 2026-09-27 (IDT) · stub for upcoming I.*
