@@ -1,0 +1,77 @@
+\begin{frame}[plain]
+  \titlepage
+  \vspace{-0.5em}
+  \begin{center}
+    \small \hilite{Burn the runner. Keep the proof. Fork the machine, not the trust.}
+  \end{center}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{Why I ended up working on this}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\textbf{1. Computational science}\par
+\normalsize I learned that an experiment is not reproducible unless the \emph{machine state}, inputs, and provenance are reproducible too.
+
+\column{0.31\textwidth}
+\textbf{2. Production ML + build systems}\par
+\normalsize I learned the opposite pressure: reuse everything you safely can --- caches, artifacts, warm state --- because recomputation is expensive.
+
+\column{0.31\textwidth}
+\textbf{3. Coding agents}\par
+\normalsize Then the developer became a program that runs shells, mutates files, calls networks, retries, and fans out hypotheses.
+\end{columns}
+
+\vspace{0.75em}
+\begin{block}{The collision}
+\centering
+\large The thing I wanted to reuse for speed --- \textbf{state} --- became the thing I had to isolate for trust.
+\end{block}
+
+\vspace{0.35em}
+\centering\large
+The missing primitive was not another model. It was a machine state I could \hilite{fork, inspect, revert, and burn} without forking authority.
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{One-sentence talk}
+\LARGE
+Coding agents, RL post-training, and hardware-in-the-loop all need the same thing:
+
+\vspace{0.7em}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\centering
+\Huge \hilite{cheap forked machines for search}
+\Large \\
+\vspace{0.2em}
+and a separate authority that never lives inside those machines.
+\end{minipage}
+\end{center}
+
+\vspace{0.7em}
+\large Forkable sandboxes are that machine. Everything else is orchestration.
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{The scarcity ladder}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[align=center,anchor=west,font=\bfseries\large] at (0,5.0) {cheap and plural};
+  \node[align=center,anchor=east,font=\bfseries\large] at (12.2,5.0) {scarce and singular};
+  \draw[very thick,SignalCyan,-{Latex[length=3mm]}] (0.3,4.55) -- (11.9,4.55);
+  \node[anchor=west] at (0.5,3.75) {agent samples / patches};
+  \node[anchor=east] at (11.7,3.75) {merge to main};
+  \node[anchor=west] at (0.5,3.0) {RL rollouts / policy candidates};
+  \node[anchor=east] at (11.7,3.0) {checkpoint promote};
+  \node[anchor=west] at (0.5,2.25) {sim / synthetic HIL};
+  \node[anchor=east] at (11.7,2.25) {real arm / human hour};
+  \node[anchor=west] at (0.5,1.5) {forked sandbox};
+  \node[anchor=east] at (11.7,1.5) {controller acceptance};
+  \node[fill=SoftGray,rounded corners,inner sep=6pt,align=center] at (2.1,0.65) {SEARCH\\many failures are cheap};
+  \node[fill=SoftGray,rounded corners,inner sep=6pt,align=center] at (10.2,0.65) {AUTHORITY\\one mistake is expensive};
+\end{tikzpicture}
+
+\vspace{0.4em}
+\large A million compiles are search. One merge - or one robot hour - is authority you can burn.
+\end{frame}
