@@ -1,0 +1,93 @@
+% 21
+\begin{frame}{Computer science translation dictionary}
+\small
+\begin{tabular}{p{0.22\textwidth}p{0.30\textwidth}p{0.36\textwidth}}
+\toprule
+\textbf{Perspective} & \textbf{Object} & \textbf{Same idea in this talk} \\
+\midrule
+Git & branch / merge & child world / promote \\
+Databases & transaction / commit / rollback & fork / promote / burn \\
+Distributed systems & MapReduce & many workers, structured reduce \\
+Operating systems & fork / checkpoint & executable continuation state \\
+Security & capability & authority is explicit and scoped \\
+Statistics & correlated samples & shared ancestry reduces evidence value \\
+Science & experiment / lab notebook & frozen state, oracle, durable record \\
+RL & rollout / reward & episode, verifier, policy update \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+% 22
+\begin{frame}{Fork, Reduce, Promote: the capability contract}
+\centering
+\begin{tikzpicture}[>=Latex]
+  \tikzset{capnode/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=3.3cm,minimum height=1.2cm,align=center,font=\Large\bfseries}}
+  \node[capnode] (f) at (-4.2,0) {Fork\\\normalsize make worlds cheap};
+  \node[capnode] (r) at (0,0) {Reduce\\\normalsize keep evidence honest};
+  \node[capnode,fill=WarmAmber!23] (p) at (4.2,0) {Promote\\\normalsize spend authority once};
+  \draw[->,very thick,SignalCyan] (f) -- (r);
+  \draw[->,very thick,SignalCyan] (r) -- (p);
+\end{tikzpicture}
+\vspace{1em}
+\begin{center}
+\large \law
+\end{center}
+\vspace{0.45em}
+\Large Search may be stochastic. \hilite{Authority may not be ambient.}
+\end{frame}
+
+% 23
+\begin{frame}{Reduce is not majority vote}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.46\textwidth}
+A worker should not return only:
+\begin{center}
+\Large \warn{score = 0.94}
+\end{center}
+It should return a structured record:
+\begin{center}
+\normalsize result + precision + evidence IDs + lineage + method
+\end{center}
+\column{0.48\textwidth}
+\begin{block}{Why?}
+\begin{itemize}
+  \item two siblings may share the same bad root
+  \item one worker may claim absurd confidence
+  \item tests may be changed mid-epoch
+  \item evidence may be missing or stale
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{0.6em}
+\centering\large When the reducer cannot tell, \hilite{abstain} is a valid result.
+\end{frame}
+
+% 24
+\begin{frame}{Four clones do not make four witnesses}
+\begin{columns}[T,onlytextwidth]
+\column{0.46\textwidth}
+\Large
+\begin{center}
+$S_0 \rightarrow \{w_1,w_2,w_3,w_4\}$
+\end{center}
+\normalsize They may share:
+\begin{itemize}
+  \item the same prompt and model
+  \item the same cached artifact
+  \item the same hidden bad fixture
+  \item the same ancestor state
+\end{itemize}
+\column{0.48\textwidth}
+\begin{block}{Cold liar}
+If a worker can claim absurd confidence, it can dominate a reducer even when it is wrong.
+\end{block}
+\vspace{0.6em}
+\begin{block}{Correlation}
+Execution isolation is not statistical independence.
+\end{block}
+\end{columns}
+\vspace{0.5em}
+\centering\Large \hilite{Fork makes search cheap. It does not manufacture evidence.}
+\source{Evidence-Aware / Boltzmann MapReduce: Eliaz, arXiv:2607.09689.}
+\end{frame}
