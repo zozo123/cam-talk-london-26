@@ -9,11 +9,12 @@ Working notes for **Forkable Sandboxes: The Runtime Layer for AI Software Factor
 | [UNIVERSAL-HILLCLIMB.md](UNIVERSAL-HILLCLIMB.md) | propose→isolate→measure→keep/revert→promote |
 | [PARALLEL-WORLDS-STATPHYS.md](PARALLEL-WORLDS-STATPHYS.md) | Path integrals, β/Z, Tensorlake |
 | [PAPERS-AND-SOURCES.md](PAPERS-AND-SOURCES.md) | Top 15 + clusters + deck five |
+| [THEORY-PRACTICE-BRIDGE.md](THEORY-PRACTICE-BRIDGE.md) | Books ↔ Tensorlake ↔ algos (README pointer) |
 
 Status: scratch pad. Not the final deck.
 
-## Seven-researcher swarm
+## Eleven-researcher swarm
 
-Deep panel notes (fork, reduce, oracle, auto-research, WIRE, CoW channels, factory API):
+Deep panel notes (fork, reduce, oracle, auto-research, WIRE, CoW channels, factory API, anneal, non-eq, Tensorlake practice, books, split-merge algos):
 
 → [`../swarm/INDEX.md`](../swarm/INDEX.md) · [`../swarm/ROUNDTABLE.md`](../swarm/ROUNDTABLE.md)
