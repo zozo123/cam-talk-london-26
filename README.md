@@ -7,6 +7,7 @@ The talk now has one reproducible stage source:
 - [SPEAKER-NOTES-30MIN.md](SPEAKER-NOTES-30MIN.md) — exact stage beats, jokes, transitions and cut points.
 - [TOPICS.md](TOPICS.md) — complete repo-wide topic map.
 - [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis, current landscape, honesty fence and benchmark design.
+- [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — Dreamer / Contrastive World Models ↔ forkable-runtime bridge, executable counterfactuals, state sufficiency and claim fence.
 - [CLAIM-FENCE.md](CLAIM-FENCE.md) — hard DO / DO-NOT-SAY stage card.
 
 Build locally with `make`; GitHub Actions compiles the final 16:9 `talk.pdf` and uploads it as an artifact.
@@ -36,9 +37,11 @@ Build locally with `make`; GitHub Actions compiles the final 16:9 `talk.pdf` and
 
 ## One-sentence talk
 
-Coding agents, RL post-training, and hardware-in-the-loop all need the same thing: **cheap forked machines for search, and a separate authority that never lives inside those machines.**
+**World models make imagination cheap. Forkable sandboxes make interaction cheap.**
 
-Forkable sandboxes are that machine. Everything else is orchestration.
+For executable software worlds, a snapshot lets us branch real futures from one authenticated past; the controller keeps evidence and authority outside those disposable worlds.
+
+Coding agents, RL post-training, and hardware-in-the-loop then share one systems contract: **Fork, Reduce, Promote.**
 
 **Mantra:** Burn the runner. Keep the proof. Fork the machine, not the trust.
 
