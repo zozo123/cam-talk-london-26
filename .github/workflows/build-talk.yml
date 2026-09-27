@@ -20,6 +20,9 @@ on:
       - ".github/workflows/build-talk.yml"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,3 +43,19 @@ jobs:
           path: |
             talk.pdf
             talk-30min.pdf
+      - name: Publish compiled PDFs to main
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp talk.pdf dist/forkable-sandboxes-full-academic.pdf
+          cp talk-30min.pdf dist/forkable-sandboxes-30min.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/forkable-sandboxes-full-academic.pdf dist/forkable-sandboxes-30min.pdf
+          if git diff --cached --quiet; then
+            echo "Compiled PDFs unchanged."
+          else
+            git commit -m "Publish compiled Cambridge talk PDFs [skip ci]"
+            git push origin HEAD:main
+          fi
