@@ -1,4 +1,4 @@
-# Nine-researcher swarm — Cambridge SRG
+# Eleven-researcher swarm — Cambridge SRG
 
 Best-minds panel for **Forkable Sandboxes** (CL SRG · 15 Oct 2026).
 Repo: https://github.com/zozo123/cam-talk-london-26
@@ -14,7 +14,9 @@ Repo: https://github.com/zozo123/cam-talk-london-26
 | G | Universal factory API | [G-FACTORY-API.md](G-FACTORY-API.md) |
 | H | Annealing / MCMC / SGD | [H-ANNEALING-MCMC-SGD.md](H-ANNEALING-MCMC-SGD.md) |
 | I | Non-eq / Hamiltonian / driven | [I-NONEQUILIBRIUM-HAMILTONIAN.md](I-NONEQUILIBRIUM-HAMILTONIAN.md) |
-| K | Deep bibliography (books + papers) | [K-BOOKS-PAPERS-DEEP.md](K-BOOKS-PAPERS-DEEP.md) |
+| J | Tensorlake practice / fork fabric | [J-TENSORLAKE-PRACTICE.md](J-TENSORLAKE-PRACTICE.md) |
+| K | Books + papers theory↔practice | [K-BOOKS-THEORY-PRACTICE.md](K-BOOKS-THEORY-PRACTICE.md) |
+| L | Algos / frameworks split-merge | [L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md](L-ALGOS-FRAMEWORKS-SPLIT-MERGE.md) |
 
 Peer debate: [ROUNDTABLE.md](ROUNDTABLE.md)
 
