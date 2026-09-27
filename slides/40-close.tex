@@ -4,10 +4,10 @@ Four systems questions I do not think we have answered cleanly yet:
 
 \vspace{0.4em}
 \begin{enumerate}
-  \item \term{Fork semantics}: what is the right first-class ``machine value'' --- FS, memory, process tree, GPU, display, sockets?
+  \item \term{Executable state}: what must a first-class machine value include -- FS, memory, process tree, GPU, sockets, clock, external state?
+  \item \term{Model vs world}: where is the crossover where learned imagination becomes cheaper than forked executable interaction?
   \item \term{Correlation}: how should reducers price shared ancestry instead of pretending siblings are i.i.d.?
-  \item \term{Warmth vs isolation}: where can warm state live without becoming a credential or side channel?
-  \item \term{Authority}: how do children outlive parents without inheriting the parent’s power to promote?
+  \item \term{Authority}: how do children inherit enough state to act without inheriting the power to grade or promote themselves?
 \end{enumerate}
 
 \vspace{0.65em}
@@ -22,17 +22,16 @@ Four systems questions I do not think we have answered cleanly yet:
 \footnotesize
 \begin{tabular}{p{0.23\textwidth}p{0.69\textwidth}}
 \toprule
-Firecracker & Agache et al., \textit{Firecracker: Lightweight Virtualization for Serverless Applications}, NSDI 2020. \\
-DeltaBox & Dong et al., \textit{Scaling Stateful AI Agents with Millisecond-Level Sandbox Checkpoint/Rollback}, arXiv:2605.22781. \\
-Shepherd & Yu et al., \textit{Enabling Programmable Meta-Agents via Reversible Agentic Execution Traces}, arXiv:2605.10913. \\
+World models & Hafner et al., \textit{Training Agents Inside of Scalable World Models} (Dreamer 4), arXiv:2509.24527; Li, \textit{Contrastive World Models}, arXiv:2609.22175. \\
+Fork systems & Firecracker, NSDI 2020; DeltaBox, arXiv:2605.22781; Shepherd, arXiv:2605.10913. \\
 Evidence-aware reduce & Eliaz, \textit{Evidence-Aware MapReduce / Boltzmann MapReduce}, arXiv:2607.09689. \\
 Reward integrity & \textit{From Rebound to Remedy}, arXiv:2604.01476. \\
-Training environments & SWE-smith, arXiv:2504.21798; Meta CWM, arXiv:2510.02387; Prime Intellect; Scale / Surge / Mercor environment products. \\
+Training environments & SWE-smith, arXiv:2504.21798; Meta Code World Model (2025); Prime Intellect; Scale / Surge / Mercor environment products. \\
 \bottomrule
 \end{tabular}
 
-\vspace{0.8em}
+\vspace{0.65em}
 \begin{block}{Claim fence}
-Fork is a systems primitive, not a proof of independent evidence. Physics analogies are algebra / schedule language for Q\&A, not a claim that agent factories are equilibrium Gibbs systems.
+A fork removes learned-dynamics error only inside the executable boundary it actually captures. External services, nondeterminism, hardware and incomplete tests can still make the world partial. Fork also does not imply independent evidence.
 \end{block}
 \end{frame}
