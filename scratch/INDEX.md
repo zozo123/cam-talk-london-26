@@ -11,3 +11,9 @@ Working notes for **Forkable Sandboxes: The Runtime Layer for AI Software Factor
 | [PAPERS-AND-SOURCES.md](PAPERS-AND-SOURCES.md) | Top 15 + clusters + deck five |
 
 Status: scratch pad. Not the final deck.
+
+## Seven-researcher swarm
+
+Deep panel notes (fork, reduce, oracle, auto-research, WIRE, CoW channels, factory API):
+
+→ [`../swarm/INDEX.md`](../swarm/INDEX.md) · [`../swarm/ROUNDTABLE.md`](../swarm/ROUNDTABLE.md)
