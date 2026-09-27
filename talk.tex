@@ -1,0 +1,60 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usetheme{default}
+\usefonttheme{professionalfonts}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\definecolor{DeepNavy}{HTML}{07131F}
+\definecolor{SignalCyan}{HTML}{13C5D8}
+\definecolor{WarmAmber}{HTML}{F5A623}
+\definecolor{SoftGray}{HTML}{E7EDF3}
+\definecolor{Muted}{HTML}{667085}
+\definecolor{Danger}{HTML}{B42318}
+\definecolor{OK}{HTML}{027A48}
+
+\setbeamercolor{normal text}{fg=DeepNavy,bg=white}
+\setbeamercolor{frametitle}{fg=DeepNavy,bg=white}
+\setbeamercolor{title}{fg=DeepNavy}
+\setbeamercolor{subtitle}{fg=Muted}
+\setbeamercolor{structure}{fg=SignalCyan}
+\setbeamercolor{block title}{fg=white,bg=DeepNavy}
+\setbeamercolor{block body}{fg=DeepNavy,bg=SoftGray!40}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{\begin{beamercolorbox}[wd=.75\paperwidth,ht=2.4ex,dp=1.2ex,leftskip=1.5em]{author in head/foot}\scriptsize Forkable Sandboxes - Cambridge SRG - Yossi Eliaz\end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.4ex,dp=1.2ex,rightskip=1.5em plus1fil]{date in head/foot}\hfill\scriptsize\insertframenumber/\inserttotalframenumber\end{beamercolorbox}}
+}
+\setbeamertemplate{itemize item}{\color{SignalCyan}$\blacktriangleright$}
+\setbeamertemplate{itemize subitem}{\color{WarmAmber}$\circ$}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\setbeamerfont{subtitle}{size=\large}
+
+\newcommand{\term}[1]{\textbf{\color{DeepNavy}#1}}
+\newcommand{\hilite}[1]{\textbf{\color{SignalCyan}#1}}
+\newcommand{\warn}[1]{\textbf{\color{Danger}#1}}
+\newcommand{\ok}[1]{\textbf{\color{OK}#1}}
+\newcommand{\source}[1]{\vfill{\raggedleft\tiny\color{Muted}#1\par}}
+\newcommand{\law}{\textbf{Durable intent. Disposable execution. Singular authority. Deterministic convergence.}}
+
+\title{Forkable Sandboxes}
+\subtitle{The Runtime Layer for AI Software Factories}
+\author{Yossi Eliaz\\Principal Engineer, Incredibuild / islo.dev}
+\institute{Computer Laboratory Systems Research Group Seminar\\University of Cambridge}
+\date{15 October 2026 - FW11 + Microsoft Teams}
+
+\begin{document}
+\input{slides/00-opening.tex}
+\input{slides/10-runtime.tex}
+\input{slides/20-factories.tex}
+\input{slides/30-reduce.tex}
+\input{slides/40-close.tex}
+\end{document}
