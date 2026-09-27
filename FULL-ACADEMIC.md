@@ -6,12 +6,12 @@ The earlier concise deck is preserved as `talk-30min.tex` plus `slides/`.
 
 ## Format
 
-- **36 slides total**
-- **32 core slides**
+- **38 slides total**
+- **34 core slides**
 - **4 appendix / optional deep-cut slides**
 - Designed for **~45 minutes of material + 15 minutes discussion**
-- The first 32 slides form a complete academic narrative.
-- Slides 33–36 are source/claim-fence and optional technical depth.
+- The first 34 slides form a complete academic narrative.
+- Slides 35–38 are source/claim-fence and optional technical depth.
 
 ## Why this version exists
 
@@ -132,7 +132,7 @@ Then we explain why Reduce is not majority vote, why abstain is valid, and why:
 > **Four clones do not make four witnesses.**
 
 ### Act VI — Cross-domain synthesis and research agenda
-Slides 25–32.
+Slides 25–34.
 
 Software, RL, HIL, scientific computing, and biology all instantiate:
 
@@ -144,6 +144,8 @@ The architecture blueprint then assembles the full system.
 
 We close with:
 
+- epoch fencing and stale-result rejection,
+- falsifiable evaluation methodology,
 - failure-mode checklist,
 - “what this is not,”
 - Cambridge research agenda,
@@ -179,17 +181,19 @@ We close with:
 26. Scientific computing and biology fit the same shape.
 27. Search dynamics: annealing, without mysticism.
 28. Architecture blueprint.
-29. Failure mode checklist.
-30. What this is not.
-31. Research agenda for Cambridge SRG.
-32. Takeaways.
+29. Epochs and fencing make promotion linearizable.
+30. A research claim needs a benchmark, not a slogan.
+31. Failure mode checklist.
+32. What this is not.
+33. Research agenda for Cambridge SRG.
+34. Takeaways.
 
 ## Appendix / optional deep cuts
 
-33. Selected sources / claim fence.
-34. World models plus forks, not either/or.
-35. Minimal API shape.
-36. Why the title says “factory.”
+35. Selected sources / claim fence.
+36. World models plus forks, not either/or.
+37. Minimal API shape.
+38. Why the title says “factory.”
 
 ## Suggested pacing — 45 minutes
 
@@ -198,7 +202,7 @@ We close with:
 - Slides 12–17: 8 minutes
 - Slides 18–20: 5 minutes
 - Slides 21–24: 6 minutes
-- Slides 25–32: 11 minutes
+- Slides 25–34: 13 minutes
 
 The exact order can be shortened without breaking the story because every act has an explicit transition.
 
@@ -207,7 +211,7 @@ The exact order can be shortened without breaking the story because every act ha
 Use the preserved `talk-30min.tex` for a polished short version.
 
 If cutting the full academic deck live, keep:
-1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 17, 20, 21, 22, 24, 25, 28, 31, 32.
+1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 17, 20, 21, 22, 24, 25, 28, 29, 30, 33, 34.
 
 ## Accessibility rules used in the deck
 
@@ -219,6 +223,8 @@ If cutting the full academic deck live, keep:
 6. Separate mechanism from authority.
 7. Keep claims fenced where the literature is incomplete.
 8. Return repeatedly to the same simple loop.
+9. Make correctness properties explicit: stale work is fenced, promotion linearizes once.
+10. Make the central systems thesis falsifiable with an explicit benchmark matrix.
 
 ## Main stage lines
 
