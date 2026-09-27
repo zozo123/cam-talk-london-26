@@ -26,7 +26,7 @@ If clock is tight: **skip II½ entirely**; keep one spoken line (“fork ≠ ind
 
 ## Act 0 — Hook (0:00–3:00) `[SYS]`
 
-**Analogy (SW eng):** `fork(2)` / process clone — Docker:apps :: forkable sandbox:agent trajectories. Illuminates ≠ proves.
+**Analogy:** primary **SW eng** `fork(2)` / Docker leap · **5-domain set** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#act-0--hook). Illuminates ≠ proves.
 **Slide intent:** one title + one diagram of “machine you can fork like a process.”
 
 **Beats (≈45 s each):**
@@ -43,18 +43,18 @@ If clock is tight: **skip II½ entirely**; keep one spoken line (“fork ≠ ind
 
 ## Act I — The execution contract (3:00–15:00) `[SYS]`
 
-**Analogies (per surface, prefer DL):** checkpointing≈S₀ · capability remint≈WIRE · ensemble≈fork fan-out · MoE≈fork experts · WAL/receipts≈recovery. Illuminates ≠ proves.
+**Analogies (per surface):** primary listed in table · **5-domain set (SW eng · CS · bio · physics · DL)** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#act-i--execution-contract-six-surfaces). Illuminates ≠ proves.
 **Slide intent:** six surfaces (matches published abstract) + one trade-off slide.
 
 | Min | Surface / beat | Slide | Cite | Analogy |
 |---|---|---|---|---|
 | 3:00 | Frame: substrate must expose these six | Checklist | — | — |
-| 4:00 | **Filesystem state** — workspace as snapshotable object | FS as object | — | **DL** checkpointing ≈ S₀ |
-| 5:30 | **Networking + credentials** — brokered WIRE; no ambient keys | Lease sketch | Xu–Kaffes BACKUP verbal | **SW** capability remint on spawn |
-| 7:00 | **Reproducibility** — named snapshot → identical restore | S₀ badge | — | **DL** frozen weights + seed |
-| 8:00 | **Fast cloning** — CoW microVM economics, not rebuild-from-Dockerfile | CoW fan-out | `[CITE#1]` Firecracker pedigree · `[CITE#2]` DeltaBox **or** Crab **peer tables only** | **DL** ensemble ≈ fork fan-out |
-| 10:00 | **Build/test/rollout** — warm factory *beside* the fork | Factory-beside | — | **DL** MoE ≈ fork experts |
-| 11:30 | **Recovery + observability** — crash ≠ authority; receipts outlive machine | Receipts | — | **SW** WAL / receipts outlive process |
+| 4:00 | **Filesystem state** — workspace as snapshotable object | FS as object | — | **DL** ckpt≈S₀ + see OUTLINE-ANALOGIES |
+| 5:30 | **Networking + credentials** — brokered WIRE; no ambient keys | Lease sketch | Xu–Kaffes BACKUP verbal | **SW** remint + see OUTLINE-ANALOGIES |
+| 7:00 | **Reproducibility** — named snapshot → identical restore | S₀ badge | — | **DL** frozen+seed + see OUTLINE-ANALOGIES |
+| 8:00 | **Fast cloning** — CoW microVM economics, not rebuild-from-Dockerfile | CoW fan-out | `[CITE#1]` Firecracker pedigree · `[CITE#2]` DeltaBox **or** Crab **peer tables only** | **DL** ensemble≈fan-out + see OUTLINE-ANALOGIES |
+| 10:00 | **Build/test/rollout** — warm factory *beside* the fork | Factory-beside | — | **DL** MoE≈experts + see OUTLINE-ANALOGIES |
+| 11:30 | **Recovery + observability** — crash ≠ authority; receipts outlive machine | Receipts | — | **SW** WAL/receipts + see OUTLINE-ANALOGIES |
 | 12:30 | Trade-off: container vs gVisor vs Firecracker-class | Isolation × latency × density | EscapeBench → wall (BACKUP); no vendor ms | denser ≠ stronger evidence |
 
 **Number fence (A):** quote DeltaBox ckpt/restore / Crab ≤1.9% / Shepherd 134–143 ms **as theirs**. forkd/Tensorlake/E2B = verbal landscape only.
@@ -65,7 +65,7 @@ If clock is tight: **skip II½ entirely**; keep one spoken line (“fork ≠ ind
 
 ## Act II — Three factories, one primitive (15:00–30:00) `[SYS]`
 
-**Analogies (per factory):** batch≈siblings (SW) · RLHF reward model≈oracle outside policy (RL) · phenotype screen≈HIL tip (bio). Loop mnemonic: ckpt→ensemble→distill→early-stop→**dropout** burn. Illuminates ≠ proves.
+**Analogies (per factory):** primary in table · **5-domain set** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#act-ii--three-factories). Loop mnemonic: ckpt→ensemble→distill→early-stop→**dropout** burn. Illuminates ≠ proves.
 **Slide intent:** one loop diagram, then three noun-swaps, then isomorphism tease.
 
 ```
@@ -75,9 +75,9 @@ snapshot → fork N → run searchers → reduce evidence → promote once → b
 | Min | Beat | Slide | Notes | Analogy |
 |---|---|---|---|---|
 | 15:00 | Draw the loop once | Loop | Stay `[SYS]` — say *reduce evidence*, not \(Z\) yet | DL loop mnemonic (see header) |
-| 16:30 | **Software factory** | Patches / Cells / tests → main | pstack fearless parallelism needs *own* machine | **DL** batch ≈ siblings |
-| 19:30 | **RL post-training** | Rollouts / preference → checkpoint | Reward sealed outside fork (preview C); soft temp = Epoch policy — don’t say β yet unless II½ confirmed | **DL** RLHF RM ≈ oracle outside policy |
-| 23:00 | **HIL** | Sim fan-out → robot hour tip | Scarcity ladder; million sim ≠ N robot hours | **bio** phenotype screen |
+| 16:30 | **Software factory** | Patches / Cells / tests → main | pstack fearless parallelism needs *own* machine | **DL** batch≈siblings + see OUTLINE-ANALOGIES |
+| 19:30 | **RL post-training** | Rollouts / preference → checkpoint | Reward sealed outside fork (preview C); soft temp = Epoch policy — don’t say β yet unless II½ confirmed | **DL** RLHF RM≈oracle + see OUTLINE-ANALOGIES |
+| 23:00 | **HIL** | Sim fan-out → robot hour tip | Scarcity ladder; million sim ≠ N robot hours | **bio** phenotype screen + see OUTLINE-ANALOGIES |
 | 26:30 | Isomorphism one-liner | SW/RL/sim/bio/auto-research table | Depth stays on FS/net/creds/clone/recovery | — |
 | 28:00 | Three gifts | pstack / OpenClaw / swfactory | Worker ≠ authority; sibling reuse ≠ confirmation | sibling reuse ≠ confirmation (correlated batch) |
 | 29:00 | Bridge to II½ or III | “Fork makes workers cheap…” | If skipping II½, add: “…not independent; lineage or abstain.” | — |
@@ -89,13 +89,13 @@ snapshot → fork N → run searchers → reduce evidence → promote once → b
 
 ## Act II½ — Boltzmann reduce + anneal (30:00–34:00) `[β/Z]` lean
 
-**Analogies:** Slide A — **DDP ≠ evidence independence** (DL); Slide B — **LR schedule ≈ anneal T**, early stopping ≈ promote gate (DL). Illuminates ≠ proves. No Gibbs-of-nature.
+**Analogies:** Slide A primary **DL** DDP≠indep · Slide B primary **DL** LR≈anneal \(T\) · **5-domain set** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#act-ii--two-slides). Illuminates ≠ proves. No Gibbs-of-nature.
 **Cut priority:** first thing to drop if late.  
 **Slide intent:** max **two** slides — (1) fork≠indep + worker record; (2) anneal schedule / driven sink.
 
 ### Slide A — Fork ≠ independence (≈90 s) `[β/Z]`
 
-**Analogy (DL):** DDP ≠ evidence independence — shared init ⇒ variance floor; reduce needs lineage, not naked scalar.
+**Analogy:** primary **DL** DDP ≠ evidence independence · **5-domain set** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#a--fork--independence). Illuminates ≠ proves.
 
 - Open with B Eq. (1) in words: shared ancestor ⇒ variance floor; cheap branches ≠ independent evidence.
 - Worker wire: \((\hat\theta, J, n, \mathcal{E}, \mathcal{L})\) — not a naked scalar. \(\beta_k \equiv n_k\).
@@ -107,7 +107,7 @@ snapshot → fork N → run searchers → reduce evidence → promote once → b
 
 ### Slide B — Annealing family + driven sink (≈90–120 s) `[β/Z]` + `[SYS]`
 
-**Analogy (DL):** LR schedule ≈ anneal \(T\) (Epoch digest = schedule id); early stopping ≈ promote gate; promote = absorbing tip under drive, not equilibrium.
+**Analogy:** primary **DL** LR schedule ≈ anneal \(T\) / early-stop ≈ promote · **5-domain set** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#b--anneal--driven-sink). Promote = absorbing tip under drive, not equilibrium. Illuminates ≠ proves.
 
 | Cousin | One line on stage |
 |---|---|
@@ -128,19 +128,19 @@ snapshot → fork N → run searchers → reduce evidence → promote once → b
 
 ## Act III — Open systems problems (34:00–42:00) `[SYS]`
 
-**Analogies (per problem):** DDP≠indep · capability remint · heat/timing channel · RLHF oracle · distillation≈reduce · early-stop≈promote · Git/world-diff · capability contract. Illuminates ≠ proves. See [`OUTLINE-ANALOGIES.md`](OUTLINE-ANALOGIES.md).
+**Analogies (per problem):** primary in table · **5-domain set (SW eng · CS · bio · physics · DL)** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#act-iii--open-problems). Illuminates ≠ proves.
 **Slide intent:** 6–8 problem cards; leave 2 as questions you want back.
 
 | Min | Problem | Owner lens | Stage tip | Analogy |
 |---|---|---|---|---|
-| 34:00 | **Fork ≠ independence** | A+B | Default abstain on shared root | **DL** DDP ≠ evidence independence |
-| 35:00 | **WIRE leases** | E | Capability remint; lit thin | **SW** capability remint on fork |
-| 36:00 | **Warm CoW channels** | F | Pack-by-trust; factory-beside | **physics** heat/timing side channel |
-| 37:00 | **Sealed oracle** | C | `[CITE#5]` Rebound *or* SWE-bench pedigree | **DL** RLHF RM ≈ oracle outside policy |
-| 38:00 | **Path-integral CI** | B+G | Merge = \((\hat\theta,\Delta,\mathrm{abstain})\), not green badge — say \(Z\) only if II½ ran | **DL** distillation ≈ reduce |
-| 39:00 | **Promote-once API** | G+D | compute vs tip; tip = sink under drive | **DL** early stopping ≈ promote gate |
-| 40:00 | **World-diff / β-as-Epoch** *(pick one if short)* | G / H | Conflict=evidence; no worker thermostat | **CS** Git conflict = evidence |
-| 41:00 | Name the contribution | G | *Fork, Reduce, Promote* capability contract | **SW** capability contract (POSIX-shaped) |
+| 34:00 | **Fork ≠ independence** | A+B | Default abstain on shared root | **DL** DDP≠indep + see OUTLINE-ANALOGIES |
+| 35:00 | **WIRE leases** | E | Capability remint; lit thin | **SW** remint + see OUTLINE-ANALOGIES |
+| 36:00 | **Warm CoW channels** | F | Pack-by-trust; factory-beside | **physics** heat/timing + see OUTLINE-ANALOGIES |
+| 37:00 | **Sealed oracle** | C | `[CITE#5]` Rebound *or* SWE-bench pedigree | **DL** RLHF RM≈oracle + see OUTLINE-ANALOGIES |
+| 38:00 | **Path-integral CI** | B+G | Merge = \((\hat\theta,\Delta,\mathrm{abstain})\), not green badge — say \(Z\) only if II½ ran | **DL** distill≈reduce + see OUTLINE-ANALOGIES |
+| 39:00 | **Promote-once API** | G+D | compute vs tip; tip = sink under drive | **DL** early-stop≈promote + see OUTLINE-ANALOGIES |
+| 40:00 | **World-diff / β-as-Epoch** *(pick one if short)* | G / H | Conflict=evidence; no worker thermostat | **CS** Git conflict=evidence + see OUTLINE-ANALOGIES |
+| 41:00 | Name the contribution | G | *Fork, Reduce, Promote* capability contract | **SW** capability contract + see OUTLINE-ANALOGIES |
 
 **Literature gaps (Q&A ammo, not slides):** evidence ρ across CoW; reducers that abstain; credential-on-fork peer hole; warm pages as channels; winner’s curse in Best-of-N.
 
@@ -148,7 +148,7 @@ snapshot → fork N → run searchers → reduce evidence → promote once → b
 
 ## Close (42:00–45:00) `[SYS]`
 
-**Analogy (DL):** dropout ≈ burn runners — kill unused paths; keep the proof (tip + receipts). Illuminates ≠ proves.
+**Analogy:** primary **DL** dropout ≈ burn runners · **5-domain set** → [`OUTLINE-ANALOGIES`](OUTLINE-ANALOGIES.md#close). Illuminates ≠ proves.
 **Mantra:** Burn the runner. Keep the proof. Fork the machine, not the trust.
 
 **Three questions for SRG:**
@@ -196,4 +196,4 @@ snapshot → fork N → run searchers → reduce evidence → promote once → b
 
 ---
 
-*Outline refined 2026-09-27 (IDT). Honor A’s peer-only number fence. Physics from B+H; driven/open/NESS from I; schedules from H; reduce from B. Analogies: [`OUTLINE-ANALOGIES.md`](OUTLINE-ANALOGIES.md) — illuminate ≠ prove; no Gibbs-of-nature.*
+*Outline refined 2026-09-27 (IDT). Honor A’s peer-only number fence. Physics from B+H; driven/open/NESS from I; schedules from H; reduce from B. Analogies: [`OUTLINE-ANALOGIES.md`](OUTLINE-ANALOGIES.md) — **5 domains × every beat**; illuminate ≠ prove; no Gibbs-of-nature.*
