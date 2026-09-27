@@ -1,0 +1,146 @@
+% 25
+\begin{frame}{Three factories. Same loop.}
+\centering
+\large
+\texttt{snapshot -> fork -> search -> verify -> reduce -> promote -> burn}
+\vspace{0.8em}
+\normalsize
+\begin{tabular}{p{0.18\textwidth}p{0.24\textwidth}p{0.25\textwidth}p{0.22\textwidth}}
+\toprule
+\textbf{Factory} & \textbf{Search} & \textbf{Oracle / reduce} & \textbf{Scarce tip} \\
+\midrule
+Software & candidate patches & tests + evidence lineage & merge to main \\
+RL training & rollout trajectories & reward / verifier & policy checkpoint \\
+HIL / science & sim / hypotheses & measured evidence & robot / wet / paper \\
+\bottomrule
+\end{tabular}
+\vspace{0.8em}
+\begin{block}{The isomorphism}
+Same runtime contract. Different nouns. The farther right you go, the more expensive a bad promote becomes.
+\end{block}
+\end{frame}
+
+% 26
+\begin{frame}{Scientific computing and biology fit the same shape}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\textbf{Cheap search}
+\begin{itemize}
+  \item simulation parameters
+  \item sequence designs
+  \item pipeline settings
+  \item mesh / timestep choices
+  \item generated hypotheses
+\end{itemize}
+\column{0.47\textwidth}
+\textbf{Scarce truth}
+\begin{itemize}
+  \item wet-lab assay
+  \item clinical review
+  \item large validated run
+  \item paper claim
+  \item production decision
+\end{itemize}
+\end{columns}
+\vspace{0.7em}
+\begin{block}{Lesson}
+The more expensive the oracle, the more valuable safe cheap branching becomes.
+\end{block}
+\end{frame}
+
+% 27
+\begin{frame}{Search dynamics: annealing, without mysticism}
+\small
+\begin{tabular}{p{0.25\textwidth}p{0.62\textwidth}}
+\toprule
+\textbf{Analogy} & \textbf{Runtime meaning} \\
+\midrule
+Simulated annealing & Start hot: explore many candidates. Cool: tighten gates. \\
+Metropolis-Hastings & Propose a child move; keep or burn based on evidence. \\
+SGD / Langevin & Local noisy improvement under an external schedule. \\
+RL temperature / KL & Exploration policy belongs to the controller, not the worker. \\
+\bottomrule
+\end{tabular}
+\vspace{0.8em}
+\begin{block}{Claim fence}
+This is schedule language, not a claim that CI is an equilibrium thermodynamic system.
+\end{block}
+\end{frame}
+
+% 28
+\begin{frame}{Architecture blueprint}
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+\tikzset{b/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.15cm,minimum height=.78cm,align=center}}
+\node[b] (obj) at (-4.8,2.0) {Objective\\digest};
+\node[b] (snap) at (-1.9,2.0) {Snapshot\\$S_0$};
+\node[b] (fork) at (.9,2.0) {Fork\\children};
+\node[b] (run) at (3.8,2.0) {Run\\tools};
+\node[b] (eval) at (3.8,.5) {Verifier\\outside child};
+\node[b] (red) at (.9,.5) {Reduce\\evidence};
+\node[b,fill=WarmAmber!20] (prom) at (-1.9,.5) {Promote\\once};
+\node[b] (ledger) at (-4.8,.5) {Ledger\\proof};
+\draw[->] (obj) -- (snap); \draw[->] (snap) -- (fork); \draw[->] (fork) -- (run); \draw[->] (run) -- (eval); \draw[->] (eval) -- (red); \draw[->] (red) -- (prom); \draw[->] (prom) -- (ledger); \draw[->] (ledger) -- (obj);
+\end{tikzpicture}
+\vspace{0.5em}
+\Large The child executes. The controller decides.
+\end{frame}
+
+% 29
+\begin{frame}{Failure mode checklist}
+\small
+\begin{tabular}{p{0.22\textwidth}p{0.33\textwidth}p{0.33\textwidth}}
+\toprule
+\textbf{Dimension} & \textbf{Bad smell} & \textbf{Closure} \\
+\midrule
+State & trials contaminate each other & immutable $S_0$, burn children \\
+Authority & child has merge/reward keys & remint capabilities; promote outside \\
+Oracle & evaluator is writable by subject & sealed verifier digest \\
+Evidence & green badge without lineage & durable ledger, digests, traces \\
+Correlation & siblings counted as independent & lineage-aware reduce, abstain \\
+Warmth & cache becomes communication channel & pack by trust domain \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+% 30
+\begin{frame}{What this is not}
+\begin{itemize}
+  \item Not a claim that all containers are bad.
+  \item Not a claim that fork gives independent samples.
+  \item Not a claim that learned world models are obsolete.
+  \item Not a claim that every real-world service is captured by a snapshot.
+  \item Not a claim that physics analogies prove thermodynamics of software.
+\end{itemize}
+\vspace{0.7em}
+\begin{block}{What it is}
+A capability contract for cheap executable search with separated evidence and authority.
+\end{block}
+\end{frame}
+
+% 31
+\begin{frame}{Research agenda for Cambridge SRG}
+\large
+\begin{enumerate}
+  \item \term{Executable state}: what must a first-class machine value include - FS, memory, process tree, GPU, sockets, clock, external state?
+  \item \term{Model vs world}: where is the crossover where learned imagination becomes cheaper than forked executable interaction?
+  \item \term{Correlation}: how should reducers price shared ancestry instead of pretending siblings are i.i.d.?
+  \item \term{Authority}: how do children inherit enough state to act without inheriting the power to grade or promote themselves?
+  \item \term{Warmth}: where can caches live without becoming wires?
+\end{enumerate}
+\end{frame}
+
+% 32
+\begin{frame}{Takeaways}
+\begin{enumerate}
+  \item Software agents need \term{computers}, not just prompts.
+  \item Coding RL needs \term{resettable executable environments}, not only datasets.
+  \item World models make imagination cheap; forkable sandboxes make interaction cheap.
+  \item Fork is only safe with reduce, evidence, and singular promote.
+  \item The runner is disposable. The proof is durable.
+\end{enumerate}
+\vspace{0.8em}
+\begin{center}
+\Large \hilite{Burn the runner. Keep the proof. Fork the machine, not the trust.}
+\end{center}
+\end{frame}
