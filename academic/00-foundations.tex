@@ -1,0 +1,112 @@
+% 1
+\begin{frame}[plain]
+  \titlepage
+  \vspace{-0.6em}
+  \begin{center}
+    \large \hilite{World models make imagination cheap. Forkable sandboxes make interaction cheap.}
+  \end{center}
+\end{frame}
+
+% 2
+\begin{frame}{The whole talk in one picture}
+\centering
+\begin{tikzpicture}[>=Latex,thick,node distance=1.25cm]
+  \tikzset{box/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.05cm,minimum height=.78cm,align=center}}
+  \node[box] (science) at (-5.1,1.8) {Science\\state must repeat};
+  \node[box] (build) at (-2.5,1.8) {Builds\\state should reuse};
+  \node[box] (agents) at (0.1,1.8) {Agents\\state becomes active};
+  \node[box] (world) at (2.8,1.8) {World models\\cheap futures};
+  \node[box,fill=SignalCyan!10] (fork) at (5.5,1.8) {Forked worlds\\cheap interaction};
+  \draw[->] (science) -- (build); \draw[->] (build) -- (agents); \draw[->] (agents) -- (world); \draw[->] (world) -- (fork);
+  \node[box,minimum width=9.2cm,fill=WarmAmber!16] at (.25,-.1) {Search can be plural. Authority must be singular.};
+  \node[box,minimum width=9.2cm,fill=SoftGray!70] at (.25,-1.45) {Fork $\rightarrow$ Reduce $\rightarrow$ Promote};
+\end{tikzpicture}
+
+\vspace{0.6em}
+\large We start from first principles and end with a runtime contract for agentic software, RL, and scientific computing.
+\end{frame}
+
+% 3
+\begin{frame}{Motivating failure: 100 agents, one laptop}
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+  \tikzset{agent/.style={draw=SignalCyan,fill=SignalCyan!8,rounded corners,minimum width=1.45cm,minimum height=.62cm,align=center}}
+  \tikzset{shared/.style={draw=Danger,fill=Danger!6,rounded corners,minimum width=4.6cm,minimum height=2.15cm,align=center}}
+  \node[agent] (a1) at (-4.35,1.5) {agent 1};
+  \node[agent] (a2) at (-4.35,.5) {agent 2};
+  \node[agent] (a3) at (-4.35,-.5) {agent 3};
+  \node[agent] (a4) at (-4.35,-1.5) {agent 100};
+  \node[shared] (s) at (1.0,0) {\Large shared machine\\[.22em]\normalsize workspace \quad tests \quad cache\\credentials \quad network \quad processes};
+  \draw[->] (a1) -- (s.west); \draw[->] (a2) -- (s.west); \draw[->] (a3) -- (s.west); \draw[->] (a4) -- (s.west);
+  \node[anchor=west] at (4.05,1.15) {\warn{state leaks}};
+  \node[anchor=west] at (4.05,.35) {\warn{tests drift}};
+  \node[anchor=west] at (4.05,-.45) {\warn{credentials spread}};
+  \node[anchor=west] at (4.05,-1.25) {\warn{wins correlate}};
+\end{tikzpicture}
+
+\vspace{0.4em}
+\Large \hilite{Parallelism without isolation is correlated chaos.}
+\end{frame}
+
+% 4
+\begin{frame}{Why I ended up here}
+\begin{columns}[T,onlytextwidth]
+\column{0.30\textwidth}
+\textbf{Computational science}\par
+\normalsize An experiment is not reproducible unless the state, inputs, machine, and provenance are reproducible.
+
+\column{0.30\textwidth}
+\textbf{Production ML + builds}\par
+\normalsize Rebuilding the world is expensive. Reuse warm state whenever it is safe.
+
+\column{0.30\textwidth}
+\textbf{Coding agents}\par
+\normalsize The developer becomes a program that edits files, runs shells, calls networks, retries, and forks hypotheses.
+\end{columns}
+
+\vspace{0.75em}
+\begin{block}{The collision}
+\centering
+\large The same \textbf{state} I wanted to reuse for speed became the state I had to isolate for trust.
+\end{block}
+\end{frame}
+
+% 5
+\begin{frame}{Glossary: terms we will use carefully}
+\small
+\begin{tabular}{p{0.22\textwidth}p{0.68\textwidth}}
+\toprule
+\textbf{Term} & \textbf{Meaning in this talk} \\
+\midrule
+Agent & A program that plans, edits, runs tools, observes results, and tries again. \\
+Sandbox & An execution boundary around files, processes, network, and capabilities. \\
+Snapshot & A named starting state $S_0$ that can be restored or forked. \\
+Fork & Create a disposable child world from $S_0$. \\
+Rollout & One attempted trajectory: actions, observations, artifacts, logs. \\
+Verifier / oracle & The evaluator: tests, reward, hidden checks, human or scientific measurement. \\
+Authority & The power to merge, release, publish, spend robot time, or update a checkpoint. \\
+Evidence & Durable proof of what happened: logs, digests, lineage, measurements. \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+% 6
+\begin{frame}{Search can be plural. Authority must be singular.}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[anchor=west,font=\bfseries\large] at (0,4.6) {cheap and plural};
+  \node[anchor=east,font=\bfseries\large] at (12.1,4.6) {scarce and singular};
+  \draw[very thick,SignalCyan,-{Latex[length=3mm]}] (.4,4.15) -- (11.7,4.15);
+  \node[anchor=west] at (.7,3.2) {100 candidate patches};
+  \node[anchor=east] at (11.4,3.2) {1 merge to main};
+  \node[anchor=west] at (.7,2.2) {10,000 rollouts};
+  \node[anchor=east] at (11.4,2.2) {1 policy checkpoint};
+  \node[anchor=west] at (.7,1.2) {millions of sim trials};
+  \node[anchor=east] at (11.4,1.2) {1 robot / wet-lab hour};
+  \node[fill=SoftGray,rounded corners,inner sep=6pt] at (2.0,.25) {\textbf{SEARCH}: fail cheaply};
+  \node[fill=WarmAmber!20,rounded corners,inner sep=6pt] at (10.1,.25) {\textbf{AUTHORITY}: commit carefully};
+\end{tikzpicture}
+
+\vspace{0.35em}
+\Large The runtime should make the left side cheap \emph{without letting it become the right side.}
+\end{frame}
