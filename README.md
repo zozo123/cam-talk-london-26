@@ -1,16 +1,19 @@
-## Final stage deck
+## Canonical academic stage deck
 
-The talk now has one reproducible stage source:
+The repository now carries **two reproducible stage cuts**:
 
-- [talk.tex](talk.tex) + [slides/](slides/) — final Beamer deck.
-- [FINAL-DECK.md](FINAL-DECK.md) — final 30-minute stage path, timing, delivery rhythm and claim fence.
-- [SPEAKER-NOTES-30MIN.md](SPEAKER-NOTES-30MIN.md) — exact stage beats, jokes, transitions and cut points.
+- [talk.tex](talk.tex) + [academic/](academic/) — **canonical full academic deck**: 36 slides total, 32 core + 4 optional/deep slides.
+- [FULL-ACADEMIC.md](FULL-ACADEMIC.md) — complete academic story, six-act structure, slide map, pacing and cut strategies.
+- [SPEAKER-NOTES-ACADEMIC.md](SPEAKER-NOTES-ACADEMIC.md) — teaching notes, definitions, transitions, Q&A anchors and 30/40/60-minute cuts.
+- [talk-30min.tex](talk-30min.tex) + [slides/](slides/) — preserved concise 30-minute conference-style cut.
+- [FINAL-DECK.md](FINAL-DECK.md) — concise-cut story and timing.
+- [SPEAKER-NOTES-30MIN.md](SPEAKER-NOTES-30MIN.md) — concise-cut delivery script.
 - [TOPICS.md](TOPICS.md) — complete repo-wide topic map.
-- [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis, current landscape, honesty fence and benchmark design.
-- [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — Dreamer / Contrastive World Models ↔ forkable-runtime bridge, executable counterfactuals, state sufficiency and claim fence.
+- [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis.
+- [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — Dreamer / Contrastive World Models ↔ executable-world bridge.
 - [CLAIM-FENCE.md](CLAIM-FENCE.md) — hard DO / DO-NOT-SAY stage card.
 
-Build locally with `make`; GitHub Actions compiles the final 16:9 `talk.pdf` and uploads it as an artifact.
+Build locally with `make` for the full academic deck, or `make short` for the 30-minute cut. GitHub Actions builds both PDFs and uploads them as artifacts.
 
 ---
 
@@ -27,7 +30,7 @@ Build locally with `make`; GitHub Actions compiles the final 16:9 `talk.pdf` and
 | **Where** | FW11 (+ Microsoft Teams) |
 | **Contact** | Yaman Rawas-Kalaji |
 | **Speaker** | Yossi Eliaz — Principal Engineer, Incredibuild / islo.dev · Lecturer, HIT - Holon Institute of Technology |
-| **Repo status** | **Final stage deck is `talk.tex` + `slides/`; research notes remain under `scratch/` and `swarm/`** |
+| **Repo status** | **Canonical full academic deck is `talk.tex` + `academic/`; concise cut is `talk-30min.tex` + `slides/`** |
 
 **DST note:** UK falls back **25 Oct 2026**. Slot is still **BST** — never label GMT/UTC+0. Verified against talks.cam `dtstart=20261015T150000` (no `Z`). Detail: [`scratch/TIME.md`](scratch/TIME.md).
 
