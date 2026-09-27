@@ -1,101 +1,64 @@
-\begin{frame}{Execution substrate: six surfaces}
-\begin{columns}[T,onlytextwidth]
-\column{0.49\textwidth}
-\begin{itemize}
-  \item \term{Filesystem state}: workspace as a named snapshot
-  \item \term{Networking + credentials}: brokered wire, no ambient keys
-  \item \term{Reproducibility}: restore by digest, not by hope
-\end{itemize}
-\column{0.49\textwidth}
-\begin{itemize}
-  \item \term{Fast cloning}: CoW machine economics, not rebuilds
-  \item \term{Build / test / rollout}: warm factory beside trust
-  \item \term{Recovery + observability}: receipts outlive machines
-\end{itemize}
-\end{columns}
-
-\vspace{0.8em}
-\begin{block}{Contract}
-If any surface is missing, the factory can still run - but it can no longer tell the truth about what happened.
-\end{block}
-
-\source{Published Cambridge abstract lists filesystem state, networking/credentials, reproducibility, fast cloning, build/test, recovery, and observability.}
-\end{frame}
-
-% -------------------------------------------------------------------
-\begin{frame}{The outer wall still matters}
-\Large
-Agents with shells are not tenants asking politely. They are programs with search.
-
-\vspace{0.8em}
-\begin{columns}[T,onlytextwidth]
-\column{0.33\textwidth}
-\textbf{Container}\par
-\normalsize High density. Good developer ergonomics. Weakest as a hard isolation claim.
-\column{0.33\textwidth}
-\textbf{User-space kernel}\par
-\normalsize Stronger syscall mediation. Still a trade-off between compatibility and boundary.
-\column{0.33\textwidth}
-\textbf{MicroVM}\par
-\normalsize Firecracker-class wall: VM isolation with serverless density.
-\end{columns}
-
-\vspace{0.9em}
-\begin{block}{Point}
-Fork speed is useful only after the escape wall is credible.
-\end{block}
-
-\source{Firecracker: Agache et al., NSDI 2020. SandboxEscapeBench: Marchand et al., arXiv:2603.02277.}
-\end{frame}
-
-% -------------------------------------------------------------------
-\begin{frame}{Fork becomes an OS primitive}
-\begin{columns}[T,onlytextwidth]
-\column{0.48\textwidth}
-\begin{block}{DeltaBox}
-\begin{itemize}
-  \item Change-based filesystem + process checkpoint/restore
-  \item Complete sandbox state: files, process memory, contexts
-  \item Goal: millisecond-level rollback for deep agent search
-\end{itemize}
-\end{block}
-
-\column{0.48\textwidth}
-\begin{block}{Shepherd}
-\begin{itemize}
-  \item Agent execution as a reversible trace
-  \item Fork, replay, and revert as programmable operations
-  \item Meta-agent can supervise paths, not just transcripts
-\end{itemize}
-\end{block}
-\end{columns}
-
-\vspace{0.6em}
-\centering\Large \hilite{Fork is not a convenience. Fork is the API for search.}
-\source{DeltaBox: Dong et al., arXiv:2605.22781. Shepherd: Yu et al., arXiv:2605.10913.}
-\end{frame}
-
-% -------------------------------------------------------------------
-\begin{frame}{Parallel worlds: one past, many futures}
+\begin{frame}{The primitive is a machine you can fork}
 \centering
-\begin{tikzpicture}[node distance=1.2cm,>=Latex,thick]
-  \tikzstyle{box}=[draw=DeepNavy,rounded corners,fill=SoftGray!50,minimum width=2.2cm,minimum height=0.75cm,align=center]
-  \tikzstyle{child}=[draw=SignalCyan,rounded corners,fill=SignalCyan!8,minimum width=2.0cm,minimum height=0.65cm,align=center]
-  \node[box] (s0) at (0,0) {$S_0$\\snapshot};
-  \node[child] (c1) at (3,1.7) {world 1\\patch A};
-  \node[child] (c2) at (3,0.55) {world 2\\patch B};
-  \node[child] (c3) at (3,-0.55) {world 3\\rollout C};
-  \node[child] (c4) at (3,-1.7) {world N\\trial N};
-  \node[box] (run) at (6,0) {run + measure\\evidence $E_i$};
-  \node[box] (red) at (8.8,0) {reduce\\lineage + precision};
-  \node[box,fill=WarmAmber!20] (prom) at (11.3,0) {promote\\once};
-  \draw[->] (s0) -- (c1.west); \draw[->] (s0) -- (c2.west); \draw[->] (s0) -- (c3.west); \draw[->] (s0) -- (c4.west);
-  \draw[->] (c1.east) -- (run.west); \draw[->] (c2.east) -- (run.west); \draw[->] (c3.east) -- (run.west); \draw[->] (c4.east) -- (run.west);
+\begin{tikzpicture}[>=Latex,thick]
+  \tikzset{box/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.1cm,minimum height=.8cm,align=center}}
+  \tikzset{child/.style={draw=SignalCyan,fill=SignalCyan!8,rounded corners,minimum width=1.75cm,minimum height=.65cm,align=center}}
+  \node[box] (s0) at (-5,0) {$S_0$\\snapshot};
+  \node[child] (c1) at (-2,1.4) {child 1};
+  \node[child] (c2) at (-2,.45) {child 2};
+  \node[child] (c3) at (-2,-.5) {child 3};
+  \node[child] (cn) at (-2,-1.45) {child N};
+  \node[box] (run) at (1.1,0) {run + measure};
+  \node[box] (red) at (4.0,0) {reduce evidence};
+  \node[box,fill=WarmAmber!20] (prom) at (6.8,0) {promote once};
+  \draw[->] (s0) -- node[above,sloped]{fork} (c1.west);
+  \draw[->] (s0) -- (c2.west); \draw[->] (s0) -- (c3.west); \draw[->] (s0) -- (cn.west);
+  \draw[->] (c1.east) -- (run.west); \draw[->] (c2.east) -- (run.west); \draw[->] (c3.east) -- (run.west); \draw[->] (cn.east) -- (run.west);
   \draw[->] (run) -- (red); \draw[->] (red) -- (prom);
-  \node[align=center,color=Muted] at (3,-2.55) {shared ancestor: useful for speed\\not proof of independent evidence};
-  \node[align=center,color=Muted] at (11.25,-1.25) {burn runners\\keep proof};
+  \node[color=Muted] at (-2,-2.3) {shared past, divergent futures};
+  \node[color=Muted] at (6.8,-1.2) {burn children};
 \end{tikzpicture}
 
-\vspace{0.2em}
-\large A fork is a parallel world with a shared past. A promote is world selection.
+\vspace{0.5em}
+\Large \hilite{Fork is not a convenience. Fork is the API for search.}
+\source{Related systems: Firecracker (NSDI'20), DeltaBox (arXiv:2605.22781), Shepherd (arXiv:2605.10913).}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{What actually has to fork?}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{State}
+\begin{itemize}
+  \item \term{filesystem}: named workspace snapshot
+  \item \term{memory + processes}: restore the running machine
+  \item \term{reproducibility}: identify $S_0$ by digest
+\end{itemize}
+\end{block}
+
+\begin{block}{Speed}
+\begin{itemize}
+  \item \term{CoW cloning}: pay on divergence, not on rebuild
+  \item \term{warm build/test}: share heat beside the trust boundary
+\end{itemize}
+\end{block}
+
+\column{0.48\textwidth}
+\begin{block}{Authority}
+\begin{itemize}
+  \item \term{network}: explicit egress, not ambient access
+  \item \term{credentials}: remint / lease, never blindly copy
+  \item \term{oracle}: tests/reward stay outside worker write-set
+\end{itemize}
+\end{block}
+
+\begin{block}{Evidence}
+\begin{itemize}
+  \item logs, digests, lineage outlive the child
+  \item crash/retry must not change who owns the decision
+\end{itemize}
+\end{block}
+\end{columns}
+
 \end{frame}
