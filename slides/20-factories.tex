@@ -1,0 +1,145 @@
+\begin{frame}{Three factories, one loop}
+\Large
+\centering
+\texttt{snapshot -> fork N -> search -> reduce evidence -> promote once -> burn}
+
+\vspace{0.8em}
+\normalsize
+\begin{tabular}{p{0.21\textwidth}p{0.23\textwidth}p{0.22\textwidth}p{0.22\textwidth}}
+\toprule
+\textbf{Factory} & \textbf{Searchers} & \textbf{Reduce} & \textbf{Promote} \\
+\midrule
+Software & agent patches in Cells & tests + evidence digests & human / CI gate to main \\
+RL post-training & rollouts / preference samples & reward + uncertainty pool & checkpoint / policy release \\
+HIL / sim & synthetic trials / controller candidates & graded evidence ladder & real robot hour / human slot \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.7em}
+\begin{block}{Same slots. Different oracles. Only the tip gets scarcer.}
+The sandbox is the body. The controller owns the objective, schedule, and promote bit.
+\end{block}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{Coding RL turns reset into a training primitive}
+\large
+A training episode is a controlled experiment, not just a prompt.
+
+\vspace{0.25em}
+\begin{center}
+\normalsize
+$\text{episode}=\big(S_0,\;\text{task},\;\text{tools},\;\text{verifier digest},\;\text{reset}\big)$
+\end{center}
+
+\vspace{0.25em}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\textbf{Training stack needs}
+\begin{itemize}
+  \item real repo state + dependencies
+  \item executable, verifiable outcomes
+  \item isolation from verifier internals + siblings
+  \item repeatable return to the same $S_0$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Forkable snapshots change the reset path}
+\begin{itemize}
+  \item prepare the expensive base once
+  \item snapshot the known-good start
+  \item fork one disposable child per rollout
+  \item discard child; keep evidence + lineage
+\end{itemize}
+\end{columns}
+
+\vspace{0.25em}
+\begin{block}{Systems thesis}
+\small For coding RL, \hilite{reset is part of the reward contract}: episodes are comparable only when they start from a known state and the worker cannot rewrite the judge.
+\end{block}
+% Sources: SWE-smith (arXiv:2504.21798); Meta CWM (arXiv:2510.02387);
+% Scale RL Environments; Surge AI RL Environments; Mercor RL Environments;
+% Prime Intellect Environments Hub. Snapshot-fork architecture is this talk's thesis.
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{Software factory: Cell and Epoch}
+\begin{columns}[T,onlytextwidth]
+\column{0.46\textwidth}
+\textbf{Cell}\par
+\begin{itemize}
+  \item one isolated attempt
+  \item one patch / command trajectory
+  \item one evidence record
+  \item safe to crash, retry, and burn
+\end{itemize}
+
+\column{0.46\textwidth}
+\textbf{Epoch}\par
+\begin{itemize}
+  \item objective digest
+  \item frozen harness
+  \item schedule / budget
+  \item authority to keep, reject, or abstain
+\end{itemize}
+\end{columns}
+
+\vspace{0.6em}
+\begin{block}{Failure mode}
+Shared laptop swarm is theater: parallel agents sharing filesystem, credentials, and tests can confirm the same contamination.
+\end{block}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{RL factory: the oracle leaves the fork}
+\Large
+When reward is scarce, agents learn the cheapest path to reward.
+
+\vspace{0.7em}
+\begin{columns}[T,onlytextwidth]
+\column{0.5\textwidth}
+\begin{block}{Wrong}
+\centering
+agent child can edit tests, reward scripts, score files, hidden fixtures, or telemetry
+\end{block}
+\column{0.5\textwidth}
+\begin{block}{Right}
+\centering
+controller owns sealed objective digests; child returns evidence, not authority
+\end{block}
+\end{columns}
+
+\vspace{0.8em}
+\centering\Large \warn{RUN $\ne$ EVAL. Evidence $\ne$ promote.}
+\source{Rebound to Remedy: arXiv:2604.01476. Sandbox escape risk: arXiv:2603.02277.}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{HIL is the extreme of the same ladder}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\textbf{Cheap side}\par
+\begin{itemize}
+  \item synthetic scenes
+  \item simulated controllers
+  \item replayed logs
+  \item forked environments
+  \item failed hypotheses
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Scarce tip}\par
+\begin{itemize}
+  \item real robot hour
+  \item wet-lab slot
+  \item clinical / human review
+  \item paper claim
+  \item production deploy
+\end{itemize}
+\end{columns}
+
+\vspace{0.7em}
+\begin{block}{Systems duty}
+Spend cheap forks before spending scarce authority. Keep the receipts that justify the tip.
+\end{block}
+\end{frame}
