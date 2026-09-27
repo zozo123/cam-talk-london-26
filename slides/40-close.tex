@@ -1,35 +1,38 @@
-\begin{frame}{Open problems for SRG}
-\begin{enumerate}
-  \item \term{Fork $\ne$ independence}: how should reducers estimate correlation across CoW siblings?
-  \item \term{Credential leases}: what is the right remint/revoke API on fork?
-  \item \term{Warmth vs side channels}: where may caches live without becoming a wire?
-  \item \term{Sealed oracles}: how do we keep tests/rewards writable enough for science, but not writable by the subject?
-  \item \term{World diff}: what is the Git analogue for machines, not files?
-  \item \term{Promote-once}: how do children outlive parents without inheriting authority?
-\end{enumerate}
+\begin{frame}{What I want from this room}
+\large
+Four systems questions I do not think we have answered cleanly yet:
 
 \vspace{0.4em}
-\begin{block}{Close}
-Burn the runner. Keep the proof. Fork the machine, not the trust.
+\begin{enumerate}
+  \item \term{Fork semantics}: what is the right first-class ``machine value'' --- FS, memory, process tree, GPU, display, sockets?
+  \item \term{Correlation}: how should reducers price shared ancestry instead of pretending siblings are i.i.d.?
+  \item \term{Warmth vs isolation}: where can warm state live without becoming a credential or side channel?
+  \item \term{Authority}: how do children outlive parents without inheriting the parent’s power to promote?
+\end{enumerate}
+
+\vspace{0.65em}
+\begin{block}{If you remember one thing}
+\centering\Large \hilite{Burn the runner. Keep the proof. Fork the machine, not the trust.}
 \end{block}
 \end{frame}
 
 % -------------------------------------------------------------------
-\begin{frame}{Selected sources and claim fence}
+\appendix
+\begin{frame}{Selected sources / Q\&A guardrails}
 \footnotesize
-\begin{tabular}{p{0.24\textwidth}p{0.68\textwidth}}
+\begin{tabular}{p{0.23\textwidth}p{0.69\textwidth}}
 \toprule
 Firecracker & Agache et al., \textit{Firecracker: Lightweight Virtualization for Serverless Applications}, NSDI 2020. \\
 DeltaBox & Dong et al., \textit{Scaling Stateful AI Agents with Millisecond-Level Sandbox Checkpoint/Rollback}, arXiv:2605.22781. \\
 Shepherd & Yu et al., \textit{Enabling Programmable Meta-Agents via Reversible Agentic Execution Traces}, arXiv:2605.10913. \\
 Evidence-aware reduce & Eliaz, \textit{Evidence-Aware MapReduce / Boltzmann MapReduce}, arXiv:2607.09689. \\
-Reward / escape fences & Rebound to Remedy, arXiv:2604.01476; SandboxEscapeBench, arXiv:2603.02277; SWE-bench, arXiv:2310.06770. \\
-Training environments & SWE-smith, arXiv:2504.21798; Meta CWM, arXiv:2510.02387; Prime Intellect Environments Hub; Scale / Surge / Mercor RL environments. \\
+Reward integrity & \textit{From Rebound to Remedy}, arXiv:2604.01476. \\
+Training environments & SWE-smith, arXiv:2504.21798; Meta CWM, arXiv:2510.02387; Prime Intellect; Scale / Surge / Mercor environment products. \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.8em}
-\begin{block}{Do not overclaim}
-Physics is algebra and schedule language. Do not claim Gibbs ensembles, detailed balance, thermalization, or that fork guarantees independent evidence.
+\begin{block}{Claim fence}
+Fork is a systems primitive, not a proof of independent evidence. Physics analogies are algebra / schedule language for Q\&A, not a claim that agent factories are equilibrium Gibbs systems.
 \end{block}
 \end{frame}
