@@ -326,7 +326,7 @@ If the audience is not interested, this slide can be cut with no loss.
 
 ---
 
-## Slides 28–32 — Architecture and conclusion
+## Slides 28–34 — Architecture and conclusion
 
 ### Slide 28 — Architecture blueprint
 
@@ -339,7 +339,42 @@ Main sentence:
 
 > “The child executes. The controller decides.”
 
-### Slide 29 — Failure checklist
+### Slide 29 — Epochs and fencing
+
+This is the distributed-systems correctness slide.
+
+Define an **epoch** as the frozen experiment contract: objective digest, trusted parent snapshot, verifier identity, and schedule/policy.
+
+> “A child is evidence for the epoch that created it — and nothing else.”
+
+If any trusted part changes, increment the epoch. Old children may finish, but they are stale for promotion.
+
+Then:
+
+> “Search can race. Promotion must not.”
+
+The important systems property is a single promotion linearization point guarded by the current epoch.
+
+### Slide 30 — Evaluation methodology
+
+This is where the talk becomes falsifiable.
+
+> “A research claim needs a benchmark, not a slogan.”
+
+Walk across the measurement families:
+- latency/throughput,
+- memory/storage/write amplification,
+- reset fidelity,
+- leakage and authority violations,
+- evidence correlation/effective sample size,
+- task success or validated candidates per hour.
+
+The baseline ladder is:
+cold build → cached container → snapshot restore → snapshot fork → learned proposal + fork validation.
+
+Do not quote universal numbers before running this benchmark.
+
+### Slide 31 — Failure checklist
 
 Treat this as a design review checklist.
 
@@ -351,13 +386,13 @@ Ask:
 - Are correlated siblings overcounted?
 - Can warmth become a channel?
 
-### Slide 30 — What this is not
+### Slide 32 — What this is not
 
 This protects the research claim.
 
 The audience should leave knowing what you are **not** claiming.
 
-### Slide 31 — Cambridge research agenda
+### Slide 33 — Cambridge research agenda
 
 Spend time here.
 
@@ -369,7 +404,7 @@ The strongest questions:
 4. How should capability inheritance work on fork?
 5. Where can warm state exist without becoming a wire?
 
-### Slide 32 — Takeaways
+### Slide 34 — Takeaways
 
 Do not add a second conclusion after this.
 
@@ -385,21 +420,21 @@ Then:
 
 # Appendix slides
 
-## Slide 33 — Sources / claim fence
+## Slide 35 — Sources / claim fence
 
 Use for citation questions and to recover from an overclaim.
 
-## Slide 34 — Hybrid world models + forks
+## Slide 36 — Hybrid world models + forks
 
 Key answer if asked “why not use both?”:
 
 > “Exactly. Use imagination for breadth and executable forks for grounding.”
 
-## Slide 35 — Minimal API
+## Slide 37 — Minimal API
 
 Useful for systems/API questions.
 
-## Slide 36 — Why factory?
+## Slide 38 — Why factory?
 
 Explain:
 
@@ -421,11 +456,11 @@ From the full deck, cut:
 - slide 19 warmth,
 - slide 26 science/biology,
 - slide 27 annealing,
-- slide 29 checklist.
+- slide 31 checklist.
 
 ## 60 minutes
 
-Use all 32 core slides and allow discussion during slides 11, 18, 24, and 31.
+Use all 34 core slides and allow discussion during slides 11, 18, 24, 29, 30, and 33.
 
 ---
 
@@ -454,3 +489,12 @@ No. Tests are a verifier with coverage, integrity, and provenance assumptions.
 ## “How much faster is reset?”
 
 Do not invent a universal multiplier. Compare cold build, cached container restart, snapshot restore, and fork under the same repo/task/verifier benchmark.
+
+
+## “What prevents a stale child from winning later?”
+
+Epoch fencing. Every child is bound to the objective/verifier/snapshot epoch that created it. Changing trusted experiment state increments the epoch; old children may finish but cannot promote.
+
+## “How would you prove this architecture is better?”
+
+Run the same repo/task/verifier workload across cold build, cached container restart, snapshot restore, snapshot fork, and hybrid model-propose/fork-validate. Measure cost, fidelity, isolation, effective evidence, and validated task throughput.
