@@ -1,0 +1,139 @@
+% 7
+\begin{frame}{Reinforcement learning, in one slide}
+\begin{columns}[T,onlytextwidth]
+\column{0.54\textwidth}
+\begin{center}
+\begin{tikzpicture}[>=Latex,thick]
+  \tikzset{node/.style={draw=DeepNavy,fill=SoftGray!50,rounded corners,minimum width=2cm,minimum height=.7cm,align=center}}
+  \node[node] (s) at (0,1.6) {state $s_t$};
+  \node[node] (a) at (3.0,1.6) {action $a_t$};
+  \node[node] (env) at (3.0,0) {environment};
+  \node[node] (r) at (0,0) {reward $r_t$};
+  \draw[->] (s) -- node[above]{policy $\pi$} (a);
+  \draw[->] (a) -- (env);
+  \draw[->] (env) -- node[below]{observation} (r);
+  \draw[->] (r) -- (s);
+\end{tikzpicture}
+\end{center}
+\column{0.42\textwidth}
+\small
+\begin{itemize}
+  \item \term{Policy}: how the agent chooses actions.
+  \item \term{Rollout}: a sequence of states, actions, rewards.
+  \item \term{Credit assignment}: which action caused later success?
+  \item \term{Verifiable reward}: reward that can be computed by tests or checks.
+\end{itemize}
+\end{columns}
+
+\vspace{0.45em}
+\begin{block}{Coding is unusually attractive for RL}
+A patch can be graded by executing real tests. That gives stronger feedback than chat preference alone.
+\end{block}
+\end{frame}
+
+% 8
+\begin{frame}{Model-free, model-based, and world-model RL}
+\small
+\begin{tabular}{p{0.24\textwidth}p{0.31\textwidth}p{0.35\textwidth}}
+\toprule
+\textbf{Approach} & \textbf{How it learns} & \textbf{Cost / failure mode} \\
+\midrule
+Model-free RL & Learn policy/value from real or logged rollouts. & Needs many interactions; reward can be sparse. \\
+Model-based RL & Learn a dynamics model $\hat{P}(s'|s,a)$ and plan inside it. & Rollouts are cheap; model error compounds. \\
+World models & Learn compressed latent dynamics from rich observations. & Great for imagination; must choose what information to keep. \\
+Executable forks & Do not learn the transition for code; run it in forked worlds. & Real compute/storage; boundary must be faithful. \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.8em}
+\centering\large The question is not \emph{model or no model}; it is \hilite{which future is cheaper to trust?}
+\end{frame}
+
+% 9
+\begin{frame}{There are two ways to make futures cheap}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{block}{Learn a world}
+\centering
+\large Dreamer / Contrastive World Models
+\end{block}
+\normalsize
+\begin{center}
+$o_t \rightarrow z_t \rightarrow \widehat{s}_{t+1},\widehat{s}_{t+2},\ldots$
+\end{center}
+\begin{itemize}
+  \item compact learned latent state
+  \item imagine many futures cheaply
+  \item useful when interaction is slow, unsafe, or scarce
+  \item pay approximation / learned-dynamics error
+\end{itemize}
+\small CWM's twist: retain future-predictive information, avoid reconstructing irrelevant visual detail.
+
+\column{0.47\textwidth}
+\begin{block}{Fork the world}
+\centering
+\large executable software environment
+\end{block}
+\normalsize
+\begin{center}
+$S_0 \rightarrow \{S_0^1,S_0^2,\ldots,S_0^N\}$
+\end{center}
+\begin{itemize}
+  \item explicit executable state
+  \item branch real repo / process futures
+  \item useful when reset is cheap
+  \item pay compute / storage, not learned transition-model error
+\end{itemize}
+\small Exact only inside the state and capability boundary we capture.
+\end{columns}
+\source{Dreamer 4: Hafner et al., arXiv:2509.24527. Contrastive World Models: Li, arXiv:2609.22175.}
+\end{frame}
+
+% 10
+\begin{frame}{For code, the best world model is often the world}
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+  \tikzset{box/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.2cm,minimum height=.82cm,align=center}}
+  \tikzset{child/.style={draw=SignalCyan,fill=SignalCyan!8,rounded corners,minimum width=2.0cm,minimum height=.68cm,align=center}}
+  \node[box] (s0) at (-5.2,0) {$S_0$\\snapshot};
+  \node[child] (c1) at (-2.1,1.45) {patch A};
+  \node[child] (c2) at (-2.1,.48) {patch B};
+  \node[child] (c3) at (-2.1,-.49) {patch C};
+  \node[child] (cn) at (-2.1,-1.46) {patch N};
+  \node[box] (run) at (1.15,0) {execute\\real tests};
+  \node[box] (red) at (4.05,0) {reduce\\evidence};
+  \node[box,fill=WarmAmber!20] (prom) at (6.75,0) {promote\\once};
+  \draw[->] (s0) -- node[above,sloped]{fork} (c1.west);
+  \draw[->] (s0) -- (c2.west); \draw[->] (s0) -- (c3.west); \draw[->] (s0) -- (cn.west);
+  \draw[->] (c1.east) -- (run.west); \draw[->] (c2.east) -- (run.west); \draw[->] (c3.east) -- (run.west); \draw[->] (cn.east) -- (run.west);
+  \draw[->] (run) -- (red); \draw[->] (red) -- (prom);
+  \node[color=Muted] at (-2.1,-2.28) {same past, different interventions};
+  \node[color=Muted] at (6.75,-1.25) {burn children};
+\end{tikzpicture}
+\vspace{0.35em}
+\Large These are \hilite{executable counterfactuals}: branch from the same past, intervene differently, observe the actual software transition.
+\source{Related systems: Firecracker (NSDI 2020), DeltaBox (arXiv:2605.22781), Shepherd (arXiv:2605.10913).}
+\end{frame}
+
+% 11
+\begin{frame}{Snapshot versus latent: the sufficiency question}
+\small
+\begin{tabular}{p{0.28\textwidth}p{0.30\textwidth}p{0.30\textwidth}}
+\toprule
+ & \textbf{World-model latent $z$} & \textbf{Executable snapshot $S$} \\
+\midrule
+Goal & Predict useful futures & Continue execution faithfully \\
+Size & Compact, learned & Explicit, often overcomplete \\
+Loss & Deliberately lossy & Lossless-ish inside a boundary \\
+Error & Transition-model error & Boundary / reset / nondeterminism error \\
+Use & Imagine rollouts & Execute branches \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.8em}
+\begin{block}{Common question}
+What information must survive so the future remains meaningful?
+\end{block}
+\centering
+\large A snapshot is not a learned latent. It is an executable sufficient state.
+\end{frame}
