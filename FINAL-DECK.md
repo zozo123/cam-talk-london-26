@@ -1,49 +1,58 @@
-# Final deck — Cambridge SRG · 15 Oct 2026
+# Final deck — Cambridge SRG · 30-minute version
 
-talk.tex is the stage source of truth. Planning documents (OUTLINE.md, DECK-BEATS.md, scratch/*, swarm/*) remain research and Q&A support.
+`talk.tex` is the stage source of truth. Research depth stays in `OUTLINE.md`, `DECK-BEATS.md`, `scratch/`, `swarm/`, `QA-BANK.md`, and `CLAIM-FENCE.md`.
 
-## Final 18-slide main path + appendix
+## The 13-slide stage path
 
-1. Forkable Sandboxes — title + mantra.
-2. Why I ended up working on this — computational science → production ML/build systems → coding agents; state becomes the collision point between reuse and trust.
-3. One-sentence talk — cheap forked machines for search; authority stays outside.
-4. Scarcity ladder — cheap/plural search vs scarce/singular authority.
-5. Execution substrate: six surfaces — FS, wire/credentials, reproducibility, fast cloning, execution, recovery/observability.
-6. Outer wall — container/user-space-kernel/microVM isolation framing.
-7. Fork becomes an OS primitive — DeltaBox + Shepherd as related systems.
-8. Parallel worlds — S0 → fork N → evidence → reduce → promote once → burn.
-9. Three factories, one loop — software, RL post-training, HIL/simulation.
-10. Coding RL turns reset into a training primitive — training episode = S0 + task + tools + verifier digest + reset; forkable snapshots change the reset path.
-11. Software factory: Cell and Epoch — attempt vs objective/authority lifetime.
-12. RL factory: oracle leaves the fork — RUN ≠ EVAL; verifier tampering boundary.
-13. HIL is the extreme of the same ladder — burn cheap simulation before robot/wet/human tip.
-14. Fork ≠ independence: cold liar — structured worker record and precision/provenance integrity.
-15. Annealing is schedule language — SA/MH/SGD/RL temperature as controller-owned schedules, not physical claims.
-16. Capability contract: Fork / Reduce / Promote — named API.
-17. Invariants: Search ≠ Authority — immutable S0, frozen objective, lineage, abstain, one promote bit.
-18. Open problems for SRG — correlation, leases, warm channels, sealed oracle, world diff, promote-once.
-19. Appendix: selected sources + claim fence.
+1. **Forkable Sandboxes** — title, affiliations (Incredibuild / islo.dev + HIT), mantra.
+2. **100 agents. One laptop. What could possibly go wrong?** — funny cold open; shared state/credentials/tests make fake parallelism.
+3. **Why I ended up here** — computational science → production ML/build reuse → coding agents; state changes from optimization to trust boundary.
+4. **Search can be plural. Authority must be singular.** — patches/rollouts/sim are cheap; merge/checkpoint/robot hour is scarce.
+5. **The primitive is a machine you can fork** — S0 → fork N → run → reduce → promote once → burn; DeltaBox/Shepherd/Firecracker as related systems.
+6. **What actually has to fork?** — state, speed, authority, evidence; copy enough state to resume, not enough authority to become dangerous.
+7. **Coding RL turns reset into a training primitive** — episode = S0 + task + tools + verifier + reset; cold provisioning versus fork/reset.
+8. **The student cannot grade their own exam** — RUN ≠ EVAL; sealed oracle / reward integrity.
+9. **Copy the machine, not the keys** — credentials remint, explicit network capability, warm caches beside trust boundary.
+10. **Four clones do not make four witnesses** — fork ≠ independence; evidence needs lineage/precision; cold-liar failure mode.
+11. **Three factories. Same loop.** — software, RL training, HIL/science as the same runtime contract with different scarce tips.
+12. **Fork / Reduce / Promote** — capability contract; durable intent, disposable execution, singular authority, deterministic convergence.
+13. **What I want from this room** — four research questions + mantra close.
+14. **Appendix only** — selected sources and Q&A claim fence.
 
-## Timing
+## Timing: 27 minutes + 3 minutes slack
 
-- Slides 1–4: 5 min
-- Slides 5–8: 11 min
-- Slides 9–13: 14 min
-- Slides 14–17: 10 min
-- Slide 18: 5 min
-- Q&A: 15 min
+- 0:00–1:00 — title + one-sentence promise.
+- 1:00–3:00 — 100-agents cold open.
+- 3:00–5:00 — personal path into the problem.
+- 5:00–7:00 — Search vs Authority / scarcity ladder.
+- 7:00–10:00 — forkable-machine API.
+- 10:00–13:00 — what actually has to fork.
+- 13:00–16:00 — coding-RL reset.
+- 16:00–18:30 — sealed oracle / reward integrity.
+- 18:30–21:00 — credentials + warm state.
+- 21:00–23:30 — fork ≠ independence.
+- 23:30–25:00 — three factories.
+- 25:00–26:30 — Fork / Reduce / Promote.
+- 26:30–28:30 — open problems + close.
+- 28:30–30:00 — buffer / one audience question / transition.
 
-If late, skip slide 15 (annealing) first. Never cut slide 8 (parallel worlds), slide 10 (training reset), slide 12 (oracle boundary), or slide 18 (open problems).
+## Why this version is more fun
 
-## Build
-
-Run make, or run pdflatex twice on talk.tex. GitHub Actions builds talk.pdf and uploads it as an artifact.
+- Starts with a relatable failure, not a taxonomy.
+- Every technical section has a stage line:
+  - “We call this a swarm. The operating system calls it roommates.”
+  - “The student cannot grade their own exam.”
+  - “Copy the machine, not the keys.”
+  - “Four clones do not make four witnesses.”
+- One equation total, on the RL episode slide.
+- Statistical mechanics moved to Q&A; no annealing detour in the core 30 minutes.
+- Literature is evidence for the story, not the story itself.
 
 ## Stage claim fence
 
-- Do say: forkable environments are a substrate/capability contract for controlled agent search and coding-RL episodes.
-- Do say: reset/replay, verifier integrity, credential scoping and evidence lineage are separable systems properties.
-- Do not claim universal setup bottlenecks or universal numeric speedups without the proposed benchmark.
-- Do not claim fork implies statistical independence.
-- Do not claim equilibrium thermodynamics, detailed balance, or Gibbs-of-nature.
-- Do not claim the rollout worker owns the verifier, thermostat, schedule or promote bit.
+- Say: forkable environments are a capability contract for controlled search and resettable coding-RL episodes.
+- Say: verifier integrity, credentials, lineage, reset fidelity and isolation are separable properties.
+- Do not claim universal setup bottlenecks or universal speedups without benchmark evidence.
+- Do not claim fork implies independent evidence.
+- Do not claim Gibbs equilibrium / detailed balance for the factory.
+- Do not let worker-owned state define the verifier, schedule, confidence or promote bit.
