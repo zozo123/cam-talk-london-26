@@ -1,0 +1,80 @@
+% 33
+\appendix
+\begin{frame}{Selected sources / claim fence}
+\footnotesize
+\begin{tabular}{p{0.23\textwidth}p{0.69\textwidth}}
+\toprule
+World models & Hafner et al., \textit{Training Agents Inside of Scalable World Models} (Dreamer 4), arXiv:2509.24527; Li, \textit{Contrastive World Models}, arXiv:2609.22175. \\
+Fork systems & Firecracker, NSDI 2020; DeltaBox, arXiv:2605.22781; Shepherd, arXiv:2605.10913. \\
+Training environments & SWE-smith, arXiv:2504.21798; Meta Code World Model (2025); RL-environment vendors. \\
+Evidence-aware reduce & Eliaz, \textit{Evidence-Aware MapReduce / Boltzmann MapReduce}, arXiv:2607.09689. \\
+Reward integrity & \textit{From Rebound to Remedy}, arXiv:2604.01476. \\
+\bottomrule
+\end{tabular}
+\vspace{0.65em}
+\begin{block}{Claim fence}
+A fork removes learned-dynamics error only inside the executable boundary it captures. External services, nondeterminism, hardware, and incomplete tests can still make the world partial.
+\end{block}
+\end{frame}
+
+% 34
+\begin{frame}{Optional deep cut: world models plus forks, not either/or}
+\large
+A strong system can use both:
+\vspace{0.4em}
+\begin{enumerate}
+  \item learned model proposes promising branches,
+  \item forked executable worlds ground those branches,
+  \item reducer compares evidence with lineage,
+  \item controller promotes once.
+\end{enumerate}
+\vspace{0.7em}
+\begin{block}{Hybrid thesis}
+Use imagination for breadth. Use executable forks for truth.
+\end{block}
+\end{frame}
+
+% 35
+\begin{frame}{Optional deep cut: the minimal API shape}
+\small
+\begin{tabular}{p{0.22\textwidth}p{0.62\textwidth}}
+\toprule
+\textbf{API object} & \textbf{Purpose} \\
+\midrule
+Objective.digest & Frozen definition of success for one epoch. \\
+Snapshot.id & Parent world identity and reproducibility key. \\
+Fork(spec) & Creates isolated child with scoped capabilities. \\
+Run(cmd/tool) & Produces observations and artifacts. \\
+Evidence.record & Logs, digests, lineage, method, confidence. \\
+Reduce(records) & Accept / reject / abstain with reasons. \\
+Promote(candidate) & Singular authority boundary. \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+% 36
+\begin{frame}{Optional deep cut: why the title says factory}
+\large
+A factory is not only parallel compute. It is a controlled path from motion to matter.
+\vspace{0.6em}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\textbf{Motion}
+\begin{itemize}
+  \item disposable attempts
+  \item agent sessions
+  \item rollout trajectories
+  \item speculative patches
+\end{itemize}
+\column{0.47\textwidth}
+\textbf{Matter}
+\begin{itemize}
+  \item accepted source snapshot
+  \item evidence ledger
+  \item release checkpoint
+  \item paper / product claim
+\end{itemize}
+\end{columns}
+\vspace{0.7em}
+\centering \large Create entropy where exploration pays; destroy entropy before promotion.
+\end{frame}
