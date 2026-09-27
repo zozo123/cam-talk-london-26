@@ -1,3 +1,17 @@
+## Final stage deck
+
+The talk now has one reproducible stage source:
+
+- [talk.tex](talk.tex) + [slides/](slides/) — final Beamer deck.
+- [FINAL-DECK.md](FINAL-DECK.md) — 45-minute stage path, cut order, timing and claim fence.
+- [TOPICS.md](TOPICS.md) — complete repo-wide topic map.
+- [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis, current landscape, honesty fence and benchmark design.
+- [CLAIM-FENCE.md](CLAIM-FENCE.md) — hard DO / DO-NOT-SAY stage card.
+
+Build locally with `make`; GitHub Actions compiles `talk.pdf` and uploads it as an artifact.
+
+---
+
 # Forkable Sandboxes: The Runtime Layer for AI Software Factories
 
 > **SCRATCH PAD** for Cambridge CompLab Systems Research Group · not the final deck · living speaker notebook
