@@ -2,7 +2,7 @@
 
 The repository now carries **two reproducible stage cuts**:
 
-- [talk.tex](talk.tex) + [academic/](academic/) — **canonical full academic deck**: 36 slides total, 32 core + 4 optional/deep slides.
+- [talk.tex](talk.tex) + [academic/](academic/) — **canonical full academic deck**: 38 slides total, 34 core + 4 optional/deep slides.
 - [FULL-ACADEMIC.md](FULL-ACADEMIC.md) — complete academic story, six-act structure, slide map, pacing and cut strategies.
 - [SPEAKER-NOTES-ACADEMIC.md](SPEAKER-NOTES-ACADEMIC.md) — teaching notes, definitions, transitions, Q&A anchors and 30/40/60-minute cuts.
 - [talk-30min.tex](talk-30min.tex) + [slides/](slides/) — preserved concise 30-minute conference-style cut.
