@@ -126,26 +126,28 @@ succeeds exactly once if $e$ is still current.
 
 % 30
 \begin{frame}{A research claim needs a benchmark, not a slogan}
-\small
-\begin{tabular}{p{0.22\textwidth}p{0.66\textwidth}}
+\footnotesize
+\begin{tabular}{p{0.21\textwidth}p{0.67\textwidth}}
 \toprule
 \textbf{Question} & \textbf{Measure} \\
 \midrule
-How cheap is reset? & time-to-ready, p50/p99 fork or restore latency, rollout throughput \\
+How cheap is reset? & time-to-ready, p50/p99 restore/fork latency, rollout throughput \\
 What does sharing cost? & RAM, storage, write amplification, cache hit rate \\
 Is reset faithful? & start-state digest equality, process/file drift, nondeterminism budget \\
 Is isolation real? & cross-episode leakage, credential inheritance, verifier-tamper attempts \\
 Is evidence independent enough? & lineage overlap, pairwise correlation, effective sample size \\
-Does it help the task? & validated candidates / hour, reward distribution, task success \\
+Does it help the task? & validated candidates/hour, reward distribution, task success \\
 \bottomrule
 \end{tabular}
 
-\vspace{0.55em}
-\begin{block}{Compare under the same repo / task / verifier}
-cold build $\rightarrow$ cached container $\rightarrow$ snapshot restore $\rightarrow$ snapshot fork $\rightarrow$ model-propose + fork-validate
+\vspace{0.25em}
+\begin{block}{Controlled comparison: same repo / task / verifier}
+\centering\scriptsize
+cold build $\rightarrow$ cached container $\rightarrow$ restore $\rightarrow$ fork $\rightarrow$ model-propose + fork-validate
 \end{block}
 
-\centering\large A useful system should win on a \hilite{measurable frontier of cost, fidelity, and trust}.
+\vspace{0.05em}
+\centering\normalsize \hilite{Win on cost $\times$ fidelity $\times$ trust -- not latency alone.}
 \end{frame}
 
 % 31
