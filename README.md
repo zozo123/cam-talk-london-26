@@ -11,7 +11,9 @@
 | **Where** | FW11 (+ Microsoft Teams) |
 | **Contact** | Yaman Rawas-Kalaji |
 | **Speaker** | Yossi Eliaz |
-| **Repo status** | Scratch pad — story, physics lens, papers, claim fences |
+| **Repo status** | Scratch pad — story, physics lens, papers, claim fences, timed outline |
+
+**DST note:** UK falls back **25 Oct 2026**. Slot is still **BST** — never label GMT/UTC+0. Verified against talks.cam `dtstart=20261015T150000` (no `Z`). Detail: [`scratch/TIME.md`](scratch/TIME.md).
 
 **Published abstract (faithful):** systems challenges of forkable isolated environments — filesystem state, networking/credentials, reproducibility, fast cloning, build/test, recovery, observability; architecture, trade-offs, open problems.
 
@@ -27,6 +29,22 @@ Forkable sandboxes are that machine. Everything else is orchestration.
 
 **Shared law (liquid-methodology):** Durable intent. Disposable execution. Singular authority. Deterministic convergence.  
 Create entropy where exploration pays; destroy entropy before promotion.
+
+---
+
+## Panel consensus (from 7 researchers + H schedule)
+
+Locked claims from swarm A–G ([`swarm/ROUNDTABLE.md`](swarm/ROUNDTABLE.md) · [`swarm/`](swarm/)). H (anneal/MCMC/SGD) and upcoming I (non-equilibrium / Hamiltonian) deepen the dynamics fence — not extra stage claims:
+
+1. **A — Fork ≠ independence.** Peer CoW fork is *execution* independence (DeltaBox / Crab / Shepherd ms only, attributed). Shared snapshot root ⇒ unresolved ρ; reduce must not bill \(K\) siblings as i.i.d.
+2. **B — Worker contract + abstain.** Wire \(r_k=(\hat\theta,J,n,\mathcal{E},\mathcal{L},m)\); \(\beta_k\equiv n_k\). Unresolved ρ / digest mismatch / cold-liar → `verdict=abstain`. Physics = algebra with teeth, **not** Gibbs-of-nature.
+3. **C — Oracle leaves the fork.** Rebound→Remedy / SpecBench: sealed controller digests; RUN≠EVAL; Firecracker-class outer wall for untrusted bodies. Child scores = evidence, never authority.
+4. **D — Same loop, scarce tips.** `propose→isolate→measure→keep/revert→promote` across SW/RL/sim/bio/HIL. Two-phase promote: `Promote.compute` vs `Promote.tip`. Metric edits = hard epoch bump.
+5. **E — Fork copies memory; credentials must not.** WIRE = opaque leases + broker remint (`secretInheritance: reissue`). Literature thin → Act III agenda, not shipped science.
+6. **F — Warmth is a wire.** Pack by trust domain, not NUMA fill; share compile heat as CAS+lease **beside** the fork; structural CoW OK inside pack, KSM/cross-tenant maps off.
+7. **G — Capability contract.** Named contribution: *Fork, Reduce, Promote* — `Objective.digest` mutations are epoch bumps; path-integral CI; promote-once outside the CoW body. Not a claim every Airflow path already has N-way fork.
+
+**H (dynamics, not an 8th slide claim):** SA / MH / Langevin–SGD / RL temperature = schedule language of the liquid factory; Cell = MH move; Epoch owns \(T\) / \(E\); workers never get the thermostat ([`swarm/H-ANNEALING-MCMC-SGD.md`](swarm/H-ANNEALING-MCMC-SGD.md)). **I:** driven / open / NESS; \(H\) = proposal generator; promote = absorbing sink ([`swarm/I-NONEQUILIBRIUM-HAMILTONIAN.md`](swarm/I-NONEQUILIBRIUM-HAMILTONIAN.md)).
 
 ---
 
@@ -89,10 +107,10 @@ Without fork, “revert” is a prayer. Without a frozen harness, “better” i
 | **Proposal Δ** | Patch, hyperparam, sequence, protocol, mesh | Generated in child |
 | **Oracle O** | Tests, reward, assay, residual, preference | Criteria owned by controller |
 | **Evidence E** | Metric, logs, digests, lineage | Retained with provenance |
-| **Verdict** | keep / revert | Controller + gate |
+| **Verdict** | keep / revert / abstain | Controller + gate |
 | **Promote** | Merge, checkpoint, publish, book HIL slot | Singular authority |
 
-**Law:** Search may be stochastic. The objective digest, the parent snapshot id, and the promote bit may not.
+**Law:** Search may be stochastic. The objective digest, the parent snapshot id, the β/anneal schedule, and the promote bit may not.
 
 ### One loop, many factories
 
@@ -156,6 +174,41 @@ A forkable sandbox turns one warm machine into **N parallel worlds** that share 
 
 **Claim fence:** thermodynamic form is an *interpretation* of precision-weighted pooling under local asymptotic normality (see [arXiv:2607.09689](https://arxiv.org/abs/2607.09689)). Do **not** claim agent forks are Gibbs ensembles of nature. Claim: **the algebra systems people need already looks like statistical mechanics**.
 
+### Driven / open systems (not closed equilibrium)
+
+The factory is a **driven, open** system: proposals and exploration budgets inject entropy; oracles and humans dissipate it; **promote is a sink** (absorbing boundary / entropy collapse), not a claim the swarm thermalized.
+
+| Non-eq object | Systems twin |
+|---|---|
+| Drive / flux | Proposal stream, RL rollouts, swarm fan-out, edit budget |
+| Dissipation | Oracle measurement, reduce, burn runners, KL friction |
+| Sink / absorbing state | **Promote once** — merge / checkpoint / tip; irreversible work at the gate |
+| \(H(q,p)\) | **Proposal generator** only — what the isolated searcher *wants* (not closed mechanics) |
+| NESS at fixed Epoch \(T\) | Steady swarm fork/burn with flat dashboard ≠ thermodynamic equilibrium |
+| Agent / outer Hamiltonian | Harness / search-policy loop (AIDE² · GEAR · DGM) — still under frozen Obj |
+
+**Fence:** say *driven / open / dissipative / NESS*; \(H\) = proposal generator. Do **not** say detailed balance holds, closed Hamiltonian agents, or promote = free-energy minimum of a closed lab. Toolkit: [`swarm/I-NONEQUILIBRIUM-HAMILTONIAN.md`](swarm/I-NONEQUILIBRIUM-HAMILTONIAN.md).
+
+### Annealing family ↔ liquid factory (same T schedule)
+
+Four cousins, one Search≠Authority cut — **worker must not own β or energy**:
+
+| Cousin | What it maps to in the factory | Who owns T / β / E |
+|---|---|---|
+| **Simulated annealing** | Epoch anneal schedule: explore hot → cool gates → \(T\to0\) promote | Controller Epoch (`obj_digest` + schedule id) |
+| **MCMC / Metropolis–Hastings** | Propose Δ in a fork; **accept = keep**, **reject = full revert** (burn child) | Accept rule lives *outside* the child |
+| **SGD / Langevin** | Local noisy ascent on one path (pstack one-Δ); Langevin noise ≈ harness-beating measurement noise | Step size / noise scale = harness policy, not worker whim |
+| **RL temperature** | Softmax / entropy bonus / KL-to-ref as finite-T exploration; checkpoint = zero-T tip | Reward model + β schedule sealed with oracle |
+
+Operational rhyme:
+
+1. High \(T\) / small β → wide fan-out, diverse proposals, swarm / GEAR population.
+2. Cool / raise β (or effective \(n\)) → precision-weighted reduce, fewer survivors.
+3. \(T\to0\) → singular promote (merge / checkpoint / wet / paper tip).
+4. Burn the measure — dispose runners; receipts outlive machines.
+
+**Fence:** matches SGD / SA / MCMC / RL-temperature *intuition* without claiming equilibrium thermodynamics or closed-system thermalization. \(T\to0\) promote is a **sink under drive** (H + I), not an equilibration proof. Bumping the anneal / β schedule id = **hard epoch bump** (joint B↔G↔H). Workers must not “cool themselves” by inflating \(n_k\).
+
 ### Path-integral factory
 
 ```
@@ -205,9 +258,9 @@ burn(worlds)
 ### Stat-phys toolkit for the deck (pick ≤4)
 
 1. **β = n** — colder (larger n) workers dominate; a “cold liar” hijacks unless clipped.
-2. **Annealing** — liquid factory: explore hot → promote cold.
-3. **Free energy vs energy** — score + complexity/cost/KL (RL already lives here).
-4. **Fluctuation–dissipation / noise** — harness must beat noise (median of N, frozen lever).
+2. **Annealing / MCMC keep–revert** — liquid factory T schedule; MH accept = keep in fork, reject = burn.
+3. **Free energy vs energy** — score + complexity/cost/KL (RL already lives here; temperature is exploration).
+4. **Fluctuation–dissipation / noise** — harness must beat noise (median of N, frozen lever; Langevin cousin).
 5. Phase transitions / replica method — Q&A only.
 
 ### Landscape in the physics picture
@@ -223,18 +276,28 @@ burn(worlds)
 | **swfactory** | Thermostat + fence: Cell/epoch; Search≠Authority |
 | **Boltzmann reduce** | Partition function for worker factors |
 
-### Future as open problems (not prophecy)
+---
 
-1. Path-integral CI — merge is a reduced posterior, not a green badge.
-2. World-diff protocols — CoW divergence merge; conflict = evidence.
-3. Objective digests as epoch bumps.
-4. Replica-aware schedulers — refuse correlated siblings as independent N.
-5. One fork fabric, many oracles (SW / RL / sim / bio).
-6. Physics-honest auto-research — spend scarce tips only after reduce says the free-energy drop is real.
+## Act III open problems
+
+SRG-ready problems distilled from swarm A–G (not prophecy):
+
+1. **Fork ≠ independence** — no peer ρ under CoW; default `abstain` on shared snapshot root until an overlap model ships; replica-aware schedulers must refuse fake \(N\).
+2. **WIRE leases** — capability handles across forks (mint / attenuate / revoke / epoch); scrub+remint cost vs ms-class fork; literature thin (Xu–Kaffes names the hole).
+3. **Warm CoW channels** — shared past as fault-timing / residency / write-set wire; pack-by-trust; factory-beside-fork for compile heat without sharing trust.
+4. **Sealed oracle** — controller-owned digests + attestation \(a_k\); child cannot mint \((n,J)\); held-outs never in writable overlay (Rebound / SpecBench).
+5. **Path-integral CI** — merge consumes reduced measure \((\hat\theta,\Delta,\mathrm{abstain})\), not a green badge; \(Z_g\) diagnostic only.
+6. **Promote-once API** — `Promote.compute` vs `Promote.tip`; cryptographic / control-plane fence so escaped workers cannot mint a second tip; tip kinds ∈ {merge, checkpoint, robot_hour, wet_slot, paper_claim}. Promote = **sink** in a driven factory (not closed equilibrium).
+7. **World-diff protocols** — CoW divergence merge for machine state; conflict = evidence (Git intuition, not Git coverage of GPU/mem/net).
+8. **β / anneal as Epoch policy** — schedule id in `obj_digest`; workers must not own temperature or energy (Search≠Authority on the thermostat).
 
 ---
 
 ## Act structure (45 min + 15 Q&A)
+
+Timed outline with slide intents + when to say β/Z: [`OUTLINE.md`](OUTLINE.md).  
+Claim fence one-pager: [`CLAIM-FENCE.md`](CLAIM-FENCE.md).  
+Act II + II½ speaker notes: [`scratch/SPEAKER-NOTES-ACT2.md`](scratch/SPEAKER-NOTES-ACT2.md).
 
 ### Act 0 — Hook (3 min)
 
@@ -276,26 +339,11 @@ Enrichment: one isomorphism slide for sim / bio / auto-research — depth stays 
 **OpenClaw’s gift:** agent = searcher; sandbox = body. Without fork+rollback, exploration contaminates the next trial.  
 **swfactory’s gift:** Cell + epoch fencing. Worker ≠ authority. Sibling forks reusing the same evidence are not independent confirmation.
 
-**Act II½ (optional 3–4 min) — Boltzmann reduce:** fork makes workers cheap; it does **not** make them independent. Reduce must carry precision, sample size, provenance — or a cold liar hijacks the pool.
+**Act II½ (optional 3–4 min) — Boltzmann reduce + anneal:** fork makes workers cheap; it does **not** make them independent. Reduce must carry precision, sample size, provenance — or a cold liar hijacks the pool. T schedule = liquid factory (SA/MH/SGD/Langevin/RL-T cousins); MH keep/revert in fork; RL temperature = exploration, not worker-owned β. Factory is **driven/open** — promote is a sink, not equilibration (H; I upcoming).
 
 ### Act III — Open systems problems (8 min)
 
-1. **Fork ≠ independence** — shared weights, prompts, caches, gold files  
-2. **Credential leases across forks** — capability handles, not env inheritance  
-3. **Warm cache vs isolation** — share compile heat without sharing trust  
-4. **Acceptance boundary** — agent output = evidence; controller criteria = authority (NYC cousin, one sentence)  
-5. **HIL as the extreme** — when promote costs a robot hour, burn search *before* the scarce slot  
-
-Literature gaps (for SRG Q&A):
-
-- Almost nobody measures *evidence* correlation across CoW siblings (papers optimize *execution* independence).
-- Fork-DAG reducers rarely abstain when correlation is unresolved.
-- Oracle ownership / verifier tampering (Rebound→Remedy) — Search≠Authority underspecified as a systems contract.
-- Credential / identity refresh on fork — peer literature thin.
-- Warm shared pages as side channels.
-- Cross-domain factory isomorphism — **this talk’s named contribution**.
-- Promote-once as a runtime primitive (not just sociology).
-- Adaptive selection / winner’s curse in Best-of-N.
+Lead with the eight problems above; leave path-integral CI + promote-once + WIRE as the questions you want back.
 
 ### Close (2 min)
 
@@ -312,14 +360,16 @@ Mantra again. Three questions for SRG:
 | # | Cite | Slide job |
 |---|---|---|
 | 1 | **Firecracker** (NSDI’20) | Pedigree: microVM isolation + snapshot |
-| 2 | **DeltaBox** ([2605.22781](https://arxiv.org/abs/2605.22781)) *or* **Crab** ([2604.28138](https://arxiv.org/abs/2604.28138)) | ms CoW C/R for agent search |
+| 2 | **DeltaBox** ([2605.22781](https://arxiv.org/abs/2605.22781)) *or* **Crab** ([2604.28138](https://arxiv.org/abs/2604.28138)) | ms CoW C/R for agent search — *peer tables only* |
 | 3 | **Shepherd** ([2605.10913](https://arxiv.org/abs/2605.10913)) | Meta-agent fork + Tree-RL + reversible trace |
-| 4 | **Boltzmann / Evidence-Aware MapReduce** ([2607.09689](https://arxiv.org/abs/2607.09689)) | Reduce after fork; Search≠Authority |
+| 4 | **Boltzmann / Evidence-Aware MapReduce** ([2607.09689](https://arxiv.org/abs/2607.09689)) | Reduce after fork; Search≠Authority; β≡n |
 | 5 | **SWE-bench** *or* **Rebound→Remedy** ([2604.01476](https://arxiv.org/abs/2604.01476)) | Isolated coding oracle **or** oracle must leave the fork |
 
-Speaker-notes only: AIDE² / RRSI / AI Scientist, OpenHands, SandboxEscapeBench, OpenRath, Xu–Kaffes ([2510.05556](https://arxiv.org/abs/2510.05556)), SaMOSA / RialTo.
+Speaker-notes only: AIDE² / RRSI / AI Scientist, OpenHands, SandboxEscapeBench, OpenRath, Xu–Kaffes ([2510.05556](https://arxiv.org/abs/2510.05556)), SaMOSA / RialTo, SpecBench.
 
 Full curated biblio: [`scratch/PAPERS-AND-SOURCES.md`](scratch/PAPERS-AND-SOURCES.md).
+
+**Number fence (A):** on-slide latencies only from peer tables (DeltaBox T2–4, Crab ≤1.9%, Shepherd T3). Eng (forkd / Tensorlake / E2B) = verbal landscape. Never invent ms.
 
 ---
 
@@ -335,27 +385,28 @@ Same universe. Different punchline. No reused 15-minute script.
 
 ---
 
-## Spoken lines
+## Spoken lines (≤10)
 
-- “Hill-climbing is not a coding trick. It’s the shape of every closed-loop improvement system.”
-- “OpenClaw is the searcher. The sandbox is the body. Airflow is the spine. Promotion is the brain stem — singular.”
-- “A fork is a parallel world with a shared past. A promote is world-selection.”
-- “Path integrals taught us to sum over histories. Agent factories finally have a machine that can *sample* them.”
-- “β is not mystic — in the Gaussian reduce it’s the sample size. Cold workers shout louder.”
-- “Statistical physics gave us the *reduce*. Systems still owe us the *fork* and the *fence*.”
-- “Tensorlake and friends make worlds cheap. The open problem is making the partition function trustworthy.”
-- “Auto-research fails the day the experiment and the scorekeeper share a writable machine.”
-- “Biology doesn’t need a different sandbox story. It needs a more expensive oracle and a stricter tip.”
+1. “Hill-climbing is not a coding trick. It’s the shape of every closed-loop improvement system.”
+2. “Docker made apps portable. Forkable sandboxes make agent trajectories portable.”
+3. “A fork is a parallel world with a shared past. A promote is world-selection.”
+4. “Fork makes workers cheap. It does **not** make them independent.”
+5. “β is not mystic — in the Gaussian reduce it’s the sample size. Cold workers shout louder.”
+6. “Annealing is the liquid factory: explore hot, reduce with teeth, promote as sink, burn the runners — driven, not equilibrated.”
+7. “Metropolis keep/revert in a fork; the accept rule lives outside the child — Search≠Authority on the thermostat.”
+8. “Statistical physics gave us the *reduce*. Systems still owe us the *fork* and the *fence*.”
+9. “Auto-research fails the day the experiment and the scorekeeper share a writable machine.”
+10. “Path-integral CI means merge consumes a reduced measure over worlds, not a badge from one dirty machine.”
 
 ---
 
 ## Claim fence (hard)
 
-**Say:** substrate for agentic software + RL-style fan-out; HIL as scarcity metaphor / upstream CI tax; physics as interpretation with teeth; related systems (Shepherd / DeltaBox / Crab) as cousins, not owned prior work.
+**Say:** substrate for agentic software + RL-style fan-out; HIL as scarcity metaphor / upstream CI tax; physics as interpretation with teeth (anneal / MCMC / SGD / RL-T as *cousins*; factory = driven/open, promote = sink); related systems (Shepherd / DeltaBox / Crab) as cousins, not owned prior work; capability contract, not shipped N-way everywhere.
 
-**Don’t say:** we accelerate GPU RL training; OpenClaw drives actuators; we rewrote HIL-SERL; IB is a robot OS; fork guarantees statistical independence; every swfactory path already has native N-way fork-merge; vendor latencies as our benchmarks; AGI scientist / wet-lab replacement; agent forks are literal Gibbs ensembles of nature.
+**Don’t say:** we accelerate GPU RL training; OpenClaw drives actuators; we rewrote HIL-SERL; IB is a robot OS; fork guarantees statistical independence; every swfactory path already has native N-way fork-merge; vendor latencies as our benchmarks; AGI scientist / wet-lab replacement; agent forks are literal Gibbs ensembles of nature; detailed balance / closed equilibrium holds in the factory; promote is an equilibrium free-energy minimum; workers may own β / energy / anneal schedule; \(Z_g\) is Bayesian model evidence.
 
-Cite liquid-methodology honestly: forkable sandboxes are a **capability contract**, not a claim that the default executor already launches N candidate sandboxes per issue.
+Full stage card: [`CLAIM-FENCE.md`](CLAIM-FENCE.md).
 
 ---
 
@@ -375,15 +426,20 @@ Cite liquid-methodology honestly: forkable sandboxes are a **capability contract
 
 ```
 README.md                          ← you are here (all story lines)
+OUTLINE.md                         ← timed 45+15 speaker outline
+CLAIM-FENCE.md                     ← stage do/don’t one-pager
 scratch/
+  TIME.md                          ← slot verification
   STORY-SPINE.md                   ← locked acts + claim fence
   UNIVERSAL-HILLCLIMB.md           ← isomorphism depth
   PARALLEL-WORLDS-STATPHYS.md      ← path integrals / β / Tensorlake
+  SPEAKER-NOTES-ACT2.md            ← Act II + II½ (Boltzmann + anneal)
   PAPERS-AND-SOURCES.md            ← Top 15 + clusters A–F + deck five
+swarm/                             ← panel A–I + ROUNDTABLE
 ```
 
-**Still to build:** timed speaker outline, architecture diagram (S₀→fork→reduce→promote), optional recorded fork demo (not live dependency), deck.
+**Still to build:** architecture diagram (S₀→fork→reduce→promote), optional recorded fork demo (not live dependency), deck.
 
 ---
 
-*Scratch pad seeded 2026-09-27. Prefer primary arXiv/USENIX over tertiary SEO. Refresh HF trending weekly before 15 Oct.*
+*Scratch pad seeded 2026-09-27; deep refinement 2026-09-27 (IDT). Prefer primary arXiv/USENIX over tertiary SEO. Refresh HF trending weekly before 15 Oct.*
