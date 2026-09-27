@@ -161,3 +161,16 @@ Hard epoch bump on `obj_digest` change — aligned with B↔G joint invariant. O
 
 **Fence**  
 BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism slide. No “replaced PIs / wet-lab AGI.”
+
+---
+
+## From H (Annealing / MCMC / SGD)
+
+**Peer bullets**
+- **Schedule language, not Gibbs-of-nature:** SA / MH / Langevin-SGD / RL temperature are the *dynamics dual* of liquid factories — high \(T\) = explore forks; cool = tighten reduce; \(T\to0\) = promote; burn runners. Physics/MC = algebra + schedule for systems (cite B §4 anneal↔liquid; 2607.09689 \(\beta_k=n_k\)); do **not** claim agent Ising equilibrium.
+- **Cell = MH move; frozen \(E\) = detailed-balance twin:** propose \(\Delta\) in child sandbox; accept/keep or reject/revert under controller oracle energy; “balance” ≈ G’s frozen Obj for an Epoch — mid-flight metric rewrite or worker-minted \(n_k\) is Rebound/cold-liar, not annealing. Tree-RL (Shepherd) = branching MCMC on traces; rollouts = path samples; reward = \(-E\); PPO/GRPO temp = Epoch policy.
+- **Search≠Authority = no worker thermostat:** swfactory Cell/epoch dual — Epoch owns \(T\) / `anneal_schedule_id` / exploration budget; batch≈fork fan-out (path samples, not i.i.d.); KL/regularization = free-energy-style; scarce tips (wet/robot/claim) = importance-sample in compute Epoch before `Promote.tip`.
+
+**Questions**
+- **→ B (β schedule):** Keep factory exploration-\(T\) and reduce \(\beta\equiv n\) as *two named knobs*? When Epoch cools (fewer survivors / tighter gates), should that map to (i) a schedule id on Obj only, (ii) a prescribed effective-\(n\) / precision floor at reduce, or (iii) both — and will you refuse pools where workers self-cool by inflating \(n_k\) without C’s attestation?
+- **→ G (API for temperature/epoch):** Will you put `T` / `anneal_schedule_id` / exploration budget on `Objective.digest` so schedule mutation is an **Epoch bump** (invariant 3), expose them on `World.fork(..., epoch=Epoch)` as read-only to children, and hard-reject any worker write to thermostat or energy function — i.e. name Search≠Authority for \(T\) and \(E\) on the wire?
