@@ -1,64 +1,118 @@
-\begin{frame}{The primitive is a machine you can fork}
+\begin{frame}{There are two ways to make futures cheap}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{block}{Learn a world}
+\centering
+\large Dreamer / Contrastive World Models
+\end{block}
+\normalsize
+\begin{center}
+$o_t \rightarrow z_t \rightarrow \widehat{s}_{t+1},\widehat{s}_{t+2},\ldots$
+\end{center}
+\begin{itemize}
+  \item compact, learned latent state
+  \item imagine many futures cheaply
+  \item useful when interaction is slow, unsafe, or scarce
+  \item pay approximation / learned-dynamics error
+\end{itemize}
+\small CWM's twist: stop spending capacity reconstructing irrelevant pixels; keep information predictive of the future.
+
+\column{0.47\textwidth}
+\begin{block}{Fork the world}
+\centering
+\large executable software environment
+\end{block}
+\normalsize
+\begin{center}
+$S_0 \rightarrow \{S_0^1,S_0^2,\ldots,S_0^N\}$
+\end{center}
+\begin{itemize}
+  \item explicit, executable state
+  \item branch real repo / process futures
+  \item useful when the world is software and reset is cheap
+  \item pay compute / storage, not learned transition-model error
+\end{itemize}
+\small Exact only inside the state and capability boundary we actually captured.
+\end{columns}
+
+\vspace{0.45em}
+\begin{block}{The systems inversion}
+\centering\large World models make \textbf{imagination} cheap. Forkable sandboxes make \textbf{interaction} cheap.
+\end{block}
+\source{Dreamer 4: Hafner et al., arXiv:2509.24527. Contrastive World Models: Li, arXiv:2609.22175.}
+\end{frame}
+
+% -------------------------------------------------------------------
+\begin{frame}{For code, the best world model is often the world}
 \centering
 \begin{tikzpicture}[>=Latex,thick]
-  \tikzset{box/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.1cm,minimum height=.8cm,align=center}}
-  \tikzset{child/.style={draw=SignalCyan,fill=SignalCyan!8,rounded corners,minimum width=1.75cm,minimum height=.65cm,align=center}}
-  \node[box] (s0) at (-5,0) {$S_0$\\snapshot};
-  \node[child] (c1) at (-2,1.4) {child 1};
-  \node[child] (c2) at (-2,.45) {child 2};
-  \node[child] (c3) at (-2,-.5) {child 3};
-  \node[child] (cn) at (-2,-1.45) {child N};
-  \node[box] (run) at (1.1,0) {run + measure};
-  \node[box] (red) at (4.0,0) {reduce evidence};
-  \node[box,fill=WarmAmber!20] (prom) at (6.8,0) {promote once};
+  \tikzset{box/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.2cm,minimum height=.82cm,align=center}}
+  \tikzset{child/.style={draw=SignalCyan,fill=SignalCyan!8,rounded corners,minimum width=2.0cm,minimum height=.68cm,align=center}}
+  \node[box] (s0) at (-5.2,0) {$S_0$\\snapshot};
+  \node[child] (c1) at (-2.1,1.45) {patch A};
+  \node[child] (c2) at (-2.1,.48) {patch B};
+  \node[child] (c3) at (-2.1,-.49) {patch C};
+  \node[child] (cn) at (-2.1,-1.46) {patch N};
+  \node[box] (run) at (1.15,0) {execute\\real tests};
+  \node[box] (red) at (4.05,0) {reduce\\evidence};
+  \node[box,fill=WarmAmber!20] (prom) at (6.75,0) {promote\\once};
   \draw[->] (s0) -- node[above,sloped]{fork} (c1.west);
   \draw[->] (s0) -- (c2.west); \draw[->] (s0) -- (c3.west); \draw[->] (s0) -- (cn.west);
   \draw[->] (c1.east) -- (run.west); \draw[->] (c2.east) -- (run.west); \draw[->] (c3.east) -- (run.west); \draw[->] (cn.east) -- (run.west);
   \draw[->] (run) -- (red); \draw[->] (red) -- (prom);
-  \node[color=Muted] at (-2,-2.3) {shared past, divergent futures};
-  \node[color=Muted] at (6.8,-1.2) {burn children};
+  \node[color=Muted] at (-2.1,-2.28) {same past, different interventions};
+  \node[color=Muted] at (6.75,-1.25) {burn children};
 \end{tikzpicture}
 
-\vspace{0.5em}
-\Large \hilite{Fork is not a convenience. Fork is the API for search.}
+\vspace{0.45em}
+\Large These are \hilite{executable counterfactuals}: branch from the same past, intervene differently, observe the actual software transition.
+
+\vspace{0.4em}
+\normalsize No learned transition model is required for the part of the world we can execute faithfully.
 \source{Related systems: Firecracker (NSDI'20), DeltaBox (arXiv:2605.22781), Shepherd (arXiv:2605.10913).}
 \end{frame}
 
 % -------------------------------------------------------------------
-\begin{frame}{What actually has to fork?}
+\begin{frame}{A fork should copy state, not authority}
 \small
 \begin{columns}[T,onlytextwidth]
 \column{0.48\textwidth}
-\begin{block}{State}
+\begin{block}{Copy into the child}
 \begin{itemize}
-  \item \term{filesystem}: named workspace snapshot
-  \item \term{memory + processes}: restore the running machine
-  \item \term{reproducibility}: identify $S_0$ by digest
+  \item filesystem + process / memory state
+  \item pinned source, dependencies, toolchain
+  \item enough state to continue the experiment
 \end{itemize}
 \end{block}
 
-\begin{block}{Speed}
+\begin{block}{Share carefully}
 \begin{itemize}
-  \item \term{CoW cloning}: pay on divergence, not on rebuild
-  \item \term{warm build/test}: share heat beside the trust boundary
+  \item content-addressed build artifacts
+  \item immutable heat / caches inside one trust domain
+  \item CoW pages whose sharing policy is explicit
 \end{itemize}
 \end{block}
 
 \column{0.48\textwidth}
-\begin{block}{Authority}
+\begin{block}{Remint at the boundary}
 \begin{itemize}
-  \item \term{network}: explicit egress, not ambient access
-  \item \term{credentials}: remint / lease, never blindly copy
-  \item \term{oracle}: tests/reward stay outside worker write-set
+  \item API / cloud credentials
+  \item network capabilities and identity
+  \item randomness / epoch identity when required
 \end{itemize}
 \end{block}
 
-\begin{block}{Evidence}
+\begin{block}{Keep outside the child}
 \begin{itemize}
-  \item logs, digests, lineage outlive the child
-  \item crash/retry must not change who owns the decision
+  \item hidden verifier + objective digest
+  \item promotion key / merge authority
+  \item durable evidence ledger
 \end{itemize}
 \end{block}
 \end{columns}
 
+\vspace{0.35em}
+\begin{center}
+\Large \hilite{Copy the machine, not the keys.}
+\end{center}
 \end{frame}
