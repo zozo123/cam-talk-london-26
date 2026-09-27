@@ -1,6 +1,6 @@
-# Final deck — Cambridge SRG · 30-minute version
+# Concise deck — Cambridge SRG · 30-minute version
 
-`talk.tex` is the stage source of truth. Research depth stays in `OUTLINE.md`, `DECK-BEATS.md`, `scratch/`, `swarm/`, `QA-BANK.md`, `CLAIM-FENCE.md`, and `WORLD-MODELS-BRIDGE.md`.
+`talk-30min.tex` + `slides/` are the source of truth for this concise cut. The canonical full academic deck is `talk.tex` + `academic/`; see `FULL-ACADEMIC.md`. Research depth stays in `OUTLINE.md`, `DECK-BEATS.md`, `scratch/`, `swarm/`, `QA-BANK.md`, `CLAIM-FENCE.md`, and `WORLD-MODELS-BRIDGE.md`.
 
 ## The 13-slide stage path
 
