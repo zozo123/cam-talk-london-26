@@ -1,35 +1,35 @@
 \begin{frame}{Coding RL turns reset into a training primitive}
 \large
-A training episode is a controlled experiment, not just a prompt.
+For coding RL, the environment is part of the training example.
 
-\vspace{0.35em}
+\vspace{0.3em}
 \begin{center}
 \Large
 $\text{episode}=\big(S_0,\;\text{task},\;\text{tools},\;\text{verifier},\;\text{reset}\big)$
 \end{center}
 
-\vspace{0.45em}
+\vspace{0.4em}
 \begin{columns}[T,onlytextwidth]
 \column{0.47\textwidth}
 \textbf{Cold path}\par
 \normalsize clone repo $\rightarrow$ install deps $\rightarrow$ build $\rightarrow$ run episode $\rightarrow$ throw away
 
-\vspace{0.55em}
-\warn{We keep paying to reconstruct the same starting world.}
+\vspace{0.5em}
+\warn{Reconstruct the same starting world again.}
 
 \column{0.47\textwidth}
 \textbf{Fork path}\par
 \normalsize prepare once $\rightarrow$ snapshot $S_0$ $\rightarrow$ fork episode $\rightarrow$ burn child $\rightarrow$ fork again
 
-\vspace{0.55em}
-\ok{Reset becomes a runtime operation, not a provisioning project.}
+\vspace{0.5em}
+\ok{Reset becomes a runtime operation.}
 \end{columns}
 
 \vspace{0.45em}
 \begin{block}{Systems thesis}
 \centering Reset is part of the reward contract: episodes are comparable only if they begin from an authenticated $S_0$.
 \end{block}
-\source{SWE-smith: arXiv:2504.21798. Meta CWM: arXiv:2510.02387. RL-environment products: Scale, Surge, Mercor, Prime Intellect.}
+\source{SWE-smith: arXiv:2504.21798. Meta Code World Model (2025). RL-environment products: Scale, Surge, Mercor, Prime Intellect.}
 \end{frame}
 
 % -------------------------------------------------------------------
@@ -62,36 +62,4 @@ $\text{episode}=\big(S_0,\;\text{task},\;\text{tools},\;\text{verifier},\;\text{
 \vspace{0.25em}
 \centering\large If the agent can rewrite the ruler, a green score stops meaning what you think it means.
 \source{Reward-hacking example: From Rebound to Remedy, arXiv:2604.01476.}
-\end{frame}
-
-% -------------------------------------------------------------------
-\begin{frame}{Copy the machine, not the keys}
-\large
-CoW makes copying state cheap. That does \emph{not} mean every byte should inherit across the fork.
-
-\vspace{0.65em}
-\begin{columns}[T,onlytextwidth]
-\column{0.47\textwidth}
-\textbf{Good things to share}
-\begin{itemize}
-  \item compiler/toolchain pages
-  \item immutable source snapshot
-  \item content-addressed build artifacts
-  \item read-only caches inside one trust domain
-\end{itemize}
-
-\column{0.47\textwidth}
-\textbf{Things to remint / isolate}
-\begin{itemize}
-  \item API and cloud credentials
-  \item network capabilities
-  \item writable verifier state
-  \item cross-tenant warm pages / side channels
-\end{itemize}
-\end{columns}
-
-\vspace{0.55em}
-\begin{block}{Rule of thumb}
-\centering \hilite{Warmth is a performance feature. Authority is a capability. Do not confuse them.}
-\end{block}
 \end{frame}
