@@ -187,3 +187,46 @@ BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism sl
 **Questions**
 - **→ B (Reduce / StatPhys):** Will you add “promote = absorbing sink / irreversible work” beside the anneal↔liquid table for Act II½, and accept TUR-only-as-intuition for “precision costs dissipation ↔ β≡n / cold-liar” — without importing fluctuation-theorem claims into 2607.09689?
 - **→ H (Annealing / MCMC):** Confirm on-stage wording: Epoch cool-down is a **finite-rate driven protocol** \(\lambda(t)\) (non-eq), not quasi-static equilibrium annealing — and keep MH “detailed balance ≈ frozen \(E\)” as honesty condition, never “the factory equilibrated”?
+
+---
+
+## From J (Tensorlake practice)
+
+**Peer bullets**
+- **Product = durable configuration space, not the reduce:** Tensorlake MicroVM worlds (`filesystem` vs `memory` snapshots, `copy`/clone fan-out, suspend/resume, `tl fs`/`tl git`, `@function` Orchestrate) make parallel worlds *cheap* — Firecracker/CloudHypervisor pedigree. Eng/product = **BACKUP verbal**; no vendor ms as Yossi benches (A/CLAIM fence).
+- **Agent-inside vs sandbox-as-tool:** named durable computer (SSH/IDE/suspend) vs ephemeral MicroVM/`@function` per tool — both compose; neither is promote authority.
+- **Gap is the talk:** cheap MEMORY siblings share snapshot root ⇒ unresolved ρ; Git CAS promote ≠ `Promote.tip`; durability checkpoints ≠ sealed oracle; isolation wall ≠ WIRE remint. People (public): **Diptanu Gon Choudhury**, Founder & CEO/Co-founder — tensorlake.ai blog bylines + LinkedIn; Nomad-era scheduler pedigree = speaker-note only.
+
+**Questions**
+- **→ B (Reduce):** Default `verdict=abstain` when product clone returns K warm siblings from one MEMORY root — even if all tool scores are green?
+- **→ C (Oracle):** Confirm `@function` durable outputs / MEMORY restore cannot rehydrate a writable grader — sealed digests stay outside snapshot mutability?
+- **→ G (Factory):** Distinguish `tl git` CAS promote (data) from `Promote.tip` (merge/checkpoint/wet/paper) as separate bits on the wire?
+- **→ E (WIRE):** MEMORY clone copies credential pages — remint+scrub before child runnable, same as A’s dirty-surface default?
+
+---
+
+## From K (Books / theory↔practice)
+
+**Peer bullets**
+- **Depth biblio shipped:** Top **25 books** + Top **40 papers** in `K-BOOKS-THEORY-PRACTICE.md` — OS/fork/CoW, microVMs, MapReduce→Ray, MCMC/SA/SGD, non-eq, RL, coding-agent sandboxes. Each marked MAIN / speaker-note / do-not-cite-on-stage.
+- **Stage-safe nods:** OSTEP fork; DDIA MapReduce mental model; Firecracker NSDI’20; Dean/Ghemawat; 2607.09689; Sutton/Barto; Shepherd/DeltaBox∨Crab; SWE-bench∨Rebound. **Prefer Feynman path-integral pedagogy** over Everett — Everett = **do-not-cite-on-stage** (engineering ontology lives in PARALLEL-WORLDS only).
+- **Non-eq naming:** Seifert 2012 = vocabulary (driven, entropy production, NESS); Jarzynski/Crooks = do-not-stage. Kirkpatrick SA = liquid-factory T schedule (H). Metropolis = keep/revert.
+
+**Questions**
+- **→ J:** Three book/paper nods that keep Tensorlake mention from sounding like a vendor pitch?
+- **→ L:** Confirm Dean→Ray lineage + CRDT≠promote + Git≠world-diff stay ≤ one slide / two breaths.
+- **→ H/I:** Seifert/Kirkpatrick speaker-note only; no FT derivation on stage — agree?
+
+---
+
+## From L (Algos / split-merge)
+
+**Peer bullets**
+- **Lineage:** MapReduce → Dryad → Spark RDD lineage → CIEL → Ray (tasks+actors) → **Evidence-Aware MapReduce (2607.09689)**; tree/MCTS/Tree-GRPO as branching reduce; Airflow = **authority spine**, not fork fabric.
+- **Contrasts with teeth:** CRDTs converge data ≠ promote-once scarce tip; Git 3-way ≠ world-diff (mem/GPU/net/creds); BSP barrier sync ≠ **abstain-on-correlation** when shared snapshot root ∈ ℒ.
+- **Tensorlake-class enables** golden-base fan-out, suspend, tool-isolation, durable `@function` map — **still owes** Z/abstain, objective-digest epochs, sealed oracle, WIRE leases, Promote.tip kinds, pack-by-trust (F).
+
+**Questions**
+- **→ B:** Is “barrier then average” the explicit anti-pattern under your abstain default?
+- **→ G:** Wire diagram: fork fabric ⊥ Airflow/tip spine — will you name both slots?
+- **→ J:** Which Orchestrate patterns are safe to speak without implying sealed oracle ships?
