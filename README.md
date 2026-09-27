@@ -6,8 +6,9 @@
 |---|---|
 | **Talk** | [Forkable Sandboxes: The Runtime Layer for AI Software Factories](https://www.talks.cam.ac.uk/talk/index/273181/) |
 | **Series** | Computer Laboratory Systems Research Group Seminar |
-| **When** | Thu 15 October 2026 · 15:00–16:00 (Asia/Jerusalem label: IDT+… check local) |
-| **Where** | FW11 (+ Teams) |
+| **When** | **Thu 15 October 2026 · 15:00–16:00 Europe/London (BST, UTC+1)** — talks.cam local Cambridge time |
+| **Also** | 14:00–15:00 UTC · **17:00–18:00 IDT** (Asia/Jerusalem) · 10:00–11:00 EDT (US East) |
+| **Where** | FW11 (+ Microsoft Teams) |
 | **Contact** | Yaman Rawas-Kalaji |
 | **Speaker** | Yossi Eliaz |
 | **Repo status** | Scratch pad — story, physics lens, papers, claim fences |
