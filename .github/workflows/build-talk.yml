@@ -5,12 +5,16 @@ on:
     branches: [main]
     paths:
       - "talk.tex"
+      - "talk-30min.tex"
+      - "academic/**"
       - "slides/**"
       - "Makefile"
       - ".github/workflows/build-talk.yml"
   pull_request:
     paths:
       - "talk.tex"
+      - "talk-30min.tex"
+      - "academic/**"
       - "slides/**"
       - "Makefile"
       - ".github/workflows/build-talk.yml"
@@ -21,12 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compile Beamer PDF
+      - name: Compile full academic Beamer PDF
         uses: xu-cheng/latex-action@v3
         with:
           root_file: talk.tex
-      - name: Upload PDF
+      - name: Compile concise 30-minute cut
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: talk-30min.tex
+      - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
-          name: cambridge-forkable-sandboxes-talk
-          path: talk.pdf
+          name: cambridge-forkable-sandboxes-talks
+          path: |
+            talk.pdf
+            talk-30min.pdf
