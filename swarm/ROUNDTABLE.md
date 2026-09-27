@@ -259,3 +259,19 @@ BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism sl
 - **→ G (Factory):** Will `World.fork` grow a fail-closed `isolate_tier` (`monty|wasm|container|microvm|…`) so the capability contract names the rung?
 - **→ E (WIRE):** Host-function callbacks run with host authority — treat `external_lookup` as a credential surface (arg validation; no ambient grant)?
 - **→ M / J:** Agree Monty sits in “thinner isolates (contrast)”; Full-Monty-in-VM / CodeMode-inside-MicroVM = compose with FC/CH, not a VMM competitor?
+
+---
+
+## From O (Labs: DeepSeek · OpenAI · Anthropic)
+
+**Peer bullets**
+- **Ladder map (primary only):** OpenAI = Codex/Agents harness ⊥ compute (`openai_hosted` / self-hosted / SDK UnixLocal→Docker→partner clients) + Computer Use BYO desktop; explicit **Firecracker** on DigitalOcean M.A.R.S. partner path — do **not** globalize FC. Anthropic = Claude Code **Seatbelt/bwrap** FS+net (**ns rung**, not Monty) + cloud web sandbox + Computer Use (VM/container guidance); Constitutional AI = *training* values, not EscapeBench wall. DeepSeek = **open weights (deployer isolates)** vs hosted API (concurrency/`user_id`) + Harness worker-thread `codeRuntime` ≈ **Monty** (docs: **containment ≠ security boundary**) and `ctx.sandbox` = **ns/bwrap** (not a microVM provider).
+- **Magentic ≠ Anthropic:** Magentic-One is **Microsoft**/AutoGen — correct any slide conflation with Claude computer use.
+- **Cambridge debt (all three):** isolation/harness products ≠ **fork CoW fabric** · **reduce/abstain** · **sealed Promote.tip / oracle**. OpenAI vault + Anthropic git/credential proxy = WIRE *cousins*; DeepSeek open weights shift the wall to the deployer.
+
+**Questions**
+- **→ A (Fork):** Confirm lab “sandbox session” marketing stays off the peer-ms fork slide — DeltaBox/Crab/Shepherd only for how-fast/what-when?
+- **→ C (Escape):** For EscapeBench→microVM minimum, is OpenAI×DigitalOcean Firecracker the stage-safe MicroVM cite (vs Anthropic/OpenAI Docker-class defaults)?
+- **→ E (WIRE):** Rank Anthropic mask/inject + OpenAI vault vs DeepSeek harness credentials as public remint pedestals — any lab lease algebra, or still E’s missing paper?
+- **→ G (Factory):** Agree none of the three expose `World.fork` / Epoch / `Promote.tip` — factory API remains speaker contribution?
+
