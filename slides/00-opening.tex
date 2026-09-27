@@ -1,77 +1,83 @@
 \begin{frame}[plain]
   \titlepage
-  \vspace{-0.5em}
+  \vspace{-0.65em}
   \begin{center}
-    \small \hilite{Burn the runner. Keep the proof. Fork the machine, not the trust.}
+    \large \hilite{Burn the runner. Keep the proof. Fork the machine, not the trust.}
   \end{center}
 \end{frame}
 
 % -------------------------------------------------------------------
-\begin{frame}{Why I ended up working on this}
+\begin{frame}{100 agents. One laptop. What could possibly go wrong?}
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+  \tikzset{agent/.style={draw=SignalCyan,fill=SignalCyan!8,rounded corners,minimum width=1.45cm,minimum height=.62cm,align=center}}
+  \tikzset{shared/.style={draw=Danger,fill=Danger!6,rounded corners,minimum width=4.5cm,minimum height=2.15cm,align=center}}
+  \node[agent] (a1) at (-4.35,1.5) {agent 1};
+  \node[agent] (a2) at (-4.35,.5) {agent 2};
+  \node[agent] (a3) at (-4.35,-.5) {agent 3};
+  \node[agent] (a4) at (-4.35,-1.5) {agent 100};
+  \node[shared] (s) at (1.0,0) {\Large shared machine\\[.22em]\normalsize workspace \quad tests \quad cache\\credentials \quad network \quad processes};
+  \draw[->] (a1) -- (s.west);
+  \draw[->] (a2) -- (s.west);
+  \draw[->] (a3) -- (s.west);
+  \draw[->] (a4) -- (s.west);
+  \node[anchor=west] at (4.05,1.15) {\warn{state leaks}};
+  \node[anchor=west] at (4.05,.35) {\warn{tests drift}};
+  \node[anchor=west] at (4.05,-.45) {\warn{credentials spread}};
+  \node[anchor=west] at (4.05,-1.25) {\warn{``wins'' correlate}};
+\end{tikzpicture}
+
+\vspace{0.45em}
+\Large \hilite{Parallelism without isolation is correlated chaos.}
+\end{frame}
+
+% Speaker: “We call this a swarm. The operating system calls it roommates.”
+% The joke buys the pivot: the problem is shared mutable state and authority, not agents talking.
+
+% -------------------------------------------------------------------
+\begin{frame}{Why I ended up here}
 \begin{columns}[T,onlytextwidth]
-\column{0.31\textwidth}
-\textbf{1. Computational science}\par
-\normalsize I learned that an experiment is not reproducible unless the \emph{machine state}, inputs, and provenance are reproducible too.
+\column{0.30\textwidth}
+\textbf{Computational science}\par
+\normalsize An experiment is not reproducible unless the state, inputs, and provenance are reproducible.
 
-\column{0.31\textwidth}
-\textbf{2. Production ML + build systems}\par
-\normalsize I learned the opposite pressure: reuse everything you safely can --- caches, artifacts, warm state --- because recomputation is expensive.
+\column{0.30\textwidth}
+\textbf{Production ML + builds}\par
+\normalsize Reuse everything you safely can: caches, artifacts, warm state. Rebuilding the world is expensive.
 
-\column{0.31\textwidth}
-\textbf{3. Coding agents}\par
-\normalsize Then the developer became a program that runs shells, mutates files, calls networks, retries, and fans out hypotheses.
+\column{0.30\textwidth}
+\textbf{Coding agents}\par
+\normalsize Then the developer became a program that edits files, runs shells, calls networks, retries, and forks hypotheses.
 \end{columns}
 
-\vspace{0.75em}
+\vspace{0.8em}
 \begin{block}{The collision}
 \centering
-\large The thing I wanted to reuse for speed --- \textbf{state} --- became the thing I had to isolate for trust.
+\large The same \textbf{state} I wanted to reuse for speed became the state I had to isolate for trust.
 \end{block}
 
 \vspace{0.35em}
 \centering\large
-The missing primitive was not another model. It was a machine state I could \hilite{fork, inspect, revert, and burn} without forking authority.
+That is the road from reproducible science and build systems to \hilite{forkable sandboxes}.
 \end{frame}
 
 % -------------------------------------------------------------------
-\begin{frame}{One-sentence talk}
-\LARGE
-Coding agents, RL post-training, and hardware-in-the-loop all need the same thing:
-
-\vspace{0.7em}
-\begin{center}
-\begin{minipage}{0.88\textwidth}
-\centering
-\Huge \hilite{cheap forked machines for search}
-\Large \\
-\vspace{0.2em}
-and a separate authority that never lives inside those machines.
-\end{minipage}
-\end{center}
-
-\vspace{0.7em}
-\large Forkable sandboxes are that machine. Everything else is orchestration.
-\end{frame}
-
-% -------------------------------------------------------------------
-\begin{frame}{The scarcity ladder}
+\begin{frame}{Search can be plural. Authority must be singular.}
 \centering
 \begin{tikzpicture}[x=1cm,y=1cm]
-  \node[align=center,anchor=west,font=\bfseries\large] at (0,5.0) {cheap and plural};
-  \node[align=center,anchor=east,font=\bfseries\large] at (12.2,5.0) {scarce and singular};
-  \draw[very thick,SignalCyan,-{Latex[length=3mm]}] (0.3,4.55) -- (11.9,4.55);
-  \node[anchor=west] at (0.5,3.75) {agent samples / patches};
-  \node[anchor=east] at (11.7,3.75) {merge to main};
-  \node[anchor=west] at (0.5,3.0) {RL rollouts / policy candidates};
-  \node[anchor=east] at (11.7,3.0) {checkpoint promote};
-  \node[anchor=west] at (0.5,2.25) {sim / synthetic HIL};
-  \node[anchor=east] at (11.7,2.25) {real arm / human hour};
-  \node[anchor=west] at (0.5,1.5) {forked sandbox};
-  \node[anchor=east] at (11.7,1.5) {controller acceptance};
-  \node[fill=SoftGray,rounded corners,inner sep=6pt,align=center] at (2.1,0.65) {SEARCH\\many failures are cheap};
-  \node[fill=SoftGray,rounded corners,inner sep=6pt,align=center] at (10.2,0.65) {AUTHORITY\\one mistake is expensive};
+  \node[anchor=west,font=\bfseries\large] at (0,4.6) {cheap and plural};
+  \node[anchor=east,font=\bfseries\large] at (12.1,4.6) {scarce and singular};
+  \draw[very thick,SignalCyan,-{Latex[length=3mm]}] (.4,4.15) -- (11.7,4.15);
+  \node[anchor=west] at (.7,3.2) {100 candidate patches};
+  \node[anchor=east] at (11.4,3.2) {1 merge to main};
+  \node[anchor=west] at (.7,2.2) {10,000 rollouts};
+  \node[anchor=east] at (11.4,2.2) {1 policy checkpoint};
+  \node[anchor=west] at (.7,1.2) {millions of sim trials};
+  \node[anchor=east] at (11.4,1.2) {1 robot / wet-lab hour};
+  \node[fill=SoftGray,rounded corners,inner sep=6pt] at (2.0,.25) {\textbf{SEARCH}: fail cheaply};
+  \node[fill=WarmAmber!20,rounded corners,inner sep=6pt] at (10.1,.25) {\textbf{AUTHORITY}: commit carefully};
 \end{tikzpicture}
 
-\vspace{0.4em}
-\large A million compiles are search. One merge - or one robot hour - is authority you can burn.
+\vspace{0.35em}
+\Large The runtime should make the left side cheap \emph{without letting it become the right side.}
 \end{frame}
