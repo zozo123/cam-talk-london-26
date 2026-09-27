@@ -1,0 +1,228 @@
+% 12
+\begin{frame}{Software engineering view: what is the world?}
+\large
+For a coding agent, the environment is not a paragraph of text.
+\vspace{0.5em}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{itemize}
+  \item source tree + Git state
+  \item dependencies + toolchain
+  \item build cache + generated files
+  \item tests + fixtures + hidden checks
+\end{itemize}
+\column{0.48\textwidth}
+\begin{itemize}
+  \item shell + processes
+  \item network and credentials
+  \item logs, traces, artifacts
+  \item reviewer / release authority
+\end{itemize}
+\end{columns}
+\vspace{0.6em}
+\begin{block}{Software engineering becomes experimental science}
+Each patch is a hypothesis. CI is an oracle. Merge is a scarce claim about the world.
+\end{block}
+\end{frame}
+
+% 13
+\begin{frame}{Coding RL turns reset into a training primitive}
+\large
+For coding RL, the environment is part of the training example.
+\vspace{0.3em}
+\begin{center}
+\Large
+$\text{episode}=\big(S_0,\;\text{task},\;\text{tools},\;\text{verifier},\;\text{reset}\big)$
+\end{center}
+\vspace{0.4em}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\textbf{Cold path}\par
+\normalsize clone repo $\rightarrow$ install deps $\rightarrow$ build $\rightarrow$ run episode $\rightarrow$ throw away
+\vspace{0.5em}
+\warn{Reconstruct the same starting world again.}
+\column{0.47\textwidth}
+\textbf{Fork path}\par
+\normalsize prepare once $\rightarrow$ snapshot $S_0$ $\rightarrow$ fork episode $\rightarrow$ burn child $\rightarrow$ fork again
+\vspace{0.5em}
+\ok{Reset becomes a runtime operation.}
+\end{columns}
+\source{SWE-smith: arXiv:2504.21798; Meta Code World Model (2025); public RL-environment products by Scale, Surge, Mercor, Prime Intellect.}
+\end{frame}
+
+% 14
+\begin{frame}{Why verifiable rewards matter}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{block}{Chat reward}
+\centering
+\large subjective, delayed, noisy, human-expensive
+\end{block}
+\begin{itemize}
+  \item Was the answer good?
+  \item Was the reasoning helpful?
+  \item Did it hallucinate subtly?
+\end{itemize}
+\column{0.47\textwidth}
+\begin{block}{Code reward}
+\centering
+\large run tests, type checks, benchmarks, linters, evals
+\end{block}
+\begin{itemize}
+  \item Did the patch compile?
+  \item Did hidden tests pass?
+  \item Did performance regress?
+\end{itemize}
+\end{columns}
+\vspace{0.6em}
+\Large \centering \hilite{Code is trainable because the world can answer back.}
+\end{frame}
+
+% 15
+\begin{frame}{The student cannot grade their own exam}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{block}{Inside the child}
+\centering
+\large code, shell, files, compiler, visible tests
+\end{block}
+\vspace{0.4em}
+\centering\warn{untrusted searcher}
+\column{0.47\textwidth}
+\begin{block}{Outside the child}
+\centering
+\large hidden verifier, objective digest, reward policy, promotion key
+\end{block}
+\vspace{0.4em}
+\centering\ok{trusted authority}
+\end{columns}
+\vspace{0.9em}
+\begin{center}
+\Huge RUN $\ne$ EVAL
+\end{center}
+\vspace{0.25em}
+\centering\large If the agent can rewrite the ruler, a green score stops meaning what you think it means.
+\source{Reward-hacking and evaluator-integrity motivation: From Rebound to Remedy, arXiv:2604.01476.}
+\end{frame}
+
+% 16
+\begin{frame}{Non-escape escapes}
+\large
+The agent does not need a kernel escape to defeat the experiment.
+\vspace{0.5em}
+\begin{tabular}{p{0.30\textwidth}p{0.55\textwidth}}
+\toprule
+\textbf{Failure} & \textbf{What goes wrong} \\
+\midrule
+Inherited credentials & The child gets authority that belonged to the parent. \\
+Dangerous mounts & A writable path reaches the verifier, cache, or host. \\
+Allowed egress & The child leaks secrets through a permitted endpoint. \\
+Verifier tampering & The child edits the score instead of solving the task. \\
+\bottomrule
+\end{tabular}
+\vspace{0.6em}
+\begin{block}{Security lesson}
+Sandboxing is not just a wall. It is a capability contract.
+\end{block}
+\end{frame}
+
+% 17
+\begin{frame}{What actually has to fork?}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Copy into the child}
+\begin{itemize}
+  \item filesystem + process / memory state
+  \item pinned source, dependencies, toolchain
+  \item enough state to continue the experiment
+\end{itemize}
+\end{block}
+\begin{block}{Share carefully}
+\begin{itemize}
+  \item content-addressed build artifacts
+  \item immutable heat / caches inside one trust domain
+  \item CoW pages with explicit sharing policy
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Remint at the boundary}
+\begin{itemize}
+  \item API / cloud credentials
+  \item network capabilities and identity
+  \item randomness / epoch identity when required
+\end{itemize}
+\end{block}
+\begin{block}{Keep outside the child}
+\begin{itemize}
+  \item hidden verifier + objective digest
+  \item promotion key / merge authority
+  \item durable evidence ledger
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{0.3em}
+\centering\Large \hilite{Copy the machine, not the keys.}
+\end{frame}
+
+% 18
+\begin{frame}{Operating systems view: isolation layers}
+\small
+\begin{tabular}{p{0.22\textwidth}p{0.31\textwidth}p{0.35\textwidth}}
+\toprule
+\textbf{Layer} & \textbf{Good at} & \textbf{Caution} \\
+\midrule
+Process / namespace & Fast, ergonomic, cheap per task. & Shared kernel; boundary depends on configuration. \\
+Container & Developer workflow, packaging, density. & Not automatically a strong isolation claim. \\
+User-space kernel & Syscall mediation and compatibility tradeoffs. & Still must reason about devices, files, and egress. \\
+MicroVM & Stronger guest boundary with useful density. & Boundary is not the whole experiment: credentials/oracle still matter. \\
+\bottomrule
+\end{tabular}
+\vspace{0.6em}
+\begin{block}{Systems point}
+The isolation wall is necessary. The authority and evidence contracts are separate.
+\end{block}
+\end{frame}
+
+% 19
+\begin{frame}{Warmth is performance. Authority is a capability.}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\textbf{Safe warmth, if scoped}
+\begin{itemize}
+  \item immutable source snapshots
+  \item compiler and dependency layers
+  \item content-addressed artifacts
+  \item cache hits with lineage
+\end{itemize}
+\column{0.47\textwidth}
+\textbf{Dangerous warmth}
+\begin{itemize}
+  \item sibling-visible writable caches
+  \item token/session material
+  \item cross-tenant memory sharing
+  \item hidden verifier residue
+\end{itemize}
+\end{columns}
+\vspace{0.7em}
+\begin{block}{Rule}
+Pack by trust domain, not by utilization alone.
+\end{block}
+\end{frame}
+
+% 20
+\begin{frame}{Evidence must outlive the child}
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+  \tikzset{box/.style={draw=DeepNavy,fill=SoftGray!45,rounded corners,minimum width=2.3cm,minimum height=.8cm,align=center}}
+  \node[box] (child) at (-4,1) {child world};
+  \node[box] (logs) at (-1,1) {logs + traces};
+  \node[box] (dig) at (2,1) {digests};
+  \node[box] (lin) at (5,1) {lineage};
+  \node[box,fill=WarmAmber!20,minimum width=5.6cm] (ledger) at (.5,-1) {durable evidence ledger};
+  \draw[->] (child) -- (logs); \draw[->] (logs) -- (dig); \draw[->] (dig) -- (lin); \draw[->] (logs) -- (ledger); \draw[->] (dig) -- (ledger); \draw[->] (lin) -- (ledger);
+  \node[color=Muted] at (-4,-.15) {burn after use};
+\end{tikzpicture}
+\vspace{0.7em}
+\Large The runner is disposable. The proof is not.
+\end{frame}
