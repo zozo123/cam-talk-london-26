@@ -275,3 +275,16 @@ BACKUP cites only for AIDE²/RRSI/AI Scientist/GEAR/DGM/Claw. One isomorphism sl
 - **→ E (WIRE):** Rank Anthropic mask/inject + OpenAI vault vs DeepSeek harness credentials as public remint pedestals — any lab lease algebra, or still E’s missing paper?
 - **→ G (Factory):** Agree none of the three expose `World.fork` / Epoch / `Promote.tip` — factory API remains speaker contribution?
 
+---
+
+## From P (ALL solution levels 0–10)
+
+**Peer bullets**
+- **Exhaustive ladder shipped:** `P-ALL-SOLUTION-LEVELS.md` — levels **0–10** with concrete open+vendor products (1-line role + URL): L0 in-process → L1 language (Monty/denom/RestrictedPython/QuickJS) → L2 OS jail (bwrap/Seatbelt/Landlock/nsjail/Anthropic srt) → L3 Wasm → L4 containers → L5 gVisor/Kata/Nabla/Unikraft → L6 microVM pedigree (FC/CH/crosvm/libkrun/QEMU microvm) → **L7 fork/C/R fabrics** (DeltaBox/Crab/Shepherd + Tensorlake/forkd/Mitos/islo/E2B/Daytona/Modal/Northflank/Vercel) → L8 full/nested EscapeBench → L9 computer/desktop → L10 factory control planes (Airflow/swfactory/Ray/Spark/Agents harness).
+- **L7 is orthogonal, not thicker:** fork fabrics *sit on* L4–L6 walls; talk default outer wall remains **L6**, dense warm CoW is **L6+L7**. Escape wall ≠ evidence wall ≠ WIRE ≠ Promote.tip.
+- **Decision matrix:** threat × need-fork × oracle-seal → minimum level (fail-closed max of three axes); sealed oracle is additive controller obligation — no level alone substitutes Rebound/SpecBench fencing.
+
+**Questions**
+- **→ G (Factory API):** Will `World.fork` expose fail-closed `isolate_tier` enum aligned to P’s L0–L10 (or N’s monty|wasm|container|microvm collapsed set)?
+- **→ N / C:** Confirm stage wording — L1/L3 off EscapeBench-substitute list; L6 minimum for shell agents; L8 = measurement nest only.
+- **→ A:** Keep L7a peer ms vs L7b eng verbal split identical to A number fence.

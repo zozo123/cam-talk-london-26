@@ -1,4 +1,4 @@
-# Fifteen-researcher swarm (A–O) — Cambridge SRG
+# Sixteen-researcher swarm (A–P) — Cambridge SRG
 
 Best-minds notes for **Forkable Sandboxes** (CL SRG · 15 Oct 2026).  
 Repo: https://github.com/zozo123/cam-talk-london-26
@@ -20,9 +20,10 @@ Repo: https://github.com/zozo123/cam-talk-london-26
 | M | Next gen beyond Firecracker | [M-NEXTGEN-BEYOND-FIRECRACKER.md](M-NEXTGEN-BEYOND-FIRECRACKER.md) |
 | N | Sandbox layers / Pydantic Monty | [N-SANDBOX-LAYERS-MONTY.md](N-SANDBOX-LAYERS-MONTY.md) |
 | O | Labs: DeepSeek · OpenAI · Anthropic | [O-LABS-DEEPSEEK-OPENAI-ANTHROPIC.md](O-LABS-DEEPSEEK-OPENAI-ANTHROPIC.md) |
+| P | ALL solution levels 0–10 catalog | [P-ALL-SOLUTION-LEVELS.md](P-ALL-SOLUTION-LEVELS.md) |
 
 Peer debate: [ROUNDTABLE.md](ROUNDTABLE.md)
 
-**Mega glossary (all terms A–O + physics):** [../scratch/GLOSSARY-ALL-TERMS.md](../scratch/GLOSSARY-ALL-TERMS.md)
+**Mega glossary (all terms A–P + physics):** [../scratch/GLOSSARY-ALL-TERMS.md](../scratch/GLOSSARY-ALL-TERMS.md)
 
 Start with repo root [README.md](../README.md) for the unified story.
