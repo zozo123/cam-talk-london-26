@@ -19,6 +19,8 @@ Talk: Forkable Sandboxes — runtime layer for AI software factories
 | Factory = **driven / open / NESS**; **promote = absorbing sink** | Non-eq ontology (I); schedules (H) — not closed equilibrium |
 | Shepherd / DeltaBox / Crab / Firecracker = **related systems** | Cousins, not owned prior work |
 | *Fork, Reduce, Promote* = **capability contract** | Named contribution (G); not “already shipped everywhere” |
+| World models make **imagination** cheap; forks make **executable interaction** cheap | Safe cost/fidelity framing; Dreamer/CWM bridge |
+| “For code, the best world model is often the world” | Safe only with the executable-boundary qualification |
 | Peer latencies only, attributed | A’s number fence |
 
 **Mantra:** Burn the runner. Keep the proof. Fork the machine, not the trust.
@@ -42,6 +44,10 @@ Talk: Forkable Sandboxes — runtime layer for AI software factories
 | OpenClaw drives actuators; IB is a robot OS | Wrong ontology |
 | AGI scientist / wet-lab replacement / replaced PIs | D’s fence |
 | “We solved” WIRE leases / side channels / reward hacking | Open problems |
+| “Reality is always cheaper than its model” | Workload-dependent; model/world crossover is empirical |
+| “Fork means zero model error / no sim-to-real gap everywhere” | Only removes learned transition-model error inside captured executable boundary |
+| “Snapshot = the learned latent state” | Snapshot is explicit/overcomplete; connection is state sufficiency, not identity |
+| Contrastive World Models and Meta Code World Model are the same CWM | Name collision; separate works |
 
 ---
 
@@ -63,9 +69,9 @@ Talk: Forkable Sandboxes — runtime layer for AI software factories
 
 ---
 
-## Citation budget (deck max 5)
+## Citation budget (deck max 7)
 
-1. Firecracker · 2. DeltaBox **or** Crab · 3. Shepherd · 4. 2607.09689 · 5. SWE-bench **or** Rebound→Remedy  
+1. Dreamer 4 · 2. Contrastive World Models · 3. Firecracker · 4. DeltaBox **or** Shepherd · 5. 2607.09689 · 6. Rebound→Remedy · 7. SWE-smith / training environments  
 
 Everything else = speaker notes / Q&A.
 
