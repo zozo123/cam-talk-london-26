@@ -1,8 +1,10 @@
 .PHONY: all clean
 
+SLIDES := $(wildcard slides/*.tex)
+
 all: talk.pdf
 
-talk.pdf: talk.tex
+talk.pdf: talk.tex $(SLIDES)
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 
