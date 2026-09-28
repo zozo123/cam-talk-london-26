@@ -1,13 +1,18 @@
-.PHONY: all academic short clean
+.PHONY: all academic short dist clean
 
 ACADEMIC := $(wildcard academic/*.tex)
 SHORT := $(wildcard slides/*.tex)
 
-all: academic
+all: academic short
 
 academic: talk.pdf
 
 short: talk-30min.pdf
+
+dist: all
+	mkdir -p dist
+	cp talk.pdf dist/forkable-sandboxes-full-academic.pdf
+	cp talk-30min.pdf dist/forkable-sandboxes-30min.pdf
 
 talk.pdf: talk.tex $(ACADEMIC)
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
