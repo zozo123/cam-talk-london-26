@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile canonical 38-slide academic deck
+      - name: Compile canonical 40-slide Cambridge deck
         uses: xu-cheng/latex-action@v3
         with:
           root_file: talk.tex
@@ -43,7 +43,7 @@ jobs:
         with:
           root_file: talk-30min.tex
 
-      - name: Verify canonical full deck is still 38 slides
+      - name: Verify canonical deck is still 40 slides
         shell: bash
         run: |
           python -m pip install --quiet pypdf
@@ -53,12 +53,12 @@ jobs:
           full = len(PdfReader("talk.pdf").pages)
           short = len(PdfReader("talk-30min.pdf").pages)
 
-          print(f"Full academic deck: {full} slides")
+          print(f"Cambridge deck: {full} slides")
           print(f"30-minute fallback: {short} slides")
 
-          if full != 38:
+          if full != 40:
               raise SystemExit(
-                  f"ERROR: canonical academic deck must remain 38 slides; got {full}"
+                  f"ERROR: canonical Cambridge deck must remain 40 slides; got {full}"
               )
           PY
 
@@ -83,9 +83,9 @@ jobs:
           git rebase origin/main
 
           mkdir -p dist
-          cp talk.pdf dist/forkable-sandboxes-full-academic.pdf
+          cp talk.pdf dist/forkable-sandboxes-cambridge-40.pdf
           cp talk-30min.pdf dist/forkable-sandboxes-30min.pdf
-          git add dist/forkable-sandboxes-full-academic.pdf dist/forkable-sandboxes-30min.pdf
+          git add dist/forkable-sandboxes-cambridge-40.pdf dist/forkable-sandboxes-30min.pdf
           if git diff --cached --quiet; then
             echo "Compiled PDFs unchanged."
           else

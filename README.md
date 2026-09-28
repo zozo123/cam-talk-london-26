@@ -1,21 +1,22 @@
-## Canonical academic stage deck
+## Canonical Cambridge SRG deck
 
-The repository now carries **two reproducible stage cuts**:
+[talk.tex](talk.tex) is the standalone 40-slide source for the Cambridge Systems Research Group seminar. It is the stage-ready systems talk, with speaker notes embedded in the source.
 
-- [talk.tex](talk.tex) + [academic/](academic/) — **canonical full academic deck**: 38 slides total, 34 core + 4 optional/deep slides.
-- [FULL-ACADEMIC.md](FULL-ACADEMIC.md) — complete academic story, six-act structure, slide map, pacing and cut strategies.
-- [SPEAKER-NOTES-ACADEMIC.md](SPEAKER-NOTES-ACADEMIC.md) — teaching notes, definitions, transitions, Q&A anchors and 30/40/60-minute cuts.
-- [talk-30min.tex](talk-30min.tex) + [slides/](slides/) — preserved concise 30-minute conference-style cut.
+[PRESENTER-GUIDE-40.md](PRESENTER-GUIDE-40.md) gives the 48-minute run of show, claim boundaries, and opening and closing lines for the one-hour seminar slot.
+
+The repository also carries a separate concise cut and background research material:
+
+- [talk-30min.tex](talk-30min.tex) + [slides/](slides/) — preserved concise 30-minute conference cut.
+- [FULL-ACADEMIC.md](FULL-ACADEMIC.md) and [academic/](academic/) — earlier modular academic draft retained as reference material; it is not included by the canonical talk.tex.
+- [SPEAKER-NOTES-ACADEMIC.md](SPEAKER-NOTES-ACADEMIC.md) — definitions, transitions, Q&A anchors, and pacing notes.
 - [FINAL-DECK.md](FINAL-DECK.md) — concise-cut story and timing.
-- [SPEAKER-NOTES-30MIN.md](SPEAKER-NOTES-30MIN.md) — concise-cut delivery script.
 - [TOPICS.md](TOPICS.md) — complete repo-wide topic map.
-- [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis.
-- [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — Dreamer / Contrastive World Models ↔ executable-world bridge.
-- [CLAIM-FENCE.md](CLAIM-FENCE.md) — hard DO / DO-NOT-SAY stage card.
-- [scratch/IDEATION-FULL-STORY.md](scratch/IDEATION-FULL-STORY.md) — **canonical ideation hub for the next full-talk rewrite**: Possibility → Evidence → Authority; full decision tree; Fork / Reduce / Promote; evidence independence; promotion semantics; physics fences; slide rebuild plan.
+- [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL environment and reset thesis.
+- [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — learned-world and executable-world background.
+- [CLAIM-FENCE.md](CLAIM-FENCE.md) — stage claim boundaries.
+- [scratch/IDEATION-FULL-STORY.md](scratch/IDEATION-FULL-STORY.md) — research notebook used to develop the final story and its claim boundaries.
 
-Build locally with `make` to compile both decks; use `make academic` for the canonical 38-slide seminar deck only, `make short` for the 30-minute fallback, or `make dist` to refresh both published PDFs under `dist/`. GitHub Actions builds both, verifies the full deck remains exactly 38 slides, uploads both PDFs as artifacts, and publishes both to `dist/` on `main`.
-
+Build locally with `make` to compile both cuts; use `make academic` for the canonical 40-slide seminar deck, `make short` for the 30-minute cut, or `make dist` to refresh both PDFs under `dist/`. GitHub Actions verifies the canonical deck has exactly 40 slides and builds both artifacts.
 ---
 
 # Forkable Sandboxes: The Runtime Layer for AI Software Factories
@@ -31,7 +32,7 @@ Build locally with `make` to compile both decks; use `make academic` for the can
 | **Where** | FW11 (+ Microsoft Teams) |
 | **Contact** | Yaman Rawas-Kalaji |
 | **Speaker** | Yossi Eliaz — Principal Engineer, Incredibuild / islo.dev · Lecturer, HIT - Holon Institute of Technology |
-| **Repo status** | **Canonical full academic deck is `talk.tex` + `academic/`; concise cut is `talk-30min.tex` + `slides/`** |
+| **Repo status** | **Canonical 40-slide deck is standalone `talk.tex`; concise cut is `talk-30min.tex` + `slides/`** |
 
 **DST note:** UK falls back **25 Oct 2026**. Slot is still **BST** — never label GMT/UTC+0. Verified against talks.cam `dtstart=20261015T150000` (no `Z`). Detail: [`scratch/TIME.md`](scratch/TIME.md).
 
