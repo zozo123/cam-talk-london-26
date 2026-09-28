@@ -257,15 +257,13 @@ S_{t+1}\sim P(\cdot\mid S_t,a_t;\,X_t)
 % 10
 \begin{frame}[t]{Restore fidelity is a testable observation claim}
 \lead{A snapshot is useful when its continuation preserves the behavior relevant to a declared task.}
-\small
 \[
 \forall\pi\in\Pi:\quad
 D_{\mathcal O}\!\left(
-\mathcal L(O_{0:h}^{\mathrm{direct}}\mid\pi,X),
-\mathcal L(O_{0:h}^{\mathrm{restored}}\mid\pi,X)
+\mathcal L_{0:h}^{\mathrm{direct}}(\pi,X),
+\mathcal L_{0:h}^{\mathrm{restore}}(\pi,X)
 \right)\leq\varepsilon
 \]
-\normalsize
 \begin{itemize}
 \item Start from the same reached state and agent history; fix or mediate external-state policy $X$.
 \item Declare observable set $\mathcal O$, horizon $h$, policy class $\Pi$, distance $D_{\mathcal O}$, and tolerance $\varepsilon$.
@@ -491,20 +489,20 @@ $\rightarrow$
 \begin{tikzpicture}[x=1cm,y=1cm,
   box/.style={draw=Accent,rounded corners=2pt,line width=.8pt,fill=Pale,align=center,text width=3.0cm,minimum height=1.05cm,font=\small},
   arrow/.style={-{Latex[length=2mm]},line width=.8pt,draw=Accent}]
-\node[box] (controller) at (-4.1,0) {\textbf{Controller / epoch}\\task, objective, budget};
+\node[box] (controller) at (-4.1,0) {\textbf{Controller / epoch}\\objective, budget};
 \node[box] (snapshot) at (0,0) {\textbf{Snapshot store}\\state $S_0$ and digest};
 \node[box] (workers) at (4.1,0) {\textbf{Sandbox workers}\\patch, build, run};
 \node[box] (gate) at (-4.1,-2.0) {\textbf{Promotion gate}\\one fenced acceptance};
 \node[box] (compare) at (0,-2.0) {\textbf{Compare / reduce}\\receipts and lineage};
 \node[box] (evaluator) at (4.1,-2.0) {\textbf{Sealed evaluator}\\tests outside worker};
-\draw[arrow] (controller.east) -- node[above,font=\scriptsize] {pin parent} (snapshot.west);
-\draw[arrow] (snapshot.east) -- node[above,font=\scriptsize] {scoped fork} (workers.west);
-\draw[arrow] (workers.south) -- node[right,font=\scriptsize] {artifacts} (evaluator.north);
-\draw[arrow] (evaluator.west) -- node[above,font=\scriptsize] {receipt} (compare.east);
-\draw[arrow] (compare.west) -- node[above,font=\scriptsize] {admit} (gate.east);
+\draw[arrow] (controller.east) -- (snapshot.west);
+\draw[arrow] (snapshot.east) -- (workers.west);
+\draw[arrow] (workers.south) -- (evaluator.north);
+\draw[arrow] (evaluator.west) -- (compare.east);
+\draw[arrow] (compare.west) -- (gate.east);
 \end{tikzpicture}
 \end{center}
-\takeaway{The full gate is proposed; the paper exercises a named-snapshot worker-to-reducer path.}
+\takeaway{Exercised: snapshot $\rightarrow$ worker $\rightarrow$ reducer. Proposed: sealed evaluator and promotion gate.}
 \note{This diagram is a proposed composition, not a diagram of a fully deployed system. pstack inspires local search, OpenClaw illustrates an agent tool loop, and Airflow-style workflows illustrate durable orchestration. The runtime supplies isolation and continuation; an evaluator outside the worker scores artifacts; a controller owns campaign identity and promotion. The current paper exercises part of the lower path through a named-snapshot integration trace.}
 \end{frame}
 
@@ -549,19 +547,11 @@ keep, revert, or retry
 % 25
 \begin{frame}[t]{Genetic search branches candidate lineages}
 \lead{A population search mutates or recombines artifacts, then evaluates each candidate in a controlled environment.}
-\[
-\text{population}
-\rightarrow
-\text{select parents}
-\rightarrow
-\text{mutate / crossover}
-\rightarrow
-\text{construct child environment}
-\rightarrow
-\text{evaluate}
-\rightarrow
-\text{update archive}
-\]
+\begin{center}
+\large population $\rightarrow$ select parents $\rightarrow$ mutate / crossover\\[0.16cm]
+$\downarrow$\\[0.16cm]
+isolated child $\rightarrow$ evaluate $\rightarrow$ update archive
+\end{center}
 \begin{itemize}
 \item The genotype may be code, a harness, a policy, or runtime configuration.
 \item Machine-state lineage and candidate-code lineage are different graphs.
@@ -664,7 +654,7 @@ Computational biology & Model settings, sequences, and analysis pipelines. & Ind
 \begin{itemize}
 \item A computational branch can vary a parameter, initial condition, or model version.
 \item Outcomes can include connectivity, clustering, or predicted network morphology.
-\item A simulation score tests the model's consequences, not the biological system itself.
+\item A simulation score tests model consequences, not biology itself.
 \item Experiments are needed to validate whether the modeled mechanism fits biology.
 \end{itemize}
 \vspace{0.2cm}
@@ -706,7 +696,7 @@ $\quad\longrightarrow\quad$
 \item Exact evidence-ID overlap can be detected; shared model error and adaptive selection are harder.
 \item Distinct, designed rollouts may provide new conditional evidence.
 \end{itemize}
-\takeaway{Execution identity, evidence identity, and statistical independence are different fields.}
+\takeaway{Execution identity, evidence identity, and statistical independence are different properties.}
 \note{This example concerns retries of the same candidate. The test cases are deliberately reused, so a reducer must not count them four times as independent samples. With different candidate patches, the same suite can still support paired comparison; that is a different statistical design. Distinct stochastic continuations can add information, but only under a model that accounts for their shared state, data, and selection.}
 \end{frame}
 
@@ -846,7 +836,7 @@ Forked fan-out & Branch from one reached parent. & Throughput, memory growth, an
 
 % 40
 \begin{frame}[t]{Forks expose futures; they do not certify them}
-\lead{A useful runtime makes controlled continuations cheaper while keeping evidence and authority explicit.}
+\lead{A useful runtime can make controlled continuations cheaper while keeping evidence and authority explicit.}
 \vspace{0.2cm}
 \begin{itemize}
 \item Capture and restore a declared executable state.
