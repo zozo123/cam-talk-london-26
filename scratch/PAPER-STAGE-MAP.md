@@ -52,6 +52,25 @@
 | Mantra / \\law slide | **No slide** — spoken close once max |
 | Empty eval sermon | **No slide** — numbers live on 6 + 13 |
 
+
 ---
 
-*PAPER-STAGE-MAP · 2026-09-28 IDT · companion to AGGRESSIVE-SPINE*
+## Flowchart gate map (companion)
+
+Full annotated decision flowchart (per-gate systems meaning · papers · venue · claim-fence · HIS vs cousin · paper shapes):
+
+→ [`FLOW-GATES-PAPERS.md`](FLOW-GATES-PAPERS.md)
+
+| Flowchart gate cluster | AGGRESSIVE slides | Primary papers |
+|---|---|---|
+| START · stateful · \(S_0\) | 1–5 | Firecracker · Xu–Kaffes |
+| cheap branch · FORK N | 6–7, 10–11 | DeltaBox · Crab · Shepherd · Xu–Kaffes |
+| LEARN/SIMULATE (off spine) | Q&A only | Dreamer · CWM · ContrastiveWM |
+| oracle seal | 14–15 | Rebound→Remedy · SWE-bench |
+| independent evidence · REDUCE | 12–13 | **2607.09689** ★HIS |
+| promote-once · REPEAT | 16–18 | **2607.09689** · G-contract |
+
+
+---
+
+*PAPER-STAGE-MAP · 2026-09-28 IDT · companion to AGGRESSIVE-SPINE + FLOW-GATES-PAPERS*

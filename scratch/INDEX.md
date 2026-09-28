@@ -9,6 +9,7 @@ Working notes for **Forkable Sandboxes: The Runtime Layer for AI Software Factor
 | [UNIVERSAL-HILLCLIMB.md](UNIVERSAL-HILLCLIMB.md) | propose→isolate→measure→keep/revert→promote |
 | [PARALLEL-WORLDS-STATPHYS.md](PARALLEL-WORLDS-STATPHYS.md) | Path integrals, β/Z, Tensorlake |
 | [PAPERS-AND-SOURCES.md](PAPERS-AND-SOURCES.md) | Top 15 + clusters + deck five |
+| [FLOW-GATES-PAPERS.md](FLOW-GATES-PAPERS.md) | **FINAL** annotated decision flowchart · papers · venues · HIS vs cousin · paper shapes |
 | [THEORY-PRACTICE-BRIDGE.md](THEORY-PRACTICE-BRIDGE.md) | Books ↔ Tensorlake ↔ algos (README pointer) |
 | [GLOSSARY-ALL-TERMS.md](GLOSSARY-ALL-TERMS.md) | **Exhaustive glossary** — swarm A–M + physics |
 | [G-PAPER-ABSTRACT.md](G-PAPER-ABSTRACT.md) | Factory API paper abstract draft |
