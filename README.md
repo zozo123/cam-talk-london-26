@@ -13,7 +13,7 @@ The repository now carries **two reproducible stage cuts**:
 - [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — Dreamer / Contrastive World Models ↔ executable-world bridge.
 - [CLAIM-FENCE.md](CLAIM-FENCE.md) — hard DO / DO-NOT-SAY stage card.
 
-Build locally with `make` for the full academic deck, or `make short` for the 30-minute cut. GitHub Actions builds both PDFs and uploads them as artifacts.
+Build locally with `make` to compile both decks; use `make academic` for the canonical 38-slide seminar deck only, `make short` for the 30-minute fallback, or `make dist` to refresh both published PDFs under `dist/`. GitHub Actions builds both, verifies the full deck remains exactly 38 slides, uploads both PDFs as artifacts, and publishes both to `dist/` on `main`.
 
 ---
 
