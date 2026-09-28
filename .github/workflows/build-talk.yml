@@ -28,21 +28,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compile full academic Beamer PDF
+
+      - name: Compile canonical 38-slide academic deck
         uses: xu-cheng/latex-action@v3
         with:
           root_file: talk.tex
-      - name: Compile concise 30-minute cut
+
+      - name: Compile 30-minute fallback cut
         uses: xu-cheng/latex-action@v3
         with:
           root_file: talk-30min.tex
-      - name: Upload PDFs
+
+      - name: Verify canonical full deck is still 38 slides
+        shell: bash
+        run: |
+          python -m pip install --quiet pypdf
+          python - <<'PY'
+          from pypdf import PdfReader
+
+          full = len(PdfReader("talk.pdf").pages)
+          short = len(PdfReader("talk-30min.pdf").pages)
+
+          print(f"Full academic deck: {full} slides")
+          print(f"30-minute fallback: {short} slides")
+
+          if full != 38:
+              raise SystemExit(
+                  f"ERROR: canonical academic deck must remain 38 slides; got {full}"
+              )
+          PY
+
+      - name: Upload both PDFs
         uses: actions/upload-artifact@v4
         with:
           name: cambridge-forkable-sandboxes-talks
           path: |
             talk.pdf
             talk-30min.pdf
+
       - name: Publish compiled PDFs to main
         if: github.event_name != 'pull_request'
         shell: bash
