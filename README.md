@@ -2,6 +2,8 @@
 
 [talk.tex](talk.tex) is the standalone 40-slide source for the Cambridge Systems Research Group seminar. It is the stage-ready systems talk, with speaker notes embedded in the source.
 
+[PRESENTER-GUIDE-40.md](PRESENTER-GUIDE-40.md) gives the 48-minute run of show, claim boundaries, and opening and closing lines for the one-hour seminar slot.
+
 The repository also carries a separate concise cut and background research material:
 
 - [talk-30min.tex](talk-30min.tex) + [slides/](slides/) — preserved concise 30-minute conference cut.
@@ -12,8 +14,9 @@ The repository also carries a separate concise cut and background research mater
 - [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL environment and reset thesis.
 - [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — learned-world and executable-world background.
 - [CLAIM-FENCE.md](CLAIM-FENCE.md) — stage claim boundaries.
+- [scratch/IDEATION-FULL-STORY.md](scratch/IDEATION-FULL-STORY.md) — research notebook used to develop the final story and its claim boundaries.
 
-Build locally with make to compile both cuts; use make academic for the canonical 40-slide seminar deck, make short for the 30-minute cut, or make dist to refresh both PDFs under dist/. GitHub Actions verifies the canonical deck has exactly 40 slides and builds both artifacts.
+Build locally with `make` to compile both cuts; use `make academic` for the canonical 40-slide seminar deck, `make short` for the 30-minute cut, or `make dist` to refresh both PDFs under `dist/`. GitHub Actions verifies the canonical deck has exactly 40 slides and builds both artifacts.
 ---
 
 # Forkable Sandboxes: The Runtime Layer for AI Software Factories
@@ -29,7 +32,7 @@ Build locally with make to compile both cuts; use make academic for the canonica
 | **Where** | FW11 (+ Microsoft Teams) |
 | **Contact** | Yaman Rawas-Kalaji |
 | **Speaker** | Yossi Eliaz — Principal Engineer, Incredibuild / islo.dev · Lecturer, HIT - Holon Institute of Technology |
-| **Repo status** | **Canonical full academic deck is `talk.tex` + `academic/`; concise cut is `talk-30min.tex` + `slides/`** |
+| **Repo status** | **Canonical 40-slide deck is standalone `talk.tex`; concise cut is `talk-30min.tex` + `slides/`** |
 
 **DST note:** UK falls back **25 Oct 2026**. Slot is still **BST** — never label GMT/UTC+0. Verified against talks.cam `dtstart=20261015T150000` (no `Z`). Detail: [`scratch/TIME.md`](scratch/TIME.md).
 
