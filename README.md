@@ -12,6 +12,7 @@ The repository now carries **two reproducible stage cuts**:
 - [TRAINING-ENVIRONMENTS.md](TRAINING-ENVIRONMENTS.md) — coding-RL/RLVR environment and reset thesis.
 - [WORLD-MODELS-BRIDGE.md](WORLD-MODELS-BRIDGE.md) — Dreamer / Contrastive World Models ↔ executable-world bridge.
 - [CLAIM-FENCE.md](CLAIM-FENCE.md) — hard DO / DO-NOT-SAY stage card.
+- [scratch/IDEATION-FULL-STORY.md](scratch/IDEATION-FULL-STORY.md) — **canonical ideation hub for the next full-talk rewrite**: Possibility → Evidence → Authority; full decision tree; Fork / Reduce / Promote; evidence independence; promotion semantics; physics fences; slide rebuild plan.
 
 Build locally with `make` to compile both decks; use `make academic` for the canonical 38-slide seminar deck only, `make short` for the 30-minute fallback, or `make dist` to refresh both published PDFs under `dist/`. GitHub Actions builds both, verifies the full deck remains exactly 38 slides, uploads both PDFs as artifacts, and publishes both to `dist/` on `main`.
 
