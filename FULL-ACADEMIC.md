@@ -1,8 +1,8 @@
-# Full academic deck — Cambridge SRG
+# Earlier modular academic draft — Cambridge SRG
 
-The canonical stage source is now `talk.tex`, backed by modular sections in `academic/`.
+This file documents an earlier 38-slide, teaching-oriented outline. The current canonical stage deck is the standalone 40-slide talk.tex; its complete speaker notes are embedded in that source. The earlier material below remains useful as background and Q&A reference, but its slide order and counts do not describe the current deck.
 
-The earlier concise deck is preserved as `talk-30min.tex` plus `slides/`.
+The concise conference cut remains talk-30min.tex plus slides/.
 
 ## Format
 
