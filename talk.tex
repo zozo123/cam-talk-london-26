@@ -1,4 +1,4 @@
-% AI Factories* (SW): Forkable Sandboxes as a Runtime for Automated Software Development
+% AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Development
 % Final 40-slide Cambridge Systems Research Group seminar deck.
 % Source is self-contained; speaker notes are hidden in the slide output.
 \documentclass[aspectratio=169,10pt]{beamer}
@@ -44,12 +44,12 @@
 \newcommand{\takeaway}[1]{\par\vspace{0.38em}{\fontsize{10.8}{13}\selectfont\bfseries #1\par}}
 \newcommand{\sources}[1]{\par\vfill{\fontsize{6.5}{7.7}\selectfont\color{Muted}#1\par}}
 \newcommand{\code}[1]{\texttt{#1}}
-\title{AI Factories\textsuperscript{*} (SW)}
-\subtitle{Forkable Sandboxes as a Runtime for Automated Software Development}
+\title{AI (SW) Factories\textsuperscript{*}}
+\subtitle{Forkable Sandboxes as a Runtime for Automated Development}
 \author{Yossi Eliaz}
 \institute{Principal Engineer, Incredibuild / islo.dev\\Associate Professor, Holon Institute of Technology (HIT)}
 \date{Cambridge Computer Laboratory Systems Research Group\\15 October 2026}
-\hypersetup{pdftitle={AI Factories (SW): Forkable Sandboxes as a Runtime for Automated Software Development},
+\hypersetup{pdftitle={AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Development},
  pdfauthor={Yossi Eliaz},pdfsubject={Forkable execution, evidence-aware search, and AI software systems},
  colorlinks=true,urlcolor=Accent,linkcolor=Ink}
 \begin{document}
@@ -59,9 +59,9 @@
 \vspace{0.55cm}
 {\color{Muted}\small Cambridge Computer Laboratory Systems Research Group\par}
 \vspace{0.75cm}
-{\fontsize{30}{34}\selectfont\bfseries AI Factories\textsuperscript{\color{Accent}{*}} (SW)\par}
+{\fontsize{30}{34}\selectfont\bfseries AI (SW) Factories\textsuperscript{\color{Accent}{*}}\par}
 \vspace{0.24cm}
-{\fontsize{19}{23}\selectfont Forkable Sandboxes as a Runtime for\\Automated Software Development\par}
+{\fontsize{19}{23}\selectfont Forkable Sandboxes as a Runtime for\\Automated Development\par}
 \vspace{0.65cm}
 {\large Yossi Eliaz\par}
 \vspace{0.12cm}
@@ -74,7 +74,7 @@
 \end{frame}
 
 % 02
-\begin{frame}[t]{An AI factory (SW) searches over verifiable candidates}
+\begin{frame}[t]{An AI (SW) factory searches over verifiable candidates}
 \lead{It matters when trials share costly setup, change state, and can be verified under one objective.}
 \begin{center}
 \normalsize
@@ -93,7 +93,7 @@ promote / explore
 \item \term{Software development and maintenance:} agent patch search in large open-source projects such as Apache Spark, OpenClaw, Apache Airflow, and the Linux kernel.
 \end{itemize}
 \takeaway{Execution state is part of the search algorithm's working state.}
-\note{AI factory (SW) denotes an atelier-like search loop over software candidates: an agent proposes a patch, configuration, or workflow; a verifier measures the result; and the controller ranks evidence to decide what to promote, revise, or explore. It is relevant when trials share costly setup, mutate state, and can be compared under a common objective. Name three settings up front: computational-biology simulations and pipelines, model post-training rollouts, and software development or maintenance in large open-source repositories such as Apache Spark, OpenClaw, Apache Airflow, and the Linux kernel. The software sandbox can include a simulation or pipeline, not the wet-lab experiment itself. The important change from autocomplete is that an agent runs tools and reacts to outcomes. It leaves behind files, processes, test results, and partial builds; a later attempt can inherit them.}
+\note{AI (SW) factory denotes an atelier-like search loop over software candidates: an agent proposes a patch, configuration, or workflow; a verifier measures the result; and the controller ranks evidence to decide what to promote, revise, or explore. It is relevant when trials share costly setup, mutate state, and can be compared under a common objective. Name three settings up front: computational-biology simulations and pipelines, model post-training rollouts, and software development or maintenance in large open-source repositories such as Apache Spark, OpenClaw, Apache Airflow, and the Linux kernel. The software sandbox can include a simulation or pipeline, not the wet-lab experiment itself. The important change from autocomplete is that an agent runs tools and reacts to outcomes. It leaves behind files, processes, test results, and partial builds; a later attempt can inherit them.}
 \end{frame}
 
 % 03
