@@ -145,7 +145,7 @@ Stochastic hill climbing is the simplest policy to place above the runtime. It p
 
 Genetic search operates on representations of candidates. A code crossover is a proposal for a new program; it does not merge live machines safely or inherit proof of correctness. MAP-Elites supplies a useful perspective on diversity: retain strong candidates in different behavior regions. The schematic archive has no measured values. In maintenance, behavioral dimensions might expose different compatibility or resource tradeoffs, but their choice is part of the search design and needs validation.
 
-### 18. Arp2/3 concentration changes network dynamics
+### 18. Arp2/3 shapes network dynamics
 
 **Cue: 1:15**
 
