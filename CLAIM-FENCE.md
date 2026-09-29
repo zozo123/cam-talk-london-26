@@ -1,86 +1,43 @@
-# Claim fence — Cambridge SRG stage card
+# Claim boundaries for the 40-slide Cambridge seminar
 
-**One page. Hard. Read before walking on.**
+This document applies to the canonical `talk.tex`. Earlier notebooks and the separate 30-minute cut are historical material.
 
-Slot: Thu 15 Oct 2026 · 15:00–16:00 BST · FW11  
-Talk: Forkable Sandboxes — runtime layer for AI software factories
+## Definitions and proposed contract
 
----
+An environment defines interaction semantics. A sandbox constrains an execution. A snapshot captures declared state. A fork creates a separately evolving continuation under supported restoration semantics.
 
-## DO say
+The full runtime architecture, evidence-routing policy, promotion protocol, maintenance campaign, benchmark, and ablations are proposals. The fidelity expression specifies a task-dependent observational test; it is not a universal guarantee about a shipped runtime.
 
-| Claim | Why it’s safe |
-|---|---|
-| Forkable sandboxes = **substrate** for agentic SW + RL-style fan-out | Matches published abstract |
-| HIL / wet / paper = **scarcity metaphor** / upstream CI tax | Architecture of the loop, not a robot OS |
-| Search ≠ Authority; worker ≠ promote; oracle leaves the fork | Systems contract |
-| Physics = **interpretation with teeth** (algebra + schedule) | 2607.09689 LAN/Wald reduce; β≡n |
-| SA / MH / SGD / Langevin / RL-T = **cousins** of factory Epochs | Schedule language (H) |
-| Factory = **driven / open / NESS**; **promote = absorbing sink** | Non-eq ontology (I); schedules (H) — not closed equilibrium |
-| Shepherd / DeltaBox / Crab / Firecracker = **related systems** | Cousins, not owned prior work |
-| *Fork, Reduce, Promote* = **capability contract** | Named contribution (G); not “already shipped everywhere” |
-| World models make **imagination** cheap; forks make **executable interaction** cheap | Safe cost/fidelity framing; Dreamer/CWM bridge |
-| “For code, the best world model is often the world” | Safe only with the executable-boundary qualification |
-| Peer latencies only, attributed | A’s number fence |
+The main performance hypothesis is lower total resources to a fixed quality target when useful preparation can be reused. Capture, restore, divergence, inference, failures, communication, evaluation, and external effects all belong in the comparison. The cost plot on slide 14 is an analytic illustration with declared hypothetical units.
 
-**Mantra:** Burn the runner. Keep the proof. Fork the machine, not the trust.
+## Reported implementation evidence
 
----
+Source: Eliaz, arXiv:2607.09689, linked on slides 28–29 and 33–34.
 
-## DO NOT say
+- The numerical reducer exercises the stated precision-weighted algebra, metadata, and exact evidence-overlap checks.
+- The unequal-size logistic comparison reports distance to centralized MLE across eight fixed seeds: information pooling 0.0083 ± 0.0042 versus equal coefficient average 0.177 ± 0.090. Error bars are standard deviations, not confidence intervals.
+- The integration example starts from a 141 MB named snapshot. Four concurrent restore–run–capture round trips take 6.70 s in total at the client-observed boundary. This is not per-worker restore latency or a speedup.
+- The trace's pooled mean is 4.9422 versus the seed-pinned full-sample mean 4.9450.
+- The precision-forgery stress motivates a trust problem. Its heuristic response provides no Byzantine-robustness theorem.
 
-| Forbidden | Why |
-|---|---|
-| Agent forks **are** Gibbs / Ising / equilibrium ensembles of nature | Cosplay |
-| Detailed balance / closed equilibrium **holds** in our factory | Untrue; honesty condition ≠ proof |
-| Promote is the lab’s **equilibrium free-energy minimum** | Promote is a **sink under drive** |
-| \(Z_g\) is Bayesian model evidence / CI green-score | Diagnostic only |
-| Closed Hamiltonian agents / “we proved the second law for CI” | \(H\) = proposal-generator metaphor only (I) |
-| Fork **guarantees** statistical independence | ρ floor under shared root |
-| Workers may own **β / T / energy / anneal schedule** | Search≠Authority on the thermostat |
-| Every swfactory / Airflow path already has native N-way fork-merge | Capability ≠ inventory |
-| Vendor / forkd / Tensorlake / E2B / islo ms as **our** benchmarks | Eng = verbal landscape |
-| We accelerate GPU RL training / rewrote HIL-SERL | Wrong room + overclaim |
-| OpenClaw drives actuators; IB is a robot OS | Wrong ontology |
-| AGI scientist / wet-lab replacement / replaced PIs | D’s fence |
-| “We solved” WIRE leases / side channels / reward hacking | Open problems |
-| “Reality is always cheaper than its model” | Workload-dependent; model/world crossover is empirical |
-| “Fork means zero model error / no sim-to-real gap everywhere” | Only removes learned transition-model error inside captured executable boundary |
-| “Snapshot = the learned latent state” | Snapshot is explicit/overcomplete; connection is state sufficiency, not identity |
-| Contrastive World Models and Meta Code World Model are the same CWM | Name collision; separate works |
+No new controlled runtime benchmark is claimed by this slide revision.
 
----
+## Statistical scope
 
-## Number fence (peer-only)
+Precision pooling requires a common parameter, calibrated information, and independent evidence under the stated Gaussian or local Wald approximation. Disjoint evidence identifiers and distinct processes do not establish independent errors.
 
-**On-slide OK (attributed):** Firecracker pedigree; DeltaBox Tables (e.g. ~10.83 ms ckpt / ~1.86 ms restore); Crab ≤1.9% overhead; Shepherd fork ~134–143 ms.
+The variance-floor formula assumes equal marginal variances and common pairwise correlation; the plotted curves are analytic examples. Positive covariance can improve paired differences under a valid coupling. Lineage alone is not a covariance estimator.
 
-**Verbal only:** forkd / Mitos / Tensorlake / E2B / Daytona / islo demo economics.
+Shannon mutual information, Fisher information, verifier utility, and objective-score interactions are distinct quantities. The XOR example demonstrates information synergy. The patch equation measures objective non-additivity. Pairwise tests do not rule out higher-order effects.
 
-**Never:** invent ms, scrub costs, or thermalization times.
+## Biological and physical examples
 
----
+The biological work motivates attention to local rules and global network structure. It does not establish a branching threshold, optimization law, or performance theorem for agents. The biological diagram is a schematic.
 
-## Physics budget
+Chamo and Eliaz, ai.viXra:2608.0069, is a preprint. It reports verified continuation connecting apparent branches within a sampled periodic-orbit component. The two slide diagrams are conceptual schematics, not replotted numerical data. The result does not establish global topology of every orbit family, sandbox speedup, or autonomous discovery. Connectivity and dynamical stability are separate properties.
 
-- **Acts 0–II:** systems-only (reduce, lineage, promote, burn).
-- **Act II½ (optional):** β≡n, cold liar, T schedule, MH keep/revert, promote=sink. Max two slides.
-- **Q&A:** free-energy vs energy, replicas, Hamiltonian — then stop. No Fokker–Planck on stage.
+## Applications and commitment
 
----
+Spark, OpenClaw, Airflow, and Linux are motivating maintenance settings, not validated deployments of this runtime. The Airflow-style campaign is explicitly proposed.
 
-## Citation budget (deck max 7)
-
-1. Dreamer 4 · 2. Contrastive World Models · 3. Firecracker · 4. DeltaBox **or** Shepherd · 5. 2607.09689 · 6. Rebound→Remedy · 7. SWE-smith / training environments  
-
-Everything else = speaker notes / Q&A.
-
----
-
-## One-breath recovery if you overclaim
-
-> “To be precise: that’s the *capability contract* and the *schedule algebra* we need — not a claim the default executor already does N-way fork-merge, and not a claim sandboxes equilibrate like magnets.”
-
----
-
-*Stage card · 2026-09-27 (IDT) · aligns README + B/H/I fences + A number fence.*
+A local restore does not rewind external services or physical experiments. Protecting evaluator writes does not eliminate adaptive overfitting through feedback. Composed changes require a new identified artifact and fresh joint validation. Current authority and fencing are required for commitment; workers do not inherit release or merge authority.
