@@ -95,6 +95,33 @@
 \end{frame}
 
 % 03
+\begin{frame}[t]{Coordination lets parallel work compound}
+\lead{Communities turn individual insight into cumulative knowledge through shared foundations.}
+\begin{center}
+\begin{tikzpicture}[x=.8cm,y=1cm]
+\node[state,minimum width=2.4cm,minimum height=1cm] (n) at (.4,1.1) {Newton\\classical mechanics};
+\node[state,minimum width=2.4cm,minimum height=1cm] (e) at (3.55,1.1) {Einstein\\relativity};
+\draw[flow] (n)--node[above,font=\scriptsize]{revised foundations}(e);
+\node[candidate,minimum width=2.4cm,minimum height=1cm] (t) at (7.05,1.1) {Turing\\computation};
+\node[evidence,minimum width=2.4cm,minimum height=1cm] (s) at (10.2,1.1) {Shannon\\information};
+\node[state,minimum width=9.2cm,minimum height=.85cm] (k) at (5.3,-.65) {Shared methods, results, artifacts, criticism, and institutions};
+\draw[message] (n.south)--(k.north west);
+\draw[message] (e.south)--(k.north west);
+\draw[message] (t.south)--(k.north east);
+\draw[message] (s.south)--(k.north east);
+\end{tikzpicture}
+\end{center}
+\begin{columns}[T,onlytextwidth]
+\column{.31\textwidth}\term{Complementary expertise}\\Different people and agents bring different methods.
+\column{.31\textwidth}\term{Evidence with provenance}\\Others can inspect and build on results.
+\column{.31\textwidth}\term{Review and synthesis}\\Integration joins results under shared standards.
+\end{columns}
+\claim{Coordination is what lets a swarm's parallel effort become cumulative work.}
+\sources{Illustrative milestones, not a single collaboration chain: Newton (1687); Einstein (1916); Turing (1936); Shannon (1948).}
+\note{[0:50] The point is not that Newton, Einstein, Turing, and Shannon formed one team or one direct sequence. They mark distinct foundations. Scientific and engineering progress becomes cumulative because later people inherit formal ideas, methods, instruments, data, and criticism, then test and extend them. The same is true of software: code, tests, benchmarks, and maintenance knowledge are shared foundations. These examples motivate cumulative knowledge; they do not claim that swarms reproduce scientific communities or replace human judgment. With capable agents, parallel proposals are only a start. To compound work, a system must bring complementary expertise to bear, make evidence and provenance inspectable, manage dependencies, and review the synthesis. This motivates the fields I work across and the concrete puzzle next.}
+\end{frame}
+
+% 04
 \begin{frame}[t]{One runtime question across several fields}
 \lead{My work spans distinct fields; each depends on controlled computation.}
 \small
@@ -113,7 +140,7 @@ Post-training / RL & Policies and environments & Trajectories, resets, rewards\\
 \note{[0:50] These settings come from distinct parts of my research and engineering experience. In physical biology, Arp2/3-mediated branching and actomyosin topology connect local structure to collective dynamics. Genomics brings large datasets, reference versions, analysis workflows, quality control, and provenance; POSSUMM is one example where data depth and numerical methods together enabled finer analysis. Software maintenance and engineering bring compatibility, regressions, build state, and review, with projects such as Spark, Airflow, and the Linux kernel as motivating workloads. In post-training, environment state and trajectory evaluation matter. I am not claiming these projects use forkable sandboxes today. They motivate a common runtime question, while each field retains its own standard of evidence.}
 \end{frame}
 
-% 04
+% 05
 \begin{frame}[t]{Eight agents, eight candidates}
 \lead{One prepared parent. Every patch passes on its own.}
 \begin{center}
@@ -132,7 +159,7 @@ Post-training / RL & Policies and environments & Trajectories, resets, rewards\\
 \note{[1:00] Now make the coordination problem concrete. Eight agents each propose a patch to one parser from the same prepared parent. Every patch passes the available tests in isolation. That does not tell us which is best, whether their results are independent confirmations, or whether all eight work when combined. The candidates and results are a thought experiment, not measured outcomes. We will use them to connect runtime support to search, evaluation, and integration.}
 \end{frame}
 
-% 05
+% 06
 \begin{frame}[t]{Branches in biology; forks in software}
 \begin{columns}[T,onlytextwidth]
 \column{.48\textwidth}
@@ -161,7 +188,7 @@ C_i=\operatorname{Continue}(\widehat S_0,\Delta_i,\omega_i)
 \end{frame}
 
 \chapterlabel{State and runtime}
-% 06
+% 07
 \begin{frame}[t]{Environment, sandbox, snapshot, fork}
 \begin{tabularx}{\textwidth}{@{}L{2.9cm}Y@{}}
 \toprule
@@ -182,7 +209,7 @@ C_i=\operatorname{Continue}(\widehat S_0,\Delta_i,\omega_i)
 \note{[1:00] A sandbox is an active controlled execution boundary, while a snapshot is a representation of captured state. An environment is an interaction contract and may span multiple machines or the physical world. A VM can contain an environment, but the VM alone does not specify a task, reward, or termination rule. I use fork broadly for a supported branch of execution; I am not claiming every implementation is POSIX fork or that every resource can be copied.}
 \end{frame}
 
-% 07
+% 08
 \begin{frame}[t]{What belongs to the state?}
 \lead{Reproducing a continuation requires more than a filesystem copy.}
 \[
@@ -199,7 +226,7 @@ $X_t$: external state & Services, clocks, identities, devices, physical systems.
 \note{[1:00] This is a conceptual state decomposition, not a promise that one snapshot format captures all components. A VM snapshot may preserve process memory yet leave the agent's remote conversation history outside it. A copied random generator creates a coupling until streams diverge or are explicitly reseeded. External service state needs a declared policy: freeze a fixture, replay responses, recreate the service, or accept an uncontrolled dependency. The manifest makes those choices auditable.}
 \end{frame}
 
-% 08
+% 09
 \begin{frame}[t]{A continuation contract}
 \lead{Restoration should preserve the behavior relevant to the task.}
 \[
@@ -218,7 +245,7 @@ $X_t$: external state & Services, clocks, identities, devices, physical systems.
 \note{[1:15] This is a proposed observational contract. The law symbol denotes the distribution of observations under the declared continuation, not equality of every machine bit. For deterministic tests we may require exact agreement; stochastic simulations need a justified distributional criterion. Finite tests check specified observations and cannot certify every possible policy or event. Restoration fidelity, candidate quality, and scientific validity are separate axes. We establish the first before attributing an outcome to a changed candidate.}
 \end{frame}
 
-% 09
+% 10
 \begin{frame}[t]{Simulation and the external world}
 \begin{tabularx}{\textwidth}{@{}L{3.0cm}YY@{}}
 \toprule
@@ -239,7 +266,7 @@ Physical experiment & Plans and computational analysis & New measurements in the
 \note{[1:00] A branch in a simulation is a controlled computational alternative conditional on a model. A learned model may predict cheaply but brings approximation error. Neither makes the real world checkpointable. Likewise, restoring an API client does not undo an email, a database write, or a robot movement. External effects require transactions, mocks, compensation where possible, or separate authorization. The scientific question is whether the model and measurement justify the conclusion outside the captured boundary.}
 \end{frame}
 
-% 10
+% 11
 \begin{frame}[t]{One running software experiment}
 \lead{An illustrative parser campaign gives every later abstraction a concrete object.}
 \begin{columns}[T,onlytextwidth]
@@ -266,7 +293,7 @@ Physical experiment & Plans and computational analysis & New measurements in the
 \note{[0:50] This is a proposed experiment, not a measured parser benchmark. Each candidate changes one implementation relative to the same identified parent. Correctness is a constraint and throughput is an objective, so a fast incorrect parser cannot win. The public development corpus and final validation material have distinct roles. Preserve the baseline and all candidate identities. Later we will ask whether two patches that pass alone still pass when composed.}
 \end{frame}
 
-% 11
+% 12
 \begin{frame}[t]{The branch lifecycle}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
@@ -292,7 +319,7 @@ Physical experiment & Plans and computational analysis & New measurements in the
 \note{[0:55] A common shortcut in this story is to patch a file and assume a restored process now runs the new implementation. It does not. The candidate has to rebuild, reload, restart, or otherwise change the executing program. Reuse repository preparation and expensive fixtures only where the intervention leaves them valid. Content-addressed build artifacts can be shared with explicit scope and provenance. This lifecycle is also why restore latency alone is a poor measure of useful search cost.}
 \end{frame}
 
-% 12
+% 13
 \begin{frame}[t]{Mechanisms for branching}
 \begin{tabularx}{\textwidth}{@{}L{2.8cm}YY@{}}
 \toprule
@@ -307,7 +334,7 @@ VM snapshot & Guest memory, CPU and supported devices & Host/device compatibilit
 \note{[1:00] These are mechanism classes, not a performance ranking. A container image is a recipe for reconstruction rather than a live checkpoint. Process checkpointing depends on which kernel and device resources it can represent. A VM snapshot extends the boundary but still needs supported device semantics and a policy for external identity. Firecracker is a relevant microVM isolation reference, not evidence that every snapshot operation or workload has equal guarantees. A benchmark must compare equivalent required behavior.}
 \end{frame}
 
-% 13
+% 14
 \begin{frame}[t]{Copy-on-write moves cost to divergence}
 \lead{Children initially share eligible pages; writes create private copies.}
 \begin{center}
@@ -330,7 +357,7 @@ VM snapshot & Guest memory, CPU and supported devices & Host/device compatibilit
 \note{[0:55] Copy-on-write changes when copying is paid. It can make the branch operation cheap while shifting overhead into execution. Large write sets and memory contention can erase the benefit. Sharing a prepared object also creates dependencies: its content and authorization matter. The cartoon shows eligible memory pages only; disk, devices, distributed state, and application caches may use different mechanisms.}
 \end{frame}
 
-% 14
+% 15
 \begin{frame}[t]{When does branching pay?}
 \begin{columns}[T,onlytextwidth]
 \column{.55\textwidth}
@@ -363,7 +390,7 @@ $W$: candidate work; $V$: evaluation.
 \note{[1:20] This additive resource model assumes both paths do the same candidate work and evaluation. Cold execution repeats P each time; branching pays it once, plus capture and per-child restore and divergence overhead. Subtracting the expressions gives the break-even inequality. The graph uses declared hypothetical units, not benchmark data. Wall-clock latency additionally depends on scheduling and parallelism. Model calls belong in W, and all unsuccessful branches and checks count. If the paths differ in candidate work, add that difference explicitly.}
 \end{frame}
 
-% 15
+% 16
 \begin{frame}[t]{A runtime architecture for experiments}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
@@ -384,41 +411,36 @@ $W$: candidate work; $V$: evaluation.
 \end{frame}
 
 \chapterlabel{Search and learning}
-% 16
-\begin{frame}[t]{Stochastic improvement}
-\lead{A preserved parent lets a search policy try alternatives and return.}
+% 17
+\begin{frame}[t]{Search needs both improvement and diversity}
+\lead{Forking supplies alternatives; the search policy decides what to keep exploring.}
+\begin{columns}[T,onlytextwidth]
+\column{.43\textwidth}
+\term{Improve an incumbent}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm]
-\node[state,minimum width=2.0cm] (s) at (0,0) {incumbent};
-\node[candidate,minimum width=2.6cm] (a) at (4,1) {perturbation A};
-\node[candidate,minimum width=2.6cm] (b) at (4,-1) {perturbation B};
-\node[evidence,minimum width=2.9cm] (k) at (8.5,1) {compare + retain};
+\begin{tikzpicture}[x=.9cm,y=.65cm]
+\node[state,minimum width=1.55cm,minimum height=.55cm,font=\scriptsize] (s) at (0,0) {incumbent};
+\node[candidate,minimum width=1.55cm,minimum height=.55cm,font=\scriptsize] (a) at (2,.85) {candidate A};
+\node[candidate,minimum width=1.55cm,minimum height=.55cm,font=\scriptsize] (b) at (2,-.85) {candidate B};
+\node[evidence,minimum width=1.6cm,minimum height=.55cm,font=\scriptsize] (k) at (4,0) {evaluate};
 \draw[flow] (s)--(a);\draw[flow] (s)--(b);\draw[flow] (a)--(k);
-\draw[message] (b.south) to[bend left=25] node[below,font=\scriptsize]{reject / restore} (s.south);
+\draw[message] (b.south) to[bend left=20] node[below,font=\tiny]{reject / restore} (s.south);
 \end{tikzpicture}
 \end{center}
 \begin{itemize}
-\item Propose a change under a fixed objective and constraints.
-\item Compare with appropriate uncertainty; retain the evidence of failure too.
-\item Choose acceptance and exploration rules explicitly.
+\item Propose under a fixed objective and constraints.
+\item Compare with uncertainty; retain failures as evidence.
+\item Rollback is a runtime operation, not an improvement rule.
 \end{itemize}
-\claim{Rollback is a runtime operation; improvement is an algorithmic judgment.}
-\note{[1:00] Stochastic hill climbing is the simplest policy to place above the runtime. It proposes a candidate, evaluates it, and accepts according to a rule. With noisy scores, one positive difference is weak evidence. Repeated paired comparisons or independent confirmation may be needed. Other policies can temporarily accept worse states or maintain multiple incumbents. A checkpoint does not implement an optimizer or guarantee convergence; it lowers the cost of some operations the optimizer may request.}
-\end{frame}
-
-% 17
-\begin{frame}[t]{Population search and diversity}
-\begin{columns}[T,onlytextwidth]
-\column{.49\textwidth}
-\lead{Selection need not discard every alternative to the current winner.}
+\column{.53\textwidth}
+\term{Preserve useful diversity}
 \begin{itemize}
 \item Mutation explores nearby candidates.
 \item Crossover proposes a new composition.
-\item An archive retains different useful behaviors.
+\item An archive retains candidates with different behaviors.
 \end{itemize}
-\column{.46\textwidth}
 \begin{center}
-\begin{tikzpicture}[x=.75cm,y=.7cm]
+\begin{tikzpicture}[x=.55cm,y=.42cm]
 \foreach \x in {0,...,4}{\foreach \y in {0,...,3}{\draw[Line] (\x,\y) rectangle ++(1,1);}}
 \foreach \x/\y in {0/0,1/1,2/1,2/3,3/2,4/0,4/3}{\fill[Teal!28] (\x+.06,\y+.06) rectangle ++(.88,.88);\fill[Teal] (\x+.5,\y+.5) circle(2pt);}
 \draw[flow] (0,-.35)--(5.3,-.35) node[right,font=\scriptsize]{behavior 1};
@@ -427,9 +449,9 @@ $W$: candidate work; $V$: evaluation.
 \tagline{Schematic behavior archive}
 \end{center}
 \end{columns}
-\claim{Every recombined artifact needs a fresh evaluation.}
+\claim{Search policies choose; the runtime preserves the alternatives and their evidence.}
 \sources{\href{https://arxiv.org/abs/1504.04909}{Mouret \& Clune, MAP-Elites (2015)}.}
-\note{[1:10] Genetic search operates on representations of candidates. A code crossover is a proposal for a new program; it does not merge live machines safely or inherit proof of correctness. MAP-Elites supplies a useful perspective on diversity: retain strong candidates in different behavior regions. The schematic archive has no measured values. In maintenance, behavioral dimensions might expose different compatibility or resource tradeoffs, but their choice is part of the search design and needs validation.}
+\note{[1:30] Put two search ideas together. Stochastic improvement proposes a candidate, evaluates it, and accepts or rejects under an explicit rule. With noisy scores, one positive difference is weak evidence; keep failures and uncertainty, and sometimes confirm promising results. Population search keeps more than one incumbent: mutation explores nearby candidates, crossover proposes a new artifact, and a MAP-Elites-style archive preserves useful behavioral diversity. The drawing is schematic. A code crossover does not merge live machines or inherit correctness. Every recombination is a new candidate that needs evaluation. The runtime supports branching, restoration, and evidence lineage; it does not choose the objective, acceptance rule, or guarantee convergence.}
 \end{frame}
 
 % 18
