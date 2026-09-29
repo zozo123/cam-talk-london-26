@@ -427,16 +427,14 @@ $W$: candidate work; $V$: evaluation.
 \end{tikzpicture}
 \end{center}
 \begin{itemize}
-\item Propose under a fixed objective and constraints.
-\item Compare with uncertainty; retain failures as evidence.
-\item Rollback is a runtime operation, not an improvement rule.
+\item Fixed objective and constraints; compare with uncertainty.
+\item Keep failures; rollback is runtime, acceptance is algorithmic.
 \end{itemize}
 \column{.53\textwidth}
 \term{Preserve useful diversity}
 \begin{itemize}
-\item Mutation explores nearby candidates.
-\item Crossover proposes a new composition.
-\item An archive retains candidates with different behaviors.
+\item Mutation explores nearby candidates; crossover proposes new ones.
+\item An archive retains strong candidates with different behaviors.
 \end{itemize}
 \begin{center}
 \begin{tikzpicture}[x=.55cm,y=.42cm]
@@ -445,7 +443,6 @@ $W$: candidate work; $V$: evaluation.
 \draw[flow] (0,-.35)--(5.3,-.35) node[right,font=\scriptsize]{behavior 1};
 \draw[flow] (-.35,0)--(-.35,4.4) node[above,font=\scriptsize]{behavior 2};
 \end{tikzpicture}
-\tagline{Schematic behavior archive}
 \end{center}
 \end{columns}
 \sources{\href{https://arxiv.org/abs/1504.04909}{Mouret \& Clune, MAP-Elites (2015)}.}
