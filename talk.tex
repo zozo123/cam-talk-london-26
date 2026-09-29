@@ -1,4 +1,4 @@
-% Forkable Sandboxes: The Runtime Layer for AI Software Factories
+% AI Factories* (SW): Forkable Sandboxes as a Runtime for Automated Software Development
 % Final 40-slide Cambridge Systems Research Group seminar deck.
 % Source is self-contained; speaker notes are hidden in the slide output.
 \documentclass[aspectratio=169,10pt]{beamer}
@@ -44,12 +44,12 @@
 \newcommand{\takeaway}[1]{\par\vspace{0.38em}{\fontsize{10.8}{13}\selectfont\bfseries #1\par}}
 \newcommand{\sources}[1]{\par\vfill{\fontsize{6.5}{7.7}\selectfont\color{Muted}#1\par}}
 \newcommand{\code}[1]{\texttt{#1}}
-\title{Forkable Sandboxes}
-\subtitle{The Runtime Layer for AI Software Factories}
+\title{AI Factories\textsuperscript{*} (SW)}
+\subtitle{Forkable Sandboxes as a Runtime for Automated Software Development}
 \author{Yossi Eliaz}
-\institute{Principal Engineer, Incredibuild / islo.dev\\Lecturer, Holon Institute of Technology}
+\institute{Principal Engineer, Incredibuild / islo.dev\\Associate Professor, Holon Institute of Technology (HIT)}
 \date{Cambridge Computer Laboratory Systems Research Group\\15 October 2026}
-\hypersetup{pdftitle={Forkable Sandboxes: The Runtime Layer for AI Software Factories},
+\hypersetup{pdftitle={AI Factories (SW): Forkable Sandboxes as a Runtime for Automated Software Development},
  pdfauthor={Yossi Eliaz},pdfsubject={Forkable execution, evidence-aware search, and AI software systems},
  colorlinks=true,urlcolor=Accent,linkcolor=Ink}
 \begin{document}
@@ -59,39 +59,41 @@
 \vspace{0.55cm}
 {\color{Muted}\small Cambridge Computer Laboratory Systems Research Group\par}
 \vspace{0.75cm}
-{\fontsize{30}{34}\selectfont\bfseries Forkable Sandboxes\par}
+{\fontsize{30}{34}\selectfont\bfseries AI Factories\textsuperscript{\color{Accent}{*}} (SW)\par}
 \vspace{0.24cm}
-{\fontsize{19}{23}\selectfont The Runtime Layer for\\AI Software Factories\par}
+{\fontsize{19}{23}\selectfont Forkable Sandboxes as a Runtime for\\Automated Software Development\par}
 \vspace{0.65cm}
 {\large Yossi Eliaz\par}
 \vspace{0.12cm}
-{\small Principal Engineer, Incredibuild / islo.dev\\Lecturer, Holon Institute of Technology\par}
+{\small Principal Engineer, Incredibuild / islo.dev\\Associate Professor, Holon Institute of Technology (HIT)\par}
+\vspace{0.12cm}
+{\fontsize{8}{10}\selectfont\color{Muted}* “Factory” means an atelier-like search workshop, not an assembly line.\par}
 \vfill
 {\small\color{Muted}15 October 2026\quad FW11 + Microsoft Teams\par}
 \note{I will make one systems argument. Agents create value by repeatedly acting inside software, so the execution state becomes part of the search process. Forking a prepared state can make some continuations cheaper to explore. The runtime still has to define what a child inherits, what its result proves, and who is allowed to accept it.}
 \end{frame}
 
 % 02
-\begin{frame}[t]{A software factory is a search loop over executable changes}
-\lead{Here, a software factory repeatedly proposes, runs, evaluates, and decides whether to promote a change.}
+\begin{frame}[t]{An AI factory (SW) searches over verifiable candidates}
+\lead{It proposes software candidates, evaluates them under a fixed objective, ranks them by evidence, then promotes or revises.}
 \begin{center}
 \large
 propose
 \quad$\longrightarrow$\quad
-execute
+run + verify
 \quad$\longrightarrow$\quad
-evaluate
+rank evidence
 \quad$\longrightarrow$\quad
-promote or revise
+promote, revise, or explore
 \end{center}
 \vspace{0.55cm}
 \begin{itemize}
-\item An agent changes files, processes, builds, and sometimes services.
-\item Tests and traces influence the next candidate.
-\item Each trial inherits some computer state from the previous one.
+\item Candidates include patches, configurations, and workflows—not only runnable code.
+\item Verifiers produce evidence: test outcomes, traces, and resource costs.
+\item Ranking that evidence guides promotion, revision, or further exploration.
 \end{itemize}
 \takeaway{Execution state is part of the search algorithm's working state.}
-\note{Software factory denotes a closed loop over executable changes. The important change from autocomplete is that an agent runs tools and reacts to outcomes. It leaves behind files, processes, test results, and partial builds; a later attempt can inherit them.}
+\note{AI factory (SW) denotes an atelier-like search loop over software candidates: an agent proposes a patch, configuration, or workflow; a verifier measures the result; and the controller ranks evidence to decide what to promote, revise, or explore. The important change from autocomplete is that an agent runs tools and reacts to outcomes. It leaves behind files, processes, test results, and partial builds; a later attempt can inherit them.}
 \end{frame}
 
 % 03
