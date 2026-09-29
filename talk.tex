@@ -97,22 +97,22 @@ promote / explore
 \end{frame}
 
 % 03
-\begin{frame}[t]{Fork the machine. What did we actually duplicate?}
-\lead{Thought experiment: one parser failure, eight proposed patches, and one prepared development machine.}
+\begin{frame}[t]{The “cross-terms” live in the integration protocol}
+\lead{Suppose eight patches pass alone. Let $J(A)$ be the pinned objective score for patch set $A$, applied from a clean common parent $S_0$.}
 \begin{center}
-\Large
-one reached state $S_0$
-$\quad\longrightarrow\quad$
-eight isolated continuations
+\small
+\[
+I_{ij}=J(\{\Delta_i,\Delta_j\})-J(\{\Delta_i\})-J(\{\Delta_j\})+J(\emptyset)
+\]
 \end{center}
-\vspace{0.35cm}
-\begin{enumerate}
-\item Did each patch run from the same relevant state after its own rebuild?
-\item Do eight passing runs give eight independent pieces of evidence?
-\item Can a child alter the verifier or publish its patch before review?
-\end{enumerate}
-\takeaway{A fork creates possible futures; state, evidence, and authority still need contracts.}
-\note{This hypothetical parser campaign is the running example. Eight candidate patches share a prepared repository and dependencies, but each must rebuild changed code. Forking can isolate execution, yet the children may reuse the same test cases and therefore not provide eight independent observations. A child may also have access to a remote package registry or merge credential unless authority is separately scoped. We will return to this case at the cost model, architecture, evaluator, and promotion gate.}
+\vspace{-0.1cm}
+\begin{itemize}
+\item $I_{ij}\ne0$ means outcomes are non-additive: conflict, synergy, or saturation.
+\item Screen 28 pairs into an interaction graph; higher-order effects can remain.
+\item Search promising subsets under budget; re-test each composition from clean $S_0$.
+\end{itemize}
+\takeaway{Isolated branches search; a shared protocol couples results and admits one composition.}
+\note{Use the parser thought experiment: eight patches may pass separately under one verifier, yet still conflict or interact when applied together. Let $J(A)$ be a scalar score for composing set $A$ from the same clean parent; the second finite difference $I_{ij}$ is a cross-term in the ordinary systems sense: non-additivity under a joint experiment. The physics analogy stops here: this is not quantum interference or a superposition of machines. The institutional twist is that branches do not need shared mutable memory to work together. They need a common objective and verifier, candidate/evidence lineage, compatibility screening, and a controller that launches a fresh integration fork. For eight candidates there are 28 pair tests; that is a screen, not a proof against three-way effects, and exhaustive subset testing can grow as $2^8$. Re-run the joint verifier on every selected composition and issue a new receipt; never infer combined correctness by unioning individual pass receipts. This is a proposed composition protocol, not a result in the current artifact.}
 \end{frame}
 
 % 04
@@ -561,7 +561,7 @@ isolated child $\rightarrow$ evaluate $\rightarrow$ update archive
 \end{itemize}
 \takeaway{Crossover recombines candidate representations; it does not merge live machines.}
 \sources{\href{https://arxiv.org/abs/2605.13874}{Jeddi et al., GEAR: Genetic AutoResearch for Agentic Code Evolution (2026)}.}
-\note{Genetic search offers a concrete model for automatic development: keep multiple candidates, vary them, evaluate, and preserve promising lineages. A runtime fork can supply an isolated execution context for each candidate. The candidate representation and the snapshot handle should be versioned separately. This is a connection between search and systems, not a guarantee that evolution improves any particular task.}
+\note{Genetic search offers a concrete model for automatic development: keep multiple candidates, vary them, evaluate, and preserve promising lineages. A runtime fork can supply an isolated execution context for each candidate. The candidate representation and the snapshot handle should be versioned separately. Crossover proposes a new candidate; it does not establish that parent changes compose. The composed candidate needs a fresh joint evaluation and receipt. This is a connection between search and systems, not a guarantee that evolution improves any particular task.}
 \end{frame}
 
 % 26
@@ -788,7 +788,7 @@ No per-phase timing, cold-build baseline, or controlled cross-provider compariso
 
 % 37
 \begin{frame}[t]{Promotion is a separate, fenced operation}
-\lead{Workers produce artifacts and evidence; a controller decides whether either can become authoritative.}
+\lead{Workers return candidate deltas and receipts; the controller verifies compositions and decides what can become authoritative.}
 \begin{tabularx}{\textwidth}{@{}L{3.0cm}YY@{}}
 \toprule
 \term{Invariant} & \term{Controller records} & \term{Worker cannot change} \\
@@ -796,11 +796,11 @@ No per-phase timing, cold-build baseline, or controlled cross-provider compariso
 Parent identity & Immutable snapshot or artifact digest. & The campaign's trusted parent. \\
 Objective identity & Task and objective digest. & The scoring rule for its own result. \\
 Evaluation identity & Verifier version and evidence manifest. & Hidden parser tests or admission records. \\
-Promotion identity & Current epoch and one acceptance token. & Merge, release, or policy checkpoint authority. \\
+Composition / promotion & Composite artifact digest, current epoch, and one acceptance token. & Merge, release, or policy checkpoint authority. \\
 \bottomrule
 \end{tabularx}
 \takeaway{Durable intent, disposable execution, singular authority, fenced promotion.}
-\note{This is a proposed control-plane invariant, not an implementation claim. For the parser campaign, a child may return a patch and test receipt, but the controller checks the parent, objective, and verifier identities before one candidate can be merged. Fencing prevents stale promotion; deterministic admission additionally needs an explicit ordering and tie-break rule. It does not imply deterministic search convergence.}
+\note{This is a proposed control-plane invariant, not an implementation claim. For the parser campaign, a child may return a patch and test receipt, but the controller checks the parent, objective, and verifier identities before one candidate can be merged. If it combines patches from several branches, it creates a fresh integration child from the common parent and re-runs the verifier; individual receipts cannot simply be unioned. Fencing prevents stale promotion; deterministic admission additionally needs an explicit ordering and tie-break rule. It does not imply deterministic search convergence.}
 \end{frame}
 
 % 38
@@ -829,7 +829,7 @@ Forked fan-out & Branch from one reached parent. & Throughput, memory growth, an
 \item \term{Continuation:} what is the minimal useful state across files, memory, GPU, sockets, and time?
 \item \term{Capabilities:} how can credentials be reminted at fork speed without leaking identity?
 \item \term{Dependence:} how should shared ancestry and adaptive selection affect a reducer?
-\item \term{Scheduling:} when should a controller fork, replay, use a learned model, or stop?
+\item \term{Search/composition:} when should a controller fork, test combinations, use a learned model, or stop?
 \item \term{CoW channels:} which shared warmth creates a timing or residency side channel?
 \end{enumerate}
 \takeaway{The runtime and the search policy should be evaluated together.}
