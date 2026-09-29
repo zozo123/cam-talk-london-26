@@ -657,7 +657,7 @@ J_{\rm RL}(\theta)=\mathbb{E}_{\tau\sim\pi_\theta}\!\left[\sum_t\gamma^t r_t\rig
 
 % 27
 \begin{frame}[t]{What does a message contribute?}
-\lead{Information gain is conditional on a question and what is already known.}
+\lead{A branch report matters relative to the decision and evidence already available.}
 \[
 I(H;E_k\mid E_{<k})
 \]
@@ -678,45 +678,52 @@ I(H;A)=I(H;B)=0,\qquad I(H;A,B)=1\text{ bit}.
 \item Estimation requires a distribution and target.
 \end{itemize}
 \end{columns}
-\claim{Message count, Shannon information, and decision utility are different quantities.}
+\claim{Information can guide the search; the decision still depends on objective, cost, and validity.}
 \sources{Information decomposition perspective: \href{https://arxiv.org/abs/1004.2515}{Williams \& Beer, Nonnegative Decomposition of Multivariate Information (2010)}.}
-\note{[1:25] The XOR example is exact and deliberately small. Either bit alone leaves H uniformly random; together they determine H. After receiving A, B contributes one bit of conditional information. This is information synergy, not the finite-difference score interaction between two software patches. In practical search we rarely know the joint distribution well enough to compute mutual information directly. Treat it as a precise way to ask what a message could add, not a ready-made universal routing score. Useful decision information also depends on costs and available actions.}
+\note{[1:25] The XOR example is exact and deliberately small. Either bit alone leaves H uniformly random; together they determine H. After receiving A, B contributes one bit of conditional information. This is information synergy, not the finite-difference score interaction between two software patches. In practical search we rarely know the joint distribution well enough to compute mutual information directly. Treat it as a precise way to ask what a message could add, not a ready-made universal routing score. Here, think of $H$ as which candidate the evidence would favor under the declared objective, and $E_k$ as a branch report. The next slide makes that distinction concrete. Useful decision information also depends on costs and available actions.}
 \end{frame}
 
 % 28
-\begin{frame}[t]{An evidence record}
-\lead{A branch returns enough context to interpret its result.}
-\[
-r_k=(\hat\theta_k,\ J_k,\ n_k,\ \mathcal E_k,\ \mathcal L_k,\ m_k)
-\]
-\begin{tabularx}{\textwidth}{@{}L{3.1cm}Y@{}}
+\begin{frame}[t]{Compare across candidates; pool only within one}
+\lead{Each cell is a recorded evaluation of one candidate on one declared block.}
+\begin{center}
+\small
+\begin{tabularx}{.92\textwidth}{@{}L{1.7cm}YYY@{}}
 \toprule
-Estimate and information & $\hat\theta_k$, calibrated per-observation $J_k$, sample count $n_k$.\\
-Evidence identity & Which observations or data contributed?\\
-Lineage & Which parent, intervention, and continuation produced the result?\\
-Metadata & Objective, policy, evaluator, runtime, and selection context.\\\bottomrule
+\term{Candidate} & \term{Evaluation block 1} & \term{Evaluation block 2} & \term{Evaluation block 3}\\\midrule
+$A$ & $\hat\theta_{A1},\,\mathcal E_{A1}$ & $\hat\theta_{A2},\,\mathcal E_{A2}$ & $\hat\theta_{A3},\,\mathcal E_{A3}$\\
+$B$ & $\hat\theta_{B1},\,\mathcal E_{B1}$ & $\hat\theta_{B2},\,\mathcal E_{B2}$ & $\hat\theta_{B3},\,\mathcal E_{B3}$\\
+$C$ & $\hat\theta_{C1},\,\mathcal E_{C1}$ & $\hat\theta_{C2},\,\mathcal E_{C2}$ & $\hat\theta_{C3},\,\mathcal E_{C3}$\\\bottomrule
 \end{tabularx}
-\claim{A receipt needs provenance; a declaration alone does not authenticate itself.}
-\sources{\href{https://arxiv.org/abs/2607.09689}{Eliaz, Evidence-Aware MapReduce for Forkable Compute (2026), preprint}.}
-\note{[1:00] This is the record shape used in the evidence-aware reduction work. Fisher information here is distinct from the Shannon quantity on the previous slide. Bind data and artifacts to trusted identities where possible. Additional evaluation and selection context belongs in metadata. The interface makes questions about provenance possible; it cannot prove a worker's reported precision is calibrated or its data are unbiased. A production system needs trusted capture and validation mechanisms beyond a schema.}
+\end{center}
+\vspace{.05cm}
+\small Receipt: $(\hat\theta_{ik},J_{ik},n_{ik},\mathcal E_{ik},\mathcal L_{ik},m_{ik})$
+\begin{columns}[T,onlytextwidth]
+\column{.32\textwidth}\term{Within row} \\\scriptsize Pool only compatible measurements of candidate $i$.
+\column{.32\textwidth}\term{Across rows} \\\scriptsize Compare candidates under the same objective.
+\column{.32\textwidth}\term{Composition} \\\scriptsize $A+B$ is a new candidate and needs a new evaluation.
+\end{columns}
+\claim{Do not pool different candidates as if they estimated one parameter.}
+\note{[1:00] Read across a row to see the evidence recorded for one candidate; read down a column to compare candidates on a common evaluation block. The receipt carries its estimate, information, sample count, evidence identity, lineage, and metadata. Pooling across blocks is justified only when they estimate the same candidate-specific quantity and the assumptions are defensible. Comparing candidates is a separate decision under a common objective; shared evaluation inputs may call for paired comparisons. If we compose A and B, the composite is a new candidate with a new row and fresh evaluation. This matrix is the bridge between communication, evidence records, reduction, and the opening puzzle.}
 \end{frame}
 
 % 29
 \begin{frame}[t]{Evidence-aware reduction}
-\lead{For independent evidence about one common parameter, with calibrated precision:}
+\lead{For compatible evidence about one fixed candidate-specific parameter, with calibrated precision:}
 \[
-P_k=n_kJ_k,\qquad P=\sum_kP_k,\qquad
-\hat\theta=P^{-1}\sum_kP_k\hat\theta_k
+P_{ik}=n_{ik}J_{ik},\qquad P_i=\sum_kP_{ik},\qquad
+\hat\theta_i=P_i^{-1}\sum_kP_{ik}\hat\theta_{ik}
 \]
 \begin{itemize}
 \item Gaussian or local Wald approximation; positive-definite precision.
+\item Pool within candidate $i$; compare its estimate across candidates.
 \item Numeric summaries support tree reduction under these assumptions.
 \item Exact evidence overlap is detectable; hidden dependence may remain.
 \end{itemize}
 \vspace{.2cm}
 \claim{Unresolved dependence blocks a justified claim of added precision.}
 \sources{\href{https://arxiv.org/abs/2607.09689}{Eliaz, Evidence-Aware MapReduce for Forkable Compute (2026), preprint}.}
-\note{[1:30] These are standard precision-weighted formulas for a common target, not a new universal estimator for heterogeneous agent outputs. Exact arithmetic permits associative summary merging; floating-point implementations need tolerance checks. The reference reducer validates records and rejects repeated nonempty evidence IDs. Disjoint IDs do not prove independent errors. The asymptotic scope fixes dimension and worker count while local sample sizes grow. A general treatment of correlated, adaptively selected branches remains open; ancestry metadata is an input to that problem rather than its solution.}
+\note{[1:30] These are standard precision-weighted formulas for one fixed target, not a new universal estimator for heterogeneous agent outputs. Exact arithmetic permits associative summary merging; floating-point implementations need tolerance checks. The reference reducer validates records and rejects repeated nonempty evidence IDs. Disjoint IDs do not prove independent errors. The asymptotic scope fixes dimension and worker count while local sample sizes grow. A general treatment of correlated, adaptively selected branches remains open; ancestry metadata is an input to that problem rather than its solution.}
 \end{frame}
 
 % 30

@@ -205,17 +205,17 @@ Ancestry records where execution state came from, often as a tree or DAG. Commun
 
 The XOR example is exact and deliberately small. Either bit alone leaves H uniformly random; together they determine H. After receiving A, B contributes one bit of conditional information. This is information synergy, not the finite-difference score interaction between two software patches. In practical search we rarely know the joint distribution well enough to compute mutual information directly. Treat it as a precise way to ask what a message could add, not a ready-made universal routing score. Useful decision information also depends on costs and available actions.
 
-### 28. An evidence record
+### 28. Compare across candidates; pool only within one
 
-**Cue: 1:00 · planned clock 29:40–30:40**
+**Cue: 1:00**
 
-This is the record shape used in the evidence-aware reduction work. Fisher information here is distinct from the Shannon quantity on the previous slide. Bind data and artifacts to trusted identities where possible. Additional evaluation and selection context belongs in metadata. The interface makes questions about provenance possible; it cannot prove a worker's reported precision is calibrated or its data are unbiased. A production system needs trusted capture and validation mechanisms beyond a schema.
+Use the matrix to separate the three operations. Across a row, retain compatible measurements about one candidate-specific target; down a column, compare candidates under a common evaluation block. The receipt records estimate, information, sample count, evidence identity, lineage, and metadata. Shared evaluation inputs may call for paired comparisons. A combined patch is a new candidate and needs a new evaluation.
 
 ### 29. Evidence-aware reduction
 
-**Cue: 1:30 · planned clock 30:40–32:10**
+**Cue: 1:30**
 
-These are standard precision-weighted formulas for a common target, not a new universal estimator for heterogeneous agent outputs. Exact arithmetic permits associative summary merging; floating-point implementations need tolerance checks. The reference reducer validates records and rejects repeated nonempty evidence IDs. Disjoint IDs do not prove independent errors. The asymptotic scope fixes dimension and worker count while local sample sizes grow. A general treatment of correlated, adaptively selected branches remains open; ancestry metadata is an input to that problem rather than its solution.
+The precision-weighted formula applies to compatible evidence about one fixed candidate-specific target under stated Gaussian or local Wald assumptions. Pool within one candidate, then compare candidates under the objective. The reducer rejects known duplicate evidence identifiers; disjoint identifiers do not prove independence. The broader case of correlated, adaptively selected branches remains open.
 
 ### 30. How eight changes work together
 
