@@ -96,25 +96,26 @@
 
 % 03
 \begin{frame}[t]{One runtime question across several fields}
-\lead{My prior work meets different artifacts, but repeatedly depends on controlled computation.}
+\lead{My work spans distinct fields; each depends on controlled computation.}
+\small
 \begin{tabularx}{\textwidth}{@{}L{2.8cm}L{4.4cm}Y@{}}
 \toprule
 \term{Field} & \term{Connection to prior work} & \term{Coordination problem}\\\midrule
-Physical biology & Arp2/3, actomyosin networks & Local branches, global morphology, interacting dynamics\\
-Genomics & ENCODE, POSSUMM, OffRisk & Data, reference versions, pipelines, quality evidence\\
-Software and engineering & Build systems; Spark, Airflow, Linux kernel & Candidate changes, regression risk, integration\\
-Post-training and RL & Policies interacting with environments & Trajectories, reset states, rewards, evaluation\\\bottomrule
+Physical biology & Arp2/3, actomyosin & Branches, network shape, interactions\\
+Genomics & ENCODE, POSSUMM, OffRisk & Data, versions, workflows, quality\\
+Software / engineering & Build systems; Spark, Airflow, Linux & Changes, regressions, integration\\
+Post-training / RL & Policies and environments & Trajectories, resets, rewards\\\bottomrule
 \end{tabularx}
-\vspace{.25cm}
-\small These are motivating settings; they do not imply that the named systems already use this runtime.
-\claim{Different domains need different validators; all need a clear account of state and change.}
-\sources{Selected work: \href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al., PNAS (2020)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC10371165/}{Hitz et al., ENCODE pipelines (2023 preprint)}; \href{https://www.nature.com/articles/s41467-023-38429-1}{Harris et al., POSSUMM / fine-scale chromatin (2023)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC10568243/}{Barkai et al., OffRisk (2023)}.}
+\vspace{.1cm}
+\tagline{Named projects are motivating workloads, not claimed users of this runtime.}
+\claim{The artifacts differ; the need to track state and change recurs.}
+\sources{Prior work: \href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al. (2020)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC10371165/}{Hitz et al. (2023 preprint)}; \href{https://www.nature.com/articles/s41467-023-38429-1}{Harris et al. (2023)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC10568243/}{Barkai et al. (2023)}.}
 \note{[0:50] These settings come from distinct parts of my research and engineering experience. In physical biology, Arp2/3-mediated branching and actomyosin topology connect local structure to collective dynamics. Genomics brings large datasets, reference versions, analysis workflows, quality control, and provenance; POSSUMM is one example where data depth and numerical methods together enabled finer analysis. Software maintenance and engineering bring compatibility, regressions, build state, and review, with projects such as Spark, Airflow, and the Linux kernel as motivating workloads. In post-training, environment state and trajectory evaluation matter. I am not claiming these projects use forkable sandboxes today. They motivate a common runtime question, while each field retains its own standard of evidence.}
 \end{frame}
 
 % 04
-\begin{frame}[t]{The coordination puzzle: eight agents, eight candidates}
-\lead{Each agent starts from the same prepared parent. Each candidate passes on its own.}
+\begin{frame}[t]{Eight agents, eight candidates}
+\lead{One prepared parent. Every patch passes on its own.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
 \node[state,minimum width=2.2cm] (s) at (0,1.9) {parent $S_0$};
@@ -123,16 +124,16 @@ Post-training and RL & Policies interacting with environments & Trajectories, re
 \end{center}
 \vspace{.2cm}
 \begin{columns}[T,onlytextwidth]
-\column{.31\textwidth}\term{Choose}\\Which candidate best meets the objective?
-\column{.31\textwidth}\term{Learn}\\What do the results actually establish?
-\column{.31\textwidth}\term{Combine}\\Which changes still work together?
+\column{.31\textwidth}\term{Choose}\\Which is best?
+\column{.31\textwidth}\term{Learn}\\What does the evidence establish?
+\column{.31\textwidth}\term{Combine}\\What works together?
 \end{columns}
 \claim{Parallel success is not yet a coordinated decision.}
 \note{[1:00] Now make the coordination problem concrete. Eight agents each propose a patch to one parser from the same prepared parent. Every patch passes the available tests in isolation. That does not tell us which is best, whether their results are independent confirmations, or whether all eight work when combined. The candidates and results are a thought experiment, not measured outcomes. We will use them to connect runtime support to search, evaluation, and integration.}
 \end{frame}
 
 % 05
-\begin{frame}[t]{Why branches? A physical example, then a runtime contract}
+\begin{frame}[t]{Branches in biology; forks in software}
 \begin{columns}[T,onlytextwidth]
 \column{.48\textwidth}
 \term{Arp2/3 in an actin network}
@@ -154,8 +155,8 @@ Post-training and RL & Policies interacting with environments & Trajectories, re
 C_i=\operatorname{Continue}(\widehat S_0,\Delta_i,\omega_i)
 \]
 \small $\Delta_i$: candidate change; $\omega_i$: declared random-stream policy.
-\claim{The analogy motivates attention to branch structure; physical filaments are not software forks.}
-\sources{\href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al., Arp2/3 and branched actomyosin networks, PNAS (2020)}; runtime hypothesis: \href{https://arxiv.org/abs/2607.09689}{Eliaz (2026), preprint}.}
+\claim{Physical branching motivates the question; it does not define software semantics.}
+\sources{Biology: \href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al., PNAS (2020)}; runtime proposal: \href{https://arxiv.org/abs/2607.09689}{Eliaz (2026), preprint}.}
 \note{[1:05] Arp2/3 gives us a physical reason to take branching seriously. It nucleates a daughter actin filament from a mother filament; that local event changes the network's connectivity, and network interactions shape larger-scale behavior. A computational fork is a different operation: it resumes a supported state into separate executions. We can describe one child as a continuation of a captured parent under a declared change and random-stream policy. The analogy is about shared history, branching structure, and interactions. It does not say molecules copy a machine state, that the child computations interact like filaments, or that a biological branching threshold predicts software performance. The later biology slide will return to the empirical results.}
 \end{frame}
 
@@ -432,7 +433,7 @@ $W$: candidate work; $V$: evaluation.
 \end{frame}
 
 % 18
-\begin{frame}[t]{Branching can produce collective instability}
+\begin{frame}[t]{Arp2/3 concentration changes network dynamics}
 \lead{In actomyosin simulations, the effect of Arp2/3 depends on concentration.}
 \begin{columns}[T,onlytextwidth]
 \column{.31\textwidth}
@@ -455,8 +456,8 @@ Intermediate & Loosely connected clusters can collapse in motor-driven avalanche
 \end{tabularx}
 \end{columns}
 \vspace{.2cm}
-\claim{Branch count alone does not predict system behavior; connectivity and interaction matter.}
-\sources{\href{https://pubs.acs.org/doi/10.1021/acs.jpcb.1c04792}{Li et al., Forecasting Avalanches in Branched Actomyosin Networks, J. Phys. Chem. B (2021)}; \href{https://arxiv.org/abs/2006.06503}{Eliaz et al., Phys. Rev. E 102, 062420 (2020)}; \href{https://doi.org/10.1063/1.1723803}{Stockmayer, Theory of Molecular Size Distribution and Gel Formation in Branched-Chain Polymers (1943)}.}
+\claim{Connectivity and interaction matter alongside branch count.}
+\sources{\href{https://pubs.acs.org/doi/10.1021/acs.jpcb.1c04792}{Li et al. (JPCB, 2021)}; \href{https://arxiv.org/abs/2006.06503}{Eliaz et al. (PRE, 2020)}; \href{https://doi.org/10.1063/1.1723803}{Stockmayer (JCP, 1943)}.}
 \note{[1:15] This is a result from mechanochemical simulations of branched actomyosin networks. At high Arp2/3 concentration the network stalls; at low concentration it contracts; at an intermediate concentration, loosely connected clusters can collapse suddenly under motor activity. My graph-theoretic work studies how local connectivity relates to global morphology, while the avalanche study uses network science and machine learning to forecast collective rearrangements. Stockmayer's random-branching polymer theory is a formal precedent for asking when local branching yields system-scale connectivity, under its own idealized assumptions. A related question for agent systems is whether communication links connect otherwise separate lineages and reduce effective diversity; its threshold must be derived for the actual dependency model. These biological and polymer results motivate that question, but do not predict software behavior.}
 \end{frame}
 

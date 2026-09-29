@@ -61,13 +61,13 @@ Models increasingly plan, use tools, run experiments, and revise artifacts. With
 
 Connect physical biology, genomics, software and engineering, and RL to prior work and distinct validation standards. Arp2/3 and actomyosin work motivate attention to local branch structure and collective dynamics. ENCODE, POSSUMM, and OffRisk show the importance of data, reference versions, pipelines, and quality evidence. Spark, Airflow, and the Linux kernel are motivating maintenance workloads, not benchmarks in this talk. Make clear that no claim is being made that these systems already use the proposed runtime.
 
-### 04. The coordination puzzle: eight agents, eight candidates
+### 04. Eight agents, eight candidates
 
 **Cue: 1:00 · planned clock 2:25–3:25**
 
 Eight agents propose patches from the same prepared parent; each candidate passes the available tests in isolation. Passing alone does not decide which is best, how much independent evidence exists, or whether the changes work together. This is a thought experiment that the talk will revisit.
 
-### 05. Why branches? A physical example, then a runtime contract
+### 05. Branches in biology; forks in software
 
 **Cue: 1:05 · planned clock 3:25–4:30**
 
@@ -145,7 +145,7 @@ Stochastic hill climbing is the simplest policy to place above the runtime. It p
 
 Genetic search operates on representations of candidates. A code crossover is a proposal for a new program; it does not merge live machines safely or inherit proof of correctness. MAP-Elites supplies a useful perspective on diversity: retain strong candidates in different behavior regions. The schematic archive has no measured values. In maintenance, behavioral dimensions might expose different compatibility or resource tradeoffs, but their choice is part of the search design and needs validation.
 
-### 18. Branching can produce collective instability
+### 18. Arp2/3 concentration changes network dynamics
 
 **Cue: 1:15**
 
