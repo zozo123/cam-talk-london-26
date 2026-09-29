@@ -99,11 +99,10 @@
 \lead{Communities turn individual insight into cumulative knowledge through shared foundations.}
 \begin{center}
 \begin{tikzpicture}[x=.8cm,y=1cm]
-\node[state,minimum width=2.4cm,minimum height=1cm] (n) at (.4,1.1) {Newton\\classical mechanics};
-\node[state,minimum width=2.4cm,minimum height=1cm] (e) at (3.55,1.1) {Einstein\\relativity};
-\draw[flow] (n)--node[above,font=\scriptsize]{revised foundations}(e);
-\node[candidate,minimum width=2.4cm,minimum height=1cm] (t) at (7.05,1.1) {Turing\\computation};
-\node[evidence,minimum width=2.4cm,minimum height=1cm] (s) at (10.2,1.1) {Shannon\\information};
+\node[state,minimum width=2.05cm,minimum height=1cm] (n) at (.4,1.1) {Newton\\classical mechanics};
+\node[state,minimum width=2.05cm,minimum height=1cm] (e) at (3.55,1.1) {Einstein\\relativity};
+\node[candidate,minimum width=2.05cm,minimum height=1cm] (t) at (7.05,1.1) {Turing\\computation};
+\node[evidence,minimum width=2.05cm,minimum height=1cm] (s) at (10.2,1.1) {Shannon\\information};
 \node[state,minimum width=9.2cm,minimum height=.85cm] (k) at (5.3,-.65) {Shared methods, results, artifacts, criticism, and institutions};
 \draw[message] (n.south)--(k.north west);
 \draw[message] (e.south)--(k.north west);
@@ -449,7 +448,6 @@ $W$: candidate work; $V$: evaluation.
 \tagline{Schematic behavior archive}
 \end{center}
 \end{columns}
-\claim{Search policies choose; the runtime preserves the alternatives and their evidence.}
 \sources{\href{https://arxiv.org/abs/1504.04909}{Mouret \& Clune, MAP-Elites (2015)}.}
 \note{[1:30] Put two search ideas together. Stochastic improvement proposes a candidate, evaluates it, and accepts or rejects under an explicit rule. With noisy scores, one positive difference is weak evidence; keep failures and uncertainty, and sometimes confirm promising results. Population search keeps more than one incumbent: mutation explores nearby candidates, crossover proposes a new artifact, and a MAP-Elites-style archive preserves useful behavioral diversity. The drawing is schematic. A code crossover does not merge live machines or inherit correctness. Every recombination is a new candidate that needs evaluation. The runtime supports branching, restoration, and evidence lineage; it does not choose the objective, acceptance rule, or guarantee convergence.}
 \end{frame}
