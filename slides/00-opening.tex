@@ -42,16 +42,16 @@
 \begin{frame}{Why I ended up here}
 \begin{columns}[T,onlytextwidth]
 \column{0.30\textwidth}
-\textbf{Computational science}\par
-\normalsize An experiment is not reproducible unless the state, inputs, and provenance are reproducible.
+\textbf{Computational biology}\par
+\normalsize Simulation and analysis pipelines need reproducible state, inputs, and provenance; the wet lab remains outside the software boundary.
 
 \column{0.30\textwidth}
-\textbf{Production ML + builds}\par
-\normalsize Reuse everything you safely can: caches, artifacts, warm state. Rebuilding the world is expensive.
+\textbf{Model post-training + builds}\par
+\normalsize Rollouts and builds repeat costly setup; reuse prepared state while keeping resets and evaluation comparable.
 
 \column{0.30\textwidth}
-\textbf{Coding agents}\par
-\normalsize Then the developer became a program that edits files, runs shells, calls networks, retries, and forks hypotheses.
+\textbf{Software development + OSS maintenance}\par
+\normalsize Agents edit, test, and repair large projects such as Spark, OpenClaw, Airflow, and the Linux kernel.
 \end{columns}
 
 \vspace{0.8em}
