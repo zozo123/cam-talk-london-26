@@ -10,13 +10,13 @@ Canonical source: `talk.tex`. The PDF contains exactly 40 slides. All slide note
 
 ## The story
 
-Preserve a useful computational state, explore alternatives, and turn results into justified decisions. Follow the eight-candidate example through runtime semantics, search, evidence, communication, and joint validation. Biology motivates attention to branching structure. The paper with Ori illustrates a discriminating scientific check. Evidence-aware MapReduce supplies the direct CS artifact.
+As model agency grows, coordination becomes a systems problem. Begin with fields represented in Yossi's biology, genomics, and software-engineering work; pose the eight-agent puzzle; use Arp2/3 branching to motivate why shared ancestry, branch structure, and interaction matter. Then follow one computational cycle: preserve a supported state, explore alternatives, evaluate evidence, and decide what may enter shared work. Search, RL, and the scientific examples explain different parts of that cycle.
 
 ## Run of show
 
 | Slides | Segment | Duration | Cumulative |
 |---|---|---|---|
-| 1–5 | Problem and hypothesis | 4:30 | 4:30 |
+| 1–5 | Motivation, fields, puzzle, and physical branching | 4:30 | 4:30 |
 | 6–15 | State and runtime | 10:25 | 14:55 |
 | 16–22 | Search and learning | 7:55 | 22:50 |
 | 23–32 | Evidence and composition | 13:05 | 35:55 |
@@ -24,11 +24,11 @@ Preserve a useful computational state, explore alternatives, and turn results in
 
 ## Opening
 
-“Imagine eight candidate changes. Each passes when tested from the same prepared parent. Which result should we keep, how much have we learned, and which changes can we combine? A fork helps us create those trials. The rest of the talk asks what makes their results useful.”
+“As models gain more agency, we let them use tools, run experiments, and change artifacts. Then comes a coordination problem. My work touches this in physical biology, genomics, software engineering, and model development, though each field judges results differently. Imagine eight agents proposing changes to one project: every patch passes on its own. Which should we keep, what have we learned, and can we combine them? Arp2/3 branching offers a physical example of a local branch changing a network. A computational fork is a different mechanism, but it raises a related systems question: how do we preserve a common starting point, explore alternatives, and coordinate what follows?”
 
 ## Pacing when discussion starts early
 
-Keep the opening puzzle, the continuation contract, the break-even model, the two RL loops, the three graphs, evidence reduction assumptions, composition, the measured trace, and the falsifiable benchmark. Give slides 6, 12, 13, 17, 21, and 34 a brief explanation if time is tight. Keep the physics anecdote to approximately 90 seconds. Finish by returning to the eight candidates.
+Keep the opening puzzle, the continuation contract, the break-even model, the two RL loops, the three graphs, evidence reduction assumptions, composition, the measured trace, and the falsifiable benchmark. Give slides 6, 12, 13, 17, 21, and 34 a brief explanation if time is tight. Keep the Arp2/3 result and Ori anecdote concise; distinguish biological branching from computational forking. Finish by returning to the eight candidates.
 
 ## Questions to be ready for
 
@@ -38,7 +38,7 @@ Keep the opening puzzle, the continuation contract, the break-even model, the tw
 - **What if eight patches all pass?** Test the selected composition as a new artifact. Pairwise screening does not rule out higher-order interactions.
 - **What is actually implemented?** The reference evidence reducer and reported snapshot-to-worker integration path. The complete runtime, routing policy, and promotion protocol are proposals.
 - **What is the new performance result?** This seminar reports no new controlled speedup. The 6.70 s trace is a total client-observed worker-round-trip duration without an equivalent cold baseline.
-- **How far does the physics analogy go?** The paper tests connectivity behind a projected split. It does not establish quantum interference, independent universes, or sandbox acceleration.
+- **How far do the physical examples go?** Arp2/3 motivates attention to branch structure and interaction; the Ori paper motivates targeted numerical checks. Neither establishes that biology predicts runtime behavior or that the sandbox is faster.
 - **Can the evidence record solve adaptive dependence?** No. It preserves information needed to investigate the problem. A calibrated general reducer for adaptive, correlated branches remains open.
 
 ## Slide notes
@@ -47,31 +47,31 @@ Keep the opening puzzle, the continuation contract, the break-even model, the tw
 
 **Cue: 0:45 · planned clock 0:00–0:45**
 
-We increasingly ask AI systems to develop artifacts through repeated interaction: code, models, experiments, and scientific explanations. My question is what the runtime must expose to make that process economical and accountable. I use factory with an asterisk: an atelier in which proposals are explored, compared, and refined. The argument joins three subjects: operating-system state, algorithms for allocating computation, and the evidence needed to accept a result. The biological and physical examples will each make one of those distinctions concrete.
+Introduce the title and central motivation: capable models increasingly act through tools and sequences of decisions. When many processes or agents can propose, run, and revise work, coordinating state, evidence, and commitment becomes a systems question. The atelier asterisk frames the factory as a workshop for exploration and refinement.
 
-### 02. Eight candidates pass. What can we accept?
+### 02. As model agency grows, coordination becomes a systems problem
 
-**Cue: 1:00 · planned clock 0:45–1:45**
+**Cue: 0:50 · planned clock 0:45–1:35**
 
-Imagine eight patches to one parser. All pass the available tests when applied separately to the same parent. Which one should we keep? Are eight passes eight independent confirmations? Can we merge all eight? These are three different questions. A snapshot makes it convenient to generate the trials, but does not settle any of them. Keep this example in mind: we will return to it after defining the runtime, the search policy, and the evidence contract. The eight outcomes are a thought experiment, not measurements.
+Models increasingly plan, use tools, run experiments, and revise artifacts. With several agents acting at once, ask what each inherited, changed, and learned, and who may commit the result. Present coordination as a research motivation, not a claim that every multi-agent system needs one architecture.
 
-### 03. Where the pattern matters
+### 03. One runtime question across several fields
 
-**Cue: 0:50 · planned clock 1:45–2:35**
+**Cue: 0:50 · planned clock 1:35–2:25**
 
-These are application settings, not claims of deployed systems or completed benchmarks on the named projects. Biology includes analysis pipelines and simulations, whose state is computational, while wet-lab validation remains external. Scientific computing adds numerical error and model validity. Post-training adds a policy-update loop. Large open-source maintenance adds compatibility, regression risk, and human review. What unites them is a repeated experimental structure with potentially reusable preparation.
+Connect physical biology, genomics, software and engineering, and RL to prior work and distinct validation standards. Arp2/3 and actomyosin work motivate attention to local branch structure and collective dynamics. ENCODE, POSSUMM, and OffRisk show the importance of data, reference versions, pipelines, and quality evidence. Spark, Airflow, and the Linux kernel are motivating maintenance workloads, not benchmarks in this talk. Make clear that no claim is being made that these systems already use the proposed runtime.
 
-### 04. Development as iterative search
+### 04. The coordination puzzle: eight agents, eight candidates
 
-**Cue: 0:50 · planned clock 2:35–3:25**
+**Cue: 1:00 · planned clock 2:25–3:25**
 
-Development here includes improving an artifact or a method, not only writing executable code. A scientific hypothesis may be ranked by evidence without being proved. A specification may be checked for consistency. A runtime executes the computational part of that work. It does not turn every domain judgment into a Boolean verifier. This distinction lets us discuss software, research, and post-training together while keeping their claims honest.
+Eight agents propose patches from the same prepared parent; each candidate passes the available tests in isolation. Passing alone does not decide which is best, how much independent evidence exists, or whether the changes work together. This is a thought experiment that the talk will revisit.
 
-### 05. The systems hypothesis
+### 05. Why branches? A physical example, then a runtime contract
 
 **Cue: 1:05 · planned clock 3:25–4:30**
 
-This is a falsifiable systems hypothesis. It can fail when setup is cheap, divergence is expensive, or verification dominates. The present implementation supports a narrower contribution: structured evidence reduction and an exercised snapshot-to-worker path. It does not yet establish a controlled end-to-end speedup. The proposed benchmark must count capture, restore, inference, failed trials, verification, memory, and communication under the same task and quality contract.
+Arp2/3 nucleates a daughter actin filament from a mother filament, changing network connectivity. Interactions shape behavior at larger scales. A computational fork instead restores a supported state into separate executions, applies a declared candidate and random-stream policy, and records each result's lineage. The analogy is shared history and branching structure; a physical filament is not a copied machine state, and biological thresholds do not predict software performance.
 
 ### 06. Environment, sandbox, snapshot, fork
 
@@ -145,11 +145,11 @@ Stochastic hill climbing is the simplest policy to place above the runtime. It p
 
 Genetic search operates on representations of candidates. A code crossover is a proposal for a new program; it does not merge live machines safely or inherit proof of correctness. MAP-Elites supplies a useful perspective on diversity: retain strong candidates in different behavior regions. The schematic archive has no measured values. In maintenance, behavioral dimensions might expose different compatibility or resource tradeoffs, but their choice is part of the search design and needs validation.
 
-### 18. Branching in biological networks
+### 18. Branching can produce collective instability
 
-**Cue: 1:15 · planned clock 17:05–18:20**
+**Cue: 1:15**
 
-My biological work motivates asking how local connections determine global structure. The biological result and the computational proposal must remain separate. Arp2/3-mediated branching is a physical mechanism in actin networks, not an optimizer and not a software checkpoint. For our design problem, the useful analogy is controlled growth under limited resources: branch placement, interactions, pruning, and network structure matter. Flory–Stockmayer-style connectivity arguments are another bounded inspiration; their idealized bonding assumptions do not establish a critical threshold for agent success. Transition: in learning systems we can specify the growth and selection rules explicitly.
+In the cited actomyosin simulations, high Arp2/3 concentration is associated with stalling, low concentration with contraction, and an intermediate regime with loosely connected clusters that can collapse in motor-driven avalanches. Relate this to Yossi's graph-theoretic morphology work. The runtime design lesson is limited: branch count alone does not characterize system behavior; connectivity and interaction matter. Stockmayer's polymer theory motivates asking whether communication can connect candidate lineages, but any threshold must be derived for the actual dependency model. Do not claim that software search follows actomyosin physics.
 
 ### 19. Reinforcement learning has two loops
 

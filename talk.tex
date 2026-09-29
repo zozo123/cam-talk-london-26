@@ -45,7 +45,7 @@
 \author{Yossi Eliaz}
 \institute{Principal Engineer, Incredibuild / islo.dev; Associate Professor, HIT}
 \date{Cambridge SRG, 15 October 2026}
-\hypersetup{pdftitle={AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Search and Development},pdfauthor={Yossi Eliaz},pdfsubject={Computational experimentation, forkable execution, search, and evidence},colorlinks=true,urlcolor=Teal,linkcolor=Ink}
+\hypersetup{pdftitle={AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Search and Development},pdfauthor={Yossi Eliaz},pdfsubject={Coordinated AI agency, computational branching, search, and evidence},colorlinks=true,urlcolor=Teal,linkcolor=Ink}
 \AtBeginDocument{\setlength{\abovedisplayskip}{6pt}\setlength{\belowdisplayskip}{6pt}\setlength{\abovedisplayshortskip}{3pt}\setlength{\belowdisplayshortskip}{3pt}}
 \renewenvironment{center}{\par\vspace{.10cm}\centering}{\par\vspace{.10cm}}
 \begin{document}
@@ -70,84 +70,93 @@
 \end{tikzpicture}\par
 \vspace{.25cm}
 {\footnotesize\color{white!70}15 October 2026\quad FW11 + Microsoft Teams\par}
-\note{[0:45] We increasingly ask AI systems to develop artifacts through repeated interaction: code, models, experiments, and scientific explanations. My question is what the runtime must expose to make that process economical and accountable. I use factory with an asterisk: an atelier in which proposals are explored, compared, and refined. The argument joins three subjects: operating-system state, algorithms for allocating computation, and the evidence needed to accept a result. The biological and physical examples will each make one of those distinctions concrete.}
+\note{[0:45] We increasingly ask AI systems to develop artifacts through repeated interaction: code, models, experiments, and scientific explanations. My question is what the runtime must expose to make that process economical and accountable. I use factory with an asterisk: an atelier in which proposals are explored, compared, and refined. The argument joins three subjects: operating-system state, algorithms for allocating computation, and the evidence needed to accept a result. We will connect physical biology, genomics, engineering, and learning systems through one coordination problem.}
 \end{frame}}
 
 % 02
-\begin{frame}[t]{Eight candidates pass. What can we accept?}
-\lead{One prepared state. Eight proposed changes. Eight successful isolated tests.}
+\begin{frame}[t]{As model agency grows, coordination becomes a systems problem}
+\lead{Models increasingly plan, use tools, run experiments, and revise artifacts.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=2.75cm,minimum height=1.15cm] (i) at (0,0) {Capability\\propose a candidate};
+\node[candidate,minimum width=2.75cm,minimum height=1.15cm] (a) at (4.25,0) {Agency\\act on a workspace};
+\node[evidence,minimum width=3.05cm,minimum height=1.15cm] (c) at (8.65,0) {Coordination\\compare and decide};
+\draw[flow] (i)--(a);\draw[flow] (a)--(c);
+\end{tikzpicture}
+\end{center}
+\vspace{.25cm}
+\begin{itemize}
+\item Many agents can work from one shared computational starting point.
+\item Their attempts may conflict, duplicate effort, or produce dependent evidence.
+\item A system must preserve what changed and govern what enters shared state.
+\end{itemize}
+\claim{The challenge is to turn parallel agency into coordinated, assessable work.}
+\note{[0:50] The motivation is a change in how we use capable models. We increasingly connect them to tools and let them take sequences of actions, not just return one answer. Once several agents or processes can act at once, coordination becomes a systems problem: what state did each inherit, what did it change, what can others learn from its result, and who can commit a change? The talk studies a runtime layer that can make those questions explicit. This is a research motivation, not a claim that every multi-agent system needs the same architecture.}
+\end{frame}
+
+% 03
+\begin{frame}[t]{One runtime question across several fields}
+\lead{My prior work meets different artifacts, but repeatedly depends on controlled computation.}
+\begin{tabularx}{\textwidth}{@{}L{2.8cm}L{4.4cm}Y@{}}
+\toprule
+\term{Field} & \term{Connection to prior work} & \term{Coordination problem}\\\midrule
+Physical biology & Arp2/3, actomyosin networks & Local branches, global morphology, interacting dynamics\\
+Genomics & ENCODE, POSSUMM, OffRisk & Data, reference versions, pipelines, quality evidence\\
+Software and engineering & Build systems; Spark, Airflow, Linux kernel & Candidate changes, regression risk, integration\\
+Post-training and RL & Policies interacting with environments & Trajectories, reset states, rewards, evaluation\\\bottomrule
+\end{tabularx}
+\vspace{.25cm}
+\small These are motivating settings; they do not imply that the named systems already use this runtime.
+\claim{Different domains need different validators; all need a clear account of state and change.}
+\sources{Selected work: \href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al., PNAS (2020)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC10371165/}{Hitz et al., ENCODE pipelines (2023 preprint)}; \href{https://www.nature.com/articles/s41467-023-38429-1}{Harris et al., POSSUMM / fine-scale chromatin (2023)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC10568243/}{Barkai et al., OffRisk (2023)}.}
+\note{[0:50] These settings come from distinct parts of my research and engineering experience. In physical biology, Arp2/3-mediated branching and actomyosin topology connect local structure to collective dynamics. Genomics brings large datasets, reference versions, analysis workflows, quality control, and provenance; POSSUMM is one example where data depth and numerical methods together enabled finer analysis. Software maintenance and engineering bring compatibility, regressions, build state, and review, with projects such as Spark, Airflow, and the Linux kernel as motivating workloads. In post-training, environment state and trajectory evaluation matter. I am not claiming these projects use forkable sandboxes today. They motivate a common runtime question, while each field retains its own standard of evidence.}
+\end{frame}
+
+% 04
+\begin{frame}[t]{The coordination puzzle: eight agents, eight candidates}
+\lead{Each agent starts from the same prepared parent. Each candidate passes on its own.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
 \node[state,minimum width=2.2cm] (s) at (0,1.9) {parent $S_0$};
 \foreach \i in {1,...,8}{\pgfmathsetmacro{\x}{(\i-4.5)*1.55}\node[candidate,minimum width=1.15cm] (c\i) at (\x,0) {$\Delta_{\i}$\\\scriptsize pass};\draw[flow] (s.south)--(c\i.north);}
 \end{tikzpicture}
 \end{center}
-\vspace{.25cm}
+\vspace{.2cm}
 \begin{columns}[T,onlytextwidth]
-\column{.31\textwidth}\term{Selection}\\Which result is better?
-\column{.31\textwidth}\term{Evidence}\\How much did we learn?
-\column{.31\textwidth}\term{Composition}\\Which changes work together?
+\column{.31\textwidth}\term{Choose}\\Which candidate best meets the objective?
+\column{.31\textwidth}\term{Learn}\\What do the results actually establish?
+\column{.31\textwidth}\term{Combine}\\Which changes still work together?
 \end{columns}
-\claim{Each question requires more than the number of successful workers.}
-\note{[1:00] Imagine eight patches to one parser. All pass the available tests when applied separately to the same parent. Which one should we keep? Are eight passes eight independent confirmations? Can we merge all eight? These are three different questions. A snapshot makes it convenient to generate the trials, but does not settle any of them. Keep this example in mind: we will return to it after defining the runtime, the search policy, and the evidence contract. The eight outcomes are a thought experiment, not measurements.}
-\end{frame}
-
-% 03
-\begin{frame}[t]{Where the pattern matters}
-\lead{Repeated preparation, mutable state, and an outcome we can assess.}
-\begin{tabularx}{\textwidth}{@{}L{3.25cm}YY@{}}
-\toprule
-\term{Setting} & \term{Candidate} & \term{Assessment}\\\midrule
-Computational biology & Model, parameters, analysis & Fit, robustness, experimental agreement\\
-Scientific computing & Numerical method or hypothesis & Residuals, invariants, independent checks\\
-Model post-training & Policy trajectory & Reward, constraints, held-out performance\\
-Software maintenance & Patch or configuration & Tests, performance, compatibility\\\bottomrule
-\end{tabularx}
-\vspace{.3cm}
-\small Motivating software workloads: Apache Spark, OpenClaw, Apache Airflow, and the Linux kernel.
-\claim{The runtime pattern transfers; the standard of evidence remains domain-specific.}
-\note{[0:50] These are application settings, not claims of deployed systems or completed benchmarks on the named projects. Biology includes analysis pipelines and simulations, whose state is computational, while wet-lab validation remains external. Scientific computing adds numerical error and model validity. Post-training adds a policy-update loop. Large open-source maintenance adds compatibility, regression risk, and human review. What unites them is a repeated experimental structure with potentially reusable preparation.}
-\end{frame}
-
-% 04
-\begin{frame}[t]{Development as iterative search}
-\lead{A candidate may be a program, a model, an experiment, or a specification.}
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm]
-\node[state,minimum width=2.5cm] (a) at (0,0) {identify state\\and objective};
-\node[candidate,minimum width=2.5cm] (b) at (3.65,0) {propose an\\alternative};
-\node[evidence,minimum width=2.5cm] (c) at (7.3,0) {run, measure,\\or check};
-\node[state,minimum width=2.5cm] (d) at (10.95,0) {rank, retain,\\or commit};
-\draw[flow] (a)--(b);\draw[flow] (b)--(c);\draw[flow] (c)--(d);
-\draw[message] (d.south)--++(0,-1) -| (b.south);
-\node[labeltext] at (6.5,-1.35) {results change the next choice};
-\end{tikzpicture}
-\end{center}
-\vspace{.35cm}
-\begin{itemize}
-\item Some outcomes admit proofs or tests; others admit noisy scores or partial rankings.
-\item A ranking supports a choice only under its stated objective and uncertainty.
-\end{itemize}
-\claim{The central operation is a controlled alternative followed by an assessment.}
-\note{[0:50] Development here includes improving an artifact or a method, not only writing executable code. A scientific hypothesis may be ranked by evidence without being proved. A specification may be checked for consistency. A runtime executes the computational part of that work. It does not turn every domain judgment into a Boolean verifier. This distinction lets us discuss software, research, and post-training together while keeping their claims honest.}
+\claim{Parallel success is not yet a coordinated decision.}
+\note{[1:00] Now make the coordination problem concrete. Eight agents each propose a patch to one parser from the same prepared parent. Every patch passes the available tests in isolation. That does not tell us which is best, whether their results are independent confirmations, or whether all eight work when combined. The candidates and results are a thought experiment, not measured outcomes. We will use them to connect runtime support to search, evaluation, and integration.}
 \end{frame}
 
 % 05
-\begin{frame}[t]{The systems hypothesis}
-\lead{Can reusing reached state lower the cost of reaching a fixed quality target?}
-\begin{center}
-{\fontsize{18}{23}\selectfont useful state\quad$\longrightarrow$\quad new continuations}
-\end{center}
-\vspace{.35cm}
-\begin{tabularx}{\textwidth}{@{}L{2.8cm}Y@{}}
-\toprule
-\term{Proposal} & A runtime contract for continuation, evidence, and commitment.\\
-\term{Current artifact} & A reference evidence reducer and a named-snapshot worker trace.\\
-\term{Open measurement} & End-to-end cost advantage at equivalent evaluation quality.\\\bottomrule
-\end{tabularx}
-\claim{Measure total resources to a declared target, including unsuccessful search.}
-\sources{\href{https://arxiv.org/abs/2607.09689}{Eliaz, Evidence-Aware MapReduce for Forkable Compute (2026), preprint}.}
-\note{[1:05] This is a falsifiable systems hypothesis. It can fail when setup is cheap, divergence is expensive, or verification dominates. The present implementation supports a narrower contribution: structured evidence reduction and an exercised snapshot-to-worker path. It does not yet establish a controlled end-to-end speedup. The proposed benchmark must count capture, restore, inference, failed trials, verification, memory, and communication under the same task and quality contract.}
+\begin{frame}[t]{Why branches? A physical example, then a runtime contract}
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\term{Arp2/3 in an actin network}
+\begin{itemize}
+\item Nucleates a daughter filament from a mother filament.
+\item Local branching changes network connectivity.
+\item Interactions shape collective structure and dynamics.
+\end{itemize}
+\column{.48\textwidth}
+\term{A fork in a computational experiment}
+\begin{itemize}
+\item Restore a declared, supported parent state.
+\item Apply a recorded intervention and randomness policy.
+\item Keep each continuation's outcome and lineage.
+\end{itemize}
+\end{columns}
+\vspace{.1cm}
+\[
+C_i=\operatorname{Continue}(\widehat S_0,\Delta_i,\omega_i)
+\]
+\small $\Delta_i$: candidate change; $\omega_i$: declared random-stream policy.
+\claim{The analogy motivates attention to branch structure; physical filaments are not software forks.}
+\sources{\href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al., Arp2/3 and branched actomyosin networks, PNAS (2020)}; runtime hypothesis: \href{https://arxiv.org/abs/2607.09689}{Eliaz (2026), preprint}.}
+\note{[1:05] Arp2/3 gives us a physical reason to take branching seriously. It nucleates a daughter actin filament from a mother filament; that local event changes the network's connectivity, and network interactions shape larger-scale behavior. A computational fork is a different operation: it resumes a supported state into separate executions. We can describe one child as a continuation of a captured parent under a declared change and random-stream policy. The analogy is about shared history, branching structure, and interactions. It does not say molecules copy a machine state, that the child computations interact like filaments, or that a biological branching threshold predicts software performance. The later biology slide will return to the empirical results.}
 \end{frame}
 
 \chapterlabel{State and runtime}
@@ -423,28 +432,32 @@ $W$: candidate work; $V$: evaluation.
 \end{frame}
 
 % 18
-\begin{frame}[t]{Branching in biological networks}
+\begin{frame}[t]{Branching can produce collective instability}
+\lead{In actomyosin simulations, the effect of Arp2/3 depends on concentration.}
 \begin{columns}[T,onlytextwidth]
-\column{.43\textwidth}
+\column{.31\textwidth}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm]
-\draw[Ink,line width=2pt] (0,0)--(4.5,0);
-\draw[Teal,line width=1.6pt] (1,0)--(1.7,1.8) (2.3,0)--(3.0,1.8) (3.5,0)--(4.1,-1.5);
-\draw[Teal,line width=1.3pt] (1.4,1.03)--(.45,1.9) (2.75,1.15)--(3.8,1.95);
-\foreach \x/\y in {1/0,2.3/0,3.5/0,1.4/1.03,2.75/1.15}{\fill[Gold] (\x,\y) circle(3pt);}
-\node[labeltext] at (2.25,-2) {branching-network schematic\\not a molecular reconstruction};
+\begin{tikzpicture}[x=.8cm,y=.7cm]
+\draw[Ink,line width=2pt] (0,0)--(2.5,0);
+\draw[Teal,line width=1.5pt] (.55,0)--(1,1.25) (1.4,0)--(1.85,-1.05);
+\draw[Teal,line width=1.2pt] (.8,.7)--(.2,1.15) (1.65,-.65)--(2.2,-1.15);
+\foreach \x/\y in {.55/0,1.4/0,.8/.7,1.65/-.65}{\fill[Gold] (\x,\y) circle(2.5pt);}
+\node[labeltext] at (1.15,-1.65) {schematic network};
 \end{tikzpicture}
 \end{center}
-\column{.53\textwidth}
-\lead{Local mechanisms shape the structure available to the whole system.}
-\begin{itemize}
-\item Actomyosin work connects local connectivity to global morphology.
-\item Arp2/3 supplies a concrete biological branching mechanism.
-\item Computational design question: where should branches grow, interact, or stop?
-\end{itemize}
+\column{.65\textwidth}
+\begin{tabularx}{\linewidth}{@{}L{2.1cm}Y@{}}
+\toprule
+Arp2/3 regime & Reported network response\\\midrule
+High concentration & Network stalls\\
+Low concentration & Network contracts\\
+Intermediate & Loosely connected clusters can collapse in motor-driven avalanches\\\bottomrule
+\end{tabularx}
 \end{columns}
-\sources{\href{https://arxiv.org/abs/2006.06503}{Eliaz et al., Phys. Rev. E 102, 062420 (2020)}; \href{https://www.pnas.org/doi/10.1073/pnas.1922494117}{Liman et al., Arp2/3 and branched actomyosin networks, PNAS (2020)}.}
-\note{[1:15] My biological work motivates asking how local connections determine global structure. The biological result and the computational proposal must remain separate. Arp2/3-mediated branching is a physical mechanism in actin networks, not an optimizer and not a software checkpoint. For our design problem, the useful analogy is controlled growth under limited resources: branch placement, interactions, pruning, and network structure matter. Flory--Stockmayer-style connectivity arguments are another bounded inspiration; their idealized bonding assumptions do not establish a critical threshold for agent success. Transition: in learning systems we can specify the growth and selection rules explicitly.}
+\vspace{.2cm}
+\claim{Branch count alone does not predict system behavior; connectivity and interaction matter.}
+\sources{\href{https://pubs.acs.org/doi/10.1021/acs.jpcb.1c04792}{Li et al., Forecasting Avalanches in Branched Actomyosin Networks, J. Phys. Chem. B (2021)}; \href{https://arxiv.org/abs/2006.06503}{Eliaz et al., Phys. Rev. E 102, 062420 (2020)}; \href{https://doi.org/10.1063/1.1723803}{Stockmayer, Theory of Molecular Size Distribution and Gel Formation in Branched-Chain Polymers (1943)}.}
+\note{[1:15] This is a result from mechanochemical simulations of branched actomyosin networks. At high Arp2/3 concentration the network stalls; at low concentration it contracts; at an intermediate concentration, loosely connected clusters can collapse suddenly under motor activity. My graph-theoretic work studies how local connectivity relates to global morphology, while the avalanche study uses network science and machine learning to forecast collective rearrangements. Stockmayer's random-branching polymer theory is a formal precedent for asking when local branching yields system-scale connectivity, under its own idealized assumptions. A related question for agent systems is whether communication links connect otherwise separate lineages and reduce effective diversity; its threshold must be derived for the actual dependency model. These biological and polymer results motivate that question, but do not predict software behavior.}
 \end{frame}
 
 % 19
@@ -464,7 +477,7 @@ $W$: candidate work; $V$: evaluation.
 J_{\rm RL}(\theta)=\mathbb{E}_{\tau\sim\pi_\theta}\!\left[\sum_t\gamma^t r_t\right]
 \]
 \claim{Snapshots can support experience generation; the learner still defines the update.}
-\sources{\href{http://incompleteideas.net/book/the-book-2nd.html}{Sutton \& Barto, Reinforcement Learning: An Introduction, 2nd ed. (2018)}.}
+\sources{\href{http://incompleteideas.net/book/the-book-2nd.html}{Sutton \& Barto, Reinforcement Learning: An Introduction, 2nd ed. (2018)}; OS fork for probabilistic inference: \href{https://proceedings.mlr.press/v32/paige14.html}{Paige \& Wood, ICML (2014)}.}
 \note{[1:05] The inner loop is interaction: observe, act, transition, receive feedback. The outer loop uses trajectories to change policy parameters. Post-training can place a language model inside this structure, with tools and a verifier-derived reward. A fork provides a way to start or continue an episode from supported state. It does not turn branch selection into reinforcement learning by itself. Keep inference cost, environment cost, evaluation cost, and optimizer cost distinct when assessing an infrastructure benefit.}
 \end{frame}
 
@@ -522,7 +535,7 @@ J_{\rm RL}(\theta)=\mathbb{E}_{\tau\sim\pi_\theta}\!\left[\sum_t\gamma^t r_t\rig
 \end{tabularx}
 \claim{Choose by expected decision benefit relative to full cost.}
 \sources{Metareasoning perspective: \href{https://arxiv.org/abs/1207.5879}{Hay et al., Selecting Computations: Theory and Applications (2012)}.}
-\note{[1:15] This is a metareasoning problem. Computation has a cost and changes what we know or which actions are available. An ideal controller values a computation by the expected improvement in its eventual decision, accounting for budget and dependencies. That value is generally unknown and difficult to estimate; it is not a new implemented scheduler in this artifact. A simple policy might compare predictive uncertainty, diversity, expected gain, and cost. The physics example next shows why a targeted check can be more useful than many similar trials.}
+\note{[1:15] This is a metareasoning problem. Computation has a cost and changes what we know or which actions are available. An ideal controller values a computation by the expected improvement in its eventual decision, accounting for budget and dependencies. That value is generally unknown and difficult to estimate; it is not a new implemented scheduler in this artifact. A simple policy might compare predictive uncertainty, diversity, expected gain, and cost. The numerical continuation study next shows why a targeted check can be more useful than many similar trials.}
 \end{frame}
 
 \chapterlabel{Evidence and composition}
