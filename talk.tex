@@ -1,4 +1,4 @@
-% AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Development
+% AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Search and Development
 % Final 40-slide Cambridge Systems Research Group seminar deck.
 % Source is self-contained; speaker notes are hidden in the slide output.
 \documentclass[aspectratio=169,10pt]{beamer}
@@ -45,11 +45,11 @@
 \newcommand{\sources}[1]{\par\vfill{\fontsize{6.5}{7.7}\selectfont\color{Muted}#1\par}}
 \newcommand{\code}[1]{\texttt{#1}}
 \title{AI (SW) Factories\textsuperscript{*}}
-\subtitle{Forkable Sandboxes as a Runtime for Automated Development}
+\subtitle{Forkable Sandboxes as a Runtime for Automated Search and Development}
 \author{Yossi Eliaz}
 \institute{Principal Engineer, Incredibuild / islo.dev\\Associate Professor, Holon Institute of Technology (HIT)}
 \date{Cambridge Computer Laboratory Systems Research Group\\15 October 2026}
-\hypersetup{pdftitle={AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Development},
+\hypersetup{pdftitle={AI (SW) Factories*: Forkable Sandboxes as a Runtime for Automated Search and Development},
  pdfauthor={Yossi Eliaz},pdfsubject={Forkable execution, evidence-aware search, and AI software systems},
  colorlinks=true,urlcolor=Accent,linkcolor=Ink}
 \begin{document}
@@ -61,7 +61,7 @@
 \vspace{0.75cm}
 {\fontsize{30}{34}\selectfont\bfseries AI (SW) Factories\textsuperscript{\color{Accent}{*}}\par}
 \vspace{0.24cm}
-{\fontsize{19}{23}\selectfont Forkable Sandboxes as a Runtime for\\Automated Development\par}
+{\fontsize{19}{23}\selectfont Forkable Sandboxes as a Runtime for\\Automated Search and Development\par}
 \vspace{0.65cm}
 {\large Yossi Eliaz\par}
 \vspace{0.12cm}
@@ -70,12 +70,12 @@
 {\fontsize{8}{10}\selectfont\color{Muted}* “Factory” means an atelier-like search workshop, not an assembly line.\par}
 \vfill
 {\small\color{Muted}15 October 2026\quad FW11 + Microsoft Teams\par}
-\note{I will make one systems argument. Agents create value by repeatedly acting inside software, so the execution state becomes part of the search process. Forking a prepared state can make some continuations cheaper to explore. The runtime still has to define what a child inherits, what its result proves, and who is allowed to accept it.}
+\note{The argument is not that a fork makes worlds independent. A fork can make candidate continuations cheaper when they share an expensive prefix. The runtime must preserve ancestry, route evidence, and keep evaluation and promotion authority outside the child. This pattern can support software work, post-training, and computational research, while each domain keeps its own objective and standard of evidence.}
 \end{frame}
 
 % 02
-\begin{frame}[t]{An AI (SW) factory searches over verifiable candidates}
-\lead{It matters when trials share costly setup, change state, and can be verified under one objective.}
+\begin{frame}[t]{One branch-and-verify loop spans three domains}
+\lead{The workloads differ; each has repeated setup, mutable state, and a decision that can be checked.}
 \begin{center}
 \normalsize
 propose
@@ -92,27 +92,27 @@ promote / explore
 \item \term{Model post-training:} reproducible rollouts, resets, and verifier-grounded reward.
 \item \term{Software development and maintenance:} agent patch search in large open-source projects such as Apache Spark, OpenClaw, Apache Airflow, and the Linux kernel.
 \end{itemize}
-\takeaway{Execution state is part of the search algorithm's working state.}
-\note{AI (SW) factory denotes an atelier-like search loop over software candidates: an agent proposes a patch, configuration, or workflow; a verifier measures the result; and the controller ranks evidence to decide what to promote, revise, or explore. It is relevant when trials share costly setup, mutate state, and can be compared under a common objective. Name three settings up front: computational-biology simulations and pipelines, model post-training rollouts, and software development or maintenance in large open-source repositories such as Apache Spark, OpenClaw, Apache Airflow, and the Linux kernel. The software sandbox can include a simulation or pipeline, not the wet-lab experiment itself. The important change from autocomplete is that an agent runs tools and reacts to outcomes. It leaves behind files, processes, test results, and partial builds; a later attempt can inherit them.}
+\takeaway{One runtime pattern; domain-specific objectives, evidence, and boundaries.}
+\note{AI (SW) factory means an atelier-like search workshop, not a claim that every domain is software engineering. It is relevant when trials share costly setup, change state, and can be compared under a declared objective. Name three settings up front: simulation and analysis campaigns in computational biology; reproducible rollouts in model post-training; and development or maintenance in large open-source systems such as Spark, OpenClaw, Airflow, and the Linux kernel. The software boundary can include a simulation or pipeline, not the wet-lab experiment itself. In every case an agent proposes a candidate, an environment runs it, and a verifier returns evidence. What differs is the objective, the trust boundary, and what counts as validation.}
 \end{frame}
 
 % 03
-\begin{frame}[t]{The “cross-terms” live in the integration protocol}
+\begin{frame}[t]{Independent success does not imply composability}
 \lead{Suppose eight patches pass alone. Let $J(A)$ be the pinned objective score for patch set $A$, applied from a clean common parent $S_0$.}
 \begin{center}
 \small
 \[
-I_{ij}=J(\{\Delta_i,\Delta_j\})-J(\{\Delta_i\})-J(\{\Delta_j\})+J(\emptyset)
+\Gamma_{ij}=J(\{\Delta_i,\Delta_j\})-J(\{\Delta_i\})-J(\{\Delta_j\})+J(\emptyset)
 \]
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
-\item $I_{ij}\ne0$ means outcomes are non-additive: conflict, synergy, or saturation.
+\item $\Gamma_{ij}$ measures non-additivity: possible synergy, conflict, or saturation.
 \item Screen 28 pairs into an interaction graph; higher-order effects can remain.
-\item Search promising subsets under budget; re-test each composition from clean $S_0$.
+\item Route candidate evidence explicitly; test each chosen composition from clean $S_0$.
 \end{itemize}
-\takeaway{Isolate execution; couple evidence; promote only joint results.}
-\note{Use the parser thought experiment: eight patches may pass separately under one verifier, yet still conflict or interact when applied together. Let $J(A)$ be a scalar score for composing set $A$ from the same clean parent; the second finite difference $I_{ij}$ is a cross-term in the ordinary systems sense: non-additivity under a joint experiment. The physics analogy stops here: this is not quantum interference or a superposition of machines. The institutional twist is that branches do not need shared mutable memory to work together. They need a common objective and verifier, candidate/evidence lineage, compatibility screening, and a controller that launches a fresh integration fork. For eight candidates there are 28 pair tests; that is a screen, not a proof against three-way effects, and exhaustive subset testing can grow as $2^8$. Re-run the joint verifier on every selected composition and issue a new receipt; never infer combined correctness by unioning individual pass receipts. This is a proposed composition protocol, not a result in the current artifact.}
+\takeaway{Keep children isolated; make evidence composable; verify the joint result.}
+\note{Use the parser thought experiment: eight patches may pass separately yet conflict when combined. Let $J(A)$ be the score for applying set $A$ to the same clean parent. The second finite difference $\Gamma_{ij}$ measures objective non-additivity; it is not Shannon mutual information. Estimate it with repeated runs and uncertainty, because a nonzero point estimate may be noise. This is an ordinary systems interaction, not quantum interference or a superposition of machines. Eight candidates yield 28 pairs, only a screening graph: three-way and other higher-order effects can remain. Branches collaborate by exchanging typed artifacts and evidence through a controller, not by sharing mutable state. Every chosen composition starts from clean $S_0$ and gets a new verifier receipt; individual pass receipts cannot be unioned. This is a proposed protocol, not a result in the current artifact.}
 \end{frame}
 
 % 04
@@ -120,16 +120,16 @@ I_{ij}=J(\{\Delta_i,\Delta_j\})-J(\{\Delta_i\})-J(\{\Delta_j\})+J(\emptyset)
 \lead{Start from an identified reached state $S_0$ and run alternative continuations.}
 \vspace{0.25cm}
 \begin{block}{Falsifiable systems hypothesis}
-For workloads with an expensive shared prefix, restoring or forking a prepared machine can lower total search cost relative to rebuilding that prefix for every candidate, while preserving the declared continuation behavior.
+For workloads with an expensive shared prefix, a forkable runtime can lower total resources needed to reach a fixed verifier-quality target versus cold reconstruction, while preserving declared continuation behavior and evaluation integrity.
 \end{block}
 \vspace{0.2cm}
 \begin{itemize}
 \item \term{Proposed:} a continuation and authority contract for forkable search.
 \item \term{Implemented:} a reference evidence reducer and one named-snapshot worker trace.
-\item \term{Unmeasured:} a controlled end-to-end runtime speedup or general dependence model.
+\item \term{Unmeasured:} a controlled end-to-end cost advantage, communication benefit, or general dependence model.
 \end{itemize}
-\takeaway{The benefit is workload-dependent; the contract is the research object.}
-\note{The claim is deliberately conditional. If setup is cheap or state capture dominates, a fork may lose. If the prefix is expensive and alternatives share it, reuse may help. The paper's current artifact tests a reducer and exercises a four-worker named-snapshot path; it does not compare a completed runtime against equivalent cold or cached baselines. The rest of the talk asks what such a comparison must preserve.}
+\takeaway{The target is lower cost at equal verified quality, not more forks per second.}
+\note{The claim is deliberately falsifiable. Compare paths at equal task quality and trust contract; count capture, restore, communication, verification, inference, failures, and resource use. If setup is cheap or capture dominates, a fork may lose. The current artifact tests a reducer and exercises a four-worker named-snapshot path; it does not compare a completed runtime against equivalent cold or cached baselines. The rest of the talk defines the state, evidence, and authority contracts such a test must preserve.}
 \end{frame}
 
 % 05
@@ -485,27 +485,28 @@ $\rightarrow$
 \end{frame}
 
 % 22
-\begin{frame}[t]{The controller, runtime, and evaluator have different jobs}
-\lead{A proposed architecture makes the state path and the authority path visible.}
+\begin{frame}[t]{State, evidence, and authority follow different paths}
+\lead{The runtime should make continuation, communication, and promotion explicit.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm,
   box/.style={draw=Accent,rounded corners=2pt,line width=.8pt,fill=Pale,align=center,text width=3.0cm,minimum height=1.05cm,font=\small},
   arrow/.style={-{Latex[length=2mm]},line width=.8pt,draw=Accent}]
-\node[box] (controller) at (-4.1,0) {\textbf{Controller / epoch}\\objective, budget};
+\node[box] (controller) at (-4.1,0) {\textbf{Controller / epoch}\\objective, budget, branch policy};
 \node[box] (snapshot) at (0,0) {\textbf{Snapshot store}\\state $S_0$ and digest};
 \node[box] (workers) at (4.1,0) {\textbf{Sandbox workers}\\patch, build, run};
 \node[box] (gate) at (-4.1,-2.0) {\textbf{Promotion gate}\\one fenced acceptance};
-\node[box] (compare) at (0,-2.0) {\textbf{Compare / reduce}\\receipts and lineage};
+\node[box] (compare) at (0,-2.0) {\textbf{Evidence broker}\\receipts, IDs, lineage};
 \node[box] (evaluator) at (4.1,-2.0) {\textbf{Sealed evaluator}\\tests outside worker};
 \draw[arrow] (controller.east) -- (snapshot.west);
 \draw[arrow] (snapshot.east) -- (workers.west);
 \draw[arrow] (workers.south) -- (evaluator.north);
 \draw[arrow] (evaluator.west) -- (compare.east);
 \draw[arrow] (compare.west) -- (gate.east);
+\draw[arrow,dashed] (compare.north east) to[bend right=24] node[midway,above,font=\scriptsize,align=center]{policy-routed\\evidence only} (workers.south);
 \end{tikzpicture}
 \end{center}
-\takeaway{Exercised: snapshot $\rightarrow$ worker $\rightarrow$ reducer. Proposed: sealed evaluator and promotion gate.}
-\note{This diagram is a proposed composition, not a diagram of a fully deployed system. pstack inspires local search, OpenClaw illustrates an agent tool loop, and Airflow-style workflows illustrate durable orchestration. The runtime supplies isolation and continuation; an evaluator outside the worker scores artifacts; a controller owns campaign identity and promotion. The current paper exercises part of the lower path through a named-snapshot integration trace.}
+\takeaway{Share verified evidence through a broker; never share mutable state or authority by default.}
+\note{This diagram is a proposed architecture, not a deployed system. The solid path prepares a named state and runs isolated children. A sealed evaluator turns a candidate into a receipt. The evidence broker records lineage and overlap; a controller may route selected receipts or artifact deltas back to workers as messages. That communication path does not grant shared-memory access or promotion authority. The current paper exercises only the named-snapshot-to-worker-to-reducer portion.}
 \end{frame}
 
 % 23
@@ -514,12 +515,12 @@ $\rightarrow$
 \begin{enumerate}
 \item \code{checkpoint(prepared\_parser)} records a named state and parent digest.
 \item For each patch $\Delta_i$: \code{fork(snapshot, scoped\_lease)}, then apply, rebuild, and run it.
-\item \code{evaluate(artifact, verifier\_digest)} runs outside the child and seals a receipt.
-\item \code{select(receipts)} compares candidates; \code{reduce(results)} pools statistical evidence only when its assumptions hold.
-\item \code{promote(epoch, accepted\_receipt)} admits one result through a fenced gate.
+\item \code{evaluate(artifact, verifier\_digest)} runs outside the child and seals a receipt with evidence IDs, lineage, and cost.
+\item \code{route(receipt, recipient, policy)} shares permitted evidence or an artifact delta, never ambient child state.
+\item \code{select(receipts)} compares candidates; \code{reduce(results)} pools estimates only under stated assumptions; \code{promote} remains fenced.
 \end{enumerate}
-\takeaway{The restore--run--capture--reduce path has one integration trace; this full API is a research contract.}
-\note{This is API-shaped pseudocode, not a claim that every operation is implemented. The candidate patch must rebuild changed code, as slide 12 emphasized. A sealed evaluator must be outside the patchable worker. Candidate selection and statistical pooling are different operations: one picks a software artifact, while the other combines valid independent evidence about a common target. The paper exercises a named snapshot with four workers and a reducer; epoch-fenced promotion remains a proposed control-plane operation.}
+\takeaway{A branch returns an artifact and a receipt; a controller decides what evidence travels.}
+\note{This is API-shaped pseudocode, not a claim that every operation is implemented. The candidate patch must rebuild changed code. A sealed evaluator must be outside the patchable worker. The route operation is the communication primitive: it exposes declared, versioned evidence or artifact deltas under policy, not a sibling's writable process, credentials, or memory. Candidate selection and statistical pooling are different operations: one picks an artifact, while the other combines valid evidence about a common target.}
 \end{frame}
 
 % 24
@@ -542,8 +543,8 @@ keep, revert, or retry
 \item Record unsuccessful trials as well as accepted changes.
 \item Repeat when the score is noisy.
 \end{itemize}
-\takeaway{A cheap revert encourages exploration; it does not make one score reliable.}
-\note{This is the pstack-style local-search pattern: one change, one metric, complete revert on failure. Branching gives the candidate a fresh machine state. The outer controller still decides whether a change is useful and whether the evidence is sufficient.}
+\takeaway{Rollback keeps options open; repeated, lineage-aware tests address noisy scores.}
+\note{This is a local-search pattern: perturb a declared property, run from a known parent, and revert on failure. Stochastic branching models make offspring and extinction explicit; an AI factory adds a hard compute budget, adaptive selection, and a verifier. Randomness can generate useful alternatives, but it can also add variance. Choose the next trial for expected verified improvement or decision value per full cost, not novelty alone. Record failed attempts and adaptive selection so later uncertainty claims account for them.}
 \end{frame}
 
 % 25
@@ -556,10 +557,10 @@ isolated child $\rightarrow$ evaluate $\rightarrow$ update archive
 \end{center}
 \begin{itemize}
 \item The genotype may be code, a harness, a policy, or runtime configuration.
-\item Machine-state lineage and candidate-code lineage are different graphs.
+\item Track machine-state ancestry, artifact genealogy, communication, and candidate interactions separately.
 \item Preserve diversity when multiple ideas may be useful stepping stones.
 \end{itemize}
-\takeaway{Crossover recombines candidate representations; it does not merge live machines.}
+\takeaway{Crossover proposes a new candidate; it does not certify a descendant or merge live machines.}
 \sources{\href{https://arxiv.org/abs/2605.13874}{Jeddi et al., GEAR: Genetic AutoResearch for Agentic Code Evolution (2026)}.}
 \note{Genetic search offers a concrete model for automatic development: keep multiple candidates, vary them, evaluate, and preserve promising lineages. A runtime fork can supply an isolated execution context for each candidate. The candidate representation and the snapshot handle should be versioned separately. Crossover proposes a new candidate; it does not establish that parent changes compose. The composed candidate needs a fresh joint evaluation and receipt. This is a connection between search and systems, not a guarantee that evolution improves any particular task.}
 \end{frame}
@@ -577,8 +578,8 @@ Experiment & Change workload slice or parameter. & Measurement and uncertainty. 
 Runtime policy & Change fork point or cache scope. & Fidelity, cost, and leakage results. \\
 \bottomrule
 \end{tabularx}
-\takeaway{Keep the study objective versioned; log changes to the measurement protocol as proposals.}
-\note{This expands beyond code generation without pretending every scientific workflow is the same. A research agent may choose the next experiment; a coding agent may choose the next patch. The study-level objective and admission criteria stay versioned. If an experiment changes the measurement protocol, the protocol version travels with its result; comparisons must account for that change.}
+\takeaway{Search over code, hypotheses, and measurements; keep the evaluator outside the searcher's control.}
+\note{This expands beyond code generation without pretending every scientific workflow is the same. A research agent may choose the next experiment; a coding agent may choose the next patch. The study-level objective and admission criteria stay versioned. If an experiment changes the measurement protocol, the protocol version travels with its result; comparisons must account for that change. A promising research direction is to allocate branches by expected value of information under the total compute budget.}
 \end{frame}
 
 % 27
@@ -628,13 +629,13 @@ policy $\pi_{\theta'}$
 \begin{center}
 \Large RUN $\ne$ EVAL
 \end{center}
-\takeaway{Isolation protects the evaluator; task design determines whether its score is meaningful.}
+\takeaway{Evidence may travel; evaluator and promotion authority stay protected.}
 \sources{\href{https://arxiv.org/abs/2604.01476}{Wu et al., From Rebound to Remedy (2026)}.}
 \note{In the running parser case, a candidate may edit the parser but cannot rewrite the sealed regression suite that scores it. Reward hacking research gives examples of systems improving a score without improving intended behavior. I use Rebound to motivate evaluator separation, not as an RL result from my work. A protected evaluator can still be incomplete.}
 \end{frame}
 
 % 29
-\begin{frame}[t]{The same runtime shape supports different workloads}
+\begin{frame}[t]{The same runtime pattern meets different scientific oracles}
 \lead{The proposal, executable world, oracle, and scarce decision differ by domain.}
 \begin{tabularx}{\textwidth}{@{}L{2.0cm}YY@{}}
 \toprule
@@ -652,17 +653,17 @@ Biology & Model settings, sequences, and analysis pipelines. & Independent exper
 
 % 30
 \begin{frame}[t]{Computational biology makes the model boundary visible}
-\lead{In an actomyosin network model, local interaction rules can produce different large-scale structures.}
+\lead{Our actomyosin simulations and Arp2/3 biology illustrate different kinds of branching.}
 \begin{itemize}
-\item A computational branch can vary a parameter, initial condition, or model version.
-\item Outcomes can include connectivity, clustering, or predicted network morphology.
-\item A simulation score tests model consequences, not biology itself.
-\item Experiments are needed to validate whether the modeled mechanism fits biology.
+\item In our model, branches over parameters or initial states yield model-conditioned network morphologies.
+\item In cells, Arp2/3 nucleates daughter actin filaments from mother filaments at a characteristic angle near $70^\circ$.
+\item One in-vitro assay found only about $1.3\%$ of bound complexes produced daughter branches: attempts are not validated outcomes.
+\item Simulation scores test model consequences; external experiments test biological claims.
 \end{itemize}
 \vspace{0.2cm}
-\takeaway{Fork simulation state to explore model consequences; keep experimental claims tied to external validation.}
-\sources{\href{https://arxiv.org/abs/2006.06503}{Eliaz et al., arXiv:2006.06503 (2020)}.}
-\note{My earlier computational biology work studied actomyosin network morphology using graph representations and a computer model. It is a useful example of parameter and state exploration: one can branch a simulation, but not claim that the branch itself is a biological observation. The same boundary applies to other scientific computing and digital-twin workloads.}
+\takeaway{Nature branches through local mechanisms; computation branches through declared state and interventions.}
+\sources{\href{https://arxiv.org/abs/2006.06503}{Eliaz et al. (2020)}; \href{https://www.nature.com/articles/ncb0301_306}{Amann \& Pollard (2001)}; \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC3557048/}{Smith et al. (2013)}.}
+\note{My earlier computational biology work studied actomyosin network morphology using graph representations and a computer model. It motivates branching over model parameters and initial states, but a simulation outcome is not a biological observation. Arp2/3 is a separate physical example: it nucleates daughter filaments from mother filaments, with local biochemical regulation and stochastic outcomes. In one in-vitro assay, only about 1.3\% of bound complexes produced a daughter; this is assay-specific, not a universal biological rate. The runtime analogy is limited to parent-conditioned branching and measured outcomes. Do not claim that an actomyosin model implements Arp2/3 unless its equations actually do.}
 \end{frame}
 
 % 31
@@ -709,31 +710,35 @@ $\quad\longrightarrow\quad$
 r_k=
 (\hat{\theta}_k,\ J_k,\ n_k,\ \mathcal{E}_k,\ \mathcal{L}_k,\ m_k)
 \]
+\begin{center}
+\small Shannon MI, when estimable: $I(H;\mathcal{E}_k\mid\mathcal{E}_{<k})$ for a declared target and input distribution.
+\end{center}
 \begin{itemize}
-\item Estimate $\hat{\theta}_k$, information $J_k$, and sample count $n_k$.
+\item Estimate $\hat{\theta}_k$, Fisher information $J_k$, and sample count $n_k$.
 \item Evidence identifiers $\mathcal{E}_k$ and fork lineage $\mathcal{L}_k$.
 \item Execution metadata $m_k$: objective, model, task, verifier, and runtime versions.
 \end{itemize}
-\takeaway{The numeric summary and its provenance need different merge rules.}
+\takeaway{A message carries evidence and provenance; information gain depends on the declared question.}
 \sources{\href{https://arxiv.org/abs/2607.09689}{Eliaz, Evidence-Aware Reduction for Forkable Compute (2026)}.}
 \note{This worker record is the central artifact from my paper. It makes evidence identity and execution ancestry part of the reduction interface. It does not make those declarations self-authenticating; a production system must bind them to manifests or another trusted identity mechanism.}
 \end{frame}
 
 % 34
 \begin{frame}[t]{A reducer must state its statistical assumptions}
-\lead{For a common target and independent evidence, per-observation information can be pooled.}
+\lead{For a common target and independent evidence, Fisher information can be pooled under stated assumptions.}
 \[
 P_k=n_kJ_k,\qquad
 P=\sum_kP_k,\qquad
 \hat{\theta}=P^{-1}\sum_kP_k\hat{\theta}_k
 \]
 \begin{itemize}
-\item $J_k$ is calibrated per-observation information; $n_k$ is a literal sample count.
+\item $J_k$ is calibrated per-observation Fisher information; $n_k$ is a literal sample count.
 \item Reject exact overlap of non-empty evidence IDs; preserve lineage and selection history.
 \item Disjoint IDs do not remove latent dependence or bias from adaptive selection.
+\item Fisher information, Shannon mutual information, and verifier utility answer different questions.
 \item If dependence is unresolved, abstain from an added-precision claim.
 \end{itemize}
-\takeaway{The reference reducer implements this independent-evidence case; lineage alone does not supply covariance.}
+\takeaway{Lineage supports dependence analysis; it does not itself provide a covariance estimate.}
 \note{This is established Gaussian or Wald-style pooling under a common parameter, calibrated positive-definite precision, and independent disjoint evidence. The paper's asymptotic scope fixes parameter dimension and worker count while local sample sizes grow. Exact identifier overlap catches literal duplication. Adaptive selection may bias uncertainty even with disjoint data. The general dependence-aware reducer remains open.}
 \end{frame}
 
@@ -817,7 +822,7 @@ Forked fan-out & Branch from one reached parent. & Throughput, memory growth, an
 \bottomrule
 \end{tabularx}
 \vspace{0.12cm}
-\small Vary shared-prefix cost, branch write fraction, and fan-out. Check the declared observation-fidelity criterion; report task quality, CPU/GPU work, wall time, failures, and external effects.
+\small Vary prefix cost, write fraction, and fan-out. Ablate no sharing, a receipt archive, and selective evidence routing. Report verified quality, total resources, failures, and external effects.
 \takeaway{The outcome is useful task progress per total compute under the same correctness contract.}
 \note{This comparison has not yet been run. Use the parser campaign and a coding-RL episode, pin the harness and objective, and repeat across tasks and seeds. Vary how much setup is reusable, how much children write, and the number of branches. Measure the full lifecycle, including failed branches, evaluator cost, model inference, memory, and reset fidelity. The branch may lose; that result would refine the systems hypothesis.}
 \end{frame}
@@ -827,24 +832,24 @@ Forked fan-out & Branch from one reached parent. & Throughput, memory growth, an
 \lead{The unresolved problems connect operating systems, learning, and statistical evidence.}
 \begin{enumerate}
 \item \term{Continuation:} what is the minimal useful state across files, memory, GPU, sockets, and time?
-\item \term{Capabilities:} how can credentials be reminted at fork speed without leaking identity?
-\item \term{Dependence:} how should shared ancestry and adaptive selection affect a reducer?
-\item \term{Search/composition:} when should a controller fork, test combinations, use a learned model, or stop?
-\item \term{CoW channels:} which shared warmth creates a timing or residency side channel?
+\item \term{Communication:} which evidence should cross a branch boundary, and when does it change a decision?
+\item \term{Dependence:} how should ancestry, repeated data, and adaptive selection affect inference?
+\item \term{Search:} how should a controller allocate forks across exploration, replication, and composition?
+\item \term{Trust:} how can capabilities and shared caches be managed without leaking authority or state?
 \end{enumerate}
-\takeaway{The runtime and the search policy should be evaluated together.}
-\note{These are open systems questions rather than product promises. They make concrete projects for a systems group: define a continuation API, study capabilities across branches, and connect runtime lineage to valid uncertainty models.}
+\takeaway{The runtime, message policy, and search policy must be evaluated together.}
+\note{These are open systems questions rather than product promises. Define the minimal continuation state, secure capability reminting, and an evidence channel with measurable marginal value. Connect ancestry and adaptive selection to valid uncertainty models. A key experiment compares isolated search, broadcast evidence, and selective brokered communication at matched total compute.}
 \end{frame}
 
 % 40
-\begin{frame}[t]{Forks expose futures; they do not certify them}
-\lead{A useful runtime can make controlled continuations cheaper while keeping evidence and authority explicit.}
+\begin{frame}[t]{A fork creates a new execution, not an independent witness}
+\lead{Forks expose futures; lineage, evidence, and verification tell us what those futures establish.}
 \vspace{0.2cm}
 \begin{itemize}
 \item Capture and restore a declared executable state.
 \item Isolate branches and account for external effects.
 \item Keep evaluator identity and promotion authority outside the worker.
-\item Carry lineage so a reducer can state what its result assumes.
+\item Route evidence through declared channels; keep authority outside branches.
 \end{itemize}
 \vspace{0.25cm}
 \begin{block}{Questions for Cambridge}
@@ -852,7 +857,7 @@ Which state must a forkable machine preserve?\\
 How should a system infer dependence between branches?\\
 Where should warm state live so it does not become a channel?
 \end{block}
-\takeaway{Fork the machine. Keep the evidence. Promote through one explicit gate.}
-\note{The systems claim is narrow: a branchable runtime can make some search workloads cheaper when setup is reusable and continuation remains faithful. My evidence-aware reduction work addresses the next question: what a worker result must carry when execution fans out. The remaining challenge is the joint system that exposes state safely, measures cost honestly, and never mistakes execution count for evidence.}
+\takeaway{Make futures cheap. Keep ancestry visible. Route evidence. Verify before promotion.}
+\note{A branchable runtime may make some search workloads cheaper when setup is reusable and continuation remains faithful. It does not create independent evidence or guarantee a useful result. Workers need explicit lineage and evidence receipts; any composition needs a fresh evaluation; the controller alone promotes. The open research problem is to choose which futures to create and which evidence to route under a fixed compute budget.}
 \end{frame}
 \end{document}
