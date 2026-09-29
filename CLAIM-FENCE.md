@@ -1,43 +1,85 @@
-# Claim boundaries for the 40-slide Cambridge seminar
+# Claim boundaries for the Cambridge SRG seminar
 
-This document applies to the canonical `talk.tex`. Earlier notebooks and the separate 30-minute cut are historical material.
+This file applies to the canonical `talk.tex`: 27 main slides plus backups.
 
-## Definitions and proposed contract
+Each evidence slide carries one tag:
 
-An environment defines interaction semantics. A sandbox constrains an execution. A snapshot captures declared state. A fork creates a separately evolving continuation under supported restoration semantics.
+- **MEASURED**: in the speaker's own run records.
+- **BUILT**: implemented and unit-tested, or a synthetic check.
+- **PROPOSED**: a design that has not been run.
+- **PUBLISHED**: other people's work.
 
-The full runtime architecture, evidence-routing policy, promotion protocol, maintenance campaign, benchmark, and ablations are proposals. The fidelity expression specifies a task-dependent observational test; it is not a universal guarantee about a shipped runtime.
+The caveats are said once, on slide 3.
 
-The main performance hypothesis is lower total resources to a fixed quality target when useful preparation can be reused. Capture, restore, divergence, inference, failures, communication, evaluation, and external effects all belong in the comparison. The cost plot on slide 14 is an analytic illustration with declared hypothetical units.
+## Measured: runs SELFHOST-2 and SELFHOST-3, 27 Sep 2026
 
-## Reported implementation evidence
+Source: `zozo123/ariflow-swfactory`, `.factory/evidence/`.
 
-Source: Eliaz, arXiv:2607.09689, linked on slides 28–29 and 33–34.
+**Setup of both runs**
+- Both ran on Docker's sandbox (`toolset:SbxCommaPolicyBackend`), not on islo.
+- The harness answered the intent and plan gates. `approvals.json` records them as `"mode": "human"`, actor `admin`.
+- Leases were not exercised (`cell.json` `managed: false`).
+- Nothing forked. The work graph recorded `serial_fallback_missing_fork`.
 
-- The numerical reducer exercises the stated precision-weighted algebra, metadata, and exact evidence-overlap checks.
-- The unequal-size logistic comparison reports distance to centralized MLE across eight fixed seeds: information pooling 0.0083 ± 0.0042 versus equal coefficient average 0.177 ± 0.090. Error bars are standard deviations, not confidence intervals.
-- The integration example starts from a 141 MB named snapshot. Four concurrent restore–run–capture round trips take 6.70 s in total at the client-observed boundary. This is not per-worker restore latency or a speedup.
-- The trace's pooled mean is 4.9422 versus the seed-pinned full-sample mean 4.9450.
-- The precision-forgery stress motivates a trust problem. Its heuristic response provides no Byzantine-robustness theorem.
+**SELFHOST-2**
+- Repair 1 (`agent/fix.4.json`) had no shell tool and did not run the tests. It changed `src/swfactory/backend/service.py`, which is outside the plan.
+- Review 1 returned `request_changes` with a blocker. Repair 2 (`fix.5.json`) could not edit `tests/` (hook-protected) and refactored.
+- Review 2 returned `approve`, with the out-of-plan file still reported as "major".
+- All four steps used the same hosted model.
+- Final head: 1,972 tests, 0 failed. `cycle_s` 2557.5 (about 43 min). Total $10.33.
+- The speaker reverted the out-of-plan change by hand in PR #2351. **#2348–#2351 are open, not merged.**
 
-No new controlled runtime benchmark is claimed by this slide revision.
+**SELFHOST-3**
+- 1,981 tests passed first time, and review approved.
+- Delivery was refused three times with "files outside the reviewed commit stream". The stray file was the harness's own review-diff archive.
+- Teardown followed, and no PR was produced. Cost $3.43, cycle 853.8 s.
+
+**Other measured facts**
+- Repairs are recorded without a scope check: `work_stage.py`, the non-node branch.
+- The CI job `evals-islo` in Actions run 36423283572 passed in 3 s with its real step skipped.
+- The allowlist appears in five places (`demo/selfhost-2.md`).
+
+## Built
+
+- The evidence-aware reduction contract and reference reducer: Eliaz, arXiv:2607.09689.
+  - **Title:** the arXiv listing says "Evidence-Aware MapReduce for Forkable Compute". The v4 PDF's first line says "Evidence-Aware Reduction". Slides cite the paper by ID.
+- The trace:
+  - a named 141 MB snapshot and 4 concurrent restore–run–capture round trips, 6.70 s in total, measured by the client;
+  - pooled mean 4.9422 vs full-sample 4.9450.
+- Paper Table 2: islo p50 6.87 s, p95 9.04 s, 255 of 256 succeeded at concurrency 12. These are API round trips, not a mechanism latency or a vendor ranking.
+- The forged-precision result (17.0004 vs 4.9566) is a **synthetic** check. The heuristic is not a Byzantine guarantee.
+- The logistic check was not compared with sample-size weighting.
+
+## Proposed
+
+- The gateway authenticates the child, re-minted on restore.
+- A scope check in the repair loop.
+- An evaluator outside the cell.
+- Epoch-fenced promotion.
+- A controller-measured n.
+- Replay logs.
+- The redesigned SELFHOST-2 on slide 25.
+- The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
+
+## Published
+
+- Every system on slides 12–16 and in the backups is cited to its paper or docs.
+- DeltaBox: slide 12 quotes the abstract figures (14 ms / 5 ms), and slide 15 quotes the evaluation figures (10.83 ms / 1.86 ms).
+- Kimi K3 quotes are from §5.3.2 of its technical report.
 
 ## Statistical scope
 
-Precision pooling requires a common parameter, calibrated information, and independent evidence under the stated Gaussian or local Wald approximation. Disjoint evidence identifiers and distinct processes do not establish independent errors.
+- The variance floor assumes equal variances and a common pairwise correlation.
+- Lineage names the shared factors; it does not estimate their strength.
+- Precision pooling requires one common parameter, calibrated information and independent evidence.
+- On slide 22, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 
-The variance-floor formula assumes equal marginal variances and common pairwise correlation; the plotted curves are analytic examples. Positive covariance can improve paired differences under a valid coupling. Lineage alone is not a covariance estimator.
+## Do not say
 
-Shannon mutual information, Fisher information, verifier utility, and objective-score interactions are distinct quantities. The XOR example demonstrates information synergy. The patch equation measures objective non-additivity. Pairwise tests do not rule out higher-order effects.
+- That any self-authored PR was merged.
+- That a person answered the gates.
+- That the runs used islo.
+- That the factory forks today.
+- That fork is faster than a good build cache.
 
-## Biological and physical examples
-
-The biological work motivates attention to local rules and global network structure. It does not establish a branching threshold, optimization law, or performance theorem for agents. The biological diagram is a schematic.
-
-Chamo and Eliaz, ai.viXra:2608.0069, is a preprint. It reports verified continuation connecting apparent branches within a sampled periodic-orbit component. The two slide diagrams are conceptual schematics, not replotted numerical data. The result does not establish global topology of every orbit family, sandbox speedup, or autonomous discovery. Connectivity and dynamical stability are separate properties.
-
-## Applications and commitment
-
-Spark, OpenClaw, Airflow, and Linux are motivating maintenance settings, not validated deployments of this runtime. The Airflow-style campaign is explicitly proposed.
-
-A local restore does not rewind external services or physical experiments. Protecting evaluator writes does not eliminate adaptive overfitting through feedback. Composed changes require a new identified artifact and fresh joint validation. Current authority and fencing are required for commitment; workers do not inherit release or merge authority.
+Also, do not name the hosted model provider or endpoint on stage.

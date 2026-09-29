@@ -1,0 +1,12 @@
+talk.aux
+talk.log
+talk.nav
+talk.out
+talk.snm
+talk.toc
+talk.vrb
+talk.pdf
+talk-30min.*
+!talk-30min.tex
+build.log
+__pycache__/
