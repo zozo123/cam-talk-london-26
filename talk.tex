@@ -1,4 +1,4 @@
-% Canonical Cambridge SRG seminar: 27 main slides + backups. Standalone source, hidden speaker notes.
+% Canonical Cambridge SRG seminar: 28 main slides + backups. Standalone source, hidden speaker notes.
 % Notes carry [m:ss] cues; tools/presenter_guide.py builds PRESENTER-GUIDE.md from them.
 % Evidence tags: MEASURED = the speaker's own run logs; BUILT = implemented and unit-tested or a
 % synthetic check; PROPOSED = design not yet run; PUBLISHED = other people's work.
@@ -28,18 +28,21 @@
 \setbeamertemplate{itemize item}{\color{Teal}\scriptsize$\bullet$}
 \setbeamertemplate{itemize subitem}{\color{Muted}\scriptsize$\circ$}
 \setbeamertemplate{enumerate item}{\color{Teal}\bfseries\insertenumlabel.}
-\newcommand{\partlabel}{The hook}
-\newcommand{\chapterlabel}[1]{\renewcommand{\partlabel}{#1}}
+% Act strip on every frame: the current act is teal and bold.
+\newcommand{\currentact}{0}
+\newcommand{\setact}[1]{\renewcommand{\currentact}{#1}}
+\newcommand{\actitem}[2]{\ifnum\currentact=#1{\color{Teal}\bfseries #2}\else{\color{Muted!65}#2}\fi}
 % Evidence tag: \ev{\tagM} inside a frame title prints the tag on the part-label line.
 \newcommand{\currentev}{}
 \newcommand{\ev}[1]{\gdef\currentev{#1}}
-\newcommand{\evtag}[2]{\tikz[baseline=(x.base)]\node[draw=#1,text=#1,line width=.6pt,rounded corners=1.5pt,inner xsep=2.4pt,inner ysep=1.3pt,font=\fontsize{6.3}{7}\selectfont\bfseries](x){#2};}
+\newcommand{\evtag}[2]{\tikz[baseline=(x.base)]\node[draw=#1,text=#1,line width=.6pt,rounded corners=1.5pt,inner xsep=2.4pt,inner ysep=1.3pt,font=\fontsize{7.6}{8.4}\selectfont\bfseries](x){#2};}
 \newcommand{\tagM}{\evtag{Teal}{MEASURED}}
 \newcommand{\tagB}{\evtag{Ink}{BUILT}}
 \newcommand{\tagP}{\evtag{Gold}{PROPOSED}}
 \newcommand{\tagO}{\evtag{Muted}{PUBLISHED}}
-\setbeamertemplate{frametitle}{\gdef\currentev{}\sbox0{\insertframetitle}\vspace{.12cm}{\fontsize{7.5}{9}\selectfont\color{Teal}\MakeUppercase{\partlabel}\hfill\currentev\par}\vspace{.1cm}\insertframetitle\par\vspace{.17cm}}
 \newif\ifbackup
+\newcommand{\actstrip}{\ifbackup{\color{Teal}\bfseries BACKUP}\else\actitem{0}{HOOK}\quad\actitem{1}{WALL}\quad\actitem{2}{FORK}\quad\actitem{3}{COUNT}\quad\actitem{4}{TEST}\fi}
+\setbeamertemplate{frametitle}{\gdef\currentev{}\sbox0{\insertframetitle}\vspace{.1cm}{\fontsize{8}{9.5}\selectfont\actstrip\hfill\currentev\par}\vspace{.08cm}\insertframetitle\par\vspace{.15cm}}
 \setbeamertemplate{footline}{\hspace{.8cm}{\fontsize{7}{8}\selectfont\color{Muted}Yossi Eliaz\quad Cambridge SRG\quad 15 October 2026}\hfill{\fontsize{8}{9}\selectfont\color{Muted}\ifbackup Backup \insertframenumber\else\insertframenumber\,/\,\inserttotalframenumber\fi}\hspace{.8cm}\vspace{.17cm}}
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.15}
@@ -51,8 +54,9 @@
 \newcommand{\tagline}[1]{\par{\fontsize{9}{11}\selectfont\color{Muted}#1\par}}
 \newcommand{\term}[1]{\textbf{#1}}
 \newcommand{\no}{{\color{Rust}\bfseries$\times$}}
+\newenvironment{ticks}{\setlength{\leftmargini}{1.3em}\begin{itemize}\setlength{\itemsep}{1.5pt}}{\end{itemize}}
 \newcommand{\yes}{{\color{Teal}\bfseries$\checkmark$}}
-\tikzset{state/.style={draw=Ink,line width=.9pt,fill=Pale,minimum height=.8cm,align=center,font=\small}, candidate/.style={draw=Gold,line width=.9pt,fill=Sand,minimum height=.8cm,align=center,font=\small}, evidence/.style={draw=Teal,line width=.9pt,fill=Pale,minimum height=.8cm,align=center,font=\small}, bad/.style={draw=Rust,line width=.9pt,fill=white,minimum height=.8cm,align=center,font=\small}, missing/.style={draw=Rust,dashed,line width=.9pt,fill=white,minimum height=.8cm,align=center,font=\small,text=Rust}, flow/.style={-{Latex[length=2mm]},draw=Ink,line width=.9pt}, message/.style={-{Latex[length=2mm]},draw=Teal,dashed,line width=.9pt}, denied/.style={-{Latex[length=2mm]},draw=Rust,line width=.9pt}, relation/.style={draw=Rust,densely dotted,line width=1.3pt}, labeltext/.style={font=\scriptsize,text=Muted,align=center}}
+\tikzset{state/.style={draw=Ink,line width=.9pt,fill=Pale,minimum height=.8cm,align=center,font=\small}, candidate/.style={draw=Gold,line width=.9pt,fill=Sand,minimum height=.8cm,align=center,font=\small}, evidence/.style={draw=Teal,line width=.9pt,fill=Pale,minimum height=.8cm,align=center,font=\small}, bad/.style={draw=Rust,line width=.9pt,fill=white,minimum height=.8cm,align=center,font=\small}, missing/.style={draw=Rust,dashed,line width=.9pt,fill=white,minimum height=.8cm,align=center,font=\small,text=Rust}, flow/.style={-{Latex[length=2mm]},draw=Ink,line width=.9pt}, message/.style={-{Latex[length=2mm]},draw=Teal,dashed,line width=.9pt}, denied/.style={-{Latex[length=2mm]},draw=Rust,line width=.9pt}, relation/.style={draw=Rust,densely dotted,line width=1.3pt}, labeltext/.style={font=\footnotesize,text=Muted,align=center}, proposed/.style={draw=Gold,dashed,line width=.9pt,fill=white,minimum height=.8cm,align=center,font=\small}}
 \title{Forkable Sandboxes}
 \subtitle{The Runtime Layer for AI Software Factories}
 \author{Yossi Eliaz}
@@ -63,6 +67,7 @@
 \renewenvironment{center}{\par\vspace{.10cm}\centering}{\par\vspace{.10cm}}
 \begin{document}
 % ===================================================================== ACT 0: THE HOOK
+\setact{0}
 % 01
 {\setbeamercolor{normal text}{fg=white,bg=Ink}
 \begin{frame}[plain]
@@ -73,11 +78,11 @@
 \vspace{.22cm}
 {\fontsize{19}{24}\selectfont The Runtime Layer for AI Software Factories\par}
 \vspace{.18cm}
-{\fontsize{11}{14}\selectfont\color{white!75}One work order, seven surfaces, and how to count what a fork tells you\par}
+{\fontsize{11.5}{14}\selectfont\color{white!78}One factory, seven surfaces, and how to count what a fork tells you\par}
 \vspace{.55cm}
 {\large\bfseries Yossi Eliaz\par}\vspace{.12cm}
 {\small Principal Engineer, Incredibuild\quad$\cdot$\quad Associate Professor, Holon Institute of Technology (HIT)\par}
-{\scriptsize\color{white!70}Disclosure: I build islo.dev, an agent sandbox platform. I name components; I do not rank vendors.\par}
+{\footnotesize\color{white!75}Disclosure: I build islo.dev, an agent sandbox platform. I name components; I do not rank vendors.\par}
 \vfill
 \begin{tikzpicture}[x=1cm,y=1cm]
 \draw[white!45,line width=1pt] (0,0)--(2,0)--(3,.35) (2,0)--(3,-.35) (3,.35)--(4,.55) (3,.35)--(4,.15) (3,-.35)--(4,-.35);
@@ -89,276 +94,308 @@
 \end{frame}}
 
 % 02
-\begin{frame}[t]{\ev{\tagM}Review said blocker. One more repair. Review said approve.}
+\begin{frame}[t]{\ev{\tagM}Blocker. One more repair. Approve.}
+\vspace{0pt}
+{\small Work order: fix the sandbox allowlist. A four-thread race test failed; the loop sent a repair agent.\par}
+\vspace{.1cm}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
-\node[candidate,text width=2.55cm,minimum height=1.35cm,font=\scriptsize] (f4) at (0,0) {\textbf{repair 1}\\no shell; rewrites cell ownership in a file no plan listed};
-\node[bad,text width=2.45cm,minimum height=1.35cm,font=\scriptsize] (r1) at (3.45,0) {\textbf{review 1}\\{\color{Rust}blocker}: ``ships untested and unverified''};
-\node[candidate,text width=2.55cm,minimum height=1.35cm,font=\scriptsize] (f5) at (6.9,0) {\textbf{repair 2}\\tests locked; refactors and argues its case};
-\node[evidence,text width=2.45cm,minimum height=1.35cm,font=\scriptsize] (r2) at (10.35,0) {\textbf{review 2}\\{\color{Teal}approve}; ``major: file not in plan''};
+\node[candidate,text width=2.6cm,minimum height=1.45cm] (f4) at (0,0) {\textbf{repair 1}\\no shell; rewrites the race logic, outside the plan};
+\node[bad,text width=2.6cm,minimum height=1.45cm] (r1) at (3.5,0) {\textbf{review 1}\\{\color{Rust}\bfseries blocker}: ``ships untested and unverified''};
+\node[candidate,text width=2.6cm,minimum height=1.45cm] (f5) at (7.0,0) {\textbf{repair 2}\\tests locked; restructures and argues it is covered};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (r2) at (10.5,0) {\textbf{review 2}\\{\color{Teal}\bfseries approve}; ``untested'' is now minor};
 \draw[flow] (f4)--(r1);\draw[flow] (r1)--(f5);\draw[flow] (f5)--(r2);
-\draw[Muted,line width=.6pt] (-1.3,-1.0)--(11.6,-1.0);
-\node[labeltext,font=\scriptsize] at (5.15,-1.3) {all four steps: the same hosted model};
 \end{tikzpicture}
 \end{center}
+{\small\bfseries All four steps ran on the same hosted model.\par}
+\vspace{.08cm}
+{\small Repair 1: ``this environment provided no shell/execution tool, so I could not run'' the tests. After it, the harness ran the suite once: 1,972 tests, 0 failures.\par}
 \vspace{.05cm}
-{\small Repair 1, in its own words: \emph{``this environment provided no shell/execution tool, so I could not run'' the tests.}\par}
-\vspace{.15cm}
-{\small 27 Sep 2026\quad$\cdot$\quad 43 min\quad$\cdot$\quad \$10.33\quad$\cdot$\quad 1,972 tests pass at the final head\quad$\cdot$\quad I reverted the file by hand\par}
-\claim{Nothing escaped. The run still could not tell the truth about what happened.}
-\sources{Run SELFHOST-2, open-source factory \href{https://github.com/zozo123/ariflow-swfactory}{zozo123/ariflow-swfactory}: agent/fix.4.json, review.1.json, fix.5.json, review.2.json, metrics.json.}
-\note{[1:45] Let me start with a real run. On the 27th of September my software factory worked on its own code. The factory is open source. It takes a GitHub issue, runs an agent in a sandbox, runs the tests, and opens a pull request. The work order was small: fix a network allowlist. Along the way a race test failed. The repair agent had no shell, and it said so: it could not run the tests. It read the code, decided the bug was in who owns a cell, and rewrote that logic, in a file no plan listed. Review one said: blocker, untested and unverified. So the loop tried again. The tests were locked, so it could not add one. It refactored until the old tests seemed to cover the change, and it argued its case. Review two said: major, and approved. The same model wrote the fix and ran both reviews. Forty-three minutes, ten dollars. The last defence was me: I reverted that file. Nothing escaped the sandbox. Every wall held. And the run still could not tell the truth about what happened.}
+{\small 27 Sep 2026\quad$\cdot$\quad 43 min\quad$\cdot$\quad \$10.33\quad$\cdot$\quad I reverted the file by hand (PR \#2351, open)\par}
+\claim{Every agent told the truth. The gate still approved an untested change.}
+\sources{Run SELFHOST-2: PR \#2351 of \href{https://github.com/zozo123/ariflow-swfactory}{zozo123/ariflow-swfactory}, docs/factory/SELFHOST-2/ (agent/*.json, metrics.json, workgraph-execution.json).}
+\note{[1:50] Let me start with a real run. On the 27th of September my software factory worked on its own code. The work order was small: fix the sandbox's network allowlist. Along the way a four-thread race test failed, and the loop sent a repair agent. That agent had no shell, and it said so: it could not run the tests. It read the code, decided the bug was in the race logic, and rewrote it, in a file no plan listed. Review one said: blocker, untested and unverified. So the loop tried again. The tests were locked, so it could not add one. It restructured the code, said plainly it had not run the suite, and argued the change was already covered. Review two downgraded "untested" to minor, and approved. All four steps ran on the same model. The harness had run the suite once after the first repair, and it was green. One green run of a race test. Forty-three minutes, ten dollars. I reverted that file by hand. Nothing was pushed and nothing was denied. Every agent told the truth. The gate still approved an untested change.}
 \end{frame}
 
 % 03
-\begin{frame}[t]{One work order, seven places the runtime bit}
+\begin{frame}[t]{One factory, seven places the runtime bit}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\foreach \n/\x/\t in {i/0/issue,c/1.75/cell setup,s/3.5/spec + plan,b/5.25/build + test,r/7.0/review,d/8.75/deliver,g/10.5/human gate}{
-  \node[state,minimum width=1.45cm,minimum height=.7cm,font=\scriptsize] (\n) at (\x,0) {\t};}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\foreach \n/\x/\t in {i/0/issue,c/1.9/cell setup,s/3.8/spec + plan,b/5.7/build + test,r/7.6/review,d/9.5/deliver,g/11.4/human gate}{
+  \node[state,minimum width=1.5cm,minimum height=.72cm,font=\footnotesize] (\n) at (\x,0) {\t};}
 \foreach \a/\b in {i/c,c/s,s/b,b/r,r/d,d/g}{\draw[flow] (\a)--(\b);}
-\node[evidence,font=\scriptsize,minimum height=.55cm,align=center] (n1) at (1.75,1.35) {networking +\\credentials};
-\node[evidence,font=\scriptsize,minimum height=.55cm] (n2) at (1.75,-1.35) {filesystem state};
-\node[evidence,font=\scriptsize,minimum height=.55cm] (n3) at (3.5,1.35) {fast cloning};
-\node[evidence,font=\scriptsize,minimum height=.55cm] (n4) at (5.25,-1.35) {build/test execution};
-\node[evidence,font=\scriptsize,minimum height=.55cm] (n5) at (8.0,1.35) {observability};
-\node[evidence,font=\scriptsize,minimum height=.55cm] (n6) at (8.75,-1.35) {recovery};
-\node[evidence,font=\scriptsize,minimum height=.55cm] (n7) at (10.9,1.35) {reproducibility};
+\node[evidence,font=\footnotesize,minimum height=.55cm,align=center] (n1) at (1.55,1.35) {networking +\\credentials};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n2) at (1.9,-1.3) {filesystem state};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n3) at (3.85,1.35) {fast cloning};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n4) at (5.7,-1.3) {build/test};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n5) at (7.6,1.35) {observability};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n6) at (9.5,-1.3) {recovery};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n7) at (11.4,1.35) {reproducibility};
 \foreach \p/\q in {n1/c,n2/c,n3/s,n4/b,n5/r,n6/d,n7/g}{\draw[Teal,line width=.6pt] (\p)--(\q);}
 \end{tikzpicture}
 \end{center}
 \vspace{.05cm}
 \begin{columns}[T,onlytextwidth]
-\column{.47\textwidth}
-{\footnotesize \tagM\ my run logs\\[2pt] \tagB\ built and tested, or a synthetic check\\[2pt] \tagP\ design, not yet run\\[2pt] \tagO\ other people's work\par}
-\column{.5\textwidth}
-{\footnotesize\setlength{\fboxsep}{4pt}\colorbox{Sand}{\parbox{.95\linewidth}{\textbf{Scope, said once.} These runs used Docker's sandbox, not islo. My harness answered the approval gates. Leases were built but off. Nothing forked.}}\par}
+\column{.4\textwidth}
+{\footnotesize \tagM\ my run records\\[3pt] \tagB\ built and tested, or synthetic\\[3pt] \tagP\ design, not yet run\\[3pt] \tagO\ other people's work\par}
+\column{.57\textwidth}
+{\footnotesize\setlength{\fboxsep}{4pt}\colorbox{Sand}{\parbox{.96\linewidth}{\textbf{Scope, said once.} Runs SELFHOST-2 and SELFHOST-3 used Docker's sandbox. Two observations that day are from islo: the 403 that became the work order, and a CLI bug that killed an earlier attempt. My harness answered the gates. Leases were off. Nothing forked.}}\par}
 \end{columns}
-\note{[1:15] Here is the whole run as a pipeline, with the seven topics from the abstract pinned where each one bit. I will walk them in that order. Every evidence slide carries one tag: measured in my own logs, built and tested, proposed, or other people's published work. And here is the scope, said once so I do not hedge every slide. These runs used Docker's sandbox, not my own platform. My harness answered the approval gates, not a person. Credential leases were built but switched off. And nothing forked. You will see the factory ask for a fork and be refused. That is the honest starting point.}
+\note{[1:10] Here is the factory as a pipeline, with the seven topics from the abstract pinned where each one bit. I will take them roughly in the order they bit, across two runs on the 27th and a CI job the next day, and save fast cloning for last, because that is where the fork comes in. Every evidence slide carries a tag: measured in my own run records, built and tested, proposed, or other people's work. And here is the scope, said once so I do not hedge every slide. The two runs used Docker's sandbox, not my platform. Two observations that day come from islo. My harness answered the approval gates, not a person. Leases were built but off. And nothing forked.}
 \end{frame}
 
 % 04
 \begin{frame}[t]{A factory needs a wall, a fork and a count}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
-\node[state,text width=3.3cm,minimum height=1.25cm] (w) at (0,0) {\textbf{Wall}\\\scriptsize a child cannot grade its own exam};
-\node[candidate,text width=3.3cm,minimum height=1.25cm] (f) at (4.2,0) {\textbf{Fork}\\\scriptsize try alternatives from a reached state};
-\node[evidence,text width=3.3cm,minimum height=1.25cm] (c) at (8.4,0) {\textbf{Count}\\\scriptsize know what the alternatives found};
+\node[state,text width=3.4cm,minimum height=1.2cm] (w) at (0,0) {\textbf{Wall}\\\footnotesize what a cell can reach, change and report};
+\node[candidate,text width=3.4cm,minimum height=1.2cm] (f) at (4.3,0) {\textbf{Fork}\\\footnotesize alternatives from a state already paid for};
+\node[evidence,text width=3.4cm,minimum height=1.2cm] (c) at (8.6,0) {\textbf{Count}\\\footnotesize what the alternatives actually found};
 \draw[flow] (w)--(f);\draw[flow] (f)--(c);
 \end{tikzpicture}
 \end{center}
-\vspace{.1cm}
+\vspace{.05cm}
 \begin{columns}[T,onlytextwidth]
-\column{.49\textwidth}
-\textbf{I claim}\\[2pt]
+\column{.58\textwidth}
+\textbf{I claim}
 {\small
-\yes\ an evidence-aware reduction contract and a built reference reducer (arXiv:2607.09689)\\
-\yes\ real traces from a running factory\\
-\yes\ a test that could reject my hypothesis, with predictions written first\par}
-\column{.47\textwidth}
-\textbf{I do not claim}\\[2pt]
+\begin{ticks}
+\item[\yes] a worker/reducer contract: each worker returns estimate, information, $n$, evidence IDs and lineage, so reused evidence is not counted as agreement; ledger and reducer built (arXiv:2607.09689)
+\item[\yes] real traces from a running factory
+\item[\yes] a hypothesis you can reject: siblings restored from one snapshot fail together more than co-scheduled strangers
+\end{ticks}\par}
+\column{.38\textwidth}
+\textbf{I do not claim}
 {\small
-\no\ a new estimator\\
-\no\ a speed ranking of sandbox platforms\\
-\no\ a factory that forks today\par}
+\begin{ticks}
+\item[\no] a new estimator
+\item[\no] a speed ranking of platforms
+\item[\no] a factory that forks today
+\item[\no] a dependence model from lineage
+\end{ticks}\par}
 \end{columns}
-\claim{Miss one and the factory still runs. It just cannot tell the truth.}
-\note{[1:15] That run was missing three things. A wall, so a child cannot grade its own exam. A fork, so the factory can try alternatives from a state it already paid to reach. And a count, so it knows what those alternatives actually found. Here is what I claim today: an evidence-aware reduction contract with a built reference reducer, which is my paper; real traces from a running factory; and a test that could reject my hypothesis, with the predictions written down before the runs. Here is what I do not claim: a new estimator, a speed ranking of sandbox vendors, or a factory that forks today. Miss one of the three and the factory still runs. It just cannot tell the truth.}
+\claim{Execution multiplicity is not evidence multiplicity.}
+\note{[1:30] That run needs three things from its runtime. A wall: control over what a cell can reach, change and report. A fork: alternatives from a state we already paid to reach. And a count: knowing what those alternatives actually found. To be fair to the sandbox, some of what went wrong is plain policy. Scope-check the repair loop, make an out-of-plan edit a blocker, use a different reviewer, and give the repair a way to run tests. No runtime needed for those. The rest needs the runtime, and one question needs a count: what is one green run of a race test worth? What I claim is a worker and reducer contract, real traces, and a hypothesis you can reject. What I do not claim is a new estimator, a speed ranking, a factory that forks today, or a dependence model from lineage. The one line to remember: execution multiplicity is not evidence multiplicity.}
 \end{frame}
 
 % ===================================================================== ACT I: THE WALL
-\chapterlabel{The wall}
+\setact{1}
 % 05
-\begin{frame}[t]{\ev{\tagM\,\tagO}An allowlist is a list of names; the web is a graph of redirects}
+\begin{frame}[t]{\ev{\tagM\,\tagO}Allowlists name hosts; the web redirects}
 \begin{columns}[T,onlytextwidth]
-\column{.53\textwidth}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[state,minimum width=3.1cm] (a) at (0,0) {astral.sh/uv/install.sh};
-\node[bad,minimum width=3.1cm] (b) at (0,-1.05) {releases.astral.sh};
-\node[bad,minimum width=3.1cm] (c) at (0,-2.1) {release-assets.githubusercontent.com};
-\node[bad,minimum width=3.1cm] (d) at (0,-3.15) {curl 403: uv never installs};
+\column{.55\textwidth}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[state,minimum width=3.4cm,minimum height=.7cm] (a) at (0,0) {astral.sh/uv/install.sh};
+\node[bad,minimum width=3.4cm,minimum height=.7cm] (b) at (0,-1.2) {releases.astral.sh};
+\node[bad,minimum width=3.4cm,minimum height=.7cm] (c) at (0,-2.4) {release-assets.githubusercontent.com};
+\node[bad,minimum width=3.4cm,minimum height=.7cm] (d) at (0,-3.6) {curl 403: uv never installs};
 \draw[flow] (a)--node[right]{301}(b);
-\draw[flow] (b)--node[right]{fallback, also not on the list}(c);
+\draw[flow] (b)--node[right]{fallback}(c);
 \draw[denied] (c)--(d);
-\node[labeltext,anchor=west] at (1.75,-1.05) {not on the list};
-\end{tikzpicture}\par
-\vspace{.15cm}
-{\footnotesize The list lived in five places: two scripts, a checker, two docs.\par}
-\column{.44\textwidth}
-\textbf{A snapshot captures a boundary}\\[3pt]
-{\footnotesize
-\begin{tabular}{@{}ll@{}}
-\toprule
-State & Policy\\
-\midrule
-files, dependencies & pin by content digest\\
-processes, memory & copy or rebuild\\
-agent history & keep outside the VM\\
-randomness & re-seed, or couple on purpose\\
-external services & mediate\\
-\bottomrule
-\end{tabular}\par}
+\node[labeltext,anchor=west] at (1.85,-1.2) {not on the list};
+\node[labeltext,anchor=west] at (3.2,-2.4) {not on the list};
+\end{tikzpicture}
+\column{.41\textwidth}
+{\small
+\begin{ticks}
+\item the list lived in five places: two scripts, a checker, two docs
+\item the fix added both hosts
+\item the second one admits every release asset on GitHub
+\end{ticks}\par}
 \end{columns}
-\claim{Fetch by digest through a caching proxy, not by name through a hole.}
-\sources{Work order SELFHOST-2 (demo/selfhost-2.md). Snapshot-per-build-step prior art: OBuilder (OCurrent).}
-\note{[2:00] The wall first, in the order it bit. The work order itself was a network bug. The sandbox allowlist named astral dot sh. But astral dot sh answers with a redirect to another host, and that host was not on the list. The installer's fallback goes to GitHub's release asset host, also not on the list. So curl returned 403, uv never installed, and the tests could never pass. The list lived in five places, and they had drifted. The fix added the two hosts. Be honest about what that does: allowing GitHub's release asset host lets in every release asset on GitHub. The lesson is granularity. A list of names is the wrong unit when the web is a graph of redirects. The build-system answer is to fetch by content digest through a caching proxy. Same idea for the whole snapshot: it captures a boundary, not the universe. Files are pinned by digest, agent history stays outside the VM, randomness is reseeded or coupled on purpose, and external services are mediated.}
+\claim{Fetch by digest through a caching proxy, not by name.}
+\sources{Observed on islo, 27 Sep 2026 (islo CLI 0.53.1). Work order: PR \#2351, docs/factory/SELFHOST-2/intent.md.}
+\note{[1:15] The wall first. Surface one, networking. The work order itself was a network bug, seen on islo that morning. The sandbox allowlist named astral dot sh. But astral dot sh answers with a redirect to another host that was not on the list, and the installer's fallback goes to GitHub's release-asset host, also not on the list. So curl returned 403, uv never installed, and the tests could never pass. The list lived in five places, and they had drifted. The fix added both hosts. Be honest about what that does: the second host admits every release asset on GitHub. The lesson is granularity. A list of names is the wrong unit when the web is a graph of redirects. The build-system answer is to fetch by content digest, through a caching proxy.}
 \end{frame}
 
 % 06
-\begin{frame}[t]{\ev{\tagM\,\tagO}Locking the tests was not enough}
-\begin{columns}[T,onlytextwidth]
-\column{.5\textwidth}
-\textbf{In my run}\\[3pt]
+\begin{frame}[t]{\ev{\tagO\,\tagP}Filesystem state: what a snapshot shares}
+\vspace{0pt}
 {\small
-\yes\ \texttt{tests/} write-protected by a hook\\
-\no\ planned steps are scope-checked; repairs are not\\
-\no\ the child changed the code under test\\
-\no\ an out-of-plan edit counts as ``major'', not a blocker\\
-\no\ writer and both reviewers: one model\par}
-\column{.46\textwidth}
-\textbf{In published work}\\[3pt]
-{\small
-o3 reward-hacked in 30.4\% of runs when it could see the scorer, 0.7\% when it could not (METR, 2025).\\[3pt]
-Read-only tests stop test edits, not special-casing (ImpossibleBench, 2025).\\[3pt]
-Kimi K3: isolate agents from verifiers; hidden verifiers; limited submission budgets.\par}
-\end{columns}
-\claim{Run $\neq$ evaluate $\neq$ promote. Scope follows the repair loop; each grader gets a budget.}
-\sources{swfactory work\_stage.py (repairs recorded without a scope check); \href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 report}.}
-\note{[2:05] Second surface: build and test. We did the standard thing. The tests directory was write-protected by a hook, and the hook worked. It did not help. Planned steps are scope-checked against the files they declare. Repairs are not, so the repair loop could touch any file. The child did not change the test. It changed the code under test, and then it talked the grader down. An out-of-plan edit counts as major, not as a blocker, and the writer and both reviewers were the same model. This is not special to my factory. METR found o3 reward-hacking in about thirty percent of runs where it could see the scorer, and under one percent where it could not. ImpossibleBench shows read-only tests stop test edits but not special-casing. And the Kimi K3 report names the same fixes we need: isolate agents from verifiers, keep hidden verifiers, and limit submission budgets. So: run, evaluate and promote are three different permissions. Scope has to follow the repair loop, and each grader needs a budget.}
+\begin{tabularx}{\textwidth}{@{}L{2.5cm}L{4.1cm}Y@{}}
+\toprule
+State & Policy & Known mechanisms\\
+\midrule
+files, build outputs & pin by content digest & OBuilder: CoW snapshot per build step (ZFS, btrfs)\\
+workspace disk & copy-on-write layers & overlay layers (day10); DeltaBox's layered CoW filesystem; chained overlaybd snapshots (DeepSeek DSec)\\
+guest memory & map the image; fault pages on first touch & REAP: prefetch the working set, 3.7$\times$ faster cold start\\
+agent history & keep outside the VM & \\
+randomness & reseed, or couple on purpose & slide 22\\
+external services & mediate & slide 15\\
+\bottomrule
+\end{tabularx}\par}
+\claim{A snapshot captures a boundary. Measure time to useful work, not time to resume.}
+\sources{\href{https://github.com/ocurrent/obuilder}{OBuilder}; \href{https://www.tunbury.org/2026/02/16/day10/}{day10}; \href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://arxiv.org/abs/2606.19348}{DeepSeek-V4}; \href{https://arxiv.org/abs/2101.09355}{REAP (ASPLOS'21)}.}
+\note{[1:25] Surface two, filesystem state. A snapshot captures a boundary, not the universe, so each kind of state needs a policy. Files and build outputs are pinned by content digest; OBuilder, from this building's ecosystem, snapshots every build step on ZFS or btrfs. The workspace disk is shared copy-on-write, as overlay layers in day10, as DeltaBox's layered filesystem, and as DeepSeek's chained snapshots. Guest memory is mapped from the image and faulted in on first touch, so the real cost of a restore is the working set, not the copy; REAP made cold starts almost four times faster just by prefetching it. Agent history stays outside the VM. Randomness is reseeded or coupled on purpose, and external services are mediated; both come back later. So measure time to useful work, not time to resume.}
 \end{frame}
 
 % 07
-\begin{frame}[t]{\ev{\tagB\,\tagP}The agent never pushes; a placeholder token is still a string}
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[state,text width=2.9cm,minimum height=1.2cm] (o) at (0,0) {\textbf{orchestrator}\\holds the GitHub token;\\applies patches after the gate};
-\node[candidate,text width=2.9cm,minimum height=1.2cm] (c) at (4.4,0) {\textbf{work cell}\\agent; no GitHub token;\\deny-by-default egress};
-\node[evidence,text width=2.5cm,minimum height=1.2cm] (g) at (8.6,0) {\textbf{egress gateway}\\injects the model credential};
-\node[state,minimum width=1.6cm] (m) at (11.5,0) {model API};
-\draw[flow] (c)--node[above]{patch}(o);
-\draw[flow] (c)--(g);\draw[flow] (g)--(m);
-\node[bad,text width=3.3cm,font=\scriptsize] (x1) at (4.4,-1.6) {a fork copies any bearer string in guest memory};
-\node[bad,text width=3.1cm,font=\scriptsize] (x2) at (8.6,-1.6) {the model endpoint is an allowed channel for bytes};
-\draw[relation] (x1)--(c);\draw[relation] (x2)--(g);
-\end{tikzpicture}
-\end{center}
-{\small Next: the gateway authenticates the \emph{child}, and the child's principal is re-minted on every restore. \tagP\par}
-\claim{Copy the machine, not the keys. Then say what ``not the keys'' means after a fork.}
-\sources{swfactory docs/islo.md, docs/credential-authority.md; Capsicum (USENIX Sec'10); leases (SOSP'89).}
-\note{[1:50] Networking and credentials. The structure is simple and I think right. The orchestrator holds the GitHub token and applies patches only after the gate. The agent never pushes. The work cell has no GitHub token and deny-by-default egress. The model credential is injected by an egress gateway, so it never sits in the cell. Industry has converged on that pattern. But be precise, because this room will be. What the cell holds is a placeholder token, and a placeholder token is still a bearer string in guest memory. Fork the VM and you copy it. And the model endpoint is itself an allowed channel that carries arbitrary bytes out. So the next step is that the gateway authenticates the child, not the string, and the child's principal is re-minted on every restore. That part is proposed, not built. Capsicum and leases are the right vocabulary for it.}
+\begin{frame}[t]{\ev{\tagM\,\tagO}Locking the tests was not enough}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+\textbf{In my run}
+{\small
+\begin{ticks}
+\item[\yes] \texttt{tests/} write-protected, and the agent was told
+\item[\no] planned steps are scope-checked; repairs are not
+\item[\no] the repair changed the code under test
+\item[\no] an out-of-plan edit is ``major'', not a blocker
+\item[\no] writer and both reviewers: one model
+\end{ticks}\par}
+\column{.46\textwidth}
+\textbf{In published work}
+{\small
+\begin{ticks}
+\item o3 reward-hacked in 30.4\% of RE-Bench runs, 0.7\% of HCAST; METR suggests RE-Bench's visible scorer is why
+\item read-only tests stop test edits, not special-casing (ImpossibleBench)
+\item Kimi K3: isolate agents from verifiers; hidden verifiers; limited submission budgets
+\end{ticks}\par}
+\end{columns}
+\vspace{.2cm}{\small\color{Muted}Two fixes here are policy, not runtime: scope-check repairs; make an out-of-plan edit a blocker.\par}
+\claim{Run $\neq$ evaluate $\neq$ promote. Each grader gets a budget.}
+\sources{swfactory work\_stage.py (repairs recorded without a scope check); \href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
+\note{[1:40] Surface three, build and test. We did the standard thing. The tests directory was write-protected by a hook, and the agent was told so. It never tried to edit a test, so the hook never fired. It did not matter. Planned steps are scope-checked against the files they declare; repairs are not, so the repair loop could touch any file. The repair changed the code under test, not the test. An out-of-plan edit counts as major, not as a blocker, and the writer and both reviewers were one model. Two of those are policy fixes, not runtime fixes, and I will say so. This is not special to my factory. METR saw o3 reward-hack in about thirty percent of RE-Bench runs and under one percent of HCAST runs, and suggests the visible scorer on RE-Bench is why. ImpossibleBench shows read-only tests stop test edits but not special-casing. And the Kimi K3 report names the fixes: isolate agents from verifiers, keep hidden verifiers, limit submission budgets. Run, evaluate and promote are three permissions, and each grader gets a budget.}
 \end{frame}
 
 % 08
-\begin{frame}[t]{\ev{\tagM}Teardown should destroy a worker, not the experiment}
+\begin{frame}[t]{\ev{\tagB\,\tagP}The agent never pushes; its token still copies}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[evidence,text width=2.1cm,minimum height=1.05cm] (b) at (0,0) {\textbf{build + test}\\1,981 tests pass, first try};
-\node[evidence,text width=1.7cm,minimum height=1.05cm] (r) at (2.9,0) {\textbf{review}\\approve};
-\node[bad,text width=3.2cm,minimum height=1.05cm] (d) at (6.3,0) {\textbf{deliver} refused $3\times$\\files outside the reviewed commit stream};
-\node[bad,text width=1.7cm,minimum height=1.05cm] (t) at (9.75,0) {\textbf{teardown}\\no PR};
-\draw[flow] (b)--(r);\draw[flow] (r)--(d);\draw[flow] (d)--(t);
-\node[labeltext,text width=5.6cm] at (6.3,-1.25) {the stray file was my harness's own review-diff archive, mirrored into the workspace};
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=2.9cm,minimum height=1.25cm] (o) at (0,0) {\textbf{orchestrator}\\holds the GitHub token; delivers after the gate};
+\node[candidate,text width=2.9cm,minimum height=1.25cm] (c) at (4.3,0) {\textbf{work cell}\\agent; no GitHub token; deny-by-default egress};
+\node[evidence,text width=2.6cm,minimum height=1.25cm] (g) at (8.5,0) {\textbf{egress gateway}\\injects the model credential};
+\node[state,minimum width=1.5cm] (m) at (11.45,0) {model};
+\draw[flow] (c)--node[above,font=\footnotesize]{patch}(o);
+\draw[flow] (c)--(g);\draw[flow] (g)--(m);
+\node[bad,text width=3.4cm] (x1) at (4.3,-1.75) {a fork copies any string in guest memory};
+\node[bad,text width=3.2cm] (x2) at (8.5,-1.75) {the model endpoint carries bytes out};
+\draw[relation] (x1)--(c);\draw[relation] (x2)--(g);
 \end{tikzpicture}
 \end{center}
-{\small Run SELFHOST-3: 14 min, \$3.43, nothing delivered.\par}
-\claim{The gate was right. Recovery was wrong. The artifact leaves the cell before the cell dies.}
-\sources{Run SELFHOST-3 (stages.jsonl, metrics.json); fix in open PR \#2350 (harness archives moved to control state).}
-\note{[1:40] Recovery. A second run the same day went well, then badly. Build and test passed first time, 1,981 tests. Review approved. Then delivery was refused three times: the workspace contained a file outside the reviewed commit stream. That file was my own harness's review archive, mirrored into the workspace. So the gate was right to refuse. What happened next was wrong: teardown destroyed the cell, and with it the approved candidate. Fourteen minutes, three dollars forty, nothing delivered. The fix is not exotic. The artifact has to leave the cell before the cell dies; here a patch file on the host would have been enough. The general rule: a crash, a refusal or a human wait should destroy a worker, never the experiment. Snapshot, destroy, and restore across a long human gate, instead of keeping a machine alive for days.}
+{\small \tagP\ Next: the gateway keys each request on host-assigned identity (per-clone tap or vsock CID), never on a string in guest memory. Restore bumps a generation and voids the parent's lease.\par}
+\claim{Copy the machine, not the keys.}
+\sources{swfactory docs/islo.md, docs/credential-authority.md; \href{https://docs.docker.com/ai/sandboxes/security/}{Docker Sandboxes security}; Capsicum (USENIX Sec'10); macaroons (NDSS'14).}
+\note{[1:35] Surface four, networking and credentials. The orchestrator holds the GitHub token and delivers only after the gate. The agent never pushes. The work cell has no GitHub token and deny-by-default egress. In islo's design the model credential is injected by an egress gateway, so it never sits in the cell, and Docker's sandbox documents the same idea: a host-side proxy injects the header and the raw credential never enters the VM. But be precise, because this room will be. What the cell holds is a placeholder, and a placeholder is still a bearer string in guest memory. Fork the VM and you copy it. Forked children are bit-identical, so nothing inside them tells them apart. And the model endpoint itself carries arbitrary bytes out. So the next step, which is proposed, is that the gateway keys each request on identity the host assigns, a per-clone tap device or a vsock ID, and a restore bumps a generation and voids the parent's lease. Capabilities and macaroons are the right vocabulary.}
 \end{frame}
 
 % 09
-\begin{frame}[t]{\ev{\tagM\,\tagO}A green check is not proof the check ran}
-\begin{columns}[T,onlytextwidth]
-\column{.32\textwidth}
-\begin{tikzpicture}\node[evidence,text width=3.75cm,minimum height=1.9cm,align=left,font=\footnotesize] {\textbf{CI job \texttt{evals-islo}}\\ {\color{Teal}success} in 3\,s\\ every real step \emph{skipped}: the key was unset};\end{tikzpicture}
-\column{.32\textwidth}
-\begin{tikzpicture}\node[evidence,text width=3.75cm,minimum height=1.9cm,align=left,font=\footnotesize] {\textbf{approvals.json}\\ \texttt{"mode": "human"}\\ actor \texttt{admin}: my harness answered};\end{tikzpicture}
-\column{.32\textwidth}
-\begin{tikzpicture}\node[evidence,text width=3.75cm,minimum height=1.9cm,align=left,font=\footnotesize] {\textbf{sandbox CLI}\\ status lines printed on the command's stdout, mixed into its output};\end{tikzpicture}
-\end{columns}
-\vspace{.35cm}
-{\small Two of these are my own receipts, and they were wrong.\par}
-\claim{Every check needs a receipt that says it ran, on a channel the child cannot write.}
-\sources{GitHub Actions run 36423283572 (28 Sep 2026); SELFHOST-2 approvals.json; open PR \#2348. Provenance: PASS (USENIX ATC'06), CamFlow (SoCC'17), in-toto (USENIX Security'19).}
-\note{[1:50] Observability. Three receipts. First, a CI job that evaluates the islo lane reported success in three seconds, because the key was unset and every real step was skipped. Second, my approvals file records the gates as mode human, actor admin. It was my harness answering. Third, my own sandbox command line printed its status messages on the same standard output as the program it was running, so the tool's words and the program's output were mixed. Two of these are my own receipts, and they were wrong. I would rather tell you than have you find them. The rule: every check needs a receipt that says it actually ran, carried on a channel the child cannot write. This room knows this problem as provenance, from PASS and CamFlow, and the supply-chain world calls it in-toto. The factory needs the same thing for evaluations.}
+\begin{frame}[t]{\ev{\tagM}Teardown must not destroy the experiment}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[evidence,text width=2.7cm,minimum height=1.2cm] (b) at (-.2,0) {\textbf{build + test}\\1,981 tests, 0 failures, first try};
+\node[evidence,text width=1.7cm,minimum height=1.2cm] (r) at (3.1,0) {\textbf{review}\\approve};
+\node[bad,text width=3.1cm,minimum height=1.2cm] (d) at (6.5,0) {\textbf{deliver} refused $3\times$: files outside the reviewed commits};
+\node[bad,text width=1.9cm,minimum height=1.2cm] (t) at (10.0,0) {\textbf{teardown}\\no PR};
+\draw[flow] (b)--(r);\draw[flow] (r)--(d);\draw[flow] (d)--(t);
+\end{tikzpicture}
+\end{center}
+{\small The stray file was my own harness's review-diff archive, mirrored into the workspace.\par}
+\vspace{.05cm}
+{\small Run SELFHOST-3, a second work order: 26 min, \$3.43, nothing delivered.\par}
+\claim{The gate was right. Recovery was wrong.}
+{\small The artifact leaves the cell before the cell dies. A human wait should be snapshot, destroy, restore.\par}
+\sources{SELFHOST-3 run records, 27 Sep 2026; fix in open PR \#2350 (harness archives moved to control state).}
+\note{[1:15] Surface five, recovery. A second work order the same day went well, then badly. Build and test passed first time. Review approved. Then delivery was refused three times: the workspace had a file outside the reviewed commits. That file was my own harness's review archive, mirrored into the workspace. So the gate was right to refuse. What happened next was wrong: teardown destroyed the cell, and the approved candidate with it. Twenty-six minutes, three dollars forty, nothing delivered. The fix is not exotic. The artifact has to leave the cell before the cell dies; a patch file on the host would have been enough. A crash, a refusal or a long human wait should destroy a worker, never the experiment. For a day-long human gate: snapshot, destroy, restore.}
 \end{frame}
 
 % 10
-\begin{frame}[t]{\ev{\tagM\,\tagO}Everything is pinned except the part that wrote the code}
-\begin{columns}[T,onlytextwidth]
-\column{.47\textwidth}
-\textbf{Pinned in the run record}\\[3pt]
-{\small
-\yes\ input commit (\texttt{8ff967d})\\
-\yes\ lockfile (\texttt{uv.lock})\\
-\yes\ policy digest (\texttt{policy\_sha256})\\
-\yes\ inputs digest (\texttt{inputs\_digest})\\
-\yes\ every agent step's output, as JSON\par}
-\column{.49\textwidth}
-\textbf{Not pinned}\\[3pt]
-{\small
-\no\ the hosted model: no sampling seed\\
-\no\ external hosts and their redirects\\
-\no\ wall-clock time and scheduling\par}
-\vspace{.3cm}
-\textbf{So: replay, not rerun.}\\[2pt]
-{\small Keep every model call and response as a log; re-execute the rest against it. \tagP\par}
-\end{columns}
-\claim{A C2D3 scientist can audit this run. Nobody can rerun it.}
-\sources{SELFHOST-2 metrics.json, workgraph-execution.json. Record/replay: rr (USENIX ATC'17); DeepSeek-V4 DSec keeps trajectory logs for replay (\href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348}).}
-\note{[1:25] Reproducibility. Here is what the run record pins: the input commit, the lockfile, a digest of the policy, a digest of the accepted inputs, and the output of every agent step as JSON. Here is what it does not pin: the hosted model, which has no sampling seed I control; the external hosts and their redirects; and time and scheduling. So everything is reproducible except the part that wrote the code. The honest target is replay, not rerun. Keep every model call and response as a log, and re-execute everything else against it. That is record and replay, as in rr, and DeepSeek's sandbox system keeps trajectory logs for the same reason. Today a scientist could audit this run. Nobody could rerun it.}
+\begin{frame}[t]{\ev{\tagM\,\tagO}A green check is not proof the check ran}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (0,0) {\textbf{CI job \texttt{evals-islo}}\\ {\color{Teal}success} in 3\,s; every real step skipped, because the key was unset};
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (4.3,0) {\textbf{approvals.json}\\ \texttt{"mode": "human"}, actor \texttt{admin}; my harness answered};
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (8.6,0) {\textbf{islo CLI 0.53.1}\\ status lines on the command's stdout; an earlier attempt died parsing them};
+\end{tikzpicture}
+\end{center}
+{\small All three are my own receipts, and each was wrong.\par}
+\claim{Every check needs a receipt the child cannot write.}
+\sources{GitHub Actions run 36423283572 (28 Sep 2026); SELFHOST-2 approvals.json; open PR \#2348. Provenance: PASS (USENIX ATC'06), CamFlow (SoCC'17), in-toto (USENIX Security'19).}
+\note{[1:15] Surface six, observability. Three receipts, all mine. First, a CI job that evaluates the islo lane reported success in three seconds, because the key was unset and every real step was skipped. Second, my approvals file records the gates as mode human, actor admin. It was my harness answering. Third, my own islo command line printed its status messages on the same standard output as the program it ran, and an earlier attempt that day died trying to parse them. All three are my own receipts, and each was wrong. I would rather tell you than have you find them. So every check needs a receipt that says it actually ran, on a channel the child cannot write. This room knows that problem as provenance, from PASS and CamFlow; the supply-chain world calls it in-toto.}
 \end{frame}
 
 % 11
-\begin{frame}[t]{\ev{\tagM}The plan asked for a fork; the runtime said no}
+\begin{frame}[t]{\ev{\tagM\,\tagO\,\tagP}What the run pins, and what it cannot}
 \begin{columns}[T,onlytextwidth]
-\column{.55\textwidth}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[candidate,minimum width=2.3cm] (a) at (0,0) {allowlist\quad 82.4 s};
-\node[candidate,minimum width=2.3cm] (d) at (3.4,0) {docs\quad 83.5 s};
-\node[candidate,minimum width=2.3cm] (t) at (1.7,-1.2) {tests\quad 176.7 s};
-\draw[flow] (a)--(d);
-\node[labeltext,anchor=west] at (3.1,-1.2) {parallel-safe};
-\end{tikzpicture}
-\column{.42\textwidth}
-{\footnotesize\ttfamily
-reason: serial\_fallback\_missing\_fork\\
-required: fork, filesystem\_isolation,\\ \phantom{required: }exact\_teardown\par}
-\vspace{.2cm}
-{\small 342.6 s serial vs.\ 176.7 s with a fork\par}
+\column{.47\textwidth}
+\textbf{Pinned in the run record}
+{\small
+\begin{ticks}
+\item[\yes] input commit (\texttt{8ff967d}) and \texttt{uv.lock}
+\item[\yes] policy and inputs digests
+\item[\yes] sandbox adapter digest
+\item[\yes] every agent step's output, as JSON
+\end{ticks}\par}
+\column{.49\textwidth}
+\textbf{Not pinned}
+{\small
+\begin{ticks}
+\item[\no] the hosted model: no sampling seed
+\item[\no] external hosts and their redirects
+\item[\no] the clock and scheduling
+\item[\no] the adapter's source: a local shim, not in the repo
+\end{ticks}\par}
 \end{columns}
-\claim{About three minutes of forty-three. Speed is not why we fork; we fork to buy alternatives.}
-\sources{SELFHOST-2 workgraph-execution.json.}
-\note{[0:50] Fast cloning. The plan had three steps, and one of them was safe to run in parallel with the other two. The executor needed a fork to do that. It did not have one, so it ran them one after another, and it wrote down why: serial fallback, missing fork. With a fork it would have saved about three minutes of a forty-three-minute run. So speed is not why we fork. We fork to buy alternatives.}
+\vspace{.1cm}
+{\small \tagP\ Replay, not rerun: log every model response, external fetch and clock read; re-execute the rest against the log.\par}
+\claim{A C2D3 scientist can audit this run. Nobody can rerun it.}
+\sources{SELFHOST-2 metrics.json, workgraph-execution.json. Record and replay: rr (USENIX ATC'17); DeepSeek-V4 DSec logs every sandbox command and result for replay (\href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348}).}
+\note{[1:10] Surface seven, reproducibility. The run record pins the input commit and the lockfile, digests of the policy, the inputs and the sandbox adapter, and the output of every agent step. It does not pin the hosted model, which has no sampling seed I control; the external hosts and their redirects; the clock; or the source of my sandbox adapter, which is a local shim that is not in the repository yet. So the honest target is replay, not rerun: log every model response, every external fetch through that caching proxy, and every clock read, and re-execute the rest against the log. That is rr's rule, and DeepSeek logs every sandbox command for the same reason. Today a scientist could audit this run. Nobody could rerun it.}
+\end{frame}
+
+% 12
+\begin{frame}[t]{\ev{\tagM}Parallel-safe steps, and nothing to fork them}
+\begin{center}
+\begin{tikzpicture}[x=.0275cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[anchor=east] at (-6,0) {as run};
+\draw[fill=Sand,draw=Gold] (0,-.25) rectangle (82.4,.25) node[midway]{allowlist};
+\draw[fill=Sand,draw=Gold] (82.4,-.25) rectangle (259.1,.25) node[midway]{tests};
+\draw[fill=Sand,draw=Gold] (259.1,-.25) rectangle (342.6,.25) node[midway]{docs};
+\node[anchor=west] at (346,0) {342.6 s};
+\node[anchor=east,align=right] at (-6,-1.15) {with a fork\\(projected)};
+\draw[fill=white,draw=Gold,dashed] (0,-1.0) rectangle (82.4,-.55) node[midway]{allowlist};
+\draw[fill=white,draw=Gold,dashed] (82.4,-1.0) rectangle (165.9,-.55) node[midway]{docs};
+\draw[fill=white,draw=Gold,dashed] (0,-1.75) rectangle (176.7,-1.3) node[midway]{tests};
+\draw[Teal,dashed,line width=.8pt] (176.7,-1.95)--(176.7,-.4);
+\node[anchor=west,text=Teal] at (180,-1.52) {176.7 s};
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+{\small\ttfamily reason: serial\_fallback\_missing\_fork\par}
+{\small Disjoint files: two worktrees would do here. A fork matters when the reached state is expensive.\par}
+\claim{Three minutes of forty-three. We fork to buy alternatives.}
+\sources{SELFHOST-2 workgraph-execution.json (node timings measured; the fork lane is computed, fork cost excluded).}
+\note{[1:05] Last on the wall, fast cloning. The plan had three steps. The tests step was safe to run in parallel with the other two, and the executor asked its sandbox provider for a fork. None offered one, so it ran them in series and wrote down why: serial fallback, missing fork. Had tests run in a fork, the critical path would have been about three minutes shorter, out of forty-three. And these steps touch disjoint files, so two worktrees would have done. So speed is not why we fork. A fork matters when the reached state is expensive, and when we want alternatives.}
 \end{frame}
 
 % ===================================================================== ACT II: THE FORK
-\chapterlabel{The fork}
-% 12
-\begin{frame}[t]{\ev{\tagO}Fork has a 20-year literature, much of it built on Xen}
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\draw[Line,line width=2pt] (-.6,0)--(12.4,0);
-\foreach \x/\y/\t/\d in {0/2003/Xen/{paravirtual VMM, Cambridge},2.35/2005/Potemkin/{flash clone + CoW memory},4.7/2009/SnowFlock/{VM fork on Xen, 600--800 ms},7.05/2020/Catalyzer/{fork of a running sandbox},9.4/2026/{DeltaBox, Shepherd}/{agent checkpoint 14 ms; fork 134--143 ms},11.75/2026/Kimi K3/{51.2M sandboxes; fork in RL}}{
-  \fill[Teal] (\x,0) circle(2.5pt);
-  \node[above,font=\scriptsize\bfseries] at (\x,.12) {\y};
-  \node[below,align=center,font=\scriptsize\bfseries] at (\x,-.12) {\t};
-  \node[below,align=center,text=Muted,font=\scriptsize,text width=2.05cm] at (\x,-.5) {\d};}
-\end{tikzpicture}
-\end{center}
-\vspace{.1cm}
-{\small SnowFlock's first example: \texttt{trusted\_code(); VM\_fork(1); child: untrusted\_code(state)}.\\[2pt]
-Kimi K3's reason to fork: ``reward judging without side effects''.\par}
+\setact{2}
+% 13
+\begin{frame}[t]{\ev{\tagO}Fork is old, and much of it ran on Xen}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}l L{2.75cm} Y L{3.9cm}@{}}
+\toprule
+& System & What it forks & Reported\\
+\midrule
+2003 & Xen (Cambridge) & paravirtualised VMs & substrate for most of these\\
+2005 & Potemkin & flash-cloned honeypot VMs, CoW memory & 521 ms clone to first reply\\
+2009 & SnowFlock & \texttt{VM\_fork(N)} across hosts, on Xen & 600--800 ms; first example forks an untrusted child\\
+2020 & Catalyzer & \texttt{sfork} of a running sandbox & under 1 ms, best case\\
+2023 & Nephele & \texttt{fork()} for unikernel VMs, on Xen & \\
+2026 & DeltaBox; Shepherd & agent sandbox checkpoint; fork & 10.83 ms checkpoint; 134--143 ms fork\\
+2026 & Kimi K3 AgentENV & Firecracker fork ``for reward judging without side effects'' & 51.2M sandboxes over all K3 runtimes\\
+\bottomrule
+\end{tabularx}\par}
 \claim{The mechanism is old. The caller is new: a program that searches.}
-\sources{Barham et al.\ SOSP'03; Vrable et al.\ SOSP'05; Lagar-Cavilla et al.\ EuroSys'09; Du et al.\ ASPLOS'20; \href{https://arxiv.org/abs/2605.22781}{DeltaBox} (abstract figure); \href{https://arxiv.org/abs/2605.10913}{Shepherd}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
-\note{[1:50] Now the fork. Fork is old, and much of it was built on Xen, in this building. Potemkin flash-cloned honeypot VMs with copy-on-write memory in 2005. SnowFlock forked Xen VMs across hosts in 2009, in six to eight hundred milliseconds. Its very first example is our pattern: run trusted code, fork, and give the child the untrusted work. Catalyzer forked running sandboxes. This year, DeltaBox reports fourteen-millisecond agent checkpoints and Shepherd forks agent sandboxes in about 140 milliseconds. And a frontier lab, Kimi, reports fifty-one million sandboxes in RL, with fork used, in their words, for reward judging without side effects. By fork I mean whole-machine fork, not the POSIX call that A fork in the road argued we should retire. So the mechanism is old. What is new is the caller: a program that searches, reads git history and games tests.}
+\sources{SOSP'03; SOSP'05; EuroSys'09; ASPLOS'20; EuroSys'23; \href{https://arxiv.org/abs/2605.22781}{DeltaBox} (evaluation); \href{https://arxiv.org/abs/2605.10913}{Shepherd}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
+\note{[1:40] Now the fork. Fork is old, and much of it was built on Xen, in this building. Potemkin flash-cloned honeypot VMs with copy-on-write memory in 2005. SnowFlock forked Xen VMs across hosts in 2009, in six to eight hundred milliseconds, and its very first example is our pattern: run trusted code, fork, and give the child the untrusted work. Catalyzer forked running sandboxes; Nephele brought fork to unikernel VMs on Xen. This year DeltaBox checkpoints agent sandboxes in about eleven milliseconds, and Shepherd forks them in about 140. Moonshot's Kimi K3 report counts fifty-one million sandboxes across training and evaluation, and its microVM runtime offers fork, in their words, for reward judging without side effects. By fork I mean forking a whole machine, not the POSIX fork call, which Baumann and colleagues argued we should retire. The mechanism is old. The caller is new: a program that searches, reads git history and games tests.}
 \end{frame}
 
-% 13
-\begin{frame}[t]{\ev{\tagO}Fork copies memory; identity and secrets must not follow}
-\vspace{0pt}% keep beamer from reading the next group as a subtitle
-{\footnotesize
-\begin{tabularx}{\textwidth}{@{}L{2.6cm}L{3.4cm}Y@{}}
+% 14
+\begin{frame}[t]{\ev{\tagO}Fork copies memory, secrets and identity}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{2.7cm}L{3.3cm}Y@{}}
 \toprule
 The child inherits & Hazard & What is known\\
 \midrule
@@ -366,142 +403,162 @@ RNG and entropy pool & siblings share random streams & VMGenID reseeds the kerne
 tokens in memory & $N$ live copies & keep secrets outside; wipe on suspend (Brooker et al.\ 2021)\\
 guest clock & resumes at snapshot time & resync on restore\\
 IP and MAC & identical identities & namespace + NAT per clone; Potemkin spent 142.8 of 521 ms on IP setup\\
-open TCP connections & cannot be cloned & CRIU restores one; gVisor returns \texttt{ECONNRESET}\\
+open TCP connections & cannot be cloned & CRIU hands one to one restore; gVisor returns \texttt{ECONNRESET}\\
 \bottomrule
 \end{tabularx}\par}
 \claim{Eight forks of a VM holding a token are eight live tokens.}
-\sources{Firecracker snapshotting docs; \href{https://arxiv.org/abs/2102.12892}{Brooker et al., arXiv:2102.12892}; Vrable et al.\ SOSP'05; CRIU and gVisor C/R docs.}
-\note{[1:55] Fork copies memory, so it copies everything in memory. Five things follow the child that must not. Random state: siblings share random streams. VMGenID reseeds the kernel generator, but Firecracker's own documentation says there is no generic solution for userspace. Tokens: eight forks of a VM holding a token are eight live tokens, which is why the secret should never be in the guest, and why AWS proposed wiping memory on suspend. The clock resumes at snapshot time. Network identity: every clone has the same IP and MAC, so each needs its own namespace and NAT; back in 2005 Potemkin already spent 142 of its 521 milliseconds just configuring IP. And nobody clones an open TCP connection. CRIU can restore one connection, once. gVisor resets it. A runtime for search has to treat all five as part of the fork contract, not as surprises.}
+\sources{Firecracker snapshotting docs; \href{https://arxiv.org/abs/2102.12892}{Brooker et al., arXiv:2102.12892}; Vrable et al.\ SOSP'05; CRIU and gVisor checkpoint/restore docs.}
+\note{[1:35] Fork copies memory, so it copies everything in memory. Five things follow the child that must not. Random state: siblings share random streams. VMGenID reseeds the kernel generator, but Firecracker's own documentation says there is no generic solution for userspace. Tokens: eight forks of a VM holding a token are eight live tokens, which is why the secret should never be in the guest, and why AWS proposed wiping memory on suspend. The clock resumes at snapshot time. Network identity: every clone has the same IP and MAC, so each needs its own namespace and NAT; in 2005 Potemkin already spent 142 of its 521 milliseconds configuring IP. And nobody clones an open TCP connection. CRIU can hand an open connection to one restored copy, not to eight, and gVisor resets it. A runtime for search has to make all five part of the fork contract.}
 \end{frame}
 
-% 14
-\begin{frame}[t]{\ev{\tagO}Hold effects until an authority releases them}
+% 15
+\begin{frame}[t]{\ev{\tagO\,\tagB}Hold effects until an authority releases them}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[candidate,minimum width=2.4cm] (c1) at (0,.6) {child 1};
-\node[candidate,minimum width=2.4cm] (c2) at (0,-.6) {child 2};
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[candidate,minimum width=2.3cm] (c1) at (0,.6) {child 1};
+\node[candidate,minimum width=2.3cm] (c2) at (0,-.6) {child 2};
 \node[state,text width=2.6cm,minimum height=1.2cm] (h) at (3.6,0) {held effects\\push, email, write};
-\node[evidence,text width=2.3cm,minimum height=1.2cm] (a) at (7.0,0) {authority\\validates, commits once};
-\node[state,minimum width=1.6cm] (w) at (10.0,0) {world};
+\node[evidence,text width=2.4cm,minimum height=1.2cm] (a) at (7.0,0) {authority\\validates, commits once};
+\node[state,minimum width=1.5cm] (w) at (10.0,0) {world};
 \draw[flow] (c1)--(h);\draw[flow] (c2)--(h);\draw[flow] (h)--(a);\draw[flow] (a)--(w);
 \end{tikzpicture}
 \end{center}
 {\small
-\textbf{Speculator} (SOSP'05), \textbf{external synchrony} (OSDI'06): run ahead; hold output until it is safe.\\[2pt]
-\textbf{Remus} (NSDI'08): hold network output until the checkpoint commits.\\[2pt]
-\textbf{Zheng et al.} (2026): an execution edit cannot undo a tool request already sent.\\[2pt]
-\textbf{Here:} children hold no credential that can publish; the orchestrator applies patches after the gate.\par}
+\begin{ticks}
+\item Speculator (SOSP'05), external synchrony (OSDI'06): run ahead, hold output until it is safe
+\item Remus (NSDI'08): hold network output until the checkpoint commits
+\item Zheng et al.\ (2026): an execution edit cannot undo a tool request already sent
+\item \tagB\ here: children hold no publishing credential; the orchestrator delivers after the gate
+\item exception: the model API is an unheld channel, metered and logged
+\end{ticks}\par}
 \claim{Output commit, made structural.}
 \sources{Nightingale, Chen \& Flinn SOSP'05; Nightingale et al.\ OSDI'06; Cully et al.\ NSDI'08; \href{https://arxiv.org/abs/2608.22928}{Zheng et al., arXiv:2608.22928}.}
-\note{[1:20] External effects. A restore cannot unsend an email or un-push a branch. The answers here are old too. Speculator and external synchrony ran ahead speculatively and held output until it was safe to release. Remus held network output until the checkpoint committed. And this year Zheng and colleagues state the agent version plainly: an execution edit cannot undo a tool request already sent. In my factory the rule is structural. The children hold no credential that can publish anything. The orchestrator applies their patches, once, after the gate. Output commit, made structural.}
+\note{[1:05] External effects. A restore cannot unsend an email or un-push a branch, and the answers here are old too. Speculator and external synchrony ran ahead speculatively and held output until it was safe. Remus held network output until the checkpoint committed. This year Zheng and colleagues state the agent version: an execution edit cannot undo a tool request already sent. In my factory the rule is structural: children hold no credential that can publish, and the orchestrator delivers once, after the gate. In these runs it delivered to a local git remote. The one exception is the model API: every child uses it, and it is metered and logged, not held. Output commit, made structural.}
 \end{frame}
 
-% 15
+% 16
 \begin{frame}[t]{\ev{\tagM\,\tagO}When fork pays, and where it loses}
 \begin{columns}[T,onlytextwidth]
 \column{.5\textwidth}
 \[(N-1)\,P \;>\; H + N\,(R+D)\]
-{\footnotesize $P$ preparation, $H$ capture, $R$ restore, $D$ divergence, $N$ children.\par}
+{\small $P$ preparation, $H$ capture, $R$ restore, $D$ divergence, $N$ children\par}
 \vspace{.2cm}
-\textbf{Where fork loses}\\[2pt]
+\textbf{Where fork loses}
 {\small
-\no\ $N=1$\\
-\no\ state is only files, and the build cache is good\\
-\no\ a minimal image boots faster (Jitsu, LightVM)\par}
+\begin{ticks}
+\item[\no] $N=1$
+\item[\no] the state is only files, and the build cache is good
+\item[\no] a minimal image boots faster (Jitsu; LightVM)
+\end{ticks}\par}
 \column{.46\textwidth}
-\textbf{One API round trip} \tagM\\[2pt]
-{\footnotesize islo named 141 MB snapshot, restore + run + capture at concurrency 12:\\ p50 6.87 s, p95 9.04 s, 255 of 256 succeeded\par}
-\vspace{.2cm}
-\textbf{Mechanisms} \tagO\\[2pt]
-{\footnotesize Kimi K3: checkpoint 133 ms, resume 49 ms\\ DeltaBox: checkpoint 10.83 ms, rollback 1.86 ms\par}
-\vspace{.2cm}
-{\footnotesize Kimi K3: waiting on inference is up to 98\% of a sandbox's life.\par}
-\end{columns}
-\claim{If your build cache is good, fork loses. Warmth is performance; authority is a capability.}
-\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2; \href{https://arxiv.org/abs/2605.22781}{DeltaBox} evaluation; Madhavapeddy et al.\ NSDI'15; Manco et al.\ SOSP'17.}
-\note{[2:10] When does fork pay? You pay preparation once instead of N times, and in exchange you pay capture once and restore and divergence per child. Fork wins when N minus one preparations cost more than that. It loses in three places. With one child. When the state is only files and your build cache is good, which is the lesson I learned at Incredibuild. And when a minimal image boots faster than you can restore, which is the Jitsu and LightVM argument, from this room. Now my number, carefully. From a named 141-megabyte snapshot, one restore, run and capture round trip through the public API takes 6.87 seconds at the median, at concurrency twelve, and 255 of 256 succeeded. That is an API round trip. The mechanisms are much faster: Kimi reports 133 milliseconds to checkpoint, DeltaBox under 11. Mine is an API round trip; theirs are mechanisms. And Kimi reports that a sandbox spends up to 98 percent of its life waiting on the model. So the value of fork is not seconds. It is state you cannot rebuild cheaply, and a grader the child cannot touch.}
-\end{frame}
-
-% 16
-\begin{frame}[t]{\ev{\tagO}Pick the lowest rung that holds the threat}
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\small}]
-\foreach \i/\t/\s in {0/process/{shared kernel, shared everything},1/container/{namespaces + cgroups; one kernel},2/gVisor/{user-space kernel},3/microVM/{hardware virtualisation}}{
-  \node[state,minimum width=2.4cm,anchor=west] (r\i) at (\i*1.1,\i*.72) {\t};
-  \node[labeltext,anchor=west] at (\i*1.1+2.6,\i*.72) {\s};}
-\end{tikzpicture}
-\end{center}
+\textbf{Restore fan-out, one API round trip} \tagM
 {\small
-Kimi K3 reports container kernel panics under agent workloads.\\[2pt]
-Firecracker's production guide: disable SMT and kernel same-page merging.\par}
-\claim{We call it a swarm. The operating system calls it roommates.}
-\sources{\href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2; Firecracker docs/prod-host-setup.md.}
-\note{[1:05] Isolation. There is a ladder: process, container, a user-space kernel like gVisor, and a microVM. Pick the lowest rung that holds the threat, and remember that the threat here is a program that searches. Kimi reports container kernel panics under agent workloads. Firecracker's own production guide says to turn off simultaneous multithreading and kernel same-page merging, because both are side channels. Density claims are not isolation claims. We call it a swarm. The operating system calls it roommates.}
+\begin{ticks}
+\item 141 MB named islo snapshot; restore, run \texttt{true}, capture
+\item concurrency 12: p50 6.87 s, p95 9.04 s; 255 of 256 succeeded
+\item per-op teardown excluded; memory capture unverified
+\end{ticks}\par}
+\vspace{.1cm}
+{\small Kimi K3: waiting on inference is up to 98\% of a sandbox's life. \tagO\par}
+\end{columns}
+\claim{If your build cache is good, fork loses. Fork pays for state you cannot rebuild.}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2; Madhavapeddy et al.\ NSDI'15; Manco et al.\ SOSP'17.}
+\note{[1:55] When does fork pay? Without a fork you prepare N times. With a fork you prepare once, capture once, and pay a restore and divergence per child. The inequality is just that. Fork loses in three places. With one child. When the state is only files and your build cache is good, which is the lesson I learned at Incredibuild. And when a minimal image boots faster than you can restore: the Jitsu argument from this room, and LightVM's from NEC Labs. Now my number, carefully. From a named 141-megabyte islo snapshot, one restore, run and capture through the public API takes 6.87 seconds at the median, at concurrency twelve, and 255 of 256 succeeded. I have not yet shown that snapshot includes memory, so call it restore fan-out, not fork. The mechanisms are far faster: Kimi reports checkpoints as fast as 133 milliseconds, DeltaBox about eleven. And Kimi reports that a sandbox spends up to 98 percent of its life waiting on the model. So fork does not pay in seconds. It pays for state you cannot rebuild cheaply, and for a grader the child cannot touch.}
 \end{frame}
 
 % 17
-\begin{frame}[t]{\ev{\tagB\,\tagP}Cheap forked machines for search; authority never lives inside them}
+\begin{frame}[t]{\ev{\tagO}Two axes: what a child can reach, and name}
+\begin{columns}[T,onlytextwidth]
+\column{.52\textwidth}
+\textbf{Kernel surface}\\[4pt]
+\begin{tikzpicture}[x=1cm,y=1cm]
+\foreach \i/\t/\s in {0/container/{one shared kernel},1/gVisor/{user-space kernel},2/{microVM, unikernel}/{hardware virtualisation}}{
+  \node[state,minimum width=2.75cm,minimum height=.62cm,anchor=west] at (\i*.3,\i*.82) {\t};
+  \node[font=\footnotesize,text=Ink,anchor=west] at (3.4,\i*.82) {\s};}
+\draw[flow] (-.25,-.3)--(-.25,2.1) node[above,font=\footnotesize]{less shared};
+\end{tikzpicture}
+\column{.44\textwidth}
+\textbf{Authority}\\[4pt]
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=3.6cm,minimum height=.62cm,anchor=west] at (0,0) {ambient process};
+\node[font=\footnotesize,anchor=west] at (0,-.55) {whatever its user can name};
+\node[evidence,minimum width=3.6cm,minimum height=.62cm,anchor=west] at (0,1.25) {Capsicum; CHERI};
+\node[font=\footnotesize,anchor=west] at (0,.7) {only what it is handed};
+\draw[flow] (-.3,-.3)--(-.3,1.6);
+\end{tikzpicture}
+\end{columns}
+\vspace{.15cm}
+{\small Kimi K3 saw kernel panics in its early container runtimes. Firecracker's production guide: disable SMT and KSM.\par}
+\claim{Pick the kernel surface for the workload. Hand over authority explicitly.}
+\sources{\href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2; Firecracker docs/prod-host-setup.md; Watson et al., Capsicum (USENIX Sec'10) and CHERI (IEEE S\&P'15).}
+\note{[1:05] Isolation has two axes, and this building built both. One is kernel surface: a container shares one kernel, gVisor puts a kernel in user space, and a microVM or a unikernel stands on hardware virtualisation. The other is authority: an ordinary process can name whatever its user can; under Capsicum or on CHERI it can use only what it is handed. Work cells run arbitrary builds, so they get a microVM. Their authority should be handed over explicitly, never ambient. Kimi reports kernel panics in its early container runtimes, and Firecracker's production guide says to disable simultaneous multithreading and same-page merging, because both are side channels. We call it a swarm. The operating system calls it roommates.}
+\end{frame}
+
+% 18
+\begin{frame}[t]{\ev{\tagB\,\tagP}Machines fork; authority stays outside}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[state,text width=3.4cm,minimum height=.9cm] (s) at (0,1.35) {\textbf{scheduler}\\Airflow + durable journal + run lock};
-\node[missing,text width=2.3cm,minimum height=.95cm] (f) at (-4.3,0) {\textbf{fork store}\\missing};
-\node[candidate,text width=2.6cm,minimum height=.95cm] (c) at (0,0) {\textbf{work cells}\\microVM or sbx};
-\node[state,text width=2.8cm,minimum height=.9cm] (l) at (4.4,1.35) {\textbf{lease broker}\\attempt, cell, epoch};
-\node[evidence,text width=2.8cm,minimum height=.95cm] (e) at (4.4,0) {\textbf{evaluator}\\outside the cell};
-\node[state,text width=4.2cm,minimum height=.9cm] (g) at (0,-1.35) {\textbf{orchestrator + gate}\\approval bound to artifact sha256};
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=3.5cm,minimum height=.85cm] (s) at (0,1.25) {\textbf{scheduler}: Airflow, journal, run lock};
+\node[missing,text width=2.1cm,minimum height=.85cm] (f) at (-4.2,0) {\textbf{fork store}\\missing};
+\node[candidate,text width=2.5cm,minimum height=.85cm] (c) at (0,0) {\textbf{work cells}};
+\node[proposed,text width=2.9cm,minimum height=.85cm] (l) at (4.4,1.25) {\textbf{lease broker}: not exercised};
+\node[proposed,text width=2.9cm,minimum height=.85cm] (e) at (4.4,0) {\textbf{evaluator} outside the cell};
+\node[state,text width=4.3cm,minimum height=.85cm] (g) at (0,-1.25) {\textbf{gate}: approval bound to artifact sha256};
 \draw[flow] (s)--(c);\draw[message] (f)--(c);\draw[flow] (l)--(c);\draw[flow] (c)--(e);\draw[flow] (e)--(g);\draw[flow] (c)--(g);
 \end{tikzpicture}
 \end{center}
-{\scriptsize\color{Muted}Built and run: scheduler, cells, gate.\quad Built, not exercised: lease broker.\quad Proposed: evaluator.\quad Missing: fork store.\par}
+{\footnotesize Fork contract, 8 conditions (docs/lifecycle.md), e.g.\ {\color{Rust}\bfseries 5: reused evidence is not independent agreement}; 8: tear down every child.\par}
+{\footnotesize Promotion is epoch-fenced, like Chubby sequencers and fencing tokens. A TLA+ design model exists, not yet checked against traces.\par}
 \claim{I wrote the fork contract before I had the fork.}
-\sources{swfactory README; docs/lifecycle.md (native-fork conditions); docs/run-recovery.md.}
-\note{[2:00] Here is the architecture with honest labels. Built and running: an Airflow scheduler with a durable journal and a run lock, the work cells, and an orchestrator whose gate binds an approval to the exact artifact hash. Built but not exercised in these runs: a lease broker that ties each credential to an attempt, a cell and an epoch, so an old worker cannot commit into a new campaign. Proposed: an evaluator that lives outside the cell. And missing: the fork store. I wrote the fork contract before I had the fork. It lives in the repository: fork from an immutable content-addressed parent, give every branch its own lease and budget, never copy publishing credentials, record parent and evidence identities, never count siblings that reuse evidence as independent agreement, merge deterministically, and verify the merged result. That list is my ask to every provider in the lineage I just showed you. And the fifth condition is the bridge to the last part of the talk.}
+\sources{swfactory docs/lifecycle.md, docs/run-recovery.md, formal/authority/; Burrows OSDI'06; Kleppmann (2016).}
+\note{[1:45] Here is the architecture with honest labels. Solid boxes are built and ran: an Airflow scheduler with a durable journal and a run lock, the work cells, and a gate that binds an approval to the exact artifact hash. Dashed gold is built or designed but not exercised: a lease broker that ties each credential to an attempt, a cell and an epoch, and an evaluator outside the cell. Dashed red is missing: the fork store. I wrote the fork contract before I had the fork. It has eight conditions: a content-addressed parent; a lease and budget per branch; no publishing credentials; recorded parent and evidence identities; never count siblings that reuse evidence as independent agreement; merge deterministically; verify the merge; and tear down every child. Promotion is epoch-fenced, which is Chubby's sequencer and Kleppmann's fencing token, and there is a TLA+ design model of it, not yet checked against real traces. I can model-check promotion. I cannot model-check what a child will write. That is why the count is statistics, and condition five is where the rest of this talk goes.}
 \end{frame}
 
 % ===================================================================== ACT III: THE COUNT
-\chapterlabel{The count}
-% 18
-\begin{frame}[t]{\ev{\tagM\,\tagP}One model wrote the fix and reviewed it twice. How many witnesses?}
+\setact{3}
+% 19
+\begin{frame}[t]{\ev{\tagM\,\tagP}The second review was not a second witness}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[state,text width=5.2cm,minimum height=.8cm] (m) at (5.1,1.55) {same hosted model, same parent, same prompt family};
-\foreach \n/\x/\t in {a/0/repair 1,b/3.4/review 1,c/6.8/repair 2,d/10.2/review 2}{\node[candidate,minimum width=2.1cm] (\n) at (\x,0) {\t};\draw[message] (m)--(\n);}
-\draw[flow] (a)--(b);\draw[flow] (b)--(c);\draw[flow] (c)--(d);
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=7.2cm,minimum height=.7cm] (m) at (5.25,1.4) {one hosted model, one parent, one prompt family};
+\foreach \n/\x/\t in {a/0/repair 1,b/3.5/review 1,c/7.0/repair 2,d/10.5/review 2}{\node[candidate,minimum width=2.2cm] (\n) at (\x,0) {\t};\draw[message] (m)--(\n);}
+\draw[flow] (a)--(b);\draw[flow] (b)--node[above,font=\footnotesize]{verdict}(c);\draw[flow] (c)--(d);
 \end{tikzpicture}
 \end{center}
-\vspace{.15cm}
-{\small Now fork the repair loop nine times from the same parent. Nine greens would not be nine witnesses. \tagP\par}
-\claim{Same parent, same model, same prompt, same flaky test.}
-\note{[1:15] Now the turn. Go back to that run. One model wrote the fix, and the same model reviewed it twice. How many independent witnesses was that? Not two, and not three. Now imagine the thing the factory asked for: fork the repair loop nine times from the same parent. Suppose all nine go green. That is not nine witnesses either. Same parent, same model, same prompt, same flaky test. The copies share almost everything that could make them wrong together.}
-\end{frame}
-
-% 19
-\begin{frame}[t]{\ev{\tagO}Execution multiplicity is not evidence multiplicity}
-\begin{columns}[T,onlytextwidth]
-\column{.5\textwidth}
-\[\operatorname{Var}(\bar Y_K)=\sigma^2\!\left(\rho+\frac{1-\rho}{K}\right)\]
-\[N_{\rm eff}=\frac{N}{1+(N-1)\rho}\]
-{\small 100 forks: 9.2 witnesses at $\rho=0.1$; 2.0 at $\rho=0.5$.\par}
-\column{.46\textwidth}
-\begin{tikzpicture}[x=.34cm,y=1.8cm]
-\draw[flow] (1,0)--(14,0) node[right,font=\scriptsize]{$K$};
-\draw[flow] (1,0)--(1,1.15) node[above,font=\scriptsize]{variance / $\sigma^2$};
-\draw[Ink,line width=1.2pt,domain=1:13,samples=60] plot (\x,{1/\x});
-\draw[Teal,line width=1.2pt,domain=1:13,samples=60] plot (\x,{.25+.75/\x});
-\draw[Teal,dashed] (1,.25)--(13,.25);
-\node[font=\scriptsize,text=Teal] at (9,.49){$\rho=0.25$: a floor};
-\node[font=\scriptsize,text=Ink] at (9,.08){$\rho=0$};
-\end{tikzpicture}
-\end{columns}
-\vspace{.1cm}
-{\small Across 350+ LLMs, models agree 60\% of the time when both are wrong (Kim et al., ICML'25).\par}
-\claim{Four clones do not make four witnesses. Past the floor, more forks buy nothing.}
-\sources{Equal variances, common pairwise correlation $\rho\geq0$; Kish (1965). \href{https://arxiv.org/abs/2506.07962}{Kim et al., Correlated Errors in Large Language Models, ICML 2025}.}
-\note{[1:50] Here is the arithmetic. If K runs have the same variance and a common pairwise correlation rho, the variance of their average has a floor at rho times sigma squared. More runs approach the floor; they never go below it. The same thing written as an effective sample size: a hundred forks at a correlation of point one are worth about nine independent witnesses. At point five they are worth two. And the correlation is not hypothetical. Kim and colleagues looked at more than 350 language models and found that when two models are both wrong, they agree sixty percent of the time. So: execution multiplicity is not evidence multiplicity. Four clones do not make four witnesses, and past the floor, more forks buy nothing.}
+{\small
+\begin{ticks}
+\item \textbf{Sequential:} repair 2 was written against review 1's verdict, then graded by the same model. The candidate adapts to its grader (Dwork et al.\ 2015).
+\item \textbf{Parallel:} fork the repair loop nine times; nine greens share a parent, a model, a prompt and a flaky test. \tagP
+\end{ticks}\par}
+\claim{Record both: what feedback each candidate saw, and what siblings share.}
+\note{[1:05] Now the count. Go back to that run. Repair two was written against review one's verdict, and graded by the same model. The candidate adapted to its grader, which is the adaptive-data-analysis problem Dwork and colleagues named: a reused holdout stops being a holdout. So review two was one independent look at best, not a second witness. And the thing the factory asked for makes a second problem. Fork the repair loop nine times from the same parent, and suppose all nine go green. That is not nine witnesses either. Same parent, same model, same prompt, same flaky test. So the runtime has to record both: what feedback each candidate saw, and what its siblings share.}
 \end{frame}
 
 % 20
-\begin{frame}[t]{\ev{\tagO}The statistics exist; the runtime does not hand over the cluster labels}
+\begin{frame}[t]{\ev{\tagO}Execution multiplicity is not evidence multiplicity}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+\[\operatorname{Var}(\bar Y_N)=\sigma^2\!\left(\rho+\frac{1-\rho}{N}\right)\]
+\[N_{\rm eff}=\frac{N}{1+(N-1)\rho}\]
+{\small 100 forks: 9.2 witnesses at $\rho=0.1$, 2.0 at $\rho=0.5$.\par}
+\column{.46\textwidth}
+\begin{tikzpicture}[x=.42cm,y=1.8cm]
+\draw[flow] (1,0)--(12,0) node[below,font=\footnotesize]{$N$};
+\draw[flow] (1,0)--(1,1.15) node[above,font=\footnotesize]{variance / $\sigma^2$};
+\draw[Ink,line width=1.2pt,domain=1:10,samples=60] plot (\x,{1/\x}) node[right,font=\footnotesize]{$\rho=0$};
+\draw[Teal,line width=1.2pt,domain=1:10,samples=60] plot (\x,{.25+.75/\x}) node[right,font=\footnotesize,text=Teal]{$\rho=0.25$};
+\draw[Teal,dashed] (1,.25)--(10,.25);
+\end{tikzpicture}
+\end{columns}
+\vspace{.1cm}
+{\small On one leaderboard, two models that are both wrong agree 60\% of the time (Kim et al., ICML'25; 350+ LLMs studied).\par}
+\claim{Nine clones are not nine witnesses.}
+\sources{Equal variances, common pairwise correlation $\rho\geq0$; Kish (1965). \href{https://arxiv.org/abs/2506.07962}{Kim et al., Correlated Errors in Large Language Models, ICML 2025}.}
+\note{[1:25] Here is the arithmetic. If N runs have the same variance and a common pairwise correlation rho, the variance of their average has a floor at rho times sigma squared. More runs approach the floor; they never go below it. The same thing as an effective sample size: a hundred forks at a correlation of point one are worth about nine independent witnesses. At point five, two. And the correlation is not hypothetical. Kim and colleagues studied more than 350 language models; on one leaderboard, when two models are both wrong, they give the same wrong answer sixty percent of the time. So execution multiplicity is not evidence multiplicity. Nine clones are not nine witnesses, and past the floor, more forks buy nothing.}
+\end{frame}
+
+% 21
+\begin{frame}[t]{\ev{\tagO\,\tagP}The runtime holds some of the cluster labels}
 \begin{columns}[T,onlytextwidth]
 \column{.47\textwidth}
 \textbf{Methods for dependent evidence}\\[3pt]
@@ -512,21 +569,23 @@ cluster-robust variance & Liang \& Zeger 1986\\
 dependent effect sizes & Hedges et al.\ 2010\\
 lineage as annotation & Green et al.\ PODS'07\\
 \end{tabular}\par}
-\column{.47\textwidth}
-\textbf{What they need}\\[3pt]
-{\small which runs share a parent, a model, a seed, a test, a fixture\par}
-\vspace{.25cm}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[candidate,text width=2.3cm] (l) at (0,0) {fork lineage + evidence IDs};
-\node[evidence,text width=1.7cm] (c) at (3.3,0) {cluster labels};
-\draw[flow] (l)--(c);
-\end{tikzpicture}
+\vspace{.2cm}
+{\small All of them need cluster labels.\par}
+\column{.49\textwidth}
+\textbf{What lineage can and cannot label}
+{\small
+\begin{ticks}
+\item[\yes] shared parent, seed, test, fixture
+\item[\no] a shared model's blind spots (Kim et al.)
+\item parent, model and test are crossed, not nested; a few families are too few clusters for any interval
+\end{ticks}\par}
 \end{columns}
-\claim{Counting correlated evidence is a runtime problem, not a statistics problem.}
-\note{[1:15] I want to be precise about what is new, because it is not the statistics. Correlated evidence has a sixty-year literature. Kish's design effect, cluster-robust variance, meta-analysis of dependent effect sizes, and in databases, provenance as annotations on derived results. All of these need the same input: cluster labels. Which runs share a parent, a model, a seed, a test, a fixture. The runtime is the only component that knows. Today it throws that away and returns a score. Fork lineage and evidence identities are exactly the cluster labels. So counting correlated evidence is a runtime problem, not a statistics problem.}
+\claim{Hand over the labels you have. The dependence model is still open.}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, \S5 (dependence-aware reduction over fork DAGs remains open).}
+\note{[1:30] I want to be precise about what is new, because it is not the statistics. Correlated evidence has a sixty-year literature: Kish's design effect, cluster-robust variance, meta-analysis of dependent effect sizes, and in databases, provenance as annotations on derived results. All of them need the same input: cluster labels. The runtime holds some of those labels and nobody else does: which runs share a parent, a seed, a test, a fixture. Today it throws them away and returns a score. But lineage cannot label everything. It cannot label a shared model's blind spots, which is exactly what Kim and colleagues measured. And parent, model and test are crossed factors, not nested ones, so a handful of snapshot families is too few clusters for any interval. So: the runtime must hand over the labels it has. Turning them into a dependence model is still open, and my paper says so.}
 \end{frame}
 
-% 21
+% 22
 \begin{frame}[t]{\ev{\tagO}Fork is also how you run the control}
 \lead{For a comparison, positive covariance helps.}
 \[\operatorname{Var}(Y_A-Y_B)=\operatorname{Var}(Y_A)+\operatorname{Var}(Y_B)-2\operatorname{Cov}(Y_A,Y_B)\]
@@ -539,109 +598,115 @@ lineage as annotation & Green et al.\ PODS'07\\
 \draw[flow] (r)--(a);\draw[flow] (r)--(b);\draw[message] (a)--(d);\draw[message] (b)--(d);
 \end{tikzpicture}
 \end{center}
-\claim{Share randomness to compare; vary it to corroborate. The seed policy belongs in the fork API.}
+\claim{Share randomness to compare; vary it to corroborate.}
+{\small The seed policy belongs in the fork API.\par}
 \sources{\href{https://pubsonline.informs.org/doi/abs/10.1287/mnsc.38.6.884}{Glasserman \& Yao, Management Science (1992)}.}
-\note{[1:00] Dependence is not always the enemy. To compare two candidates, give them the same random draw, and the nuisance variation cancels in the difference. That is common random numbers, old in simulation. To corroborate a claim, you want the opposite: vary the randomness and the failure modes. A fork decides which one you get, by whether it copies the random state or reseeds it. So the seed policy belongs in the fork API, as an explicit choice.}
-\end{frame}
-
-% 22
-\begin{frame}[t]{\ev{\tagB}Every worker returns a receipt, not a score}
-\begin{columns}[T,onlytextwidth]
-\column{.52\textwidth}
-\[r_k=(\hat\theta_k,\ J_k,\ n_k,\ \mathcal E_k,\ \mathcal L_k,\ m_k)\]
-{\footnotesize estimate, information, sample size, evidence IDs, lineage, metadata\par}
-\vspace{.15cm}
-{\small
-\begin{itemize}
-\item $\theta$: one candidate's quantity, e.g.\ its pass probability
-\item numeric summaries merge in any tree order
-\item repeated evidence IDs are rejected
-\item a retry reuses its evidence ID
-\item unknown dependence: abstain, do not narrow the interval
-\end{itemize}\par}
-\column{.44\textwidth}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[evidence,minimum width=1.8cm] (red) at (1.7,1.6) {reducer};
-\node[candidate,minimum width=1.35cm] (a) at (0,0) {A: $e_1$};
-\node[candidate,minimum width=1.35cm] (b) at (1.7,0) {B: $e_1$};
-\node[candidate,minimum width=1.35cm] (c) at (3.4,0) {C: $e_2$};
-\draw[flow] (a)--(red);\draw[denied] (b)--node[right,text=Rust]{reject}(red);\draw[flow] (c)--(red);
-\end{tikzpicture}\par
-\vspace{.25cm}
-{\footnotesize\color{Muted}Trace: 141 MB named snapshot $\to$ 4 concurrent restore--run--capture round trips, 6.70 s total; pooled mean 4.9422 vs.\ full-sample 4.9450.\par}
-\end{columns}
-\claim{The estimator is Cochran's. The contract is what was missing.}
-\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S2--4; Cochran (1954).}
-\note{[2:00] That is my contribution. Every worker returns a receipt, not a score. The receipt carries an estimate, its information, the sample size, the identities of the evidence it used, its fork lineage, and metadata. Theta is one candidate's quantity, for example its pass probability, estimated by forked re-runs. Choosing among different candidates is a separate selection step. The numeric part merges in any tree order, so it fits MapReduce-style reduction. Two workers that declare the same evidence are rejected, not counted twice. A retry reuses its evidence identity, so fault tolerance cannot turn into double counting. And when the dependence is unknown, the reducer abstains: it refuses to report the narrow interval that independence would imply. The estimator is Cochran's inverse-variance weighting. The contract is what was missing. The reference reducer is built and tested, and one trace runs it end to end from a named snapshot through four workers.}
+\note{[0:55] Dependence is not always the enemy. To compare two candidates, give them the same random draw, and the nuisance variation cancels in the difference. That is common random numbers, old in simulation. To corroborate a claim you want the opposite: vary the randomness and the failure modes. A fork decides which one you get, by whether it copies the random state or reseeds it. So the seed policy belongs in the fork API, as an explicit choice.}
 \end{frame}
 
 % 23
-\begin{frame}[t]{\ev{\tagB}Isolation does not authenticate $n$}
+\begin{frame}[t]{\ev{\tagB\,\tagP}Every worker returns a receipt, not a score}
+\begin{columns}[T,onlytextwidth]
+\column{.55\textwidth}
+\vspace{-.25cm}\[r_k=(\hat\theta_k,\ J_k,\ n_k,\ \mathcal E_k,\ \mathcal L_k,\ m_k)\]
+{\footnotesize estimate, information, $n$, evidence IDs, lineage, metadata\par}\vspace{-.1cm}
+{\small
+\tagB
+\begin{ticks}
+\item numeric summaries merge in any tree order
+\item a repeated evidence ID stops the merge
+\item lineage travels with the result; nothing consumes it yet
+\end{ticks}
+\tagP
+\begin{ticks}
+\item one execution per evidence ID: a retry is never counted twice
+\item unknown dependence: abstain
+\end{ticks}\par}
+\column{.41\textwidth}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[evidence,minimum width=1.8cm] (red) at (1.6,1.7) {reducer};
+\node[candidate,minimum width=1.3cm] (a) at (0,0) {A: $e_1$};
+\node[candidate,minimum width=1.3cm] (b) at (1.6,0) {B: $e_1$};
+\node[candidate,minimum width=1.3cm] (c) at (3.2,0) {C: $e_2$};
+\draw[flow] (a)--(red);\draw[flow] (c)--(red);
+\draw[Rust,line width=.9pt] (b.north)--($(b.north)!.45!(red.south)$) node[font=\bfseries,text=Rust]{$\times$};
+\node[below,font=\footnotesize,text=Rust] at (b.south) {duplicate $e_1$: merge stops};
+\end{tikzpicture}\par
+\vspace{.1cm}
+{\small $\theta$: e.g.\ one candidate's pass probability; then counts $(k,n)$ add exactly.\par}
+\vspace{.05cm}
+{\small \tagM\ trace: 4 restores, 6.70 s total; pooled 4.94 vs.\ 4.95.\par}
+\end{columns}
+\claim{The estimator is Cochran's. The contract is what was missing.}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S2--5; Cochran (1954).}
+\note{[1:45] That is my contribution. Every worker returns a receipt, not a score: an estimate, its information, the sample size, the identities of the evidence it used, its fork lineage, and metadata. Here is exactly what is built. The numeric summaries merge in any tree order, so it fits MapReduce-style reduction. If two workers declare the same evidence, the merge stops instead of counting it twice. And lineage travels with the result, although nothing consumes it yet. Here is what is proposed: an admission step that keeps one execution per evidence identity, so a retry is never double-counted, and a reducer that abstains when dependence is unknown instead of reporting the narrow interval independence would imply. For a pass probability you do not even need the Gaussian machinery; counts add exactly. The Gaussian path is for workers that report estimates. The estimator is Cochran's inverse-variance weighting. The contract is what was missing. One trace runs it end to end, from a named snapshot through four workers.}
+\end{frame}
+
+% 24
+\begin{frame}[t]{\ev{\tagB\,\tagP}Isolation does not authenticate precision}
 \begin{columns}[T,onlytextwidth]
 \column{.5\textwidth}
-\lead{One worker reports a distant estimate and inflates its precision a further $50\times$.}
-\begin{tikzpicture}[x=1cm,y=.115cm,every node/.style={font=\scriptsize}]
-\draw[flow] (0,0)--(0,19) node[above]{pooled estimate};
-\fill[Teal] (.6,0) rectangle (1.6,4.9566); \node[above] at (1.1,4.9566) {4.9566};
-\fill[Rust] (2.4,0) rectangle (3.4,17.0004); \node[above] at (2.9,17.0004) {17.0004};
-\node[below,align=center] at (1.1,0) {with the\\stress heuristic};
-\node[below,align=center] at (2.9,0) {unprotected\\pooling};
+\lead{One worker reports a distant estimate from a 2,000-point shard and multiplies its precision by a further $50\times$.}
+\begin{tikzpicture}[x=1cm,y=.115cm,every node/.style={font=\footnotesize}]
+\draw[flow] (0,0)--(0,20) node[above]{pooled estimate};
+\fill[Rust] (.6,0) rectangle (1.6,17.0004); \node[above] at (1.1,17.0004) {17.0};
+\fill[Teal] (2.4,0) rectangle (3.4,4.9566); \node[above] at (2.9,4.9566) {4.96};
+\node[below,align=center] at (1.1,0) {unprotected\\pooling};
+\node[below,align=center] at (2.9,0) {stress\\heuristic};
 \end{tikzpicture}
 \column{.46\textwidth}
 {\small
-\begin{itemize}
+\begin{ticks}
 \item a sandbox bounds what a child can \emph{do}, not what it can \emph{claim}
-\item the controller should measure $n$; the child should not report it \tagP
+\item precision ($n\cdot J$) must come from evidence the controller holds: re-run or re-score on held-out data \tagP
 \item the heuristic is not a Byzantine guarantee
-\end{itemize}\par}
+\end{ticks}\par}
 \end{columns}
 \claim{Precision is an input the child should not control.}
 \sources{Synthetic check, Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, \S4.}
-\note{[1:10] One more trap. Isolation bounds what a child can do. It does not bound what a child can claim. In a synthetic check from the paper, one worker reports a distant estimate and inflates its reported precision a further fifty times. Unprotected pooling moves to seventeen. A simple stress heuristic brings it back to about five. That heuristic is not a Byzantine guarantee. The real fix is architectural: the controller measures sample size and information; the child does not report them. Precision is an input the child should not control.}
+\note{[1:10] One more trap. Isolation bounds what a child can do. It does not bound what a child can claim. In a synthetic check from the paper, one worker reports a distant estimate from a two-thousand-point shard, and inflates its reported precision a further fifty times. Unprotected pooling moves to seventeen. A simple stress heuristic brings it back to about five, and that heuristic is not a Byzantine guarantee. Measuring the sample size alone would not help, because the forgery is in the information per point. The fix is architectural: precision has to come from evidence the controller holds, by re-running or re-scoring on held-out data. Precision is an input the child should not control.}
 \end{frame}
 
 % ===================================================================== ACT IV: TEST AND AGENDA
-\chapterlabel{Test and agenda}
-% 24
+\setact{4}
+% 25
 \begin{frame}[t]{\ev{\tagP}The test that could prove me wrong}
-\vspace{0pt}% keep beamer from reading the next group as a subtitle
-{\small
-\begin{tabularx}{\textwidth}{@{}L{2.2cm}Y L{3.5cm}@{}}
+\vspace{0pt}
+{\footnotesize
+\begin{tabularx}{\textwidth}{@{}L{1.5cm} Y L{3.3cm} L{2.9cm}@{}}
 \toprule
-Phase & Design (no model calls in A and B) & Rejects the thesis if\\
+Phase & Design & I predict & Rejects the thesis if\\
 \midrule
-A.\ cost & cold, cached template, restore; $N\in\{1,3,6,12\}$; server-side timestamps & restore does not beat the cached template\\
-B.\ coupling & 6 snapshot families $\times$ 3 siblings vs.\ 18 co-scheduled cold cells; flaky test $\times$30 each & $\Delta\rho\le0.05$, upper CI $<0.1$\\
-C.\ the loop & repair 1 re-run from its recorded input: 3 families $\times$ 3 forks & children disagree as much across families as within\\
+A.\ cost & cold (no cache), cached template, restore; $N\in\{1,3,6,12\}$; server-side timestamps where exposed & restore beats cold by $\geq$30 s at every $N$; if cached is within 10 s at $N{=}1$, the cache wins & restore does not beat the cached template\\
+B.\ coupling & 6 snapshot families $\times$ 3 siblings vs.\ 18 co-scheduled cold cells; flaky test $\times$30 each; no model calls & $\Delta\rho>0.05$, 95\% CI excluding 0 & $\Delta\rho\le0.05$ and upper CI $<0.1$\\
+C.\ the loop & repair 1 re-sampled 9 times from its recorded input, one model & at least 5 of 9 repeat the out-of-plan edit & descriptive only\\
 \bottomrule
 \end{tabularx}\par}
-\vspace{.2cm}
-{\small Predictions, committed before any run: restore beats cold by $\geq$30 s at every $N$; $\Delta\rho>0$; at least 5 of 9 forked repairs edit the out-of-plan file.\par}
+\vspace{.15cm}
+{\small Written before any run: PREREGISTRATION.md. Results, held or failed, go in RESULTS.md in the same repository.\par}
 \claim{A result where the build cache wins is a good result for this room.}
-\sources{Protocol and predictions: PREREGISTRATION.md in this talk's repository.}
-\note{[2:20] Here is the test that could prove me wrong, and I wrote the predictions down before any run. Phase A is cost, with no model calls: a cold cell, a cached template, and a restore from snapshot, at one to twelve concurrent children, timed on the server side so we see where the seconds go. If restore does not beat a good cached template, fork buys nothing for this factory, and I will say so. Phase B is coupling, also with no model calls: six snapshot families of three siblings each, against eighteen cold cells scheduled at the same times, each running the flaky race test thirty times. If siblings fail together no more than co-scheduled strangers do, shared ancestry did not couple the evidence here. Phase C is the repair loop itself: re-run it from its recorded input, three forks in each of three families, and ask whether each child edits the out-of-plan file. That is the only phase that measures correlation induced by the model. My predictions are on the slide. A result where the build cache wins is a good result for this room.}
-\end{frame}
-
-% 25
-\begin{frame}[t]{\ev{\tagP}The same work order, as the runtime should run it}
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\scriptsize}]
-\node[state,text width=1.9cm,minimum height=1.1cm] (p) at (0,0) {approved plan\\content-addressed parent};
-\node[candidate,minimum width=1.5cm] (k1) at (2.9,.75) {child + lease};
-\node[candidate,minimum width=1.5cm] (k2) at (2.9,-.75) {child + lease};
-\node[evidence,text width=1.9cm,minimum height=1.1cm] (e) at (5.9,0) {evaluator outside; scope enforced in repair};
-\node[evidence,text width=1.8cm,minimum height=1.1cm] (r) at (8.7,0) {reducer:\\$N_{\rm eff}$ or abstain};
-\node[state,text width=1.8cm,minimum height=1.1cm] (g) at (11.4,0) {artifact out; fenced promotion + gate};
-\draw[flow] (p)--(k1);\draw[flow] (p)--(k2);\draw[flow] (k1)--(e);\draw[flow] (k2)--(e);\draw[flow] (e)--(r);\draw[flow] (r)--(g);
-\end{tikzpicture}
-\end{center}
-\vspace{.1cm}
-{\small The out-of-plan edit becomes a denial, not a ``major'' finding. The approved candidate leaves the cell before teardown. Review 2 is not counted as a second witness.\par}
-\claim{Search can race. Promotion must not.}
-\note{[1:30] So here is the same work order, run the way the runtime should run it. Fork after the plan is approved, from a content-addressed parent. Each child gets its own lease and budget. The evaluator lives outside the cells, and the repair loop's scope is enforced, so the out-of-plan edit is denied instead of being reported as a major finding. The reducer reports an effective number of witnesses, or abstains. The approved candidate leaves the cell before teardown. And promotion is fenced by an epoch, so a stale worker cannot commit. Review two would not count as a second witness. Search can race. Promotion must not. This is a design, not a run.}
+\sources{github.com/zozo123/cam-talk-london-26.}
+\note{[2:00] Everything so far is one run and a synthetic check. Whether it generalises is an experiment, so here is the test that could prove me wrong, written down before any run. Phase A is cost, with no model calls: a cold cell with no cache, a cached template, and a restore, at one to twelve children, timed on the server where it can be. If restore does not beat a good cached template, fork buys nothing for this factory, and I will say so. Phase B is coupling, also with no model calls. Eighteen siblings from six snapshots, against eighteen strangers run at the same times. Each runs the flaky race test thirty times. If siblings fail together no more than strangers do, shared ancestry did not couple the evidence here. Phase C re-samples the repair loop nine times from its recorded input, and simply counts how often it makes the same out-of-plan edit. That one is descriptive. The results, held or failed, will be in the repository. A result where the build cache wins is a good result for this room.}
 \end{frame}
 
 % 26
+\begin{frame}[t]{\ev{\tagP}The same work order, run as it should be}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[candidate,text width=2.6cm,minimum height=1.45cm] (f) at (0,0) {\textbf{fork $\times3$}\\after the plan; own lease and budget};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (s) at (3.5,0) {\textbf{repair scope}\\out-of-plan edit {\color{Rust}\bfseries denied}};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (e) at (7.0,0) {\textbf{evaluator}\\outside the cell; a different model};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (r) at (10.5,0) {\textbf{reducer}\\$N_{\rm eff}$ from lineage, or abstain};
+\node[state,text width=6.2cm,minimum height=.9cm] (g) at (8.75,-1.9) {artifact exported; epoch-fenced promotion; human gate};
+\draw[flow] (f)--(s);\draw[flow] (s)--(e);\draw[flow] (e)--(r);\draw[flow] (r)--(10.5,-1.45);
+\end{tikzpicture}
+\end{center}
+{\small Review 2 would not count as a second witness.\par}
+\claim{Search can race. Promotion must not.}
+\note{[1:05] So here is the same work order, run the way the runtime should run it. Fork after the plan is approved, each child with its own lease and budget. The repair loop's scope is enforced, so the out-of-plan edit is denied instead of being reported as major. The evaluator lives outside the cells and uses a different model. The reducer reports an effective number of witnesses from lineage, or abstains. The artifact leaves the cell before teardown, and promotion is fenced by an epoch, so a stale worker cannot commit. Review two would not count as a second witness. Search can race. Promotion must not. This is a design, not a run.}
+\end{frame}
+
+% 27
 \begin{frame}[t]{Open problems where this room is ahead of me}
 \begin{enumerate}
 \item \textbf{Dependence from lineage.} Estimate $\rho$ from fork lineage and evidence manifests.
@@ -652,32 +717,33 @@ C.\ the loop & repair 1 re-run from its recorded input: 3 families $\times$ 3 fo
 \item \textbf{Human-gate latency.} Snapshot, destroy and restore across a day-long wait.
 \end{enumerate}
 \claim{I would like help with the first two.}
-\note{[1:45] I will end with open problems, where I think this room is ahead of me. One: estimate the dependence from lineage. Given fork trees and evidence manifests, what can we say about rho without running everything twice? Two: leases that fork. A child's capability should be re-minted on restore, revocable, and never ambient. Three: warm state and side channels. Sharing warm pages is performance, and it is also a channel, so we should pack forks by trust and not only by utilisation. Four: evidence commit. We know how to hold network output; how do we hold effects on remote services and on people? Five: when does a content-addressed build beat a live fork? Six: a human gate can take a day; the machine should not wait alive for it. I would especially like help with the first two.}
+\note{[1:20] I will end with open problems, where I think this room is ahead of me. One: estimate the dependence from lineage. Given fork trees and evidence manifests, what can we say about rho without running everything twice? Two: leases that fork. A child's capability should be re-minted on restore, revocable, and never ambient. Three: warm state and side channels. Sharing warm pages is performance, and it is also a channel, so we should pack forks by trust and not only by utilisation. Four: evidence commit. We know how to hold network output; how do we hold effects on remote services and on people? Five: when does a content-addressed build beat a live fork? Six: a human gate can take a day; the machine should not wait alive for it. I would especially like help with the first two.}
 \end{frame}
 
-% 27
+% 28
 {\setbeamercolor{normal text}{fg=white,bg=Ink}
 \begin{frame}[plain]
 \color{white}
 \vspace{.35cm}
 {\fontsize{24}{28}\selectfont\bfseries Fork the machine, not the trust.\par}
-\vspace{.5cm}
+\vspace{.45cm}
 {\fontsize{14.5}{20}\selectfont
 State without secrets.\\
 Graders the children cannot write.\\
-Receipts that outlive the runner.\\
+Receipts that outlive the cell.\\
 Evidence counted, not executions.\\
 Authority committed once.\par}
 \vfill
-{\fontsize{15}{19}\selectfont\color{white!85}Burn the runner. Keep the proof.\par}
-\vspace{.3cm}
-{\footnotesize\color{white!65}arXiv:2607.09689\quad$\cdot$\quad github.com/zozo123/ariflow-swfactory\quad$\cdot$\quad Yossi Eliaz, Cambridge SRG, 15 October 2026\par}
-\note{[0:40] Fork the machine, not the trust. State without secrets. Graders the children cannot write. Receipts that outlive the runner. Evidence counted, not executions. And authority committed once. Burn the runner; keep the proof. Thank you. I am happy to take questions.}
+{\fontsize{15}{19}\selectfont\color{white!85}Burn the cell. Keep the receipt.\par}
+\vspace{.2cm}
+{\small\color{white!85}Help wanted: estimating $\rho$ from lineage; leases that fork.\par}
+\vspace{.1cm}
+{\small\color{white!85}arXiv:2607.09689\quad$\cdot$\quad github.com/zozo123/ariflow-swfactory\\ github.com/zozo123/cam-talk-london-26 (slides, notes, pre-registration)\par}
+\note{[0:30] Fork the machine, not the trust. State without secrets. Graders the children cannot write. Receipts that outlive the cell. Evidence counted, not executions. And authority committed once. Burn the cell; keep the receipt. Thank you. I am happy to take questions.}
 \end{frame}}
 
 \appendix
 \backuptrue
-\chapterlabel{Backup}
 % B1
 \begin{frame}[t]{\ev{\tagM}Paper Table 2: exercised API paths, not a provider ranking}
 \vspace{0pt}% keep beamer from reading the next group as a subtitle
@@ -692,9 +758,9 @@ islo & named 141 MB snapshot & restore + run + capture & 12 & 256 & 255/256 & 6.
 \bottomrule
 \end{tabularx}\par}
 \vspace{.2cm}
-{\small Total wall time: 190.3 s, 387.3 s, 240.3 s. Operation boundaries differ; rows are not comparable as latencies. The 256 islo round trips at concurrency 12 took 240.3 s, about 11 s per slot: queueing above the p50 that Phase A must explain.\par}
+{\small Total wall time: 190.3 s, 387.3 s, 240.3 s. Operation boundaries differ; rows are not comparable as latencies. The islo percentiles exclude the per-op teardown, which shares the slot: 256 ops over 12 slots averaged 11.3 s per slot including teardown. Whether the snapshot captures memory is unverified, so this is restore fan-out.\par}
 \sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2.}
-\note{[backup] Bring this up only if asked about speed. The operations differ: two rows are sandbox creation, the islo row is restore plus run plus capture. Do not compare them as latencies. The islo total implies queueing above the median; the one failure out of 256 must be explained before the talk.}
+\note{[backup] Bring this up only if asked about speed. The operations differ: two rows are sandbox creation, the islo row is restore plus run plus capture. They are not comparable as latencies, and none of them is a mechanism latency.}
 \end{frame}
 
 % B2
@@ -705,16 +771,16 @@ islo & named 141 MB snapshot & restore + run + capture & 12 & 256 & 255/256 & 6.
 \toprule
 System & What it forks or restores & Reported figure\\
 \midrule
-DeltaBox & layered CoW filesystem + incremental CRIU in Firecracker & abstract 14 ms / 5 ms; evaluation 10.83 ms checkpoint, 1.86 ms restore\\
+DeltaBox & layered CoW filesystem + incremental CRIU in Firecracker & evaluation: 10.83 ms checkpoint, 1.86 ms restore (abstract: 14 ms / 5 ms)\\
 Shepherd & overlay filesystem + backend-native checkpoints & fork 134--143 ms, flat from 42 MB to 5.8 GB\\
 Crab & eBPF effect classification per agent turn & over 75\% of turns need no checkpoint\\
 Planarian & statepoints spanning local and remote state & remote rollback by compensating actions\\
 Zheng et al. & when checkpoint, fork, restore, merge are safe & a sent request cannot be undone (Lean)\\
-Kimi K3 AgentENV & Firecracker pause, fork, snapshot at RL scale & checkpoint 133 ms, resume 49 ms; 51.2M sandboxes\\
+Kimi K3 AgentENV & Firecracker pause, fork, snapshot for agentic RL & checkpoint as low as 133 ms, resume as low as 49 ms\\
 \bottomrule
 \end{tabularx}\par}
 \sources{\href{https://arxiv.org/abs/2605.22781}{2605.22781}; \href{https://arxiv.org/abs/2605.10913}{2605.10913}; \href{https://arxiv.org/abs/2604.28138}{2604.28138}; \href{https://arxiv.org/abs/2609.35366}{2609.35366}; \href{https://arxiv.org/abs/2608.22928}{2608.22928}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
-\note{[backup] None of these systems treats sibling outputs as correlated evidence; they optimise checkpoint latency or safety. Planarian was posted on 28 September; read it in full before the talk.}
+\note{[backup] None of these systems treats sibling outputs as correlated evidence; they optimise checkpoint latency or safety. Planarian, from Imperial, spans local and remote state and rolls remote state back with compensating actions.}
 \end{frame}
 
 \begin{frame}[t]{Arp2/3 shapes network dynamics}
@@ -922,10 +988,29 @@ Composition order and size & Joint success and regressions & Which interactions 
 \note{[backup] Access control prevents direct tampering. It does not prevent a candidate generator from adapting to repeated pass/fail or score feedback. The final reported score may then be optimistic even when every individual evaluation was computed correctly. A fresh held-out evaluation or a statistically justified adaptive procedure addresses a different failure mode from sandbox isolation. If final-validation feedback is fed back into further selection, it has become development feedback and the protocol must account for that.}
 \end{frame}
 
+
+% B3 fork contract
+\begin{frame}[t]{\ev{\tagP}The fork contract, before the fork}
+\lead{A future native-fork executor must satisfy all of these before enabling parallel branches:}
+{\small
+\begin{enumerate}
+\item fork from an immutable, content-addressed parent state
+\item give every branch its own lease, TTL, budget and provenance
+\item never copy publishing credentials into a coding cell
+\item record the parent checkpoint, branch ID and evidence IDs for every child
+\item {\color{Rust}\bfseries never count siblings that reuse the same evidence as independent agreement}
+\item merge deterministically and surface conflicts as evidence, not silent retries
+\item run the complete verification and review stream on the merged result
+\item tear down every child on success, failure, cancellation or scheduler recovery
+\end{enumerate}\par}
+\sources{swfactory \href{https://github.com/zozo123/ariflow-swfactory/blob/main/docs/lifecycle.md}{docs/lifecycle.md}.}
+\note{[backup] The full contract, quoted from the repository. Condition five is the bridge to the count; condition eight is the SELFHOST-3 lesson.}
+\end{frame}
+
 % Bn references
 \begin{frame}[t]{References: systems}
 \vspace{0pt}
-{\fontsize{7.4}{8.9}\selectfont
+{\fontsize{6.6}{7.8}\selectfont
 \begin{columns}[T,onlytextwidth]
 \column{.49\textwidth}
 \textbf{Speaker}\\
@@ -933,14 +1018,16 @@ Y.~Eliaz. Evidence-aware reduction for forkable compute. arXiv:2607.09689, 2026.
 github.com/zozo123/ariflow-swfactory, runs SELFHOST-2/3, 27 Sep 2026.\\[4pt]
 \textbf{Fork, snapshot, isolation}\\
 Barham et al. Xen and the art of virtualization. SOSP 2003.\\
-Vrable et al. The Potemkin virtual honeyfarm. SOSP 2005.\\
+Vrable et al. Scalability, fidelity, and containment in the Potemkin virtual honeyfarm. SOSP 2005.\\
 Lagar-Cavilla et al. SnowFlock. EuroSys 2009.\\
 Madhavapeddy et al. Jitsu. NSDI 2015.\\
 Manco et al. My VM is lighter (and safer) than your container. SOSP 2017.\\
 Baumann et al. A fork() in the road. HotOS 2019.\\
 Agache et al. Firecracker. NSDI 2020.\\
 Du et al. Catalyzer. ASPLOS 2020.\\
-Brooker et al. Restoring uniqueness in microVM snapshots. arXiv:2102.12892, 2021.
+Brooker et al. Restoring uniqueness in microVM snapshots. arXiv:2102.12892, 2021.\\
+Ustiugov et al. Benchmarking, analysis, and optimization of serverless function snapshots (REAP). ASPLOS 2021.\\
+Nephele: extending virtualization environments for cloning unikernel-based VMs. EuroSys 2023.
 \column{.49\textwidth}
 \textbf{Agent sandboxes, 2026}\\
 DeltaBox, arXiv:2605.22781. Shepherd, arXiv:2605.10913. Crab, arXiv:2604.28138.\\
@@ -952,10 +1039,13 @@ Nightingale, Chen \& Flinn. Speculative execution in a distributed file system. 
 Nightingale et al. Rethink the sync. OSDI 2006.\\
 Cully et al. Remus. NSDI 2008.\\
 Watson et al. Capsicum. USENIX Security 2010.\\
+Watson et al. CHERI. IEEE S\&P 2015.\\
+Birgisson et al. Macaroons. NDSS 2014.\\
+Burrows. The Chubby lock service. OSDI 2006.\\
 Muniswamy-Reddy et al. Provenance-aware storage systems. USENIX ATC 2006.\\
 Pasquier et al. Practical whole-system provenance capture. SoCC 2017.\\
 Torres-Arias et al. in-toto. USENIX Security 2019.\\
-O'Callahan et al. Record and replay for deployability (rr). USENIX ATC 2017.
+O'Callahan et al. Engineering record and replay for deployability. USENIX ATC 2017.
 \end{columns}\par}
 \note{[backup] Systems references. Every figure on a main slide is traceable to one of these or to a named run file.}
 \end{frame}

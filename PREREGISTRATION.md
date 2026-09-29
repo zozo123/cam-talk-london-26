@@ -1,8 +1,8 @@
 # Pre-registration: fork cost and sibling coupling in an AI software factory
 
-Written before any run. The git commit that adds this file is the timestamp. Any change after a run starts is recorded as a separate commit with its reason.
+Written before any run. **The timestamp is the public push of tag `prereg-v1`** to github.com/zozo123/cam-talk-london-26. Any later change is a separate commit, with its reason, and a new tag.
 
-Slide 24 of `talk.tex` presents this protocol. The results slide shows every prediction as held or failed.
+Slide 25 of `talk.tex` presents this protocol. Results, each prediction marked held or failed, go in `RESULTS.md` in this repository. If the runs finish before 15 Oct 2026, the talk shows them.
 
 ## Question
 
@@ -15,7 +15,10 @@ Also: does forking the factory's repair loop produce correlated edits?
 
 ## Workload
 
-- Repository: `zozo123/ariflow-swfactory` at pre-repair head `b77afa9eebe5a928789ac2e637772a86060f4413`. This is the input head of repair 1 in run SELFHOST-2 (`workgraph-execution.json`, `repairs[0].input_head`).
+- Repository: `zozo123/ariflow-swfactory` at public commit `c07bc4a`, the parent of repair 1's delivered commit `2b1aa7c` on PR #2351.
+  - `b77afa9` is the in-cell SHA that `workgraph-execution.json` records as `repairs[0].input_head`, and it is not recoverable.
+  - The two are treated as equivalent because of the delivered commit order, not because a tree-hash comparison was made.
+  - Before running, push a tag (`prereg/selfhost-2-pre-repair`) at `c07bc4a`.
 - Test: `tests/test_dispatch_strand.py::test_two_replicas_pumping_the_same_outbox_dispatch_once`. It is a four-thread race. It failed in SELFHOST-2 ("0 runs from 4 replicas").
 - Dependencies: `uv sync --group dev` against the committed `uv.lock`. One recorded base image digest.
 - Record the platform CLI version and server region for every run.
@@ -78,35 +81,34 @@ Running both arms in concurrent triples matches host conditions across them. The
 - first simulate power at Δρ = 0.2 with 6 families; if power is below 0.8, use 9 families;
 - report N_eff for "18 green cells" under the estimated ρ.
 
-## Phase C: the repair loop (model calls, about $26)
+## Phase C: the repair loop (model calls, about $26; descriptive)
 
-Re-run repair 1 of SELFHOST-2 from its recorded input on the pre-repair snapshot:
-- same prompt, same tool policy (no shell), same model endpoint;
-- 3 families × 3 forked children.
+Re-sample repair 1 of SELFHOST-2 nine times from its recorded input, on the pre-repair state. Keep the same prompt, the same tool policy (no shell) and the same model endpoint.
 
-**Outcome per child:** did it edit `src/swfactory/backend/service.py`, which is outside the plan? Also record the diff digest.
+**Outcome per sample:** did it edit `src/swfactory/backend/service.py`, which is outside the plan? Also record the diff digest.
 
-**Analysis:**
-- the proportion of children that make the out-of-plan edit;
-- within-family vs across-family agreement.
+**Analysis:** the count k of 9, and the number of distinct diffs. Phase C is descriptive only:
+- the hosted model's sampling is not part of any guest snapshot, so a within-family vs across-family contrast would be empty by design;
+- a real contrast needs a second model or a paraphrased prompt, and is future work.
 
 ## Predictions
 
 - **P1:** restore beats cold on t_ready by at least 30 s at every N.
 - **P2:** if the cached template comes within 10 s of restore at N = 1, the build cache is the better mechanism for this workload, and the talk says so.
-- **P3:** Δρ > 0, with a 95% CI that excludes 0.
-- **P4:** at least 5 of 9 forked repairs edit the out-of-plan file, with higher within-family than across-family agreement.
+- **P3:** Δρ > 0.05, with a 95% CI that excludes 0. A result between P3 and the rejection zone below is reported as inconclusive.
+- **P4 (descriptive):** at least 5 of 9 samples repeat the out-of-plan edit.
 
 ## What rejects the thesis on this workload
 
 - Restore does not beat the cached template on t_ready. Fork buys nothing here.
 - Δρ ≤ 0.05 with an upper CI bound below 0.1. Shared ancestry did not couple test outcomes.
-- Phase C children disagree as much across families as within them.
 
 Every result is reported, including failures to reach the target within budget.
 
 ## Scope
 
-- Phases A and B measure correlation induced by the environment. Only Phase C measures correlation induced by the model.
+- Phases A and B measure correlation induced by the environment.
+- Phase C describes how repeatable one model's behaviour is. It does not estimate a correlation.
+- If Gate 0 shows the snapshot is disk-only, every result is about restore fan-out, not fork.
 - None of the phases compares vendors.
 - The cold arm is labelled "no cache". It is not presented as the build-system baseline; the cached template is.
