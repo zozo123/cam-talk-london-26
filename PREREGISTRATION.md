@@ -45,10 +45,10 @@ Before any child counts in Phase A or B, run the deterministic part of the suite
 
 ## Pilot (at most 2 hours)
 
-Run 3 cells × 50 executions of the race test and estimate its failure rate p.
-- Phase B sets runs per cell to ⌈10 / p⌉, so each cell expects at least 10 failures.
-- If p < 1%, pin cells to 1 vCPU and pilot again.
-- If it is still under 1%, the outcome becomes "any failure in the full suite".
+Run 3 restored cells × 50 executions of the race test and estimate its failure rate p.
+- If p is below 0.01 or above 0.99, pin cells to 1 vCPU and pilot again.
+- If it is still outside [0.01, 0.99], Phase B uses another flaky test from the same suite whose piloted p is inside that range. It is chosen and named from pilot data alone, before any Phase B run.
+- Phase B then runs T = max(300, ⌈10 / min(p, 1 − p)⌉) rounds per cell. That gives each cell at least 10 of the rarer outcome, and a per-triple standard error of ρ of about 0.014 or less.
 
 ## Phase A: cost, H1 (no model calls)
 
@@ -63,14 +63,20 @@ Run 3 cells × 50 executions of the race test and estimate its failure rate p.
 - N ∈ {3, 6, 12} concurrent cells.
 - 20 repetitions per (arm, N), interleaved in random order, with the seed recorded.
 
-**Measure:** time from the request to the first test result, using server-side timestamps where exposed and client-side ones otherwise (labelled as such). Also record capture time H and the uniqueness probe (`boot_id`, `machine-id`, IP/MAC, guest-minus-host clock, a userspace random value).
+**Outcome per repetition:** makespan, the time from the batch request until the last of the N cells reports its first test result.
+- Both arms at a given N use the same clock source: server-side timestamps where exposed for both, otherwise client-side for both, labelled as such.
+- Also record capture time H and the uniqueness probe (`boot_id`, `machine-id`, IP/MAC, guest-minus-host clock, a userspace random value).
 
-**Analysis:** gain = cached median − restore median, at each N, with a 95% bootstrap CI over repetitions.
+**Analysis:**
+- gain_N = median makespan (cached) − median makespan (restore), over the 20 repetitions of each arm.
+- CI: 10,000 bootstrap resamples of repetitions drawn separately within each arm, percentile method, seed recorded.
+- Secondary (not a decision input): the amortised gain, gain_N − H/N.
 
 **Decision:**
-- **Supports H1** if the lower CI bound is above 10 s at every N.
-- **Rejects H1** if the upper CI bound is below 10 s at any N.
+- **Supports H1** if the lower bound of the 95% CI is above 10 s at every N.
+- **Rejects H1** if the upper bound of a 98.3% CI (Bonferroni over the three N) is below 10 s at any N.
 - Anything else is inconclusive.
+- Why 10 s: a round number fixed before any data, not derived from it.
 
 ## Phase B: coupling, H2 (no model calls)
 
@@ -78,24 +84,33 @@ Run 3 cells × 50 executions of the race test and estimate its failure rate p.
 
 **Design:**
 - 12 snapshot families, each built independently from the same commit.
-- Each family has 3 restored siblings, paired with 3 cold "strangers" started in the same slot on the same host.
-- The three cells of a triple run the race test in lockstep rounds (round k starts in all three at once), for ⌈10 / p⌉ rounds.
+- Each family has 3 restored siblings.
+- Its 3 strangers are restores from other families' snapshots: pair i uses families i+1, i+2 and i+3 (mod 12). They start in the same slot on the same host.
+- Both arms are therefore restored. Only shared ancestry differs.
+- The three cells of a triple run the race test in lockstep rounds (round k starts in all three at once), for T rounds (see Pilot).
 - Record the binary outcome and the failure class.
 
 **Statistic:**
-- For a triple, ρ is the mean pairwise phi (Pearson) correlation of its three cells' binary outcome sequences over rounds. This is the ρ of the variance-floor formula on slide 22.
+- For a triple, ρ = mean over cell pairs (j, j′) and rounds k of (Y_jk − p̄)(Y_j′k − p̄) / (p̄(1 − p̄)).
+  - p̄ is the pooled failure rate of that arm (siblings or strangers), not each cell's own mean.
+  - This is the intraclass correlation of outcomes. It is the ρ of the variance-floor formula on slide 22.
+  - It captures both co-failure within a round and a shared shift in failure rate.
+  - It stays defined when one cell's sequence is constant.
 - For pair i, Δρ_i = ρ(siblings) − ρ(strangers).
 - Δρ is the mean over the 12 pairs.
 - Because host and timing are matched within a pair, Δρ isolates shared ancestry.
 
-**Test:** a sign-flip permutation test over the 12 pairs (all 4,096 sign patterns), plus a 90% bootstrap CI for Δρ.
+**Test:**
+- One-sided sign-flip permutation test: p = #{s ∈ {±1}^12 : mean(s_i Δρ_i) ≥ observed Δρ} / 4,096, counting the identity pattern. The smallest attainable p is 1/4,096.
+- CI: a 90% t-interval over the 12 pair differences, mean ± 1.796 · s / √12.
+- A failed restore is replaced by a new restore of the same family and listed. If pairs are lost, the test runs over the n that remain (2^n patterns), and n is reported.
 
 **Decision:**
 - **Supports H2** if p < 0.05 and Δρ > 0.05.
-- **Rejects H2** if the 90% CI lies within ±0.05, which is equivalence with no coupling.
+- **Rejects H2** if the upper bound of the 90% CI is below 0.05: the data rule out a shared-ancestry excess of 0.05 or more.
 - Anything else is **inconclusive**.
 
-**Why 0.05:** at N = 9 siblings, ρ = 0.05 gives N_eff = 9 / 1.4 ≈ 6.4.
+**Why 0.05:** an excess correlation of 0.05 from shared ancestry alone takes 9 siblings from 9 to 6.4 witnesses (9 / 1.4). Also report the siblings' absolute ρ with its CI. That value, not Δρ, feeds any N_eff bound.
 
 ## Phase C: the repair loop (model calls, about $26; descriptive)
 
@@ -109,14 +124,14 @@ Re-sample repair 1 of SELFHOST-2 nine times from its recorded input, on the pre-
 
 ## Predictions
 
-- **H1 (Phase A):** restore beats the cached template by more than 10 s at every N ∈ {3, 6, 12}.
-- **H2 (Phase B):** siblings fail together more than co-scheduled strangers: Δρ > 0.05 with permutation p < 0.05.
+- **H1 (Phase A):** restore beats the cached template by more than 10 s in median makespan at every N ∈ {3, 6, 12}.
+- **H2 (Phase B):** siblings fail together more than restored strangers: Δρ > 0.05 with one-sided permutation p < 0.05.
 - **Loop (Phase C, descriptive):** at least 5 of 9 samples repeat the out-of-plan edit.
 
 ## What rejects the thesis on this workload
 
-- **H1:** the upper CI bound of the gain is below 10 s at some N. The warm cache is the better mechanism here.
-- **H2:** the 90% CI of Δρ lies within ±0.05. Shared ancestry did not couple test outcomes.
+- **H1:** the upper bound of the 98.3% CI of the gain is below 10 s at some N. The warm cache is the better mechanism here.
+- **H2:** the upper bound of the 90% CI of Δρ is below 0.05. Shared ancestry did not couple test outcomes by that much.
 
 Every result is reported, including inconclusive ones and failures to finish within budget. Excluded runs are listed with reasons: a failed restore is excluded from timing but counted as a failure.
 

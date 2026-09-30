@@ -52,7 +52,7 @@
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcommand{\lead}[1]{{\fontsize{12.5}{15}\selectfont #1\par}\vspace{.2cm}}
 \newcommand{\claim}[1]{\par\vspace{.2cm}{\fontsize{11.5}{14}\selectfont\color{Teal}\bfseries #1\par}}
-\newcommand{\sources}[1]{\par\vfill{\fontsize{7.3}{9}\selectfont\color{Muted}#1\par}\vspace{.05cm}}
+\newcommand{\sources}[1]{\par\vfill{\fontsize{7.8}{9.2}\selectfont\color{Muted}#1\par}\vspace{.05cm}}
 \newcommand{\tagline}[1]{\par{\fontsize{9}{11}\selectfont\color{Muted}#1\par}}
 \newcommand{\term}[1]{\textbf{#1}}
 \newcommand{\no}{{\color{Rust}\bfseries$\times$}}
@@ -112,33 +112,33 @@
 \end{center}
 {\small\bfseries All four steps ran on the same hosted model.\par}
 \vspace{.08cm}
-{\small Repair 1: ``this environment provided no shell/execution tool, so I could not run'' the tests. The suite then ran once: 1,972 tests, 0 failures. Repair 2 was never tested before review 2 approved it.\par}
+{\small Repair 1: ``this environment provided no shell/execution tool, so I could not run'' the tests. The harness ran the suite after each repair: 1,972 tests, 0 failures. The new branch had no test; only the race can reach it.\par}
 \vspace{.05cm}
 {\small 27 Sep 2026\quad$\cdot$\quad 43 min\quad$\cdot$\quad \$10.33\quad$\cdot$\quad I reverted the file by hand (PR \#2351, open)\par}
-\claim{Every agent told the truth. The gate approved a change no test had run.}
-\sources{Run SELFHOST-2: PR \#2351 of \href{https://github.com/zozo123/ariflow-swfactory}{zozo123/ariflow-swfactory}, docs/factory/SELFHOST-2/ (agent/*.json, metrics.json, workgraph-execution.json).}
-\note{[2:00] Let me start with a real run. On the 27th of September my software factory worked on its own code. The work order was small: fix the sandbox's network allowlist. Along the way a four-thread race test failed, and the loop sent a repair agent. That agent had no shell, and it said so: it could not run the tests. It read the code, decided the bug was in the race logic, and rewrote it, in a file no plan listed. Review one said: blocker, untested and unverified. So the loop tried again. The tests were locked, so it could not add one. It restructured the code, said plainly it had not run the suite, and argued the change was already covered. Review two downgraded "untested" to minor, and approved. All four steps ran on the same model. The suite had run once, after the first repair, and it was green. The second repair never ran under test before it was approved. I reverted that file by hand. Every agent told the truth. The gate approved a change no test had run. Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Hold that question.}
+\claim{Every agent was honest. The suite was green. The branch had no test.}
+\sources{Run SELFHOST-2: PR \#2351 of \href{https://github.com/zozo123/ariflow-swfactory}{zozo123/ariflow-swfactory}, docs/factory/SELFHOST-2/.}
+\note{[2:10] Let me start with a real run. On the 27th of September my software factory worked on its own code. The work order was small: fix the sandbox's network allowlist. Along the way a four-thread race test failed, and the loop sent a repair agent. That agent had no shell, and it said so: it could not run the tests. It read the code, decided the bug was in the race logic, and rewrote it, in a file no plan listed. Review one said: blocker, untested and unverified. So the loop tried again. The tests were locked, so it could not add one. It restructured the code, said plainly it had not run the suite, and argued the change was already covered. Review two downgraded "untested" to minor, and approved. All four steps ran on the same model. After each repair the harness ran the whole suite, and it was green. But the new branch had no test of its own. Review two says the only coverage is the race itself, which reaches it only when the interleaving happens to lose an activation. I reverted that file by hand. Every agent told the truth. The suite was green. The new branch had no test. Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Hold that question.}
 \end{frame}
 
 % 03
 \begin{frame}[t]{One factory, seven places the runtime bit}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
-\foreach \n/\x/\t in {i/0/issue,c/1.9/cell setup,s/3.8/spec + plan,b/5.7/build + test,r/7.6/review,d/9.5/deliver,g/11.4/human gate}{
+\foreach \n/\x/\t in {i/0/issue,c/2.0/cell setup,s/4.0/spec + plan,b/6.0/build + test,r/8.0/review,d/10.0/deliver,g/12.0/human gate}{
   \node[state,minimum width=1.5cm,minimum height=.72cm,font=\footnotesize] (\n) at (\x,0) {\t};}
 \foreach \a/\b in {i/c,c/s,s/b,b/r,r/d,d/g}{\draw[flow] (\a)--(\b);}
-\node[evidence,font=\footnotesize,minimum height=.55cm,align=center] (n1) at (1.55,1.35) {1 networking +\\credentials};
-\node[evidence,font=\footnotesize,minimum height=.55cm] (n2) at (1.9,-1.3) {2 filesystem state};
-\node[evidence,font=\footnotesize,minimum height=.55cm] (n3) at (3.95,1.35) {7 fast cloning};
-\node[evidence,font=\footnotesize,minimum height=.55cm] (n4) at (5.7,-1.3) {3 build/test};
-\node[evidence,font=\footnotesize,minimum height=.55cm] (n5) at (7.6,1.35) {5 observability};
-\node[evidence,font=\footnotesize,minimum height=.55cm] (n6) at (9.5,-1.3) {4 recovery};
-\node[evidence,font=\footnotesize,minimum height=.55cm] (n7) at (11.3,1.35) {6 reproducibility};
+\node[evidence,font=\footnotesize,minimum height=.55cm,align=center] (n1) at (1.75,1.35) {1 networking +\\credentials};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n2) at (2.0,-1.3) {2 filesystem state};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n3) at (4.15,1.35) {7 fast cloning};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n4) at (6.0,-1.3) {3 build/test};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n5) at (8.0,1.35) {5 observability};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n6) at (10.0,-1.3) {4 recovery};
+\node[evidence,font=\footnotesize,minimum height=.55cm] (n7) at (11.9,1.35) {6 reproducibility};
 \foreach \p/\q in {n1/c,n2/c,n3/s,n4/b,n5/r,n6/d,n7/g}{\draw[Teal,line width=.6pt] (\p)--(\q);}
 \end{tikzpicture}
 \end{center}
 \vspace{.1cm}
-{\footnotesize \tagM\ my run records\qquad \tagB\ built and tested, or synthetic\qquad \tagP\ design, not yet run\qquad \tagO\ other people's work\par}
+{\footnotesize \tagM\ my run records\qquad \tagB\ built and tested, or synthetic\\[3pt] \tagP\ design, not yet run\qquad \tagO\ other people's work\par}
 \vspace{.2cm}
 {\small\setlength{\fboxsep}{4pt}\colorbox{Sand}{\parbox{.975\linewidth}{\textbf{Scope, said once:} two runs on Docker's sandbox; two observations from islo; my harness answered the gates; leases off; nothing forked.}}\par}
 \note{[1:10] Here is the factory as a pipeline, with the seven topics from the abstract pinned where each one bit, and numbered in the order I will take them: across two runs on the 27th and a CI job the next day, saving fast cloning for last, because that is where the fork comes in. Every evidence slide carries a tag: measured in my own run records, built and tested, proposed, or other people's work. And here is the scope, said once so I do not hedge every slide. The two runs used Docker's sandbox, not my platform. Two observations that day come from islo. My harness answered the approval gates, not a person. Leases were built but off. And nothing forked.}
@@ -150,7 +150,7 @@
 \begin{tikzpicture}[x=1cm,y=1cm]
 \node[state,text width=3.4cm,minimum height=1.2cm] (w) at (0,0) {\textbf{Wall}\\\footnotesize what a cell can reach, change and report};
 \node[candidate,text width=3.4cm,minimum height=1.2cm] (f) at (4.3,0) {\textbf{Fork}\\\footnotesize alternatives from a state already paid for};
-\node[evidence,text width=3.4cm,minimum height=1.2cm] (c) at (8.6,0) {\textbf{Count}\\\footnotesize what the alternatives actually found};
+\node[evidence,text width=3.4cm,minimum height=1.2cm] (c) at (8.6,0) {\textbf{Count}\\\footnotesize what alternatives actually found};
 \draw[flow] (w)--(f);\draw[flow] (f)--(c);
 \end{tikzpicture}
 \end{center}
@@ -161,7 +161,7 @@
 {\small
 \tagB\ a receipt contract: reused evidence stops the merge; lineage travels with every result (arXiv:2607.09689)\\[3pt]
 \tagM\ two real factory runs, 27 September\\[3pt]
-\tagP\ H1: restore beats a warm build cache only when preparation is expensive\\[3pt]
+\tagP\ H1: restore beats a warm cached template by more than 10 s ($N=3,6,12$)\\[3pt]
 \tagP\ H2: siblings from one snapshot fail together more than strangers\par}
 \column{.36\textwidth}
 \textbf{I do not claim}
@@ -182,7 +182,7 @@
 \setact{1}
 
 % 05
-\begin{frame}[t]{\surf{surface 1 of 7}\ev{\tagM\,\tagO}Allowlists name hosts; the web redirects}
+\begin{frame}[t]{\surf{surface 1 of 7}\ev{\tagM}Allowlists name hosts; the web redirects}
 \begin{columns}[T,onlytextwidth]
 \column{.55\textwidth}
 \begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
@@ -274,7 +274,7 @@ external services & mediate & (later)\\
 \end{columns}
 \vspace{.2cm}{\small\color{Muted}Two fixes here are policy, not runtime: scope-check repairs; make an out-of-plan edit a blocker.\par}
 \claim{Run $\neq$ evaluate $\neq$ promote. Each grader gets a budget.}
-\sources{swfactory work\_stage.py (repairs recorded without a scope check); \href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
+\sources{swfactory work\_stage.py (repairs recorded without a scope check); \href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S4.2.6.}
 \note{[1:40] Surface three, build and test. We did the standard thing. The tests directory was write-protected by a hook, and the agent was told so. It never tried to edit a test, so the hook never fired. It did not matter. Planned steps are scope-checked against the files they declare; repairs are not, so the repair loop could touch any file. The repair changed the code under test, not the test. An out-of-plan edit counts as major, not as a blocker, and the writer and both reviewers were one model. Two of those are policy fixes, not runtime fixes, and I will say so. This is not special to my factory. METR saw o3 reward-hack in about thirty percent of RE-Bench runs and under one percent of HCAST runs, and suggests the visible scorer on RE-Bench is why. ImpossibleBench shows read-only tests stop test edits but not special-casing. And the Kimi K3 report names the fixes: isolate agents from verifiers, keep hidden verifiers, limit submission budgets. Run, evaluate and promote are three permissions, and each grader gets a budget.}
 \end{frame}
 
@@ -294,7 +294,7 @@ external services & mediate & (later)\\
 {\small Run SELFHOST-3, a second work order: 26 min, \$3.43, nothing delivered.\par}
 \claim{The gate was right. Recovery was wrong.}
 {\small The artifact leaves the cell before the cell dies. A human wait should be snapshot, destroy, restore.\par}
-\sources{SELFHOST-3 run records, 27 Sep 2026; fix in open PR \#2350 (harness archives moved to control state).}
+\sources{Run SELFHOST-3, 27 Sep 2026: described in open PR \#2350 of zozo123/ariflow-swfactory (cost and time from local records).}
 \note{[1:15] Surface four, recovery. A second work order the same day went well, then badly. Build and test passed first time. Review approved. Then delivery was refused three times: the workspace had a file outside the reviewed commits. That file was my own harness's review archive, mirrored into the workspace. So the gate was right to refuse. What happened next was wrong: teardown destroyed the cell, and the approved candidate with it. Twenty-six minutes, three dollars forty, nothing delivered. The fix is not exotic. The artifact has to leave the cell before the cell dies; a patch file on the host would have been enough. A crash, a refusal or a long human wait should destroy a worker, never the experiment. For a day-long human gate: snapshot, destroy, restore.}
 \end{frame}
 
@@ -304,7 +304,7 @@ external services & mediate & (later)\\
 \begin{tikzpicture}[x=1cm,y=1cm]
 \node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (0,0) {\textbf{CI job \texttt{evals-islo}}\\ {\color{Teal}success} in 3\,s; every real step skipped, because the key was unset};
 \node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (4.3,0) {\textbf{approvals.json}\\ \texttt{"mode": "human"}, actor \texttt{admin}; my harness answered};
-\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (8.6,0) {\textbf{islo CLI 0.53.1}\\ status lines on the command's stdout; an earlier attempt died parsing them};
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (8.6,0) {\textbf{islo CLI 0.53.1}\\ status lines mixed into stdout; an earlier attempt died parsing them};
 \end{tikzpicture}
 \end{center}
 {\small All three are my own receipts, and each was wrong.\par}
@@ -332,7 +332,7 @@ external services & mediate & (later)\\
 \item[\no] the hosted model: no sampling seed
 \item[\no] external hosts and their redirects
 \item[\no] the clock and scheduling
-\item[\no] the adapter's source: a local shim, not in the repo
+\item[\no] the adapter source: a local shim, not in git
 \end{ticks}\par}
 \end{columns}
 \vspace{.1cm}
@@ -378,7 +378,7 @@ external services & mediate & (later)\\
 \toprule
 & System & What it forks or moves & Reported\\
 \midrule
-2003 & Xen (Cambridge) & paravirtualised VMs & base of three rows below\\
+2003 & Xen (Cambridge) & paravirtualised VMs & base of the Xen rows below\\
 2005 & Live migration (Cambridge) & pre-copy of memory to another host & 60 ms downtime, Quake 3 server\\
 2005 & Potemkin & flash-cloned honeypot VMs, CoW memory & 521 ms clone to first reply\\
 2009 & SnowFlock & \texttt{VM\_fork(N)} across hosts, on Xen & 600--800 ms; first example forks an untrusted child\\
@@ -422,7 +422,7 @@ open TCP connections & cannot be cloned & CRIU hands one to one restore; gVisor 
 Mechanism & What survives & Where the cost lands\\
 \midrule
 worktree, overlay layer & files only & bytes each child writes\\
-container checkpoint (CRIU) & processes and memory; a TCP connection restores once & dump size; what the kernel can checkpoint\\
+container checkpoint (CRIU) & processes and memory; a TCP connection needs its original IP, so one copy at most & dump size; what the kernel can checkpoint\\
 microVM snapshot & guest memory and vCPU/device state; disks handled separately & pages each child touches after restore\\
 record and replay (rr) & a log, not a state & replay time\\
 \bottomrule
@@ -431,7 +431,7 @@ record and replay (rr) & a log, not a state & replay time\\
 {\small A restore that returns OK is not fidelity: compare restored and direct runs on declared outputs before counting a child. islo's named snapshot: memory capture not yet verified.\par}
 \claim{Cheap at fork; you pay at divergence.}
 \sources{Firecracker snapshot-support docs; CRIU TCP\_REPAIR docs; \href{https://arxiv.org/abs/2101.09355}{REAP (ASPLOS'21)}; rr (USENIX ATC'17).}
-\note{[1:35] What does a fork actually copy? Children share memory until they write, so the total is the shared part plus each child's private pages. Four mechanisms, four answers. A worktree or an overlay layer keeps files only, and costs the bytes each child writes. A container checkpoint with CRIU keeps processes and memory, but an open TCP connection can be restored only once. A microVM snapshot keeps guest memory and device state, with disks handled separately, and the real cost is the pages each child touches after restore; REAP showed that is where cold starts go. Record and replay keeps a log instead of a state. Two cautions. A restore that returns OK is not fidelity: before a child counts, compare restored and direct runs on the outputs you declared. And I have not yet verified that islo's snapshot captures memory. Cheap at fork; you pay at divergence.}
+\note{[1:40] What does a fork actually copy? Children share memory until they write, so the total is the shared part plus each child's private pages. Four mechanisms, four answers. A worktree or an overlay layer keeps files only, and costs the bytes each child writes. A container checkpoint with CRIU keeps processes and memory, but an open TCP connection needs its original IP, so at most one restored copy can keep it. A microVM snapshot keeps guest memory and device state, with disks handled separately, and the real cost is the pages each child touches after restore; REAP showed that is where cold starts go. Record and replay keeps a log instead of a state. Two cautions. A restore that returns OK is not fidelity: before a child counts, compare restored and direct runs on the outputs you declared. And I have not yet verified that islo's snapshot captures memory. Cheap at fork; you pay at divergence.}
 \end{frame}
 
 % 15
@@ -472,7 +472,8 @@ record and replay (rr) & a log, not a state & replay time\\
 \textbf{Where fork loses}
 {\small
 \begin{ticks}
-\item[\no] $N=1$, or the build cache is good
+\item[\no] $N=1$
+\item[\no] the state is only files and the build cache is good
 \item[\no] a minimal image boots faster (Jitsu; LightVM)
 \end{ticks}\par}
 \column{.44\textwidth}
@@ -525,7 +526,7 @@ record and replay (rr) & a log, not a state & replay time\\
 \node[missing,text width=2.1cm,minimum height=.85cm] (f) at (-4.2,0) {\textbf{fork store}\\missing};
 \node[candidate,text width=2.5cm,minimum height=.85cm] (c) at (0,0) {\textbf{work cells}};
 \node[proposed,text width=2.9cm,minimum height=.85cm] (l) at (4.4,1.25) {\textbf{lease broker}: not exercised};
-\node[proposed,text width=2.9cm,minimum height=.85cm] (e) at (4.4,0) {\textbf{evaluator} outside the cell};
+\node[proposed,text width=2.9cm,minimum height=.85cm] (e) at (4.4,0) {\textbf{evaluator}\\outside the cell};
 \node[state,text width=4.3cm,minimum height=.85cm] (g) at (0,-1.25) {\textbf{gate}: approval bound to artifact sha256};
 \draw[flow] (s)--(c);\draw[message] (f)--(c);\draw[flow] (l)--(c);\draw[flow] (c)--(e);\draw[flow] (e)--(g);\draw[flow] (c)--(g);
 \end{tikzpicture}
@@ -544,19 +545,19 @@ record and replay (rr) & a log, not a state & replay time\\
 \toprule
 \normalfont Call & Status\\
 \midrule
-checkpoint(cell) $\to$ snap & islo named snapshots exist (disk; memory unverified)\\
+checkpoint(cell) $\to$ snap & \tagM\ islo named snapshots; memory unverified\\
 fork(snap, lease, seed=copy|reseed, egress) & \tagP\\
 evaluate(artifact, verifier) $\to$ receipt & \tagP\ runs outside the child\\
 select(candidates, fresh test) $\to$ one & \tagP\ choosing, not pooling\\
 reduce(receipts) $\to$ $(\hat\theta, N_{\rm eff})$ | abstain & \tagB\ merge + evidence check;\ \tagP\ abstain\\
-promote(epoch, receipt) & \tagB\ gate bound to sha256; fenced, once\\
+promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.15cm}
-{\small Promotion is epoch-fenced, like Chubby sequencers and fencing tokens. A TLA+ design model of it exists, not yet checked against traces.\par}
-\claim{I can model-check promotion. I cannot model-check what a child writes.}
+{\small The epoch fence is a Chubby sequencer or a fencing token. A TLA+ design model states its invariants.\par}
+\claim{Promotion is small enough to model-check. What a child writes is not.}
 \sources{swfactory formal/authority/ (TLA+); Burrows OSDI'06; Kleppmann (2016).}
-\note{[1:35] If this is a runtime layer, here is the interface it owes the factory. Checkpoint a cell into a snapshot; islo has named snapshots today, as disk images, and memory is unverified. Fork a snapshot with a lease, an explicit seed policy, copy or reseed, and an egress policy. Evaluate an artifact outside the child, and get back a receipt. Select one candidate on a fresh test: that is choosing, and it is not pooling. Reduce receipts into an estimate and an effective number of witnesses, or abstain; the merge and the evidence check are built, abstention is proposed. And promote once, under an epoch fence, which is Chubby's sequencer and Kleppmann's fencing token. There is a TLA+ design model of promotion, not yet checked against real traces. I can model-check promotion. I cannot model-check what a child will write. That is why the count is statistics.}
+\note{[1:45] If this is a runtime layer, here is the interface it owes the factory. Checkpoint a cell into a snapshot; islo has named snapshots today, as disk images, and memory is unverified. Fork a snapshot with a lease, an explicit seed policy, copy or reseed, and an egress policy. Evaluate an artifact outside the child, and get back a receipt. Select one candidate on a fresh test: that is choosing, and it is not pooling. Reduce receipts into an estimate and an effective number of witnesses, or abstain; the merge and the evidence check are built, abstention is proposed. And promote once: the gate that binds approval to the artifact hash is built, and the epoch fence, which is Chubby's sequencer and Kleppmann's fencing token, is proposed. There is a TLA+ design model of promotion with explicit invariants, not yet checked against real traces. Promotion is small enough to model-check. What a child will write is not. That is why the count is statistics.}
 \end{frame}
 
 % ===================================================================== ACT 3: THE COUNT
@@ -573,7 +574,7 @@ promote(epoch, receipt) & \tagB\ gate bound to sha256; fenced, once\\
 \end{center}
 {\small
 \begin{ticks}
-\item \textbf{Sequential:} repair 2 was written against review 1's verdict and graded by the same model (Dwork et al.\ 2015).
+\item \textbf{Sequential:} repair 2 answered review 1's verdict; the same model graded it (Dwork et al.\ 2015).
 \item \textbf{Choosing} among 9 forked patches needs a fresh test. \textbf{Confirming} one patch 9 times is capped by what the runs share.
 \item Review 2: the race reaches the new code ``only when the interleaving happens to lose an activation''. At 10\% per run, 29 independent greens get the risk below 5\%.
 \end{ticks}\par}
@@ -592,17 +593,17 @@ promote(epoch, receipt) & \tagB\ gate bound to sha256; fenced, once\\
 \begin{tikzpicture}[x=.42cm,y=1.8cm]
 \draw[flow] (1,0)--(12,0) node[below,font=\footnotesize]{$N$};
 \draw[flow] (1,0)--(1,1.15) node[above,font=\footnotesize]{variance / $\sigma^2$};
-\draw[Ink,line width=1.2pt,domain=1:10,samples=60] plot (\x,{1/\x}) node[right,font=\footnotesize]{$\rho=0$};
-\draw[Teal,line width=1.2pt,domain=1:10,samples=60] plot (\x,{.25+.75/\x}) node[right,font=\footnotesize,text=Teal]{$\rho=0.25$};
-\draw[Teal,dashed] (1,.25)--(10,.25);
+\draw[Teal,line width=1.2pt,domain=1:10,samples=60] plot (\x,{.1+.9/\x}) node[right,font=\footnotesize,text=Teal]{$\rho=0.1$};
+\draw[Gold,line width=1.2pt,domain=1:10,samples=60] plot (\x,{.5+.5/\x}) node[right,font=\footnotesize,text=Gold]{$\rho=0.5$};
+\draw[Teal,dashed] (1,.1)--(10,.1);\draw[Gold,dashed] (1,.5)--(10,.5);
 \end{tikzpicture}
 \end{columns}
 \vspace{.1cm}
-{\small 4 re-runs $\times$ 100 tests $=$ 100 evidence IDs, not 400. Pool within a candidate; compare across candidates.\\[2pt]
+{\small 4 re-runs $\times$ 100 tests: 400 executions, 100 evidence IDs; they count as 100 until $\rho$ is measured. Pool within a candidate; compare across candidates.\\[2pt]
 On one leaderboard, two models that are both wrong agree 60\% of the time (Kim et al., ICML'25). A shared blind spot is bias, not variance.\par}
 \claim{Execution multiplicity is not evidence multiplicity.}
 \sources{Equal variances, common pairwise correlation $\rho\geq0$; Kish (1965). \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025} (350+ LLMs studied).}
-\note{[1:35] Here is the arithmetic. If N runs have the same variance and a common pairwise correlation rho, the variance of their average has a floor at rho times sigma squared. More runs approach the floor; they never go below it. As an effective sample size: a hundred forks at a correlation of point one are worth about nine independent witnesses; at point five, two. In evidence terms: four re-runs of a hundred tests are a hundred pieces of evidence, not four hundred. Pool within a candidate, compare across candidates. And the correlation is not hypothetical. Kim and colleagues found that on one leaderboard, two models that are both wrong give the same wrong answer sixty percent of the time. A shared blind spot is bias, not variance: no number of re-runs averages it away. Execution multiplicity is not evidence multiplicity.}
+\note{[1:40] Here is the arithmetic. If N runs have the same variance and a common pairwise correlation rho, the variance of their average has a floor at rho times sigma squared. More runs approach the floor; they never go below it. As an effective sample size: a hundred forks at a correlation of point one are worth about nine independent witnesses; at point five, two. In evidence terms: four re-runs of a hundred tests are four hundred executions but a hundred evidence identities, and until rho is measured they count as a hundred. Pool within a candidate, compare across candidates. And the correlation is not hypothetical. Kim and colleagues found that on one leaderboard, two models that are both wrong give the same wrong answer sixty percent of the time. A shared blind spot is bias, not variance: no number of re-runs averages it away. Execution multiplicity is not evidence multiplicity.}
 \end{frame}
 
 % 21
@@ -653,7 +654,7 @@ lineage as annotation & Green et al.\ PODS'07\\
 \end{frame}
 
 % 23
-\begin{frame}[t]{\ev{\tagB\,\tagP}Every worker returns a receipt, not a score}
+\begin{frame}[t]{\ev{\tagM\,\tagB\,\tagP}Every worker returns a receipt, not a score}
 \begin{columns}[T,onlytextwidth]
 \column{.55\textwidth}
 \vspace{-.25cm}\[r_k=(\hat\theta_k,\ J_k,\ n_k,\ \mathcal E_k,\ \mathcal L_k,\ m_k)\]
@@ -683,7 +684,7 @@ lineage as annotation & Green et al.\ PODS'07\\
 \vspace{.1cm}
 {\small $\theta$: e.g.\ a pass probability. $m$ siblings inflate its variance by $1+(m-1)\rho$.\par}
 \vspace{.05cm}
-{\small \tagM\ separate 4-worker trace, no cold baseline: 6.70 s total; pooled 4.94 vs.\ 4.95.\par}
+{\small \tagM\ separate 4-worker trace, no cold baseline: 6.70 s total; pooled 4.942 vs.\ 4.945.\par}
 \end{columns}
 \claim{The estimator is Cochran's. The contract is what was missing.}
 \sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S2--5; Cochran (1954).}
@@ -728,14 +729,14 @@ Step & Design & Decision\\
 \midrule
 Gate 0 & a RAM nonce, snapshot, restore 3 children: does it survive? & if not, every result is ``restore fan-out''\\
 Fidelity & deterministic tests, restored vs.\ direct & any output mismatch voids the arm\\
-H1 cost & cached template vs.\ restore, cold as reference; $N\in\{3,6,12\}$; 20 interleaved reps per arm and $N$; server-side time to first test result & supports if the 95\% CI of the median gain is above 10 s at every $N$; rejects if it is below 10 s at any $N$\\
+H1 cost & cached template vs.\ restore, cold as reference; $N\in\{3,6,12\}$; 20 interleaved reps per arm and $N$; makespan to first test results, one clock for both arms & supports if the 95\% CI of the median gain is above 10 s at every $N$; rejects if a Bonferroni CI is below 10 s at any $N$\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.15cm}
 {\small No model calls. Rules written before any run: PREREGISTRATION.md, tag \texttt{prereg-v1}.\par}
 \claim{A result where the build cache wins is a good result for this room.}
 \sources{github.com/zozo123/cam-talk-london-26: PREREGISTRATION.md; results in RESULTS.md.}
-\note{[1:30] Everything so far is one run and a synthetic check. Whether it generalises is an experiment, so here are two tests that could prove me wrong, written down before any run. Test one is cost. First a gate: put a random value in RAM, snapshot, restore three children, and see whether it survives; if not, everything I report is restore fan-out, not fork. Then fidelity: deterministic tests must give identical outputs restored and direct. Then the comparison that matters to this room: a cached template against a restore, twenty interleaved repetitions at each size, timed on the server to the first test result. If restore does not beat the cache by ten seconds, fork buys nothing for this factory, and I will say so. A result where the build cache wins is a good result for this room.}
+\note{[1:35] Everything so far is one run and a synthetic check. Whether it generalises is an experiment, so here are two tests that could prove me wrong, written down before any run. Test one is cost. First a gate: put a random value in RAM, snapshot, restore three children, and see whether it survives; if not, everything I report is restore fan-out, not fork. Then fidelity: deterministic tests must give identical outputs restored and direct. Then the comparison that matters to this room: a cached template against a restore, twenty interleaved repetitions at each size, timed on the server to the first test result. If the whole interval for the gain sits below ten seconds at any size, the warm cache wins here, and I will say so; anything in between is inconclusive. A result where the build cache wins is a good result for this room.}
 \end{frame}
 
 % 25b
@@ -746,15 +747,15 @@ H1 cost & cached template vs.\ restore, cold as reference; $N\in\{3,6,12\}$; 20 
 \toprule
 Step & Design & Decision\\
 \midrule
-H2 coupling & 12 snapshot families $\times$ 3 siblings, each paired with 3 strangers started in the same slot on the same host; the race test in lockstep rounds, enough for $\geq$10 expected failures per cell & supports if a sign-flip permutation test gives $p<0.05$ and $\Delta\rho>0.05$; rejects if the 90\% CI of $\Delta\rho$ lies within $\pm0.05$; otherwise inconclusive\\
-The loop & repair 1 re-sampled 9 times from its recorded input & descriptive: how many repeat the out-of-plan edit\\
+H2 coupling & 12 snapshot families $\times$ 3 siblings, each paired with 3 strangers restored from other families, same slot, same host; the race test in lockstep rounds, at least 300 per cell & supports if a one-sided sign-flip test gives $p<0.05$ and $\Delta\rho>0.05$; rejects if the 90\% CI of $\Delta\rho$ lies below 0.05; otherwise inconclusive\\
+The loop & repair 1 re-sampled 9 times from its recorded input & descriptive; predicted: $\geq$5 of 9 repeat the out-of-plan edit\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.15cm}
-{\small Why 0.05: nine siblings at $\rho=0.05$ are worth 6.4 witnesses. The loop is the only step with model calls.\par}
+{\small Why 0.05: that much extra correlation takes 9 siblings down to 6.4 witnesses. Only the loop makes model calls.\par}
 \claim{Each rejection rule was written before the data.}
 \sources{github.com/zozo123/cam-talk-london-26: PREREGISTRATION.md; results in RESULTS.md.}
-\note{[1:40] Test two is coupling. Twelve snapshot families of three siblings each, and each family paired with three strangers started in the same slot on the same host, so the only difference is shared ancestry. A pilot sets how many runs each cell gets, so every cell expects at least ten failures of the race test. Each triple runs the test in lockstep rounds, and the statistic is how correlated its three outcome sequences are: siblings minus strangers, tested by flipping signs across the twelve pairs. If siblings fail together more than strangers by more than point zero five, the thesis holds here. If the difference is confidently within point zero five of zero, shared ancestry did not couple the evidence, and I will say that. Point zero five matters because nine siblings at that correlation are worth only six and a half witnesses. Last, the loop: re-sample the repair nine times and count how often it makes the same out-of-plan edit. That one is descriptive.}
+\note{[1:45] Test two is coupling. Twelve snapshot families of three siblings each, and each family paired with three strangers restored from other families' snapshots, started in the same slot on the same host, so the only difference is shared ancestry. Each triple runs the race test in lockstep rounds, at least three hundred of them, and the statistic is how correlated its three outcome sequences are: siblings minus strangers, tested by flipping signs across the twelve pairs. If siblings beat strangers by more than point zero five and the test gives p below point zero five, the thesis holds here. If the interval shows the excess is below point zero five, shared ancestry did not couple the evidence, and I will say that. Point zero five matters because that much extra correlation takes nine siblings down to six and a half witnesses. Last, the loop: re-sample the repair nine times and count how often it makes the same out-of-plan edit. That one is descriptive.}
 \end{frame}
 
 % 26
@@ -771,7 +772,7 @@ The loop & repair 1 re-sampled 9 times from its recorded input & descriptive: ho
 \end{center}
 {\small Review 2 would not count as a second witness.\par}
 \claim{Search can race. Promotion must not.}
-\note{[1:20] So here is the same work order, run the way the runtime should run it. Fork after the plan is approved, each child with its own lease and budget. The repair loop's scope is enforced, so the out-of-plan edit is denied instead of being reported as major. The evaluator lives outside the cells, uses another model family and hidden tests the repair loop never saw, and scores the frozen candidate once, so the holdout stays a holdout. The reducer clusters receipts by lineage and reports the number of runs, a bound on the effective number of witnesses from the coupling test, or abstains. The artifact leaves the cell before teardown, and promotion is fenced by an epoch. Review two would not count as a second witness. Search can race. Promotion must not. This is a design, not a run.}
+\note{[1:25] So here is the same work order, run the way the runtime should run it. Fork after the plan is approved, three children here because that is the sandbox cap I run at, each with its own lease and budget. The repair loop's scope is enforced, so the out-of-plan edit is denied instead of being reported as major. The evaluator lives outside the cells, uses another model family and hidden tests the repair loop never saw, and scores the frozen candidate once, so the holdout stays a holdout. The reducer clusters receipts by lineage and reports the number of runs, a bound on the effective number of witnesses from the coupling test, or abstains. The artifact leaves the cell before teardown, and promotion is fenced by an epoch. Review two would not count as a second witness. Search can race. Promotion must not. This is a design, not a run.}
 \end{frame}
 
 % 27
@@ -837,7 +838,7 @@ islo & named 141 MB snapshot & restore + run + capture & 12 & 256 & 255/256 & 6.
 \toprule
 System & What it forks or restores & Reported figure\\
 \midrule
-DeltaBox & layered CoW filesystem + incremental CRIU in Firecracker & evaluation: 10.83 ms checkpoint, 1.86 ms restore (abstract: 14 ms / 5 ms)\\
+DeltaBox & layered CoW filesystem + incremental CRIU in Firecracker & 10.83 / 1.86 ms (abstract: 14 / 5 ms)\\
 Shepherd & overlay filesystem + backend-native checkpoints & fork 134--143 ms, flat from 42 MB to 5.8 GB\\
 Crab & eBPF effect classification per agent turn & over 75\% of turns need no checkpoint\\
 Planarian & statepoints spanning local and remote state & remote rollback by compensating actions\\
@@ -849,7 +850,7 @@ Kimi K3 AgentENV & Firecracker pause, fork, snapshot for agentic RL & checkpoint
 \note{[backup] None of these systems treats sibling outputs as correlated evidence; they optimise checkpoint latency or safety. Planarian, from Imperial, spans local and remote state and rolls remote state back with compensating actions.}
 \end{frame}
 
-\begin{frame}[t]{Arp2/3 shapes network dynamics}
+\begin{frame}[t]{\ev{\tagO}Arp2/3 shapes network dynamics}
 \lead{In actomyosin simulations, the effect of Arp2/3 depends on concentration.}
 \begin{columns}[T,onlytextwidth]
 \column{.31\textwidth}
@@ -877,7 +878,7 @@ Intermediate & Loosely connected clusters can collapse in motor-driven avalanche
 \note{[backup] This is a result from mechanochemical simulations of branched actomyosin networks. At high Arp2/3 concentration the network stalls; at low concentration it contracts; at an intermediate concentration, loosely connected clusters can collapse suddenly under motor activity. My graph-theoretic work studies how local connectivity relates to global morphology, while the avalanche study uses network science and machine learning to forecast collective rearrangements. Stockmayer's random-branching polymer theory is a formal precedent for asking when local branching yields system-scale connectivity, under its own idealized assumptions. A related question for agent systems is whether communication links connect otherwise separate lineages and reduce effective diversity; its threshold must be derived for the actual dependency model. These biological and polymer results motivate that question, but do not predict software behavior.}
 \end{frame}
 
-\begin{frame}[t]{Reset changes the learning problem}
+\begin{frame}[t]{\ev{\tagO}Reset changes the learning problem}
 \lead{The distribution of starting states determines which experience is collected.}
 \[
  s_0\sim\mu\qquad\text{versus}\qquad s_0\sim\mu_{\rm checkpoint}
@@ -899,7 +900,7 @@ Intermediate & Loosely connected clusters can collapse in motor-driven avalanche
 \note{[backup] Reusing a difficult-to-reach state can make exploration productive, as return-and-explore methods illustrate. But a policy trained primarily from favorable intermediate checkpoints has seen a different starting-state distribution. We cannot silently substitute its performance for task-start performance. Depending on the algorithm, distribution correction, curriculum design, or explicit reporting may be necessary. Snapshot ancestry records where experience came from. The final evaluation should still test the deployment question we claim to answer.}
 \end{frame}
 
-\begin{frame}[t]{Three graphs describe the computation}
+\begin{frame}[t]{\ev{\tagP}Three graphs describe the computation}
 \begin{columns}[T,onlytextwidth]
 \column{.31\textwidth}
 \term{Execution ancestry}
@@ -924,19 +925,19 @@ Intermediate & Loosely connected clusters can collapse in motor-driven avalanche
 \begin{center}
 \begin{tikzpicture}[scale=.8]
 \node[candidate] (a) at (0,1.3) {C};\node[candidate] (b) at (-1,-.5) {A};\node[candidate] (c) at (1,-.5) {B};
-\draw[relation] (a)--(b)--(c)--cycle;\draw[relation] (0,.35) ellipse(1.85 and 1.75);
+\draw[relation] (a)--(b)--(c)--(a);\draw[relation] (0,.4) ellipse(2.25 and 1.95);
 \end{tikzpicture}
 \end{center}
 \small Which candidate sets need joint validation?
 \end{columns}
 \vspace{.35cm}
-\claim{A runtime tree can support a communication network and higher-order interactions.}
+\claim{A runtime tree can carry communication and higher-order interactions.}
 \note{[backup] Ancestry records where execution state came from, often as a tree or DAG. Communication adds edges that need not follow ancestry; these edges can introduce dependencies among later decisions. Composition concerns sets of artifacts and may need hyperedges for three-way or higher-order effects. The outline around the three candidates denotes a possible higher-order interaction, not a measured one. Keeping these structures separate avoids calling every relationship a fork. It also clarifies which metadata the controller must retain.}
 \end{frame}
 
 
 
-\begin{frame}[t]{How eight changes work together}
+\begin{frame}[t]{\ev{\tagP}How eight changes work together}
 \lead{Individual success does not establish the quality of a composition.}
 \[
 \Gamma_{ij}=U(\{i,j\})-U(\{i\})-U(\{j\})+U(\emptyset)
@@ -962,7 +963,7 @@ Intermediate & Loosely connected clusters can collapse in motor-driven avalanche
 \note{[backup] Gamma is a second finite difference of a declared scalar objective. It measures non-additivity such as synergy, conflict, or saturation, and may itself require repeated measurements. It is not mutual information or quantum interference. Define an application order or canonical composition procedure; if the patches do not compose, record a failure rather than inventing a score. Eight candidates have 28 unordered pairs, while all subsets number 256 including the empty set. Pairwise screening can guide an economical search but cannot certify every higher-order interaction.}
 \end{frame}
 
-\begin{frame}[t]{What the reducer experiments establish}
+\begin{frame}[t]{\ev{\tagB}What the reducer experiments establish}
 \begin{columns}[T,onlytextwidth]
 \column{.53\textwidth}
 \term{Unequal logistic shards}
@@ -993,7 +994,7 @@ Distance to the centralized MLE; lower is closer.
 \note{[backup] The logistic check uses five IID shards with sample sizes 60, 120, 400, 2000, and 5000. Across eight fixed seeds the information-weighted estimate is closer to the centralized maximum-likelihood estimate than equal coefficient averaging. This specific check does not establish universal efficiency or superiority to other distributed estimators. The forged-precision example motivates trustworthy information estimates, not a claim of Byzantine robustness. These are reported results from the paper; they are not new agent-task benchmark measurements.}
 \end{frame}
 
-\begin{frame}[t]{Ablations that explain the outcome}
+\begin{frame}[t]{\ev{\tagP}Ablations that explain the outcome}
 \begin{tabularx}{\textwidth}{@{}L{3.4cm}YY@{}}
 \toprule
 \term{Vary} & \term{Observe} & \term{Question}\\\midrule
@@ -1007,7 +1008,7 @@ Composition order and size & Joint success and regressions & Which interactions 
 \note{[backup] These ablations distinguish mechanisms. A fast fork with a worse search policy may lose. A communicating system may win only because it spends more model calls. Sharing can help discovery while increasing evidence dependence. Evaluate communication with an equal full resource budget and record the induced selection history. For composition, include deliberately interacting changes rather than only independent patches. Use uncertainty across tasks and seeds and reserve fresh validation for selected results.}
 \end{frame}
 
-\begin{frame}[t]{Evaluation under adaptive search}
+\begin{frame}[t]{\ev{\tagO}Evaluation under adaptive search}
 \lead{A protected evaluator can still teach the search how to overfit its feedback.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
@@ -1016,7 +1017,7 @@ Composition order and size & Joint success and regressions & Which interactions 
 \node[evidence,minimum width=3.2cm] (c) at (10,0) {final validation};
 \draw[flow] (a.north east) to[bend left=16] (b.north west);
 \draw[message] (b.south west) to[bend left=16] node[below,font=\scriptsize]{repeated feedback} (a.south east);
-\draw[flow] (b)--node[above,font=\scriptsize]{freeze candidate}(c);
+\draw[flow] (b)--node[below,font=\footnotesize,align=center]{freeze\\candidate}(c);
 \end{tikzpicture}
 \end{center}
 \vspace{.4cm}
@@ -1050,7 +1051,7 @@ Composition order and size & Joint success and regressions & Which interactions 
 
 
 % B promotion invariants
-\begin{frame}[t]{\ev{\tagP}Promotion invariants in the TLA+ design model}
+\begin{frame}[t]{\ev{\tagP}TLA+ promotion invariants}
 \lead{\texttt{AuthorityKernel.tla} models one cell across epoch replacement, Airflow binding, evidence, approval and publication.}
 {\small
 \begin{ticks}
@@ -1061,15 +1062,15 @@ Composition order and size & Joint success and regressions & Which interactions 
 \item a search-origin authority request cannot become an authority source
 \item an \texttt{in\_doubt} effect has no blind retry and leaves that state only by observation
 \end{ticks}\par}
-\claim{A design model with explicit assumptions, not yet refinement-checked against traces.}
+\claim{A design model, not yet checked against traces.}
 \sources{swfactory \href{https://github.com/zozo123/ariflow-swfactory/tree/main/formal/authority}{formal/authority/README.md}.}
-\note{[backup] Use this if someone asks why promotion is not also statistics. The invariants are model-checked in TLC under stated assumptions; the next step is checking that real control-kernel traces are admitted by the model.}
+\note{[backup] Use this if someone asks why promotion is not also statistics. The invariants are written for TLC under the README's stated assumptions; no TLC run is recorded here yet, and the next step is checking that real control-kernel traces are admitted by the model.}
 \end{frame}
 
 % Bn references
 \begin{frame}[t]{References: systems}
 \vspace{0pt}
-{\fontsize{6.6}{7.8}\selectfont
+{\fontsize{6.3}{7.45}\selectfont
 \begin{columns}[T,onlytextwidth]
 \column{.49\textwidth}
 \textbf{Speaker}\\
@@ -1086,7 +1087,8 @@ Agache et al. Firecracker. NSDI 2020.\\
 Du et al. Catalyzer. ASPLOS 2020.\\
 Brooker et al. Restoring uniqueness in microVM snapshots. arXiv:2102.12892, 2021.\\
 Ustiugov et al. Benchmarking, analysis, and optimization of serverless function snapshots (REAP). ASPLOS 2021.\\
-Nephele: extending virtualization environments for cloning unikernel-based VMs. EuroSys 2023.
+Lupu et al. Nephele: cloning unikernel-based VMs. EuroSys 2023.\\
+Clark et al. Live migration of virtual machines. NSDI 2005.
 \column{.49\textwidth}
 \textbf{Agent sandboxes, 2026}\\
 DeltaBox, arXiv:2605.22781. Shepherd, arXiv:2605.10913. Crab, arXiv:2604.28138.\\
@@ -1101,6 +1103,7 @@ Watson et al. Capsicum. USENIX Security 2010.\\
 Watson et al. CHERI. IEEE S\&P 2015.\\
 Birgisson et al. Macaroons. NDSS 2014.\\
 Burrows. The Chubby lock service. OSDI 2006.\\
+Kleppmann. How to do distributed locking. 2016.\\
 Muniswamy-Reddy et al. Provenance-aware storage systems. USENIX ATC 2006.\\
 Pasquier et al. Practical whole-system provenance capture. SoCC 2017.\\
 Torres-Arias et al. in-toto. USENIX Security 2019.\\
@@ -1121,6 +1124,7 @@ Liang \& Zeger. Longitudinal data analysis using generalized linear models. Biom
 Hedges, Tipton \& Johnson. Robust variance estimation in meta-regression with dependent effect size estimates. Research Synthesis Methods 2010.\\
 Green, Karvounarakis \& Tannen. Provenance semirings. PODS 2007.\\
 Glasserman \& Yao. Some guidelines and guarantees for common random numbers. Management Science 1992.\\
+Stockmayer. Theory of molecular size distribution and gel formation. J.\ Chem.\ Phys.\ 1943.\\
 Kim et al. Correlated errors in large language models. ICML 2025.
 \column{.49\textwidth}
 \textbf{Evaluation under search}\\

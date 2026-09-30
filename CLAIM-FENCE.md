@@ -2,7 +2,7 @@
 
 This file applies to the canonical `talk.tex`: 31 main slides plus backups.
 
-Each evidence slide carries one tag:
+Each evidence slide carries one or more tags:
 
 - **MEASURED**: in the speaker's own run records.
 - **BUILT**: implemented and unit-tested, or a synthetic check.
@@ -15,7 +15,7 @@ The caveats are said once, on slide 3.
 
 **Sources**
 - SELFHOST-2: PR #2351 of `zozo123/ariflow-swfactory`, `docs/factory/SELFHOST-2/`.
-- SELFHOST-3: local run records. They are not yet published; publish a redacted copy (no host fields, no `file://` paths) before citing it publicly.
+- SELFHOST-3: local run records. They are not published; the slide says "redacted copy on request".
 
 **Setup of both runs**
 - Both ran on Docker's sandbox (`toolset:SbxCommaPolicyBackend`), not on islo.
@@ -31,7 +31,8 @@ The caveats are said once, on slide 3.
 - Repair 1 (`agent/fix.4.json`) had no shell tool and did not run the tests. It changed `src/swfactory/backend/service.py`, which is outside the plan.
 - Review 1 returned `request_changes` with a blocker. Repair 2 (`fix.5.json`) could not edit `tests/` (hook-protected) and refactored.
 - Review 2 returned `approve`. The out-of-plan file stayed "major", and "untested" was downgraded to minor.
-- After repair 1, the harness ran the suite once: 1,972 tests (including skips), 0 failures.
+- The harness ran the full suite after each repair (`stages.py` re-runs tests after a review fix): 1,972 tests including skips, 0 failures.
+- The new CellBusy-adoption branch "lands with no test in the diff" (review 2). Its only coverage is the race, which reaches it "only when the interleaving happens to lose an activation".
 - The test hook never fired: 15 edits, all allowed.
 - All four steps used the same hosted model.
 - `cycle_s` 2557.5 (about 43 min). Total $10.33.
@@ -76,12 +77,13 @@ The caveats are said once, on slide 3.
 - A controller-measured n.
 - Replay logs.
 - The redesigned SELFHOST-2 on slide 29.
-- The runtime interface on slide 20, except `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built).
+- The runtime interface on slide 20, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
+- The TLA+ promotion model (formal/authority) is a design model; no TLC run or trace check is recorded.
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
 ## Published
 
-- Every system on slides 5–8 and 13–18 and in the backups is cited to its paper or docs.
+- Every system on slides 7–8, 10–11, 13–18 and 20–24 and in the backups is cited to its paper or docs.
 - Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
 - DeltaBox: the main slides use the evaluation figures (10.83 ms / 1.86 ms). The abstract's 14 ms / 5 ms appear only in backup.
 - Kimi K3 (Moonshot AI), §5.3.2:
@@ -111,6 +113,8 @@ The caveats are said once, on slide 3.
 Also, do not name the hosted model provider or endpoint on stage.
 
 Do not say:
+- that repair 2 was never tested (the suite ran after it);
+- that promotion is model-checked;
 - that the built reducer abstains;
 - that any islo snapshot is a memory fork before Gate 0 is resolved;
 - that nothing escaped. Say "nothing was pushed and nothing was denied".

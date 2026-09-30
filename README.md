@@ -20,7 +20,7 @@ On 27 September 2026, the speaker's open-source software factory ([zozo123/arifl
 - A repair agent without a shell rewrote code outside the plan.
 - The first review blocked it. After one more repair, the second review approved it.
 - The same model wrote the fix and ran both reviews.
-- Every agent told the truth. The gate still approved an untested change.
+- Every agent told the truth. The suite was green. The new branch had no test.
 
 The talk walks the seven advertised surfaces roughly in the order they bit across that day's runs. It then places fork in its Xen-era lineage (SnowFlock, Potemkin, Remus, Firecracker, the 2026 agent-checkpoint papers).
 
