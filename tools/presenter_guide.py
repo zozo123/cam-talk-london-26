@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 MAX_WPM = 125
-TOTAL_WINDOW_S = (35 * 60, 44 * 60)
+TOTAL_WINDOW_S = (35 * 60, 45 * 60)
 ROOT = Path(__file__).resolve().parent.parent
 
 

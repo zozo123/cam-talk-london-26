@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile canonical 40-slide Cambridge deck
+      - name: Compile canonical Cambridge deck
         uses: xu-cheng/latex-action@v3
         with:
           root_file: talk.tex
@@ -54,10 +54,10 @@ jobs:
 
           full = len(PdfReader("talk.pdf").pages)
           short = len(PdfReader("talk-30min.pdf").pages)
-          print(f"Cambridge deck: {full} pages (31 main + backups)")
+          print(f"Cambridge deck: {full} pages (33 main + 1 reveal page + 19 backups)")
           print(f"30-minute historical cut: {short} slides")
-          if full != 44:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 44 pages; got {full}")
+          if full != 53:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 53 pages; got {full}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md

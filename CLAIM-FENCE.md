@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: 31 main slides plus backups.
+This file applies to the canonical `talk.tex`: 33 main slides plus backups.
 
 Each evidence slide carries one or more tags:
 
@@ -76,12 +76,18 @@ The caveats are said once, on slide 3.
 - Epoch-fenced promotion.
 - A controller-measured n.
 - Replay logs.
-- The redesigned SELFHOST-2 on slide 29.
-- The runtime interface on slide 20, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
+- The redesigned SELFHOST-2 on slide 31.
+- The runtime interface on slide 23, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
 - The TLA+ promotion model (formal/authority) is a design model; no TLC run or trace check is recorded.
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
 ## Published
+
+- Dean & Barroso, CACM 2013: hedged request after 10 ms; 99.9th-percentile latency for 1,000 BigTable keys from 1,800 ms to 74 ms with 2% more requests; "the source of latency is often not inherent in the particular request".
+- Brown et al., arXiv:2407.21787: SWE-bench Lite 15.9% (1 sample) to 56% (250 samples); majority voting and reward models plateau without automatic verifiers.
+- Stroebl, Kapoor & Narayanan, arXiv:2411.17501: imperfect verifiers cap repeated-sampling gains; the best number of attempts is often under 10.
+- Slide 5 stage shares are of the 2,557 s cycle (metrics.json); setup is 20.3 s (operations.jsonl).
+- Blackburn et al., arXiv:2206.02871: most bitcoin from 3 Jan 2009 to 9 Feb 2011 was mined by 64 agents (address linking >99% sensitivity and specificity). Used as a motivating example of recovered labels, not as evidence about forks.
 
 - Every system on slides 7–8, 10–11, 13–18 and 20–24 and in the backups is cited to its paper or docs.
 - Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
@@ -99,7 +105,7 @@ The caveats are said once, on slide 3.
 - The variance floor assumes equal variances and a common pairwise correlation.
 - Lineage names the shared factors; it does not estimate their strength.
 - Precision pooling requires one common parameter, calibrated information and independent evidence.
-- On slide 25, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
+- On slide 27, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 - Lineage labels shared parents, seeds, tests and fixtures. It cannot label a shared model's blind spots.
 
 ## Do not say
