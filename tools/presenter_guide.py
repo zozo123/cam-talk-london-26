@@ -50,7 +50,7 @@ def main():
     words = sum(r[3] for r in rows)
     out = ["# Presenter guide: Forkable Sandboxes", "",
            "**The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.", "",
-           f"Generated from `talk.tex` by `tools/presenter_guide.py`. {len(rows)} main slides, {len(backups)} backups. "
+           f"Generated from `talk.tex` by `tools/presenter_guide.py`. {len(rows)} main slides, {len(backups)} end-matter pages. "
            f"Planned talk: **{total // 60}:{total % 60:02d}**, {words} spoken words, {60 * words / total:.0f} wpm average, "
            f"peak {max(r[4] for r in rows):.0f} wpm. These are planned cues, not a measured rehearsal.", "",
            "## Run of show", "", "| # | Slide | Cue | Clock | Words | wpm |", "|---|---|---|---|---|---|"]
@@ -60,9 +60,9 @@ def main():
     out += ["", "## Script", ""]
     for i, (title, dur, start, w, wpm, text) in enumerate(rows, 1):
         out += [f"### {i:02d}. {title}", "", f"*{dur // 60}:{dur % 60:02d}, starts at {start // 60}:{start % 60:02d}*", "", text, ""]
-    out += ["## Backup slides", ""]
+    out += ["## End matter (untimed)", ""]
     for i, (title, text) in enumerate(backups, 1):
-        out += [f"### B{i}. {title}", "", text, ""]
+        out += [f"### E{i}. {title}", "", text, ""]
     (ROOT / "PRESENTER-GUIDE.md").write_text("\n".join(out))
     print(f"{len(rows)} main slides, total {total // 60}:{total % 60:02d}, {words} words, peak {max(r[4] for r in rows):.0f} wpm")
     for i, r in enumerate(rows, 1):

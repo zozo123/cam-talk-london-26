@@ -54,10 +54,10 @@ jobs:
 
           full = len(PdfReader("talk.pdf").pages)
           short = len(PdfReader("talk-30min.pdf").pages)
-          print(f"Cambridge deck: {full} pages (33 main + 2 reveal pages + 20 backups)")
+          print(f"Cambridge deck: {full} pages (48 story slides + 3 reveal pages + 6 end-matter pages)")
           print(f"30-minute historical cut: {short} slides")
-          if full != 55:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 55 pages; got {full}")
+          if full != 57:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 57 pages; got {full}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md

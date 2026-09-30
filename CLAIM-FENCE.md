@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: 33 main slides plus backups.
+This file applies to the canonical `talk.tex`: 48 story slides (no backup slides) plus untimed end matter (research record, references).
 
 Each evidence slide carries one or more tags:
 
@@ -9,7 +9,7 @@ Each evidence slide carries one or more tags:
 - **PROPOSED**: a design that has not been run.
 - **PUBLISHED**: other people's work.
 
-The scope caveats are said once, on slide 7.
+The scope caveats are said once, on slide 8.
 
 ## Measured: runs SELFHOST-2 and SELFHOST-3, 27 Sep 2026
 
@@ -76,8 +76,8 @@ The scope caveats are said once, on slide 7.
 - Epoch-fenced promotion.
 - A controller-measured n.
 - Replay logs.
-- The redesigned SELFHOST-2 on slide 31.
-- The runtime interface on slide 23, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
+- The redesigned SELFHOST-2 on slide 45.
+- The runtime interface on slide 28, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
 - The TLA+ promotion model (formal/authority) is a design model; no TLC run or trace check is recorded.
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
@@ -94,9 +94,9 @@ The scope caveats are said once, on slide 7.
 - Eliaz et al. PRE 2020 is about linker valency (multilinkers), not branching. Liman et al. PNAS 2020 and Li et al. JPCB 2021 are about Arp2/3 branching and avalanches. None says branching sets global connectivity or that whole networks collapse together. The PhD also covered Hi-C loops and protein-folding hydrodynamics.
 - Hitz et al. 2023 (ENCODE pipelines): data files, reference genome versions, software versions and parameters are captured in the ENCODE Portal.
 
-- Every system named on a main slide is cited on that slide's source line, and the three References backups collect them with the documentation used.
+- Every system named on a story slide is cited on that slide's source line, and the three References end-matter pages collect them with the documentation used.
 - Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
-- DeltaBox: the main slides use the evaluation figures (10.83 ms / 1.86 ms). The abstract's 14 ms / 5 ms appear only in backup.
+- DeltaBox: the slides use the evaluation checkpoint figure (10.83 ms; 10.8 ms on slide 4). The abstract's 14 ms / 5 ms are not used.
 - Kimi K3 (Moonshot AI), §5.3.2:
   - checkpoint and resume are "as low as" 133 ms and 49 ms;
   - 51.2M sandboxes counts all K3 runtimes, across training and evaluation;
@@ -105,12 +105,28 @@ The scope caveats are said once, on slide 7.
 - Kim et al.: the 60% figure is from one leaderboard; 350+ models were studied overall.
 - LightVM is NEC Labs work, not SRG work.
 
+Added with the one-story restructure:
+
+- Kimi K3 §5.3.2: 51,219,741 sandboxes "across" (not "over") 1,505,678 images; memory overcommit "up to 6.5×" in real workloads, from copy-on-write memory plus page-cache optimisations together. It does not measure the shared part alone.
+- Kimi K3 §4.1.2: partial rollout at a fraction λ; verbosity control. §4.2.4: the hacking-detection quote (CUDA graph replay, input caching, precision reduction). §4.2.6: evaluation of final environment state "rather than the agent's self-reported completion"; public diagnostic verifiers paired with hidden held-out ones.
+- Kimi forks a sandbox, not the judge: fork is "useful for reward judging without side effects".
+- DeepSeek-V4 §5.2.5 (DSec): hundreds of thousands of concurrent sandboxes per cluster; when a training task is preempted the sandbox is retained, and on resumption DSec replays cached results. The sandbox itself is not preempted.
+- Dean & Barroso: each server's 99th percentile is 1 s, so one request in 100 is slow on each server; a 100-way fan-out makes 63% of requests slow. Not "one slow server". Canary requests (one or two leaf servers first); mutations go to quorum algorithms such as Paxos.
+- Dorfman, Ann. Math. Stat. 14:436 (1943): group testing.
+- Poolkeh (Eliaz, Danovich & Gasic, medRxiv 2020): a SIR-D model plus a nested pooling strategy, a model only, no laboratory pooling. Israel, ~9M people, 295,951 tests, s1 = 92, s2 = 10, 30-fold fewer. Say "my co-authors and I modelled", never "I pooled".
+- OffRisk (Barkai, Malul, Eliaz et al., Bioinformatics Advances 3:vbad138, 2023; Eliaz 3rd of 5): a Docker image that annotates CRISPR off-target sites and labels their risk. Used as an analogy for a scope check.
+- Gilad, Eliaz et al., Commun. Biol. 4:399 (2021), Methods: at least four technical replicates per viability point, at least two independent experiments per plot.
+- Li et al., JPCB 2021: loosely connected clusters "may collapse suddenly when driven by motors". Liman et al., PNAS 2020: avalanches "reminiscent of" experimental cytoquakes. Neither defines a cytoquake as a failure.
+- Stockmayer (J. Chem. Phys. 11:45, 1943): gelation, an analogy only, under idealised assumptions.
+- Amdahl: 100 cores with 10% serial give 9.2×; reading ρ as a serial fraction is the speaker's interpretation.
+- The 1-in-10 race loss rate behind "29 greens" is illustrative, not measured.
+
 ## Statistical scope
 
 - The variance floor assumes equal variances and a common pairwise correlation.
 - Lineage names the shared factors; it does not estimate their strength.
 - Precision pooling requires one common parameter, calibrated information and independent evidence.
-- On slide 27, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
+- On slide 39, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 - Lineage labels shared parents, seeds, tests and fixtures. It cannot label a shared model's blind spots.
 
 ## Do not say
@@ -123,6 +139,9 @@ The scope caveats are said once, on slide 7.
 - That the speaker's PhD was only on branched networks, or that the papers show whole networks collapsing together.
 - "I recovered" for the Bitcoin or iScience results: they are team results.
 - That nine forks were run or came back green on slide 6: the question is hypothetical.
+- That Poolkeh pooled real samples: it is a model.
+- That clusters or networks "collapse together": say "may collapse suddenly".
+- That Kimi forks its reward judge: it forks a sandbox for judging.
 
 Also, do not name the hosted model provider or endpoint on stage.
 
