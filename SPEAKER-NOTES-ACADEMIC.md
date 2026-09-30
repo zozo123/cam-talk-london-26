@@ -1,3 +1,5 @@
+> Superseded: the canonical talk is `talk.tex` (33 main slides, 15 Oct 2026). These notes follow the earlier 38-slide draft in `academic/`; the notes for `talk.tex` are embedded in it and rendered in `PRESENTER-GUIDE.md`.
+
 # Speaker notes — Full academic Cambridge talk
 
 Target: **~45 minutes content + 15 minutes discussion**.

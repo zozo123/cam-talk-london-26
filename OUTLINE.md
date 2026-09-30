@@ -1,3 +1,5 @@
+> Superseded: the canonical talk is `talk.tex` (33 main slides, 15 Oct 2026). This minute map is an earlier plan; the delivered timings are in `PRESENTER-GUIDE.md`.
+
 # Timed outline — Cambridge SRG · 45 + 15
 
 **Slot:** Thu 15 Oct 2026 · **15:00–16:00 BST** (Cambridge) · **17:00–18:00 IDT** · FW11  

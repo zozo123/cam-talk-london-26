@@ -61,4 +61,4 @@ The cues are derived from the script at about 105 wpm plus reading pauses: 43:20
 
 ## Historical material
 
-`talk-30min.tex`, `slides/`, `academic/`, `swarm/`, `scratch/` and the older outline files are research notebooks and earlier cuts. Their claims and numbering differ from the canonical deck, and they are not part of it.
+`talk-30min.tex` (published as `dist/forkable-sandboxes-30min.pdf`), `slides/`, `academic/`, `swarm/`, `scratch/` and the older notes (`OUTLINE.md`, `OUTLINE-ANALOGIES.md`, `DECK-BEATS.md`, `FINAL-DECK.md`, `FULL-ACADEMIC.md`, `SPEAKER-NOTES-ACADEMIC.md`, `SPEAKER-NOTES-30MIN.md`, `TOPICS.md`, `QA-BANK.md`, `TRAINING-ENVIRONMENTS.md`, `WORLD-MODELS-BRIDGE.md`) are research notebooks and earlier cuts. Their claims and numbering differ from the canonical deck, and they are not part of it.

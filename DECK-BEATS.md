@@ -1,3 +1,5 @@
+> Superseded: the canonical talk is `talk.tex` (33 main slides, 15 Oct 2026). These 17 beats and the "deck five" citation rule describe an earlier plan.
+
 # Deck beats — Cambridge SRG · Forkable Sandboxes
 **Talk:** CL SRG · Thu 15 Oct 2026 · FW11 · 15:00–16:00 Europe/London  
 **Speaker:** Yossi Eliaz · Repo: zozo123/cam-talk-london-26  

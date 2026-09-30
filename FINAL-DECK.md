@@ -1,6 +1,8 @@
 # Concise deck — Cambridge SRG · 30-minute version
 
-`talk-30min.tex` + `slides/` are the source of truth for this concise cut. The canonical full academic deck is `talk.tex` + `academic/`; see `FULL-ACADEMIC.md`. Research depth stays in `OUTLINE.md`, `DECK-BEATS.md`, `scratch/`, `swarm/`, `QA-BANK.md`, `CLAIM-FENCE.md`, and `WORLD-MODELS-BRIDGE.md`.
+> Superseded: the canonical talk is `talk.tex` (33 main slides, 15 Oct 2026). This file describes the historical 30-minute cut, not the seminar.
+
+`talk-30min.tex` + `slides/` are the source of truth for this concise cut. `academic/` is an earlier modular draft; see `FULL-ACADEMIC.md`. Research depth stays in `OUTLINE.md`, `DECK-BEATS.md`, `scratch/`, `swarm/`, `QA-BANK.md`, `CLAIM-FENCE.md`, and `WORLD-MODELS-BRIDGE.md`.
 
 ## The 13-slide stage path
 
