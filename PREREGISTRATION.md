@@ -48,7 +48,7 @@ Before any child counts in Phase A or B, run the deterministic part of the suite
 Run 3 restored cells × 50 executions of the race test and estimate its failure rate p.
 - If p is below 0.01 or above 0.99, pin cells to 1 vCPU and pilot again.
 - If it is still outside [0.01, 0.99], Phase B uses another flaky test from the same suite whose piloted p is inside that range. It is chosen and named from pilot data alone, before any Phase B run.
-- Phase B then runs T = max(300, ⌈10 / min(p, 1 − p)⌉) rounds per cell. That gives each cell at least 10 of the rarer outcome, and a per-triple standard error of ρ of about 0.014 or less.
+- Phase B then runs T = max(300, ⌈10 / min(p, 1 − p)⌉) rounds per cell. That gives each cell at least 10 of the rarer outcome, and, if rounds are independent, a standard error of about 1/√(3T) ≤ 0.033 for one triple's ρ and about 0.014 or less for Δρ, the mean over 12 pairs. (Corrected after prereg-v1, which gave 0.014 as the per-triple figure; no decision rule uses it.)
 
 ## Phase A: cost, H1 (no model calls)
 
@@ -93,7 +93,7 @@ Run 3 restored cells × 50 executions of the race test and estimate its failure 
 **Statistic:**
 - For a triple, ρ = mean over cell pairs (j, j′) and rounds k of (Y_jk − p̄)(Y_j′k − p̄) / (p̄(1 − p̄)).
   - p̄ is the pooled failure rate of that arm (siblings or strangers), not each cell's own mean.
-  - This is the intraclass correlation of outcomes. It is the ρ of the variance-floor formula on slide 22.
+  - This is the intraclass correlation of outcomes. It is the ρ of the variance-floor formula on slide 25.
   - It captures both co-failure within a round and a shared shift in failure rate.
   - It stays defined when one cell's sequence is constant.
 - For pair i, Δρ_i = ρ(siblings) − ρ(strangers).
@@ -142,3 +142,12 @@ Every result is reported, including inconclusive ones and failures to finish wit
 - If Gate 0 shows the snapshot is disk-only, every result is about restore fan-out, not fork.
 - None of the phases compares vendors.
 - The cold arm is labelled "no cache". It is not presented as the build-system baseline; the cached template is.
+
+## Amendments after `prereg-v1`
+
+No run had started when either amendment was made. No hypothesis, arm, sample size, statistic or decision rule changed.
+
+1. `de13c1d` (30 Sep 2026): slide numbers updated to follow the rebuilt deck (slides 29–30).
+2. Tag `prereg-v2` (30 Sep 2026):
+   - The ρ cross-reference now points to slide 25, where the variance-floor formula is.
+   - The Phase B standard-error note is corrected. One triple's ρ has SE ≈ 1/√(3T) ≤ 0.033. The 0.014 figure is the SE of Δρ over 12 pairs.

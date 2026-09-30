@@ -1,3 +1,5 @@
+> Superseded: the canonical talk is `talk.tex` (33 main slides, 15 Oct 2026). This file is an earlier topic map: its "final" labels (the talk spine, `DECK-BEATS.md`, `talk.tex + slides/`) describe earlier drafts.
+
 # Topic map — Cambridge SRG talk repo
 
 This is the repo-wide map for Forkable Sandboxes: The Runtime Layer for AI Software Factories. It separates the final stage story from research depth and Q&A material.
