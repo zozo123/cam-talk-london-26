@@ -2,14 +2,14 @@
 
 Written before any run. **The timestamp is the public push of tag `prereg-v1`** to github.com/zozo123/cam-talk-london-26. Any later change is a separate commit, with its reason, and a new tag.
 
-Slide 25 of `talk.tex` presents this protocol. Results, each prediction marked held or failed, go in `RESULTS.md` in this repository. If the runs finish before 15 Oct 2026, the talk shows them.
+Slides 27–28 of `talk.tex` present this protocol. Results, each prediction marked held or failed, go in `RESULTS.md` in this repository. If the runs finish before 15 Oct 2026, the talk shows them.
 
 ## Question
 
 Does restoring sibling work cells from one snapshot:
 
-1. reduce the resources needed to reach a ready cell, and
-2. couple their test outcomes more than cells that merely run at the same time?
+1. reduce the time to a ready, tested cell compared with a warm cached template (H1), and
+2. couple their test outcomes more than cells that merely run at the same time (H2)?
 
 Also: does forking the factory's repair loop produce correlated edits?
 
@@ -25,61 +25,77 @@ Also: does forking the factory's repair loop produce correlated edits?
 
 ## Gate 0: snapshot semantics (before anything else)
 
-Determine whether an islo named snapshot includes guest memory and running processes, or only the filesystem.
+Find out whether an islo named snapshot includes guest memory and running processes.
 
-If it is filesystem-only:
+**Probe:**
+1. A process keeps a random 128-bit nonce in RAM.
+2. Take a named snapshot.
+3. Restore 3 children.
+4. Record whether the process is running in each child and still holds the same nonce.
+
+**If the nonce does not survive:**
 - every report says **restore fan-out**, not fork;
-- the memory-uniqueness probes below are skipped and reported as not applicable.
+- the memory-uniqueness probes are reported as not applicable.
+
+The code suggests the snapshot is a disk archive (`.tar.zst` via bear-agent), but that is not a result.
+
+## Fidelity gate
+
+Before any child counts in Phase A or B, run the deterministic part of the suite twice: once directly on the parent, and once in a restored child. The outputs must be identical. A mismatch voids that arm until it is explained.
 
 ## Pilot (at most 2 hours)
 
-Run 3 cells × 50 executions of the test.
+Run 3 cells × 50 executions of the race test and estimate its failure rate p.
+- Phase B sets runs per cell to ⌈10 / p⌉, so each cell expects at least 10 failures.
+- If p < 1%, pin cells to 1 vCPU and pilot again.
+- If it is still under 1%, the outcome becomes "any failure in the full suite".
 
-- Proceed only if the failure rate is between 5% and 95%.
-- Otherwise, pin cells to 1 vCPU and pilot again.
-- If it is still out of range, the outcome becomes "any failure in the full suite".
-- If that is also degenerate, report "failure did not reproduce in N runs" as a reproducibility result, and run Phase A alone.
+## Phase A: cost, H1 (no model calls)
 
-## Phase A: cost (no model calls)
+**Question:** does restoring a reached state beat a warm, cached template?
 
-**Arms**
-- **Cold (no cache):** a fresh cell, full clone, `uv sync`.
-- **Cached template:** dependencies baked into the template; source fetched at the pinned commit.
-- **Restore:** a named snapshot taken after clone, sync and one warm test run.
+**Arms:**
+- **Cached template:** dependencies baked in; source fetched at the pinned commit.
+- **Restore:** a named snapshot taken after clone, `uv sync` and one warm test run.
+- **Cold** (no cache): a reference only. H1 is not tested against it.
 
-**Concurrency and rounds**
-- N ∈ {1, 3, 6, 12} concurrent cells.
-- 5 rounds. Arm order is rotated each round (Latin square).
+**Design:**
+- N ∈ {3, 6, 12} concurrent cells.
+- 20 repetitions per (arm, N), interleaved in random order, with the seed recorded.
 
-**Timings** (server-side timestamps where the platform exposes them, otherwise client-side and labelled as such)
-- API accepted.
-- VM running.
-- First command exits 0. This is `t_ready`.
-- `t_tests`.
-- Capture time `H`.
+**Measure:** time from the request to the first test result, using server-side timestamps where exposed and client-side ones otherwise (labelled as such). Also record capture time H and the uniqueness probe (`boot_id`, `machine-id`, IP/MAC, guest-minus-host clock, a userspace random value).
 
-**Uniqueness probe** in every child:
-- `boot_id`, `machine-id`, hostname, IP/MAC;
-- guest-minus-host clock;
-- a userspace random value.
+**Analysis:** gain = cached median − restore median, at each N, with a 95% bootstrap CI over repetitions.
 
-If Gate 0 shows memory is captured, also check whether a token held **in a live process's memory** before the snapshot is present in each child. A token in a file would trivially appear in every restore, so a file does not count.
+**Decision:**
+- **Supports H1** if the lower CI bound is above 10 s at every N.
+- **Rejects H1** if the upper CI bound is below 10 s at any N.
+- Anything else is inconclusive.
 
-## Phase B: coupling (no model calls)
+## Phase B: coupling, H2 (no model calls)
 
-**Arms**
-- **S (siblings):** 6 snapshot families, each built independently from the same commit, × 3 restored siblings per family. The three siblings run at the same time.
-- **C (co-scheduled cold):** 18 cold cells, run in concurrent triples.
+**Question:** do siblings restored from one snapshot fail together more than strangers that ran at the same time?
 
-Running both arms in concurrent triples matches host conditions across them. The contrast is shared ancestry.
+**Design:**
+- 12 snapshot families, each built independently from the same commit.
+- Each family has 3 restored siblings, paired with 3 cold "strangers" started in the same slot on the same host.
+- The three cells of a triple run the race test in lockstep rounds (round k starts in all three at once), for ⌈10 / p⌉ rounds.
+- Record the binary outcome and the failure class.
 
-**Outcome:** each cell runs the test 30 times, 1,080 executions in total. Record the binary outcome and the failure class.
+**Statistic:**
+- For a triple, ρ is the mean pairwise phi (Pearson) correlation of its three cells' binary outcome sequences over rounds. This is the ρ of the variance-floor formula on slide 22.
+- For pair i, Δρ_i = ρ(siblings) − ρ(strangers).
+- Δρ is the mean over the 12 pairs.
+- Because host and timing are matched within a pair, Δρ isolates shared ancestry.
 
-**Analysis** (fixed now):
-- binary-outcome intraclass correlation per arm: family level for S, triple level for C;
-- Δρ = ICC_S − ICC_C, with a bootstrap 95% CI over families/triples;
-- first simulate power at Δρ = 0.2 with 6 families; if power is below 0.8, use 9 families;
-- report N_eff for "18 green cells" under the estimated ρ.
+**Test:** a sign-flip permutation test over the 12 pairs (all 4,096 sign patterns), plus a 90% bootstrap CI for Δρ.
+
+**Decision:**
+- **Supports H2** if p < 0.05 and Δρ > 0.05.
+- **Rejects H2** if the 90% CI lies within ±0.05, which is equivalence with no coupling.
+- Anything else is **inconclusive**.
+
+**Why 0.05:** at N = 9 siblings, ρ = 0.05 gives N_eff = 9 / 1.4 ≈ 6.4.
 
 ## Phase C: the repair loop (model calls, about $26; descriptive)
 
@@ -93,17 +109,16 @@ Re-sample repair 1 of SELFHOST-2 nine times from its recorded input, on the pre-
 
 ## Predictions
 
-- **P1:** restore beats cold on t_ready by at least 30 s at every N.
-- **P2:** if the cached template comes within 10 s of restore at N = 1, the build cache is the better mechanism for this workload, and the talk says so.
-- **P3:** Δρ > 0.05, with a 95% CI that excludes 0. A result between P3 and the rejection zone below is reported as inconclusive.
-- **P4 (descriptive):** at least 5 of 9 samples repeat the out-of-plan edit.
+- **H1 (Phase A):** restore beats the cached template by more than 10 s at every N ∈ {3, 6, 12}.
+- **H2 (Phase B):** siblings fail together more than co-scheduled strangers: Δρ > 0.05 with permutation p < 0.05.
+- **Loop (Phase C, descriptive):** at least 5 of 9 samples repeat the out-of-plan edit.
 
 ## What rejects the thesis on this workload
 
-- Restore does not beat the cached template on t_ready. Fork buys nothing here.
-- Δρ ≤ 0.05 with an upper CI bound below 0.1. Shared ancestry did not couple test outcomes.
+- **H1:** the upper CI bound of the gain is below 10 s at some N. The warm cache is the better mechanism here.
+- **H2:** the 90% CI of Δρ lies within ±0.05. Shared ancestry did not couple test outcomes.
 
-Every result is reported, including failures to reach the target within budget.
+Every result is reported, including inconclusive ones and failures to finish within budget. Excluded runs are listed with reasons: a failed restore is excluded from timing but counted as a failure.
 
 ## Scope
 

@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: 28 main slides plus backups.
+This file applies to the canonical `talk.tex`: 31 main slides plus backups.
 
 Each evidence slide carries one tag:
 
@@ -75,12 +75,14 @@ The caveats are said once, on slide 3.
 - Epoch-fenced promotion.
 - A controller-measured n.
 - Replay logs.
-- The redesigned SELFHOST-2 on slide 26.
+- The redesigned SELFHOST-2 on slide 29.
+- The runtime interface on slide 20, except `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built).
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
 ## Published
 
-- Every system on slides 5–7 and 13–17 and in the backups is cited to its paper or docs.
+- Every system on slides 5–8 and 13–18 and in the backups is cited to its paper or docs.
+- Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
 - DeltaBox: the main slides use the evaluation figures (10.83 ms / 1.86 ms). The abstract's 14 ms / 5 ms appear only in backup.
 - Kimi K3 (Moonshot AI), §5.3.2:
   - checkpoint and resume are "as low as" 133 ms and 49 ms;
@@ -95,7 +97,7 @@ The caveats are said once, on slide 3.
 - The variance floor assumes equal variances and a common pairwise correlation.
 - Lineage names the shared factors; it does not estimate their strength.
 - Precision pooling requires one common parameter, calibrated information and independent evidence.
-- On slide 23, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
+- On slide 25, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 - Lineage labels shared parents, seeds, tests and fixtures. It cannot label a shared model's blind spots.
 
 ## Do not say

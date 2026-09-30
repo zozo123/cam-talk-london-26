@@ -4,7 +4,7 @@
 
 Cambridge Computer Laboratory Systems Research Group seminar, 15 October 2026, 15:00–16:00 BST, FW11 + Microsoft Teams. [Event listing](https://www.talks.cam.ac.uk/talk/index/273181).
 
-- **[Seminar PDF](dist/forkable-sandboxes-cambridge-40.pdf)** (28 main slides + backups; the file name is kept for old links)
+- **[Seminar PDF](dist/forkable-sandboxes-cambridge-40.pdf)** (31 main slides + backups; the file name is kept for old links)
 - **[LaTeX source with speaker notes](talk.tex)**
 - **[Presenter guide, generated from the notes](PRESENTER-GUIDE.md)**
 - **[Claim boundaries and provenance](CLAIM-FENCE.md)**
@@ -32,13 +32,13 @@ It ends on the contribution: sibling results are correlated evidence. The statis
 
 | Slides | Act | Time |
 |---|---|---|
-| 1–4 | The hook: one real run; what I claim and don't | 5:15 |
-| 5–12 | The wall: networking, filesystem state, build/test, credentials, recovery, observability, reproducibility, fast cloning | 10:40 |
-| 13–18 | The fork: lineage, clone hazards, held effects, where fork loses, isolation, architecture | 9:05 |
-| 19–24 | The count: adaptivity, execution vs evidence multiplicity, cluster labels, the receipt contract | 7:50 |
-| 25–28 | Test and agenda: the pre-registered test, the redesigned run, open problems | 4:55 |
+| 1–4 | The hook: one real run; what I claim and don't | 5:25 |
+| 5–12 | The wall: seven surfaces, numbered on each slide | 10:20 |
+| 13–20 | The fork: lineage, clone hazards, what each fork copies, held effects, cost, isolation, architecture, the runtime interface | 12:20 |
+| 21–26 | The count: adaptivity, execution vs evidence multiplicity, cluster labels, the receipt contract | 8:20 |
+| 27–31 | Test and agenda: two pre-registered tests, the redesigned run, open problems | 6:20 |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 37:45 in total. That leaves room for interruptions and about 20 minutes of questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 42:45 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
