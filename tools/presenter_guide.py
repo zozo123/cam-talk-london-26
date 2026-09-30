@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 MAX_WPM = 125
-TOTAL_WINDOW_S = (35 * 60, 44 * 60)
+TOTAL_WINDOW_S = (35 * 60, 45 * 60)
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -21,8 +21,8 @@ def frames(tex):
             continue
         title = m.group("title") or ""
         if not title:
-            head = re.search(r"\\bfseries ([^\\}]+)", body)
-            title = head.group(1).strip() if head else "Title"
+            head = re.search(r"\\bfseries ((?:[^\\}]|\\\\)+)", body)
+            title = " ".join(head.group(1).replace("\\\\", " ").split()) if head else "Title"
         title = re.sub(r"\\(ev|surf)\{[^{}]*(\{[^{}]*\}[^{}]*)*\}", "", title)
         title = title.replace("$n$", "n").replace("\\", "").strip()
         yield title, note.group("cue"), " ".join(note.group("text").split())

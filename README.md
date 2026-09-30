@@ -4,7 +4,7 @@
 
 Cambridge Computer Laboratory Systems Research Group seminar, 15 October 2026, 15:00–16:00 BST, FW11 + Microsoft Teams. [Event listing](https://www.talks.cam.ac.uk/talk/index/273181).
 
-- **[Seminar PDF](dist/forkable-sandboxes-cambridge-40.pdf)** (31 main slides + backups; the file name is kept for old links)
+- **[Seminar PDF](dist/forkable-sandboxes-cambridge-40.pdf)** (33 main slides + backups; the file name is kept for old links)
 - **[LaTeX source with speaker notes](talk.tex)**
 - **[Presenter guide, generated from the notes](PRESENTER-GUIDE.md)**
 - **[Claim boundaries and provenance](CLAIM-FENCE.md)**
@@ -16,29 +16,33 @@ Cambridge Computer Laboratory Systems Research Group seminar, 15 October 2026, 1
 
 ## The argument
 
-On 27 September 2026, the speaker's open-source software factory ([zozo123/ariflow-swfactory](https://github.com/zozo123/ariflow-swfactory)) ran a work order on its own code:
-- A repair agent without a shell rewrote code outside the plan.
-- The first review blocked it. After one more repair, the second review approved it.
-- The same model wrote the fix and ran both reviews.
-- Every agent told the truth. The suite was green. The new branch had no test.
+The talk opens with a result the room already trusts. In *The Tail at Scale* (Dean & Barroso, CACM 2013), hedged requests cut 99.9th-percentile latency from 1,800 ms to 74 ms for 2% more requests. It works because slowness is "often not inherent in the particular request". AI agents now hedge for correctness, but a wrong answer often *is* in the request.
 
-The talk walks the seven advertised surfaces roughly in the order they bit across that day's runs. It then places fork in its Xen-era lineage (SnowFlock, Potemkin, Remus, Firecracker, the 2026 agent-checkpoint papers).
+- **Forks find answers.** Repeated sampling takes SWE-bench Lite from 16% to 56% (Brown et al. 2024).
+- **Checks decide which answer is right.** An imperfect verifier caps the gain (Stroebl et al. 2024).
+- **The numbers.** A Jeff Dean-style table of fork, checkpoint and restore numbers ends with the one nobody reports: how correlated two forks' verdicts are.
+- **Where the time goes.** In the speaker's own factory run, sandbox setup was 0.8% of a 43-minute work order.
 
-It ends on the contribution: sibling results are correlated evidence. The statistics for correlated evidence exist, and they need cluster labels. The runtime holds some of those labels (shared parent, seed, test, fixture) and today throws them away. A worker/reducer contract hands them over. Turning them into a dependence model is still open.
+The talk then covers the seven advertised surfaces, the fork (SnowFlock's 2009 Figure 1, what forks copy, when fork pays, the runtime interface) and the count. The count covers the refrain *forks multiply executions, not evidence*, the cluster labels the runtime can write, and the receipt contract (arXiv:2607.09689). Two pre-registered tests follow, and the talk closes with *Hedging works when failures are independent. Fork the machine, not the trust.*
 
-*Fork the machine, not the trust. Count evidence, not executions.*
+The speaker's own papers appear where they are used:
+- **ENCODE pipelines:** reproducibility.
+- **Bitcoin (2022) and iScience (2026):** dependence the co-authors had to uncover from outside, which a fork runtime could label itself.
+- **PRE, PNAS (2020) and JPCB (2021):** actomyosin linkers, branching and avalanches, as motivation (not evidence) for the coupling test.
+
+The full research record is in the backups.
 
 ## Structure
 
 | Slides | Act | Time |
 |---|---|---|
-| 1–4 | The hook: one real run; what I claim and don't | 5:25 |
-| 5–12 | The wall: seven surfaces, numbered on each slide | 10:20 |
-| 13–20 | The fork: lineage, clone hazards, what each fork copies, held effects, cost, isolation, architecture, the runtime interface | 12:20 |
-| 21–26 | The count: adaptivity, execution vs evidence multiplicity, cluster labels, the receipt contract | 8:20 |
-| 27–31 | Test and agenda: two pre-registered tests, the redesigned run, open problems | 6:20 |
+| 1–8 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the map, the claims | 8:40 |
+| 9–16 | The wall: seven surfaces, numbered on each slide | 10:00 |
+| 17–23 | The fork: SnowFlock Fig. 1, what forks copy, held effects, cost, isolation, the interface | 10:10 |
+| 24–28 | The count: adaptivity, multiplicity, cluster labels, the receipt, precision | 8:00 |
+| 29–33 | Test and agenda: two pre-registered tests, the redesigned run, open problems, close | 6:30 |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 42:45 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 43:20 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
