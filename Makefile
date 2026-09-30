@@ -1,10 +1,13 @@
-.PHONY: all academic short dist clean
+.PHONY: all academic short dist guide clean
 
 SHORT := $(wildcard slides/*.tex)
 
 all: academic short
 
-academic: talk.pdf
+academic: talk.pdf guide
+
+guide: talk.tex tools/presenter_guide.py
+	python3 tools/presenter_guide.py --check
 
 short: talk-30min.pdf
 
