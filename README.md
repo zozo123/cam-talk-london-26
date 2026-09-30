@@ -23,12 +23,12 @@ The talk opens with a result the room already trusts. In *The Tail at Scale* (De
 - **The numbers.** A Jeff Dean-style table of fork, checkpoint and restore numbers ends with the one nobody reports: how correlated two forks' verdicts are.
 - **Where the time goes.** In the speaker's own factory run, sandbox setup was 0.8% of a 43-minute work order.
 
-The talk then covers the seven advertised surfaces, the fork (SnowFlock's 2009 Figure 1, what forks copy, when fork pays, the runtime interface) and the count. The count covers execution vs evidence multiplicity, the cluster labels only the runtime holds, and the receipt contract (arXiv:2607.09689). Two pre-registered tests follow, and the talk closes with *Hedging works when failures are independent. Fork the machine, not the trust.*
+The talk then covers the seven advertised surfaces, the fork (SnowFlock's 2009 Figure 1, what forks copy, when fork pays, the runtime interface) and the count. The count covers the refrain *forks multiply executions, not evidence*, the cluster labels the runtime can write, and the receipt contract (arXiv:2607.09689). Two pre-registered tests follow, and the talk closes with *Hedging works when failures are independent. Fork the machine, not the trust.*
 
 The speaker's own papers appear where they are used:
 - **ENCODE pipelines:** reproducibility.
-- **Bitcoin (2022) and iScience (2026):** recovering hidden cluster labels.
-- **PRE and PNAS (2020):** branching networks, as motivation for the coupling test.
+- **Bitcoin (2022) and iScience (2026):** dependence the co-authors had to uncover from outside, which a fork runtime could label itself.
+- **PRE, PNAS (2020) and JPCB (2021):** actomyosin linkers, branching and avalanches, as motivation (not evidence) for the coupling test.
 
 The full research record is in the backups.
 
@@ -36,13 +36,13 @@ The full research record is in the backups.
 
 | Slides | Act | Time |
 |---|---|---|
-| 1–8 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the map, the claims | 8:45 |
-| 9–16 | The wall: seven surfaces, numbered on each slide | 9:45 |
-| 17–23 | The fork: SnowFlock Fig. 1, what forks copy, held effects, cost, isolation, the interface | 10:25 |
-| 24–28 | The count: adaptivity, multiplicity, cluster labels, the receipt, precision | 7:25 |
-| 29–33 | Test and agenda: two pre-registered tests, the redesigned run, open problems, close | 6:40 |
+| 1–8 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the map, the claims | 8:40 |
+| 9–16 | The wall: seven surfaces, numbered on each slide | 10:00 |
+| 17–23 | The fork: SnowFlock Fig. 1, what forks copy, held effects, cost, isolation, the interface | 10:10 |
+| 24–28 | The count: adaptivity, multiplicity, cluster labels, the receipt, precision | 8:00 |
+| 29–33 | Test and agenda: two pre-registered tests, the redesigned run, open problems, close | 6:30 |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 43:00 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 43:20 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
