@@ -36,13 +36,13 @@ The full research record is in the backups.
 
 | Slides | Act | Time |
 |---|---|---|
-| 1–8 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the map, the claims | 8:40 |
+| 1–8 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the map, the claims | 8:55 |
 | 9–16 | The wall: seven surfaces, numbered on each slide | 10:00 |
-| 17–23 | The fork: SnowFlock Fig. 1, what forks copy, held effects, cost, isolation, the interface | 10:10 |
-| 24–28 | The count: adaptivity, multiplicity, cluster labels, the receipt, precision | 8:00 |
-| 29–33 | Test and agenda: two pre-registered tests, the redesigned run, open problems, close | 6:30 |
+| 17–23 | The fork: SnowFlock Fig. 1, what forks copy, held effects, cost, isolation, the interface | 10:20 |
+| 24–28 | The count: adaptivity, multiplicity, cluster labels, the receipt, precision | 7:50 |
+| 29–33 | Test and agenda: two pre-registered tests, the redesigned run, open problems, close | 6:35 |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 43:20 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 43:40 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
