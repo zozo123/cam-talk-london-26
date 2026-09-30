@@ -2,7 +2,7 @@
 
 Written before any run. **The timestamp is the public push of tag `prereg-v1`** to github.com/zozo123/cam-talk-london-26. Any later change is a separate commit, with its reason, and a new tag.
 
-Slides 29–30 of `talk.tex` present this protocol. Results, each prediction marked held or failed, go in `RESULTS.md` in this repository. If the runs finish before 15 Oct 2026, the talk shows them.
+The slides "Test 1: does restore beat a warm cache?" and "Test 2: do siblings fail together?" of `talk.tex` present this protocol. Results, each prediction marked held or failed, go in `RESULTS.md` in this repository. If the runs finish before 15 Oct 2026, the talk shows them.
 
 ## Question
 
@@ -93,7 +93,7 @@ Run 3 restored cells × 50 executions of the race test and estimate its failure 
 **Statistic:**
 - For a triple, ρ = mean over cell pairs (j, j′) and rounds k of (Y_jk − p̄)(Y_j′k − p̄) / (p̄(1 − p̄)).
   - p̄ is the pooled failure rate of that arm (siblings or strangers), not each cell's own mean.
-  - This is the intraclass correlation of outcomes. It is the ρ of the variance-floor formula on slide 25.
+  - This is the intraclass correlation of outcomes. It is the ρ of the variance-floor formula on the slide "More forks are not more witnesses".
   - It captures both co-failure within a round and a shared shift in failure rate.
   - It stays defined when one cell's sequence is constant.
 - For pair i, Δρ_i = ρ(siblings) − ρ(strangers).
@@ -145,9 +145,10 @@ Every result is reported, including inconclusive ones and failures to finish wit
 
 ## Amendments after `prereg-v1`
 
-No run had started when either amendment was made. No hypothesis, arm, sample size, statistic or decision rule changed.
+No run had started when any amendment was made. No hypothesis, arm, sample size, statistic or decision rule changed.
 
 1. `de13c1d` (30 Sep 2026): slide numbers updated to follow the rebuilt deck (slides 29–30).
 2. Tag `prereg-v2` (30 Sep 2026):
    - The ρ cross-reference now points to slide 25, where the variance-floor formula is.
    - The Phase B standard-error note is corrected. One triple's ρ has SE ≈ 1/√(3T) ≤ 0.033. The 0.014 figure is the SE of Δρ over 12 pairs.
+3. Tag `prereg-v3` (30 Sep 2026): slide references replaced by slide titles after the talk was reorganised into one story. No protocol change.

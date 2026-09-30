@@ -2,45 +2,60 @@
 
 **The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.
 
-Generated from `talk.tex` by `tools/presenter_guide.py`. 33 main slides, 20 backups. Planned talk: **43:40**, 4311 spoken words, 99 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
+Generated from `talk.tex` by `tools/presenter_guide.py`. 48 main slides, 6 end-matter pages. Planned talk: **42:45**, 4153 spoken words, 97 wpm average, peak 107 wpm. These are planned cues, not a measured rehearsal.
 
 ## Run of show
 
 | # | Slide | Cue | Clock | Words | wpm |
 |---|---|---|---|---|---|
-| 1 | Forkable Sandboxes | 0:20 | 0:00-0:20 | 32 | 96 |
-| 2 | Hedging needs independent slowdowns | 1:15 | 0:20-1:35 | 118 | 94 |
-| 3 | Forks find answers. Checks decide which. | 1:15 | 1:35-2:50 | 112 | 90 |
-| 4 | Numbers every agent runtime should know | 1:20 | 2:50-4:10 | 118 | 88 |
-| 5 | Where 43 minutes went | 1:10 | 4:10-5:20 | 104 | 89 |
-| 6 | Blocker. One more repair. Approve. | 1:35 | 5:20-6:55 | 156 | 99 |
-| 7 | One factory, seven places the runtime bit | 0:55 | 6:55-7:50 | 97 | 106 |
-| 8 | A factory needs a wall, a fork and a count | 1:05 | 7:50-8:55 | 118 | 109 |
-| 9 | Allowlists name hosts; the web redirects | 1:20 | 8:55-10:15 | 140 | 105 |
-| 10 | Keys stay outside; a fork copies the inside | 1:10 | 10:15-11:25 | 126 | 108 |
-| 11 | Filesystem state: what a snapshot shares | 0:55 | 11:25-12:20 | 91 | 99 |
-| 12 | Locking the tests was not enough | 1:15 | 12:20-13:35 | 129 | 103 |
-| 13 | Teardown must not destroy the experiment | 1:15 | 13:35-14:50 | 135 | 108 |
-| 14 | A green check is not proof the check ran | 1:20 | 14:50-16:10 | 144 | 108 |
-| 15 | What the run pins, and what it cannot | 1:30 | 16:10-17:40 | 160 | 107 |
-| 16 | Parallel-safe steps, and nothing to fork them | 1:15 | 17:40-18:55 | 126 | 101 |
-| 17 | The shape of an agent sandbox, drawn in 2009 | 1:20 | 18:55-20:15 | 120 | 90 |
-| 18 | Fork copies memory, secrets and identity | 1:35 | 20:15-21:50 | 146 | 92 |
-| 19 | What each kind of fork copies | 1:35 | 21:50-23:25 | 145 | 92 |
-| 20 | Hold effects until an authority releases them | 1:05 | 23:25-24:30 | 117 | 108 |
-| 21 | When fork pays, and where it loses | 1:30 | 24:30-26:00 | 136 | 91 |
-| 22 | Isolation has two axes: kernel and authority | 1:30 | 26:00-27:30 | 155 | 103 |
-| 23 | The interface the runtime owes the factory | 1:45 | 27:30-29:15 | 170 | 97 |
-| 24 | The second review was not a second witness | 1:30 | 29:15-30:45 | 157 | 105 |
-| 25 | More forks are not more witnesses | 1:50 | 30:45-32:35 | 165 | 90 |
-| 26 | The runtime holds some of the cluster labels | 1:35 | 32:35-34:10 | 156 | 99 |
-| 27 | Every worker returns a receipt, not a score | 1:45 | 34:10-35:55 | 163 | 93 |
-| 28 | A sandbox bounds actions, not claims | 1:10 | 35:55-37:05 | 114 | 98 |
-| 29 | Test 1: does restore beat a warm cache? | 1:30 | 37:05-38:35 | 144 | 96 |
-| 30 | Test 2: do siblings fail together? | 1:40 | 38:35-40:15 | 159 | 95 |
-| 31 | The same work order, run as it should be | 1:20 | 40:15-41:35 | 141 | 106 |
-| 32 | Open problems where this room is ahead of me | 1:00 | 41:35-42:35 | 102 | 102 |
-| 33 | Hedging works when failures are independent. | 1:05 | 42:35-43:40 | 115 | 106 |
+| 1 | Forkable Sandboxes | 0:20 | 0:00-0:20 | 34 | 102 |
+| 2 | Hedging needs independent slowdowns | 1:00 | 0:20-1:20 | 100 | 100 |
+| 3 | Forks find answers. Checks decide which. | 0:50 | 1:20-2:10 | 89 | 107 |
+| 4 | Numbers every agent runtime should know | 1:05 | 2:10-3:15 | 100 | 92 |
+| 5 | Where 43 minutes went | 0:45 | 3:15-4:00 | 68 | 91 |
+| 6 | Blocker. One more repair. Approve. | 1:20 | 4:00-5:20 | 127 | 95 |
+| 7 | How a biophysicist ended up forking sandboxes | 1:05 | 5:20-6:25 | 96 | 89 |
+| 8 | One factory, seven places the runtime bit | 0:45 | 6:25-7:10 | 79 | 105 |
+| 9 | A factory needs a wall, a fork and a count | 0:45 | 7:10-7:55 | 74 | 99 |
+| 10 | Allowlists name hosts; the web redirects | 0:50 | 7:55-8:45 | 82 | 98 |
+| 11 | Keys stay outside; a fork copies the inside | 0:50 | 8:45-9:35 | 83 | 100 |
+| 12 | Filesystem state: what a snapshot shares | 0:45 | 9:35-10:20 | 74 | 99 |
+| 13 | Locking the tests was not enough | 0:55 | 10:20-11:15 | 88 | 96 |
+| 14 | Reward hacking is the RL name for it | 0:55 | 11:15-12:10 | 90 | 98 |
+| 15 | Teardown must not destroy the experiment | 0:55 | 12:10-13:05 | 97 | 106 |
+| 16 | A green check is not proof the check ran | 0:55 | 13:05-14:00 | 88 | 96 |
+| 17 | What the run pins, and what it cannot | 0:55 | 14:00-14:55 | 92 | 100 |
+| 18 | Parallel-safe steps, and nothing to fork them | 0:45 | 14:55-15:40 | 73 | 97 |
+| 19 | The shape of an agent sandbox, drawn in 2009 | 0:55 | 15:40-16:35 | 89 | 97 |
+| 20 | Fork is old, and much of it was built on Xen | 1:00 | 16:35-17:35 | 96 | 96 |
+| 21 | Training runs are sandbox factories | 1:05 | 17:35-18:40 | 105 | 97 |
+| 22 | Reset changes the learning problem | 0:45 | 18:40-19:25 | 71 | 95 |
+| 23 | Fork copies memory, secrets and identity | 0:55 | 19:25-20:20 | 90 | 98 |
+| 24 | What each kind of fork copies | 0:55 | 20:20-21:15 | 93 | 101 |
+| 25 | Hold effects until an authority releases them | 0:55 | 21:15-22:10 | 93 | 101 |
+| 26 | When fork pays, and where it loses | 1:05 | 22:10-23:15 | 106 | 98 |
+| 27 | Isolation has two axes: kernel and authority | 0:55 | 23:15-24:10 | 90 | 98 |
+| 28 | The interface the runtime owes the factory | 0:55 | 24:10-25:05 | 90 | 98 |
+| 29 | Machines fork; authority stays outside | 0:55 | 25:05-26:00 | 94 | 103 |
+| 30 | Promotion is small enough to model-check | 0:45 | 26:00-26:45 | 73 | 97 |
+| 31 | The second review was not a second witness | 1:05 | 26:45-27:50 | 111 | 102 |
+| 32 | A reused grader becomes a training set | 0:45 | 27:50-28:35 | 75 | 100 |
+| 33 | One formula, three fields | 0:55 | 28:35-29:30 | 95 | 104 |
+| 34 | More forks are not more witnesses | 1:20 | 29:30-30:50 | 126 | 94 |
+| 35 | The runtime holds some of the cluster labels | 0:55 | 30:50-31:45 | 87 | 95 |
+| 36 | Fork is also how you run the control | 0:45 | 31:45-32:30 | 74 | 99 |
+| 37 | When does a swarm gel? | 0:50 | 32:30-33:20 | 76 | 91 |
+| 38 | Two green patches can fail together | 0:45 | 33:20-34:05 | 73 | 97 |
+| 39 | Every worker returns a receipt, not a score | 1:00 | 34:05-35:05 | 88 | 88 |
+| 40 | A sandbox bounds actions, not claims | 0:55 | 35:05-36:00 | 84 | 92 |
+| 41 | Test 1: does restore beat a warm cache? | 0:55 | 36:00-36:55 | 91 | 99 |
+| 42 | Why I expect siblings to fail together | 0:40 | 36:55-37:35 | 65 | 98 |
+| 43 | Test 2: do siblings fail together? | 1:00 | 37:35-38:35 | 94 | 94 |
+| 44 | What two tests cannot separate | 0:40 | 38:35-39:15 | 61 | 92 |
+| 45 | The same work order, run as it should be | 0:55 | 39:15-40:10 | 89 | 97 |
+| 46 | Open problems where this room is ahead of me | 0:45 | 40:10-40:55 | 69 | 92 |
+| 47 | The hedging paper already had the answer | 0:50 | 40:55-41:45 | 73 | 88 |
+| 48 | Hedging works when failures are independent. | 1:00 | 41:45-42:45 | 98 | 98 |
 
 ## Script
 
@@ -48,278 +63,312 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 33 main slides, 20 back
 
 *0:20, starts at 0:00*
 
-Thank you for having me. I work on distributed builds at Incredibuild, and I build an agent sandbox platform called islo. I will say that once and then talk only about components.
+Thank you for having me. I work on distributed builds at Incredibuild. Disclosure: I also build islo, an agent sandbox platform. And I started as a physicist, which will matter in about five minutes.
 
 ### 02. Hedging needs independent slowdowns
 
-*1:15, starts at 0:20*
+*1:00, starts at 0:20*
 
-In 2013 Jeff Dean and Luiz Barroso described a trick that is now widely used. Send a request to a second replica, and keep whichever answer comes first. In one Google benchmark it cut the 99.9th-percentile latency from 1,800 milliseconds to 74, for two percent more requests. And they said why it works: the slowness is often not in the request. It is interference, and the replicas do not share it. [click] AI agents now play the same trick for correctness. Run the attempt several times; keep the one that passes. But a wrong answer often is in the request: the same prompt, the same model, the same starting state, the same flaky test. The copies share it.
+In 2013 Jeff Dean and Luiz Barroso published a trick most of this room has used: send a second copy of a slow request, and keep whichever answer comes first. In one Google benchmark, tail latency fell from 1,800 milliseconds to 74, for two percent more requests. The slowness is often not in the request, and replicas do not share it. [click] Agents now hedge for correctness. But a wrong answer often is in the request. Their paper has a second trick, for exactly the case where the fault is in the request. I will hold it until the end.
 
 ### 03. Forks find answers. Checks decide which.
 
-*1:15, starts at 1:35*
+*0:50, starts at 1:20*
 
-So does hedging for correctness work? Partly, and the numbers are striking. Sample a coding model two hundred and fifty times and it solves fifty-six percent of SWE-bench Lite instead of sixteen. Forks find answers. But only when something can tell which answer is right. Without an automatic check, voting and reward models plateau. And a check that says yes to wrong answers caps the whole thing: when a wrong answer costs more than no answer, Stroebl and colleagues find the best number of tries is often under ten. So hedging for correctness is only as good as the check you hedge on. This talk is about the runtime underneath that check.
+So does hedging for correctness work? Partly, and the numbers are striking. Sample a coding model two hundred and fifty times and it solves fifty-six percent of SWE-bench Lite, not sixteen. But only with a check. Without one, voting and reward models plateau. A check that says yes to wrong answers caps the gain: when a wrong answer costs more than no answer, Stroebl and colleagues find the best number of tries is often under ten. If you train models, you know this check by another name: the reward.
 
 ### 04. Numbers every agent runtime should know
 
-*1:20, starts at 2:50*
+*1:05, starts at 2:10*
 
-Jeff Dean gave us numbers everyone should know. Here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts in 2009 in under a second. One work order in my factory: forty-three minutes and ten dollars. One frontier lab created fifty-one million sandboxes for a single model, and its sandboxes spend up to ninety-eight percent of their lives waiting on the model. The primitives take milliseconds. Through a public API, seconds. The work takes minutes. Every row has a source, except the last: how correlated two forks' verdicts are. That row decides what every other row is worth.
+Jeff Dean also gave us numbers everyone should know, so here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across its training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth.
 
 ### 05. Where 43 minutes went
 
-*1:10, starts at 4:10*
+*0:45, starts at 3:15*
 
-Now my own numbers. A software factory is a pipeline of agents: an issue goes in, a reviewed patch comes out. Mine is open source. This is one work order through it, on the 27th of September. Forty-three minutes. Setting up the sandbox took twenty seconds: under one percent. Build and test took almost half, review nearly as much, and both are agents and checks. Make sandbox setup a hundred times faster and this run gets eight tenths of a percent faster. Amdahl sends his regards. The minutes are in the agents and the checks. And, as it turns out, so is the risk.
+That forty-three-minute row is my own factory, so let me open it up. A software factory is a pipeline of agents: an issue in, a reviewed patch out. Sandbox setup: twenty seconds, under one percent. Make it a hundred times faster and this run gets eight tenths of a percent faster. Amdahl sends his regards. The minutes are in the agents and the checks. So is the risk.
 
 ### 06. Blocker. One more repair. Approve.
 
-*1:35, starts at 5:20*
+*1:20, starts at 4:00*
 
-Here is what happened inside that run. The work order was small: fix the sandbox allowlist. A four-thread race test failed, and the loop sent a repair agent. That agent had no shell, and it said so: it could not run the tests. It rewrote code outside the plan. Review one said: blocker, untested and unverified. The tests were locked, so the second repair restructured the code and argued it was covered. Review two downgraded "untested" to minor, and approved. One model did all four steps. A committee of one. The suite passed after each repair, nineteen hundred and seventy-two tests. But the new code had no test of its own. Both repairs said they had not run the tests. The gate approved anyway. I reverted the out-of-plan change by hand. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Hold that question.
+So here is what the agents and the checks actually did. A four-thread race test failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair, but the new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Hold that question.
 
-### 07. One factory, seven places the runtime bit
+### 07. How a biophysicist ended up forking sandboxes
 
-*0:55, starts at 6:55*
+*1:05, starts at 5:20*
 
-The talk you signed up for promised seven topics. Here they are, pinned on the factory pipeline where each one bit, and numbered in the order I will take them. The evidence is two runs on the 27th and a CI job the next day. Every evidence slide carries a tag: measured in my own records, built and tested, proposed, or other people's work. And the scope, said once: the runs used Docker's sandbox, not my platform. Two observations come from islo. My harness answered the approval gates, not a person. Credential leases were off. Nothing forked.
+I have met that question before; it is how a biophysicist ended up forking sandboxes. In my PhD, linker valency and Arp2/3 shaped simulated actomyosin networks, which rearrange in avalanches. Then my co-authors and I met it again: ENCODE's pipelines record how every file was made; malignant cells cluster by patient; most early bitcoin was mined by sixty-four agents. Agent factories are my fourth meeting; RL training is the field's. Four of these five fields are me. A committee of one again, so each brings published evidence. I keep changing fields; the question keeps following me.
 
-### 08. A factory needs a wall, a fork and a count
+### 08. One factory, seven places the runtime bit
 
-*1:05, starts at 7:50*
+*0:45, starts at 6:25*
 
-So the runtime owes the factory three things. A wall: control over what a cell, the agents' sandbox, can reach, change and report. A fork: alternatives from a state we already paid for. And a count: knowing what those alternatives actually found. What I claim: a receipt contract, which is built; two real runs, which are measured; and two hypotheses, one about cost and one about coupling, which I will show you how to reject. What I do not claim: a new estimator, a controlled speedup, a ranking of vendors, or a factory that forks today. The one sentence to take home: forks multiply executions, not evidence. And the runtime is where you can see what forks share.
+The fourth meeting is the one I have logs for, so here it is in systems terms: one factory, seven places the runtime bit. The seven topics you signed up for, in the order I take them. Every evidence slide carries a tag, now including analogy. Scope, said once: the runs used Docker's sandbox, not islo; two observations are from islo. My harness answered the gates. Leases off. A talk about forks, from a factory in which nothing forked.
 
-### 09. Allowlists name hosts; the web redirects
+### 09. A factory needs a wall, a fork and a count
 
-*1:20, starts at 8:55*
+*0:45, starts at 7:10*
 
-The wall first. Surface one is networking and credentials; start with the network. The work order itself was a network bug, seen on islo that morning. The sandbox allowlist named astral dot sh. But astral dot sh answers with a redirect to another host that was not on the list, and the installer's fallback goes to GitHub's release-asset host, also not on the list. So curl returned 403, uv never installed, and the tests could never pass. The list lived in five places, and they had drifted. The fix added both hosts. Be honest about what that does: the second host admits every release asset on GitHub. The lesson is granularity. A list of names is the wrong unit when the web is a graph of redirects. The build-system answer is to fetch by content digest, through a caching proxy.
+Those seven surfaces reduce to three things the runtime owes the factory: a wall, a fork and a count. I claim a built receipt contract, two measured runs, and two hypotheses I will show you how to reject. I do not claim an estimator, a speedup, a ranking, or a factory that forks today. Nor that a gel proves anything about a fork. Forks multiply executions, not evidence. The runtime sees what forks share.
 
-### 10. Keys stay outside; a fork copies the inside
+### 10. Allowlists name hosts; the web redirects
 
-*1:10, starts at 10:15*
+*0:50, starts at 7:55*
 
-Same surface, the credential half. The orchestrator holds the GitHub token and delivers only after the gate. The agent never pushes. The cell has no GitHub token and deny-by-default egress. The model credential is injected by an egress gateway, as Docker's sandbox also documents: the raw credential never enters the VM. But the cell still holds a placeholder, and a placeholder is a bearer string in guest memory. Fork the VM and you copy it; forked children are bit-identical. And the model endpoint carries arbitrary bytes out. The proposed next step: the gateway keys each request on identity the host assigns, a per-clone tap or vsock ID, and a restore voids the parent's lease. Capabilities and macaroons are the vocabulary. Copy the machine, not the keys.
+The wall first: surface one is networking, and the work order itself was a network bug, seen on islo that morning. The allowlist named astral dot sh, which redirects to a host not on the list; the fallback, GitHub's asset host, was not on it either. Curl said 403, and uv never installed. The list lived in five places, and they had drifted: four copies too many. The fix admits every release asset on GitHub. Fetch by digest, through a caching proxy.
 
-### 11. Filesystem state: what a snapshot shares
+### 11. Keys stay outside; a fork copies the inside
 
-*0:55, starts at 11:25*
+*0:50, starts at 8:45*
 
-Surface two, filesystem state. A snapshot captures a boundary, not the universe, so each kind of state needs a policy. Files and build outputs are pinned by content digest; OBuilder snapshots every build step on ZFS or btrfs. The workspace disk is shared copy-on-write: as overlay layers in day10, as DeltaBox's layered filesystem, and as DeepSeek's chained snapshots. Agent history stays outside the VM. Randomness and external services come back later in the talk. Memory is the part a filesystem cannot share, and I will come to it with the fork.
+That was the network half of surface one; the credential half is about where the keys live. The GitHub token stays with the orchestrator. The cell has deny-by-default egress, and a gateway injects the model credential. But the cell still holds a placeholder, a bearer string in guest memory, and a fork copies it bit for bit. Proposed: key each request on identity the host assigns, and let restore bump a generation that voids the parent's lease. Copy the machine, not the keys.
 
-### 12. Locking the tests was not enough
+### 12. Filesystem state: what a snapshot shares
 
-*1:15, starts at 12:20*
+*0:45, starts at 9:35*
 
-Surface three, build and test. The tests directory was write-protected, and the agent was told. It never tried to edit a test, so the hook never fired. It did not matter. Planned steps are scope-checked; repairs are not. The repair changed the code under test. An out-of-plan edit counts as major, not a blocker, and writer and reviewers were one model. Two of those are policy fixes, not runtime. Published work agrees. METR saw o3 reward-hack in about thirty percent of RE-Bench runs and under one percent of HCAST, and suggests the visible scorer may be why. ImpossibleBench shows read-only tests stop test edits, not special-casing. Kimi K3 names the fix: isolate agents from verifiers, and keep the verifiers hidden. Run, evaluate and promote are three permissions, not one.
+Surface two is filesystem state, and the first thing to say is that a snapshot captures a boundary, not the universe. So each kind of state gets its own policy. Build outputs are pinned by digest; OBuilder snapshots every step. The workspace disk is copy-on-write, and RL platforms already chain those snapshots: DeepSeek's DSec does. Randomness and external services come later. Memory is the part a filesystem cannot share; hold that for the fork.
 
-### 13. Teardown must not destroy the experiment
+### 13. Locking the tests was not enough
 
-*1:15, starts at 13:35*
+*0:55, starts at 10:20*
 
-Surface four, recovery. A second work order the same day went well, then badly. Build and test passed first time. Review approved. Then delivery was refused three times: the workspace had a file outside the reviewed commits. That file was my own harness's review archive, mirrored into the workspace. The gate was protecting the repository from me. So it was right to refuse. What happened next was wrong: teardown destroyed the cell, and the approved candidate with it. Twenty-six minutes, three dollars forty, nothing delivered. The fix is not exotic. The artifact has to leave the cell before the cell dies; a patch file on the host would have been enough. A crash, a refusal or a long human wait should destroy a worker, never the experiment. For a day-long human gate: snapshot, destroy, restore.
+Surface three is build and test, and here the wall was a write-protected tests directory. The agent never tried: fifteen edits, all allowed; the hook never fired. It did not matter. Repairs were not scope-checked, and one edited code outside the plan. Biology, as an analogy, calls that an off-target edit. Biologists label off-target risk before they cut; my co-authors and I built a tool for it. A scope check is that label for code. The fixes are policy, not runtime. A locked directory is not a scope.
 
-### 14. A green check is not proof the check ran
+### 14. Reward hacking is the RL name for it
 
-*1:20, starts at 14:50*
+*0:55, starts at 11:15*
 
-Surface five, observability. Three receipts, all mine. First, a CI job that evaluates the islo lane reported success in three seconds, because the key was unset and every real step was skipped. My fastest CI job ever, because it did nothing. Second, my approvals file records the gates as mode human, actor admin. It was my harness answering. Third, my own islo command line printed its status messages on the same standard output as the program it ran, and an earlier attempt that day died trying to parse them. All three are my own receipts, and each was wrong. I would rather tell you than have you find them. So every check needs a receipt that says it actually ran, on a channel the child cannot write. This room knows that problem as provenance, from PASS and CamFlow; the supply-chain world calls it in-toto.
+This is not my harness being unlucky: reinforcement learning has a name for it, reward hacking. METR saw o3 reward-hack in thirty percent of RE-Bench runs and under one percent of HCAST; their leading guess is the visible scorer. ImpossibleBench: read-only tests stop test edits, not special-casing. Kimi K3 hides some verifiers. And on its kernel tasks, the hacking detector penalises input caching. I work at a build-acceleration company. I felt seen. Whether a cache is engineering or cheating depends on what the grader measures. Run, evaluate, promote: three permissions.
 
-### 15. What the run pins, and what it cannot
+### 15. Teardown must not destroy the experiment
 
-*1:30, starts at 16:10*
+*0:55, starts at 12:10*
 
-Surface six, reproducibility. The run record pins the input commit and the lockfile, digests of the policy, the inputs and the sandbox adapter, and the output of every agent step. It does not pin the hosted model, which has no seed I control; external hosts and their redirects; the clock; or my sandbox adapter's source, a local shim not yet in git. So the honest target is replay, not rerun: log every model response, every external fetch through that caching proxy, and every clock read, and re-execute the rest against the log. Record-and-replay tools like rr work this way, and so does DeepSeek's sandbox. Genomics set the audit bar years ago: in the ENCODE pipelines I worked on, every data file is captured in the portal with the software versions, parameters and reference genome that produced it. This run is close; the gaps are the hosted model and my adapter's source. So you can audit it. You cannot rerun it.
+Surface four, recovery: a second work order that same day went well, and then badly. Tests and review passed. Then delivery was refused three times, for a stray file outside the reviewed commits: my own harness's review archive. The gate was protecting the repository from me. Then teardown destroyed the cell, and the approved candidate with it: twenty-six minutes, three dollars forty-three, nothing delivered. The artifact must leave the cell before the cell dies. DeepSeek's DSec keeps the sandbox when training is preempted, and replays its log to resume. For a long human wait: snapshot, destroy, restore.
 
-### 16. Parallel-safe steps, and nothing to fork them
+### 16. A green check is not proof the check ran
 
-*1:15, starts at 17:40*
+*0:55, starts at 13:05*
 
-Last on the wall, surface seven, fast cloning. The plan had three steps. The tests step was safe to run in parallel with the other two, and the executor asked its sandbox provider for a fork. None offered one, so it ran them in series and wrote down why: serial fallback, missing fork. Had tests run in a fork, the critical path would have been about three minutes shorter, out of forty-three. And these steps touch disjoint files, so two worktrees would have done. So speed is not why we fork. We fork when the reached state is expensive, and when we want alternatives. That is the wall. Seven surfaces, one rule: whatever you must trust lives outside the cell. Now let us copy the cell.
+Surface five, observability, and here I have three receipts, all mine, all wrong. A CI job passed in three seconds: every real step skipped. My fastest CI job ever, because it did nothing. My approvals file says mode human; my harness answered. My CLI mixed status into standard output. So every check needs a receipt the child cannot write; this room calls it provenance. RL learned this too: reward the final state, not the self-report. Both repairs confessed they never ran the tests. The harness ran them anyway.
 
-### 17. The shape of an agent sandbox, drawn in 2009
+### 17. What the run pins, and what it cannot
 
-*1:20, starts at 18:55*
+*0:55, starts at 14:00*
 
-These are two of the four patterns in Figure 1 of SnowFlock, EuroSys 2009. It forked Xen virtual machines, and Xen came from this lab. Pattern (a) is called sandboxing. Run trusted code, fork, give the child the untrusted code, and the parent waits. That is the shape of an agent sandbox, drawn seventeen years ago. Pattern (b) is parallel computation: each child works on data indexed by its own fork ID, so the ID picks its slice. Now fork an agent's repair nine times. Same state, same tests. Nine children, one slice. The rest of the lineage is in the backup. The mechanism is old. The caller is new: a program that searches, reads git history and games tests.
+Surface six, reproducibility: if a receipt is right, can anyone rerun it? The record pins the commit, the lockfile and the digests. Not the hosted model, external hosts, the clock, or my adapter's source. The target is replay: log every model response, fetch and clock read, and re-execute the rest. DeepSeek's sandbox logs every command for replay. Genomics set this bar in the ENCODE pipelines I worked on; the off-target tool from surface three ships as a Docker image for the same reason. You can audit this run. You cannot rerun it.
 
-### 18. Fork copies memory, secrets and identity
+### 18. Parallel-safe steps, and nothing to fork them
 
-*1:35, starts at 20:15*
+*0:45, starts at 14:55*
 
-Fork copies memory, so it copies everything in memory. The child inherits five things it should not. Random state: siblings share random streams. VMGenID reseeds the kernel generator, but Firecracker's own documentation says there is no generic solution for userspace. Tokens: eight forks of a VM holding a token are eight live tokens, which is why the secret should never be in the guest, and why AWS proposed wiping memory on suspend. The clock resumes at snapshot time. Network identity: every clone has the same IP and MAC, so each needs its own namespace and NAT; in 2005 Potemkin already spent 142 of its 521 milliseconds configuring IP. And nobody clones an open TCP connection. CRIU can hand an open connection to one restored copy, not to eight, and gVisor resets it. A runtime for search has to make all five part of the fork contract.
+Last on the wall, surface seven, fast cloning: the executor actually asked for a fork that day. No provider offered one, so it ran in series and wrote down why: serial fallback, missing fork. A fork would have saved three minutes of forty-three. Amdahl again. We fork to buy alternatives from expensive state, not speed. Seven surfaces, one rule: whatever you must trust lives outside the cell. Now let us copy the cell.
 
-### 19. What each kind of fork copies
+### 19. The shape of an agent sandbox, drawn in 2009
 
-*1:35, starts at 21:50*
+*0:55, starts at 15:40*
 
-What does a fork actually copy? Children share memory until they write, so the total is the shared part plus each child's private pages. Four mechanisms, four answers. A worktree or an overlay layer keeps files only, and costs the bytes each child writes. A container checkpoint with CRIU keeps processes and memory, but an open TCP connection needs its original IP, so at most one restored copy can keep it. A microVM snapshot keeps guest memory and device state, with disks handled separately, and the real cost is the pages each child touches after restore; REAP showed that is where cold starts go. Record and replay keeps a log instead of a state. One caution. A restore that returns OK is not fidelity: before a child counts, compare restored and direct runs on the outputs you declared. Cheap at fork; you pay at divergence.
+So let us copy the cell, starting with a picture this building will recognise. SnowFlock, EuroSys 2009, forked Xen machines, and Xen came from this lab. Pattern (a) is sandboxing: fork, give the child the untrusted code, and the parent waits. That is an agent sandbox, drawn seventeen years ago. Pattern (b) is parallel work: the fork ID picks each child's slice. Now fork an agent's repair nine times. Same state, same tests. Nine children, one slice. The mechanism is old. The caller is new: a program that searches.
 
-### 20. Hold effects until an authority releases them
+### 20. Fork is old, and much of it was built on Xen
 
-*1:05, starts at 23:25*
+*1:00, starts at 16:35*
 
-External effects. A restore cannot unsend an email or un-push a branch, and the answers here are old too. Speculator and external synchrony ran ahead speculatively and held output until it was safe. Remus held network output until the checkpoint committed. This year Zheng and colleagues state the agent version: no fork, restore or merge can undo a tool request already sent. In my factory the rule is structural: children hold no credential that can publish, and the orchestrator delivers once, after the gate. In these runs it delivered to a local git remote. The one exception is the model API: every child uses it, and it is metered and logged, not held. Output commit, made structural.
+SnowFlock was one point on a line that started in this building in 2003. Xen; then live migration, sixty milliseconds of downtime. Potemkin cloned honeypots, SnowFlock forked across hosts, Catalyzer forked a gVisor sandbox in under a millisecond, best case, and MITOSIS forked remotely over RDMA. By fork I mean the whole machine, not the POSIX call Baumann and colleagues asked us to retire. The shaded band is this year, and one row is a training run. Every row is latency or safety. None counts what siblings share. That is the survey behind the blank row.
 
-### 21. When fork pays, and where it loses
+### 21. Training runs are sandbox factories
 
-*1:30, starts at 24:30*
+*1:05, starts at 17:35*
 
-When does fork pay? Without a fork you prepare N times. With a fork you prepare once, capture once, and pay a restore and divergence per child. Work and evaluation, including every model call, appear on both sides and cancel. And a restored process does not run your patch: each child still rebuilds. So fork loses in three cases. One child. State that is only files, with a good build cache: that is the Incredibuild lesson. And a minimal image that boots faster than you can restore: the Jitsu argument from this room, and LightVM's from NEC Labs. My own number is an API round trip, 6.87 seconds, and until I show the snapshot holds memory, it is restore fan-out, not fork. Fork does not pay in seconds. It pays for state you cannot rebuild cheaply.
+So who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes across training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. And its trainer stops waiting once a fraction lambda of trajectories finish, to mitigate the long-tail latency. That is Dean's good enough, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.
 
-### 22. Isolation has two axes: kernel and authority
+### 22. Reset changes the learning problem
 
-*1:30, starts at 26:00*
+*0:45, starts at 18:40*
 
-Isolation has two axes, and this building built both. One is kernel surface: a container shares one kernel, gVisor puts a kernel in user space, and a microVM or a unikernel stands on a hypervisor. The other is authority: an ordinary process can name whatever its user can; under Capsicum or on CHERI it can use only what it is handed. Work cells run arbitrary builds, so they get a microVM, and their authority is handed over explicitly. Then warm state, where build systems live. A build cache is performance and also a channel, so share it within one trust domain; share dependency images by digest, and watch for a poisoned base; and never share scratch. Kimi reports kernel panics in its early container runtimes, and Firecracker's production guide says to disable simultaneous multithreading and same-page merging. Put many agents on one host and we call it a swarm. The operating system calls it roommates.
+Once a fork is a reset, it also changes what the learner gets to see. Start at the task start and you sample one distribution; restore from a checkpoint and you sample another. Go-Explore showed that returning, then exploring, makes exploration productive. So record where each checkpoint came from and why it was chosen, and evaluate on the task you care about. A restore point is a choice of training data.
 
-### 23. The interface the runtime owes the factory
+### 23. Fork copies memory, secrets and identity
 
-*1:45, starts at 27:30*
+*0:55, starts at 19:25*
 
-If this is a runtime layer, here is the interface it owes the factory. Checkpoint a cell into a snapshot; islo has named snapshots today, but whether they hold memory is unverified. Fork a snapshot with a lease, a seed policy, copy or reseed, and an egress policy. Evaluate an artifact outside the child, and get back a receipt. Select one candidate on a fresh test: that is choosing, and it is not pooling. Reduce receipts into an estimate and a bound on the effective number of witnesses, or abstain; the merge and the evidence check are built, the bound and abstention are proposed. And promote once: the gate that binds approval to the artifact hash is built; the epoch fence, Chubby's sequencer or Kleppmann's fencing token, is proposed. There is a TLA+ design model of promotion with explicit invariants; I have not yet run the model checker on it. Promotion is small enough to model-check. What a child will write is not. That is why the count is statistics.
+Trainer or factory, the child inherits everything in memory, including what it should not. Random state: siblings share random streams, and for userspace there is no generic solution. Tokens: eight forks holding a token are eight live tokens, so secrets stay outside. The clock resumes at snapshot time. Clones share one IP and MAC. And nobody clones an open TCP connection. All five belong in the fork contract. An analogy, not evidence: systems people named a remote fork MITOSIS. Biologists would add that daughter cells inherit the parent's mistakes too.
 
-### 24. The second review was not a second witness
+### 24. What each kind of fork copies
 
-*1:30, starts at 29:15*
+*0:55, starts at 20:20*
 
-Now the count, and the question I asked you to hold. Repair two was written against review one's verdict, and graded by the same model. The candidate adapted to its grader, which is the adaptive-data-analysis problem Dwork and colleagues named: a reused holdout stops being a holdout. So the two reviews together were, at best, one independent look. Now the nine forks. Two questions hide there. Nine forks that write nine different patches is choosing, and choosing needs a fresh test. Nine re-runs of one patch is confirming, and it is capped by what the runs share. How many greens would confirming need? Review two itself says the race reaches the new code only when the interleaving happens to lose an activation. If that happens one run in ten, you need twenty-nine independent green runs before the chance of missing it drops below five percent. Independent is the hard word. Nine green forks are not nine witnesses.
+So what does each kind of fork copy, and where does the bill land? Children share until they write. Kimi reports that copy-on-write memory, with page-cache tricks, lets it overcommit memory up to six and a half times. A worktree keeps files. CRIU keeps processes, but a connection survives in one copy at most. A microVM pays for the pages each child touches. A restore that returns OK is not fidelity. An analogy from physics: trajectories that share a past and split at the first write. Cheap at fork; you pay at divergence.
 
-### 25. More forks are not more witnesses
+### 25. Hold effects until an authority releases them
 
-*1:50, starts at 30:45*
+*0:55, starts at 21:15*
 
-Here is the arithmetic, and the one number to remember from it: a hundred forks can be worth nine witnesses. If N runs have the same variance and a common pairwise correlation rho, the variance of their average has a floor at rho times sigma squared. More runs approach the floor; they never go below it. As an effective sample size: nine witnesses at point one, two at point five. In evidence terms: four re-runs of a hundred tests are four hundred executions but a hundred evidence identities, and until rho is measured, a hundred is only an upper bound. Pool within a candidate, compare across candidates. And the correlation is not hypothetical. Kim and colleagues found that on one leaderboard, two models that are both wrong give the same wrong answer sixty percent of the time. A shared blind spot is bias, not variance: no number of re-runs averages it away. Forks multiply executions, not evidence. If you remember one sentence, remember that one.
+Memory we can copy or throw away; an email already sent is another matter. Speculator, external synchrony and Remus all held output until it was safe. This year Zheng and colleagues state it in Lean: nothing undoes a request already sent. DeepSeek replays logged results, so a non-idempotent command never runs twice. Kimi forks a sandbox to judge reward for exactly this reason: no side effects. In my factory, children hold no publishing credential; the orchestrator delivers once, after the gate. The model API is the one unheld channel. Output commit, made structural.
 
-### 26. The runtime holds some of the cluster labels
+### 26. When fork pays, and where it loses
 
-*1:35, starts at 32:35*
+*1:05, starts at 22:10*
 
-What is new is not the statistics. Correlated evidence has a sixty-year literature: Kish's design effect, cluster-robust variance, dependent effect sizes, provenance as annotations. All of it needs cluster labels. The runtime holds some of those labels and nobody else does: which runs share a parent, a seed, a test, a fixture, and, through the egress gateway, which model they called. My co-authors and I have had to uncover structure like this from outside twice: address linking tied most early bitcoin to sixty-four agents, and malignant cells cluster by patient rather than by cell type. A fork runtime does not have to recover its own lineage. It records it. It cannot label a shared model's blind spots, and parent, model and test are crossed factors, so you need multiway clustering, and a wild-cluster bootstrap when clusters are few. Others must infer the clusters. A fork runtime can record its own. The dependence model is still open.
+Held effects make a fork safe; now, when does it pay? Fork trades N preparations for one capture, plus a restore and a divergence per child. So it loses at one child, on files-only state with a good build cache, and against a minimal image that boots faster, Jitsu from this room, LightVM from NEC Labs. If your build cache is good, fork loses. My day job is fast builds, so I am contractually obliged to tell you that. The table is not a ranking. With teardown, an islo slot averaged 11.3 seconds, and until the snapshot is shown to hold memory, that is restore fan-out.
 
-### 27. Every worker returns a receipt, not a score
+### 27. Isolation has two axes: kernel and authority
 
-*1:45, starts at 34:10*
+*0:55, starts at 23:15*
 
-Here is my contribution. Every worker returns a receipt, not a score: an estimate, its information, the sample size, the identities of the evidence it used, its fork lineage, and metadata. Built: the numeric summaries merge in any tree order, so it fits MapReduce-style reduction. If two workers declare the same evidence, the merge stops instead of counting it twice. And lineage travels with the result, although nothing consumes it yet. Proposed: one execution per evidence identity, so a retry is never double-counted, and a reducer that abstains when dependence is unknown instead of reporting the narrow interval that independence would imply. For a pass probability the counts simply add, but m siblings inflate the variance by a factor of one, plus rho for every sibling after the first: Kish's design effect again. A separate four-worker trace runs the contract end to end from a named snapshot, with no cold baseline. The estimator is Cochran's inverse-variance weighting. The contract is what was missing.
+Wherever the child starts, it needs a wall with two axes, and this building built both. Kernel surface: a container shares one kernel, gVisor moves it to user space, a microVM stands on a hypervisor. Authority: a process can name whatever its user can; under Capsicum or CHERI, only what it is handed. Share a build cache within one trust domain; never share scratch. Kimi saw kernel panics in early container runtimes; Firecracker says disable SMT and same-page merging. We call it a swarm. The operating system calls it roommates.
 
-### 28. A sandbox bounds actions, not claims
+### 28. The interface the runtime owes the factory
 
-*1:10, starts at 35:55*
+*0:55, starts at 24:10*
 
-One more trap. Isolation bounds what a child can do. It does not bound what a child can claim. In a synthetic check from the paper, one worker reports a distant estimate from a two-thousand-point shard, and inflates its reported precision a further fifty times. Unprotected pooling moves to seventeen. A simple stress heuristic brings it back to about five, and that heuristic is not a Byzantine guarantee. Measuring the sample size alone would not help, because the forgery is in the information per point. The fix is architectural: precision has to come from evidence the controller holds, by re-running or re-scoring on held-out data. Precision is an input the child should not control.
+Put the wall, the fork and the held effects together and you get the interface the runtime owes the factory. Six calls, with honest status. Checkpoint: islo has named snapshots, memory unverified. Fork takes a lease, an egress policy and a seed policy, copy or reseed; hold on to that knob. Evaluate outside the child. Select one candidate on a fresh test. Reduce receipts to an estimate, or abstain: the merge is built, abstention proposed. Promote once: the hash-bound gate is built, the epoch fence proposed. Choosing is not pooling.
 
-### 29. Test 1: does restore beat a warm cache?
+### 29. Machines fork; authority stays outside
 
-*1:30, starts at 37:05*
+*0:55, starts at 25:05*
 
-Everything so far is two runs and a synthetic check. So here are two tests that could prove me wrong, written down before any run. Test one is cost. First a gate: put a random value in RAM, snapshot, restore three children, and see whether it survives; if not, everything I report is restore fan-out, not fork. Then fidelity: deterministic tests must give identical outputs restored and direct. Then the comparison that matters: a cached template against a restore, twenty interleaved repetitions at each size, both timed on one clock to the first test result. If the whole interval for the gain sits above ten seconds at every size, restore wins. If it sits below ten seconds at any size, the warm cache wins here. Anything in between is inconclusive. A result where the build cache wins is a good result for this room.
+Behind those six calls sits an architecture, and here it is with honest labels. Solid boxes are built and ran: the scheduler with its journal and run lock, the work cells, and a gate bound to the artifact's hash. Dashed gold is not exercised: the lease broker is built, the outside evaluator only designed. Every architecture diagram should have a box labelled missing. Mine is the fork store. I wrote the fork contract before I had the fork. Condition eight is the teardown lesson. Condition five is where the rest of this talk goes.
 
-### 30. Test 2: do siblings fail together?
+### 30. Promotion is small enough to model-check
 
-*1:40, starts at 38:35*
+*0:45, starts at 26:00*
 
-Test two is coupling. Twelve snapshot families of three siblings, each paired with three strangers restored from other families, in the same slot on the same host, so the only difference is shared ancestry. Each triple runs the race test in lockstep rounds, at least three hundred. The statistic is sibling correlation minus stranger correlation, tested by flipping signs across the twelve pairs. If the sibling excess is above point zero five and significant at five percent, the data support the thesis here. If the data rule out an excess that large, they do not. Why do I expect coupling? Part of my PhD was on actomyosin networks, where how filaments link and branch reshapes the whole network's connectivity, and branched networks show rare, sudden avalanches. A motivation, not a prediction. Last, the nine repairs I asked you to imagine: re-sample the first repair nine times from its recorded input. My prediction: at least five repeat the out-of-plan edit.
+One box must never race, the promotion gate, and it is small enough to model-check. Evidence names only the frozen candidate, approval needs that evidence, and publication needs all three in the current epoch. Six invariants, zero model-checker runs. I would rather you heard that from me. Even the hedging paper did not hedge writes: consistent updates go to quorum protocols like Paxos. A child's output cannot be model-checked. It must be counted.
 
-### 31. The same work order, run as it should be
+### 31. The second review was not a second witness
 
-*1:20, starts at 40:15*
+*1:05, starts at 26:45*
 
-So here is the same work order, run the way the runtime should run it. Fork after the plan is approved, three children here, each with its own lease and budget. The repair loop's scope is enforced, so the out-of-plan edit is denied instead of being reported as major. The evaluator lives outside the cells, uses another model family and hidden tests the repair loop never saw, and scores the frozen candidate once, so the holdout stays a holdout. The reducer clusters receipts by lineage and reports the number of runs, a bound on the effective number of witnesses from the coupling test, or abstains. The artifact leaves the cell before teardown, and promotion is fenced by an epoch. Review two would not count as a second witness. Search can race. Promotion must not. This is a design, not a run.
+What a child writes cannot be model-checked, so it has to be counted, starting with the question I asked you to hold. Repair two was written against review one's verdict and graded by the same model. A reused holdout stops being a holdout; Dwork named that. Two reviews by one model were, at best, one look. And the nine imagined forks? Choosing among nine patches needs a fresh test. Confirming one patch nine times is capped by what the runs share. Biologists are taught not to confuse technical replicates with independent experiments; our 2021 paper reported both. Our factories confuse them by default. Nine forks of one parent are technical replicates.
 
-### 32. Open problems where this room is ahead of me
+### 32. A reused grader becomes a training set
 
-*1:00, starts at 41:35*
+*0:45, starts at 27:50*
 
-I will end with open problems, where I think this room is ahead of me. Six are on the slide. I will talk about two, because I want help with them. One: estimate dependence from lineage. Given fork trees and evidence manifests, what can we say about rho without running everything twice? Two: leases that fork. A child's capability should be re-minted on restore, revocable, and never ambient. The other four are on the slide for questions: side channels in warm state; holding effects on remote services and people; when a content-addressed build beats a live fork; and a day-long human gate.
+Machine learning has a name for a grader you keep going back to: a training set. Even a protected evaluator teaches search to overfit its feedback. So freeze the candidate and validate once. RL labs do this: Kimi K3 pairs public diagnostic verifiers with hidden held-out ones, and caps verbosity so longer answers cannot win. Our repair two argued past review one. Same failure, grader or reward model. Feedback you optimise against stops being evidence.
 
-### 33. Hedging works when failures are independent.
+### 33. One formula, three fields
 
-*1:05, starts at 42:35*
+*0:55, starts at 28:35*
 
-Hedging works when failures are independent. The runtime's job is to know when they are not. Remember the blank row in the table: how correlated two forks' verdicts are. No system I surveyed reports it. Test two is how I plan to fill it in. In 2009 the parent's last line was wait. Ours has to be count: reduce the receipts by lineage, or abstain. My bet: agents will soon fork far more often than people commit. Forks multiply executions, not evidence. So the runtime that matters is the one that can tell you what a thousand green checks are worth. Fork the machine, not the trust. Thank you. I am happy to take questions.
+Here is a formula this room knows, in three costumes. Dean: each server slow one time in a hundred, a hundred-way fan-out, sixty-three percent of requests slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled putting many swabs in one tube: Poolkeh covered nine million people with under three hundred thousand tests. Now I put one machine in many sandboxes. Say our race loses one run in ten: twenty-nine greens before a miss drops under five percent. All three assume independent draws.
 
-## Backup slides
+### 34. More forks are not more witnesses
 
-### B1. Table 2: API paths, not a provider ranking
+*1:20, starts at 29:30*
 
-Bring this up only if asked about speed. The operations differ: two rows are sandbox creation, the islo row is restore plus run plus capture. They are not comparable as latencies, and none of them is a mechanism latency.
+Here is what happens to all three when the draws are not independent. Give N runs a common correlation rho, and the variance of their average has a floor at rho sigma squared. In witnesses: a hundred forks at point one are nine; at point five, two; at one, a hundred forks are one witness. Four hundred executions of a hundred tests are a hundred evidence IDs. And rho is real: on one leaderboard, two wrong models agree sixty percent of the time. That is bias, not variance. [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. Reading rho as coupling is my interpretation. Forks multiply executions, not evidence.
 
-### B2. Agent checkpoint and fork, 2026
+### 35. The runtime holds some of the cluster labels
 
-None of these systems treats sibling outputs as correlated evidence; they optimise checkpoint latency or safety. Planarian, from Imperial, spans local and remote state and rolls remote state back with compensating actions.
+*0:55, starts at 30:50*
 
-### B3. Arp2/3 shapes network dynamics
+The formula is sixty years old; what it needs, and rarely gets, is cluster labels. The runtime holds some that nobody else does: parent, seed, test, fixture, and, through the egress gateway, the model. It cannot label a shared model's blind spots. My co-authors and I had to infer clusters from outside. A decentralized network, or sixty-four agents? A new cell type, or the same patient? Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.
 
-This is a result from mechanochemical simulations of branched actomyosin networks. At high Arp2/3 concentration the network stalls; at low concentration it contracts; at an intermediate concentration, loosely connected clusters can collapse suddenly under motor activity. My graph-theoretic work studies how local connectivity relates to global morphology, while the avalanche study uses network science and machine learning to forecast collective rearrangements. Stockmayer's random-branching polymer theory is a formal precedent for asking when local branching yields system-scale connectivity, under its own idealized assumptions. A related question for agent systems is whether communication links connect otherwise separate lineages and reduce effective diversity; its threshold must be derived for the actual dependency model. These biological and polymer results motivate that question, but do not predict software behavior.
+### 36. Fork is also how you run the control
 
-### B4. Reset changes the learning problem
+*0:45, starts at 31:45*
 
-Reusing a difficult-to-reach state can make exploration productive, as return-and-explore methods illustrate. But a policy trained primarily from favorable intermediate checkpoints has seen a different starting-state distribution. We cannot silently substitute its performance for task-start performance. Depending on the algorithm, distribution correction, curriculum design, or explicit reporting may be necessary. Snapshot ancestry records where experience came from. The final evaluation should still test the deployment question we claim to answer.
+Correlation is not always the enemy: when you compare two candidates, you want it. Give A and B the same draw and the covariance term cancels the nuisance: common random numbers. To corroborate, vary the draw. A fork decides which you get, by copying the seed or reseeding, so the seed policy belongs in the fork API. Test two is built this way: only ancestry differs. Share randomness to compare; vary it to corroborate.
 
-### B5. Three graphs describe the computation
+### 37. When does a swarm gel?
 
-Ancestry records where execution state came from, often as a tree or DAG. Communication adds edges that need not follow ancestry; these edges can introduce dependencies among later decisions. Composition concerns sets of artifacts and may need hyperedges for three-way or higher-order effects. The outline around the three candidates denotes a possible higher-order interaction, not a measured one. Keeping these structures separate avoids calling every relationship a fork. It also clarifies which metadata the controller must retain.
+*0:50, starts at 32:30*
 
-### B6. How eight changes work together
+Seeds are a coupling we choose; communication between forks is one we often do not. A swarm has three graphs: ancestry, evidence flow and composition. Ancestry is a tree. Evidence flow is not: its edges can join separate lineages into one cluster, the way cross-links join polymer chains. Stockmayer asked when that makes one gel. 1943 again. Enough shared context, and a swarm becomes one witness. That is an analogy; the agent threshold must be derived.
 
-Gamma is a second finite difference of a declared scalar objective. It measures non-additivity such as synergy, conflict, or saturation, and may itself require repeated measurements. It is not mutual information or quantum interference. Define an application order or canonical composition procedure; if the patches do not compose, record a failure rather than inventing a score. Eight candidates have 28 unordered pairs, while all subsets number 256 including the empty set. Pairwise screening can guide an economical search but cannot certify every higher-order interaction.
+### 38. Two green patches can fail together
 
-### B7. What the reducer experiments establish
+*0:45, starts at 33:20*
 
-The logistic check uses five IID shards with sample sizes 60, 120, 400, 2000, and 5000. Across eight fixed seeds the information-weighted estimate is closer to the centralized maximum-likelihood estimate than equal coefficient averaging. This specific check does not establish universal efficiency or superiority to other distributed estimators. The forged-precision example motivates trustworthy information estimates, not a claim of Byzantine robustness. These are reported results from the paper; they are not new agent-task benchmark measurements.
+The composition graph hides the nastiest case: two patches that are green alone and break together. Gamma measures that non-additivity. Eight candidates give twenty-eight pair tests and two hundred and fifty-six subsets, and higher-order effects survive pairwise screening. Genetics calls strongly negative gamma synthetic lethality; my co-authors and I screened the genome for it. Each knockout survivable, together lethal. Each patch green, together red. Rebuild and evaluate the composition you ship: condition seven.
 
-### B8. Ablations that explain the outcome
+### 39. Every worker returns a receipt, not a score
 
-These ablations distinguish mechanisms. A fast fork with a worse search policy may lose. A communicating system may win only because it spends more model calls. Sharing can help discovery while increasing evidence dependence. Evaluate communication with an equal full resource budget and record the induced selection history. For composition, include deliberately interacting changes rather than only independent patches. Use uncertainty across tasks and seeds and reserve fresh validation for selected results.
+*1:00, starts at 34:05*
 
-### B9. Evaluation under adaptive search
+So what should a worker hand back? A receipt, not a score: estimate, information, sample size, evidence IDs, lineage and metadata. Built: summaries merge in any tree order, and a duplicate evidence ID stops the merge. Proposed: one execution per evidence ID, and abstention when dependence is unknown. A hedged request is a speculative duplicate, and DSec replays cached results rather than re-running them. Count that evidence once. Yes, the repository is called boltzmann-mapreduce. Physicists never really leave. The estimator is Cochran's. The contract is what was missing.
 
-Access control prevents direct tampering. It does not prevent a candidate generator from adapting to repeated pass/fail or score feedback. The final reported score may then be optimistic even when every individual evaluation was computed correctly. A fresh held-out evaluation or a statistically justified adaptive procedure addresses a different failure mode from sandbox isolation. If final-validation feedback is fed back into further selection, it has become development feedback and the protocol must account for that.
+### 40. A sandbox bounds actions, not claims
 
-### B10. The fork contract, before the fork
+*0:55, starts at 35:05*
 
-The full contract, quoted from the repository. Condition five is the bridge to the count; condition eight is the SELFHOST-3 lesson.
+A receipt can lie too, and isolation will not stop it. Two synthetic checks from the paper. Left, honest shards of unequal size: information pooling lands far closer to the full-data estimate than equal averaging, over eight seeds. Right, one worker forges its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back, but that is no Byzantine guarantee. This is reward hacking, aimed at the reducer. Precision is an input the child should not control.
 
-### B11. TLA+ promotion invariants
+### 41. Test 1: does restore beat a warm cache?
 
-Use this if someone asks why promotion is not also statistics. The invariants are written for TLC under the README's stated assumptions; no TLC run is recorded here yet, and the next step is checking that real control-kernel traces are admitted by the model.
+*0:55, starts at 36:00*
 
-### B12. Machines fork; authority stays outside
+Everything so far is two runs and synthetic checks, so here are two tests that could prove me wrong, written before any run. Test one: cost. Gate zero: a random value in RAM, snapshot, restore three children. If it dies, I report restore fan-out, not fork. Fidelity: restored and direct outputs must match. A cached template against a restore, twenty interleaved reps per size. Restore wins only if the whole interval clears ten seconds at every size. A result where the build cache wins is a good result for this room.
 
-Here is the architecture with honest labels. Solid boxes are built and ran: an Airflow scheduler with a durable journal and a run lock, the work cells, and a gate that binds an approval to the exact artifact hash. Dashed gold is built or designed but not exercised: a lease broker that ties each credential to an attempt, a cell and an epoch, and an evaluator outside the cell. Dashed red is missing: the fork store. I wrote the fork contract before I had the fork. It has eight conditions: a content-addressed parent; a lease and budget per branch; no publishing credentials; recorded parent and evidence identities; never count siblings that reuse evidence as independent agreement; merge deterministically; verify the merge; and tear down every child. Condition five is where the rest of this talk goes.
+### 42. Why I expect siblings to fail together
 
-### B13. Fork is old, and much of it was built on Xen
+*0:40, starts at 36:55*
 
-Now the fork. Fork is old, and much of it was built on Xen, in this building. Live migration, from here in 2005, already moved a running VM's memory by pre-copying dirty pages, with sixty milliseconds of downtime for a game server. Potemkin flash-cloned honeypot VMs with copy-on-write memory. SnowFlock forked Xen VMs across hosts in 2009, in six to eight hundred milliseconds, and its very first example is our pattern: run trusted code, fork, and give the child the untrusted work. Catalyzer forked running gVisor sandboxes; Nephele brought fork to unikernel VMs on Xen. This year DeltaBox checkpoints agent sandboxes in about eleven milliseconds, and Shepherd forks them in about 140. And Moonshot's Kimi K3 report offers fork, in their words, for reward judging without side effects. By fork I mean forking a whole machine, not the POSIX fork call, which Baumann and colleagues argued we should retire. The mechanism is old. The caller is new: a program that searches, reads git history and games tests.
+Before test two, let me declare why I expect siblings to be coupled: I have watched networks do it. My co-authors and I simulated branched actomyosin networks. High Arp2/3: they stall. Low: they contract. In between, loosely connected clusters may collapse suddenly, in avalanches; we noted they are reminiscent of the cytoquakes seen in cells. The physicists here will hold me to that analogy tag.
 
-### B14. Fork is also how you run the control
+### 43. Test 2: do siblings fail together?
 
-Dependence is not always the enemy. To compare two candidates, give them the same random draw, and the nuisance variation cancels in the difference. That is common random numbers, old in simulation. To corroborate a claim you want the opposite: vary the randomness and the failure modes. A fork decides which one you get, by whether it copies the random state or reseeds it. So the seed policy belongs in the fork API, as an explicit choice.
+*1:00, starts at 37:35*
 
-### B15. Research record: biophysics
+So test two asks it directly: do siblings from one snapshot fail together more than strangers do? Twelve families of three siblings, each paired with three strangers: same slot, same host. Technical replicates against independent experiments. The statistic is the sibling excess correlation. Above point zero five and significant: supported. Confidently below: rejected. Why point zero five? It takes nine siblings down to six point four witnesses. And the nine imagined repairs: re-sample repair one nine times. I predict at least five repeat the out-of-plan edit. When it runs, it fills the blank row.
 
-PhD work at the University of Houston and Rice: graph theory of actomyosin network shape, Arp2/3 branching and avalanches, protein folding and calcium binding. This is the motivation for Test 2, not evidence for it.
+### 44. What two tests cannot separate
 
-### B16. Research record: genomics
+*0:40, starts at 38:35*
 
-Genome architecture, bioinformatics and cancer genomics at Baylor, NRGene, HIT and Harvard. ENCODE sets the reproducibility bar on slide 15; per-patient clustering is a cluster-label story.
+Suppose both tests go my way: a win would still not tell us why. A fast fork with a worse search policy can still lose. A communicating system may win only because it spends more model calls. So each row varies one thing, at an equal full budget. Recall Stroebl: how many tries you pay for is part of the result.
 
-### B17. Research record: preprints, systems and talks
+### 45. The same work order, run as it should be
 
-Preprints, systems work and talks. The three-body e-print is on an AI-assisted server and is not peer reviewed; say so if asked.
+*0:55, starts at 39:15*
 
-### B18. References: systems
+Put the whole talk together: the same work order, run the way the runtime should run it. Fork after the plan: three children, each with its own lease. Why three? When a wrong answer costs more than none, the best number of tries is often under ten. The out-of-plan edit is denied. Another model family scores hidden tests once, as K3 hides its verifiers. The reducer clusters by lineage, or abstains. The artifact leaves before teardown. Search can race. Promotion must not. This is a design, not a run.
 
-Systems references. Every figure on a main slide is traceable to these, to the slide's own source line, or to a named run file.
+### 46. Open problems where this room is ahead of me
 
-### B19. References: evidence and evaluation
+*0:45, starts at 40:10*
+
+That is a design, not a run, and building it hits problems where I think this room is ahead of me. Six are on the slide. I would like help with the first two. One: estimate dependence from lineage and evidence edges, without running everything twice. Two: leases that fork. A child's capability should be re-minted on restore, revocable, and never ambient. The other four are there for questions.
+
+### 47. The hedging paper already had the answer
+
+*0:50, starts at 40:55*
+
+Just one more thing. At the start I promised the hedging paper's second trick, for when the fault is in the request. Their worry is a request that exercises an untested code path, crashing thousands of servers at once. The cure is not more replicas. It is a canary: one or two leaves first. My run's new code had no test. Nine green forks would share that gap. So: a canary for correlation.
+
+### 48. Hedging works when failures are independent.
+
+*1:00, starts at 41:45*
+
+So let me close where I began, with Jeff Dean's hedged request. Hedging works when failures are independent. The runtime's job is to know when they are not. Remember the blank row: how correlated two forks' verdicts are. It stays blank until test two runs. In 2009 the parent's last line was wait. Ours has to be count: reduce the receipts by lineage, or abstain. In physics, genomics and Bitcoin, my co-authors and I had to infer the clusters. A fork runtime can record them. Forks multiply executions, not evidence. Fork the machine, not the trust. Thank you.
+
+## End matter (untimed)
+
+### E1. Research record: biophysics
+
+PhD work at the University of Houston and Rice: graph theory of actomyosin network shape (PRE 2020, linker valency), Arp2/3 branching and avalanches (PNAS 2020, JPCB 2021), protein folding and calcium binding. Used on slide 7 (the journey) and slide 42, the declared prior for Test 2. It is the motivation for Test 2, not evidence for it. Team results: my co-authors and I.
+
+### E2. Research record: genomics
+
+Genome architecture, bioinformatics and cancer genomics at Baylor, NRGene, HIT and Harvard. Where they appear: OffRisk on slide 13 (the off-target analogy); the 2021 CRISPR screen on slides 31, 38 and 43 (replicates, synthetic lethality); the per-patient tumour clustering (iScience) on slides 7 and 35 (cluster labels). The ENCODE pipelines, which set the replay bar on slide 17, are on the next page. Team results: my co-authors and I.
+
+### E3. Research record: preprints, systems and talks
+
+Preprints, systems work and talks. Where they appear: Poolkeh on slide 33 (a model, not a deployment); arXiv:2607.09689 on slides 39 and 40 (receipts, forged precision); Bitcoin on slides 7 and 35 (team result); the ENCODE pipelines on slides 7 and 17. The three-body e-print is on an AI-assisted server and is not peer reviewed; say so if asked.
+
+### E4. References: systems
+
+Systems references. Every figure on a story slide is traceable to these, to the slide's own source line, or to a named run file.
+
+### E5. References: evidence and evaluation
 
 Evidence and evaluation references.
 
-### B20. References: own work and documentation
+### E6. References: own work and documentation
 
-The speaker's own and co-authored work cited on main slides, and the documentation behind slides 10, 11, 18, 19 and 22.
+The speaker's own and co-authored work cited on story slides, the documentation behind slides 11, 12, 23, 24 and 27, and Go-Explore for slide 22.
