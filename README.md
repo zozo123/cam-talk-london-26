@@ -4,8 +4,7 @@
 
 Cambridge Computer Laboratory Systems Research Group seminar, 15 October 2026, 15:00–16:00 BST, FW11 + Microsoft Teams. [Event listing](https://www.talks.cam.ac.uk/talk/index/273181).
 
-- **[Seminar PDF](dist/forkable-sandboxes-cambridge.pdf)** (49 story slides + end matter; the same file is also published as `dist/forkable-sandboxes-cambridge-40.pdf` for old links)
-- **[Presenting copy](dist/forkable-sandboxes-cambridge-present.pdf)** (story slides only, ending on the Contributions slide, so a click during questions cannot reach the end matter)
+- **[Seminar PDF](dist/forkable-sandboxes-cambridge.pdf)** (49 story slides, then end matter: detail pages, research record, references)
 - **[LaTeX source with speaker notes](talk.tex)**
 - **[Presenter guide, generated from the notes](PRESENTER-GUIDE.md)**
 - **[Claim boundaries and provenance](CLAIM-FENCE.md)**
@@ -65,10 +64,10 @@ The cues are derived from the script at about 105 wpm plus reading pauses: 44:45
 
 ## Build
 
-- `make academic` builds `talk.pdf` and regenerates the presenter guide. It fails if any slide's notes exceed 125 wpm.
-- `make dist` builds both PDFs.
+- `make deck` builds `talk.pdf` and regenerates the presenter guide. It fails if any slide's notes exceed 125 wpm.
+- `make dist` copies the deck to `dist/forkable-sandboxes-cambridge.pdf`.
 - CI checks the page count and pacing, and that `PRESENTER-GUIDE.md` is current.
 
 ## Historical material
 
-`talk-30min.tex` and `slides/` are an earlier 30-minute cut, still built by CI as a fallback (`dist/forkable-sandboxes-30min.pdf`). `archive/` holds the research notebooks and earlier outlines (`academic/`, `swarm/`, `scratch/` and the older notes files). Their claims and numbering differ from the canonical deck, and they are not part of it.
+`archive/` holds the research notebooks, earlier outlines and an earlier 30-minute cut (`talk-30min/`, `academic/`, `swarm/`, `scratch/` and the older notes files). None of it is built or published. Their claims and numbering differ from the canonical deck, and they are not part of it.
