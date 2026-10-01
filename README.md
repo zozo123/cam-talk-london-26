@@ -1,10 +1,10 @@
 # Forkable Sandboxes: The Runtime Layer for AI Software Factories
 
-**Yossi Eliaz**: Principal Engineer, Incredibuild; islo.dev; Associate Professor, Holon Institute of Technology (HIT).
+**Yossi Eliaz**: Principal Engineer, Incredibuild; Associate Professor, Holon Institute of Technology (HIT).
 
 Cambridge Computer Laboratory Systems Research Group seminar, 15 October 2026, 15:00–16:00 BST, FW11 + Microsoft Teams. [Event listing](https://www.talks.cam.ac.uk/talk/index/273181).
 
-- **[Seminar PDF](dist/forkable-sandboxes-cambridge-40.pdf)** (48 story slides + end matter; the file name is kept for old links)
+- **[Seminar PDF](dist/forkable-sandboxes-cambridge.pdf)** (49 story slides + end matter; the same file is also published as `dist/forkable-sandboxes-cambridge-40.pdf` for old links)
 - **[Presenting copy](dist/forkable-sandboxes-cambridge-present.pdf)** (story slides only, ending on the Contributions slide, so a click during questions cannot reach the end matter)
 - **[LaTeX source with speaker notes](talk.tex)**
 - **[Presenter guide, generated from the notes](PRESENTER-GUIDE.md)**
@@ -31,13 +31,13 @@ The wall covers the seven advertised surfaces where they bit in a real run, with
 The speaker's own papers appear where they are used:
 - **OffRisk (2023):** the off-target analogy for an out-of-plan edit (slide 13).
 - **ENCODE pipelines:** the replay bar (slides 7 and 17).
-- **Commun. Biol. (2021):** technical replicates vs independent experiments, and synthetic lethality (slides 31, 38 and 43).
-- **Poolkeh (2020):** pooled testing as a model, not a deployment (slide 33).
-- **Bitcoin (2022) and iScience (2026):** dependence the co-authors had to uncover from outside, which a fork runtime could label itself (slides 7 and 35).
-- **arXiv:2607.09689:** the receipt contract and forged precision (slides 39 and 40).
-- **PRE, PNAS (2020) and JPCB (2021):** actomyosin linkers, branching and avalanches, as motivation (not evidence) for the coupling test (slides 7 and 42).
+- **Commun. Biol. (2021):** technical replicates vs independent experiments, and synthetic lethality (slides 32, 39 and 44).
+- **Poolkeh (2020):** pooled testing as a model, not a deployment (slide 34).
+- **Bitcoin (2022) and iScience (2026):** dependence the co-authors had to uncover from outside, which a fork runtime could label itself (slides 7 and 36).
+- **arXiv:2607.09689:** the receipt contract and forged precision (slides 40 and 41).
+- **PRE, PNAS (2020) and JPCB (2021):** actomyosin linkers, branching and avalanches, as motivation (not evidence) for the coupling test (slides 7 and 43).
 
-Detail pages for slides 20, 26, 29, 41 and 43, the full research record and the references are untimed end matter after the close.
+Detail pages for slides 21, 27, 30, 42 and 44, the full research record and the references are untimed end matter after the close.
 
 The delivery follows Patrick Winston's *How to Speak* (MIT, 2018): an empowerment promise in the first minute, vision and done-something inside five minutes, the slogan cycled three times, a fenced claim, spoken act seams, two questions with a seven-second wait, one prop (nine photocopies of one page), one dense slide (slide 4), and a Contributions slide that mirrors slide 9 and stays up through questions. The talk ends on the refrain and a salute, not on "thank you".
 
@@ -46,13 +46,13 @@ The delivery follows Patrick Winston's *How to Speak* (MIT, 2018): an empowermen
 | Slides | Act | Time |
 |---|---|---|
 | 1–9 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the journey across fields, the map, the claims | 9:00 |
-| 10–18 | The wall: seven surfaces, numbered on each slide, with reward hacking and the green-check receipt | 7:45 |
-| 19–30 | The fork: SnowFlock Fig. 1, Xen lineage, training runs, resets, what forks copy, held effects, cost, isolation, the interface, architecture, promotion | 11:15 |
-| 31–40 | The count: the second review, reused graders, one formula in three fields, N_eff as Amdahl, cluster labels, common random numbers, gelation, synthetic lethality, the receipt, precision | 9:35 |
-| 41–48 | Test and agenda: two pre-registered tests with the declared physics prior, what they cannot separate, the redesigned run, open problems, the canary twist, Contributions | 7:05 |
-| after 48 | End matter (untimed): detail pages (4), research record (3), references (3) | — |
+| 10–19 | The wall: seven surfaces, numbered on each slide, with reward hacking and the green-check receipt, then what our runs found | 7:45 |
+| 20–31 | The fork: SnowFlock Fig. 1, Xen lineage, training runs, resets, what forks copy, held effects, cost, isolation, the interface, architecture, promotion | 11:15 |
+| 32–41 | The count: the second review, reused graders, one formula in three fields, N_eff as Amdahl, cluster labels, common random numbers, gelation, synthetic lethality, the receipt, precision | 9:40 |
+| 42–49 | Test and agenda: two pre-registered tests with the declared physics prior, what they cannot separate, the redesigned run, open problems, the canary twist, Contributions | 7:05 |
+| after 49 | End matter (untimed): detail pages (4), research record (3), references (3) | — |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 44:40 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 44:45 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
@@ -71,4 +71,4 @@ The cues are derived from the script at about 105 wpm plus reading pauses: 44:40
 
 ## Historical material
 
-`talk-30min.tex` (published as `dist/forkable-sandboxes-30min.pdf`), `slides/`, `academic/`, `swarm/`, `scratch/` and the older notes (`OUTLINE.md`, `OUTLINE-ANALOGIES.md`, `DECK-BEATS.md`, `FINAL-DECK.md`, `FULL-ACADEMIC.md`, `SPEAKER-NOTES-ACADEMIC.md`, `SPEAKER-NOTES-30MIN.md`, `TOPICS.md`, `QA-BANK.md`, `TRAINING-ENVIRONMENTS.md`, `WORLD-MODELS-BRIDGE.md`) are research notebooks and earlier cuts. Their claims and numbering differ from the canonical deck, and they are not part of it.
+`talk-30min.tex` and `slides/` are an earlier 30-minute cut, still built by CI as a fallback (`dist/forkable-sandboxes-30min.pdf`). `archive/` holds the research notebooks and earlier outlines (`academic/`, `swarm/`, `scratch/` and the older notes files). Their claims and numbering differ from the canonical deck, and they are not part of it.

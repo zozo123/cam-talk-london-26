@@ -16,6 +16,7 @@ short: talk-30min.pdf
 
 dist: all present
 	mkdir -p dist
+	cp talk.pdf dist/forkable-sandboxes-cambridge.pdf
 	cp talk.pdf dist/forkable-sandboxes-cambridge-40.pdf
 	cp talk-present.pdf dist/forkable-sandboxes-cambridge-present.pdf
 	cp talk-30min.pdf dist/forkable-sandboxes-30min.pdf
