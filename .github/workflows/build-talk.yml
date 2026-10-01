@@ -42,9 +42,9 @@ jobs:
           from pypdf import PdfReader
 
           full = len(PdfReader("talk.pdf").pages)
-          print(f"Cambridge deck: {full} pages (49 story slides + 5 reveal/build pages + 10 end-matter pages)")
-          if full != 64:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 64 pages; got {full}")
+          print(f"Cambridge deck: {full} pages (50 story slides + 5 reveal/build pages + 10 end-matter pages)")
+          if full != 65:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 65 pages; got {full}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md

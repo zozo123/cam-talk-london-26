@@ -13,7 +13,7 @@
 
 ### Q2 — Abstain as first-class verdict (B ↔ G)
 **Challenge:** Will the factory API let reduce refuse a narrow posterior?  
-**Answer:** In the design, yes; today, no, and I will not claim it. Built: numeric summaries merge in any tree order, a repeated evidence ID stops the merge (it raises), and lineage travels with the result, but nothing consumes it yet. Proposed: abstaining when dependence is unknown, one execution per evidence ID, a controller-derived precision, and the bound on N_eff (slide 46). The gate built today binds approval to the artifact's sha256; the epoch fence is proposed.
+**Answer:** In the design, yes; today, no, and I will not claim it. Built: numeric summaries merge in any tree order, a repeated evidence ID stops the merge (it raises), and lineage travels with the result, but nothing consumes it yet. Proposed: abstaining when dependence is unknown, one execution per evidence ID, a controller-derived precision, and the bound on N_eff (slide 47). The gate built today binds approval to the artifact's sha256; the epoch fence is proposed.
 
 ### Q3 — Oracle digests outside the fork (C ↔ A/B)
 **Challenge:** Rebound shows agents rewrite `run_tests()` inside the env — what stops forged \((J_k,n_k)\)?  
@@ -61,23 +61,23 @@
 
 ### Q14 — Why not boot a minimal image, or hit the build cache? (Jitsu, LightVM, OBuilder, day10)
 **Challenge:** Jitsu and LightVM boot minimal VMs in milliseconds; OBuilder snapshots every build step by hash. Your H1 baseline, dependencies baked in and source fetched, is weaker than either.  
-**Answer:** Slide 27 concedes both: fork loses with one child, when the state is only files and the build cache is good, and when a minimal image boots faster. In my own run the parallel steps touched disjoint files, so two worktrees would have done. Fork pays only when (N−1)P > H + N(R+D), that is, when the reached state is expensive to rebuild; H1 tests that against the cached template the pre-registration names, with cold as a reference only. If the gain comes from state a better step cache would also hold, that is a point for the cache and for open problem 5; I do not claim fork beats a good build cache.
+**Answer:** Slide 28 concedes both: fork loses with one child, when the state is only files and the build cache is good, and when a minimal image boots faster. In my own run the parallel steps touched disjoint files, so two worktrees would have done. Fork pays only when (N−1)P > H + N(R+D), that is, when the reached state is expensive to rebuild; H1 tests that against the cached template the pre-registration names, with cold as a reference only. If the gain comes from state a better step cache would also hold, that is a point for the cache and for open problem 5; I do not claim fork beats a good build cache.
 
 ### Q15 — Every child talks to the model: what does Remus hold? (live migration, Remus)
 **Challenge:** Remus holds network output until the checkpoint commits. Every one of your children sends bytes to a hosted model. Isn't that an unheld channel out of every fork?  
-**Answer:** Yes, and slide 26 says so: the model API is the one exception, metered and logged, not held, and slide 11 notes the endpoint can carry arbitrary bytes out. What is structural today is narrower: children hold no credential that can publish, and the orchestrator delivers once, after the gate (in these runs, to a local git remote). Holding effects for remote services and for people is open problem 4.
+**Answer:** Yes, and slide 27 says so: the model API is the one exception, metered and logged, not held, and slide 12 notes the endpoint can carry arbitrary bytes out. What is structural today is narrower: children hold no credential that can publish, and the orchestrator delivers once, after the gate (in these runs, to a local git remote). Holding effects for remote services and for people is open problem 4.
 
 ### Q16 — Host identity is not a capability (Capsicum, CHERI, macaroons)
 **Challenge:** You cite Capsicum and macaroons, then propose keying the gateway on a vsock CID or a tap device. That is identity-based authority. And whatever authority sits in guest memory, a fork copies.  
 **Answer:** Agreed on both. Today the cell holds a placeholder, a bearer string in guest memory, and a fork copies it: eight forks of a VM holding a token are eight live tokens. The slide-11 proposal keys on identity the host assigns rather than on a string the guest holds, and a restore bumps a generation that voids the parent's lease; that is closer to a revocable lease (Gray and Cheriton) than to a Capsicum capability, it is proposed, and leases were not exercised in these runs. A capability that is re-minted on restore, revocable and never ambient is open problem 2, one of the two I asked for help with.
 
 ### Q17 — A receipt the child cannot write (CamFlow, PASS, in-toto)
-**Challenge:** Whole-system provenance runs inside the machine the child controls. Where does your receipt come from, and why trust your receipts when slide 16 shows three of them were wrong?  
-**Answer:** Do not trust them because they are mine; that is slide 16: a CI job green in 3 s with every real step skipped, `approvals.json` recording `"mode": "human"`, actor `admin`, when my harness answered, and status lines mixed into stdout. The receipt has to come from outside the guest: `evaluate(artifact, verifier)` runs outside the child and returns it, and that is proposed. What is built is the gate that binds approval to the artifact's sha256 and the receipt record the reducer checks; provenance captured inside the guest is useful for audit, but it sits in the child's trust domain, so I do not count it as the receipt.
+**Challenge:** Whole-system provenance runs inside the machine the child controls. Where does your receipt come from, and why trust your receipts when slide 17 shows three of them were wrong?  
+**Answer:** Do not trust them because they are mine; that is slide 17: a CI job green in 3 s with every real step skipped, `approvals.json` recording `"mode": "human"`, actor `admin`, when my harness answered, and status lines mixed into stdout. The receipt has to come from outside the guest: `evaluate(artifact, verifier)` runs outside the child and returns it, and that is proposed. What is built is the gate that binds approval to the artifact's sha256 and the receipt record the reducer checks; provenance captured inside the guest is useful for audit, but it sits in the child's trust domain, so I do not count it as the receipt.
 
 ### Q18 — Isn't this just set semantics? (provenance semirings)
 **Challenge:** Green et al.'s provenance semirings already separate bag from set semantics. Isn't "executions, not evidence" just set semantics over evidence IDs?  
-**Answer:** For exact reuse, yes: the built reducer canonicalises evidence IDs as a set and raises on a repeated ID, and that is the only dependence it handles today. Lineage travels with the result as annotation, but nothing consumes it yet, which is why slide 36 cites Green et al. What annotation does not give is how strongly two distinct evidence IDs that share a parent, a model or a test are correlated; that is ρ, and estimating it from lineage is open problem 1.
+**Answer:** For exact reuse, yes: the built reducer canonicalises evidence IDs as a set and raises on a repeated ID, and that is the only dependence it handles today. Lineage travels with the result as annotation, but nothing consumes it yet, which is why slide 37 cites Green et al. What annotation does not give is how strongly two distinct evidence IDs that share a parent, a model or a test are correlated; that is ρ, and estimating it from lineage is open problem 1.
 
 ---
 
@@ -87,11 +87,11 @@
 **Challenge:** N_eff = N/(1+(N−1)ρ) with all nine forks from one parent is one cluster, and ρ cannot be estimated from one cluster. Where does ρ come from?  
 **Answer:** Not from one parent. Test 2 builds 12 snapshot families of 3 siblings, each paired with 3 restored strangers in the same slot on the same host, and estimates the intraclass correlation from them; the siblings' absolute ρ with its CI, not Δρ, is what feeds any N_eff bound. Until that has run I count by evidence identity, not by execution: four re-runs of 100 tests are 400 executions and 100 evidence IDs, and 100 is only an upper bound until ρ is measured. The formula assumes equal variances and a common pairwise correlation; estimating ρ from lineage without running everything twice is open problem 1.
 
-### Q20 — What do 29 greens confirm? (slide 34)
+### Q20 — What do 29 greens confirm? (slide 35)
 **Challenge:** 29 greens only show the new code probably ran once, and re-runs from one snapshot are not independent.  
 **Answer:** Right, it is a coverage bound: if the race reaches the new code in 1 run of 10, 29 independent runs all miss it with probability 0.9^29 = 0.047. "Independent" is the hard word, because re-runs from one snapshot share whatever Test 2 measures. The better fix is the one review 2 asked for: a deterministic test that drives `cell_store.activate` to raise `CellBusy`, which beats any number of greens.
 
-### Q21 — Two different tests on slide 44 (sign-flip vs t-interval)
+### Q21 — Two different tests on slide 45 (sign-flip vs t-interval)
 **Challenge:** You support H2 with a sign-flip test against zero but reject with a 90% t-interval against 0.05. Why mix them, why 90%, and does support show the excess is above 0.05?  
 **Answer:** The upper bound of a two-sided 90% interval is a one-sided 95% bound, so rejection is a one-sided 5% test that the excess is at least 0.05, at the same level as the one-sided support test. Support is the weaker rule: p < 0.05 is against Δρ = 0, plus a point estimate above 0.05, so it does not show the excess exceeds 0.05. The two rules cannot both fire, because rejection forces the estimate below 0.05; anything else is inconclusive. The sign-flip p is exact over the 4,096 patterns if the 12 pair differences are independent and symmetric under the null, the t-interval is the approximation, and both were fixed in prereg-v1 before any data.
 
@@ -109,7 +109,7 @@
 
 ### Q25 — Cluster labels are known by design (Kish, Liang–Zeger, Kim et al.)
 **Challenge:** In cluster sampling and longitudinal studies the design writes the labels too. What is new, and isn't a shared blind spot bias rather than variance?  
-**Answer:** Nothing statistical is new; slide 36 says so. What the runtime adds is where the labels live: parent, seed, test, fixture and, through the egress gateway, the model each child called are known when it forks and lost if a worker returns a bare score, which is why the receipt carries lineage. Lineage names shared factors but does not estimate their strength, and it cannot label a shared model's blind spots; for one fixed model and test that is bias, which no re-run averages away (on one leaderboard, two models that are both wrong agree 60% of the time). Parent, model and test are crossed, so the analysis needs multiway clustering, and a wild-cluster bootstrap when clusters are few.
+**Answer:** Nothing statistical is new; slide 37 says so. What the runtime adds is where the labels live: parent, seed, test, fixture and, through the egress gateway, the model each child called are known when it forks and lost if a worker returns a bare score, which is why the receipt carries lineage. Lineage names shared factors but does not estimate their strength, and it cannot label a shared model's blind spots; for one fixed model and test that is bias, which no re-run averages away (on one leaderboard, two models that are both wrong agree 60% of the time). Parent, model and test are crossed, so the analysis needs multiway clustering, and a wild-cluster bootstrap when clusters are few.
 
 ### Q26 — The closing line over-generalises Dean and Barroso
 **Challenge:** Dean and Barroso hedge latency, where the first reply is as good as any. For correctness nothing is self-certifying. Isn't the closing line a false generalisation?  
