@@ -44,14 +44,14 @@ The delivery follows Patrick Winston's *How to Speak* (MIT, 2018): an empowermen
 
 | Slides | Act | Time |
 |---|---|---|
-| 1–10 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the journey across fields, the map, intelligence and the agentic loop, the claims | 9:45 |
-| 11–20 | The wall: seven surfaces, numbered on each slide, with reward hacking and the green-check receipt, then what our runs found | 7:45 |
-| 21–32 | The fork: SnowFlock Fig. 1, Xen lineage, training runs, resets, what forks copy, held effects, cost, isolation, the interface, architecture, promotion | 11:15 |
-| 33–42 | The count: the second review, reused graders, one formula in three fields, N_eff as Amdahl, cluster labels, common random numbers, gelation, synthetic lethality, the receipt, precision | 9:45 |
+| 1–10 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the journey across fields, the map, intelligence and the agentic loop, the claims | 9:40 |
+| 11–20 | The wall: seven surfaces, numbered on each slide, with reward hacking and the green-check receipt, then what our runs found | 7:30 |
+| 21–32 | The fork: SnowFlock Fig. 1, Xen lineage, training runs, resets, what forks copy, held effects, cost, isolation, the interface, architecture, promotion | 11:00 |
+| 33–42 | The count: the second review, reused graders, one formula in three fields, N_eff as Amdahl, cluster labels, common random numbers, gelation, synthetic lethality, the receipt, precision | 9:35 |
 | 43–50 | Test and agenda: two pre-registered tests with the declared physics prior, what they cannot separate, the redesigned run, open problems, the canary twist, Contributions | 6:30 |
 | after 50 | End matter (untimed): detail pages (4), research record (3), references (3) | — |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 45:00 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 44:15 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
