@@ -101,20 +101,22 @@
 \end{frame}}
 
 % 02
-\begin{frame}[t]{\ev{\tagO}Hedging needs independent slowdowns}
-\vspace{.35cm}
+\begin{frame}[t]{\ev{\tagO}Hedging: ask twice, keep the first answer}
+\vspace{0pt}
+\lead{If a server is slow, ask a second server too, and use whichever answers first.}
+\vspace{.05cm}
 \begin{center}
 {\fontsize{40}{46}\selectfont\bfseries 1,800 ms $\to$ 74 ms\par}
-\vspace{.2cm}
-{\large Send a second copy. Keep the first answer. 2\% more requests.\par}
-\vspace{.35cm}
-{\small\color{Muted}``the source of latency is often not inherent in the particular request''\par}
+\vspace{.15cm}
+{\large Google's slowest 0.1\% of requests. Cost: 2\% more requests.\par}
+\vspace{.25cm}
+{\small\color{Muted}``the source of latency is often not inherent in the particular request'': the server is slow, not the request.\par}
 \end{center}
-\vspace{.2cm}
+\vspace{.1cm}
 \pause
-\claim{Agents now hedge for correctness. A wrong answer often \emph{is} in the request.}
-\sources{Dean \& Barroso, The Tail at Scale, CACM 2013: hedged request after 10 ms, 99.9th-percentile latency for 1,000 BigTable keys; the authors limit it to variability that does not hit several replicas at once. Shared errors: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025}.}
-\note{[1:00] In 2013 Jeff Dean and Luiz Barroso published a trick most of this room has used: send a second copy of a slow request, and keep whichever answer comes first. In one Google benchmark, tail latency fell from 1,800 milliseconds to 74, for two percent more requests. The slowness is often not in the request, and replicas do not share it. [click] Agents now hedge for correctness. But a wrong answer often is in the request. Their paper has a second trick, for exactly the case where the fault is in the request. I will hold it until the end.}
+\claim{Agents hedge for correctness. A flaw in the task repeats in every copy.}
+\sources{Dean \& Barroso, The Tail at Scale, CACM 2013: backup after 10 ms; 99.9th-percentile latency reading 1,000 BigTable keys. It works only when the slowdown does not hit several servers at once. Shared mistakes: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025}.}
+\note{[1:10] In 2013 Jeff Dean and Luiz Barroso published a trick called hedging. If a server is slow to answer, send the same request to a second server and use whichever replies first. In one Google benchmark the slowest requests fell from 1,800 milliseconds to 74, for two percent more requests. It works because the delay is usually the server's fault, not the request's, and two servers rarely stall at the same moment. [click] Agents now hedge too, for correctness: run the task several times and keep a run that passes. But when the flaw is in the task itself, every copy repeats it. Their paper has a second trick for exactly that case. I will hold it until the end.}
 \end{frame}
 
 % 03
