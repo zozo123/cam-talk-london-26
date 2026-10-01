@@ -5,16 +5,12 @@ on:
     branches: [main]
     paths:
       - "talk.tex"
-      - "talk-30min.tex"
-      - "slides/**"
       - "Makefile"
       - "tools/**"
       - ".github/workflows/build-talk.yml"
   pull_request:
     paths:
       - "talk.tex"
-      - "talk-30min.tex"
-      - "slides/**"
       - "Makefile"
       - "tools/**"
       - ".github/workflows/build-talk.yml"
@@ -38,11 +34,6 @@ jobs:
         with:
           root_file: talk.tex
 
-      - name: Compile 30-minute fallback cut
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: talk-30min.tex
-
       - name: Verify canonical deck size and pacing
         shell: bash
         run: |
@@ -51,26 +42,20 @@ jobs:
           from pypdf import PdfReader
 
           full = len(PdfReader("talk.pdf").pages)
-          short = len(PdfReader("talk-30min.pdf").pages)
           print(f"Cambridge deck: {full} pages (49 story slides + 5 reveal/build pages + 10 end-matter pages)")
-          print(f"30-minute historical cut: {short} slides")
           if full != 64:
               raise SystemExit(f"ERROR: canonical Cambridge deck must be 64 pages; got {full}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md
-          python tools/present_copy.py
 
-      - name: Upload both PDFs
+      - name: Upload the deck
         uses: actions/upload-artifact@v4
         with:
-          name: cambridge-forkable-sandboxes-talks
-          path: |
-            talk.pdf
-            talk-present.pdf
-            talk-30min.pdf
+          name: cambridge-forkable-sandboxes
+          path: talk.pdf
 
-      - name: Publish compiled PDFs to main
+      - name: Publish the compiled deck to main
         if: github.event_name != 'pull_request'
         shell: bash
         run: |
@@ -84,13 +69,10 @@ jobs:
 
           mkdir -p dist
           cp talk.pdf dist/forkable-sandboxes-cambridge.pdf
-          cp talk.pdf dist/forkable-sandboxes-cambridge-40.pdf
-          cp talk-present.pdf dist/forkable-sandboxes-cambridge-present.pdf
-          cp talk-30min.pdf dist/forkable-sandboxes-30min.pdf
-          git add dist/forkable-sandboxes-cambridge.pdf dist/forkable-sandboxes-cambridge-40.pdf dist/forkable-sandboxes-cambridge-present.pdf dist/forkable-sandboxes-30min.pdf
+          git add dist/forkable-sandboxes-cambridge.pdf
           if git diff --cached --quiet; then
-            echo "Compiled PDFs unchanged."
+            echo "Compiled deck unchanged."
           else
-            git commit -m "Publish compiled Cambridge talk PDFs [skip ci]"
+            git commit -m "Publish compiled Cambridge talk PDF [skip ci]"
             git push origin HEAD:main
           fi
