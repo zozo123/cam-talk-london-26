@@ -45,14 +45,14 @@ The delivery follows Patrick Winston's *How to Speak* (MIT, 2018): an empowermen
 
 | Slides | Act | Time |
 |---|---|---|
-| 1–9 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the journey across fields, the map, the claims | 8:50 |
+| 1–9 | The question: hedging, forks vs checks, numbers, where 43 minutes went, the run, the journey across fields, the map, the claims | 9:00 |
 | 10–18 | The wall: seven surfaces, numbered on each slide, with reward hacking and the green-check receipt | 7:45 |
 | 19–30 | The fork: SnowFlock Fig. 1, Xen lineage, training runs, resets, what forks copy, held effects, cost, isolation, the interface, architecture, promotion | 11:15 |
 | 31–40 | The count: the second review, reused graders, one formula in three fields, N_eff as Amdahl, cluster labels, common random numbers, gelation, synthetic lethality, the receipt, precision | 9:35 |
 | 41–48 | Test and agenda: two pre-registered tests with the declared physics prior, what they cannot separate, the redesigned run, open problems, the canary twist, Contributions | 7:05 |
 | after 48 | End matter (untimed): detail pages (4), research record (3), references (3) | — |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 44:30 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 44:40 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
