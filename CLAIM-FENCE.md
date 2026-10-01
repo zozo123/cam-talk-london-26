@@ -142,8 +142,11 @@ Added with the one-story restructure:
 - That Poolkeh pooled real samples: it is a model.
 - That clusters or networks "collapse together": say "may collapse suddenly".
 - That Kimi forks its reward judge: it forks a sandbox for judging.
+- That SELFHOST-2 or SELFHOST-3 ran on the speaker's own sandbox platform (they ran in Docker Sandboxes through Airflow's sandbox toolset).
 
-Also, do not name the hosted model provider or endpoint on stage.
+Models were served through Databricks; that may be named. Name no model vendor or endpoint.
+
+The slides do not name the speaker's sandbox platform (speaker's choice); the disclosure stays in generic form.
 
 Do not say:
 - that repair 2 was never tested (the suite ran after it);

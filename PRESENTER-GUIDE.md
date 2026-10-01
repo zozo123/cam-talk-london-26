@@ -2,28 +2,28 @@
 
 **The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.
 
-Generated from `talk.tex` by `tools/presenter_guide.py`. 48 main slides, 10 end-matter pages. Planned talk: **44:40**, 4386 spoken words, 98 wpm average, peak 108 wpm. These are planned cues, not a measured rehearsal.
+Generated from `talk.tex` by `tools/presenter_guide.py`. 48 main slides, 10 end-matter pages. Planned talk: **44:40**, 4403 spoken words, 99 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
 
 ## Run of show
 
 | # | Slide | Cue | Clock | Words | wpm |
 |---|---|---|---|---|---|
-| 1 | Forkable Sandboxes | 0:45 | 0:00-0:45 | 80 | 107 |
+| 1 | Forkable Sandboxes | 0:45 | 0:00-0:45 | 82 | 109 |
 | 2 | Hedging: ask twice, keep the first answer | 1:10 | 0:45-1:55 | 120 | 103 |
 | 3 | Forks find answers. Checks decide which. | 0:50 | 1:55-2:45 | 89 | 107 |
-| 4 | Numbers every agent runtime should know | 1:10 | 2:45-3:55 | 117 | 100 |
-| 5 | Where 43 minutes went | 0:45 | 3:55-4:40 | 68 | 91 |
+| 4 | Numbers every agent runtime should know | 1:10 | 2:45-3:55 | 118 | 101 |
+| 5 | Where 43 minutes went | 0:45 | 3:55-4:40 | 77 | 103 |
 | 6 | Blocker. One more repair. Approve. | 1:35 | 4:40-6:15 | 158 | 100 |
 | 7 | How a biophysicist ended up forking sandboxes | 1:05 | 6:15-7:20 | 110 | 102 |
-| 8 | One factory, seven places the runtime bit | 0:45 | 7:20-8:05 | 78 | 104 |
+| 8 | One factory, seven places the runtime bit | 0:45 | 7:20-8:05 | 74 | 99 |
 | 9 | A factory needs a wall, a fork and a count | 0:55 | 8:05-9:00 | 90 | 98 |
-| 10 | Allowlists name hosts; the web redirects | 0:50 | 9:00-9:50 | 83 | 100 |
+| 10 | Allowlists name hosts; the web redirects | 0:50 | 9:00-9:50 | 86 | 103 |
 | 11 | Keys stay outside; a fork copies the inside | 0:50 | 9:50-10:40 | 83 | 100 |
 | 12 | Filesystem state: what a snapshot shares | 0:45 | 10:40-11:25 | 74 | 99 |
 | 13 | Locking the tests was not enough | 0:55 | 11:25-12:20 | 88 | 96 |
 | 14 | Reward hacking is the RL name for it | 0:55 | 12:20-13:15 | 90 | 98 |
 | 15 | Teardown must not destroy the experiment | 0:55 | 13:15-14:10 | 97 | 106 |
-| 16 | A green check is not proof the check ran | 0:55 | 14:10-15:05 | 88 | 96 |
+| 16 | A green check is not proof the check ran | 0:55 | 14:10-15:05 | 91 | 99 |
 | 17 | What the run pins, and what it cannot | 0:55 | 15:05-16:00 | 92 | 100 |
 | 18 | Parallel-safe steps, and nothing to fork them | 0:45 | 16:00-16:45 | 73 | 97 |
 | 19 | The shape of an agent sandbox, drawn in 2009 | 0:55 | 16:45-17:40 | 88 | 96 |
@@ -33,9 +33,9 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 48 main slides, 10 end-
 | 23 | Fork copies memory, secrets and identity | 0:55 | 20:30-21:25 | 90 | 98 |
 | 24 | What each kind of fork copies | 0:55 | 21:25-22:20 | 93 | 101 |
 | 25 | Hold effects until an authority releases them | 0:55 | 22:20-23:15 | 93 | 101 |
-| 26 | When fork pays, and where it loses | 1:10 | 23:15-24:25 | 115 | 99 |
+| 26 | When fork pays, and where it loses | 1:10 | 23:15-24:25 | 117 | 100 |
 | 27 | Isolation has two axes: kernel and authority | 0:55 | 24:25-25:20 | 90 | 98 |
-| 28 | The interface the runtime owes the factory | 0:55 | 25:20-26:15 | 90 | 98 |
+| 28 | The interface the runtime owes the factory | 0:55 | 25:20-26:15 | 91 | 99 |
 | 29 | Machines fork; authority stays outside | 1:00 | 26:15-27:15 | 96 | 96 |
 | 30 | Promotion is small enough to model-check | 0:45 | 27:15-28:00 | 73 | 97 |
 | 31 | The second review was not a second witness | 1:00 | 28:00-29:00 | 100 | 100 |
@@ -63,7 +63,7 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 48 main slides, 10 end-
 
 *0:45, starts at 0:00*
 
-Thank you for having me. I work on distributed builds at Incredibuild. Disclosure: I also build islo, an agent sandbox platform. In five minutes I will ask you how many witnesses nine green forks are. By the end, you will be able to work that out, and know what a fork runtime must record so you can. You will also see what I did: a receipt contract built, two factory runs measured, and two tests that could prove me wrong.
+Thank you. I do distributed builds at Incredibuild and build Airflow Factory, an open-source software factory on Apache Airflow. Disclosure: I also build an agent sandbox platform; I do not rank vendors. In five minutes I will ask how many witnesses nine green forks are. By the end, you can work that out, and know what a fork runtime must record. You will see what I did: a receipt contract built, two factory runs measured, two tests that could prove me wrong.
 
 ### 02. Hedging: ask twice, keep the first answer
 
@@ -81,13 +81,13 @@ So does hedging for correctness work? Partly, and the numbers are striking. Samp
 
 *1:10, starts at 2:45*
 
-Jeff Dean also gave us numbers everyone should know, so here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across its training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that blank row gets filled.
+Jeff Dean also gave us numbers everyone should know, so here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across its training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that blank row gets filled.
 
 ### 05. Where 43 minutes went
 
 *0:45, starts at 3:55*
 
-That forty-three-minute row is my own factory, so let me open it up. A software factory is a pipeline of agents: an issue in, a reviewed patch out. Sandbox setup: twenty seconds, under one percent. Make it a hundred times faster and this run gets eight tenths of a percent faster. Amdahl sends his regards. The minutes are in the agents and the checks. So is the risk.
+That forty-three-minute row is Airflow Factory; let me open it up. I spent two years on self-driving cars at Mobileye, where the hard part was the rare case. My analogy: a software factory is self-driving software, and the hard part is the same. Sandbox setup: twenty seconds, under one percent. A hundred times faster, and this run gets eight tenths of a percent faster. The minutes are in the agents and the checks. So is the risk.
 
 ### 06. Blocker. One more repair. Approve.
 
@@ -105,7 +105,7 @@ I have met that question before; it is how a biophysicist ended up forking sandb
 
 *0:45, starts at 7:20*
 
-The fourth meeting is the one I have logs for, so here it is in systems terms: one factory, seven places the runtime bit. The seven topics you signed up for, in the order I take them. Every evidence slide carries a tag, analogy included. Scope, said once: the runs used Docker's sandbox, not islo; two observations are from islo. My harness answered the gates. Leases off. A talk about forks, from a factory in which nothing forked.
+The fourth meeting is the one I have logs for, so here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness answered the gates. Leases off. Nothing forked.
 
 ### 09. A factory needs a wall, a fork and a count
 
@@ -117,7 +117,7 @@ Those seven surfaces reduce to three things the runtime owes the factory: a wall
 
 *0:50, starts at 9:00*
 
-Part one, the wall: surface one is networking, and the work order itself was a network bug, seen on islo that morning. The allowlist named astral dot sh, which redirects to a host not on the list; the fallback, GitHub's asset host, was not on it either. Curl said 403, and uv never installed. The list lived in five places, and they had drifted: four copies too many. The fix admits every release asset on GitHub. Fetch by digest, through a caching proxy.
+Part one, the wall: surface one is networking, and the work order itself was a network bug, seen on my own sandbox platform that morning. The allowlist named astral dot sh, which redirects to a host not on the list; the fallback, GitHub's asset host, was not on it either. Curl said 403, and uv never installed. The list lived in five places, and they had drifted: four copies too many. The fix admits every release asset on GitHub. Fetch by digest, through a caching proxy.
 
 ### 11. Keys stay outside; a fork copies the inside
 
@@ -153,7 +153,7 @@ Surface four, recovery: a second work order that same day went well, and then ba
 
 *0:55, starts at 14:10*
 
-Surface five, observability, and here I have three receipts, all mine, all wrong. A CI job passed in three seconds: every real step skipped. My fastest CI job ever, because it did nothing. My approvals file says mode human; my harness answered. My CLI mixed status into standard output. So every check needs a receipt the child cannot write; this room calls it provenance. RL learned this too: reward the final state, not the self-report. Both repairs confessed they never ran the tests. The harness ran them anyway.
+Surface five, observability, and here I have three receipts, all mine, all wrong. A sandbox eval CI job passed in three seconds: every real step skipped. My fastest CI job ever, because it did nothing. My approvals file says mode human; my harness answered. My sandbox CLI mixed status into standard output. So every check needs a receipt the child cannot write; this room calls it provenance. RL learned this too: reward the final state, not the self-report. Both repairs confessed they never ran the tests. The harness ran them anyway.
 
 ### 17. What the run pins, and what it cannot
 
@@ -213,7 +213,7 @@ Memory we can copy or throw away; an email already sent is another matter. Specu
 
 *1:10, starts at 23:15*
 
-Held effects make a fork safe; now, when does it pay? Fork trades N preparations for one capture, plus a restore and a divergence per child. So it loses at one child, on files-only state with a good build cache, and against a minimal image that boots faster, Jitsu from this room, LightVM from NEC Labs. If your build cache is good, fork loses. My day job is fast builds, so I am contractually obliged to tell you that. The API timings are in the end matter; they are different operations, not a ranking. With teardown, an islo slot averaged 11.3 seconds, and until the snapshot is shown to hold memory, that is restore fan-out.
+Held effects make a fork safe; now, when does it pay? Fork trades N preparations for one capture, plus a restore and a divergence per child. So it loses at one child, on files-only state with a good build cache, and against a minimal image that boots faster, Jitsu from this room, LightVM from NEC Labs. If your build cache is good, fork loses. My day job is fast builds, so I am contractually obliged to tell you that. The API timings are in the end matter; they are different operations, not a ranking. With teardown, a slot on my platform averaged 11.3 seconds, and until the snapshot is shown to hold memory, that is restore fan-out.
 
 ### 27. Isolation has two axes: kernel and authority
 
@@ -225,7 +225,7 @@ Wherever the child starts, it needs a wall with two axes, and this building buil
 
 *0:55, starts at 25:20*
 
-Put the wall, the fork and the held effects together and you get the interface the runtime owes the factory. Six calls, with honest status. Checkpoint: islo has named snapshots, memory unverified. Fork takes a lease, an egress policy and a seed policy, copy or reseed; hold on to that knob. Evaluate outside the child. Select one candidate on a fresh test. Reduce receipts to an estimate, or abstain: the merge is built, abstention proposed. Promote once: the hash-bound gate is built, the epoch fence proposed. Choosing is not pooling.
+Put the wall, the fork and the held effects together and you get the interface the runtime owes the factory. Six calls, with honest status. Checkpoint: my platform has named snapshots, memory unverified. Fork takes a lease, an egress policy and a seed policy, copy or reseed; hold on to that knob. Evaluate outside the child. Select one candidate on a fresh test. Reduce receipts to an estimate, or abstain: the merge is built, abstention proposed. Promote once: the hash-bound gate is built, the epoch fence proposed. Choosing is not pooling.
 
 ### 29. Machines fork; authority stays outside
 
