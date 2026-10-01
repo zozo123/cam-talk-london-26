@@ -115,6 +115,22 @@
 **Challenge:** Dean and Barroso hedge latency, where the first reply is as good as any. For correctness nothing is self-certifying. Isn't the closing line a false generalisation?  
 **Answer:** It is a generalisation, and I say so. Their condition is a necessary one: the techniques are effective only when the cause of variability does not tend to hit several replicas at once. For correctness you also need a check (slide 3: without one, voting and reward models plateau), and that check must itself fail independently of the attempts. So independence is necessary, not sufficient, and partial independence buys a partial gain, which is what N_eff counts.
 
+### Q27 — Isn't the 60% just question difficulty? (Jo, Garg & Raghavan)
+**Challenge:** Hard questions fool everyone. Jo, Garg and Raghavan argue much of the "excess" agreement shrinks once the baseline accounts for difficulty. Isn't the 60% an artefact?  
+**Answer:** Partly, and I would not defend the excess. Their 2026 preprint, with Kim et al.'s senior author, shows the measured monoculture depends on the baseline and on which models are compared; that errors are shared stands, how much is beyond difficulty is contested. For counting witnesses the split does not matter: what N_eff charges for is total shared failure, whatever its cause. Forks that all fail the same hard tasks are still fewer witnesses. And the 60% is a conditional agreement rate (both wrong, same wrong answer, against 33% by chance), not a ρ; I never plug it into the formula.
+
+### Q28 — Those studies compare different models; your forks are one model. Does it transfer?
+**Challenge:** Kim et al., Kohli and Bone et al. all compare different models. Your forks are one agent. Why should cross-model numbers say anything about forks?  
+**Answer:** They do not measure forks, and I say so: none of these papers measures forks of one agent from a shared snapshot, or multi-step agent runs. My reasoning, not a result: forks share more than different models do (same weights, same prompt, same snapshot, same tools), so I expect the cross-model figures to be a floor on how much forks share, not a ceiling. That expectation is exactly what could be wrong, which is why Test 2 measures the fork case directly: sibling coupling against strangers, the blank row on slide 4.
+
+### Q29 — Why not use a diverse panel of judges?
+**Challenge:** If one grader shares the agent's blind spots, use a panel from many vendors and vote.  
+**Answer:** Diversity helps less than it looks. Kohli's 2026 preprint finds 9 frontier judges from 7 model families carry about 2.2 independent votes (Kish n_eff 2.18), with a ceiling of about 2.6 however many are added; the panel never beat the best single judge beyond noise, and when all 9 agreed they were still wrong 9.1% of the time. Goel et al. (ICML 2025) find AI judges favour models similar to themselves, beyond accuracy, so a judge from the agent's family is not neutral. Same lesson as the forks: count witnesses, not judges, and keep the hidden test outside the search.
+
+### Q30 — Is best-of-N safe if one fork is right?
+**Challenge:** With pass@k, you only need one fork to be right. Doesn't correlation stop mattering?  
+**Answer:** Only if something can tell which fork is right, and even then there is a ceiling. Chen's 2026 preprint shows that any vote, router or best-of-N that returns one member's answer is capped at 1 − β, where β is the rate at which all members are wrong together, and that average pairwise correlation cannot identify β. So record per-fork pass/fail, not just the winner (a proposal, not a built field): then the all-fail rate is measured rather than inferred from a correlation, and an imperfect verifier still caps the gain (slide 3).
+
 ---
 
 ## Staging

@@ -102,7 +102,13 @@ The scope caveats are said once, on slide 8.
   - 51.2M sandboxes counts all K3 runtimes, across training and evaluation;
   - fork is offered "for reward judging without side effects".
 - METR (Von Arx, Chan & Barnes): 30.4% on RE-Bench vs 0.7% on HCAST. Scorer visibility is METR's leading guess (difficulty and scaffolding also differ), not a controlled variable.
-- Kim et al.: the 60% figure is from one leaderboard; 350+ models were studied overall.
+- Kim, Garg, Peng & Garg, ICML 2025 (PMLR 267), arXiv:2506.07962: on HELM (71 models, MMLU, four options), when two models both miss a question they pick the same wrong answer 60% of the time on average, against 33% by chance, and 97.5% of pairs are above chance; on the HuggingFace leaderboard (349 models) it is 42% against 13%. More accurate models share more errors, even across providers and architectures. These are different models, not forks or repeated runs of one model, and the 60% is a conditional agreement rate, not a correlation ρ.
+- Kohli, arXiv:2605.29800 (2026 preprint): 9 frontier judges from 7 model families carry about 2.2 independent votes (Kish n_eff 2.18, 95% CI 2.07–2.31), with a ceiling of about 2.6 however many judges are added; the panel never beat the best single judge beyond noise; when all 9 agreed they were still wrong 9.1% of the time.
+- Chen, arXiv:2606.27288 (2026 preprint): any vote, router or best-of-N that returns one member's answer is capped at 1 − β, where β is the rate at which all members are wrong together; average pairwise correlation cannot identify β. Quote only this ceiling: the paper's other numbers are internally inconsistent.
+- Jo, Garg & Raghavan, arXiv:2602.24086 (2026 preprint; Garg is Kim et al.'s senior author): much of the "excess" agreement shrinks once the baseline accounts for question difficulty, and the measured monoculture depends on the baseline and on which models are compared. That errors are shared stands; how much is beyond difficulty is contested. For counting witnesses, total shared failure is what matters.
+- Goel et al., ICML 2025, arXiv:2502.04313: AI judges favour models similar to themselves, beyond accuracy. No number quoted.
+- Bone, Stephany & del Rio-Chanona, arXiv:2609.22169 (2026 preprint): post-training makes models from different vendors agree more; near-unanimous hiring exclusion rises from 5.6% (base models) to 17.3% (post-trained). The arXiv PDF header says COLM 2026; cite it as a preprint until the proceedings are out.
+- None of these measures forks of one agent from a shared snapshot, or multi-step agent runs. That gap is what Test 2 measures.
 - LightVM is NEC Labs work, not SRG work.
 
 Added with the one-story restructure:
@@ -142,6 +148,9 @@ Added with the one-story restructure:
 - That Poolkeh pooled real samples: it is a model.
 - That clusters or networks "collapse together": say "may collapse suddenly".
 - That Kimi forks its reward judge: it forks a sandbox for judging.
+- That Kim et al. measured forks or repeated runs of one model.
+- That 60% is a correlation ρ.
+- That the follow-up preprints are peer reviewed.
 - That SELFHOST-2 or SELFHOST-3 ran on the speaker's own sandbox platform (they ran in Docker Sandboxes through Airflow's sandbox toolset).
 
 Models were served through Databricks; that may be named. Name no model vendor or endpoint.
