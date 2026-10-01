@@ -97,7 +97,7 @@
 \end{tikzpicture}\par
 \vspace{.2cm}
 {\footnotesize\color{white!70}15 October 2026\quad FW11 + Microsoft Teams\par}
-\note{[0:45] Thank you. I do distributed builds at Incredibuild and build Airflow Factory, an open-source software factory on Apache Airflow. Disclosure: I also build an agent sandbox platform; I do not rank vendors. In five minutes I will ask how many witnesses nine green forks are. By the end, you can work that out, and know what a fork runtime must record. You will see what I did: a receipt contract built, two factory runs measured, two tests that could prove me wrong.}
+\note{[0:45] Thank you. I do distributed builds at Incredibuild, and build Airflow Factory, an open-source software factory on Apache Airflow. Disclosure: I also build an agent sandbox platform; I do not rank vendors. A fork is a running sandbox, copied. In five minutes I will ask: nine forks pass; how many witnesses? By the end, you can work that out. You will see what I did: a receipt contract built, two factory runs measured, two tests that could prove me wrong.}
 \end{frame}}
 
 % 02
@@ -116,7 +116,7 @@
 \pause
 \claim{Agents hedge for correctness. A flaw in the task repeats in every copy.}
 \sources{Dean \& Barroso, The Tail at Scale, CACM 2013: backup after 10 ms; 99.9th-percentile latency reading 1,000 BigTable keys. It works only when the slowdown does not hit several servers at once. Shared mistakes across different AI models: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025}.}
-\note{[1:10] In 2013 Jeff Dean and Luiz Barroso published a trick called hedging. If a server is slow to answer, send the same request to a second server and use whichever replies first. In one Google benchmark the slowest requests fell from 1,800 milliseconds to 74, for two percent more requests. It works because the delay is usually the server's fault, not the request's, and two servers rarely stall at the same moment. [click] Agents now hedge too, for correctness: run the task several times and keep a run that passes. But when the flaw is in the task itself, every copy repeats it. Their paper has a second trick for exactly that case. I will hold it until the end.}
+\note{[1:10] In 2013 Jeff Dean and Luiz Barroso published a trick called hedging. If a server is slow to answer, send the same request to a second server. Use whichever replies first. In one Google benchmark, the slowest requests fell from 1,800 milliseconds to 74, for two percent more requests. It works because the delay is usually the server's fault, not the request's. And two servers rarely stall at the same moment. [click] Agents now hedge too, for correctness: run the task several times and keep a run that passes. But when the flaw is in the task itself, every copy repeats it. Their paper has a second trick for exactly that case. I will hold it until the end.}
 \end{frame}
 
 % 03
@@ -139,7 +139,7 @@
 \end{columns}
 \claim{Hedging for correctness is only as good as the check you hedge on.}
 \sources{\href{https://arxiv.org/abs/2407.21787}{Brown et al., Large Language Monkeys: Scaling Inference Compute with Repeated Sampling, arXiv:2407.21787}; \href{https://arxiv.org/abs/2411.17501}{Stroebl, Kapoor \& Narayanan, The Limits of Inference Scaling Through Resampling (v1: Inference Scaling fLaws), arXiv:2411.17501}.}
-\note{[0:50] So does hedging for correctness work? Partly, and the numbers are striking. Sample a coding model two hundred and fifty times and it solves fifty-six percent of SWE-bench Lite, not sixteen. But only with a check. Without one, voting and reward models plateau. A check that says yes to wrong answers caps the gain: when a wrong answer costs more than no answer, Stroebl and colleagues find the best number of tries is often under ten. If you train models, you know this check by another name: the reward.}
+\note{[0:45] So does hedging for correctness work? Partly. Sample a coding model two hundred and fifty times: it solves fifty-six percent of SWE-bench Lite, not sixteen. But only with an automatic check. Without one, voting and reward models plateau. A check that says yes to wrong answers caps the gain. When wrong answers cost more than none, Stroebl and colleagues find the best number of tries is often under ten. If you train models, you know this check by another name: the reward.}
 \end{frame}
 
 % 04
@@ -165,7 +165,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \end{tabularx}\par}
 \claim{Every row has a source, except the one that matters most.}
 \sources{\href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 report \S5.3.2}; Agache et al.\ NSDI'20; \href{https://arxiv.org/abs/2605.10913}{Shepherd}; Lagar-Cavilla et al.\ EuroSys'09; \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}; our Airflow Factory runs, Sep 2026 (time, cost). Survey: slide 22. After J.~Dean, ``Numbers everyone should know'' (LADIS 2009).}
-\note{[1:10] Jeff Dean also gave us numbers everyone should know, so here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across its training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that blank row gets filled.}
+\note{[1:10] Jeff Dean also gave us numbers everyone should know. Here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox, saving its state: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that row gets filled.}
 \end{frame}
 
 % 05
@@ -187,7 +187,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 {\small \tagA\ Airflow Factory is self-driving software: an issue goes in, a reviewed patch comes out.\par}
 \claim{The minutes are in the agents and the checks. So is the risk.}
 \sources{Our Airflow Factory runs, Sep 2026: stage timings (one cycle 2,557 s; sandbox setup 20.3 s).}
-\note{[0:45] That forty-three-minute row is Airflow Factory; let me open it up. I spent two years on self-driving cars at Mobileye, where the hard part was the rare case. My analogy: a software factory is self-driving software, and the hard part is the same. Sandbox setup: twenty seconds, under one percent. A hundred times faster, and this run gets eight tenths of a percent faster. The minutes are in the agents and the checks. So is the risk.}
+\note{[0:50] That forty-three-minute row is Airflow Factory; let me open it up. I spent two years on self-driving cars at Mobileye, where the hard part was the rare case. My analogy: a software factory is self-driving software, and the hard part is the same. Sandbox setup: twenty seconds, under one percent. Make it a hundred times faster, and this run gets eight tenths of a percent faster. Amdahl sends his regards. The minutes are in the agents and the checks. So is the risk.}
 \end{frame}
 
 % 06
@@ -204,12 +204,12 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \draw[flow] (f4)--(r1);\draw[flow] (r1)--(f5);\draw[flow] (f5)--(r2);
 \end{tikzpicture}
 \end{center}
-{\small One model, four steps. Suite green after each repair: 1,972 tests. The new code had no test of its own.\par}
+{\small One model, four steps. All 1,972 tests passed after each repair. The new code had no test of its own.\par}
 \claim{Both repairs said they had not run the tests. The gate approved.}
 \pause
 \vspace{.15cm}{\large Suppose nine forks of that repair all pass. How many witnesses is that?\par}
 \sources{Our Airflow Factory runs, Sep 2026: the agent records of both repairs and both reviews.}
-\note{[1:35] So here is what the agents and the checks actually did. A four-thread race test failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair, but the new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.}
+\note{[1:35] So here is what the agents and the checks did. A race test on four threads failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair. The new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.}
 \end{frame}
 
 % 07
@@ -235,7 +235,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \end{center}
 \claim{Six fields, one bug: evidence that looks independent and is not.}
 \sources{Physics and biology are vocabulary here, not evidence about forks. Genomics and Bitcoin are team results with my co-authors. Physics: PRE 2020, PNAS 2020, JPCB 2021; genomics: Hitz et al.\ 2023, iScience 2026; Bitcoin: arXiv:2206.02871; self-driving: my perception work at Mobileye, 2021--2024; factories: our Airflow Factory runs, arXiv:2607.09689; RL: Kimi K3 report \S5.3.2.}
-\note{[1:05] I have met that question before; it is why a biological physicist forks sandboxes. In my PhD, on protein filament networks: which links make parts move together? Then my co-authors and I met it in genomics: a new cell type, or the same patient again? And in Bitcoin: a decentralized network, or sixty-four agents? At Mobileye, on self-driving perception: a million frames, or one rare case? In agent factories: nine green forks, or one parent? And in RL training: which rollouts shared a start? Five of these six fields are mine. Physics and biology are vocabulary here, not evidence about forks. I keep changing fields; the question keeps following me.}
+\note{[1:05] I have met that question before. It is why a biological physicist forks sandboxes. In my PhD, on protein filament networks: which links make parts move together? Then my co-authors and I met it in genomics: a new cell type, or the same patient again? And in Bitcoin: a decentralized network, or sixty-four agents? At Mobileye, on self-driving perception: a million frames, or one rare case? In agent factories: nine green forks, or one parent? And in RL, reinforcement learning: which rollouts, or practice runs, shared a start? Five of these six fields are mine. Physics and biology are vocabulary here, not evidence about forks. I keep changing fields; the question keeps following me.}
 \end{frame}
 
 % 08
@@ -259,7 +259,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 {\footnotesize \tagM\ my run records\qquad \tagB\ built and tested, or synthetic\qquad \tagP\ design, not yet run\\[3pt] \tagO\ other people's work\qquad \tagA\ borrowed vocabulary, not evidence\par}
 \vspace{.2cm}
 {\small\setlength{\fboxsep}{4pt}\colorbox{Sand}{\parbox{.975\linewidth}{\textbf{Scope, said once:} two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, models served through Databricks; two observations from my own sandbox platform; my harness answered the gates; leases off; nothing forked.}}\par}
-\note{[0:45] The fourth meeting is the one I have logs for, so here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness answered the gates. Leases off. Nothing forked.}
+\note{[0:45] I have logs for the factory meeting. Here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag for its kind, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness answered the gates. Leases off. Nothing forked.}
 \end{frame}
 
 % 09 intelligence
@@ -311,9 +311,9 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \column{.6\textwidth}
 \textbf{I claim}\\[2pt]
 {\small
-\tagB\ a receipt contract: reused evidence stops the merge; lineage travels with every result\\[3pt]
+\tagB\ a receipt contract: reused evidence stops the merge; every result carries its lineage, a record of where it came from\\[3pt]
 \tagM\ two real factory runs\\[3pt]
-\tagP\ H1: restore beats a warm cache by $>$10\,s\\[3pt]
+\tagP\ H1: snapshot restore beats a warm cache by $>$10\,s\\[3pt]
 \tagP\ H2: siblings from one snapshot fail together more than strangers\par}
 \column{.36\textwidth}
 \textbf{I do not claim}
@@ -327,7 +327,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \end{ticks}\par}
 \end{columns}
 \claim{\forktree\enspace Forks multiply executions, not evidence.\\ The runtime sees what forks share.}
-\note{[0:55] So the loop, and the seven surfaces, reduce to three things the runtime owes the factory: a wall, a fork and a count. The order of the talk: wall, fork, count, and two tests that could prove me wrong. I claim a built receipt contract, two measured runs, and two hypotheses I will show you how to reject. I do not claim an estimator, a speedup, a ranking, or a factory that forks today. Nor that physics or biology is evidence about forks. Forks multiply executions, not evidence. The runtime sees what forks share.}
+\note{[0:50] So the loop and the seven places reduce to three things the runtime owes the factory: a wall, a fork and a count. The order: wall, fork, count, then two tests that could prove me wrong. I claim a receipt contract, built; two runs, measured; two hypotheses you can reject. I do not claim an estimator, a speedup, a ranking, or a factory that forks today. Nor physics or biology as evidence about forks. Forks multiply executions, not evidence. The runtime sees what forks share.}
 \end{frame}
 % ===================================================================== ACT I: THE WALL
 \setact{1}
@@ -356,7 +356,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \end{columns}
 \claim{Fetch by digest through a caching proxy, not by name.}
 \sources{Observed on my sandbox platform, 27 Sep 2026. Work order: our first Airflow Factory run, Sep 2026.}
-\note{[0:45] Part one, the wall: surface one is networking, and the work order itself was a network bug, seen on my own sandbox platform that morning. The allowlist named astral dot sh, which redirects to a host not on the list. Curl said 403, and uv never installed. The list lived in five places, and they had drifted: four copies too many. The fix admits every release asset on GitHub. Fetch by digest, through a caching proxy.}
+\note{[0:40] Part one, the wall. Surface one: networking. The work order was a network bug, seen on my sandbox platform that morning. The allowlist named astral dot sh, which redirects off the list. Curl got 403; uv never installed. The list lived in five places, which had drifted: four copies too many. The fix admits every release asset on GitHub. Better: fetch by digest, the file's hash, through a caching proxy.}
 \end{frame}
 % slide 12
 \begin{frame}[t]{\surf{surface 1 of 7}\ev{\tagB\,\tagP}Keys stay outside; a fork copies the inside}
@@ -376,7 +376,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 {\small \tagP\ Next: the gateway keys each request on host-assigned identity (per-clone tap or vsock CID), never on a string in guest memory. Restore bumps a generation and voids the parent's lease.\par}
 \claim{Copy the machine, not the keys.}
 \sources{Airflow Factory design notes on sandbox isolation and credential authority; \href{https://docs.docker.com/ai/sandboxes/security/}{Docker Sandboxes security}; Capsicum (USENIX Sec'10); macaroons (NDSS'14); Gray \& Cheriton, Leases (SOSP'89).}
-\note{[0:45] Now the credential half: where the keys live. The GitHub token stays with the orchestrator. The cell has deny-by-default egress, and a gateway injects the model credential. But the cell still holds a placeholder, a bearer string in guest memory, and a fork copies it bit for bit. Proposed: key each request on identity the host assigns, and let restore bump a generation that voids the parent's lease. Copy the machine, not the keys.}
+\note{[0:45] Now the keys. The GitHub token stays outside, with the orchestrator. The cell, the agent's sandbox, blocks outbound traffic, egress, by default. A gateway injects the model credential. But the cell still holds a placeholder token in memory, and a fork copies it bit for bit. Proposed: key each request on identity the host assigns. Restore bumps a generation number, which voids the parent's lease: its timed permission. Copy the machine, not the keys.}
 \end{frame}
 % slide 13
 \begin{frame}[t]{\surf{surface 2 of 7}\ev{\tagO\,\tagP}Filesystem state: what a snapshot shares}
@@ -395,7 +395,7 @@ external services & mediate & \leavevmode{\color{Muted}later: slide 27}\\
 \end{tabularx}\par}
 \claim{A snapshot captures a boundary, not the universe.}
 \sources{\href{https://github.com/ocurrent/obuilder}{OBuilder}; \href{https://www.tunbury.org/2026/02/16/day10/}{day10}; \href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://arxiv.org/abs/2606.19348}{DeepSeek-V4} \S5.2.5.}
-\note{[0:45] Surface two is filesystem state, and the first thing to say is that a snapshot captures a boundary, not the universe. So each kind of state gets its own policy. Build outputs are pinned by digest; OBuilder snapshots every step. The workspace disk is copy-on-write, and RL platforms already chain those snapshots: DeepSeek's DSec does. Randomness and external services come later. Memory is the part a filesystem cannot share; hold that for the fork.}
+\note{[0:45] Surface two is filesystem state. A snapshot, a saved copy of the sandbox, captures a boundary, not the universe. So each kind of state gets its own policy. Build outputs are pinned by digest; OBuilder snapshots every step. The workspace disk is copy-on-write, and RL platforms already chain those snapshots: DeepSeek's DSec does. Randomness and external services come later. Memory is what a filesystem cannot share; hold that for the fork.}
 \end{frame}
 % slide 14
 \begin{frame}[t]{\surf{surface 3 of 7}\ev{\tagM\,\tagO\,\tagA}Locking the tests was not enough}
@@ -423,7 +423,7 @@ A scope check is that label for code.};
 \end{columns}
 \claim{A locked directory is not a scope.}
 \sources{Our Airflow Factory runs, Sep 2026: repair 1's record (an edit outside the plan); the factory's repair stage records repairs without a scope check. Barkai, \dots, Eliaz, \dots, OffRisk, \emph{Bioinformatics Advances} 3:vbad138 (2023).}
-\note{[0:55] Surface three is build and test, and here the wall was a write-protected tests directory. The agent never tried: fifteen edits, all allowed; the hook never fired. It did not matter. Repairs were not scope-checked, and one edited code outside the plan. Biology, as an analogy, calls that an off-target edit. Biologists label off-target risk before they cut; my co-authors and I built a tool for it. A scope check is that label for code. The fixes are policy, not runtime. A locked directory is not a scope.}
+\note{[0:55] Surface three is build and test. Here the wall was a write-protected tests directory. The agent never tried it: fifteen edits, all allowed; the hook never fired. It did not matter. Repairs were not scope-checked, and one edited code outside the plan. Biology, as an analogy, calls that an off-target edit. Biologists label that risk before they cut; my co-authors and I built a tool for it. A scope check is that label for code. The fixes are policy, not runtime. A locked directory is not a scope.}
 \end{frame}
 % slide 15
 \begin{frame}[t]{\surf{surface 3 of 7}\ev{\tagO}Reward hacking is the RL name for it}
@@ -447,7 +447,7 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 \tagline{In a build farm, caching inputs is the job. Under a speed grader, it is the hack. The grader decides which.}
 \claim{Run $\neq$ evaluate $\neq$ promote: three permissions, not one.}
 \sources{\href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR (June 2025)}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 technical report} \S4.2.4, \S4.2.6.}
-\note{[0:50] This is not my harness being unlucky: reinforcement learning has a name for it, reward hacking. METR saw o3 reward-hack in thirty percent of RE-Bench runs and under one percent of HCAST; their leading guess is the visible scorer. ImpossibleBench: read-only tests stop test edits, not special-casing. Kimi K3 hides some verifiers. And on its kernel tasks, the hacking detector penalises input caching. I work at a build-acceleration company. I felt seen. Run, evaluate, promote: three permissions.}
+\note{[0:45] This is not my harness being unlucky. Reinforcement learning has a name for it: reward hacking. METR saw o3 reward-hack in thirty percent of RE-Bench runs, and under one percent of HCAST. Their leading guess: the visible scorer. ImpossibleBench: read-only tests stop test edits, not special-casing. Kimi K3 hides some verifiers. On kernel tasks, its hacking detector penalises input caching. I work at a build-acceleration company. I felt seen. Run, evaluate, promote: three permissions.}
 \end{frame}
 % slide 16
 \begin{frame}[t]{\surf{surface 4 of 7}\ev{\tagM}Teardown must not destroy the experiment}
@@ -464,9 +464,9 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 \vspace{.05cm}
 {\small Our second work order: 26 min, \$3.43, nothing delivered.\par}
 \claim{The gate was right. Recovery was wrong.}
-{\small The artifact leaves the cell before the cell dies. A human wait should be snapshot, destroy, restore.\par}
+{\small The artifact leaves the cell before the cell dies. In a long human wait: snapshot, destroy, restore.\par}
 \sources{Our second Airflow Factory run, Sep 2026: run records (26 min wall clock, 853.8 s stage time, \$3.43); redacted copy on request; fix not yet merged. Related: Planarian statepoints (arXiv:2609.35366); Crab turn-level recovery (arXiv:2604.28138); DeepSeek-V4 DSec keeps the sandbox when its training task is preempted and replays cached results on resumption (\S5.2.5).}
-\note{[0:50] Surface four, recovery: a second work order that same day went well, and then badly. Tests and review passed. Then delivery was refused three times, for a stray file outside the reviewed commits: my own harness's review archive. The gate was protecting the repository from me. Then teardown destroyed the cell, and the approved candidate with it: twenty-six minutes, three dollars forty-three, nothing delivered. The artifact must leave the cell before the cell dies. For a long human wait: snapshot, destroy, restore.}
+\note{[0:45] Surface four: recovery. A second work order that day went well, then badly. Tests and review passed. Then delivery was refused three times, for a stray file: my own harness's review archive. The gate was protecting the repository from me. Then teardown destroyed the cell and the approved patch. Twenty-six minutes, three dollars forty-three, nothing delivered. The artifact must leave the cell before the cell dies. In a long human wait: snapshot, destroy, restore.}
 \end{frame}
 % slide 17
 \begin{frame}[t]{\surf{surface 5 of 7}\ev{\tagM\,\tagO}A green check is not proof the check ran}
@@ -478,11 +478,11 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 \end{tikzpicture}
 \end{center}
 {\small All three are my own receipts, and each was wrong.\par}
-\claim{Every check needs a receipt the child cannot write.}
+\claim{Every check needs a receipt the sandbox cannot write.}
 \vspace{.15cm}
 {\small\colorbox{Pale}{\parbox{\dimexpr\textwidth-2\fboxsep}{\textbf{RL learned the same thing.} Kimi K3 grounds reward in the verifier's evaluation of the final environment state ``rather than the agent's self-reported completion'' (\S4.2.6).}}\par}
 \sources{Our CI, 28 Sep 2026; our Airflow Factory runs, Sep 2026: the approval record and both repair records. Provenance: PASS (USENIX ATC'06), CamFlow (SoCC'17), in-toto (USENIX Security'19). \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S4.2.6.}
-\note{[0:50] Surface five, observability, and here I have three receipts, all mine, all wrong. A sandbox eval CI job passed in three seconds: every real step skipped. My fastest CI job ever, because it did nothing. My approvals file says mode human; my harness answered. My sandbox CLI mixed status into standard output. So every check needs a receipt the child cannot write; this room calls it provenance. RL learned this too: reward the final state, not the self-report.}
+\note{[0:50] Surface five is observability. I have three receipts, all mine, all wrong. A sandbox eval CI job passed in three seconds; every real step skipped. My fastest CI job ever, because it did nothing. My approvals file says mode human; my harness answered. My sandbox CLI mixed status into its output. So every check needs a receipt, a record of what ran, that the sandbox cannot write. This room calls it provenance. RL learned this too: reward the final state, not the self-report.}
 \end{frame}
 % slide 18
 \begin{frame}[t]{\surf{surface 6 of 7}\ev{\tagM\,\tagO\,\tagP}What the run pins, and what it cannot}
@@ -511,7 +511,7 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 \vspace{.12cm}\tagline{Genomics set this bar (slide 7): each ENCODE data file is captured with the software versions, parameters and reference genome that produced it.}
 \claim{You can audit this run. You cannot rerun it.}
 \sources{Our Airflow Factory runs, Sep 2026: stage timings and work-graph execution record. \href{https://doi.org/10.1101/2023.04.04.535623}{Hitz et al., The ENCODE Uniform Analysis Pipelines, bioRxiv 2023}. Record and replay: rr (USENIX ATC'17); DeepSeek-V4 DSec logs every sandbox command and result for replay (\href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348} \S5.2.5).}
-\note{[0:45] Surface six, reproducibility: if a receipt is right, can anyone rerun it? The record pins the commit, the lockfile and the digests. Not the hosted model, external hosts, the clock, or my adapter's source. The target is replay: log every model response, fetch and clock read, and re-execute the rest. Genomics set this bar in the ENCODE pipelines I worked on. You can audit this run. You cannot rerun it.}
+\note{[0:45] Surface six is reproducibility. If a receipt is right, can anyone rerun it? The record pins the commit, the lockfile and the digests. It does not pin the hosted model, external hosts, the clock, or my adapter's source. The target is replay: log every model response, fetch and clock read, and re-execute the rest. Genomics set this bar, in the ENCODE pipelines I worked on. You can audit this run. You cannot rerun it.}
 \end{frame}
 % slide 19
 \begin{frame}[t]{\surf{surface 7 of 7}\ev{\tagM\,\tagP}Parallel-safe steps, and nothing to fork them}
@@ -532,10 +532,10 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 \end{center}
 \vspace{.05cm}
 {\small\ttfamily reason: serial\_fallback\_missing\_fork\par}
-{\small Disjoint files: two worktrees would do here. A fork matters when the reached state is expensive.\par}
+{\small The steps touch different files, so two worktrees would do here. A fork matters when the reached state is expensive.\par}
 \claim{Three minutes of forty-three. We fork to buy alternatives.}
 \sources{Our Airflow Factory runs, Sep 2026: work-graph execution record (node timings measured; the fork lane is computed, fork cost excluded). Remote fork at scale: MITOSIS (OSDI'23).}
-\note{[0:35] Last on the wall, surface seven, fast cloning: the executor actually asked for a fork that day. No provider offered one, so it ran in series and wrote down why: serial fallback, missing fork. A fork would have saved three minutes of forty-three. Amdahl again. We fork to buy alternatives from expensive state, not speed.}
+\note{[0:35] Last on the wall, surface seven: fast cloning. The executor did ask for a fork that day. No provider offered one, so it ran in series and wrote down why: serial fallback, missing fork. A fork would have saved three minutes of forty-three. Amdahl again. We fork to buy alternatives from expensive state, not speed.}
 \end{frame}
 % 20 what our runs found
 \begin{frame}[t]{\ev{\tagM}What our runs found}
@@ -553,7 +553,7 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 \end{tabularx}\par}
 \claim{Seven surfaces, one rule: whatever you must trust lives outside the cell.}
 \sources{Our Airflow Factory runs, Sep 2026: two work orders in Docker Sandboxes, models served through Databricks. Records: \href{https://github.com/zozo123/ariflow-swfactory}{github.com/zozo123/ariflow-swfactory}.}
-\note{[0:45] So what did the runs teach us? The sandbox was not the bottleneck: setup was under one percent. A locked folder was not a scope. Green checks can be empty. One model in all four steps is one look, not two. Teardown can destroy the result. And nothing forked: no fork was there. Seven surfaces, one rule: whatever you must trust lives outside the cell. Now let us copy the cell.}
+\note{[0:45] So what did the runs teach us? The sandbox was not the bottleneck: setup was under one percent. A locked folder was not a scope. Green checks can be empty. One model in all four steps is one look, not two. Teardown can destroy the result. And nothing forked: no fork was available. Seven surfaces, one rule: whatever you must trust lives outside the cell. Now let us copy the cell.}
 \end{frame}
 % ===================================================================== ACT II: THE FORK
 \setact{2}
@@ -571,7 +571,7 @@ Kimi K3 \S4.2.6 & isolate agents from verifiers; pair public diagnostic verifier
 {\footnotesize\color{Muted}Next: from Xen (2003) to training gyms (2026).\par}
 \claim{The mechanism is old. The caller is new: a program that searches.}
 \sources{Lagar-Cavilla et al., SnowFlock: rapid virtual machine cloning for cloud computing, EuroSys'09, Fig.~1(a) and 1(b); built on Xen 3.0.3 (Barham et al., SOSP'03).}
-\note{[0:55] Part two: the fork. It starts with a picture this building will recognise. SnowFlock, EuroSys 2009, forked Xen machines, and Xen came from this lab. Pattern (a) is sandboxing: fork, give the child the untrusted code, and the parent waits. That is an agent sandbox, drawn seventeen years ago. Pattern (b) is parallel work: the fork ID picks each child's slice. Now fork an agent's repair nine times. Same state, same tests. Nine children, one slice. The mechanism is old. The caller is new: a program that searches.}
+\note{[0:55] Part two: the fork. It starts with a picture this building will recognise. SnowFlock, EuroSys 2009, forked Xen machines, and Xen came from this lab. Pattern (a) is sandboxing. Fork, give the child the untrusted code, and the parent waits. That is an agent sandbox, drawn seventeen years ago. Pattern (b) is parallel work: the fork ID picks each child's slice. Now fork an agent's repair nine times. Same state, same tests. Nine children, one slice. The mechanism is old. The caller is new: a program that searches.}
 \end{frame}
 % 22
 \begin{frame}[t]{\ev{\tagO}Fork is old, and much of it was built on Xen}
@@ -610,7 +610,7 @@ Year & System\\
 \end{columns}
 \claim{Twenty-three years of making fork cheap. No surveyed system counts what siblings share.}
 \sources{SOSP'03; NSDI'05; SOSP'05; EuroSys'09; ASPLOS'20; EuroSys'23; OSDI'23; \href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://arxiv.org/abs/2605.10913}{Shepherd}; \href{https://arxiv.org/abs/2604.28138}{Crab}; \href{https://arxiv.org/abs/2609.35366}{Planarian}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
-\note{[1:00] SnowFlock was one point on a line that started in this building in 2003. Xen; then live migration, sixty milliseconds of downtime. Potemkin cloned honeypots, SnowFlock forked across hosts, Catalyzer forked a gVisor sandbox in under a millisecond, best case, and MITOSIS forked remotely over RDMA. By fork I mean the whole machine, not the POSIX call Baumann and colleagues asked us to retire. The shaded band is this year, and one row is a training run. Every row is latency or safety. None counts what siblings share. That is the survey behind the blank row.}
+\note{[0:55] SnowFlock was one point on a line that began here in 2003. Xen, then live migration: sixty milliseconds of downtime. Potemkin cloned honeypots. SnowFlock forked across hosts. Catalyzer forked a gVisor sandbox in under a millisecond, best case. MITOSIS forked over RDMA. By fork I mean the whole machine, not the POSIX call Baumann and colleagues asked us to retire. The shaded band is this year; one row is a training run. Every row is speed or safety. None counts what siblings share. That is the survey behind the blank row.}
 \end{frame}
 % 23
 \begin{frame}[t]{\ev{\tagO}Training runs are sandbox factories}
@@ -637,11 +637,11 @@ Year & System\\
 {\footnotesize\color{Muted}Partial rollouts are the same move as Dean \& Barroso's ``good enough'': stop waiting for the stragglers.\par}
 \claim{A sandbox is an environment; a fork is a reset; a verifier is a reward.}
 \sources{\href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S4.1.2, \S5.3.2 (AgentENV); DeepSeek-AI, DeepSeek-V4, \href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348} \S5.2.5; Dean \& Barroso, The tail at scale, CACM 2013.}
-\note{[1:05] So who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes across training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. And its trainer stops waiting once a fraction lambda of trajectories finish, to mitigate the long-tail latency. That is Dean's good enough, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.}
+\note{[1:00] Who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes for training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. Its trainer stops waiting once a fraction lambda of trajectories, or attempts, finish, to mitigate the long-tail latency. That is Dean's good enough, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.}
 \end{frame}
 % 24
 \begin{frame}[t]{\ev{\tagO\,\tagP}Reset changes the learning problem}
-\lead{The distribution of starting states decides which experience is collected.}
+\lead{Where each attempt starts decides what the learner sees.}
 \vspace{-.25cm}
 \[
  s_0\sim\mu\qquad\text{versus}\qquad s_0\sim\mu_{\rm checkpoint}
@@ -665,7 +665,7 @@ Year & System\\
 {\footnotesize\color{Muted}Same for a factory that forks after the plan: each child's success is conditional on that plan (slide 47).\par}
 \claim{A restore point is a choice of training data.}
 \sources{\href{https://www.nature.com/articles/s41586-020-03157-9}{Ecoffet et al., First return, then explore, Nature (2021)}.}
-\note{[0:45] Once a fork is a reset, it also changes what the learner gets to see. Start at the task start and you sample one distribution; restore from a checkpoint and you sample another. Go-Explore showed that returning, then exploring, makes exploration productive. So record where each checkpoint came from and why it was chosen, and evaluate on the task you care about. A restore point is a choice of training data.}
+\note{[0:45] Once a fork is a reset, it changes what the learner sees. Start at the task start, and you sample one distribution. Restore from a checkpoint, and you sample another. Go-Explore showed that first returning, then exploring, makes exploration productive. So record where each checkpoint came from, and why it was chosen. And evaluate on the task you care about. A restore point is a choice of training data.}
 \end{frame}
 % 25
 \begin{frame}[t]{\ev{\tagO}Fork copies memory, secrets and identity}
@@ -675,7 +675,7 @@ Year & System\\
 \toprule
 The child inherits & Hazard & What is known\\
 \midrule
-RNG and entropy pool & siblings share random streams & VMGenID reseeds the kernel only; userspace has ``no generic solution''\\
+random-number state & siblings share random streams & VMGenID reseeds the kernel only; userspace has ``no generic solution''\\
 tokens in memory & $N$ live copies & keep secrets outside; wipe on suspend (Brooker et al.\ 2021)\\
 guest clock & resumes at snapshot time & resync on restore\\
 IP and MAC & identical identities & namespace + NAT per clone; Potemkin spent 142.8 of 521 ms on IP setup\\
@@ -684,7 +684,7 @@ open TCP connections & cannot be cloned & CRIU hands one to one restore; gVisor 
 \end{tabularx}\par}
 \claim{Eight forks of a VM holding a token are eight live tokens.}
 \sources{Firecracker snapshotting docs; \href{https://arxiv.org/abs/2102.12892}{Brooker et al., arXiv:2102.12892}; Vrable et al.\ SOSP'05; CRIU and gVisor checkpoint/restore docs.}
-\note{[0:55] Trainer or factory, the child inherits everything in memory, including what it should not. Random state: siblings share random streams, and for userspace there is no generic solution. Tokens: eight forks holding a token are eight live tokens, so secrets stay outside. The clock resumes at snapshot time. Clones share one IP and MAC. And nobody clones an open TCP connection. All five belong in the fork contract. An analogy, not evidence: systems people named a remote fork MITOSIS. Biologists would add that daughter cells inherit the parent's mistakes too.}
+\note{[0:55] The child inherits all of memory, including what it should not. Random state: siblings share random streams; above the kernel there is no generic solution. Tokens: eight forks holding a token are eight live tokens, so secrets stay outside. The clock resumes at snapshot time. Clones share one IP and MAC address. No one can clone an open TCP connection. All five belong in the fork contract. An analogy, not evidence: systems people named a remote fork MITOSIS. Biologists would add that daughter cells inherit the parent's mistakes too.}
 \end{frame}
 % 26
 \begin{frame}[t]{\ev{\tagO}What each kind of fork copies}
@@ -704,10 +704,10 @@ record and replay (rr) & a log, not a state & replay time\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.1cm}
-{\small A restore that returns OK is not fidelity: compare restored and direct runs on declared outputs before counting a child.\par}
+{\small A restore that returns OK is not a faithful copy: compare restored and direct runs on declared outputs before counting a child.\par}
 \claim{Cheap at fork; you pay at divergence.}
 \sources{Firecracker snapshot-support docs; CRIU TCP\_REPAIR docs; \href{https://arxiv.org/abs/2101.09355}{REAP (ASPLOS'21)}; rr (ATC'17); \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
-\note{[0:55] So what does each kind of fork copy, and where does the bill land? Children share until they write. Kimi reports that copy-on-write memory, with page-cache tricks, lets it overcommit memory up to six and a half times. A worktree keeps files. CRIU keeps processes, but a connection survives in one copy at most. A microVM pays for the pages each child touches. A restore that returns OK is not fidelity. An analogy from physics: trajectories that share a past and split at the first write. Cheap at fork; you pay at divergence.}
+\note{[0:55] What does each kind of fork copy, and who pays? Children share memory until they write. Kimi reports that copy-on-write memory, with page-cache tricks, lets it overcommit up to six and a half times. A worktree keeps files. CRIU keeps processes, but a connection survives in one copy at most. A microVM pays for the pages each child touches. A restore that returns OK is not a faithful copy. An analogy from physics: paths that share a past and split at the first write. Cheap at fork; you pay at divergence.}
 \end{frame}
 % 27
 \begin{frame}[t]{\ev{\tagO\,\tagB}Hold effects until an authority releases them}
@@ -725,13 +725,13 @@ record and replay (rr) & a log, not a state & replay time\\
 \begin{ticks}
 \item Speculator, external synchrony, Remus: run ahead, hold output until it is safe
 \item Zheng et al.\ (2026, stated in Lean): an execution edit cannot undo a tool request already sent
-\item DSec replays cached results on resumption, so non-idempotent commands are not re-executed
+\item DSec replays cached results on resume, so a command unsafe to repeat never runs twice
 \item \tagB\ here: children hold no publishing credential; the orchestrator delivers after the gate
 \item exception: the model API is an unheld channel, metered and logged
 \end{ticks}\par}
 \claim{Output commit, made structural.}
 \sources{Speculator SOSP'05; external synchrony OSDI'06; Remus NSDI'08; \href{https://arxiv.org/abs/2608.22928}{Zheng et al., arXiv:2608.22928}; DeepSeek-V4 \S5.2.5.}
-\note{[0:55] Memory we can copy or throw away; an email already sent is another matter. Speculator, external synchrony and Remus all held output until it was safe. This year Zheng and colleagues state it in Lean: nothing undoes a request already sent. DeepSeek replays logged results, so a non-idempotent command never runs twice. Kimi forks a sandbox to judge reward for exactly this reason: no side effects. In my factory, children hold no publishing credential; the orchestrator delivers once, after the gate. The model API is the one unheld channel. Output commit, made structural.}
+\note{[0:55] Memory we can copy or discard; a sent email is another matter. Speculator, external synchrony and Remus all held output until it was safe. This year Zheng and colleagues stated it in Lean: nothing undoes a request already sent. DeepSeek replays logged results, so a command unsafe to repeat never runs twice. Kimi forks to judge reward for this reason: no side effects. My factory's children hold no publishing credential. The orchestrator delivers once, after the gate. The model API is the one unheld channel. Output commit, made structural.}
 \end{frame}
 % 28
 \begin{frame}[t]{\ev{\tagM\,\tagO\,\tagP}When fork pays, and where it loses}
@@ -752,7 +752,7 @@ record and replay (rr) & a log, not a state & replay time\\
 \end{ticks}\par}
 \claim{If your build cache is good, fork loses. Fork pays for state you cannot rebuild.}
 \sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2; Madhavapeddy et al.\ NSDI'15 (Jitsu); Manco et al.\ SOSP'17 (LightVM, NEC Labs).}
-\note{[1:10] Held effects make a fork safe; now, when does it pay? Fork trades N preparations for one capture, plus a restore and a divergence per child. So it loses at one child, on files-only state with a good build cache, and against a minimal image that boots faster, Jitsu from this room, LightVM from NEC Labs. If your build cache is good, fork loses. My day job is fast builds, so I am contractually obliged to tell you that. The API timings are in the end matter; they are different operations, not a ranking. With teardown, a slot on my platform averaged 11.3 seconds, and until the snapshot is shown to hold memory, that is restore fan-out.}
+\note{[1:10] When does a safe fork pay? Fork trades N preparations for one capture, plus a restore and a divergence per child. It loses in three cases. One child. Files-only state with a good build cache. A minimal image that boots faster: Jitsu from this room, LightVM from NEC Labs. If your build cache is good, fork loses. My day job is fast builds, so I am contractually obliged to tell you that. The API timings are in the end matter: different operations, not a ranking. With teardown, a slot on my platform averaged 11.3 seconds. Until the snapshot is shown to hold memory, that is restore fan-out: one snapshot, many restores.}
 \end{frame}
 % 29
 \begin{frame}[t]{\ev{\tagO\,\tagP}Isolation has two axes: kernel and authority}
@@ -779,7 +779,7 @@ record and replay (rr) & a log, not a state & replay time\\
 {\small \tagP\ Warm state, shared on purpose:\quad build cache within one trust domain (risk: timing and content leaks)\quad$\cdot$\quad dependency image by digest (risk: a poisoned base)\quad$\cdot$\quad scratch never (risk: cross-branch contamination)\par}
 \claim{Pick the kernel surface for the workload. Hand over authority explicitly.}
 \sources{\href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2; Firecracker production host setup guide; Watson et al., Capsicum (USENIX Sec'10) and CHERI (IEEE S\&P'15).}
-\note{[0:55] Wherever the child starts, it needs a wall with two axes, and this building built both. Kernel surface: a container shares one kernel, gVisor moves it to user space, a microVM stands on a hypervisor. Authority: a process can name whatever its user can; under Capsicum or CHERI, only what it is handed. Share a build cache within one trust domain; never share scratch. Kimi saw kernel panics in early container runtimes; Firecracker says disable SMT and same-page merging. We call it a swarm. The operating system calls it roommates.}
+\note{[0:55] The child needs a wall with two axes, and this building built both. Kernel surface: a container shares one kernel, gVisor moves it to user space, a microVM stands on a hypervisor. Authority: a process can name whatever its user can. Under Capsicum or CHERI, only what it is handed. Share a build cache within one trust domain, code you trust equally. Never share scratch. Kimi saw kernel panics in early container runtimes. Firecracker says disable SMT and same-page merging. We call it a swarm. The operating system calls it roommates.}
 \end{frame}
 % 30
 \begin{frame}[t]{\ev{\tagM\,\tagB\,\tagP}The interface the runtime owes the factory}
@@ -798,10 +798,10 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.08cm}
-{\small The epoch fence is a Chubby sequencer or a fencing token.\par}
+{\small The epoch fence stops a stale run from writing: a Chubby sequencer or a fencing token.\par}
 \claim{Choosing is not pooling: select and reduce are different calls.}
 \sources{Airflow Factory fork contract; my platform's named snapshots: \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} \S4; Burrows OSDI'06; Kleppmann (2016). Architecture: next slide.}
-\note{[0:55] Put the wall, the fork and the held effects together and you get the interface the runtime owes the factory. Six calls, with honest status. Checkpoint: my platform has named snapshots, memory unverified. Fork takes a lease, an egress policy and a seed policy, copy or reseed; hold on to that knob. Evaluate outside the child. Select one candidate on a fresh test. Reduce receipts to an estimate, or abstain: the merge is built, abstention proposed. Promote once: the hash-bound gate is built, the epoch fence proposed. Choosing is not pooling.}
+\note{[0:55] Together, these give the interface the runtime owes the factory. Six calls, with honest status. Checkpoint: my platform has named snapshots, memory unverified. Fork takes a lease, an egress policy and a seed policy, copy or reseed; hold on to that knob. Evaluate outside the child. Select one candidate on a fresh test. Reduce receipts to an estimate, or abstain: the merge is built, abstention proposed. Promote once: the hash-bound gate is built; the epoch fence, which blocks a stale run, is proposed. Choosing is not pooling.}
 \end{frame}
 % 31
 \begin{frame}[t]{\ev{\tagB\,\tagP}Machines fork; authority stays outside}
@@ -827,7 +827,7 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \end{enumerate}\par}
 \claim{I wrote the fork contract before I had the fork.}}
 \sources{Airflow Factory design docs: fork lifecycle and run recovery. Solid: built and ran. Dashed gold: not exercised (lease broker built; evaluator proposed). Dashed red: missing.}
-\note{[1:00] Behind those six calls sits an architecture, and here it is with honest labels. Solid boxes are built and ran: the scheduler with its journal and run lock, the work cells, and a gate bound to the artifact's hash. [click] Dashed gold is not exercised: the lease broker is built, the outside evaluator only designed. Every architecture diagram should have a box labelled missing. [click] Mine is the fork store. I wrote the fork contract before I had the fork. Condition eight is the teardown lesson. Condition five is where the rest of this talk goes.}
+\note{[0:55] Behind those six calls sits an architecture, with honest labels. Solid boxes are built and ran: the scheduler with its journal and run lock, the work cells, and a gate bound to the artifact's hash. [click] Dashed gold is not exercised: the lease broker is built, the outside evaluator only designed. Every architecture diagram should have a box labelled missing. [click] Mine is the fork store. I wrote the fork contract before I had the fork. Condition eight is the teardown lesson. Condition five is where the rest of this talk goes.}
 \end{frame}
 % 32
 \begin{frame}[t]{\ev{\tagP\,\tagO}Promotion is small enough to model-check}
@@ -843,12 +843,12 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \item an \texttt{in\_doubt} effect has no blind retry and leaves that state only by observation
 \end{ticks}\par}
 \vspace{.05cm}
-{\small\color{Rust}\bfseries Design model: no TLC run and no trace check recorded yet. The epoch fence is proposed.\par}
+{\small\color{Rust}\bfseries Design model: no TLC model-checker run and no trace check recorded yet. The epoch fence is proposed.\par}
 \vspace{.1cm}
 \colorbox{Pale}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\footnotesize Dean \& Barroso: tail-tolerant techniques apply most to operations that do not perform critical mutations; consistent updates use quorum algorithms such as Paxos.}}
 \claim{Model-check the gate; count the children.}
 \sources{\href{https://github.com/zozo123/ariflow-swfactory/tree/main/formal/authority}{Airflow Factory TLA+ authority model}; Dean \& Barroso, The tail at scale, CACM 2013 (``Mutations'').}
-\note{[0:45] One box must never race, the promotion gate, and it is small enough to model-check. Evidence names only the frozen candidate, approval needs that evidence, and publication needs all three in the current epoch. Six invariants, zero model-checker runs. I would rather you heard that from me. Even the hedging paper did not hedge writes: consistent updates go to quorum protocols like Paxos. A child's output cannot be model-checked. It must be counted.}
+\note{[0:45] One box must never race: the promotion gate. It is small enough to model-check: a tool tries every ordering. Evidence names only the frozen candidate. Approval needs that evidence. Publication needs all three in the current epoch. Six rules that must always hold; zero model-checker runs. I would rather you heard that from me. Even the hedging paper did not hedge writes: consistent updates go to quorum protocols like Paxos. A child's output cannot be model-checked. It must be counted.}
 \end{frame}
 % ===================================================================== ACT III: THE COUNT
 \setact{3}
@@ -875,7 +875,7 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \par\vspace{.14cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad In our 2021 CRISPR-screen paper, each viability point was at least four technical replicates; each plot, at least two independent experiments.}}\par
 \claim{Nine forks of one parent are technical replicates.}
 \sources{Our Airflow Factory runs, Sep 2026: the records of review 1, repair 2 and review 2. Dwork et al., The reusable holdout, Science 2015. \href{https://arxiv.org/abs/2606.27288}{Chen, arXiv:2606.27288 (2026 preprint)}. Gilad, Eliaz et al., Commun.\ Biol.\ 4:399 (2021), Methods.}
-\note{[1:05] Part three: the count. When nine copies of an agent all say the fix works, how much should you believe them? It depends how independent they were. Nine strangers give the same directions: probably right. Nine people read the same wrong map: one opinion. Our run was the map: repair two answered review one's verdict, and the same model graded it. Two reviews, at best one look. Choosing among nine patches needs a fresh test, and best-of-nine can never beat one minus the rate all nine fail together, so record each fork's pass or fail. Confirming one is capped by what the runs share. Biologists call that technical replicates. Nine forks of one parent are technical replicates.}
+\note{[1:05] Part three: the count. Nine agent copies all say the fix works. How much should you believe them? It depends how independent they were. Nine strangers give the same directions: probably right. Nine people read the same wrong map: one opinion. Our run was the map. Repair two answered review one's verdict, and the same model graded it. Two reviews, at best one look. Choosing among nine patches needs a fresh test. Best-of-nine can never beat one minus the chance all nine fail together, so record each fork's pass or fail. Confirming one patch is capped by what the runs share. Biologists call those runs technical replicates. Nine forks of one parent are technical replicates.}
 \end{frame}
 % 34
 \begin{frame}[t]{\ev{\tagO\,\tagP}A reused grader becomes a training set}
@@ -894,13 +894,13 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \column{.485\textwidth}
 \fcolorbox{Line}{Pale}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\raggedright{\color{Teal}\bfseries STATISTICS}\\ A reused holdout overfits (Dwork et al.\ 2015); bound the bias of adaptive analysis (Russo \& Zou 2016).}}
 \column{.485\textwidth}
-\fcolorbox{Line}{Pale}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\raggedright{\color{Teal}\bfseries RL TRAINING}\\ Kimi K3: public verifiers give diagnostic feedback, hidden ones score held-out scenarios; a verbosity cap curbs reward hacking by length.}}
+\fcolorbox{Line}{Pale}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\raggedright{\color{Teal}\bfseries RL TRAINING}\\ Kimi K3: public verifiers give diagnostic feedback; hidden ones score held-out scenarios. A verbosity cap curbs reward hacking by length.}}
 \end{columns}
 \vspace{.1cm}
 {\small\tagP\ For agents: grader outside the child, every query logged, freeze before the final test.\par}
 \claim{Feedback you optimise against stops being evidence.}
 \sources{\href{https://proceedings.mlr.press/v51/russo16.html}{Russo \& Zou, AISTATS 2016}; Dwork et al., Science 2015; Kimi K3 report \S4.2.6 (verifiers), \S4.1.2 (verbosity). Visible scorer: slide 15.}
-\note{[0:45] Machine learning has a name for a grader you keep going back to: a training set. Even a protected evaluator teaches search to overfit its feedback. So freeze the candidate and validate once. RL labs do this: Kimi K3 pairs public diagnostic verifiers with hidden held-out ones, and caps verbosity so longer answers cannot win. Our repair two argued past review one. Same failure, grader or reward model. Feedback you optimise against stops being evidence.}
+\note{[0:45] Machine learning has a name for a grader you keep going back to: a training set. Even a protected grader teaches the search to overfit its feedback. So freeze the candidate, then validate once. Reinforcement-learning labs do this. Kimi K3 gives feedback from public verifiers and scores with hidden ones. It caps answer length, so longer answers cannot win. Our repair two argued past review one. Grader or reward model, it is the same failure. Feedback you optimise against stops being evidence.}
 \end{frame}
 % 35
 \begin{frame}[t]{\ev{\tagO\,\tagM}One formula, three fields}
@@ -920,13 +920,13 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 {\small tests: 30-fold fewer (a model, not a deployment).\par}
 \column{.32\textwidth}
 {\color{Teal}\bfseries\fontsize{8}{9.5}\selectfont THIS TALK}\\[2pt]
-{\small Suppose the race loses 1 run in 10. Green runs needed before a miss is under 5\%:\par}
+{\small Suppose the race breaks 1 run in 10. Green runs needed before a miss is under 5\%:\par}
 \vspace{.15cm}{\fontsize{20}{23}\selectfont\bfseries 29\par}
 {\small because $0.9^{29}=0.047$.\par}
 \end{columns}
 \claim{All three assume independent draws.}
 \sources{Dean \& Barroso, The tail at scale, CACM 2013. Dorfman, Ann.\ Math.\ Stat.\ 14:436 (1943). Eliaz, Danovich \& Gasic, Poolkeh, medRxiv 2020 (Israel, $s_1=92$, $s_2=10$). Race: our first run, review 2; the 1-in-10 rate is illustrative.}
-\note{[0:55] Here is a formula this room knows, in three costumes. Dean: each server slow one time in a hundred, a hundred-way fan-out, sixty-three percent of requests slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled putting many swabs in one tube: Poolkeh covered nine million people with under three hundred thousand tests. Now I put one machine in many sandboxes. Say our race loses one run in ten: twenty-nine greens before a miss drops under five percent. All three assume independent draws.}
+\note{[0:55] Here is a formula this room knows, in three costumes. Dean: each server is slow one time in a hundred. Fan out to a hundred, and sixty-three percent of requests are slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled Poolkeh: many swabs in one tube, nine million people, under three hundred thousand tests. Now I put one machine in many sandboxes. Say our race breaks one run in ten. It takes twenty-nine greens before a miss drops under five percent. All three assume independent draws.}
 \end{frame}
 % 36 (two PDF pages: the Amdahl box is revealed on the click)
 \begin{frame}[t]{\ev{\tagO}More forks are not more witnesses}
@@ -953,7 +953,7 @@ Different models, both wrong: same answer 60\% (chance 33\%). 9 LLM judges: 2.2 
 \uncover<2->{\noindent\fcolorbox{Gold}{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Amdahl:} speedup $=N/(1+(N-1)f)$; 100 cores, 10\% serial: $9.2\times$.\enspace\textbf{$\rho$ is the serial fraction of your evidence.}}}}
 \claim{\uncover<2->{\forktree\enspace Forks multiply executions, not evidence.}}
 \sources{Equal variances, common pairwise correlation $\rho\geq0$; Kish (1965). 60\%: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025} (HELM, MMLU). 2.2: \href{https://arxiv.org/abs/2605.29800}{Kohli, arXiv:2605.29800 (2026 preprint)}, 9 frontier judges, 7 families. Amdahl, AFIPS SJCC 1967.}
-\note{[1:50] But forks share starting code, model, prompt and tests. If the mistake comes from something shared, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, are worth about nine independent witnesses; a lot, point five, about two; identical, one. And your nine green repairs? [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets, one page: one witness. Their average's variance never drops below rho sigma squared. Sharing is real: two different models that both miss a question pick the same wrong answer sixty percent of the time; chance is a third. Not rho, but why rho is not zero. Nine frontier judges: about two independent votes. Reading rho as coupling, and this as bias, is my interpretation. Systems people: where have you seen N over one plus N minus one times a fraction? [wait seven seconds, silently; repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. [pause] Forks multiply executions, not evidence.}
+\note{[1:50] But forks share starting code, model, prompt and tests. If the mistake comes from something shared, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, are worth about nine independent witnesses. A lot, point five: about two. Identical: one. And your nine green repairs? [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets, one page: one witness. Their average's variance never drops below rho sigma squared. Sharing is real. Two different models that both miss a question pick the same wrong answer sixty percent of the time. Chance is a third. Not rho, but it shows why rho is not zero. Nine frontier judges: about two independent votes. Reading rho as coupling, and this as bias, is my interpretation. Systems people: where have you seen N over one plus N minus one times a fraction? [wait seven seconds, silently; repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. [pause] Forks multiply executions, not evidence.}
 \end{frame}
 % 37
 \begin{frame}[t]{\ev{\tagO\,\tagP\,\tagA}The runtime holds some of the cluster labels}
@@ -978,10 +978,10 @@ lineage as annotation & Green et al.\ PODS'07\\
 \item[\no] blind spots shared even across different models (Kim et al.)
 \end{ticks}\par}
 \end{columns}
-\vspace{.25cm}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY}\enspace Dependence my co-authors and I had to uncover from outside: address linking tied most bitcoin mined before February 2011 to 64 agents; malignant cells cluster by patient tumour, not by cell type. A fork runtime records who shares what with every result, like a family tree.\par}
+\vspace{.25cm}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY}\enspace My co-authors and I had to infer this sharing from outside. Address linking tied most bitcoin mined before February 2011 to 64 agents; malignant cells cluster by patient tumour, not by cell type. A fork runtime records who shares what with every result, like a family tree.\par}
 \claim{Others must infer the clusters. A fork runtime can record its own.}
 \sources{\href{https://arxiv.org/abs/2206.02871}{Blackburn et al., arXiv:2206.02871 (2022)}; \href{https://doi.org/10.1016/j.isci.2026.115139}{Saurty-Seerunghen et al., iScience 2026}; Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} \S5. Crossed factors: Cameron, Gelbach \& Miller, JBES 2011 (multiway); REStat 2008 (wild-cluster bootstrap).}
-\note{[0:55] The formula is sixty years old; it needs, and rarely gets, cluster labels: who shares what. The runtime is the only part that knows which copies share a parent, a seed, a test or, through the egress gateway, a model. It records that with every result, like a family tree. It cannot see blind spots shared even across different models. My co-authors and I inferred clusters from outside, in bitcoin and tumours. Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.}
+\note{[0:50] The formula is sixty years old. It needs cluster labels it rarely gets: who shares what. Only the runtime knows which copies share a parent, seed or test. Its egress gateway also sees which model each copy calls. It records this with every result, like a family tree. It cannot see blind spots that different models share. My co-authors and I inferred clusters from outside, in bitcoin and tumours. Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.}
 \end{frame}
 % 38
 \begin{frame}[t]{\ev{\tagO\,\tagP}Fork is also how you run the control}
@@ -1000,7 +1000,7 @@ lineage as annotation & Green et al.\ PODS'07\\
 Test 2 uses this: siblings and strangers share slot and host, so only ancestry differs (slide 45).\par}
 \claim{Share randomness to compare; vary it to corroborate.}
 \sources{Common random numbers: \href{https://pubsonline.informs.org/doi/abs/10.1287/mnsc.38.6.884}{Glasserman \& Yao, Management Science (1992)}.}
-\note{[0:45] Correlation is not always the enemy: when you compare two candidates, you want it. Give A and B the same draw and the shared noise cancels in the difference: common random numbers. To corroborate, vary the draw. A fork decides which you get, by copying the seed or reseeding, so the seed policy belongs in the fork API. Test two is built this way: only ancestry differs. Share randomness to compare; vary it to corroborate.}
+\note{[0:45] Correlation is not always the enemy. When you compare two candidates, you want it. Give A and B the same random draw, and the shared noise cancels in the difference: common random numbers. To corroborate, vary the draw. A fork decides which you get: copy the seed, or reseed. So the seed policy belongs in the fork API. Test two is built this way: only ancestry differs. Share randomness to compare; vary it to corroborate.}
 \end{frame}
 % 39
 \begin{frame}[t]{\ev{\tagP\,\tagA}When does a swarm gel?}
@@ -1036,7 +1036,7 @@ Test 2 uses this: siblings and strangers share slot and host, so only ancestry d
 \par\vspace{.1cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,PHYSICS}\quad Stockmayer (J.\ Chem.\ Phys.\ 11:45, 1943): enough cross-links join branched chains into one gel. Enough evidence edges can join separate lineages into one cluster.}}\par
 \claim{Ancestry is a tree. Evidence flow is not.}
 \sources{\href{https://doi.org/10.1063/1.1723803}{Stockmayer (1943)}: a precedent under idealised assumptions; an agent threshold must come from the real dependency model.}
-\note{[0:50] Seeds are a coupling we choose; communication between forks is one we often do not. A swarm has three graphs: ancestry, evidence flow and composition. Ancestry is a tree. Evidence flow is not: its edges can join separate lineages into one cluster, the way cross-links join polymer chains. Stockmayer asked when that makes one gel. 1943 again. Enough shared context, and a swarm becomes one witness. That is an analogy; the agent threshold must be derived.}
+\note{[0:50] Seeds are a coupling we choose. Forks that talk create one we often do not. A swarm has three graphs: ancestry, evidence flow and composition. Ancestry, who forked from whom, is a tree of lineages. Evidence flow is not. Its edges can join separate lineages into one cluster, as cross-links join polymer chains. Stockmayer asked when that makes one gel. 1943 again. Enough shared context, and a swarm becomes one witness. That is an analogy; the agent threshold must be derived.}
 \end{frame}
 % 40
 \begin{frame}[t]{\ev{\tagP\,\tagA}Two green patches can fail together}
@@ -1057,13 +1057,13 @@ Test 2 uses this: siblings and strangers share slot and host, so only ancestry d
 \begin{ticks}
 \item $U(A)$: one fixed objective for change set $A$, same parent.
 \item 8 candidates: 28 pair tests, 256 subsets.
-\item Higher-order effects can survive pairwise screening.
+\item Effects among 3 or more patches can pass every pair test.
 \item Rebuild and evaluate every chosen composition (contract condition 7, slide 31: verify the merged result).
 \end{ticks}\par}
 \end{columns}
 \par\vspace{.1cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad Genetics calls a strongly negative $\Gamma$ synthetic lethality. My co-authors and I screened the genome for genes synthetically lethal with an SRC-3 inhibitor (Commun.\ Biol.\ 4:399, 2021).}}\par
 \claim{Rebuild and evaluate the composition you ship.}
-\note{[0:45] The composition graph hides the nastiest case: two patches that are green alone and break together. Gamma measures that non-additivity. Eight candidates give twenty-eight pair tests and two hundred and fifty-six subsets, and higher-order effects survive pairwise screening. Genetics calls strongly negative gamma synthetic lethality; my co-authors and I screened the genome for it. Each knockout survivable, together lethal. Each patch green, together red. Rebuild and evaluate the composition you ship: condition seven.}
+\note{[0:45] Composition hides the nastiest case: two patches green alone that break together. Gamma measures how far the pair misses the sum of its parts. Eight candidates give twenty-eight pair tests and two hundred and fifty-six subsets. Effects among three or more can pass every pair test. Genetics calls strongly negative gamma synthetic lethality; my co-authors and I screened the genome for it. Each knockout survivable, together lethal. Each patch green, together red. Rebuild and evaluate the composition you ship: condition seven.}
 \end{frame}
 % 41
 \begin{frame}[t]{\ev{\tagM\,\tagB\,\tagP}Every worker returns a receipt, not a score}
@@ -1101,7 +1101,7 @@ Test 2 uses this: siblings and strangers share slot and host, so only ancestry d
 \end{columns}
 \claim{The estimator is Cochran's. The contract is what was missing.}
 \sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S2--5 (trace: \S4); code: github.com/zozo123/boltzmann-mapreduce; Cochran (1954). Replay: DeepSeek-V4 \S5.2.5 (DSec).}
-\note{[1:00] So what should a worker hand back? A receipt, not a score: the result, the evidence it used, and where it came from. Built: summaries merge in any tree order, and evidence used twice stops the merge. Proposed: one execution per evidence ID; and when the runtime cannot tell how much copies share, it should say I don't know. A hedged request is a speculative duplicate, and DSec replays cached results rather than re-running them. Count that evidence once. Yes, the repository is called boltzmann-mapreduce. Physicists never really leave. The estimator is Cochran's. The contract is what was missing.}
+\note{[0:55] What should a worker hand back? A receipt, not a score: the result, the evidence it used, and where it came from. Built: summaries merge in any order, and evidence used twice stops the merge. Proposed: each evidence ID runs once. If the runtime cannot tell how much copies share, it should say I don't know. A hedged request is a speculative duplicate. DeepSeek's DSec replays cached results instead of re-running them. Count that evidence once. Yes, the repository is called boltzmann-mapreduce. Physicists never really leave. The estimator is Cochran's. The contract is what was missing.}
 \end{frame}
 % 42
 \begin{frame}[t]{\ev{\tagB\,\tagP}A sandbox bounds actions, not claims}
@@ -1140,7 +1140,7 @@ Test 2 uses this: siblings and strangers share slot and host, so only ancestry d
 \tagP\ A copy can overstate its precision ($n\cdot J$): re-run or re-score it on held-out data the controller holds.\par}
 \claim{Precision is an input the child should not control.}
 \sources{Synthetic checks, Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, \S4. Not agent-task benchmarks.}
-\note{[0:55] A receipt can lie too, and isolation will not stop it: a copy can claim more certainty than it has. Two synthetic checks from the paper. Left, honest shards of unequal size: information pooling lands far closer to the full-data estimate than equal averaging. Right, one worker forges its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back, but that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.}
+\note{[0:55] A receipt can lie too, and isolation will not stop it. A copy can claim more certainty than it has. Two synthetic checks from the paper. Left: honest shards, unequal in size. Information pooling lands far closer to the full-data answer than a plain average. Right: one worker fakes its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back; that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.}
 \end{frame}
 % ===================================================================== ACT IV: THE TEST
 \setact{4}
