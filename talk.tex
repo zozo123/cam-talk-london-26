@@ -165,7 +165,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \end{tabularx}\par}
 \claim{Every row has a source, except the one that matters most.}
 \sources{\href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 report \S5.3.2}; Agache et al.\ NSDI'20; \href{https://arxiv.org/abs/2605.10913}{Shepherd}; Lagar-Cavilla et al.\ EuroSys'09; \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}; our Airflow Factory runs, Sep 2026 (time, cost). Survey: slide 22. After J.~Dean, ``Numbers everyone should know'' (LADIS 2009).}
-\note{[1:10] Jeff Dean also gave us numbers everyone should know. Here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox, saving its state: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that row gets filled.}
+\note{[1:10] Jeff Dean also gave us numbers everyone should know. Here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox, saving its state: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That blank row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that row gets filled.}
 \end{frame}
 
 % 05
@@ -207,9 +207,9 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 {\small One model, four steps. All 1,972 tests passed after each repair. The new code had no test of its own.\par}
 \claim{Both repairs said they had not run the tests. The gate approved.}
 \pause
-\vspace{.15cm}{\large Suppose nine forks of that repair all pass. How many witnesses is that?\par}
+\vspace{.15cm}{\large Suppose nine forks of repair 1 all pass. How many witnesses is that?\par}
 \sources{Our Airflow Factory runs, Sep 2026: the agent records of both repairs and both reviews.}
-\note{[1:35] So here is what the agents and the checks did. A race test on four threads failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair. The new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.}
+\note{[1:35] So here is what the agents and the checks did. A race test on four threads failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair. The new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked repair one nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.}
 \end{frame}
 
 % 07
@@ -259,7 +259,7 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 {\footnotesize \tagM\ my run records\qquad \tagB\ built and tested, or synthetic\qquad \tagP\ design, not yet run\\[3pt] \tagO\ other people's work\qquad \tagA\ borrowed vocabulary, not evidence\par}
 \vspace{.2cm}
 {\small\setlength{\fboxsep}{4pt}\colorbox{Sand}{\parbox{.975\linewidth}{\textbf{Scope, said once:} two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, models served through Databricks; two observations from my own sandbox platform; my harness answered the gates; leases off; nothing forked.}}\par}
-\note{[0:45] I have logs for the factory meeting. Here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag for its kind, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness answered the gates. Leases off. Nothing forked.}
+\note{[0:45] I have logs for the factory case. Here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag for its kind, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness, not a human, answered the gates. Permission leases off. Nothing forked.}
 \end{frame}
 
 % 09 intelligence
@@ -637,7 +637,7 @@ Year & System\\
 {\footnotesize\color{Muted}Partial rollouts are the same move as Dean \& Barroso's ``good enough'': stop waiting for the stragglers.\par}
 \claim{A sandbox is an environment; a fork is a reset; a verifier is a reward.}
 \sources{\href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S4.1.2, \S5.3.2 (AgentENV); DeepSeek-AI, DeepSeek-V4, \href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348} \S5.2.5; Dean \& Barroso, The tail at scale, CACM 2013.}
-\note{[1:00] Who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes for training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. Its trainer stops waiting once a fraction lambda of trajectories, or attempts, finish, to mitigate the long-tail latency. That is Dean's good enough, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.}
+\note{[1:00] Who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes for training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. Its trainer stops waiting once a fraction lambda of trajectories, or attempts, finish, to mitigate the long-tail latency. That is Dean's good enough, stop waiting for stragglers, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.}
 \end{frame}
 % 24
 \begin{frame}[t]{\ev{\tagO\,\tagP}Reset changes the learning problem}
@@ -926,7 +926,7 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \end{columns}
 \claim{All three assume independent draws.}
 \sources{Dean \& Barroso, The tail at scale, CACM 2013. Dorfman, Ann.\ Math.\ Stat.\ 14:436 (1943). Eliaz, Danovich \& Gasic, Poolkeh, medRxiv 2020 (Israel, $s_1=92$, $s_2=10$). Race: our first run, review 2; the 1-in-10 rate is illustrative.}
-\note{[0:55] Here is a formula this room knows, in three costumes. Dean: each server is slow one time in a hundred. Fan out to a hundred, and sixty-three percent of requests are slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled Poolkeh: many swabs in one tube, nine million people, under three hundred thousand tests. Now I put one machine in many sandboxes. Say our race breaks one run in ten. It takes twenty-nine greens before a miss drops under five percent. All three assume independent draws.}
+\note{[0:55] Here is a formula this room knows, in three costumes. Dean: each server is slow one time in a hundred. Fan out to a hundred, and sixty-three percent of requests are slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled Poolkeh: many swabs in one tube, nine million people, under three hundred thousand tests. Now I run one patch in many sandboxes. Say our race breaks one run in ten. It takes twenty-nine greens before a miss drops under five percent. All three assume independent draws.}
 \end{frame}
 % 36 (two PDF pages: the Amdahl box is revealed on the click)
 \begin{frame}[t]{\ev{\tagO}More forks are not more witnesses}
@@ -1058,7 +1058,7 @@ Test 2 uses this: siblings and strangers share slot and host, so only ancestry d
 \item $U(A)$: one fixed objective for change set $A$, same parent.
 \item 8 candidates: 28 pair tests, 256 subsets.
 \item Effects among 3 or more patches can pass every pair test.
-\item Rebuild and evaluate every chosen composition (contract condition 7, slide 31: verify the merged result).
+\item Rebuild and evaluate every chosen composition (contract condition 7, end matter: verify the merged result).
 \end{ticks}\par}
 \end{columns}
 \par\vspace{.1cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad Genetics calls a strongly negative $\Gamma$ synthetic lethality. My co-authors and I screened the genome for genes synthetically lethal with an SRC-3 inhibitor (Commun.\ Biol.\ 4:399, 2021).}}\par
@@ -1140,7 +1140,7 @@ Test 2 uses this: siblings and strangers share slot and host, so only ancestry d
 \tagP\ A copy can overstate its precision ($n\cdot J$): re-run or re-score it on held-out data the controller holds.\par}
 \claim{Precision is an input the child should not control.}
 \sources{Synthetic checks, Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, \S4. Not agent-task benchmarks.}
-\note{[0:55] A receipt can lie too, and isolation will not stop it. A copy can claim more certainty than it has. Two synthetic checks from the paper. Left: honest shards, unequal in size. Information pooling lands far closer to the full-data answer than a plain average. Right: one worker fakes its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back; that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.}
+\note{[0:55] A receipt can lie too, and isolation will not stop it. A copy can claim more certainty than it has. Two synthetic checks from my preprint. Left: honest shards, unequal in size. Information pooling lands far closer to the full-data answer than a plain average. Right: one worker fakes its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back; that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.}
 \end{frame}
 % ===================================================================== ACT IV: THE TEST
 \setact{4}
@@ -1391,7 +1391,7 @@ My platform & restore + run + capture & 255/256 & 6.87 s & 9.04 s\\
 \item {\color{Rust}\bfseries never count siblings that reuse the same evidence as independent agreement}
 \item merge deterministically; conflicts are evidence
 \item full verification and review on the merged result
-\item tear down every child, on any exit \hfill{\color{Muted}SELFHOST-3}
+\item tear down every child, on any exit \hfill{\color{Muted}our second run}
 \end{enumerate}
 \end{columns}\par}
 \sources{Airflow Factory fork contract (design doc). Slide 31 shows conditions 5 and 8.}
@@ -1418,7 +1418,7 @@ H1 cost & cached template vs.\ restore, cold as reference; $N\in\{3,6,12\}$; 20 
 \toprule
 Step & Design & Decision\\
 \midrule
-H2 coupling & 12 snapshot families $\times$ 3 siblings, each paired with 3 strangers restored from other families, same slot, same host; the race test in lockstep rounds, at least 300 per cell & supports if a one-sided sign-flip test gives $p<0.05$ and $\Delta\rho>0.05$; rejects if the 90\% CI of $\Delta\rho$ is below 0.05; else inconclusive\\
+H2 coupling & 12 snapshot families $\times$ 3 siblings, each paired with 3 strangers restored from other families, same slot, same host; the race test in lockstep rounds, at least 300 per condition & supports if a one-sided sign-flip test gives $p<0.05$ and $\Delta\rho>0.05$; rejects if the 90\% CI of $\Delta\rho$ is below 0.05; else inconclusive\\
 The loop & repair 1 re-sampled 9 times from its recorded input; the only model calls & descriptive; predicted: $\geq$5 of 9 repeat the out-of-plan edit\\
 \bottomrule
 \end{tabularx}\par}

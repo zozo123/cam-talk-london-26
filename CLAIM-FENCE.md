@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: 48 story slides (no backup slides) plus untimed end matter (research record, references).
+This file applies to the canonical `talk.tex`: 50 story slides (no backup slides) plus untimed end matter (detail pages, research record, references).
 
 Each evidence slide carries one or more tags:
 

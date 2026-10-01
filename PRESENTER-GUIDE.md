@@ -2,7 +2,7 @@
 
 **The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.
 
-Generated from `talk.tex` by `tools/presenter_guide.py`. 50 main slides, 10 end-matter pages. Planned talk: **44:15**, 4496 spoken words, 102 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
+Generated from `talk.tex` by `tools/presenter_guide.py`. 50 main slides, 10 end-matter pages. Planned talk: **44:15**, 4505 spoken words, 102 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
 
 ## Run of show
 
@@ -11,11 +11,11 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 50 main slides, 10 end-
 | 1 | Forkable Sandboxes | 0:45 | 0:00-0:45 | 80 | 107 |
 | 2 | Hedging: ask twice, keep the first answer | 1:10 | 0:45-1:55 | 119 | 102 |
 | 3 | Forks find answers. Checks decide which. | 0:45 | 1:55-2:40 | 82 | 109 |
-| 4 | Numbers every agent runtime should know | 1:10 | 2:40-3:50 | 118 | 101 |
+| 4 | Numbers every agent runtime should know | 1:10 | 2:40-3:50 | 119 | 102 |
 | 5 | Where 43 minutes went | 0:50 | 3:50-4:40 | 83 | 100 |
 | 6 | Blocker. One more repair. Approve. | 1:35 | 4:40-6:15 | 158 | 100 |
 | 7 | Why a biological physicist forks sandboxes | 1:05 | 6:15-7:20 | 114 | 105 |
-| 8 | One factory, seven places the runtime bit | 0:45 | 7:20-8:05 | 73 | 97 |
+| 8 | One factory, seven places the runtime bit | 0:45 | 7:20-8:05 | 77 | 103 |
 | 9 | Intelligence: choose between, then act | 0:45 | 8:05-8:50 | 77 | 103 |
 | 10 | A factory needs a wall, a fork and a count | 0:50 | 8:50-9:40 | 85 | 102 |
 | 11 | Allowlists name hosts; the web redirects | 0:40 | 9:40-10:20 | 70 | 105 |
@@ -30,7 +30,7 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 50 main slides, 10 end-
 | 20 | What our runs found | 0:45 | 16:25-17:10 | 71 | 95 |
 | 21 | The shape of an agent sandbox, drawn in 2009 | 0:55 | 17:10-18:05 | 88 | 96 |
 | 22 | Fork is old, and much of it was built on Xen | 0:55 | 18:05-19:00 | 91 | 99 |
-| 23 | Training runs are sandbox factories | 1:00 | 19:00-20:00 | 105 | 105 |
+| 23 | Training runs are sandbox factories | 1:00 | 19:00-20:00 | 109 | 109 |
 | 24 | Reset changes the learning problem | 0:45 | 20:00-20:45 | 69 | 92 |
 | 25 | Fork copies memory, secrets and identity | 0:55 | 20:45-21:40 | 89 | 97 |
 | 26 | What each kind of fork copies | 0:55 | 21:40-22:35 | 91 | 99 |
@@ -83,7 +83,7 @@ So does hedging for correctness work? Partly. Sample a coding model two hundred 
 
 *1:10, starts at 2:40*
 
-Jeff Dean also gave us numbers everyone should know. Here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox, saving its state: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that row gets filled.
+Jeff Dean also gave us numbers everyone should know. Here is the list I wish someone had handed me for agent runtimes. Checkpoint a sandbox, saving its state: eleven milliseconds. Fork one: about a hundred and forty. SnowFlock forked Xen VMs across hosts, in 2009, in under a second. Through a public API: seconds. One work order in my Airflow Factory: forty-three minutes and ten dollars. One frontier model: fifty-one million sandboxes across training and evaluation. Every row has a source, except the one that matters most: how correlated two forks' verdicts are. That blank row decides what every other row is worth. My claim: the runtime sees what forks share, so it is where that row gets filled.
 
 ### 05. Where 43 minutes went
 
@@ -95,7 +95,7 @@ That forty-three-minute row is Airflow Factory; let me open it up. I spent two y
 
 *1:35, starts at 4:40*
 
-So here is what the agents and the checks did. A race test on four threads failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair. The new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.
+So here is what the agents and the checks did. A race test on four threads failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair. The new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked repair one nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.
 
 ### 07. Why a biological physicist forks sandboxes
 
@@ -107,7 +107,7 @@ I have met that question before. It is why a biological physicist forks sandboxe
 
 *0:45, starts at 7:20*
 
-I have logs for the factory meeting. Here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag for its kind, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness answered the gates. Leases off. Nothing forked.
+I have logs for the factory case. Here it is in systems terms: one factory, seven places the runtime bit, in the order I take them. Every evidence slide carries a tag for its kind, analogy included. Scope, said once: two Airflow Factory runs, in Docker Sandboxes through Airflow's sandbox toolset, with models served through Databricks. Two observations come from my own sandbox platform. My harness, not a human, answered the gates. Permission leases off. Nothing forked.
 
 ### 09. Intelligence: choose between, then act
 
@@ -197,7 +197,7 @@ SnowFlock was one point on a line that began here in 2003. Xen, then live migrat
 
 *1:00, starts at 19:00*
 
-Who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes for training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. Its trainer stops waiting once a fraction lambda of trajectories, or attempts, finish, to mitigate the long-tail latency. That is Dean's good enough, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.
+Who calls fork at the largest scale today? Not a software factory: a training run. Kimi K3 created fifty-one million sandboxes for training and evaluation. It pauses a sandbox while the model thinks, up to ninety-eight percent of its life. It forks one, in their words, for reward judging without side effects. It snapshots for recovery. Its trainer stops waiting once a fraction lambda of trajectories, or attempts, finish, to mitigate the long-tail latency. That is Dean's good enough, stop waiting for stragglers, with a pause button. DeepSeek runs hundreds of thousands per cluster. A sandbox is an environment; a fork is a reset; a verifier is a reward.
 
 ### 24. Reset changes the learning problem
 
@@ -269,7 +269,7 @@ Machine learning has a name for a grader you keep going back to: a training set.
 
 *0:55, starts at 30:00*
 
-Here is a formula this room knows, in three costumes. Dean: each server is slow one time in a hundred. Fan out to a hundred, and sixty-three percent of requests are slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled Poolkeh: many swabs in one tube, nine million people, under three hundred thousand tests. Now I put one machine in many sandboxes. Say our race breaks one run in ten. It takes twenty-nine greens before a miss drops under five percent. All three assume independent draws.
+Here is a formula this room knows, in three costumes. Dean: each server is slow one time in a hundred. Fan out to a hundred, and sixty-three percent of requests are slow. Dorfman, 1943: a pool is clean only if every swab is. Hold that year. In 2020 my co-authors and I modelled Poolkeh: many swabs in one tube, nine million people, under three hundred thousand tests. Now I run one patch in many sandboxes. Say our race breaks one run in ten. It takes twenty-nine greens before a miss drops under five percent. All three assume independent draws.
 
 ### 36. More forks are not more witnesses
 
@@ -311,7 +311,7 @@ What should a worker hand back? A receipt, not a score: the result, the evidence
 
 *0:55, starts at 36:50*
 
-A receipt can lie too, and isolation will not stop it. A copy can claim more certainty than it has. Two synthetic checks from the paper. Left: honest shards, unequal in size. Information pooling lands far closer to the full-data answer than a plain average. Right: one worker fakes its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back; that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.
+A receipt can lie too, and isolation will not stop it. A copy can claim more certainty than it has. Two synthetic checks from my preprint. Left: honest shards, unequal in size. Information pooling lands far closer to the full-data answer than a plain average. Right: one worker fakes its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back; that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.
 
 ### 43. Test 1: does restore beat a warm cache?
 
