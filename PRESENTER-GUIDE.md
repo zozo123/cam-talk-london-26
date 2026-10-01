@@ -2,7 +2,7 @@
 
 **The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.
 
-Generated from `talk.tex` by `tools/presenter_guide.py`. 49 main slides, 10 end-matter pages. Planned talk: **44:45**, 4406 spoken words, 98 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
+Generated from `talk.tex` by `tools/presenter_guide.py`. 49 main slides, 10 end-matter pages. Planned talk: **44:45**, 4438 spoken words, 99 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
 
 ## Run of show
 
@@ -14,7 +14,7 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 49 main slides, 10 end-
 | 4 | Numbers every agent runtime should know | 1:10 | 2:45-3:55 | 118 | 101 |
 | 5 | Where 43 minutes went | 0:45 | 3:55-4:40 | 77 | 103 |
 | 6 | Blocker. One more repair. Approve. | 1:35 | 4:40-6:15 | 158 | 100 |
-| 7 | How a biophysicist ended up forking sandboxes | 1:05 | 6:15-7:20 | 110 | 102 |
+| 7 | Why a biological physicist forks sandboxes | 1:05 | 6:15-7:20 | 110 | 102 |
 | 8 | One factory, seven places the runtime bit | 0:45 | 7:20-8:05 | 74 | 99 |
 | 9 | A factory needs a wall, a fork and a count | 0:55 | 8:05-9:00 | 90 | 98 |
 | 10 | Allowlists name hosts; the web redirects | 0:45 | 9:00-9:45 | 76 | 101 |
@@ -39,24 +39,24 @@ Generated from `talk.tex` by `tools/presenter_guide.py`. 49 main slides, 10 end-
 | 29 | The interface the runtime owes the factory | 0:55 | 25:20-26:15 | 91 | 99 |
 | 30 | Machines fork; authority stays outside | 1:00 | 26:15-27:15 | 96 | 96 |
 | 31 | Promotion is small enough to model-check | 0:45 | 27:15-28:00 | 73 | 97 |
-| 32 | The second review was not a second witness | 1:05 | 28:00-29:05 | 110 | 102 |
+| 32 | The second review was not a second witness | 1:05 | 28:00-29:05 | 117 | 108 |
 | 33 | A reused grader becomes a training set | 0:45 | 29:05-29:50 | 75 | 100 |
 | 34 | One formula, three fields | 0:55 | 29:50-30:45 | 95 | 104 |
-| 35 | More forks are not more witnesses | 1:45 | 30:45-32:30 | 188 | 107 |
-| 36 | The runtime holds some of the cluster labels | 0:55 | 32:30-33:25 | 91 | 99 |
-| 37 | Fork is also how you run the control | 0:45 | 33:25-34:10 | 75 | 100 |
-| 38 | When does a swarm gel? | 0:50 | 34:10-35:00 | 76 | 91 |
-| 39 | Two green patches can fail together | 0:45 | 35:00-35:45 | 73 | 97 |
-| 40 | Every worker returns a receipt, not a score | 1:00 | 35:45-36:45 | 99 | 99 |
-| 41 | A sandbox bounds actions, not claims | 0:55 | 36:45-37:40 | 91 | 99 |
-| 42 | Test 1: does restore beat a warm cache? | 1:00 | 37:40-38:40 | 95 | 95 |
-| 43 | Why I expect siblings to fail together | 0:40 | 38:40-39:20 | 65 | 98 |
-| 44 | Test 2: do siblings fail together? | 1:00 | 39:20-40:20 | 94 | 94 |
-| 45 | What two tests cannot separate | 0:40 | 40:20-41:00 | 61 | 92 |
-| 46 | The same work order, run as it should be | 0:55 | 41:00-41:55 | 86 | 94 |
-| 47 | Open problems where this room is ahead of me | 0:40 | 41:55-42:35 | 61 | 92 |
-| 48 | The hedging paper already had the answer | 0:50 | 42:35-43:25 | 73 | 88 |
-| 49 | Contributions | 1:20 | 43:25-44:45 | 132 | 99 |
+| 35 | More forks are not more witnesses | 1:50 | 30:45-32:35 | 195 | 106 |
+| 36 | The runtime holds some of the cluster labels | 0:55 | 32:35-33:30 | 93 | 101 |
+| 37 | Fork is also how you run the control | 0:45 | 33:30-34:15 | 75 | 100 |
+| 38 | When does a swarm gel? | 0:50 | 34:15-35:05 | 76 | 91 |
+| 39 | Two green patches can fail together | 0:45 | 35:05-35:50 | 73 | 97 |
+| 40 | Every worker returns a receipt, not a score | 1:00 | 35:50-36:50 | 99 | 99 |
+| 41 | A sandbox bounds actions, not claims | 0:55 | 36:50-37:45 | 91 | 99 |
+| 42 | Test 1: does restore beat a warm cache? | 1:00 | 37:45-38:45 | 95 | 95 |
+| 43 | Why I expect siblings to fail together | 0:40 | 38:45-39:25 | 65 | 98 |
+| 44 | Test 2: do siblings fail together? | 1:00 | 39:25-40:25 | 94 | 94 |
+| 45 | What two tests cannot separate | 0:40 | 40:25-41:05 | 61 | 92 |
+| 46 | The same work order, run as it should be | 0:55 | 41:05-42:00 | 86 | 94 |
+| 47 | Open problems where this room is ahead of me | 0:40 | 42:00-42:40 | 61 | 92 |
+| 48 | The hedging paper already had the answer | 0:45 | 42:40-43:25 | 79 | 105 |
+| 49 | Contributions | 1:20 | 43:25-44:45 | 142 | 106 |
 
 ## Script
 
@@ -96,11 +96,11 @@ That forty-three-minute row is Airflow Factory; let me open it up. I spent two y
 
 So here is what the agents and the checks actually did. A four-thread race test failed, and the loop sent a repair agent. It had no shell, and it rewrote code outside the plan. Review one: blocker, untested and unverified. The tests were locked, so repair two restructured the code and argued it was covered. Review two downgraded untested to minor, and approved. One model did all four steps. A committee of one. All 1,972 tests passed after each repair, but the new code had no test of its own. Both repairs said they had not run the tests. The gate approved. [click] Now suppose the loop had forked that repair nine times, and all nine came back green. How many witnesses is that? Pick a number; on Teams, type it in the chat. [wait seven seconds, silently; then read one or two numbers aloud for the recording] Keep your number; we will check it when we count.
 
-### 07. How a biophysicist ended up forking sandboxes
+### 07. Why a biological physicist forks sandboxes
 
 *1:05, starts at 6:15*
 
-I have met that question before; it is how a biophysicist ended up forking sandboxes. In my PhD, simulating protein filament networks: which links make parts move together? Then my co-authors and I met it in genomics: a new cell type, or the same patient again? And in Bitcoin: a decentralized network, or sixty-four agents? In agent factories: nine green forks, or one parent? And in RL training, the field's meeting, not mine: which rollouts shared a start? Four of these five fields are mine, and I have published in each. Physics and biology are vocabulary here, not evidence about forks. I keep changing fields; the question keeps following me.
+I have met that question before; it is why a biological physicist forks sandboxes. In my PhD, on protein filament networks: which links make parts move together? Then my co-authors and I met it in genomics: a new cell type, or the same patient again? And in Bitcoin: a decentralized network, or sixty-four agents? At Mobileye, on self-driving perception: a million frames, or one rare case? In agent factories: nine green forks, or one parent? And in RL training: which rollouts shared a start? Five of these six fields are mine. Physics and biology are vocabulary here, not evidence about forks. I keep changing fields; the question keeps following me.
 
 ### 08. One factory, seven places the runtime bit
 
@@ -250,7 +250,7 @@ One box must never race, the promotion gate, and it is small enough to model-che
 
 *1:05, starts at 28:00*
 
-Part three: the count. When nine copies of an agent all say the fix works, how much should you believe them? It depends how independent they were. Nine strangers give the same directions: probably right. Nine people read the same wrong map: nine answers, one opinion. Our run was the map: repair two answered review one's verdict, and the same model graded it. Two reviews by one model were, at best, one look. Choosing among nine patches needs a fresh test; confirming one is capped by what the runs share. Biologists call that technical replicates; our 2021 paper also reported independent experiments. Nine forks of one parent are technical replicates.
+Part three: the count. When nine copies of an agent all say the fix works, how much should you believe them? It depends how independent they were. Nine strangers give the same directions: probably right. Nine people read the same wrong map: one opinion. Our run was the map: repair two answered review one's verdict, and the same model graded it. Two reviews, at best one look. Choosing among nine patches needs a fresh test, and best-of-nine can never beat one minus the rate all nine fail together, so record each fork's pass or fail. Confirming one is capped by what the runs share. Biologists call that technical replicates. Nine forks of one parent are technical replicates.
 
 ### 33. A reused grader becomes a training set
 
@@ -266,93 +266,93 @@ Here is a formula this room knows, in three costumes. Dean: each server slow one
 
 ### 35. More forks are not more witnesses
 
-*1:45, starts at 30:45*
+*1:50, starts at 30:45*
 
-But forks share starting code, model, prompt and tests. If the mistake comes from something they share, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, are worth about nine independent witnesses; sharing a lot, point five, about two; identical, one. And your nine green repairs? [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets, one page: one witness. The variance of their average never drops below rho sigma squared. Four hundred executions of a hundred tests are a hundred evidence IDs. And rho is real: on one leaderboard, two wrong models agree sixty percent of the time. That is bias, not variance. Reading rho as coupling is my interpretation. Systems people: where have you seen N over one plus N minus one times a fraction? [wait seven seconds, silently; repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. [pause] Forks multiply executions, not evidence.
+But forks share starting code, model, prompt and tests. If the mistake comes from something shared, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, are worth about nine independent witnesses; a lot, point five, about two; identical, one. And your nine green repairs? [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets, one page: one witness. Their average's variance never drops below rho sigma squared. Sharing is real: two different models that both miss a question pick the same wrong answer sixty percent of the time; chance is a third. Not rho, but why rho is not zero. Nine frontier judges: about two independent votes. Reading rho as coupling, and this as bias, is my interpretation. Systems people: where have you seen N over one plus N minus one times a fraction? [wait seven seconds, silently; repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. [pause] Forks multiply executions, not evidence.
 
 ### 36. The runtime holds some of the cluster labels
 
-*0:55, starts at 32:30*
+*0:55, starts at 32:35*
 
-The formula is sixty years old; it needs, and rarely gets, cluster labels: who shares what. The runtime is the only part that knows which copies share a parent, a seed, a test or, through the egress gateway, a model. It records that with every result, like a family tree. It cannot see a shared model's blind spots. My co-authors and I inferred clusters from outside, in bitcoin and tumours. Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.
+The formula is sixty years old; it needs, and rarely gets, cluster labels: who shares what. The runtime is the only part that knows which copies share a parent, a seed, a test or, through the egress gateway, a model. It records that with every result, like a family tree. It cannot see blind spots shared even across different models. My co-authors and I inferred clusters from outside, in bitcoin and tumours. Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.
 
 ### 37. Fork is also how you run the control
 
-*0:45, starts at 33:25*
+*0:45, starts at 33:30*
 
 Correlation is not always the enemy: when you compare two candidates, you want it. Give A and B the same draw and the shared noise cancels in the difference: common random numbers. To corroborate, vary the draw. A fork decides which you get, by copying the seed or reseeding, so the seed policy belongs in the fork API. Test two is built this way: only ancestry differs. Share randomness to compare; vary it to corroborate.
 
 ### 38. When does a swarm gel?
 
-*0:50, starts at 34:10*
+*0:50, starts at 34:15*
 
 Seeds are a coupling we choose; communication between forks is one we often do not. A swarm has three graphs: ancestry, evidence flow and composition. Ancestry is a tree. Evidence flow is not: its edges can join separate lineages into one cluster, the way cross-links join polymer chains. Stockmayer asked when that makes one gel. 1943 again. Enough shared context, and a swarm becomes one witness. That is an analogy; the agent threshold must be derived.
 
 ### 39. Two green patches can fail together
 
-*0:45, starts at 35:00*
+*0:45, starts at 35:05*
 
 The composition graph hides the nastiest case: two patches that are green alone and break together. Gamma measures that non-additivity. Eight candidates give twenty-eight pair tests and two hundred and fifty-six subsets, and higher-order effects survive pairwise screening. Genetics calls strongly negative gamma synthetic lethality; my co-authors and I screened the genome for it. Each knockout survivable, together lethal. Each patch green, together red. Rebuild and evaluate the composition you ship: condition seven.
 
 ### 40. Every worker returns a receipt, not a score
 
-*1:00, starts at 35:45*
+*1:00, starts at 35:50*
 
 So what should a worker hand back? A receipt, not a score: the result, the evidence it used, and where it came from. Built: summaries merge in any tree order, and evidence used twice stops the merge. Proposed: one execution per evidence ID; and when the runtime cannot tell how much copies share, it should say I don't know. A hedged request is a speculative duplicate, and DSec replays cached results rather than re-running them. Count that evidence once. Yes, the repository is called boltzmann-mapreduce. Physicists never really leave. The estimator is Cochran's. The contract is what was missing.
 
 ### 41. A sandbox bounds actions, not claims
 
-*0:55, starts at 36:45*
+*0:55, starts at 36:50*
 
 A receipt can lie too, and isolation will not stop it: a copy can claim more certainty than it has. Two synthetic checks from the paper. Left, honest shards of unequal size: information pooling lands far closer to the full-data estimate than equal averaging. Right, one worker forges its precision fifty-fold. One confident liar moves the answer from about five to seventeen. A heuristic brings it back, but that is no Byzantine guarantee. So the controller should set precision, not the copy. Precision is an input the child should not control.
 
 ### 42. Test 1: does restore beat a warm cache?
 
-*1:00, starts at 37:40*
+*1:00, starts at 37:45*
 
 Part four: the test. Everything so far is two runs and synthetic checks, so here are two tests that could prove me wrong, written before any run. Test one: cost. Gate zero: a random value in RAM, snapshot, restore three children. If it dies, I report restore fan-out, not fork. Fidelity: restored and direct outputs must match. A cached template against a restore, twenty interleaved reps per size. Restore wins only if the whole interval clears ten seconds at every size. A result where the build cache wins is a good result for this room.
 
 ### 43. Why I expect siblings to fail together
 
-*0:40, starts at 38:40*
+*0:40, starts at 38:45*
 
 Before test two, let me declare why I expect siblings to be coupled: I have watched networks do it. My co-authors and I simulated branched actomyosin networks. High Arp2/3: they stall. Low: they contract. In between, loosely connected clusters may collapse suddenly, in avalanches; we noted they are reminiscent of the cytoquakes seen in cells. The physicists here will hold me to that analogy tag.
 
 ### 44. Test 2: do siblings fail together?
 
-*1:00, starts at 39:20*
+*1:00, starts at 39:25*
 
 So test two asks it directly: do siblings from one snapshot fail together more than strangers do? Twelve families of three siblings, each paired with three strangers: same slot, same host. Technical replicates against independent experiments. The statistic is the sibling excess correlation. Above point zero five and significant: supported. Confidently below: rejected. Why point zero five? It takes nine siblings down to six point four witnesses. And the nine imagined repairs: re-sample repair one nine times. I predict at least five repeat the out-of-plan edit. When it runs, it fills the blank row.
 
 ### 45. What two tests cannot separate
 
-*0:40, starts at 40:20*
+*0:40, starts at 40:25*
 
 Suppose both tests go my way: a win would still not tell us why. A fast fork with a worse search policy can still lose. A communicating system may win only because it spends more model calls. So each row varies one thing, at an equal full budget. Recall Stroebl: how many tries you pay for is part of the result.
 
 ### 46. The same work order, run as it should be
 
-*0:55, starts at 41:00*
+*0:55, starts at 41:05*
 
 Put the whole talk together: the same work order, run the way the runtime should run it. Fork after the plan: three children, each with its own lease. Why three? Stroebl again: when a wrong answer costs more than none, often under ten tries. The out-of-plan edit is denied. Another model family scores hidden tests once, as K3 hides its verifiers. The reducer clusters by lineage, or abstains. The artifact leaves before teardown. Search can race. Promotion must not. This is a design, not a run.
 
 ### 47. Open problems where this room is ahead of me
 
-*0:40, starts at 41:55*
+*0:40, starts at 42:00*
 
 Building it hits problems where I think this room is ahead of me. Six are on the slide. I would like help with the first two. One: estimate dependence from lineage and evidence edges, without running everything twice. Two: leases that fork. A child's capability should be re-minted on restore, revocable, and never ambient. The other four are there for questions.
 
 ### 48. The hedging paper already had the answer
 
-*0:50, starts at 42:35*
+*0:45, starts at 42:40*
 
-Just one more thing. At the start I promised the hedging paper's second trick, for when the fault is in the request. Their worry is a request that exercises an untested code path, crashing thousands of servers at once. The cure is not more replicas. It is a canary: one or two leaves first. My run's new code had no test. Nine green forks would share that gap. So: a canary for correlation.
+Just one more thing. I promised the hedging paper's second trick, for when the fault is in the request. Their worry: a request hitting an untested code path, crashing thousands of servers at once. The cure is not more replicas but a canary: one or two leaves first. My run's new code had no test. Nine green forks would share that gap. Even unanimous frontier judges were still wrong nine percent of the time. So: a canary for correlation.
 
 ### 49. Contributions
 
 *1:20, starts at 43:25*
 
-Let me close where I began, with Dean's hedged request. Hedging works when failures are independent; the runtime's job is to know when they are not. Remember the blank row, how correlated two forks' verdicts are: it stays blank until test two runs. In 2009 the parent's last line was wait. Ours has to be count: reduce the receipts by lineage, or abstain. [pause; let the room read the contributions] In physics, genomics and Bitcoin, my co-authors and I had to infer the clusters; a fork runtime can record them. Forks multiply executions, not evidence. [pause] Xen came from this lab, so bringing a question about forks here has been a privilege. I would like to come back with that row filled in. [Stop. Contributions slide stays up through questions. No thank-you.]
+Let me close where I began. Hedging works when failures are independent; the runtime's job is to know when they are not. The field now counts witnesses for models and judges; for forks of one agent, as far as I know, not yet. That is the blank row: blank until test two runs. In 2009 the parent's last line was wait. Ours has to be count: reduce the receipts by lineage, or abstain. [pause; let the room read the contributions] In physics, genomics and Bitcoin, my co-authors and I had to infer the clusters; a fork runtime can record them. Forks multiply executions, not evidence. [pause] Xen came from this lab, so bringing a question about forks here has been a privilege. I would like to come back with that row filled in. [Stop. Contributions slide stays up through questions. No thank-you.]
 
 ## End matter (untimed)
 
@@ -390,7 +390,7 @@ Systems references. Every figure on a story slide is traceable to these, to the 
 
 ### E9. References: evidence and evaluation
 
-Evidence and evaluation references.
+Evidence and evaluation references. The shared-errors papers compare different models, not forks of one agent, and the 2026 arXiv items are preprints.
 
 ### E10. References: own work and documentation
 

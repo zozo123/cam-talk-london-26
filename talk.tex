@@ -115,7 +115,7 @@
 \vspace{.1cm}
 \pause
 \claim{Agents hedge for correctness. A flaw in the task repeats in every copy.}
-\sources{Dean \& Barroso, The Tail at Scale, CACM 2013: backup after 10 ms; 99.9th-percentile latency reading 1,000 BigTable keys. It works only when the slowdown does not hit several servers at once. Shared mistakes: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025}.}
+\sources{Dean \& Barroso, The Tail at Scale, CACM 2013: backup after 10 ms; 99.9th-percentile latency reading 1,000 BigTable keys. It works only when the slowdown does not hit several servers at once. Shared mistakes across different AI models: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025}.}
 \note{[1:10] In 2013 Jeff Dean and Luiz Barroso published a trick called hedging. If a server is slow to answer, send the same request to a second server and use whichever replies first. In one Google benchmark the slowest requests fell from 1,800 milliseconds to 74, for two percent more requests. It works because the delay is usually the server's fault, not the request's, and two servers rarely stall at the same moment. [click] Agents now hedge too, for correctness: run the task several times and keep a run that passes. But when the flaw is in the task itself, every copy repeats it. Their paper has a second trick for exactly that case. I will hold it until the end.}
 \end{frame}
 
@@ -213,28 +213,29 @@ sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2
 \end{frame}
 
 % 07
-\begin{frame}[t]{\ev{\tagO\,\tagM\,\tagA}How a biophysicist ended up forking sandboxes}
+\begin{frame}[t]{\ev{\tagO\,\tagM\,\tagA}Why a biological physicist forks sandboxes}
 \vspace{0pt}
-{\small The same question, met five times: how many independent witnesses do I really have?\par}
+{\small The same question, met six times: how many independent witnesses do I really have?\par}
 \vspace{.15cm}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
-\draw[Line,line width=1.2pt] (0,0)--(11.6,0);
-\draw[Line,line width=1.2pt] (11.6,0)--(12.2,.3) (11.6,0)--(12.2,-.3);
-\foreach \x/\c in {0/Teal,2.9/Teal,5.8/Teal,8.7/Teal,11.6/Gold}{\fill[\c] (\x,0) circle(3.2pt);}
+\draw[Line,line width=1.2pt] (0,0)--(12.0,0);
+\draw[Line,line width=1.2pt] (12.0,0)--(12.55,.3) (12.0,0)--(12.55,-.3);
+\foreach \x/\c in {0/Teal,2.4/Teal,4.8/Teal,7.2/Teal,9.6/Teal,12.0/Gold}{\fill[\c] (\x,0) circle(3.2pt);}
 \foreach \x/\h/\q in {
  0/PHYSICS/{Which links make parts move together?},
- 2.9/GENOMICS/{A new cell type, or the same patient again?},
- 5.8/BITCOIN/{A decentralized network, or 64 agents?},
- 8.7/{AGENT FACTORIES}/{Nine green forks, or one parent?},
- 11.6/{RL TRAINING}/{Which rollouts shared a start?}}{
- \node[anchor=south,font=\small\bfseries,text=Ink] at (\x,.2) {\h};
- \node[anchor=north,text width=2.55cm,align=center,font=\normalsize\itshape,text=Teal] at (\x,-.25) {\q};}
+ 2.4/GENOMICS/{A new cell type, or the same patient again?},
+ 4.8/BITCOIN/{A decentralized network, or 64 agents?},
+ 7.2/{SELF-DRIVING}/{A million frames, or one rare case?},
+ 9.6/{AGENT\\FACTORIES}/{Nine green forks, or one parent?},
+ 12.0/{RL TRAINING}/{Which rollouts shared a start?}}{
+ \node[anchor=south,font=\footnotesize\bfseries,text=Ink,text width=2.4cm,inner xsep=0pt,align=center] at (\x,.2) {\h};
+ \node[anchor=north,text width=2.2cm,align=center,font=\small\itshape,text=Teal] at (\x,-.25) {\q};}
 \end{tikzpicture}
 \end{center}
-\claim{Five fields, one bug: evidence that looks independent and is not.}
-\sources{Physics and biology are vocabulary here, not evidence about forks; every borrowing is labelled \tagA, on the slide or aloud. Genomics and Bitcoin are team results with my co-authors; full author lists in the end matter. Physics: PRE 2020, PNAS 2020, JPCB 2021; genomics: Hitz et al.\ 2023, iScience 2026; Bitcoin: arXiv:2206.02871; factories: our Airflow Factory runs, arXiv:2607.09689; RL: Kimi K3 report \S5.3.2.}
-\note{[1:05] I have met that question before; it is how a biophysicist ended up forking sandboxes. In my PhD, simulating protein filament networks: which links make parts move together? Then my co-authors and I met it in genomics: a new cell type, or the same patient again? And in Bitcoin: a decentralized network, or sixty-four agents? In agent factories: nine green forks, or one parent? And in RL training, the field's meeting, not mine: which rollouts shared a start? Four of these five fields are mine, and I have published in each. Physics and biology are vocabulary here, not evidence about forks. I keep changing fields; the question keeps following me.}
+\claim{Six fields, one bug: evidence that looks independent and is not.}
+\sources{Physics and biology are vocabulary here, not evidence about forks. Genomics and Bitcoin are team results with my co-authors. Physics: PRE 2020, PNAS 2020, JPCB 2021; genomics: Hitz et al.\ 2023, iScience 2026; Bitcoin: arXiv:2206.02871; self-driving: my perception work at Mobileye, 2021--2024; factories: our Airflow Factory runs, arXiv:2607.09689; RL: Kimi K3 report \S5.3.2.}
+\note{[1:05] I have met that question before; it is why a biological physicist forks sandboxes. In my PhD, on protein filament networks: which links make parts move together? Then my co-authors and I met it in genomics: a new cell type, or the same patient again? And in Bitcoin: a decentralized network, or sixty-four agents? At Mobileye, on self-driving perception: a million frames, or one rare case? In agent factories: nine green forks, or one parent? And in RL training: which rollouts shared a start? Five of these six fields are mine. Physics and biology are vocabulary here, not evidence about forks. I keep changing fields; the question keeps following me.}
 \end{frame}
 
 % 08
@@ -833,14 +834,14 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \vspace{.04cm}
 \begin{columns}[T,onlytextwidth]
 \column{.485\textwidth}
-\fcolorbox{Line}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Choosing} among 9 different patches\\needs a fresh test.}}
+\fcolorbox{Line}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Choosing} among 9 different patches\\needs a fresh test; best-of-9 $\leq 1-{}$P(all fail).}}
 \column{.485\textwidth}
 \fcolorbox{Line}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Confirming} one patch 9 times\\is capped by what the runs share.}}
 \end{columns}
 \par\vspace{.14cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad In our 2021 CRISPR-screen paper, each viability point was at least four technical replicates; each plot, at least two independent experiments.}}\par
 \claim{Nine forks of one parent are technical replicates.}
-\sources{Our Airflow Factory runs, Sep 2026: the records of review 1, repair 2 and review 2. Dwork et al., The reusable holdout, Science 2015. Gilad, Eliaz et al., Commun.\ Biol.\ 4:399 (2021), Methods.}
-\note{[1:05] Part three: the count. When nine copies of an agent all say the fix works, how much should you believe them? It depends how independent they were. Nine strangers give the same directions: probably right. Nine people read the same wrong map: nine answers, one opinion. Our run was the map: repair two answered review one's verdict, and the same model graded it. Two reviews by one model were, at best, one look. Choosing among nine patches needs a fresh test; confirming one is capped by what the runs share. Biologists call that technical replicates; our 2021 paper also reported independent experiments. Nine forks of one parent are technical replicates.}
+\sources{Our Airflow Factory runs, Sep 2026: the records of review 1, repair 2 and review 2. Dwork et al., The reusable holdout, Science 2015. \href{https://arxiv.org/abs/2606.27288}{Chen, arXiv:2606.27288 (2026 preprint)}. Gilad, Eliaz et al., Commun.\ Biol.\ 4:399 (2021), Methods.}
+\note{[1:05] Part three: the count. When nine copies of an agent all say the fix works, how much should you believe them? It depends how independent they were. Nine strangers give the same directions: probably right. Nine people read the same wrong map: one opinion. Our run was the map: repair two answered review one's verdict, and the same model graded it. Two reviews, at best one look. Choosing among nine patches needs a fresh test, and best-of-nine can never beat one minus the rate all nine fail together, so record each fork's pass or fail. Confirming one is capped by what the runs share. Biologists call that technical replicates. Nine forks of one parent are technical replicates.}
 \end{frame}
 % 33
 \begin{frame}[t]{\ev{\tagO\,\tagP}A reused grader becomes a training set}
@@ -911,15 +912,14 @@ promote(epoch, receipt) & \tagB\ sha256-bound gate;\ \tagP\ epoch fence\\
 \draw[Teal,dashed] (1,.1)--(10,.1);\draw[Gold,dashed] (1,.5)--(10,.5);
 \end{tikzpicture}
 \end{columns}
-\vspace{.05cm}
-\vspace{.12cm}
+\vspace{.03cm}
 {\small 4 re-runs $\times$ 100 tests = 400 executions, 100 evidence IDs. Pool within a candidate; compare across.\\[1pt]
-Kim et al.: on one leaderboard, two wrong models agree 60\% of the time. That is bias, not variance.\par}
-\vspace{.06cm}
+Different models, both wrong: same answer 60\% (chance 33\%). 9 LLM judges: 2.2 independent votes.\par}
+\vspace{.03cm}
 \uncover<2->{\noindent\fcolorbox{Gold}{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Amdahl:} speedup $=N/(1+(N-1)f)$; 100 cores, 10\% serial: $9.2\times$.\enspace\textbf{$\rho$ is the serial fraction of your evidence.}}}}
 \claim{\uncover<2->{\forktree\enspace Forks multiply executions, not evidence.}}
-\sources{Equal variances, common pairwise correlation $\rho\geq0$; Kish (1965). \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025}. Amdahl, AFIPS SJCC 1967.}
-\note{[1:45] But forks share starting code, model, prompt and tests. If the mistake comes from something they share, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, are worth about nine independent witnesses; sharing a lot, point five, about two; identical, one. And your nine green repairs? [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets, one page: one witness. The variance of their average never drops below rho sigma squared. Four hundred executions of a hundred tests are a hundred evidence IDs. And rho is real: on one leaderboard, two wrong models agree sixty percent of the time. That is bias, not variance. Reading rho as coupling is my interpretation. Systems people: where have you seen N over one plus N minus one times a fraction? [wait seven seconds, silently; repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. [pause] Forks multiply executions, not evidence.}
+\sources{Equal variances, common pairwise correlation $\rho\geq0$; Kish (1965). 60\%: \href{https://arxiv.org/abs/2506.07962}{Kim et al., ICML 2025} (HELM, MMLU). 2.2: \href{https://arxiv.org/abs/2605.29800}{Kohli, arXiv:2605.29800 (2026 preprint)}, 9 frontier judges, 7 families. Amdahl, AFIPS SJCC 1967.}
+\note{[1:50] But forks share starting code, model, prompt and tests. If the mistake comes from something shared, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, are worth about nine independent witnesses; a lot, point five, about two; identical, one. And your nine green repairs? [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets, one page: one witness. Their average's variance never drops below rho sigma squared. Sharing is real: two different models that both miss a question pick the same wrong answer sixty percent of the time; chance is a third. Not rho, but why rho is not zero. Nine frontier judges: about two independent votes. Reading rho as coupling, and this as bias, is my interpretation. Systems people: where have you seen N over one plus N minus one times a fraction? [wait seven seconds, silently; repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law: rho is the serial fraction of your evidence. Amdahl sends his regards. Again. [pause] Forks multiply executions, not evidence.}
 \end{frame}
 % 36
 \begin{frame}[t]{\ev{\tagO\,\tagP\,\tagA}The runtime holds some of the cluster labels}
@@ -941,13 +941,13 @@ lineage as annotation & Green et al.\ PODS'07\\
 \begin{ticks}
 \item[\yes] shared parent, seed, test, fixture
 \item[\yes] the model each child called: the egress gateway sees it
-\item[\no] a shared model's blind spots (Kim et al.)
+\item[\no] blind spots shared even across different models (Kim et al.)
 \end{ticks}\par}
 \end{columns}
 \vspace{.25cm}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY}\enspace Dependence my co-authors and I had to uncover from outside: address linking tied most bitcoin mined before February 2011 to 64 agents; malignant cells cluster by patient tumour, not by cell type. A fork runtime records who shares what with every result, like a family tree.\par}
 \claim{Others must infer the clusters. A fork runtime can record its own.}
 \sources{\href{https://arxiv.org/abs/2206.02871}{Blackburn et al., arXiv:2206.02871 (2022)}; \href{https://doi.org/10.1016/j.isci.2026.115139}{Saurty-Seerunghen et al., iScience 2026}; Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} \S5. Crossed factors: Cameron, Gelbach \& Miller, JBES 2011 (multiway); REStat 2008 (wild-cluster bootstrap).}
-\note{[0:55] The formula is sixty years old; it needs, and rarely gets, cluster labels: who shares what. The runtime is the only part that knows which copies share a parent, a seed, a test or, through the egress gateway, a model. It records that with every result, like a family tree. It cannot see a shared model's blind spots. My co-authors and I inferred clusters from outside, in bitcoin and tumours. Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.}
+\note{[0:55] The formula is sixty years old; it needs, and rarely gets, cluster labels: who shares what. The runtime is the only part that knows which copies share a parent, a seed, a test or, through the egress gateway, a model. It records that with every result, like a family tree. It cannot see blind spots shared even across different models. My co-authors and I inferred clusters from outside, in bitcoin and tumours. Cancer cells cluster by patient; forks cluster by parent. Others must infer the clusters. A fork runtime can record its own.}
 \end{frame}
 % 37
 \begin{frame}[t]{\ev{\tagO\,\tagP}Fork is also how you run the control}
@@ -1248,11 +1248,12 @@ Composition order and size & Joint success and regressions & Which interactions 
 \end{tikzpicture}
 \end{center}
 \end{columns}
-\vspace{.25cm}
-{\small A canary for correlation: a few siblings and strangers before a hundred forks (proposed).\par}
+\vspace{.12cm}
+{\small A canary for correlation: a few siblings and strangers before a hundred forks (proposed).\\
+Agreement is not proof: 9 frontier judges who all agreed were still wrong 9.1\% of the time (Kohli).\par}
 \claim{Hedge for slow replicas. Canary for shared failures.}
-\sources{Dean \& Barroso, CACM 56(2):74--80, 2013, p.\,79. Our Airflow Factory runs, Sep 2026: reviews 1 and 2.}
-\note{[0:50] Just one more thing. At the start I promised the hedging paper's second trick, for when the fault is in the request. Their worry is a request that exercises an untested code path, crashing thousands of servers at once. The cure is not more replicas. It is a canary: one or two leaves first. My run's new code had no test. Nine green forks would share that gap. So: a canary for correlation.}
+\sources{Dean \& Barroso, CACM 56(2):74--80, 2013, p.\,79. Our Airflow Factory runs, Sep 2026: reviews 1 and 2. \href{https://arxiv.org/abs/2605.29800}{Kohli, arXiv:2605.29800 (2026 preprint)}.}
+\note{[0:45] Just one more thing. I promised the hedging paper's second trick, for when the fault is in the request. Their worry: a request hitting an untested code path, crashing thousands of servers at once. The cure is not more replicas but a canary: one or two leaves first. My run's new code had no test. Nine green forks would share that gap. Even unanimous frontier judges were still wrong nine percent of the time. So: a canary for correlation.}
 \end{frame}
 % 49 close
 {\setbeamercolor{normal text}{fg=white,bg=Ink}
@@ -1277,7 +1278,7 @@ Composition order and size & Joint success and regressions & Which interactions 
 \vspace{.15cm}
 {\small\color{white!85}Help wanted: estimating $\rho$ from lineage; leases that fork.\par}
 {\small\color{white!85}arXiv:2607.09689\par}
-\note{[1:20] Let me close where I began, with Dean's hedged request. Hedging works when failures are independent; the runtime's job is to know when they are not. Remember the blank row, how correlated two forks' verdicts are: it stays blank until test two runs. In 2009 the parent's last line was wait. Ours has to be count: reduce the receipts by lineage, or abstain. [pause; let the room read the contributions] In physics, genomics and Bitcoin, my co-authors and I had to infer the clusters; a fork runtime can record them. Forks multiply executions, not evidence. [pause] Xen came from this lab, so bringing a question about forks here has been a privilege. I would like to come back with that row filled in. [Stop. Contributions slide stays up through questions. No thank-you.]}
+\note{[1:20] Let me close where I began. Hedging works when failures are independent; the runtime's job is to know when they are not. The field now counts witnesses for models and judges; for forks of one agent, as far as I know, not yet. That is the blank row: blank until test two runs. In 2009 the parent's last line was wait. Ours has to be count: reduce the receipts by lineage, or abstain. [pause; let the room read the contributions] In physics, genomics and Bitcoin, my co-authors and I had to infer the clusters; a fork runtime can record them. Forks multiply executions, not evidence. [pause] Xen came from this lab, so bringing a question about forks here has been a privilege. I would like to come back with that row filled in. [Stop. Contributions slide stays up through questions. No thank-you.]}
 \end{frame}}
 % ===================================================================== END MATTER (untimed): research record, references
 \appendix
@@ -1498,7 +1499,7 @@ O'Callahan et al. Engineering record and replay for deployability. USENIX ATC 20
 
 \begin{frame}[t]{References: evidence and evaluation}
 \vspace{0pt}
-{\fontsize{6.6}{7.75}\selectfont
+{\fontsize{6.0}{6.9}\selectfont
 \begin{columns}[T,onlytextwidth]
 \column{.49\textwidth}
 \textbf{Dependent evidence}\\
@@ -1513,7 +1514,9 @@ Cameron, Gelbach \& Miller. Bootstrap-based improvements for inference with clus
 Cameron, Gelbach \& Miller. Robust inference with multiway clustering. JBES 2011.\\
 Glasserman \& Yao. Some guidelines and guarantees for common random numbers. Management Science 1992.\\
 Stockmayer. Theory of molecular size distribution and gel formation in branched-chain polymers. J.\ Chem.\ Phys.\ 11:45, 1943.\\
-Kim et al. Correlated errors in large language models. ICML 2025.
+\textbf{Shared errors across models}\\
+Kim, Garg, Peng \& Garg. Correlated errors in large language models. ICML 2025, PMLR 267. arXiv:2506.07962.\\
+Goel et al. Great models think alike and this undermines AI oversight. ICML 2025. arXiv:2502.04313.
 \column{.49\textwidth}
 \textbf{Evaluation under search}\\
 Dean \& Barroso. The tail at scale. CACM 2013 (hedged requests; also fan-out, good enough, canary requests, mutations).\\
@@ -1523,9 +1526,14 @@ Von Arx, Chan \& Barnes (METR). Recent frontier models are reward hacking. 5 Jun
 Zhong, Raghunathan \& Carlini. ImpossibleBench. arXiv:2510.20270, 2025.\\
 Dwork et al. The reusable holdout. Science 2015.\\
 Stroebl, Kapoor \& Narayanan. The limits of inference scaling through resampling (v1: Inference scaling fLaws). arXiv:2411.17501, 2024.\\
-Russo \& Zou. Controlling bias in adaptive data analysis using information theory. AISTATS 2016.
+Russo \& Zou. Controlling bias in adaptive data analysis using information theory. AISTATS 2016.\\
+\textbf{Shared errors across models: 2026 preprints}\\
+Jo, Garg \& Raghavan. The subjectivity of monoculture. arXiv:2602.24086, preprint.\\
+Kohli. Nine judges, two effective votes: correlated errors undermine LLM evaluation panels. arXiv:2605.29800, preprint.\\
+Chen. When does combining language models help? A co-failure ceiling on routing, voting, and mixture-of-agents across 67 frontier models. arXiv:2606.27288, preprint.\\
+Bone, Stephany \& del Rio-Chanona. Monocultural biases: correlated biases in large language models lead to unequal systemic exclusion rates in hiring. arXiv:2609.22169, preprint.
 \end{columns}\par}
-\note{[backup] Evidence and evaluation references.}
+\note{[backup] Evidence and evaluation references. The shared-errors papers compare different models, not forks of one agent, and the 2026 arXiv items are preprints.}
 \end{frame}
 
 \begin{frame}[t]{References: own work and documentation}
