@@ -6,6 +6,7 @@ talk.snm
 talk.toc
 talk.vrb
 talk.pdf
+talk-present.pdf
 talk-30min.*
 !talk-30min.tex
 build.log
