@@ -76,8 +76,8 @@ The scope caveats are said once, on slide 8.
 - Epoch-fenced promotion.
 - A controller-measured n.
 - Replay logs.
-- The redesigned SELFHOST-2 on slide 45.
-- The runtime interface on slide 28, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
+- The redesigned SELFHOST-2 on slide 46.
+- The runtime interface on slide 29, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
 - The TLA+ promotion model (formal/authority) is a design model; no TLC run or trace check is recorded.
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
@@ -126,7 +126,7 @@ Added with the one-story restructure:
 - The variance floor assumes equal variances and a common pairwise correlation.
 - Lineage names the shared factors; it does not estimate their strength.
 - Precision pooling requires one common parameter, calibrated information and independent evidence.
-- On slide 39, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
+- On slide 40, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 - Lineage labels shared parents, seeds, tests and fixtures. It cannot label a shared model's blind spots.
 
 ## Do not say

@@ -6,7 +6,6 @@ on:
     paths:
       - "talk.tex"
       - "talk-30min.tex"
-      - "academic/**"
       - "slides/**"
       - "Makefile"
       - "tools/**"
@@ -15,7 +14,6 @@ on:
     paths:
       - "talk.tex"
       - "talk-30min.tex"
-      - "academic/**"
       - "slides/**"
       - "Makefile"
       - "tools/**"
@@ -54,10 +52,10 @@ jobs:
 
           full = len(PdfReader("talk.pdf").pages)
           short = len(PdfReader("talk-30min.pdf").pages)
-          print(f"Cambridge deck: {full} pages (48 story slides + 5 reveal pages + 10 end-matter pages)")
+          print(f"Cambridge deck: {full} pages (49 story slides + 5 reveal/build pages + 10 end-matter pages)")
           print(f"30-minute historical cut: {short} slides")
-          if full != 63:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 63 pages; got {full}")
+          if full != 64:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 64 pages; got {full}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md
@@ -85,10 +83,11 @@ jobs:
           git rebase origin/main
 
           mkdir -p dist
+          cp talk.pdf dist/forkable-sandboxes-cambridge.pdf
           cp talk.pdf dist/forkable-sandboxes-cambridge-40.pdf
           cp talk-present.pdf dist/forkable-sandboxes-cambridge-present.pdf
           cp talk-30min.pdf dist/forkable-sandboxes-30min.pdf
-          git add dist/forkable-sandboxes-cambridge-40.pdf dist/forkable-sandboxes-cambridge-present.pdf dist/forkable-sandboxes-30min.pdf
+          git add dist/forkable-sandboxes-cambridge.pdf dist/forkable-sandboxes-cambridge-40.pdf dist/forkable-sandboxes-cambridge-present.pdf dist/forkable-sandboxes-30min.pdf
           if git diff --cached --quiet; then
             echo "Compiled PDFs unchanged."
           else
