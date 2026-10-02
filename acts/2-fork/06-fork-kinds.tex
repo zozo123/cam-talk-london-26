@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagO}What each kind of fork copies}
+\lead{$M_{\rm total}\approx M_{\rm shared}+\sum_i M_{{\rm private},i}$, as children share memory until they write.}
+\vspace{-.08cm}
+{\footnotesize\color{Muted}Kimi K3, real workloads, copy-on-write memory plus page-cache optimisations, up to 6.5$\times$ overcommit.\par}
+\vspace{.05cm}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.4cm} Y L{4.3cm}@{}}
+\toprule
+Mechanism & What survives & Where the cost lands\\
+\midrule
+worktree, overlay layer & files only & bytes each child writes\\
+container checkpoint (CRIU) & processes and memory, a TCP connection needs its original IP, so one copy at most & dump size, what the kernel can checkpoint\\
+microVM snapshot & guest memory and vCPU/device state, disks handled separately & pages each child touches after restore\\
+record and replay (rr) & a log of execution & replay time\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.1cm}
+{\small A restore that returns OK is not a faithful copy. Before counting a child, compare restored and direct runs on declared outputs.\par}
+\claim{Fork is cheap, divergence is costly.}
+\sources{Firecracker snapshot-support docs; CRIU TCP\_REPAIR docs; \href{https://arxiv.org/abs/2101.09355}{REAP (ASPLOS'21)}; rr (ATC'17); \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
+\note{[0:55] Each fork type copies different state and costs differently. Children share memory until they write. Kimi reports copy-on-write memory with page-cache optimisations allows up to 6.5 times overcommit. A worktree keeps files. CRIU keeps processes, but a connection survives in one copy at most. A microVM pays for the pages each child touches. A restore that returns OK is not a faithful copy. As an analogy from physics, paths share a past and split at first write. Fork is cheap, and the cost appears at divergence.}
+\end{frame}

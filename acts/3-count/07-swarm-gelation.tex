@@ -1,0 +1,35 @@
+\begin{frame}[t]{\ev{\tagP\,\tagA}When a swarm gels}
+\begin{columns}[T,onlytextwidth]
+\column{.31\textwidth}
+\term{Execution ancestry}
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+\node[state] (a) at (0,1.3) {$S_0$};\node[candidate] (b) at (-1,-.5) {A};\node[candidate] (c) at (1,-.5) {B};
+\draw[flow] (a)--(b);\draw[flow] (a)--(c);
+\end{tikzpicture}
+\end{center}
+\small The state producing this child.
+\column{.31\textwidth}
+\term{Evidence flow}
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+\node[evidence] (a) at (0,1.3) {archive};\node[candidate] (b) at (-1,-.5) {A};\node[candidate] (c) at (1,-.5) {B};
+\draw[message] (b)--(a);\draw[message] (a)--(c);\draw[message] (c)--(b);
+\end{tikzpicture}
+\end{center}
+\small Observations that influenced a decision.
+\column{.31\textwidth}
+\term{Composition}
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+\node[candidate] (a) at (0,1.3) {C};\node[candidate] (b) at (-1,-.5) {A};\node[candidate] (c) at (1,-.5) {B};
+\draw[relation] (a)--(b)--(c)--(a);\draw[relation] (0,.4) ellipse(2.1 and 1.55);
+\end{tikzpicture}
+\end{center}
+\small Sets needing joint validation.
+\end{columns}
+\par\vspace{.1cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,PHYSICS}\quad Stockmayer (J.\ Chem.\ Phys.\ 11:45, 1943) found that enough cross-links join branched chains into one gel. Enough evidence edges can join separate lineages into one cluster.}}\par
+\claim{Ancestry is a tree. Evidence flow is not.}
+\sources{\href{https://doi.org/10.1063/1.1723803}{Stockmayer (1943)} is a precedent under idealised assumptions, and an agent threshold must come from the real dependency model.}
+\note{[0:50] Seeds couple copies by choice, but exchanged information often couples them unintentionally. A swarm has three graphs, ancestry, evidence flow and composition, and only ancestry (who forked from whom) forms a tree of lineages. Evidence edges can join separate lineages into one cluster, as cross-links join polymer chains. Stockmayer asked in 1943 when such links make one gel. With enough shared context, a swarm becomes one witness. This is an analogy, so the agent threshold must be derived.}
+\end{frame}

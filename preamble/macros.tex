@@ -1,0 +1,35 @@
+% Frame-title strip, evidence tags, text and table helpers, the fork-tree symbol.
+% Act strip on every frame: the current act is teal and bold.
+\newcommand{\currentact}{0}
+\newcommand{\setact}[1]{\renewcommand{\currentact}{#1}}
+\newcommand{\actitem}[2]{\ifnum\currentact=#1{\color{Teal}\bfseries #2}\else{\color{Muted!65}#2}\fi}
+% Evidence tag: \ev{\tagM} inside a frame title prints the tag on the part-label line.
+\newcommand{\currentev}{}
+\newcommand{\currentsurf}{}
+\newcommand{\surf}[1]{\gdef\currentsurf{#1}}
+\newcommand{\ev}[1]{\gdef\currentev{#1}}
+\newcommand{\evtag}[2]{\tikz[baseline=(x.base)]\node[draw=#1,text=#1,line width=.6pt,rounded corners=1.5pt,inner xsep=2.4pt,inner ysep=1.3pt,font=\fontsize{7.6}{8.4}\selectfont\bfseries](x){#2};}
+\newcommand{\tagM}{\evtag{Teal}{MEASURED}}
+\newcommand{\tagB}{\evtag{Ink}{BUILT}}
+\newcommand{\tagP}{\evtag{Gold}{PROPOSED}}
+\newcommand{\tagO}{\evtag{Muted}{PUBLISHED}}
+\newcommand{\tagA}{\evtag{Gold!55!Muted}{ANALOGY}}
+\newif\ifbackup
+\def\endlabel{REFERENCES}\newcommand{\setendlabel}[1]{\gdef\endlabel{#1}}
+\newcommand{\actstrip}{\ifbackup{\color{Teal}\bfseries\endlabel}\else\actitem{0}{HOOK}\quad\actitem{1}{WALL}\quad\actitem{2}{FORK}\quad\actitem{3}{COUNT}\quad\actitem{4}{TEST}\fi}
+\setbeamertemplate{frametitle}{\gdef\currentev{}\gdef\currentsurf{}\sbox0{\insertframetitle}\vspace{.1cm}{\fontsize{8}{9.5}\selectfont\actstrip\ifx\currentsurf\empty\else\quad{\color{Gold}\bfseries\MakeUppercase{\currentsurf}}\fi\hfill\currentev\par}\vspace{.08cm}\insertframetitle\par\vspace{.15cm}}
+\setbeamertemplate{footline}{\hspace{.8cm}{\fontsize{7}{8}\selectfont\color{Muted}Yossi Eliaz\quad Cambridge SRG\quad 15 October 2026}\hfill{\fontsize{8}{9}\selectfont\color{Muted}\ifbackup\else\insertframenumber\,/\,\inserttotalframenumber\fi}\hspace{.8cm}\vspace{.17cm}}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\lead}[1]{{\fontsize{12.5}{15}\selectfont #1\par}\vspace{.2cm}}
+\newcommand{\claim}[1]{\par\vspace{.2cm}{\fontsize{11.5}{14}\selectfont\color{Teal}\bfseries #1\par}}
+\newcommand{\sources}[1]{\par\vfill{\fontsize{7.8}{9.2}\selectfont\color{Muted}#1\par}\vspace{.05cm}}
+\newcommand{\tagline}[1]{\par{\fontsize{9}{11}\selectfont\color{Muted}#1\par}}
+\newcommand{\term}[1]{\textbf{#1}}
+\newcommand{\no}{{\color{Rust}\bfseries$\times$}}
+\newenvironment{ticks}{\setlength{\leftmargini}{1.3em}\begin{itemize}\setlength{\itemsep}{1.5pt}}{\end{itemize}}
+\newcommand{\yes}{{\color{Teal}\bfseries$\checkmark$}}
+% Recurring symbol: the title slide's fork tree, inline beside the refrain (slides 10, 36, 50).
+\newcommand{\forktree}[1][Teal]{\tikz[baseline={(0,-.55ex)},x=1em,y=1em]{\draw[#1,line width=.75pt] (0,0)--(.85,0)--(1.55,.42) (.85,0)--(1.55,0) (.85,0)--(1.55,-.42);\foreach \fx/\fy in {0/0,.85/0,1.55/.42,1.55/0,1.55/-.42}{\fill[#1] (\fx,\fy) circle(.12);}}}

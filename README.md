@@ -5,7 +5,7 @@
 Cambridge Computer Laboratory Systems Research Group seminar, 15 October 2026, 15:00–16:00 BST, FW11 + Microsoft Teams. [Event listing](https://www.talks.cam.ac.uk/talk/index/273181).
 
 - **[Seminar PDF](dist/forkable-sandboxes-cambridge.pdf)** (50 story slides, then end matter: detail pages, research record, references)
-- **[LaTeX source with speaker notes](talk.tex)**
+- **[LaTeX source](talk.tex)**: the root file. Each slide is one file in [acts/](acts/), and its speaker note is inside it.
 - **[Presenter guide, generated from the notes](PRESENTER-GUIDE.md)**
 - **[Claim boundaries and provenance](CLAIM-FENCE.md)**
 - **[Pre-registered experiment](PREREGISTRATION.md)**
@@ -48,10 +48,10 @@ The delivery follows Patrick Winston's *How to Speak* (MIT, 2018): an empowermen
 | 11–20 | The wall: seven surfaces, numbered on each slide, with reward hacking and the green-check receipt, then what our runs found | 7:30 |
 | 21–32 | The fork: SnowFlock Fig. 1, Xen lineage, training runs, resets, what forks copy, held effects, cost, isolation, the interface, architecture, promotion | 11:00 |
 | 33–42 | The count: the second review, reused graders, one formula in three fields, N_eff as Amdahl, cluster labels, common random numbers, gelation, synthetic lethality, the receipt, precision | 9:35 |
-| 43–50 | Test and agenda: two pre-registered tests with the declared physics prior, what they cannot separate, the redesigned run, open problems, the canary twist, Contributions | 6:30 |
+| 43–50 | Test and agenda: two pre-registered tests with the declared physics prior, what they cannot separate, the redesigned run, open problems, the canary twist, Contributions | 6:50 |
 | after 50 | End matter (untimed): detail pages (4), research record (3), references (3) | — |
 
-The cues are derived from the script at about 105 wpm plus reading pauses: 44:15 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
+The cues are derived from the script at about 105 wpm plus reading pauses: 44:35 in total, leaving about 15 minutes for questions. Replace them with stopwatch times after rehearsal.
 
 ## Evidence status
 
@@ -61,6 +61,30 @@ The cues are derived from the script at about 105 wpm plus reading pauses: 44:15
 - **Not claimed:** a controlled speedup, a vendor ranking, or a factory that forks today.
 
 `CLAIM-FENCE.md` lists every figure and its source.
+
+## Repository layout
+
+```
+talk.tex                    root file: document class, preamble, the six act indexes
+preamble/
+  packages.tex              packages, TikZ libraries, Beamer options
+  theme.tex                 colours and Beamer theme
+  macros.tex                frame-title strip, evidence tags, text helpers, fork-tree symbol
+  tikz-styles.tex           shared node and arrow styles
+  metadata.tex              title, author, PDF metadata
+acts/
+  0-hook/                   slides 1-10: the question, the case, the claims
+  1-wall/                   slides 11-20: what a sandbox must contain
+  2-fork/                   slides 21-32: copying a sandbox, its cost and risks
+  3-count/                  slides 33-42: how many independent observations N forks give
+  4-test/                   slides 43-50: two pre-registered tests, open problems, the close
+  5-endmatter/              untimed: detail pages, research record, references
+    index.tex               the order of the slides in the act, and the act number
+    NN-name.tex             one slide: one frame, with its speaker note as the last item
+tools/                      presenter_guide.py, slide_index.py, texflat.py
+```
+
+To edit a slide, open its file in `acts/` and change the text. To move a slide, move its `\input` line in the act's `index.tex`. To add a slide, create a file and add an `\input` line. File names carry the position within the act, so rename them after a reorder if the order should show in a directory listing. `python3 tools/slide_index.py` prints the global slide numbers, files, titles and planned times. Cross-references written in the text as "slide N" must be updated by hand after a move.
 
 ## Build
 

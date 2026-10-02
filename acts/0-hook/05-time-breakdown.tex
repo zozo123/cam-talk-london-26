@@ -1,0 +1,20 @@
+\begin{frame}[t]{\ev{\tagM\,\tagA}Where 43 minutes went}
+\vspace{.3cm}
+\begin{center}
+\begin{tikzpicture}[x=.0047cm,y=1cm,every node/.style={font=\small}]
+\draw[fill=Pale,draw=Ink] (0,0) rectangle (218.4,.8) node[midway]{};
+\draw[fill=Sand,draw=Gold] (218.4,0) rectangle (1419.7,.8) node[midway]{build + test 47\%};
+\draw[fill=Pale,draw=Teal] (1419.7,0) rectangle (2554.7,.8) node[midway]{review 44\%};
+\node[font=\footnotesize,above] at (109,.8) {spec, plan 9\%};
+\draw[fill=Rust,draw=Rust] (-40,0) rectangle (-20,.8);
+\draw[Rust,line width=.7pt] (-30,0)--(-30,-.45) node[below,font=\footnotesize,text=Rust,align=center]{sandbox setup: 20 s\\0.8\%};
+\end{tikzpicture}
+\end{center}
+\vspace{.35cm}
+{\large A hundredfold faster sandbox setup would shorten this run by 0.8\%.\par}
+\vspace{.15cm}
+{\small \tagA\ A self-evolving loop, an agent system that proposes, tests and merges changes to its own code, is self-driving software that takes an issue and produces a reviewed patch.\par}
+\claim{Both the minutes and the risk lie in the agents and checks.}
+\sources{Our experiments, Sep 2026, stage timings (one cycle 2,557 s, sandbox setup 20.3 s).}
+\note{[0:50] The forty-three-minute row is one work order of a self-evolving loop, an agent system that proposes, tests and merges changes to its own code. The analogy comes from two years on self-driving cars at Mobileye, where the rare case was hardest. The loop is self-driving software with the same hard part. Setup takes twenty seconds, under one percent. A hundredfold faster setup would make this run 0.8 percent faster. The minutes are in the agents and the checks. So is the risk.}
+\end{frame}

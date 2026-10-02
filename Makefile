@@ -4,14 +4,16 @@ all: deck
 
 deck: talk.pdf guide
 
-guide: talk.tex tools/presenter_guide.py
+SOURCES := talk.tex $(wildcard preamble/*.tex) $(wildcard acts/*/*.tex)
+
+guide: $(SOURCES) tools/presenter_guide.py
 	python3 tools/presenter_guide.py --check
 
 dist: deck
 	mkdir -p dist
 	cp talk.pdf dist/forkable-sandboxes-cambridge.pdf
 
-talk.pdf: talk.tex
+talk.pdf: $(SOURCES)
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 

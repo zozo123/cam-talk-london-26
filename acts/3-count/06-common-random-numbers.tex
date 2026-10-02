@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagO\,\tagP}A fork can supply the control run}
+\lead{For a comparison, positive covariance helps.}
+\[\operatorname{Var}(Y_A-Y_B)=\operatorname{Var}(Y_A)+\operatorname{Var}(Y_B)-2\operatorname{Cov}(Y_A,Y_B)\]
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=2.3cm] (r) at (0,0) {same draw $\xi_i$};
+\node[candidate,minimum width=2.4cm] (a) at (4.3,.7) {candidate A};
+\node[candidate,minimum width=2.4cm] (b) at (4.3,-.7) {candidate B};
+\node[evidence,minimum width=2.7cm] (d) at (8.8,0) {$D_i=Y_{A,i}-Y_{B,i}$};
+\draw[flow] (r)--(a);\draw[flow] (r)--(b);\draw[message] (a)--(d);\draw[message] (b)--(d);
+\end{tikzpicture}
+\end{center}
+{\small\tagP\ The fork API should include a seed policy, \texttt{seed=copy|reseed} (slide 30).\\[2pt]
+Test 2 relies on siblings and strangers sharing slot and host, so only ancestry differs (slide 45).\par}
+\claim{Share draws to compare and vary draws to corroborate.}
+\sources{Common random numbers: \href{https://pubsonline.informs.org/doi/abs/10.1287/mnsc.38.6.884}{Glasserman \& Yao, Management Science (1992)}.}
+\note{[0:45] Positive correlation lowers the variance of the difference between two candidates. Giving A and B the same draw cancels shared noise, a technique called common random numbers. To corroborate, each copy needs a different draw, so a fork copies the seed or reseeds. The seed policy therefore belongs in the fork API. Test two uses this design, so only ancestry differs. Sharing the draw supports comparison and varying it supports corroboration.}
+\end{frame}

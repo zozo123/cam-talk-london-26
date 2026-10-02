@@ -1,0 +1,26 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}Fork cost model and API timings}
+\vspace{0pt}
+\noindent\begin{minipage}[t]{.43\textwidth}
+\textbf{Cost model} \tagP
+\[\begin{aligned}C_{\rm cold}&=N(P+W+V)\\ C_{\rm fork}&=P+H+N(R+D+W+V)\end{aligned}\]
+\[(N-1)\,P \;>\; H + N\,(R+D)\]
+{\footnotesize prepare $P$, capture $H$, restore $R$, diverge $D$, work $W$, evaluate $V$. $W$ includes model calls and cancels. Each child still rebuilds its patch.\par}
+\end{minipage}\hfill
+\begin{minipage}[t]{.52\textwidth}
+\textbf{Three API paths} \tagM\\[3pt]
+{\scriptsize\renewcommand{\arraystretch}{1.1}\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l Y r r r@{}}
+\toprule
+& Operation & Success & p50 & p95\\
+\midrule
+Daytona & create & 1024/1024 & 0.20 s & 1.12 s\\
+Tensorlake & create & 256/256 & 3.44 s & 9.00 s\\
+My platform & restore + run + capture & 255/256 & 6.87 s & 9.04 s\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.1cm}
+{\footnotesize\color{Muted}My platform: 141 MB named snapshot, concurrency 12. Different operations: not a ranking. Teardown excluded. Memory capture unverified, so that row is restore fan-out.\par}
+\end{minipage}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2.}
+\note{[backup] Detail for slide 28: the full cost model and the three API paths behind it.}
+\end{frame}

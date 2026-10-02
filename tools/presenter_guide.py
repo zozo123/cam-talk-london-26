@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build PRESENTER-GUIDE.md from talk.tex notes and check per-slide pacing.
+"""Build PRESENTER-GUIDE.md from the speaker notes in talk.tex and the files it includes and check per-slide pacing.
 
 Each main slide's \\note{} starts with an [m:ss] cue; backup notes start with [backup].
 `--check` exits non-zero if any main slide exceeds MAX_WPM or the total leaves the window.
@@ -7,6 +7,9 @@ Each main slide's \\note{} starts with an [m:ss] cue; backup notes start with [b
 import re
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from texflat import flatten
 
 MAX_WPM = 125
 TOTAL_WINDOW_S = (35 * 60, 45 * 60)
@@ -34,7 +37,7 @@ def plain(text):
 
 
 def main():
-    tex = (ROOT / "talk.tex").read_text()
+    tex = flatten(ROOT / "talk.tex")
     rows, backups, total = [], [], 0
     for title, cue, text in frames(tex):
         text = plain(text)
@@ -50,7 +53,7 @@ def main():
     words = sum(r[3] for r in rows)
     out = ["# Presenter guide: Forkable Sandboxes", "",
            "**The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.", "",
-           f"Generated from `talk.tex` by `tools/presenter_guide.py`. {len(rows)} main slides, {len(backups)} end-matter pages. "
+           f"Generated from the notes in `acts/` by `tools/presenter_guide.py`. {len(rows)} main slides, {len(backups)} end-matter pages. "
            f"Planned talk: **{total // 60}:{total % 60:02d}**, {words} spoken words, {60 * words / total:.0f} wpm average, "
            f"peak {max(r[4] for r in rows):.0f} wpm. These are planned cues, not a measured rehearsal.", "",
            "## Run of show", "", "| # | Slide | Cue | Clock | Words | wpm |", "|---|---|---|---|---|---|"]

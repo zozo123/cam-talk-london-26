@@ -1,0 +1,17 @@
+% Analogy strips are inline Sand colorboxes.
+\begin{frame}[t]{\ev{\tagP}Test 1: restore versus a warm cache}
+\vspace{0pt}
+{\Large Our claim fails if the whole interval for the gain is under 10\,s at any $N$.\par}
+\vspace{.35cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,stepbox/.style={candidate,text width=4.1cm,minimum height=1.55cm,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000}}]
+\node[stepbox] (a) at (0,0) {\textbf{Gate 0}\\a random value in RAM is snapshotted and restored into 3 children};
+\node[stepbox] (b) at (4.95,0) {\textbf{Fidelity}\\any restored vs.\ direct output mismatch voids the arm};
+\node[stepbox] (h) at (9.9,0) {\textbf{H1 cost}\\cached template vs.\ restore, $N\in\{3,6,12\}$, 20 runs each};
+\draw[flow] (a)--(b);\draw[flow] (b)--(h);
+\end{tikzpicture}
+\end{center}
+\claim{A result in which the build cache wins is a valid outcome.}
+\sources{Pre-registration, tag prereg-v1, github.com/zozo123/cam-talk-london-26. Restore cost follows REAP (ASPLOS'21) and FaaSnap (EuroSys'22). Decision rules in full are in the end matter.}
+\note{[1:00] Part four presents the test, after two runs and synthetic checks. Two tests could refute our claim, and both were written before any run. Test one measures cost, and gate zero snapshots a random RAM value and restores three children. If the value is lost, memory was not restored, so the operation is restore fan-out and not a fork. Fidelity requires matching restored and direct outputs, and a cached template is compared with a restore over twenty alternating runs per size. Restore counts as better only if the whole interval exceeds ten seconds at every size. A result in which the build cache wins is a valid outcome.}
+\end{frame}
