@@ -1,0 +1,38 @@
+\begin{frame}[t]{\ev{\tagO}Fork systems since 2003, many built on Xen}
+\vspace{.15cm}
+\begin{columns}[T,onlytextwidth]
+\column{.44\textwidth}
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}L{.9cm} Y@{}}
+\toprule
+Year & System\\
+\midrule
+2003 & Xen (Cambridge)\\
+2005 & Live migration (Cambridge)\\
+2005 & Potemkin\\
+2009 & SnowFlock\\
+2020 & Catalyzer\\
+2023 & Nephele, MITOSIS\\
+\bottomrule
+\end{tabularx}\par}
+\column{.52\textwidth}
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}L{.9cm} Y@{}}
+\toprule
+Year & System\\
+\midrule
+\end{tabularx}\par}
+\vspace{-.1cm}
+\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small\renewcommand{\arraystretch}{1.25}%
+\begin{tabularx}{\linewidth}{@{}L{.9cm} Y@{}}
+\textbf{2026} & DeltaBox\\
+& Shepherd\\
+& Crab\\
+& Planarian\\
+& Kimi K3 AgentENV (training)\\
+\end{tabularx}}}
+\end{columns}
+\claim{Researchers have worked for twenty-three years to make fork cheap, and no surveyed system counts what sibling forks share.}
+\sources{SOSP'03; NSDI'05; SOSP'05; EuroSys'09; ASPLOS'20; EuroSys'23; OSDI'23; \href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://arxiv.org/abs/2605.10913}{Shepherd}; \href{https://arxiv.org/abs/2604.28138}{Crab}; \href{https://arxiv.org/abs/2609.35366}{Planarian}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2.}
+\note{[0:55] SnowFlock continued a line begun here in 2003. Xen led to live migration with sixty milliseconds of downtime. Potemkin cloned honeypots. SnowFlock forked across hosts. Catalyzer forked a gVisor sandbox in under one millisecond, best case. MITOSIS forked over remote direct memory access. Fork here means the whole machine, unlike the POSIX call Baumann and colleagues proposed to retire. The shaded band marks this year and one row is a training run. Each system targets speed or safety. None counts what sibling forks share, which is the blank row.}
+\end{frame}

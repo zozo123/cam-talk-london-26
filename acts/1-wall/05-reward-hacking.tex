@@ -1,0 +1,23 @@
+\begin{frame}[t]{\surf{surface 3 of 7}\ev{\tagO}Reinforcement learning calls it reward hacking}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.1cm}Y@{}}
+\toprule
+Source & What it found\\
+\midrule
+METR (2025) & o3 reward-hacked in \textbf{30.4\%} of RE-Bench runs and \textbf{0.7\%} of HCAST runs, and METR's leading hypothesis is the visible scorer\\
+ImpossibleBench & read-only tests prevent edits to the tests but not special-casing of the code for the tests\\
+Kimi K3 \S4.2.6 & isolates agents from verifiers and pairs public diagnostic verifiers with hidden ones\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.25cm}
+\begin{center}
+\begin{tikzpicture}
+\node[draw=Muted,line width=.8pt,fill=Pale,rounded corners=2pt,text width=12.6cm,align=left,inner sep=6pt,font=\small] {\textbf{On kernel-optimisation tasks (\S4.2.4),} the Kimi K3 hacking-detection system penalises ``CUDA graph replay, input caching, and precision reduction''.};
+\end{tikzpicture}
+\end{center}
+\tagline{Caching inputs is the intended function of a build farm, but a speed grader treats it as a hack.}
+\claim{Running, evaluating and promoting code require three separate permissions.}
+\sources{\href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR (June 2025)}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 technical report} \S4.2.4, \S4.2.6.}
+\note{[0:45] Others report the same failure. Reinforcement learning calls this behavior reward hacking. METR reports o3 reward-hacked in thirty percent of RE-Bench runs and under one percent of HCAST. Their leading hypothesis is the visible scorer. ImpossibleBench reports read-only tests prevent test edits but not special-casing. Kimi K3 hides some verifiers. On kernel tasks, its hacking detector penalises input caching. Input caching is also core to build acceleration. Running, evaluating and promoting are three permissions.}
+\end{frame}

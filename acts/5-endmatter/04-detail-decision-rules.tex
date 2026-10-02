@@ -1,0 +1,27 @@
+\begin{frame}[t]{Pre-registered decision rules}
+\vspace{-.15cm}
+{\footnotesize\textbf{Test 1: does restore beat a warm cache?}\par}\vspace{1.5pt}
+{\fontsize{7.4}{8.9}\selectfont\renewcommand{\arraystretch}{1.0}
+\begin{tabularx}{\textwidth}{@{}L{1.9cm} Y L{5.6cm}@{}}
+\toprule
+Step & Design & Decision\\
+\midrule
+Gate 0 & a RAM nonce, snapshot, restore 3 children: does it survive? & if not, every result is ``restore fan-out''\\
+Fidelity & deterministic tests, restored vs.\ direct & any output mismatch voids the arm\\
+H1 cost & cached template vs.\ restore, cold as reference; $N\in\{3,6,12\}$; 20 interleaved reps per arm and $N$; makespan to first test results, one clock for both arms; no model calls & supports if the 95\% CI of the median gain is above 10 s at every $N$; rejects if the 98.3\% (Bonferroni) CI is below 10 s at any $N$\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.05cm}
+{\footnotesize\textbf{Test 2: do siblings fail together?}\par}\vspace{1.5pt}
+{\fontsize{7.4}{8.9}\selectfont\renewcommand{\arraystretch}{1.0}
+\begin{tabularx}{\textwidth}{@{}L{1.9cm} Y L{5.6cm}@{}}
+\toprule
+Step & Design & Decision\\
+\midrule
+H2 coupling & 12 snapshot families $\times$ 3 siblings, each paired with 3 strangers restored from other families, same slot, same host; the race test in lockstep rounds, at least 300 per condition & supports if a one-sided sign-flip test gives $p<0.05$ and $\Delta\rho>0.05$; rejects if the 90\% CI of $\Delta\rho$ is below 0.05; else inconclusive\\
+The loop & repair 1 re-sampled 9 times from its recorded input; the only model calls & descriptive; predicted: $\geq$5 of 9 repeat the out-of-plan edit\\
+\bottomrule
+\end{tabularx}\par}
+\sources{Pre-registration in github.com/zozo123/cam-talk-london-26, tags prereg-v1 to prereg-v3.}
+\note{[backup] Detail for slides 43 and 45; the protocol is PREREGISTRATION.md, tags prereg-v1 to prereg-v3.}
+\end{frame}

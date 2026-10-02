@@ -5,12 +5,16 @@ on:
     branches: [main]
     paths:
       - "talk.tex"
+      - "preamble/**"
+      - "acts/**"
       - "Makefile"
       - "tools/**"
       - ".github/workflows/build-talk.yml"
   pull_request:
     paths:
       - "talk.tex"
+      - "preamble/**"
+      - "acts/**"
       - "Makefile"
       - "tools/**"
       - ".github/workflows/build-talk.yml"

@@ -2,7 +2,7 @@
 
 **The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.
 
-Generated from `talk.tex` by `tools/presenter_guide.py`. 50 main slides, 10 end-matter pages. Planned talk: **44:35**, 4432 spoken words, 99 wpm average, peak 110 wpm. These are planned cues, not a measured rehearsal.
+Generated from the notes in `acts/` by `tools/presenter_guide.py`. 50 main slides, 10 end-matter pages. Planned talk: **44:35**, 4432 spoken words, 99 wpm average, peak 110 wpm. These are planned cues, not a measured rehearsal.
 
 ## Run of show
 

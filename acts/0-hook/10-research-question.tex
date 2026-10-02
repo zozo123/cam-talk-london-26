@@ -1,0 +1,32 @@
+\begin{frame}[t]{The loop needs a wall, a fork and a count}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=3.4cm,minimum height=1.2cm] (w) at (0,0) {\textbf{Wall}\\\footnotesize what a cell can reach, change and report};
+\node[candidate,text width=3.4cm,minimum height=1.2cm] (f) at (4.3,0) {\textbf{Fork}\\\footnotesize alternatives started from an existing state};
+\node[evidence,text width=3.4cm,minimum height=1.2cm] (c) at (8.6,0) {\textbf{Count}\\\footnotesize how many independent observations the forks provide};
+\draw[flow] (w)--(f);\draw[flow] (f)--(c);
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+\begin{columns}[T,onlytextwidth]
+\column{.6\textwidth}
+\textbf{We claim}\\[2pt]
+{\small
+\tagB\ a receipt contract in which reused evidence stops the merge and each result carries its lineage, a record of its origin\\[3pt]
+\tagM\ two experiments with the loop\\[3pt]
+\tagP\ H1 snapshot restore beats a warm cache by $>$10\,s\\[3pt]
+\tagP\ H2 siblings from one snapshot fail together more than strangers\par}
+\column{.36\textwidth}
+\textbf{We do not claim}
+{\small
+\begin{ticks}
+\item[\no] a new estimator
+\item[\no] a controlled speedup
+\item[\no] a ranking of platforms
+\item[\no] a loop that forks today
+\item[\no] physics or biology as evidence about forks
+\end{ticks}\par}
+\end{columns}
+\claim{\forktree\enspace $N$ forks $\to$ $N$ executions, but $N_{\rm eff}<N$ independent observations.\\ The runtime sees what forks share.}
+\note{[0:50] The loop and the seven places reduce to a wall, a fork and a count, which the runtime owes the loop. Then come two tests that could prove us wrong. We claim a built receipt contract, two measured runs, and two rejectable hypotheses. We do not claim an estimator, a speedup, a ranking, a loop that forks today, or physics and biology as evidence about forks. N forks give N executions, but fewer than N independent observations. The runtime sees what forks share.}
+\end{frame}

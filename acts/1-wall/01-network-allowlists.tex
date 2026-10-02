@@ -1,0 +1,26 @@
+\begin{frame}[t]{\surf{surface 1 of 7}\ev{\tagM}Allowlists fail when hosts redirect}
+\begin{columns}[T,onlytextwidth]
+\column{.55\textwidth}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[state,minimum width=3.4cm,minimum height=.7cm] (a) at (0,0) {astral.sh/uv/install.sh};
+\node[bad,minimum width=3.4cm,minimum height=.7cm] (b) at (0,-1.2) {releases.astral.sh};
+\node[bad,minimum width=3.4cm,minimum height=.7cm] (c) at (0,-2.4) {release-assets.githubusercontent.com};
+\node[bad,minimum width=3.4cm,minimum height=.7cm] (d) at (0,-3.6) {Curl returns 403 and uv fails.};
+\draw[flow] (a)--node[right]{301}(b);
+\draw[flow] (b)--node[right]{fallback}(c);
+\draw[denied] (c)--(d);
+\node[labeltext,anchor=west] at (1.85,-1.2) {not on the list};
+\node[labeltext,anchor=west] at (3.2,-2.4) {not on the list};
+\end{tikzpicture}
+\column{.41\textwidth}
+{\small
+\begin{ticks}
+\item The list lived in five places, two scripts, a checker, two docs.
+\item The fix added both hosts.
+\item The second host admits every release asset on GitHub.
+\end{ticks}\par}
+\end{columns}
+\claim{We propose fetching files by digest through a caching proxy.}
+\sources{Observed on our sandbox platform, 27 Sep 2026. Work order from our first experiment, Sep 2026.}
+\note{[0:40] Part one, the wall, starts with networking. The work order was a network bug seen on our sandbox platform that morning. The allowlist named astral dot sh, which redirects off the list. Curl got a 403 and uv never installed. The list lived in five drifted places, four copies too many. The fix admits every release asset on GitHub. We propose fetching by digest, the file's hash, through a caching proxy.}
+\end{frame}

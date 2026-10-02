@@ -1,0 +1,24 @@
+\begin{frame}[t]{\ev{\tagO\,\tagM}Latency and scale of agent runtimes}
+\vspace{0pt}
+{\footnotesize
+\begin{tabularx}{\textwidth}{@{}Y r L{4.2cm}@{}}
+\toprule
+Operation & Number & Source\\
+\midrule
+checkpoint an agent sandbox & 10.8 ms & DeltaBox, 2026\\
+resume a paused microVM & 49 ms, best case & Kimi K3, 2026\\
+boot a microVM to application code & $<$125 ms & Firecracker, NSDI'20\\
+fork an agent sandbox & 134--143 ms & Shepherd, 2026\\
+fork a Xen VM across hosts & 600--800 ms & SnowFlock, EuroSys'09\\
+restore, run, capture through a public API & 6.87 s p50 & Eliaz, arXiv:2607.09689, Table 2\\
+one work order in our experiments & 43 min, \$10.33 & our run, 27 Sep 2026\\
+a sandbox's life spent waiting on the model & up to 98\% & Kimi K3, 2026\\
+sandboxes across one model's training and evaluation & 51.2 million & Kimi K3, 2026\\
+\midrule
+\textbf{how correlated two forks' verdicts are} & \textbf{?} & \leavevmode{\color{Rust}\bfseries no surveyed system reports it}\\
+\bottomrule
+\end{tabularx}\par}
+\claim{No surveyed system reports the correlation between two forks' verdicts.}
+\sources{\href{https://arxiv.org/abs/2605.22781}{DeltaBox}, \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 report \S5.3.2}, Agache et al.\ NSDI'20, \href{https://arxiv.org/abs/2605.10913}{Shepherd}, Lagar-Cavilla et al.\ EuroSys'09, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, our experiments, Sep 2026 (time, cost). Survey, slide 22. After J.~Dean, ``Numbers everyone should know'' (LADIS 2009).}
+\note{[1:10] Jeff Dean also gave us numbers everyone should know. This table gives them for agent runtimes. Checkpointing a sandbox, saving its state, takes eleven milliseconds. Forking one takes about a hundred and forty milliseconds. SnowFlock forked Xen VMs across hosts in 2009 in under a second. Through a public API it takes seconds. One work order in our experiments takes forty-three minutes and costs ten dollars. One frontier model used fifty-one million sandboxes across training and evaluation. The row without a source is how correlated two forks' verdicts are. That value decides how much independent evidence the other rows buy. Our claim is that the runtime sees what forks share, so it is where this value can be measured.}
+\end{frame}

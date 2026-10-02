@@ -1,0 +1,27 @@
+\begin{frame}[t]{\ev{\tagO\,\tagP}Reset changes the learning problem}
+\lead{Where each attempt starts decides what the learner sees.}
+\vspace{-.25cm}
+\[
+ s_0\sim\mu\qquad\text{versus}\qquad s_0\sim\mu_{\rm checkpoint}
+\]
+\vspace{-.2cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=2.0cm,minimum height=.65cm] (a) at (0,0) {task start};
+\node[state,minimum width=2.0cm,minimum height=.65cm] (b) at (4,0) {reached state};
+\node[candidate,minimum width=2.3cm,minimum height=.6cm] (c) at (9,.45) {continuation A};
+\node[candidate,minimum width=2.3cm,minimum height=.6cm] (d) at (9,-.45) {continuation B};
+\draw[flow] (a)--node[above,font=\scriptsize]{expensive prefix}(b);\draw[flow] (b)--(c);\draw[flow] (b)--(d);
+\end{tikzpicture}\\[-2pt]
+{\scriptsize\color{Muted}Go-Explore: first return, then explore (Ecoffet et al., Nature 2021)}
+\end{center}
+{\small
+\begin{ticks}
+\item \tagP\ record each checkpoint's origin and the rule that selected it
+\item \tagP\ evaluate the final policy on the intended task distribution
+\end{ticks}\par}
+{\footnotesize\color{Muted}The same applies to forking after the plan, because each child's success depends on it (slide 47).\par}
+\claim{Each restore point selects the learner's training data.}
+\sources{\href{https://www.nature.com/articles/s41586-020-03157-9}{Ecoffet et al., First return, then explore, Nature (2021)}.}
+\note{[0:45] Once a fork is a reset, it changes what the learner sees. Starting at the task start samples one distribution. Restoring from a checkpoint samples another. Ecoffet and colleagues showed that returning to a state before exploring makes exploration productive. We propose recording where each checkpoint came from and why. We also propose evaluating on the intended task distribution. Each restore point selects the learner's training data.}
+\end{frame}

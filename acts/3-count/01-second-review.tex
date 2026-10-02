@@ -1,0 +1,24 @@
+% Analogy strips are inline Sand colorboxes.
+\begin{frame}[t]{\ev{\tagM\,\tagO\,\tagA}The second review was not independent}
+\lead{Agreeing strangers are likely right, but nine sharing one map are one opinion.}
+\vspace{-.15cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=7.2cm,minimum height=.56cm] (m) at (5.25,1.0) {one hosted model, one parent, one prompt family};
+\foreach \n/\x/\t in {a/0/repair 1,b/3.5/review 1,c/7.0/repair 2,d/10.5/review 2}{\node[candidate,minimum width=2.2cm,minimum height=.56cm] (\n) at (\x,0) {\t};\draw[message] (m)--(\n);}
+\draw[flow] (a)--(b);\draw[flow] (b)--node[above,font=\footnotesize]{verdict}(c);\draw[flow] (c)--(d);
+\end{tikzpicture}
+\end{center}
+{\small Repair 2 answered review 1's verdict, and the same model graded it, a reused holdout (Dwork et al.\ 2015).\par}
+\vspace{.04cm}
+\begin{columns}[T,onlytextwidth]
+\column{.485\textwidth}
+\fcolorbox{Line}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Choosing} among 9 patches\\needs a fresh test, as best-of-9 $\leq 1-{}$P(all fail).}}
+\column{.485\textwidth}
+\fcolorbox{Line}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\textbf{Confirming} one patch 9 times\\is capped by what the runs share.}}
+\end{columns}
+\par\vspace{.14cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad In our 2021 CRISPR-screen paper, each viability point had at least four technical replicates and each plot at least two independent experiments.}}\par
+\claim{Nine forks of one parent are technical replicates.}
+\sources{Our experiments, Sep 2026: the records of review 1, repair 2 and review 2. Dwork et al., The reusable holdout, Science 2015. \href{https://arxiv.org/abs/2606.27288}{Chen, arXiv:2606.27288 (2026 preprint)}. Gilad, Eliaz et al., Commun.\ Biol.\ 4:399 (2021), Methods.}
+\note{[1:05] Part three is the count. Nine agent copies say the fix works. Belief depends on how independent they were. Nine strangers giving the same directions are probably right. Nine people reading the same wrong map hold one opinion. Our reviews shared one map. Repair two answered review one's verdict, and the same model graded it. The two reviews give at best one look. Choosing among nine patches needs a fresh test. Best-of-nine cannot beat one minus the chance all nine fail together, so record each fork's pass or fail. Confirming one patch is capped by what the runs share. Biologists call those runs technical replicates. Nine forks of one parent are technical replicates.}
+\end{frame}
