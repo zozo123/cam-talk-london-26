@@ -1,0 +1,17 @@
+\begin{frame}[t]{AFL++ reports 10--20$\times$ speedups from persistent process reuse.\ev{\tagO}\surf{SECURITY}}
+\lead{Coverage-guided fuzzing mutates inputs, runs the target, and retains inputs that reach new behavior.}
+\begin{center}
+\begin{tikzpicture}[node distance=.5cm,every node/.style={align=center,font=\small}]
+\node[state,text width=2.8cm,minimum height=1.15cm](a){Initialize target\\Deferred forkserver};
+\node[candidate,text width=2.8cm,minimum height=1.15cm,right=of a](b){Child: run mutated input};
+\node[evidence,text width=2.8cm,minimum height=1.15cm,right=of b](c){Collect coverage/crash\\Reset target state};
+\draw[flow](a)--(b);\node[labeltext,font=\scriptsize] at (1.9,.9){fork once};
+\draw[flow](b)--(c);
+\draw[flow](c.south)--++(0,-.5)-|node[pos=.6,below,font=\scriptsize]{repeat $\sim$1,000 inputs, then restart child}(b.south);
+\end{tikzpicture}
+\end{center}
+\claim{Forking saves initialization; resetting correctly makes persistent reuse useful.}
+\sources{\href{https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md}{AFL++ persistent-mode documentation}: typical 10--20$\times$ speedup; about 1,000 loop iterations recommended.}
+\qadetail{The documented 10--20x gain is for persistent mode, which avoids a process fork for every input. It must not be attributed solely to the deferred forkserver. The forkserver can defer cloning until expensive initialization is complete; a persistent child then repeatedly executes the harness, resetting mutable state between inputs. The documentation recommends roughly 1,000 iterations before restarting to contain leaks and residual state. Coverage and stability checks can expose state-reset mistakes. A newly executed input is not automatically an independent observation, and a crash is not automatically an exploitable vulnerability. This is a published defensive testing workflow, not our benchmark or an instruction to attack a live service.}
+\note{[1:00] AFL++ is a direct systems example of useful process reuse. We initialize the target, fork a child, then feed it mutated inputs. Coverage decides which inputs deserve further exploration, while crashes become candidates for investigation. Persistent mode runs about a thousand inputs in the child before restarting it. Its documentation reports typical speedups of ten to twenty times. That gain depends on correctly resetting mutable state between inputs. The forkserver saves initialization; the persistent loop avoids repeating process creation. This is where state reuse has a concrete operation, a mechanism and a reported value.}
+\end{frame}

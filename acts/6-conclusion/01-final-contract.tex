@@ -1,12 +1,15 @@
-\begin{frame}{The runtime must preserve shared history and verify the result before publication.}
+\begin{frame}{Reuse the useful state, retain the evidence, and verify the exact result.}
 \lifecycle{0}
-\begin{ticks}
-\item \textbf{State:} exercised paths; useful live-state benefit remains open.
-\item \textbf{Evidence:} duplicate checks built; dependence calibration remains open.
-\item \textbf{Authority:} digest gate built; restore epoch fencing remains open.
-\end{ticks}
-\claim{H1 chooses the reuse path; H2 tests environmental dependence; the targeted test resolves coverage.}
-\sources{Integrated forked factory and authority protocol remain proposed.}
+\vspace{-.15cm}
+\begin{columns}[T,onlytextwidth]
+\column{.30\textwidth}
+{\footnotesize\textbf{State: AFL++}\\10--20$\times$ reported speedup\par}
+\column{.34\textwidth}
+{\footnotesize\textbf{Evidence: information pooling}\\MLE gap $0.177\to0.0083$\par}
+\column{.30\textwidth}
+{\footnotesize\textbf{Verification: CyberGym}\\56 crashes $\to$ 22 zero-days\par}
+\end{columns}
+\sources{AFL++ documentation; Eliaz, arXiv:2607.09689; CyberGym report. Integrated lifecycle is the design developed in this talk.}
 \qadetail{Two research questions: can an ancestry/fixtures/feedback manifest support a calibrated dependence model or a justified refusal of a precision claim? Can restore renew authority and reject stale publication across failure and uncertain external effects? The decisive live-state systems result needs useful reached state that survives capture, remains valid in private continuations, and is cheaper to restore than to reconstruct with a warm alternative. Code edits may require reload or restart. The built reducer handles common-target numerical measurements under declared assumptions; it does not choose or validate patches. Completed incidents do not measure fork-induced correlation. Keep the evidence ledger, exported bytes, exact-artifact verification and current authority distinct.}
-\note{[1:10] Return to the running failure in the opening. We want to reuse state that actually helps a continuation, preserve what each result used, and verify the artifact before publication. We have recorded factory incidents, exercised execution paths, and built duplicate and artifact-identity checks. The integrated forked workflow remains proposed. Two research problems remain: using shared-history metadata to justify uncertainty or refusal, and renewing authority safely after restore. The next decisive result is useful reached state that survives capture and beats an equivalent warm reconstruction. Fork supplies an execution option; the contract determines what the continuation established and what it may publish.}
+\note{[1:10] The story comes back to one useful reached state and several possible continuations. AFL plus plus shows a concrete performance gain from process reuse. Our synthetic reducer shows why the strength and identity of returned measurements matter. CyberGym shows the distance between a generated crash and a confirmed finding. Software repair adds the last boundary: the exact tested artifact must survive export, and current authority must approve its publication. These are separate results supporting one design. The next systems experiment compares faithful restore with equivalent warm reconstruction. The goal is useful continuations that return inspectable evidence and a verifiable artifact.}
 \end{frame}

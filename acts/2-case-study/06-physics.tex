@@ -1,0 +1,18 @@
+\begin{frame}[t]{26 bidirectional continuations joined the projected orbit branches.\ev{\tagM}\surf{PHYSICS}}
+\lead{With Ori Chamo: test whether projected branches of periodic three-body orbits connect in solution space.}
+\vspace{-.08cm}
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm,every node/.style={align=center,font=\small}]
+\node[state,text width=3.05cm,minimum height=1.0cm](a){\textbf{135,445 source orbits}\\Unequal-mass planar\\three-body catalog};
+\node[evidence,text width=3.05cm,minimum height=1.0cm,right=of a](b){\textbf{26 difficult links}\\Shooting correction\\Continue both ways};
+\node[evidence,text width=3.05cm,minimum height=1.0cm,right=of b](c){\textbf{26 successful links}\\Apparent branches connected\\in one sampled component};
+\draw[flow](a)--node[above,font=\scriptsize]{select}(b);
+\draw[flow](b)--node[above,font=\scriptsize]{verify}(c);
+\end{tikzpicture}
+\end{center}
+{\small \textbf{Tools:} Extra-Trees proposes warm starts; shooting restores periodicity; Floquet calculations assess stability.\par}
+\claim{Independent 60-digit checks confirmed representative stability transitions.}
+\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz, ai.viXra:2608.0069 (2026)}; \href{https://github.com/zozo123/threebody-closing-the-open}{Three-Body Orbit Atlas records}. Preliminary preprint.}
+\qadetail{Full source: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent branch splitting in unequal-mass three-body orbits, ai.viXra:2608.0069v1 (2026), https://ai.vixra.org/pdf/2608.0069v1.pdf; numerical records and code at https://github.com/zozo123/threebody-closing-the-open. The 135,445 entries originate in Li, Li and Liao's catalog. The 26 selected tests comprise five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair; all succeed bidirectionally in the manuscript. This establishes a connection within the sampled continuation component, not global completeness. Representative physical Floquet transitions have independent 60-digit Verner-integrator checks; this is not a claim that every catalog orbit was checked at that precision. Extra-Trees active learning is a candidate-proposal tool in the Atlas, not the proof behind the 26 connections. A separate coarse mpmath RK4 64/128-step cross-check was numerically unresolved and rejected as evidence. The work is preliminary and not peer reviewed; it supplies an evidence-admission example, not a sandbox-fork performance result.}
+\note{[1:00] With Ori Chamo, we asked whether two branches seen in a projected orbit diagram really belong to different solution components. We started from a catalog of one hundred thirty-five thousand unequal-mass orbits. We selected twenty-six difficult connections and used prediction followed by shooting correction, running continuation in both directions. All twenty-six connected within the sampled component. Floquet calculations then described stability, with representative transitions independently checked at sixty digits. Extra-Trees helps propose warm starts in the Atlas. The numerical checks determine which claims those proposals can support.}
+\end{frame}

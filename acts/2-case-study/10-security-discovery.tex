@@ -1,0 +1,18 @@
+\begin{frame}[t]{CyberGym's GPT-5 campaign turned 56 crashes into 22 confirmed zero-days.\ev{\tagO}\surf{SECURITY}}
+\lead{OpenHands + GPT-5 explored current code from 431 OSS-Fuzz projects: 1,748 executables.}
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm,every node/.style={align=center,font=\small}]
+\node[state,text width=2.65cm,minimum height=1.15cm](a){Inspect source\\Propose input};
+\node[candidate,text width=2.65cm,minimum height=1.15cm,right=of a](b){Execute with\\sanitizers};
+\node[evidence,text width=2.65cm,minimum height=1.15cm,right=of b](c){56 crashes\\Reproduce + deduplicate};
+\node[evidence,text width=2.25cm,minimum height=1.15cm,right=of c](d){22 confirmed\\zero-day vulnerabilities};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\end{tikzpicture}
+\end{center}
+\vspace{.15cm}
+{\small \textbf{Historical benchmark:} 1,507 vulnerabilities in 188 projects; the input crashes the vulnerable version and does not crash the patched version.\par}
+\claim{An executed crash is a lead; validation establishes the security finding.}
+\sources{\href{https://rdi.berkeley.edu/blog/cybergym/}{Berkeley RDI, CyberGym}; \href{https://www.cybergym.io/cybergym/}{CyberGym report}. Latest-code campaign and historical benchmark are separate experiments.}
+\qadetail{The latest-code campaign used OpenHands with GPT-5 on 431 latest OSS-Fuzz projects and 1,748 executables. It reported 56 crashes and 22 confirmed previously unknown vulnerabilities. This is separate from CyberGym's historical 1,507-vulnerability benchmark across 188 projects, whose differential success criterion is that a proof of concept triggers the vulnerable version but not the patched version. Do not imply all 56 crashes were distinct vulnerabilities, or that every discovered zero-day already has a public patch. The separate GPT-4.1 campaign had different counts and overlap; counts cannot be added. CyberGym demonstrates candidate execution and independent finding validation. The reported discovery count is not evidence of gains from sandbox forking or of our own security campaign.}
+\note{[1:00] CyberGym shows why exploration needs a second decision after execution. In its latest-code campaign, OpenHands with GPT-five explored 431 OSS-Fuzz projects and 1,748 executables. It produced fifty-six crashes, which validation reduced to twenty-two confirmed zero-day vulnerabilities. Separately, its historical benchmark covers 1,507 known vulnerabilities and tests that a reproduction triggers the vulnerable version but not the patched version. Across these cases, candidates become accepted results through domain-specific checks. We can now choose what starting state an execution runtime should preserve.}
+\end{frame}

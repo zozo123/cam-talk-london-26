@@ -1,0 +1,28 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}Delivery refused three times, then cleanup erased an approved patch.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[evidence,text width=2.2cm,minimum height=.8cm] (r) at (0,0) {Review approves};
+\node[bad,text width=2.4cm,minimum height=.8cm] (f) at (3.3,0) {Unreviewed archive};
+\node[bad,text width=2.0cm,minimum height=.8cm] (d) at (6.65,0) {Delivery refuses $3\times$};
+\node[bad,text width=2.15cm,minimum height=.8cm] (t) at (9.9,0) {Teardown loses patch};
+\draw[flow] (r)--(f);\draw[flow] (f)--(d);\draw[flow] (d)--(t);
+\end{tikzpicture}
+\end{center}
+{\small Separate work order: \textbf{about 26 min, \$3.43, no delivered PR}.\par}
+\vspace{.15cm}
+{\fontsize{11}{13.5}\selectfont
+\begin{tabularx}{\textwidth}{@{}L{3.0cm}Y@{}}
+\toprule
+\textbf{Recorded object} & \textbf{Actual limitation}\\
+\midrule
+CI success & Evaluation skipped without a key; job passed in about 3\,s.\\
+Human approval & Harness answered; record named a human actor.\\
+Adapter digest & Shim source stayed outside Git and was not recoverable.\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.12cm}
+{\small \tagP\ Export the patch, input identity, and typed receipts before teardown.\par}
+\sources{SELFHOST-3 delivery records; SELFHOST-2 adapter/approval records; CI, 28 September 2026.}
+\qadetail{SELFHOST-3 recorded about 26 minutes wall time and 853.8 s of stage time, \$3.43, 1,981 reported cases with no failures, and approved review. Delivery refused three times because files lay outside the reviewed commit stream. The unexpected file was a review-diff archive mirrored into the workspace. Teardown removed the patch, and no pull request resulted. The supplied deck does not specify the original requested change; this is a delivery/recovery incident, not a full second task reconstruction. Export before cleanup is proposed, not merged. Preserve or snapshot state during long human waits without granting publication authority. Related recovery mechanisms: Planarian, Crab, DSec. The evals-islo Actions job passed in about three seconds while its real evaluation step was skipped because a key was absent. Approvals recorded mode human and actor admin although the harness answered. A local adapter shim outside Git had a recorded digest but no recoverable source in the repository. Another setup attempt failed while parsing stdout contaminated by status text. Typed states are executed, skipped, and failed; actors are human, harness, and service. Authenticity alone does not establish semantic accuracy. Audit inspects records; replay requires retrievable adapter bytes and recorded external responses; fresh hosted-model calls create a fresh run. Related: PASS, CamFlow, in-toto, rr, DSec, and ENCODE pipelines. Before the first repair, we could identify the input tree, dependencies, and failed-test receipt for proposed alternative continuations. No actual fork occurred. The case does not establish that useful process memory must survive, so worktrees or warm environments remain alternatives. The hypothetical live-application failure is a future workload, not factory evidence. New scope needs authorization and a behavioral obligation; missing coverage needs a targeted artifact-bound test; inaccurate receipts need typed event semantics; recovery needs export before teardown; replay needs retrievable inputs. For proposed branching, declare the captured surface, sharing policy, external observations, child identity, and authority. The numerical reducer does not detect the missing test by itself.}
+\note{[1:05] A second work order received an approved review, but delivery found our harness's own review archive outside the reviewed files. It refused three times, and teardown discarded the patch. The run took about twenty-six minutes, cost three dollars forty-three, and produced no pull request. We also found CI success with evaluation skipped, harness approval labeled human, and an adapter digest without recoverable source. These are distinct failures of recovery, record meaning, and input preservation. We propose exporting candidates and typed receipts before cleanup. The broader case set now asks how other workflows identify an observation and admit a claim.}
+\end{frame}

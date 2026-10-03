@@ -1,6 +1,6 @@
 # References and source record
 
-The canonical seminar has **45 main frames in six acts, no appendix and no overlays**. This bibliography is a repository reference, not additional deck pages. Earlier end-matter files remain in the tree as historical sources and are not part of the canonical build.
+The canonical seminar has **41 main frames in six acts, no appendix and no overlays**. This bibliography is a repository reference, not additional deck pages. Earlier end-matter files remain in the tree as historical sources and are not part of the canonical build.
 
 ## Current primary sources
 
@@ -8,6 +8,15 @@ The canonical seminar has **45 main frames in six acts, no appendix and no overl
 - [SELFHOST-2 public run records](https://github.com/zozo123/ariflow-swfactory/tree/main/docs/factory/SELFHOST-2): intent, plan, metrics, work graph, repair and review outputs. SELFHOST-3 raw records are unpublished.
 - [Experiment protocol](PREREGISTRATION.md), preserved unchanged. Inference changes discussed in [CLAIM-FENCE.md](CLAIM-FENCE.md) and [QA-BANK.md](QA-BANK.md) are **proposed amendments before collection**, not changes already made to that protocol.
 - Ori Chamo and Yossi Eliaz. [Continuation Geometry Resolves Apparent Branch Splitting in Unequal-Mass Three-Body Orbits](https://ai.vixra.org/pdf/2608.0069v1.pdf), ai.viXra:2608.0069 (2026), preliminary and not peer reviewed. [Three-Body Atlas code and records](https://github.com/zozo123/threebody-closing-the-open).
+
+## Primary sources for the cross-domain cases
+
+- Gilad, Eliaz et al. [A genome-scale CRISPR Cas9 dropout screen identifies synthetically lethal targets in SRC-3 inhibited cancer cells](https://doi.org/10.1038/s42003-021-01929-1). Communications Biology 4:399 (2021), Figs. 2–4 and Methods. [Full article](https://pmc.ncbi.nlm.nih.gov/articles/PMC7994904/).
+- Schultz and Coelingh Bennink. [Target expression is a relevant factor in synthetic lethal screens](https://doi.org/10.1038/s42003-022-03746-6). Communications Biology 5:835 (2022), Matters Arising on the screen above.
+- Karpathy. [autoresearch](https://github.com/karpathy/autoresearch), `README.md` and `program.md` (2026). [Session report, discussion #43](https://github.com/karpathy/autoresearch/discussions/43), 8 March 2026; an automated report on Karpathy's behalf, not an independently replicated study.
+- Novikov et al. [AlphaEvolve: A coding agent for scientific and algorithmic discovery](https://arxiv.org/abs/2506.13131) (2025), technical report; [original report PDF](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/AlphaEvolve.pdf).
+- AFL++ project. [LLVM persistent-mode documentation](https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md), §§1, 3–4. Describes state-reset conditions, typical throughput gains and loop-count guidance.
+- [CyberGym: Evaluating AI Agents' Cybersecurity Capabilities with Real-World Vulnerabilities at Scale](https://arxiv.org/abs/2506.02548). [ICLR 2026 conference paper](https://openreview.net/pdf/eea34d6015b8e77e38bafe756ab3d4924402b055.pdf), [Berkeley RDI campaign report](https://rdi.berkeley.edu/blog/cybergym/) and [project report](https://www.cybergym.io/cybergym/). Historical benchmark and latest-code vulnerability-discovery campaign have distinct populations.
 
 ## Systems
 

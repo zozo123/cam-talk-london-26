@@ -1,4 +1,4 @@
-\begin{frame}{The API traces measured creation and restore--run--capture separately.\ev{\tagM}}
+\begin{frame}{islo completed 255/256 restore--run--capture calls, median 6.87 s.\ev{\tagM}}
 \vspace{.1cm}
 {\small
 \begin{tabularx}{\textwidth}{@{}Y r r r@{}}
@@ -13,12 +13,11 @@ islo: restore, run, capture & 255/256 & 6.87 s & 9.04 s\\
 \vspace{.2cm}
 {\small
 \begin{ticks}
-\item Restore path: a 141 MB named snapshot at concurrency 12
-\item Whether the snapshot captures memory is unverified, so the third row is restore fan-out
-\item Teardown is excluded; operations and workloads differ.
+\item Restore path: a 141 MB named snapshot; concurrency 12.
+\item Creation paths: requested concurrency 8.
+\item Each row names its timing endpoint; teardown is excluded.
 \end{ticks}\par}
-\claim{The table establishes exercised API paths and their latencies.}
 \sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2.}
-\qadetail{Daytona and Tensorlake requested concurrency eight. islo used a named 141 MB snapshot at concurrency twelve. Teardown is excluded from per-operation percentiles. The islo result is a client API round trip including restore, command execution and capture; memory preservation is unverified. These are exercised paths, not isolated mechanism latencies or a provider ranking.}
-\note{[0:55] The traces show what actually executed. Daytona and Tensorlake created sandboxes, at requested concurrency eight. The islo path restored a named snapshot, ran a command and captured at concurrency twelve. It completed two hundred fifty-five of two hundred fifty-six operations, with median six point eight seven seconds. Per-operation teardown is outside the reported percentiles, and memory capture remains unverified. Different operations explain why this is not a ranking. The controlled experiment must isolate whether reuse beats a warm alternative.}
+\qadetail{Daytona and Tensorlake requested concurrency eight. islo used a named 141 MB snapshot at concurrency twelve. Teardown is excluded from per-operation percentiles. The islo result is a client API round trip including restore, command execution and capture; memory preservation is unverified, so the supported description is restore fan-out. These are exercised paths, not isolated mechanism latencies or a provider ranking. Operations, workloads, concurrency and timing endpoints differ. The controlled reuse experiment compares equivalent usable states against a warm baseline.}
+\note{[0:55] The islo trace completed two hundred fifty-five of two hundred fifty-six restore, run and capture calls. Its median was six point eight seven seconds, and its ninety-fifth percentile was nine point zero four seconds. The input was a named hundred forty-one megabyte snapshot, with concurrency twelve. Daytona and Tensorlake exercised creation at requested concurrency eight; their endpoints are shown separately. Teardown is outside these percentiles. Memory preservation still needs the nonce probe. These traces establish concrete API paths and costs; the next experiment asks whether that reuse path beats a faithful warm alternative.}
 \end{frame}

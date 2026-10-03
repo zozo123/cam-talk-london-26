@@ -47,13 +47,15 @@ jobs:
 
           pages = PdfReader("talk.pdf").pages
           full = len(pages)
-          print(f"Cambridge deck: {full} pages (45 story slides, no appendix)")
-          if full != 45:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 45 pages; got {full}")
+          print(f"Cambridge deck: {full} pages (41 story slides, no appendix)")
+          if full != 41:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 41 pages; got {full}")
           # Guard against content accidentally consumed as a Beamer subtitle.
-          anchors = {2: ["VM_fork", "DSec"], 9: ["3:41", "20:01", "18:55"],
-                     14: ["CI success", "Human approval", "Adapter digest"],
-                     26: ["Ori Chamo", "135,445"]}
+          anchors = {2: ["1,800", "56%"], 5: ["3:41", "20:01", "18:55"],
+                     8: ["19,050", "120,000"], 9: ["Ori Chamo", "135,445"],
+                     10: ["126", "0.969686"], 11: ["0.7%", "23%"],
+                     12: ["AFL++", "1,000"], 13: ["1,748", "22"],
+                     20: ["255/256", "6.87"], 33: ["0.0083", "0.177"]}
           for page, terms in anchors.items():
               rendered = pages[page].extract_text()
               for term in terms:

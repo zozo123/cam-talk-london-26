@@ -1,4 +1,5 @@
-\begin{frame}{Restore fidelity needs checks of the state the API claims to preserve.\ev{\tagP}}
+\begin{frame}{A RAM-only 128-bit nonce tests memory restoration in three children.\ev{\tagP}}
+\tagline{Experiment design: Gate 0, followed by declared semantic checks.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
 \node[state,text width=2.9cm,minimum height=.9cm] (p) at (0,0) {process holds a 128-bit nonce in RAM only};
@@ -21,9 +22,8 @@ declared semantic checks match & fidelity for those checked properties only\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.02cm}
-{\footnotesize Passing is necessary for a memory claim. Full fidelity needs more. Compare declared outputs, ignoring timestamps. Worktrees, CRIU, VM snapshots and replay logs restore different state.\par}
-\claim{Gate 0 is preregistered and unrun, so we say restore fan-out.}
+\claim{A child passes the memory probe by retaining the live process and nonce.}
 \sources{Our preregistered protocol, Gate 0. \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2. CRIU and Firecracker snapshot documentation.}
-\qadetail{The RAM nonce is a necessary probe, not a complete fidelity proof. Check private writes, process identity, clocks, random state and sockets as relevant. A snapshot name does not establish memory semantics. Hosted-model weights, KV state and sampling are outside the guest. A failed nonce probe requires reporting the actual filesystem/restore semantics. A successful probe still requires useful captured state and declared semantic tests.}
-\note{[0:55] A process keeps a random nonce only in RAM. We capture, restore three children, and ask whether the process is alive with the same nonce. That is a necessary probe of the memory path, not full fidelity certification. We then compare the declared deterministic behavior between direct and restored execution. Private writes, clocks, identities, randomness and sockets need checks appropriate to the workload. The probe is preregistered and unrun. Our current measurements therefore establish restore fan-out; they do not establish a memory fork.}
+\qadetail{Gate 0 is preregistered and unrun; the diagram is an experiment design, not a result. Current API measurements establish restore fan-out without verified memory semantics. The RAM nonce is a necessary probe, not a complete fidelity proof. Compare declared deterministic outputs between direct and restored execution, ignoring timestamps only when the protocol declares them irrelevant. Check private writes, process identity, clocks, random state and sockets as relevant. Worktrees, CRIU, VM snapshots and replay logs restore different state. A snapshot name does not establish memory semantics. Hosted-model weights, KV state and sampling are outside the guest. A failed nonce probe requires reporting the actual filesystem/restore semantics. A successful probe still requires useful captured state and declared semantic tests.}
+\note{[0:55] Here is the restoration experiment. A process generates a hundred twenty-eight bit nonce and holds it only in RAM. Capture that state, restore three children, and check that each child has the live process and the same nonce. Files surviving establishes a filesystem path. The process and nonce surviving adds evidence for the memory path. Then compare the declared deterministic behavior against direct execution, with workload-specific checks for writes, clocks, randomness and sockets. Gate zero is preregistered and awaits execution. It gives us a concrete way to label the state our API actually preserves.}
 \end{frame}

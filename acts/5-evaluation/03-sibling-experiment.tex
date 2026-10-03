@@ -1,4 +1,4 @@
-\begin{frame}{The proposed sibling experiment measures environmental co-failure.\ev{\tagP}}
+\begin{frame}{12 snapshot families compare sibling and separately prepared co-failures.\ev{\tagP}}
 \begin{columns}[T]
 \begin{column}{.49\textwidth}
 \lead{Shared parent}
@@ -18,7 +18,7 @@
 Record binary outcome and failure class.
 \end{column}\end{columns}
 \claim{Identify a parent-state feature that capture preserves and the race test consumes.}
-\sources{Unrun H2 in PREREGISTRATION.md; measures environmental outcomes, not hosted-model sampling.}
+\sources{Experiment design: H2 in PREREGISTRATION.md; environmental failure outcomes.}
 \qadetail{Both arms restore; strangers can still share host, scheduling, fixtures or other causes. The planned race test is tests/test_dispatch_strand.py::test_two_replicas_pumping_the_same_outbox_dispatch_once. Its fresh backend construction may discard relevant restored state, so the causal treatment must be verified before collection. Guest RNG state does not control the hosted model's RNG. The overlapping family assignments and repeated rounds invalidate an automatic independent-pair analysis. This experiment does not establish judge correlation, reducer calibration, accepted-patch quality or a general effect of forked agents.}
 \note{[1:10] The second experiment asks whether captured ancestry changes environmental failure patterns. Twelve independently prepared families each supply three siblings. We compare them with three restores from other families, matched by host and start slot, over at least three hundred race-test rounds. We record failure classes as well as binary outcomes. Before collecting data, we must identify a varying parent-state feature that is preserved and actually consumed. If the test rebuilds the relevant state, it removes the treatment. This is an environmental experiment; the hosted model remains outside the guest snapshot.}
 \end{frame}

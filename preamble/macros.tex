@@ -11,12 +11,12 @@
 \newcommand{\evtag}[2]{\tikz[baseline=(x.base)]\node[draw=#1,text=#1,line width=.6pt,rounded corners=1.5pt,inner xsep=2.4pt,inner ysep=1.3pt,font=\fontsize{7.6}{8.4}\selectfont\bfseries](x){#2};}
 \newcommand{\tagM}{\evtag{Teal}{MEASURED}}
 \newcommand{\tagB}{\evtag{Ink}{BUILT}}
-\newcommand{\tagP}{\evtag{Gold}{PROPOSED}}
+\newcommand{\tagP}{\evtag{Gold}{DESIGN}}
 \newcommand{\tagO}{\evtag{Muted}{PUBLISHED}}
-\newcommand{\tagA}{\evtag{Gold!55!Muted}{ANALOGY}}
+\newcommand{\tagA}{\evtag{Gold!55!Muted}{ILLUSTRATION}}
 \newif\ifbackup
 \def\endlabel{REFERENCES}\newcommand{\setendlabel}[1]{\gdef\endlabel{#1}}
-\newcommand{\actstrip}{\ifbackup{\color{Teal}\bfseries\endlabel}\else\actitem{1}{INTRODUCTION}\quad\actitem{2}{CASE STUDY}\quad\actitem{3}{DESIGN}\quad\actitem{4}{ANALYSIS}\quad\actitem{5}{EVALUATION}\quad\actitem{6}{CONCLUSION}\fi}
+\newcommand{\actstrip}{\ifbackup{\color{Teal}\bfseries\endlabel}\else\actitem{1}{INTRODUCTION}\quad\actitem{2}{CASES}\quad\actitem{3}{DESIGN}\quad\actitem{4}{ANALYSIS}\quad\actitem{5}{EVALUATION}\quad\actitem{6}{CONCLUSION}\fi}
 \setbeamertemplate{frametitle}{\gdef\currentev{}\gdef\currentsurf{}\sbox0{\insertframetitle}\vspace{.1cm}{\fontsize{8}{9.5}\selectfont\actstrip\ifx\currentsurf\empty\else\quad{\color{Gold}\bfseries\MakeUppercase{\currentsurf}}\fi\hfill\currentev\par}\vspace{.08cm}\insertframetitle\par\vspace{.15cm}}
 \setbeamertemplate{footline}{\hspace{.8cm}{\fontsize{7}{8}\selectfont\color{Muted}Yossi Eliaz\quad Cambridge SRG\quad 15 October 2026}\hfill{\fontsize{8}{9}\selectfont\color{Muted}\ifbackup\else\insertframenumber\,/\,\inserttotalframenumber\fi}\hspace{.8cm}\vspace{.17cm}}
 \setlength{\tabcolsep}{5pt}

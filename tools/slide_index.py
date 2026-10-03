@@ -6,6 +6,7 @@ when slides are added, removed or moved. Cross-references written as "slide N" m
 """
 import re
 from pathlib import Path
+from presenter_guide import plain
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -33,12 +34,11 @@ def main():
             if not m:
                 continue
             src = (ROOT / (m.group(1) + ".tex")).read_text()
-            title = ""
+            title = "Forkable Sandboxes"
             t = re.search(r"\\begin\{frame\}(?:\[[^\]]*\])?\{", src)
             if t:
                 title = src[t.end():balanced(src, t.end() - 1)]
-                title = re.sub(r"\\(?:ev|surf)\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", "", title)
-                title = re.sub(r"\\[a-zA-Z]+\*?|[{}]", "", title).replace("\\%", "%").strip()
+                title = plain(title)
             cue = re.search(r"\\note\{\[(\d+):(\d+)\]", src)
             if cue:
                 n += 1

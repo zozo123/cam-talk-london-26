@@ -1,0 +1,21 @@
+\begin{frame}[t]{AlphaEvolve's scheduler recovered 0.7\% of Google's worldwide compute.\ev{\tagO}\surf{AI RESEARCH}}
+\lead{Gemini proposes programs; automated evaluators determine which programs enter the population.}
+\begin{center}
+\begin{tikzpicture}[node distance=.45cm,every node/.style={align=center,font=\small}]
+\node[state,text width=2.7cm,minimum height=1cm](a){Program database};
+\node[candidate,text width=2.7cm,minimum height=1cm,right=of a](b){Gemini Flash + Pro\\propose edits};
+\node[evidence,text width=2.7cm,minimum height=1cm,right=of b](c){Check validity\\Measure speed};
+\node[evidence,text width=2cm,minimum height=1cm,right=of c](d){Evolutionary\\selection};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\draw[flow](d.south)--++(0,-.45)-|(a.south);
+\end{tikzpicture}
+\end{center}
+\begin{columns}[T,onlytextwidth]
+\column{.47\textwidth}\textbf{Borg scheduling heuristic}\\0.7\% average worldwide compute recovered.
+\column{.49\textwidth}\textbf{Gemini training kernel}\\23\% kernel speedup $\to$ 1\% shorter training.
+\end{columns}
+\claim{Keep both the local gain and the end-to-end gain in the result record.}
+\sources{\href{https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/}{Google DeepMind, AlphaEvolve (2025)}; reported production applications.}
+\qadetail{DeepMind reports that the discovered Borg scheduling heuristic recovered an average 0.7\% of Google's worldwide compute resources, used in production for over a year at announcement. A matrix-multiplication kernel achieved a 23\% kernel speedup and reduced Gemini training time by 1\%. These are distinct workloads and endpoints, not additive gains. Gemini Flash supplies breadth and Gemini Pro supplies depth; algorithm proposals undergo automated validity and performance evaluation and evolutionary selection. The reported gains belong to the discovered algorithms. They are not measurements of a sandbox fork or of our implementation. Candidate execution can be mapped onto continuations, but that mapping is a design connection.}
+\note{[1:00] AlphaEvolve makes the search population explicit. A database supplies promising programs; Gemini Flash and Pro propose edits; automated evaluators check validity and performance; evolutionary selection feeds successful programs back. DeepMind reports a scheduling heuristic that recovered point seven percent of worldwide Google compute. On a separate Gemini kernel, a twenty-three percent local speedup became a one percent training-time reduction. That distinction matters for our talk: the result should record the application-level benefit as well as the fast inner operation. The population grows through evaluated programs, not through proposals alone.}
+\end{frame}

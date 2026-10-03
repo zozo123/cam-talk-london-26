@@ -1,0 +1,19 @@
+\begin{frame}[t]{Six of eight drug combinations improved killing in MCF-7 cells.\ev{\tagO}\surf{GENOMICS}}
+\lead{Goal: find gene perturbations that increase sensitivity to the SRC-3 inhibitor SI-12.}
+\vspace{-.08cm}
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm,every node/.style={align=center,font=\small}]
+\node[state,text width=3.05cm,minimum height=1.0cm](a){\textbf{Genome-scale input}\\GeCKOv2: $>120{,}000$ guides\\19,050 genes};
+\node[candidate,text width=3.05cm,minimum height=1.0cm,right=of a](b){\textbf{Candidate selection}\\Terrace + DRACO\\$\sim$100 ranked genes};
+\node[evidence,text width=3.05cm,minimum height=1.0cm,right=of b](c){\textbf{Functional assay}\\siRNA + drug combinations\\MTS viability};
+\draw[flow](a)--node[above,font=\scriptsize]{dropout}(b);
+\draw[flow](b)--node[above,font=\scriptsize]{test}(c);
+\end{tikzpicture}
+\end{center}
+\vspace{.08cm}
+{\small \textbf{Replication unit:} each viability point had $\geq4$ technical replicates; each plot represented $\geq2$ independent experiments.\par}
+\claim{Rank candidates, then measure effects in a separate assay.}
+\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al., Communications Biology 4:399 (2021)}, Figs.~2--4.}
+\qadetail{Full source: Yosi Gilad, Yossi Eliaz, Yang Yu, Adam M. Dean, San Jung Han, Li Qin, Bert W. O'Malley and David M. Lonard, A genome-scale CRISPR Cas9 dropout screen identifies synthetically lethal targets in SRC-3 inhibited cancer cells, Communications Biology 4, 399 (2021), DOI 10.1038/s42003-021-01929-1. The six-of-eight result is the paper's MCF-7 in-vitro drug-combination finding (efficacy level at least 3), not a clinical outcome. Three biological replicate arms per treatment in the pooled screen are distinct from the downstream viability assay's technical replicates and independent experiments. Schultz and Coelingh Bennink, Target expression is a relevant factor in synthetic lethal screens, Communications Biology 5, 835 (2022), DOI 10.1038/s42003-022-03746-6, questioned several hits' expression and recommended transcriptome checks. Replication alone does not establish on-target biological validity. Computational continuations of analysis variants would be a proposed design; this study reports no sandbox-fork experiment.}
+\note{[1:00] In genomics, our goal was to find gene perturbations that make breast cancer cells more sensitive to SI-12. A genome-scale CRISPR library fed two ranking methods, which shortlisted about one hundred candidates. Separate assays then tested perturbations and drug combinations. Six of eight tested combinations improved killing in MCF-7 cells. The viability points had technical repeats, and the experiments were repeated independently. Those units answer different questions. The connection to our runtime is the separation between proposing an attractive candidate and collecting evidence about its actual effect.}
+\end{frame}

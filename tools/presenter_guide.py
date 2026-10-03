@@ -27,6 +27,9 @@ def plain(text):
             arg=argument(text,m.end())
             text=text[:m.start()]+text[m.end()+len(arg)+1:]
     text=text.replace('\\&','&').replace('\\%','%').replace('\\_','_')
+    for tex, glyph in {'times':'×','to':'→','rho':'ρ','sigma':'σ','pm':'±','geq':'≥','leq':'≤'}.items():
+        text=re.sub(r'\\'+tex+r'\b',lambda _:glyph,text)
+    text=text.replace('---','—').replace('--','–')
     text=text.replace('\\\\',' ').replace('~',' ').replace('``','"').replace("''",'"')
     text=re.sub(r'\\href\{[^}]*\}\{([^}]*)\}',r'\1',text)
     text=re.sub(r'\\[a-zA-Z]+\*?(?:\[[^]]*\])?', '', text)
@@ -65,7 +68,7 @@ def main():
     (ROOT/'PRESENTER-GUIDE.md').write_text('\n'.join(out))
     print(f'{len(rows)} slides; {total//60}:{total%60:02d}; {words} words; peak {max(60*len(s.split())/d for t,d,s,q in rows):.0f} wpm')
     if '--check' in sys.argv:
-        if len(rows)!=45 or not all(x[3] for x in rows) or fast or not TOTAL_WINDOW_S[0]<=total<=TOTAL_WINDOW_S[1]:
+        if len(rows)!=41 or not all(x[3] for x in rows) or fast or not TOTAL_WINDOW_S[0]<=total<=TOTAL_WINDOW_S[1]:
             raise SystemExit(f'DECK CHECK FAILED: slides={len(rows)}, fast={fast}, duration={total}')
         if re.search(r'\\(?:pause|only|uncover|onslide|visible)\b|\\begin\{frame\}\[[^]]*allowframebreaks',tex):
             raise SystemExit('Canonical deck must have no overlay/build pages')

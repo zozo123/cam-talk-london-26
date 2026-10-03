@@ -1,0 +1,21 @@
+\begin{frame}[t]{\ev{\tagM\,\tagB}We recorded two factory runs and implemented evidence checks.}
+\vspace{0pt}
+{\fontsize{13}{16}\selectfont
+\begin{tabularx}{\textwidth}{@{}Y r r@{}}
+\toprule
+\textbf{Factory record} & \textbf{Elapsed time} & \textbf{Model cost}\\
+\midrule
+Allowlist update and dispatch repair & 43:44 & \$10.33\\
+Separate delivery/recovery incident & $\sim$26 min & \$3.43\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.3cm}
+\begin{ticks}
+\item Repeated evidence IDs stop the numerical merge.
+\item Lineage travels with each numerical result.
+\item The factory gate binds approval to an artifact digest.
+\end{ticks}
+\sources{SELFHOST-2/3 records; Eliaz, arXiv:2607.09689.}
+\qadetail{SELFHOST-2 and SELFHOST-3 ran through Airflow's Docker Sandbox backend with hosted model access through Databricks. Neither forked; the workgraph recorded serial fallback. The numerical reducer rejects repeated declared evidence IDs and carries lineage. It does not consume lineage to calibrate uncertainty or abstain on unknown dependence. A separate artifact-digest gate was exercised in the factory. Snapshot API measurements are restore/run/capture workflows with unverified memory semantics. The integrated fork store, external evaluator, and restore authority protocol remain proposed. The two factory runs took 43:44 wall time and approximately 26 min, with reported model costs \$10.33 and \$3.43. The first has 42:38 of recorded stages; the second has 853.8 s. The numerical reducer and factory digest gate are separate implemented components. They do not constitute an integrated forked factory or an obligation-aware evaluator.}
+\note{[1:00] We have two complete factory records. The allowlist update took forty-three minutes and forty-four seconds and cost ten dollars thirty-three. A separate delivery incident took about twenty-six minutes and cost three dollars forty-three. We also implemented duplicate-evidence rejection and lineage transport in a numerical reducer. The factory's separate gate binds approval to an artifact digest. These pieces let us trace a candidate and its supporting observations. We will follow the first work order through its task, failing test, repair, review, and publication checks.}
+\end{frame}

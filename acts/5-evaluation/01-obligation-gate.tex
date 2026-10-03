@@ -1,4 +1,4 @@
-\begin{frame}{The proposed gate withholds publication until the missing test passes.\ev{\tagP}}
+\begin{frame}{The publication gate requires the adoption test on the exact candidate.\ev{\tagP}}
 \lead{The new same-owner adoption path is a concrete acceptance obligation.}
 \begin{center}\begin{tikzpicture}[node distance=.45cm, every node/.style={align=center,font=\small}]
 \node[candidate,text width=2.3cm] (a) {Candidate +\\scope change};
@@ -11,7 +11,7 @@
 \end{tikzpicture}\end{center}
 \claim{Selection or composition must precede verification of the artifact that will be published.}
 \tagline{Export the patch and receipts on every exit, including refusal.}
-\sources{Proposed policy motivated by SELFHOST-2 and SELFHOST-3; not enforced by the numerical reducer.}
+\sources{Gate design motivated by SELFHOST-2 and SELFHOST-3.}
 \qadetail{Scope authorization, an executed receipt, behavioral coverage, exact-composition verification, artifact-bound approval and current controller authority are separate obligations. A valid digest proves identity, not correctness. A passing regression path supports that behavior; it does not establish held-out accuracy or ensemble confidence. The gate is proposed; the built digest gate and numerical reducer do not supply all these checks. Durable export prevents the second incident's teardown loss.}
 \note{[1:10] We can turn the case into a precise acceptance policy. The candidate added a same-owner adoption path. Before publication, we freeze that candidate, deliberately force the path, and assert that one dispatch occurs. The receipt must name the artifact we actually tested. If we combine candidates, we test that exact combination again. The controller then checks current authority and approval for that digest. A refusal retains the patch and its receipts. This resolves a concrete missing obligation; it does not yet establish how well an ensemble generalizes.}
 \end{frame}

@@ -1,6 +1,14 @@
 # Q&A: Forkable Sandboxes
 
-For the **45-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
+For the **41-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
+
+## What value do the opening numbers show?
+
+Dean and Barroso report a 1,000-key BigTable read with a backup after 10 ms: p99.9 latency fell from 1,800 ms to 74 ms with 2% extra requests. Brown et al. report SWE-bench Lite coverage rising from 15.9% for one sample to 56% for 250 DeepSeek-Coder-V2-Instruct samples. These are different opportunities: escaping a slow execution and generating a correct candidate. Coverage means at least one candidate solves the issue; selecting it still requires a reliable check. Setup details and verifier limits belong here and in slide comments rather than repeated opening qualifications.
+
+## Which existing runtimes support state reuse?
+
+SnowFlock exposes VM_fork(N) for remote VM clones; CRIU checkpoints supported process state; Firecracker snapshots microVM state. Kimi K3 AgentENV describes pause, fork for reached-state reward judging, and recovery; its reported scale is 51,219,741 sandboxes across 1,505,678 images. It forks the sandbox for judging, rather than the judge. DeepSeek DSec retains a sandbox when the training task is preempted and replays cached command results on resumption. These attributed mechanisms inform the runtime design; their endpoints and state semantics remain distinct. Full references and figures are in the bibliography and claim fence.
 
 ## What did you actually run?
 
@@ -84,7 +92,27 @@ External placement helps integrity, not semantic correctness. Our records includ
 
 ## What does Chamo add to this seminar?
 
-Ori Chamo and Yossi Eliaz's preliminary Three-Body Atlas work separates proposal, screening, numerical verification, independent reproduction and frozen claim. It checked 26 difficult continuation links in a 135,445-orbit source catalog; an unresolved independent cross-check was rejected. This is a concrete evidence-admission workflow, not agent-fork performance, a global completeness proof, or peer-reviewed work.
+Ori Chamo and Yossi Eliaz's preliminary result connects the apparent projected branches through all 26 selected bidirectional continuation links in a 135,445-orbit source catalog. Shooting restores periodicity; Floquet calculations assess stability; representative transitions have independent 60-digit checks. Extra-Trees proposes warm starts, rather than establishing the connections. A separate unresolved RK4 cross-check was rejected. The supported claim concerns the sampled component, not global completeness or agent-fork performance.
+
+## What did the genomics screen establish?
+
+The screen ranked candidate perturbations, then separate siRNA and drug-combination assays tested their effects. Six of eight tested combinations improved killing in MCF-7 cells. Technical repeats (≥4 per viability point) and independent experiments (≥2 per plot) are different replication units. This is an in-vitro finding. The 2022 Matters Arising questions expression of several hits, so replication does not settle on-target validity. It supplies a proposal-to-assay workflow, not evidence about computational forks.
+
+## What did autoresearch improve, and how?
+
+One published session edited `train.py`, trained each candidate under a five-minute budget, measured validation bits per byte and kept or reset the change. It reports 126 attempts: 23 kept, 102 discarded, one crash; 0.997900 → 0.969686, a calculated 2.83% relative decrease. Startup/compilation lie outside that budget. The score is hardware/setup-specific and repeatedly consulted during search; it is not a held-out general capability measure.
+
+## What are AlphaEvolve's two efficiency numbers?
+
+Scheduling heuristics recovered 0.7% of fleet compute on average. A separate tiling heuristic sped up the relevant matrix-multiplication kernels by 23%, reducing overall Gemini training time by 1%. These are distinct deployments and denominators. Automated evaluators screen candidate programs before production use; the report does not attribute these gains to sandbox forks.
+
+## What is AFL++ reusing?
+
+An initialized forkserver supplies children; persistent mode runs many inputs inside a child and resets target state between inputs. Documentation gives typical 10–20× speed gains and 1,000 iterations as a starting point before restart. State reset is a fidelity requirement. Incomplete cleanup can affect later inputs and distort results.
+
+## Are CyberGym's 22 zero-days a benchmark success rate?
+
+No. The historical benchmark has 1,507 patched vulnerabilities in 188 projects; a successful input crashes the vulnerable version and not the patched version. A separate latest-code campaign uses 431 projects and 1,748 entry executables. OpenHands/GPT-5 triggers 56 crashes, with 22 unique zero-days confirmed manually. Those counts distinguish generated crash evidence from a verified vulnerability; they do not share the historical benchmark's denominator.
 
 ## Is promotion model-checked?
 

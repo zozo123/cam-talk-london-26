@@ -1,4 +1,4 @@
-\begin{frame}{Forking saves resources when avoided preparation exceeds reuse overhead.\ev{\tagO}}
+\begin{frame}{Forking saves resources when avoided preparation exceeds reuse overhead.\ev{\tagA}}
 \vspace{.1cm}
 \begin{center}
 {\Large$(N-1)\,P \;>\; H + N\,(R+D)$\par}
@@ -6,7 +6,7 @@
 {\small preparation $P$, capture $H$, restore $R$, divergence $D$, children $N$. Additive resource-cost model.\par}
 \end{center}
 \vspace{.1cm}
-{\small\color{Muted}Calculation, not a measurement. Units: resource-seconds.\par}
+{\small\color{Muted}Illustrative resource cost in resource-seconds.\par}
 \vspace{.05cm}
 {\small
 \begin{tabularx}{\textwidth}{@{}L{4.6cm}L{3.0cm}L{2.9cm}Y@{}}
@@ -19,7 +19,7 @@ same, warm cache $P{=}2$ & $7\times2 = 14$ & $34$ & fork loses 20\\
 \end{tabularx}\par}
 \vspace{.15cm}
 {\small Batch elapsed time is a separate question: it depends on critical paths and contention. A faster-booting minimal image is the alternative (Jitsu, LightVM).\par}
-\sources{Madhavapeddy et al.\ NSDI'15 (Jitsu); Manco et al.\ SOSP'17 (LightVM, NEC Labs). Parameter values are illustrative.}
+\sources{Madhavapeddy et al.\ NSDI'15 (Jitsu); Manco et al.\ SOSP'17 (LightVM, NEC Labs). Illustrative parameter values.}
 \qadetail{This is an additive resource-cost model, not measured elapsed time. Ordinary continuation work common to both alternatives cancels; D is incremental divergence overhead, including copy-on-write. P must be the reusable preparation, not merely sandbox setup. In SELFHOST-2 the three edit tasks sum to 342.579 seconds, versus ideal unchanged-duration critical path 176.689 seconds: a 165.890-second saving, about 6.5 percent of stage time, before fork/merge/verification. Worktrees may support that schedule. Jitsu and LightVM illustrate cheap fresh-start alternatives.}
 \note{[0:55] The resource condition compares preparation avoided with reuse overhead. Eight children and thirty resource-seconds of preparation avoid two hundred ten, while capture, restore and divergence add thirty-four. With a warm cache, preparation can fall to two and the same reuse path loses twenty. These are illustrative calculations. Ordinary continuation work cancels; elapsed time depends on the critical path and contention. In our file-edit case, worktrees could also provide parallelism. The twenty-second setup measurement is not a measurement of the full reusable prefix.}
 \end{frame}

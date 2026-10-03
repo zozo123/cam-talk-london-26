@@ -1,6 +1,6 @@
-\begin{frame}[t]{\ev{\tagM}Two repairs and two reviews used 59\% of recorded stage time.}
+\begin{frame}[t]{\ev{\tagM}Repairs and reviews consumed 59\% of the recorded factory stage time.}
 \vspace{0pt}
-{\small
+{\fontsize{11.5}{14}\selectfont
 \begin{tabularx}{\textwidth}{@{}L{3.0cm}Y r r@{}}
 \toprule
 \textbf{Stage} & \textbf{Work performed} & \textbf{Time} & \textbf{Cost}\\
@@ -10,13 +10,13 @@ Build and test & Three edits; suite failure; first repair & 20:01 & \$4.50\\
 Review & Review; second repair; tests; re-review & 18:55 & \$4.87\\
 \bottomrule
 \end{tabularx}\par}
-\vspace{.22cm}
+\vspace{.2cm}
 {\small \textbf{43:44 elapsed}\quad 42:38 recorded stages\quad \textbf{\$10.33 model cost}\par}
-\vspace{.22cm}
-\claim{Repairs and reviews: 25.2 minutes, \$7.75. That is 59\% of stage time and 75\% of model cost.}
-\vspace{.12cm}
-{\small Setup: \textbf{20.3\,s}. The whole reusable prefix was not measured.\par}
-\sources{SELFHOST-2 stage metrics and agent-session records; costs at list price.}
+\vspace{.18cm}
+\claim{Two repairs + two reviews: 25.2 min, \$7.75; 59\% of stage time, 75\% of cost.}
+\vspace{.1cm}
+{\small Setup: \textbf{20.3\,s} = \textbf{0.79\%} of stage time. Calculated $100\times$ speedup: \textbf{20.1\,s saved}.\par}
+\sources{SELFHOST-2 metrics and agent-session records; reported costs at list price.}
 \qadetail{Recorded stage sum: 2,557.517 s, rounded to 42:38. Timestamp wall time: 2,624 s, or 43:44, from 11:39:56 to 12:23:40. About 66 s lies outside those stage totals. The first row includes intent, specification, and plan. Timings are agent-session durations including tool activity, not pure inference time. Two repairs plus two reviews sum to about 25.2 min and \$7.75. Setup is 20.3 s: a 100-fold speedup saves about 20.1 s, roughly 0.8\% of recorded stages. Initial setup is not the whole reusable prefix and does not establish or rule out another reached-state workload's benefit. Sources: metrics.json and agent/stages.jsonl.}
-\note{[0:55] We recorded forty-three minutes and forty-four seconds of elapsed time and ten dollars thirty-three of model cost. The stage records sum to forty-two minutes and thirty-eight seconds. Two repair sessions and two reviews consumed twenty-five minutes, fifty-nine percent of stage time, and seventy-five percent of cost. These durations include tool activity. Initial sandbox setup took twenty seconds. That is not a measurement of the whole reusable prefix. The dominant work here followed a failed test, which sent the repair into dispatch ownership.}
+\note{[1:10] We recorded forty-three minutes and forty-four seconds of elapsed time and ten dollars thirty-three of model cost. The stage records sum to forty-two minutes and thirty-eight seconds. Two repair sessions and two reviews consumed twenty-five minutes and seven dollars seventy-five. That is fifty-nine percent of stage time and seventy-five percent of model cost. These are agent-session durations, including tool activity. Initial sandbox setup took twenty seconds, eight tenths of a percent of stage time. Making it a hundred times faster would save about twenty seconds. The more substantial question is what the repair changed and what the checks established.}
 \end{frame}

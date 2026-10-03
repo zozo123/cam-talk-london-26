@@ -1,13 +1,13 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: **45 main frames in six acts, no appendix and no overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
+This file applies to the canonical `talk.tex`: **41 main frames in six acts, no appendix and no overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
 
 Each evidence slide carries one or more tags:
 
 - **MEASURED**: in the speaker's own run records.
 - **BUILT**: implemented and unit-tested, or a synthetic check.
 - **PROPOSED**: a design that has not been run.
-- **PUBLISHED**: other people's work.
+- **PUBLISHED**: published source results, including co-authored studies.
 
 Scope boundaries attach to the relevant claims and are summarized here; this document uses titles and artifacts instead of fragile slide numbers.
 
@@ -177,6 +177,14 @@ The proposed child pipeline is return candidate, select, verify exact artifact a
 ## Chamo / Three-Body Atlas
 
 Ori Chamo is the coauthor affiliated with Incredibuild. The preliminary ai.viXra:2608.0069 work analyzes **135,445** source periodic orbits. **26 selected difficult bidirectional continuation links** connect the projected branches within one sampled component. Independent 60-digit calculations check representative stability transitions; this is not a global completeness proof. The Atlas workflow separates candidate, screening, high-precision verification, independent reproduction and frozen claim; an unresolved independent numerical cross-check was rejected. It illustrates evidence admission, not agent-fork performance or dependence. [Preprint](https://ai.vixra.org/pdf/2608.0069v1.pdf), [records](https://github.com/zozo123/threebody-closing-the-open).
+
+## Genomics, AI and security cases
+
+- **Genomics:** Gilad, Eliaz et al. (2021) used >120,000 sgRNAs targeting 19,050 genes, shortlisted about 100 candidates and reported improved killing for six of eight tested SI-12 combinations in MCF-7 cells. The ≥4 technical replicates per viability point and ≥2 independent experiments per plot are distinct from the screen's three biological replicate arms. These are in-vitro results. The 2022 Matters Arising questions several hits' target expression; repetition alone does not establish on-target biological validity. A computational fork of analysis variants is a proposed use, not an experiment in this paper.
+- **Autoresearch:** the published session report lists 126 attempts: 23 kept, 102 discarded, one crash. Validation bits per byte fell from 0.997900 to 0.969686 (2.83% relative decrease, calculated). The five-minute training budget excludes startup/compilation. This is one reported session on its hardware and validation setup, not a controlled fork experiment or a general model-capability gain.
+- **AlphaEvolve:** the technical report attributes 0.7% average fleet compute recovery to deployed scheduling heuristics. A separate kernel-tiling optimization reports 23% kernel speedup and 1% lower overall Gemini training time. Keep the two deployments and denominators separate; none is our measured result or a sandbox-fork speedup.
+- **AFL++:** official persistent-mode documentation describes typical 10–20× speed gains from many inputs in one child. A 1,000-input loop is a recommended starting point before process restart, not a universal fixed setting. Critical state must reset between inputs. This is process execution reuse, not a guarantee of independent test outcomes.
+- **CyberGym:** the benchmark comprises 1,507 historical patched vulnerabilities across 188 projects; its differential check requires crashing the vulnerable version and not the patched version. The separate latest-code campaign covers 431 projects and 1,748 entry executables; OpenHands/GPT-5 produces 56 crashes, from which the authors manually confirm 22 unique zero-days. Crashes, benchmark successes and confirmed vulnerabilities are different units. The campaign is not a 22/1,507 benchmark success rate or a sandbox-fork experiment.
 
 ## Experiments and proposed amendments before collection
 

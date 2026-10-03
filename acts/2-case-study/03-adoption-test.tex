@@ -1,0 +1,24 @@
+\begin{frame}[t]{\ev{\tagM}The repair added same-owner adoption without its required direct test.}
+\begin{columns}[T,onlytextwidth]
+\column{.52\textwidth}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[candidate,text width=2.2cm,minimum height=.9cm] (a) at (0,.85) {A activates cell};
+\node[candidate,text width=2.2cm,minimum height=.9cm] (b) at (0,-.85) {B holds valid\\dispatch lease};
+\node[bad,text width=2.45cm,minimum height=.9cm] (fa) at (3.6,.85) {{\fontsize{7.5}{9}\selectfont\texttt{DispatchLeaseLost}}};
+\node[bad,text width=2.45cm,minimum height=.9cm] (fb) at (3.6,-.85) {\texttt{CellBusy}};
+\draw[denied] (a)--(fa);\draw[denied] (b)--(fb);
+\node[labeltext,text width=5.8cm] at (1.8,1.7) {Recorded diagnosis: 0 runs from 4 replicas};
+\node[labeltext,text width=6.2cm,text=Ink] at (1.8,-1.95) {Required test: force same-owner \texttt{CellBusy}; assert exactly one dispatch.};
+\end{tikzpicture}
+\column{.44\textwidth}
+\begin{ticks}
+\item \textbf{Fix:} after same-work-order \texttt{CellBusy}, adopt the active cell.
+\item \textbf{1,972 reported cases}, including skips; \textbf{0 failures}.
+\item Review approved without the direct test; \texttt{service.py} changed outside the six-file plan.
+\end{ticks}
+\end{columns}
+\sources{SELFHOST-2 first repair, second repair, review, and edit-hook records.}
+\qadetail{The repair record explains that replicas can all claim an intent when its dispatch lease has zero duration; only the final claimant keeps a valid token. One attempt can win cell activation, then fail while recording the epoch with DispatchLeaseLost. The token holder encounters CellBusy. The proposed source fix inspects the active cell and adopts it when the owner is another attempt of the same work order. This records the agent's explanation, not an independently reproduced causal diagnosis. The test's dispatch lease is distinct from the sandbox authority lease disabled by the unmanaged cell. Existing tests exercise adoption through a crash path and refusal of a foreign owner through a busy path. They do not deterministically cover the conjunction CellBusy plus same-work-order adoption. Review 1 requested deterministic tests as a blocker; review 2 approved and rated the missing direct test minor. The suite may encounter the path through a favorable race interleaving, which is not a deterministic branch test. The harness ran the suite after repairs; the repair agents had no shell. Do not say every reported case passed: 1,972 includes skips and zero failures. Sources: agent/review.1.json, fix.5.json, review.2.json and stage records. All 15 logged edits were allowed; six were made by repair agents. The agent reported that tests were protected, but the log does not show a blocked edit attempt and the test hook never fired. Scope checks applied to planned work nodes; repairs followed a non-node path without the same scope check. The out-of-plan backend/service.py change remained major while review could approve. A proposed amendment would explicitly authorize new source scope and require the requested behavioral test. The co-authored OffRisk work is only an annotation/enforcement analogy: Bioinformatics Advances 3:vbad138 (2023), not evidence about this repair policy.}
+\note{[1:05] The concurrency test reported zero runs from four replicas. The repair agent diagnosed one replica owning the active cell and another holding the valid dispatch lease. Its fix allowed adoption after CellBusy when the active cell belonged to the same work order. Review requested a deterministic test. The second repair refactored a helper, and review approved with that direct test still absent. The suite reported nineteen hundred seventy-two cases, including skips, and zero failures. All fifteen logged edits were allowed. We need to force the new path and assert exactly one dispatch. Next, a separate delivery incident shows why retaining the result matters.}
+\end{frame}

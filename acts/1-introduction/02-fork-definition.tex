@@ -1,0 +1,20 @@
+\begin{frame}[t]{\ev{\tagP}A sandbox fork starts private continuations from one reached state.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=3.6cm,minimum height=1.1cm] (p) at (0,0) {\textbf{Reached sandbox state}\\\footnotesize files + declared live state};
+\node[candidate,text width=3.0cm,minimum height=.7cm] (a) at (6.2,1.25) {\textbf{Continuation A}\\\footnotesize private changes};
+\node[candidate,text width=3.0cm,minimum height=.7cm] (b) at (6.2,0) {\textbf{Continuation B}\\\footnotesize private changes};
+\node[candidate,text width=3.0cm,minimum height=.7cm] (c) at (6.2,-1.25) {\textbf{Continuation C}\\\footnotesize private changes};
+\foreach \child in {a,b,c}{\draw[flow] (p.east)--(\child.west);}
+\end{tikzpicture}
+\end{center}
+\vspace{.12cm}
+\begin{ticks}
+\item Preserve the state the next action uses.
+\item Keep each child's writes private.
+\item Choose worktrees, warm files, or a process/VM checkpoint as required.
+\end{ticks}
+\sources{Fork contract; examples: SnowFlock, Kimi AgentENV, and DSec.}
+\qadetail{A fork supplies several continuations from one captured parent with private writable state. Git worktrees preserve source views. Process checkpoints may preserve memory and processes. VM snapshots preserve their declared state surfaces. Filesystem snapshots do not establish memory capture. The hypothetical running-application workload differs from the actual serial repair. Remote model sessions, model randomness, and already performed external effects require separate handling. Neither setup time nor a checkpoint API name establishes whole-prefix reuse or fidelity. SnowFlock: Lagar-Cavilla et al., Rapid Virtual Machine Cloning for Cloud Computing, EuroSys 2009, built on Xen. Kimi K3 reports 51,219,741 sandboxes across 1,505,678 images in training and evaluation, up to 98\% of sandbox lifetime during model waits, and checkpoint/resume times as low as 133/49 ms. These are attributed infrastructure figures, not our measurements. Forking is offered for reward judging without side effects. DSec retains sandboxes when training tasks are preempted and replays cached command results on resumption. DeepSeek-V4, arXiv:2606.19348, \S5.2.5.}
+\note{[1:00] A sandbox fork starts several continuations from one captured parent. Each continuation receives private writable state. We should choose the mechanism from the next action's requirements. Source alternatives can use worktrees. Prepared files can come from a warm image or disk snapshot. Useful process memory calls for a process or VM checkpoint with declared semantics. Hosted-model sampling stays outside the guest. SnowFlock, AgentENV, and DSec demonstrate different forms of reuse. We next compare two concrete benefits of additional executions, then examine our own workflow.}
+\end{frame}

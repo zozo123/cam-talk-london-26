@@ -1,4 +1,4 @@
-\begin{frame}{Checkpoint-started success is conditional on reaching that checkpoint.\ev{\tagO}}
+\begin{frame}{Checkpoint-started success is conditional on reaching that checkpoint.\ev{\tagA}}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm]
 \node[state,minimum width=2.1cm] (a) at (0,0) {task start};
@@ -17,7 +17,7 @@
 \item When every repair inherits one plan, continuation success alone does not validate every plan choice.
 \end{ticks}\par}
 \claim{Continuation success alone does not estimate how often the checkpoint is reached.}
-\sources{\href{https://www.nature.com/articles/s41586-020-03157-9}{Ecoffet et al., First return, then explore, Nature (2021)}. Probabilities are illustrative, not measured.}
+\sources{\href{https://www.nature.com/articles/s41586-020-03157-9}{Ecoffet et al., First return, then explore, Nature (2021)}. Illustrative probabilities.}
 \qadetail{Illustrative probabilities, not measured. A viable reached state contains information about the prefix; continuation success alone does not estimate how often it is reached or validate every earlier decision. Go-Explore explicitly separates return-to-state and exploration. A success rate at a selected checkpoint differs from a task-start success rate.}
 \note{[0:50] If a workflow reaches a checkpoint half the time and then succeeds with probability point eight, the corresponding end-to-end success probability is point four. Starting directly from the checkpoint observes point eight. That is a conditional question. It does not estimate how often we reach that state or establish every earlier choice. Go-Explore makes returning to reached states explicit. For our evaluation, we need to name both the checkpoint population and the task-start population, and retain which feedback shaped the candidate.}
 \end{frame}

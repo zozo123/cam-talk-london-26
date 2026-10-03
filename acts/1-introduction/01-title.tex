@@ -5,7 +5,7 @@
 \vspace{.45cm}
 {\fontsize{30}{34}\selectfont\bfseries Forkable Sandboxes\par}
 \vspace{.22cm}
-{\fontsize{16}{20}\selectfont\bfseries Forkable sandboxes need explicit contracts\par for state, evidence, and authority.\par}
+{\fontsize{16}{20}\selectfont\bfseries Forkable sandboxes reuse execution state.\par Each result needs its own verification.\par}
 \vspace{.42cm}
 {\large\bfseries Yossi Eliaz\par}\vspace{.12cm}
 {\small Principal Engineer, Incredibuild\quad$\cdot$\quad Associate Professor, Holon Institute of Technology (HIT)\par}
@@ -24,5 +24,5 @@
 \vspace{.18cm}
 {\footnotesize\color{white!70}15 October 2026\quad FW11 + Microsoft Teams\par}
 \qadetail{The title figure is a proposed lifecycle. A motivating future workload is a running application at a reproduced failure, with relevant process memory and local state. It has not been exercised in the factory case study. The observed serial repair establishes source files and feedback, not a demonstrated need for live fork. Select a worktree, warm image, disk snapshot, or verified process/VM checkpoint according to the required state. Disclosure and affiliations match the supplied Cambridge deck.}
-\note{[0:45] Suppose we reach a running application state and reproduce a failure. We would like several continuations from that point. A fork might preserve the relevant state while giving each continuation private changes. We first need to identify what must survive and which authority must remain unique. Our factory records expose obligations around testing, review, and delivery. They do not yet demonstrate a useful live fork. We will connect those obligations to a runtime contract and a set of experiments. What should a child inherit?}
+\note{[0:45] Suppose we reproduce a failure in a running application and want several continuations from that state. We would like to preserve the useful past while giving each continuation private changes. That requires a clear account of what survives, what each result establishes, and who can publish it. We will move from software repair to genomics, physics, AI research and security, then derive the runtime and evidence rules that connect them. The goal is a checked result from a useful continuation. First, define what a sandbox fork actually supplies.}
 \end{frame}}

@@ -1,11 +1,26 @@
-\begin{frame}{The factory has a publication gate, but its fork store is missing.\ev{\tagB\,\tagP}}
-\lifecycle{2}
-\begin{ticks}
-\item \textbf{Exercised:} scheduler, journal, work cell and artifact-digest gate.
-\item \textbf{Built separately:} reducer; lease broker unused in these work orders.
-\item \textbf{Missing/proposed:} fork store and external evaluator.
-\end{ticks}
+\begin{frame}{The controller binds repository publication to a candidate digest.\ev{\tagB\,\tagP}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\small}]
+\node[state,text width=1.9cm,minimum height=1.05cm] (scheduler) at (0,0) {Airflow\\scheduler};
+\node[state,text width=1.8cm,minimum height=1.05cm] (cell) at (2.4,0) {Docker\\work cell};
+\node[candidate,text width=1.9cm,minimum height=1.05cm] (artifact) at (4.9,0) {Candidate\\digest};
+\node[evidence,text width=2.3cm,minimum height=1.05cm] (gate) at (7.7,0) {Controller\\publication gate};
+\node[state,text width=1.7cm,minimum height=1.05cm] (repo) at (10.4,0) {Repository};
+\draw[flow] (scheduler)--(cell);
+\draw[flow] (cell)--(artifact);
+\draw[flow] (artifact)--(gate);
+\draw[flow] (gate)--(repo);
+\node[proposed,text width=1.9cm] (fork) at (2.4,-1.85) {Fork store};
+\node[proposed,text width=2.2cm] (evaluator) at (5.3,-1.85) {External\\evaluator};
+\draw[message] (cell.south)--node[labeltext,left]{capture / fork}(fork.north);
+\draw[message] (fork.east)--(evaluator.west);
+\draw[message] (artifact.south)--(evaluator.north);
+\draw[message] (evaluator.east)-|(gate.south);
+\end{tikzpicture}
+\end{center}
+\tagline{Solid: serial components. Dashed: fork and evaluation with artifact-bound receipts.}
+\claim{Returned candidates and receipts meet at one controller-held gate.}
 \sources{Factory records and design; arXiv:2607.09689v4.}
-\qadetail{Calls checkpoint, fork, evaluate, select, reduce and promote express different decisions. Named snapshots are exercised, numerical deduplication is built and the digest gate is exercised; integrated fork, external evaluator, calibrated dependence and epoch-fenced publication are proposed. Eight obligations: identified immutable parent; fresh child authority; no guest publishing token; input/evidence/feedback records; duplicate rejection plus retained shared factors; deterministic composition and conflict retention; exact-composition verification; durable export on every exit. Selection/composition of patches is separate from common-target numerical reduction.}
-\note{[0:55] Here is the complete lifecycle, with the evidence boundary highlighted. Our scheduler, journal, work cell and artifact-digest gate have been exercised on the serial path. The numerical reducer was built separately. A lease broker exists but was unused in these work orders. The fork store is missing and the external evaluator is proposed. The contract joins these pieces; it does not claim that the integrated system already runs. Each returned candidate needs selection or composition, exact-artifact verification and current authority before publication.}
+\qadetail{The solid path identifies exercised serial components: Airflow scheduling and journal, Docker work cells, candidate artifact digests and the controller-held publication gate. The repository is the destination behind the gate; a refusal does not imply publication occurred. No factory case-study run forked. The dashed fork-store and external-evaluator path is an extension design, not an integrated execution result. The fork store is missing; the external evaluator is proposed. Named-snapshot API paths were exercised separately. The numerical reducer was built separately; a lease broker exists but was unused in these work orders. Calibrated dependence and epoch-fenced publication are proposed. Calls checkpoint, fork, evaluate, select, reduce and promote express different decisions. Eight obligations: identified immutable parent; fresh child authority; no guest publishing token; input/evidence/feedback records; duplicate rejection plus retained shared factors; deterministic composition and conflict retention; exact-composition verification; durable export on every exit. Selection/composition of patches is separate from common-target numerical reduction. The gate must check the exact frozen candidate, adequate behavioral evidence and current authority; an authentic receipt alone cannot establish coverage.}
+\note{[0:55] The solid path is the factory architecture we exercised. Airflow schedules a Docker work cell. The cell returns a candidate identified by its digest. The controller binds approval to that artifact before repository publication. The journal records the decisions along the path. The dashed extensions place a fork store beside execution and an external evaluator beside candidate verification. Those extensions are designed rather than integrated. A numerical reducer was built separately for measurement summaries. The architectural connection is concrete: candidates and artifact-bound receipts return to the controller, which holds the publication credential and decides whether the exact candidate may proceed.}
 \end{frame}

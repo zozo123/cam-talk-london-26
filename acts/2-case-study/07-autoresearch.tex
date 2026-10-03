@@ -1,0 +1,22 @@
+\begin{frame}[t]{Autoresearch kept 23 of 126 experiments and lowered its score by 2.8\%.\ev{\tagO}\surf{AI RESEARCH}}
+\lead{Karpathy's autoresearch: edit \texttt{train.py}, train for five minutes, then compare validation bits per byte.}
+\begin{center}
+\begin{tikzpicture}[node distance=.4cm,every node/.style={align=center,font=\small}]
+\node[state,text width=2.65cm,minimum height=1cm](a){Incumbent Git commit};
+\node[candidate,text width=2.65cm,minimum height=1cm,right=of a](b){Edit \texttt{train.py}};
+\node[evidence,text width=2.65cm,minimum height=1cm,right=of b](c){Train + score \texttt{val\_bpb}};
+\node[evidence,text width=2.1cm,minimum height=1cm,right=of c](d){Keep or revert};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\draw[flow](d.south)--++(0,-.45)-|node[pos=.6,below,font=\scriptsize]{next experiment}(a.south);
+\end{tikzpicture}
+\end{center}
+\vspace{.1cm}
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}\textbf{126 attempts:} 23 kept, 102 discarded, 1 crash.
+\column{.48\textwidth}\textbf{Best score:} $0.997900\to0.969686$; lower is better.
+\end{columns}
+\claim{A fixed evaluator turns code generation into a hill-climbing loop.}
+\sources{\href{https://github.com/karpathy/autoresearch/blob/master/program.md}{autoresearch protocol}; \href{https://github.com/karpathy/autoresearch/discussions/43}{maintainer's reported session}. Five minutes is the training budget per completed attempt.}
+\qadetail{This is one reported session, not a controlled average effect. The score decline is (0.997900-0.969686)/0.997900=2.827\%. The protocol holds prepare.py, data preparation, tokenizer and evaluation fixed and permits editing train.py. Five minutes is wall-clock training time; startup and compilation occur outside that budget, and crashes can end early. Sequential Git keep/revert is the actual mechanism. Forked parallel continuations are a possible implementation extension, not what produced this reported result. Repeated adaptive selection on one validation set warrants a separate held-out check before claiming generalization.}
+\note{[1:00] Autoresearch gives us a very simple research loop. The agent edits training code, runs a five-minute training budget, reads validation bits per byte, and keeps or reverts the change. The evaluator stays fixed. In one reported session, 126 experiments produced twenty-three kept changes, 102 discards and one crash. The best score fell from about point nine nine eight to point nine seven zero, a relative reduction of 2.8 percent. This is sequential hill climbing through Git. The useful abstraction is an incumbent, a candidate, a fixed evaluation and a decision.}
+\end{frame}

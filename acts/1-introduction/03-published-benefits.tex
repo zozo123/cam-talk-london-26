@@ -1,0 +1,32 @@
+\begin{frame}[t]{\ev{\tagO}Additional requests reduced latency, and additional samples raised coverage.}
+\begin{columns}[T,onlytextwidth]
+\column{.46\textwidth}
+\textbf{BigTable request hedging}\par
+\vspace{.12cm}
+{\small 1,000-key read; backup after 10\,ms.\par}
+\vspace{.22cm}
+{\fontsize{18}{22}\selectfont\bfseries 1,800 $\to$ 74\,ms\par}
+{\small p99.9 latency\par}
+\vspace{.2cm}
+{\small\bfseries 2\% additional requests\par}
+\column{.48\textwidth}
+\textbf{SWE-bench Lite sampling}\par
+\vspace{.12cm}
+{\small DeepSeek-Coder-V2-Instruct\par}
+\vspace{.2cm}
+{\fontsize{12}{15}\selectfont
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Samples} & \textbf{Coverage}\\
+\midrule
+1 & 15.9\%\\
+250 & \textbf{56\%}\\
+\bottomrule
+\end{tabular}\par}
+\end{columns}
+\vspace{.3cm}
+\claim{Coverage still requires selecting a correct candidate.}
+\sources{Dean \& Barroso, CACM 2013; Brown et al., arXiv:2407.21787.}
+\qadetail{Dean and Barroso report the 99.9th-percentile latency of a 1,000-key BigTable read, using a hedged request after 10 ms and accepting the first response: 1,800 ms to 74 ms, with 2\% more requests. Their assumption is that the cause of variability does not affect multiple replicas at once. This is a published request-hedging result, not a fork benchmark or agent-correctness measurement. The second request can escape server-specific delay without changing the requested operation. Brown et al., Large Language Monkeys, arXiv:2407.21787: DeepSeek-Coder-V2-Instruct on SWE-bench Lite improves pass-at-least-once coverage from 15.9\% at one sample to 56\% at 250, a 40.1 percentage-point increase. This does not report production selection accuracy. Stroebl, Kapoor and Narayanan, The Limits of Inference Scaling Through Resampling, arXiv:2411.17501: when false-positive acceptance carries negative utility, the optimum is often fewer than ten attempts under their modeled conditions. This is not a universal branch-count recommendation. Neither paper measures our sandbox-fork effect.}
+\note{[1:00] Dean and Barroso sent a backup request after ten milliseconds during a thousand-key BigTable read. The 99.9th-percentile latency fell from eighteen hundred milliseconds to seventy-four, with two percent more requests. The backup could escape a server-specific delay. Brown and colleagues sampled DeepSeek-Coder-V2-Instruct on SWE-bench Lite. Coverage rose from about sixteen percent to fifty-six percent at 250 samples. Coverage means some candidate solved the issue. We still need to recognize it. Our next evidence comes from a complete factory with tests, reviews, and delivery.}
+\end{frame}

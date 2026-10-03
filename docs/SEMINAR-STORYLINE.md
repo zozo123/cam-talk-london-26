@@ -1,722 +1,540 @@
-# Forkable sandboxes seminar storyline
+# Forkable Sandboxes — connected 41-slide storyline
 
-This is a proposed reorganization of the whole revised Cambridge deck, with 45 main slides, concrete content, speaker transitions, named systems, and a map back to the PDF. It preserves the factory incidents, runtime mechanics, statistical insights, prototype results, and experimental program. It brings the work with Ori Chamo into the argument. There is no backup section.
+This outline follows the canonical `talk.tex` and its six act indexes. **41 main slides; 39:30 of timed narration; no appendix or overlays.** Each slide has one clear takeaway and a concrete visual. Detailed source scope, qualifications and follow-up questions remain in its `\qadetail` comments and the generated [presenter guide](../PRESENTER-GUIDE.md).
 
-The academic claim is deliberately precise: a forkable sandbox can reuse a reached execution state and support alternative continuations. Choose the mechanism according to the state the children actually need: source alternatives may need only worktrees; prepared files may need a warm image; valuable running state may justify a process or VM checkpoint. A complete agent runtime must also preserve the meaning of the evidence those continuations produce and control which result may be published. The factory incidents motivate this contract; the reducer implements a limited part of it; the benefit of an integrated forked factory remains to be tested.
-
-## Presentation rules for the whole deck
-
-Every slide title below is a complete sentence stating its actual takeaway. Measured findings name their setting. Proposed mechanisms and experiments remain visibly proposed. Titles state the finding or requirement rather than promise insight, ask a vague question, or repeat a section name.
-
-Use one diagram, table, code example, or calculation per slide. The audience should be able to read the visual before the explanation moves on. The **On screen** text is a content specification, not a paragraph to paste verbatim: turn it into at most three short labels or claims, except for the three-row timing and API tables. Keep qualifying details, secondary figures, file paths, and full references in the slide comments. Explain unfamiliar terms once and then reuse them.
-
-Keep one concrete state visible: the prepared repository just before the first repair. Keep one concrete candidate visible: the patch adding same-owner adoption after `CellBusy`. Keep one concrete obligation visible: force that path and assert one dispatch. The talk should repeatedly answer a question about this state, candidate, or obligation. This gives technical details a place in the story.
-
-## The short story the audience should remember
-
-An agent reaches a working state and needs to try several continuations. The first decision is which state those continuations need and which mechanism preserves it most economically. A live fork can be useful when the relevant running state survives capture and remains valid for the continuation. Our serial repair case does not yet establish such a need. It exposed missing test coverage, inaccurate receipts, and artifact loss. Those incidents define obligations that any branching workflow must preserve. The proposed runtime tracks captured state, evidence, and authority. The reducer already rejects declared duplicates and carries lineage; the integrated factory remains unfinished. Separate experiments will determine when restore is worthwhile and what shared ancestry does to the measured outcomes.
-
-## The central systems question
-
-Which valuable state must a child inherit, what genuinely new observations can it produce, and what result may it publish? The state question keeps this a fork seminar. The evidence and authority questions make the proposed branch usable in a complete workflow.
-
-The serial case demonstrates source files, installed dependencies, and recorded feedback before the first repair. It does not demonstrate a necessary live heap, stack, or service state. Worktrees and a warm dependency environment are credible alternatives. Sandbox setup took 20.3 s, but that number is not a measurement of the entire reusable prefix. Hosted-model inference state lies outside the guest. A live fork therefore needs a separate representative workload and an equivalent-state comparison.
-
-Use a hypothetical running-application example at the opening to explain that workload. Label it hypothetical. Return to it at the close: identify relevant live state, demonstrate faithful capture, show that the children consume it, and compare restoration with reconstruction from a warm alternative. Applying a patch may invalidate already loaded code, so restart or reload semantics belong to this contract too.
-
-## Proposed talk title
-
-**Forkable sandboxes need explicit contracts for state, evidence, and authority.**
-
-Subtitle: **Branching execution in AI software factories**
+The spine is simple: **reuse a useful state → explore private continuations → collect observations → choose or compose → verify the exact result → authorize publication and preserve the artifact**. Different fields supply different acceptance tests. The cases establish their own results; together they motivate the runtime design.
 
-The title names the systems primitive and the three responsibilities the talk investigates. The first two minutes should define fork and show its intended use.
+| Act | Slides | Purpose |
+|---|---:|---|
+| Opportunity | 1–4 | Definition, published gains and own records |
+| Cases | 5–14 | Software, genomics, physics, AI research and security |
+| Design | 15–23 | State semantics, cost, effects and publication authority |
+| Analysis | 24–35 | Evidence units, selection, composition and the built reducer |
+| Evaluation | 36–40 | Backend choice, environmental co-failure, coverage and repeatability |
+| Conclusion | 41 | Reconnect the useful results to one lifecycle |
 
-## The argument graph
+Use the diagram before the prose. Keep three short claims on screen where possible; put the method, result and next decision in the narration. Evidence tags attach to the claim: MEASURED, BUILT, PUBLISHED or PROPOSED; illustrations state their assumptions. [Full bibliography](../REFERENCES.md), [claim boundaries](../CLAIM-FENCE.md), and [Q&A](../QA-BANK.md) carry the secondary detail.
 
-```mermaid
-flowchart TD
-    goal["An agent needs several continuations from reached state"]
-    required["Identify the useful state: files, prepared environment, or running processes"]
-    primitive["Choose worktrees, a warm template, or a faithful checkpoint and fork"]
-    opportunity["Opportunity: save repeated preparation and explore alternatives"]
-    inheritance["Consequence: children inherit inputs and earlier decisions"]
-    costs["Cost question: when does restore beat a warm template?"]
-    evidence["Evidence question: what did each child actually establish?"]
-    cases["Airflow Factory: missing branch test, misleading receipts, lost patch"]
-    science["Chamo and Eliaz: proposals, numerical checks, and explicit claim gates"]
-    contract["Runtime contract: captured state, identified evidence, current authority"]
-    state["Declare capture, sharing, randomness, and external effects"]
-    observations["Bind checks to artifacts; reject reused observations; retain dependencies"]
-    authority["Verify the chosen result; authorize publication; export before cleanup"]
-    built["Existing pieces: snapshot traces, duplicate rejection, lineage, digest gate"]
-    tests["Separate tests of cost, environmental dependence, and repair behavior"]
-    result["A branch is useful when its cost and its accepted result are justified"]
-    goal --> required --> primitive
-    primitive --> opportunity
-    primitive --> inheritance
-    opportunity --> costs
-    inheritance --> evidence
-    cases --> contract
-    science --> evidence
-    costs --> contract
-    evidence --> contract
-    contract --> state
-    contract --> observations
-    contract --> authority
-    state --> built
-    observations --> built
-    authority --> built
-    built --> tests
-    tests --> result
-```
+## Act 1 — Opportunity: define the continuation and show its value
 
-The important logical connection is **case observations → obligations → fork contract → partial implementation → experiments**. The cases contain no forked execution, so they cannot establish a fork speedup or an effect of shared ancestry.
+The opening takes four slides: a definition, published gains, and our own concrete record. It sets up what the rest of the seminar will explain.
 
-## Opening script
+### Slide 1 — Forkable sandboxes reuse execution state; each result needs verification.
 
-“Imagine a running application reaches a failure that took a long sequence of actions to reproduce. We want to try several continuations from that exact point. A worktree preserves the code. A warm template preserves preparation. A process or VM checkpoint may preserve the reached execution. Which state do the children actually need?
+**[0:45] · LIFECYCLE**
 
-“A fork also shares a past. Its children may inherit observations, fixtures, and earlier decisions. We need to record that sharing and establish what the returned results support. A shared parent alone does not measure their dependence.
+**On screen:** A reached state branches into three continuations, which return through verification and publication. Name the state, evidence and authority boundaries.
 
-“Our measured factory run stayed serial. It does not yet establish that live fork is worthwhile. It reveals the obligations an eventual branch must preserve: the intended scope, the exact behavior checked, recoverable artifacts, and current publication authority. I will use that case to define the branch contract, show the components we have built, and describe the experiments that could justify state reuse.”
+**Say:** Suppose we reproduce a failure in a running application and want several continuations from that state. We would like to preserve the useful past while giving each continuation private changes. That requires a clear account of what survives, what each result establishes, and who can publish it. We will move from software repair to genomics, physics, AI research and security, then derive the runtime and evidence rules that connect them. The goal is a checked result from a useful continuation. First, define what a sandbox fork actually supplies.
 
-## The recurring lifecycle graph
+**Connection:** Define the operation before comparing its benefits.
 
-Return to this figure at the beginning, after the case studies, at the prototype, and at the conclusion. Highlight only the edge under discussion.
+[Slide source and full comments](../acts/1-introduction/01-title.tex)
 
-```mermaid
-flowchart TD
-    parent["Reached parent: source, dependencies, declared live state"]
-    capture["Capture parent identity and manifest"]
-    fork["Fork: private writable state and fresh host identity"]
-    childA["Continuation A"]
-    childB["Continuation B"]
-    childC["Continuation C"]
-    outputs["Candidate artifacts and identified observations"]
-    operation{"What kind of result?"}
-    select["Choose a candidate or compose patches"]
-    reduce["Combine measurements of one defined quantity"]
-    assumptions["Check evidence overlap and statistical assumptions"]
-    refusal["Retain unresolved assumptions and refuse the precision claim"]
-    exact["Freeze and verify the exact chosen artifact"]
-    gate["Controller checks approval and current authority"]
-    publish["Publish the authorized artifact"]
-    export["Durably export artifacts and receipts before teardown"]
-    parent --> capture --> fork
-    fork --> childA
-    fork --> childB
-    fork --> childC
-    childA --> outputs
-    childB --> outputs
-    childC --> outputs
-    outputs --> operation
-    operation --> select --> exact --> gate --> publish --> export
-    operation --> assumptions
-    assumptions -->|Justified| reduce --> export
-    assumptions -->|Unresolved| refusal --> export
-```
+### Slide 2 — A sandbox fork starts private continuations from one reached state.
 
-Journal inputs, ancestry, observation identity, feedback exposure, and external effects along the whole graph. Export also applies to refused, failed, and abandoned branches. Numeric reduction is a separate operation from patch selection. The full graph is a proposed integrated workflow; the existing components are identified on slides 6, 24, and 37.
+**[1:00] · PROPOSED**
 
-## Act 1 Why fork a reached state
+**On screen:** One captured parent → private continuations A/B/C. Choose worktrees, warm files, or a process/VM checkpoint for the state the next action consumes.
 
-The audience should leave this act knowing exactly what fork means and why another execution might help. Pages 1–3, 23, and 26 supply the material.
+**Say:** A sandbox fork starts several continuations from one captured parent. Each continuation receives private writable state. We should choose the mechanism from the next action's requirements. Source alternatives can use worktrees. Prepared files can come from a warm image or disk snapshot. Useful process memory calls for a process or VM checkpoint with declared semantics. Hosted-model sampling stays outside the guest. SnowFlock, AgentENV, and DSec demonstrate different forms of reuse. We next compare two concrete benefits of additional executions, then examine our own workflow.
 
-### Slide 1 Forkable sandboxes need explicit contracts for state, evidence, and authority.
+**Connection:** Show two results where additional executions created value.
 
-**On screen:** Full-sentence title, name, affiliations, and the existing company disclosure. One small parent-to-children figure. Save the subtitle for the talk listing.
+[Slide source and full comments](../acts/1-introduction/02-fork-definition.tex)
 
-**Visual:** One parent branching into three children, followed by one accepted artifact.
+### Slide 3 — Additional requests reduced latency, and additional samples raised coverage.
 
-**Say:** Give the opening scenario. Define the problem before presenting personal research history.
+**[1:00] · PUBLISHED**
 
-**Connection:** “What exactly would the children inherit?”
+**On screen:** Two concrete published results: a 1,000-key BigTable read, backup after 10 ms, p99.9 latency 1,800 → 74 ms with 2% extra requests; SWE-bench Lite coverage 15.9% → 56% at 250 samples.
 
-### Slide 2 The branching mechanism must preserve the state the continuation actually needs.
+**Say:** Dean and Barroso sent a backup request after ten milliseconds during a thousand-key BigTable read. The 99.9th-percentile latency fell from eighteen hundred milliseconds to seventy-four, with two percent more requests. The backup could escape a server-specific delay. Brown and colleagues sampled DeepSeek-Coder-V2-Instruct on SWE-bench Lite. Coverage rose from about sixteen percent to fifty-six percent at 250 samples. Coverage means some candidate solved the issue. We still need to recognize it. Our next evidence comes from a complete factory with tests, reviews, and delivery.
 
-**On screen:** Source alternatives → worktrees. Prepared filesystem → warm image or disk snapshot. Useful running state → process or VM checkpoint. Draw the same next action beginning from each kind of preserved state.
+**Connection:** Move from published opportunities to a complete recorded workflow.
 
-**Keep the detail:** A fork can supply several continuations from one captured parent, with private writable state. A Git worktree duplicates a source view. A process checkpoint may preserve memory and processes. A VM snapshot preserves the VM state its implementation declares. Remote model state and already performed external effects require separate treatment. The hypothetical opening involves running state; the serial repair case establishes files and feedback but no necessary live process state.
+[Slide source and full comments](../acts/1-introduction/03-published-benefits.tex)
 
-**Say:** “Identify what the next action needs. Then choose the least expensive mechanism that faithfully supplies it.”
+### Slide 4 — We recorded two factory runs and implemented evidence checks.
 
-**Connection:** “Systems have supported versions of this operation for years.”
+**[1:00] · MEASURED + BUILT**
 
-### Slide 3 Existing runtimes already reuse state for cloning, evaluation, and recovery.
+**On screen:** Two own run records: 43:44 / $10.33 and about 26 min / $3.43. Built checks: duplicate evidence IDs stop merge, lineage travels, and approval binds an artifact digest.
 
-**On screen:** SnowFlock: `VM_fork(N)`, EuroSys 2009, built on Xen. Kimi K3 AgentENV: pause, checkpoint, resume, and sandbox branches for reward evaluation. DeepSeek DSec: recorded commands and cached-result replay on resumption.
+**Say:** We have two complete factory records. The allowlist update took forty-three minutes and forty-four seconds and cost ten dollars thirty-three. A separate delivery incident took about twenty-six minutes and cost three dollars forty-three. We also implemented duplicate-evidence rejection and lineage transport in a numerical reducer. The factory's separate gate binds approval to an artifact digest. These pieces let us trace a candidate and its supporting observations. We will follow the first work order through its task, failing test, repair, review, and publication checks.
 
-**Keep the detail:** The current deck reports Kimi's 51.2 million sandboxes across about 1.51 million images and up to 98% of sandbox lifetime paused during model generation. These are attributed infrastructure figures. Forking a sandbox for judging does not imply that the judge itself is forked.
+**Connection:** Start with the concrete installer input and approved change.
 
-**Say:** “The primitive is established. Our question is its contract inside an agent workflow.”
+[Slide source and full comments](../acts/1-introduction/04-our-records-and-checks.tex)
 
-**Connection:** “An extra execution helps when it escapes a cause that holds the first one back.”
+## Act 2 — Cases: show what was done, how, and what changed
 
-### Slide 4 A backup request reduced p99.9 latency from 1,800 ms to 74 ms.
+Four software slides and six cross-domain cases provide the actual inputs, mechanisms, numerical results and acceptance decisions. Each adds a job to the shared workflow.
 
-**On screen:** BigTable, 1,000-key read; backup after 10 ms; accept the first result. Reported p99.9 latency: 1,800 ms → 74 ms, with 2% additional requests.
+### Slide 5 — The installer fix added two redirect hosts across a six-file plan.
 
-**Visual:** Two request lanes and the backup delay.
+**[1:10] · MEASURED**
 
-**Say:** Explain the mechanism behind the number: another server may escape a delay specific to the first server. Shared causes limit the benefit. This is published request hedging, not our fork benchmark.
+**On screen:** Installer redirect chain: astral.sh → releases.astral.sh → possible release-assets.githubusercontent.com fallback. Two missing destinations caused HTTP 403; the approved fix covered six files. Airflow + Docker Sandboxes + Databricks executed the work order.
 
-**Connection:** “For code generation, the opportunity is a better candidate rather than an earlier identical response.”
+**Say:** We began with the uv installer failing on islo. Its redirects reached two hosts outside a six-host allowlist, returning 403 and leaving uv unavailable. We ran the resulting work order in Docker Sandboxes through Airflow, with a hosted model served through Databricks. The plan covered six files: the Python allowlist, bootstrap, tests, deployment script, and documentation. It required the declarations to agree and the regression checks to remain hermetic. The factory then progressed through edits, harness tests, repair, review, and delivery. A failing test redirected that small task into dispatch ownership. Here is the cost of that detour.
 
-### Slide 5 250 attempts raised SWE-bench Lite coverage from 15.9% to 56%.
+**Connection:** Follow the detour through the recorded time and cost.
 
-**On screen:** Large Language Monkeys, DeepSeek-Coder-V2-Instruct, SWE-bench Lite: 15.9% coverage at one attempt; 56% at 250 attempts. “Coverage: at least one candidate solves the issue.”
+[Slide source and full comments](../acts/2-case-study/01-installer-task.tex)
 
-**Keep the detail:** Coverage does not give production selection accuracy. Stroebl et al. show that false acceptance costs can make the useful number of attempts small, often below ten under their conditions.
+### Slide 6 — Repairs and reviews consumed 59% of the recorded factory stage time.
 
-**Say:** “The collection can contain a correct patch while the workflow accepts a wrong one.”
+**[1:10] · MEASURED**
 
-**Connection:** “So we need separate accounts of execution cost and accepted-result quality.”
+**On screen:** Three-row work table: specification/plan 3:41 / $0.96; build/test 20:01 / $4.50; review 18:55 / $4.87. Two repairs and two reviews consumed 25.2 min / $7.75. Setup took 20.3 s; the calculated 100× improvement saves 20.1 s.
 
-### Slide 6 We built evidence accounting; the integrated forked factory remains proposed.
+**Say:** We recorded forty-three minutes and forty-four seconds of elapsed time and ten dollars thirty-three of model cost. The stage records sum to forty-two minutes and thirty-eight seconds. Two repair sessions and two reviews consumed twenty-five minutes and seven dollars seventy-five. That is fifty-nine percent of stage time and seventy-five percent of model cost. These are agent-session durations, including tool activity. Initial sandbox setup took twenty seconds, eight tenths of a percent of stage time. Making it a hundred times faster would save about twenty seconds. The more substantial question is what the repair changed and what the checks established.
 
-**On screen:** Measured: two factory work orders and distinct sandbox API paths. Built: exact duplicate-evidence rejection, lineage transport, and an artifact digest gate. Proposed: the integrated fork lifecycle, dependence-aware uncertainty, and restore authority rules.
+**Connection:** Inspect the changed behavior behind that expenditure.
 
-**Say:** “No case-study run forked. We observed obligations a branching system must preserve, and implemented some of the accounting.”
+[Slide source and full comments](../acts/2-case-study/02-workflow-cost.tex)
 
-**Connection:** “Start with the complete workflow that produced those obligations.”
+### Slide 7 — The repair added same-owner adoption without its required direct test.
 
-## Act 2 Follow one software factory through a repair
+**[1:05] · MEASURED**
 
-The audience should understand the task, the unexpected change, the missing test, and the delivery problem. Every failure will become a named requirement in the next act. Pages 7–20 supply the material.
+**On screen:** The recorded diagnosis separates cell ownership from dispatch-lease ownership. The fix adopts the active cell after same-work-order `CellBusy`. Review approved without the direct test, and `service.py` changed outside the six-file plan. The suite reports 1,972 cases including skips and zero failures. Force the new path and assert one dispatch.
 
-### Slide 7 The factory ran one hosted model through separate stages and checks.
+**Say:** The concurrency test reported zero runs from four replicas. The repair agent diagnosed one replica owning the active cell and another holding the valid dispatch lease. Its fix allowed adoption after CellBusy when the active cell belonged to the same work order. Review requested a deterministic test. The second repair refactored a helper, and review approved with that direct test still absent. The suite reported nineteen hundred seventy-two cases, including skips, and zero failures. All fifteen logged edits were allowed. We need to force the new path and assert exactly one dispatch. Next, a separate delivery incident shows why retaining the result matters.
 
-**On screen:** Airflow Factory → specification → approved plan → edits → harness tests → repair → review → delivery. Stack: Apache Airflow sandbox toolset, Docker Sandboxes, one hosted model served through Databricks across agent roles.
+**Connection:** Then preserve the artifact when acceptance cannot proceed.
 
-**Keep the detail:** Approval responses came from the harness and were recorded as human mode. The cell was unmanaged; sandbox authority leases were not exercised. Workgraph execution recorded `serial_fallback_missing_fork`.
+[Slide source and full comments](../acts/2-case-study/03-adoption-test.tex)
 
-**Say:** Explain the agent, harness, and controller as separate actors. This was a factory proposing changes to its own repository.
+### Slide 8 — Delivery refused three times, then cleanup erased an approved patch.
 
-**Connection:** “The original work order was a concrete installer failure.”
+**[1:05] · MEASURED + PROPOSED**
 
-### Slide 8 The uv installer failed at two redirect hosts missing from the policy.
+**On screen:** Approved review → unreviewed archive → three delivery refusals → teardown loses patch. Show the separate 26-minute / $3.43 incident and three record problems: skipped evaluation marked successful, harness approval labeled human, and digest without recoverable adapter source.
 
-**On screen:** `astral.sh/uv/install.sh` → `releases.astral.sh` → possible GitHub release asset at `release-assets.githubusercontent.com`. The policy began with six allowed hosts and omitted these two. Observed outcome: HTTP 403; uv unavailable.
+**Say:** A second work order received an approved review, but delivery found our harness's own review archive outside the reviewed files. It refused three times, and teardown discarded the patch. The run took about twenty-six minutes, cost three dollars forty-three, and produced no pull request. We also found CI success with evaluation skipped, harness approval labeled human, and an adapter digest without recoverable source. These are distinct failures of recovery, record meaning, and input preservation. We propose exporting candidates and typed receipts before cleanup. The broader case set now asks how other workflows identify an observation and admit a claim.
 
-**Keep the detail:** The installer failure was observed on the sandbox platform and became the work order executed through Docker Sandboxes. A shared release-asset hostname permits more than this installer. Digest-addressed fetching is a proposed refinement.
+**Connection:** Compare this proposal-to-claim distinction in genomics.
 
-**Say:** “The requested change was to add the two redirect destinations wherever the allowlist was stated.”
+[Slide source and full comments](../acts/2-case-study/04-delivery-receipts.tex)
 
-**Connection:** “The approved plan made both scope and completion concrete.”
+### Slide 9 — Six of eight drug combinations improved killing in MCF-7 cells.
 
-### Slide 9 The approved plan limited the allowlist update to six files.
+**[1:00] · PUBLISHED**
 
-**On screen:** Python allowlist check, shell bootstrap, regression tests, deployment script, and two documentation files: six files in total. Acceptance: both hosts present, policy statements agree, hermetic regression checks pass.
+**On screen:** >120,000 CRISPR guides / 19,050 genes → terrace ranking + DRACO / about 100 candidates → siRNA and drug-combination assays / MTS viability. Six of eight combinations improved killing in MCF-7. Each viability point has ≥4 technical repeats; each plot represents ≥2 experiments.
 
-**Keep the detail:** File paths in notes: `src/swfactory/doctor.py`, `deploy/islo/bootstrap.sh`, `tests/test_doctor.py`, `deploy/islo/deploy.sh`, `docs/islo.md`, `docs/selfhost.md`. Dispatch ownership was outside the plan.
+**Say:** In genomics, our goal was to find gene perturbations that make breast cancer cells more sensitive to SI-12. A genome-scale CRISPR library fed two ranking methods, which shortlisted about one hundred candidates. Separate assays then tested perturbations and drug combinations. Six of eight tested combinations improved killing in MCF-7 cells. The viability points had technical repeats, and the experiments were repeated independently. Those units answer different questions. The connection to our runtime is the separation between proposing an attractive candidate and collecting evidence about its actual effect.
 
-**Say:** “We can identify an out-of-plan edit because the boundary was recorded before editing.”
+**Connection:** Use physics to show how a specific numerical check settles a structural question.
 
-**Connection:** “Here is the whole run, with the work behind each timing.”
+[Slide source and full comments](../acts/2-case-study/05-genomics.tex)
 
-### Slide 10 Two repairs and two reviews used 59% of recorded stage time.
+### Slide 10 — 26 bidirectional continuations joined the projected orbit branches.
 
-**On screen:**
+**[1:00] · MEASURED**
 
-| Stage | Work performed | Time | Reported model cost |
-|---|---|---:|---:|
-| Specification and plan | Acceptance conditions and six-file plan | 3:41 | $0.96 |
-| Build and test | Three edit tasks, failing suite, first repair | 20:01 | $4.50 |
-| Review | Review, second repair, tests, re-review | 18:55 | $4.87 |
+**On screen:** With Ori Chamo: test whether projected branches of periodic three-body orbits connect in solution space. 135,445 source orbits → 26 selected difficult links → 26 successful bidirectional continuations within one sampled component. Shooting restores periodicity; Floquet calculations assess stability; representative transitions have independent 60-digit checks. Extra-Trees proposes warm starts.
 
-**Caption:** 43:44 elapsed; $10.33 total reported model cost. Sandbox setup: 20.3 s.
+**Say:** With Ori Chamo, we asked whether two branches seen in a projected orbit diagram really belong to different solution components. We started from a catalog of one hundred thirty-five thousand unequal-mass orbits. We selected twenty-six difficult connections and used prediction followed by shooting correction, running continuation in both directions. All twenty-six connected within the sampled component. Floquet calculations then described stability, with representative transitions independently checked at sixty digits. Extra-Trees helps propose warm starts in the Atlas. The numerical checks determine which claims those proposals can support.
 
-**Callout:** Two repair sessions and two review sessions consumed 25.2 minutes and $7.75: 59% of recorded stage time and 75% of model cost.
+**Connection:** Move from numerical continuation to automated model-development experiments.
 
-**Keep the detail:** Recorded stage total 42:38 (2,557.517 s); wall time 43:44 (2,624 s), from 11:39:56 to 12:23:40. The roughly 66 s difference is outside those recorded stage totals. Session timings include tool activity. Setup took 20.3 s; a 100× faster setup saves about 20.1 s, around 0.8% of stage time. Setup is not a measurement of the whole reusable prefix and does not establish or rule out the value of a different reached state.
+[Slide source and full comments](../acts/2-case-study/06-physics.tex)
 
-**Say:** “The long run came from repair and review. To understand it, look at the failed test that changed the task.”
+### Slide 11 — Autoresearch kept 23 of 126 experiments and lowered its score by 2.8%.
 
-**Connection:** “The repair agent diagnosed a split between two kinds of ownership.”
+**[1:00] · PUBLISHED**
 
-### Slide 11 The repair agent diagnosed different owners for the lease and active cell.
+**On screen:** Incumbent Git commit → edit `train.py` → five-minute training and `val_bpb` → keep or revert. One reported session: 126 attempts, 23 kept, 102 discarded, one crash; score 0.997900 → 0.969686, a calculated 2.8% relative reduction.
 
-**On screen:** Four replicas claim the same intent with a zero-duration dispatch lease. Replica A activates the cell; replica B holds the final dispatch token. A receives `DispatchLeaseLost`; B receives `CellBusy`. The recorded diagnosis reports zero Airflow runs.
+**Say:** Autoresearch gives us a very simple research loop. The agent edits training code, runs a five-minute training budget, reads validation bits per byte, and keeps or reverts the change. The evaluator stays fixed. In one reported session, 126 experiments produced twenty-three kept changes, 102 discards and one crash. The best score fell from about point nine nine eight to point nine seven zero, a relative reduction of 2.8 percent. This is sequential hill climbing through Git. The useful abstraction is an incumbent, a candidate, a fixed evaluation and a decision.
 
-**Visual:** Two ownership lanes meeting at dispatch, with the incompatible outcomes labeled.
+**Connection:** Scale the candidate/evaluator loop to deployed algorithm optimization.
 
-**Keep the detail:** This is the repair agent's recorded diagnosis of the failing test. The dispatch coordination lease here is different from the unused sandbox authority lease on slide 7.
+[Slide source and full comments](../acts/2-case-study/07-autoresearch.tex)
 
-**Say:** “The proposed repair let the current owner adopt an already active cell belonging to the same work order.”
+### Slide 12 — AlphaEvolve's scheduler recovered 0.7% of Google's worldwide compute.
 
-**Connection:** “That new behavior created a precise test obligation.”
+**[1:00] · PUBLISHED**
 
-### Slide 12 The suite had no failures, but the new adoption path lacked a direct test.
+**On screen:** Program database → Gemini Flash/Pro proposals → validity/performance evaluators → evolutionary selection. Report two separate production endpoints: 0.7% fleet compute recovered by scheduling; 23% kernel speedup → 1% shorter Gemini training.
 
-**On screen:** New behavior: `CellBusy` + same work-order ownership → adopt current active cell. Required check: force that path and assert exactly one successful dispatch. Existing tests covered helper adoption through another path and refusal of a foreign owner.
+**Say:** AlphaEvolve makes the search population explicit. A database supplies promising programs; Gemini Flash and Pro propose edits; automated evaluators check validity and performance; evolutionary selection feeds successful programs back. DeepMind reports a scheduling heuristic that recovered point seven percent of worldwide Google compute. On a separate Gemini kernel, a twenty-three percent local speedup became a one percent training-time reduction. That distinction matters for our talk: the result should record the application-level benefit as well as the fast inner operation. The population grows through evaluated programs, not through proposals alone.
 
-**Keep the detail:** The direct same-owner `CellBusy` test remained absent. The final suite reported 1,972 cases, including skips, with zero failures. The second review approved and treated the missing test as minor.
+**Connection:** Now isolate state reuse itself in a mature execution tool.
 
-**Say:** “A green suite answers the questions it actually exercises. Here the newly introduced path still needed a deterministic check.”
+[Slide source and full comments](../acts/2-case-study/08-alphaevolve.tex)
 
-**Connection:** “The test gap persisted through the workflow's own restrictions.”
+### Slide 13 — AFL++ reports 10–20× speedups from persistent process reuse.
 
-### Slide 13 The second repair changed code while the requested test remained absent.
+**[1:00] · PUBLISHED**
 
-**On screen:** Review requested a deterministic test. The second repair reported that the tests directory was protected, then refactored an existing recovery path onto the adoption helper. The review subsequently accepted the patch.
+**On screen:** Initialize target → deferred forkserver → fork once into a child. Inside that child, execute mutated inputs → collect coverage/crash → reset target state → repeat. After about 1,000 inputs, restart the child. Documentation gives typical 10–20× persistent-mode gains.
 
-**Keep the detail:** The public record contains 15 allowed edits, six by repair agents; the test-edit hook did not fire. The record does not establish an observed blocked test-edit attempt. Scope expansion and test coverage are separate issues.
+**Say:** AFL++ is a direct systems example of useful process reuse. We initialize the target, fork a child, then feed it mutated inputs. Coverage decides which inputs deserve further exploration, while crashes become candidates for investigation. Persistent mode runs about a thousand inputs in the child before restarting it. Its documentation reports typical speedups of ten to twenty times. That gain depends on correctly resetting mutable state between inputs. The forkserver saves initialization; the persistent loop avoids repeating process creation. This is where state reuse has a concrete operation, a mechanism and a reported value.
 
-**Say:** “The workflow needed an explicit decision about scope and a required receipt for the new behavior. Another general review could not supply that missing test.”
+**Connection:** Follow crash generation through confirmation of a security finding.
 
-**Connection:** “Even an accepted candidate still needs a reliable delivery lifecycle.”
+[Slide source and full comments](../acts/2-case-study/09-fuzzing.tex)
 
-### Slide 14 Delivery was refused three times, and cleanup lost the patch.
+### Slide 14 — CyberGym's GPT-5 campaign turned 56 crashes into 22 confirmed zero-days.
 
-**On screen:** Second recorded work order: about 26 minutes elapsed, 853.8 s of recorded stages, $3.43 model cost, 1,981 reported tests with no failures, approved review. Delivery refused three times. Teardown lost the patch; no PR resulted.
+**[1:00] · PUBLISHED**
 
-**Keep the detail:** The review found an unexpected file that was a review archive mirrored into the workspace. The supplied deck does not specify the original requested change. Present this as a delivery and recovery incident, with that limitation in notes.
+**On screen:** Latest-code campaign: OpenHands/GPT-5 explores 431 projects / 1,748 executables; 56 crashes → reproduction, deduplication and domain-specific validation → 22 confirmed zero-days. Separate historical benchmark: 1,507 patched vulnerabilities / 188 projects; candidate input must crash the vulnerable version and not the patched version.
 
-**Say:** “The controller can refuse delivery and still preserve the candidate for investigation or recovery.”
+**Say:** CyberGym shows why exploration needs a second decision after execution. In its latest-code campaign, OpenHands with GPT-five explored 431 OSS-Fuzz projects and 1,748 executables. It produced fifty-six crashes, which validation reduced to twenty-two confirmed zero-day vulnerabilities. Separately, its historical benchmark covers 1,507 known vulnerabilities and tests that a reproduction triggers the vulnerable version but not the patched version. Across these cases, candidates become accepted results through domain-specific checks. We can now choose what starting state an execution runtime should preserve.
 
-**Connection:** “Preservation is useful only if the saved records describe what really happened.”
+**Connection:** Choose what starting state the runtime should preserve, then specify its contract.
 
-### Slide 15 The records included skipped checks, mislabeled approvals, and missing input bytes.
+[Slide source and full comments](../acts/2-case-study/10-security-discovery.tex)
 
-**On screen:** Three concrete examples: CI green in about three seconds although the relevant step was skipped without a key; a harness response recorded as a human approval; an adapter digest recorded while its source remained outside Git and unrecoverable.
+## Act 3 — Design: make the state and publication contract explicit
 
-**Keep the detail:** Use typed statuses `executed`, `skipped`, `failed` and actors `human`, `harness`, `service`. Bind the receipt to the candidate and obligation. Save retrievable adapter bytes and external responses where replay requires them. CLI status text contaminating JSON stdout is a further parsing example in notes.
+Choose the state surface; verify capture; assign authority; account for external effects and cost; bind the returned artifact to the controller’s decision.
 
-**Say:** “Authentic records can still encode the wrong semantics. A digest identifies bytes; replay also needs access to those bytes.”
+### Slide 15 — Worktrees, checkpoints, and replay preserve different kinds of state.
 
-**Connection:** “These incidents give us requirements for the runtime around the agent.”
+**[0:55] · PUBLISHED**
 
-### Slide 16 Branching must preserve scope, test obligations, and recoverable artifacts.
+**On screen:** A state-to-tool table: source/build inputs → worktrees/OBuilder; process state → CRIU/gVisor; VM state → Xen/SnowFlock/Firecracker; recorded observations → rr/DSec. Match the mechanism to what the continuation consumes.
 
-**On screen:**
+**Say:** The first design choice is the state surface. Worktrees preserve files. Process checkpoints preserve supported process state. Virtual machine snapshots preserve their declared memory and device state. Replay preserves recorded observations. Each gives a continuation something different. If we edit loaded application code, we may need a reload or restart, which can destroy the state we hoped to reuse. We should first identify what the continuation consumes, then choose a mechanism and a faithful baseline. That distinction also explains the published latency figures.
 
-| Observation | Required mechanism |
-|---|---|
-| Unexpected repair | Scope amendment and new behavioral obligation |
-| Missing branch test | Artifact-bound receipt for that explicit obligation |
-| Misleading receipt | Typed execution status and actual actor |
-| Lost patch | Durable export before teardown |
-| Missing adapter source | Recoverable input bundle |
-| Future branching | Captured-state manifest, sharing policy, fresh authority |
+**Connection:** Keep state surfaces explicit when reading published latency numbers.
 
-**Say:** “A forked factory will have more states and more candidate results to manage. These obligations need to survive branching.”
+[Slide source and full comments](../acts/3-design/01-state-surfaces.tex)
 
-**Concrete proposed branch point:** Repository prepared, dependencies installed, failing suite recorded, just before the first repair. Draw three alternative repair continuations from this parent. This is a counterfactual design, not an event in the serial case study. Its demonstrated state may be supplied by worktrees and a warm template. Mark live-process reuse as unestablished. Keep this parent and its same-owner adoption candidate visible through the design and analysis sections.
+### Slide 16 — DeltaBox checkpoints in 10.83 ms; SnowFlock forks remotely in 600–800 ms.
 
-**Connection:** “First define what the branching mechanism actually preserves.”
+**[0:55] · PUBLISHED**
 
-## Act 3 Define the fork operation and its lifecycle
+**On screen:** The timing table retains operation names: DeltaBox checkpoint 10.83 ms; Kimi minimum checkpoint/resume 133/49 ms; Shepherd fork 134–143 ms; SnowFlock remote fork 600–800 ms; Firecracker boot under 125 ms. Time delivery of equivalent usable state.
 
-The audience should understand the state boundary, the authority boundary, external effects, and the cost baseline. Pages 18, 21–36 supply the material.
+**Say:** DeltaBox reports a ten point eight three millisecond checkpoint. SnowFlock reports six hundred to eight hundred milliseconds for a remote fork across hosts. Between those endpoints, Kimi reports minimum checkpoint and resume times, Shepherd reports fork time, and Firecracker reports boot to application code. The operation labels are the useful part: each runtime pays for a different state transition. A fair comparison reaches equivalent usable state and accounts for the same workflow costs. We first choose the state our continuation needs, then measure delivery of that state. The next check asks what actually survives restoration.
 
-### Slide 17 Worktrees, checkpoints, and replay preserve different kinds of state.
+**Connection:** Test which state survives our own restoration path.
 
-**On screen:** Source/build state: Git worktrees, OBuilder. Process state: CRIU; gVisor supplies a userspace-kernel sandbox with its own save/restore semantics. VM state: Xen, SnowFlock, Firecracker snapshots. Recorded observations: rr and DSec replay.
+[Slide source and full comments](../acts/3-design/02-published-latencies.tex)
 
-**Keep the detail:** Each row needs its captured surface and limitations. A worktree can parallelize edits without preserving live processes. A recorded response can support replay without executing the remote service again. Networking, time, randomness, and remote model sessions need declared semantics. Ask what state is captured, whether the child consumes it, and whether applying the patch invalidates it. Loaded application code may need a restart or reload; useful state in an unchanged simulator or service is a different case. These are possible workload examples, not observed properties of the allowlist repair.
+### Slide 17 — A RAM-only 128-bit nonce tests memory restoration in three children.
 
-**Say:** “Choose a mechanism for the state we need to reuse.”
+**[0:55] · PROPOSED**
 
-**Connection:** “This explains why the latency figures refer to different operations.”
+**On screen:** RAM-only 128-bit nonce → capture → three children → process-alive and nonce checks. Distinguish filesystem restoration, process/memory restoration, and fidelity of the declared semantic properties.
 
-### Slide 18 Published latency figures measure different operations.
+**Say:** Here is the restoration experiment. A process generates a hundred twenty-eight bit nonce and holds it only in RAM. Capture that state, restore three children, and check that each child has the live process and the same nonce. Files surviving establishes a filesystem path. The process and nonce surviving adds evidence for the memory path. Then compare the declared deterministic behavior against direct execution, with workload-specific checks for writes, clocks, randomness and sockets. Gate zero is preregistered and awaits execution. It gives us a concrete way to label the state our API actually preserves.
 
-**On screen:** DeltaBox checkpoint 10.83 ms; Kimi AgentENV checkpoint as low as 133 ms and resume as low as 49 ms; Shepherd fork 134–143 ms; SnowFlock remote fork 600–800 ms; Firecracker boot to application code under 125 ms. Preserve each row's source and qualification.
+**Connection:** Give restored children private writes and current permissions.
 
-**Keep the detail:** Mechanism lineage in a compact timeline: Xen/live migration/Potemkin → SnowFlock/Catalyzer/Nephele/MITOSIS → agent checkpointing DeltaBox/Shepherd and recovery Crab/Planarian. Recovery systems are not interchangeable fork implementations.
+[Slide source and full comments](../acts/3-design/03-restore-fidelity.tex)
 
-**Say:** “A checkpoint, a resume, a remote fork, and a boot have different endpoints. These figures locate mechanisms; they do not rank them for our workload.”
+### Slide 18 — Each child needs private writable state and host-controlled authority.
 
-**Connection:** “Our own restore path needs a fidelity check before we call it a live fork.”
+**[0:55] · PUBLISHED + PROPOSED**
 
-### Slide 19 Restore fidelity needs checks of the state the API claims to preserve.
+**On screen:** Shared immutable parent/cache, private child writes, host authentication and authorization, controller-held publication credential. Copied bearer tokens require authority treatment beyond kernel isolation.
 
-**On screen:** Write a 128-bit nonce only in RAM. Capture. Restore three children. Check whether it survives. Then compare declared deterministic behavior between restored and direct execution.
+**Say:** A child needs private writable state, while an immutable cache can be shared within a declared trust domain. It also needs authority assigned outside the copied guest state. A guest generation string and a bearer token can both be cloned. The host must authenticate and authorize the child, with an epoch, expiry and budget. The publishing credential stays with the controller, bound to a specific artifact decision. Kernel isolation is valuable, but it addresses a different boundary from permission to act.
 
-**Keep the detail:** Nonce survival is a necessary probe for the claimed memory path, not a complete fidelity proof. If it fails, report restore fan-out and its actual semantics. Probe writable isolation, process identity, clocks, RNG, and sockets as relevant. Hosted-model sampling occurs outside the guest snapshot.
+**Connection:** Extend the boundary to effects already sent outside the child.
 
-**Say:** “The name of an API cannot substitute for observing the state it preserves.”
+[Slide source and full comments](../acts/3-design/04-child-authority.tex)
 
-**Connection:** “Some inherited state must be refreshed rather than preserved.”
+### Slide 19 — Restoring local state does not undo completed external actions.
 
-### Slide 20 Each child needs private writable state and host-controlled authority.
+**[0:55] · PUBLISHED + PROPOSED**
 
-**On screen:** Immutable parent identity; private writable child state; host-assigned child identity, generation, expiry, and budget. Publishing credential remains with the controller. The warm cache is immutable and identified within a declared trust domain.
+**On screen:** A table distinguishes model requests, remote tool actions and staged patches. Local restore cannot reverse completed external actions. Proposed journals/buffers use idempotency or reconciliation; every exit exports artifacts and receipts.
 
-**Keep the detail:** A bearer credential copied into a microVM can remain usable despite kernel isolation. A guest-provided generation string is copied too. Firecracker and gVisor address isolation surfaces; Capsicum and CHERI illustrate explicit authority. Network access still needs an explicit egress policy; controller-held publishing credentials do not implement it.
+**Say:** Restoration brings back local state. It cannot unsend a model request, recover its cost, or reverse a remote tool action that already happened. Some outputs can be staged until verification; other effects need a journal, idempotency or reconciliation when the outcome is uncertain. Earlier recovery systems show ways to delay output, but a general effect buffer is still proposed here. We also export the patch and evidence before every teardown. This gives the runtime obligations beyond merely creating a child.
 
-**Say:** “The child can generate a candidate. Publication is a separate controller decision about a specific artifact.”
+**Connection:** Account for the costs of creating and preserving continuations.
 
-**Connection:** “That separation matters because external actions cannot always be rolled back.”
+[Slide source and full comments](../acts/3-design/05-external-effects.tex)
 
-### Slide 21 Restoring local state does not undo completed external actions.
+### Slide 20 — Forking saves resources when avoided preparation exceeds reuse overhead.
 
-**On screen:** Git writes can be staged; a sent model request has already incurred cost; a remote tool action may already have happened. Proposed effect journal and buffer; reconcile uncertain outcomes or use idempotency where supported. Export artifacts and evidence before every teardown.
+**[0:55] · PUBLISHED**
 
-**Keep the detail:** Speculator, external synchrony, and Remus supply precedents for delaying output. DSec replays cached command results on resumption. A general effect buffer and reconciliation policy are proposed here.
+**On screen:** Additive resource condition: `(N−1)P > H + N(R+D)`. Illustrative N=8: avoiding 210 resource-seconds while adding 34 saves 176; warm-cache preparation reduces avoided cost to 14 and loses 20. Batch elapsed time remains a separate endpoint.
 
-**Say:** “A snapshot restores local state. The surrounding protocol must account for effects that crossed its boundary.”
+**Say:** The resource condition compares preparation avoided with reuse overhead. Eight children and thirty resource-seconds of preparation avoid two hundred ten, while capture, restore and divergence add thirty-four. With a warm cache, preparation can fall to two and the same reuse path loses twenty. These are illustrative calculations. Ordinary continuation work cancels; elapsed time depends on the critical path and contention. In our file-edit case, worktrees could also provide parallelism. The twenty-second setup measurement is not a measurement of the full reusable prefix.
 
-**Connection:** “Now we can ask whether this added machinery earns its cost.”
+**Connection:** Compare that model with the API workflows actually exercised.
 
-### Slide 22 Forking saves resources when avoided preparation exceeds reuse overhead.
+[Slide source and full comments](../acts/3-design/06-reuse-cost.tex)
 
-**On screen:** Resource-cost condition `(N−1)P > H + N(R+D)`, where P is repeated preparation, H capture, R restore, D incremental divergence overhead from reuse, and N children. Illustration: N=8, P=30, H=2, R=1, D=3 → 210 resource-seconds avoided, 34 added, 176 saved. Warm P=2 → 14 avoided, 34 added, 20 lost.
+### Slide 21 — islo completed 255/256 restore–run–capture calls, median 6.87 s.
 
-**Keep the detail:** This is an additive resource model with illustrative inputs. D can include copy-on-write costs; ordinary continuation work common to both alternatives cancels and is excluded. Batch elapsed time depends on critical paths and contention. In the recorded three edit tasks, ideal unchanged-duration parallelism saves 165.9 s, about 6.5% of stage time, before fork, merge, and verification overhead. Worktrees may provide that parallelism. Jitsu and LightVM illustrate cheap fresh-start alternatives.
+**[0:55] · MEASURED**
 
-**Say:** “Compare equivalent usable states: worktree, warm template, disk restore, or live fork. The state must remain useful after the continuation changes the application.”
+**On screen:** Exercised API table: Daytona create 1,024/1,024, p50 0.20 s; Tensorlake create 256/256, p50 3.44 s; islo restore/run/capture 255/256, p50 6.87 s, p95 9.04 s. Snapshot 141 MB; islo concurrency 12; creation paths requested 8; teardown excluded.
 
-**Connection:** “Our existing measurements establish exercised API paths, with their endpoints visible.”
+**Say:** The islo trace completed two hundred fifty-five of two hundred fifty-six restore, run and capture calls. Its median was six point eight seven seconds, and its ninety-fifth percentile was nine point zero four seconds. The input was a named hundred forty-one megabyte snapshot, with concurrency twelve. Daytona and Tensorlake exercised creation at requested concurrency eight; their endpoints are shown separately. Teardown is outside these percentiles. Memory preservation still needs the nonce probe. These traces establish concrete API paths and costs; the next experiment asks whether that reuse path beats a faithful warm alternative.
 
-### Slide 23 The API traces measured creation and restore–run–capture separately.
+**Connection:** Place candidates, receipts and publication into one architecture.
 
-**On screen:** Daytona create: 1,024/1,024, p50 0.20 s, p95 1.12 s. Tensorlake create: 256/256, p50 3.44 s, p95 9.00 s. islo restore–run–capture: 255/256, p50 6.87 s, p95 9.04 s.
+[Slide source and full comments](../acts/3-design/07-api-traces.tex)
 
-**Keep the detail:** islo used a named 141 MB snapshot at requested concurrency 12. The create traces used concurrency 8. Teardown is excluded from per-operation percentiles. Memory capture remains unverified. These are different API workflows, not an isolated restore benchmark or provider ranking.
+### Slide 22 — The controller binds repository publication to a candidate digest.
 
-**Say:** Name islo explicitly. “These traces tell us what path executed. The controlled experiment must isolate the benefit.”
+**[0:55] · BUILT + PROPOSED**
 
-**Connection:** “Here is where the paths sit in the proposed complete runtime.”
+**On screen:** Solid path: Airflow scheduler → Docker cell → candidate digest → controller gate → repository. Dashed extensions: fork store and external evaluator returning artifact-bound receipts. The controller holds the publication decision.
 
-### Slide 24 The factory has a publication gate, but its fork store is missing.
+**Say:** The solid path is the factory architecture we exercised. Airflow schedules a Docker work cell. The cell returns a candidate identified by its digest. The controller binds approval to that artifact before repository publication. The journal records the decisions along the path. The dashed extensions place a fork store beside execution and an external evaluator beside candidate verification. Those extensions are designed rather than integrated. A numerical reducer was built separately for measurement summaries. The architectural connection is concrete: candidates and artifact-bound receipts return to the controller, which holds the publication credential and decides whether the exact candidate may proceed.
 
-**On screen:** Recurring lifecycle graph. Calls: checkpoint → fork → evaluate → select or reduce → verify exact result → promote. Scheduler/journal and work cells exercised; digest gate exercised; reducer built separately; lease broker built but unused in these work orders; fork store missing; external evaluator proposed.
+**Connection:** Add the authority rule for a worker restored after replacement.
 
-**Keep the detail:** Eight obligations: identified immutable parent; fresh child authority; no guest publication token; input/evidence/feedback records; duplicate rejection and retained shared factors; deterministic composition and conflict retention; verification of the exact composition; durable export before teardown. Status belongs to every obligation.
+[Slide source and full comments](../acts/3-design/08-component-status.tex)
 
-**Say:** “The contract joins components we have exercised with components we have yet to build.”
+### Slide 23 — An epoch check rejects the old instance after worker replacement.
 
-**Connection:** “A short stale-worker example makes the authority requirement concrete.”
+**[0:55] · PROPOSED**
 
-### Slide 25 A replacement restore must invalidate the old worker epoch.
+**On screen:** Worker epoch 1 → replacement advances epoch to 2 → delayed epoch-1 publication rejected. A concurrent child receives a separate worker identity. Approval names one frozen artifact; authority is checked outside restored state.
 
-**On screen:** Logical worker authorized at epoch 1 → replacement restore advances it to epoch 2 → old instance attempts publication at epoch 1 → controller rejects stale authority. Evidence, approval, and publication must name the same frozen artifact.
+**Say:** A logical worker starts with authority at epoch one. When the controller replaces that worker, it advances the current epoch to two. A delayed publication from the old instance carries epoch one, so the controller rejects it. Approval also names the frozen artifact, and the controller checks scope, expiry and budget. A concurrent fork receives a new worker identity and its own epoch; the parent may continue with its existing authority. This epoch protocol has a TLA plus design and still needs model and implementation checks. Execution can preserve state while publication remains a current controller decision.
 
-**Keep the detail:** A concurrent fork receives a new worker identity and its own epoch; it need not revoke a continuing parent. The controller checks identity, current epoch, artifact, scope, and budget. TLA+ design exists. No TLC model-check run or implementation trace check is recorded. Include clone, lease expiry, delayed approvals, and uncertain effects in the model's intended coverage. A model written down is not a checked protocol.
+**Connection:** Separate the decisions we make about returned objects.
 
-**Say:** “State restoration and authority renewal are coupled protocol events.”
+[Slide source and full comments](../acts/3-design/09-epoch-fence.tex)
 
-**Connection:** “What comes back from the children: candidate artifacts, compositions, or measurements?”
+## Act 4 — Analysis: match evidence to the decision
 
-## Act 4 Interpret the evidence from branches
+Separate selection, composition and common-target pooling. Keep observation identities, feedback and joint outcomes visible, then demonstrate the built reducer’s useful behavior and trust boundary.
 
-The audience should distinguish candidate search, patch composition, and statistical pooling. Bring Chamo into the talk as a concrete scientific workflow. Pages 4, 27, 37–46, 55, and selected research records supply the material.
+### Slide 24 — Selection, composition, and pooling require different evidence.
 
-### Slide 26 Selection, composition, and pooling require different evidence.
+**[0:50] · BUILT + PROPOSED**
 
-**On screen:** Three lanes: different patches → select one; compatible patches → compose and test the result; measurements of one parameter → statistical reduction under stated assumptions.
+**On screen:** Three lanes: different patches → select and validate one; compatible patches → compose and test resulting bytes; measurements of one target → reduce with calibrated information and a dependence model. The implemented reducer occupies the measurement lane.
 
-**Keep the detail:** A patch score is not automatically a precision estimate. Common-parameter pooling does not apply to different candidate artifacts just because every worker returned a number. A selector requires its own error and cost evaluation.
+**Say:** There are three different uses of branching. We may choose among different patches, compose compatible patches, or pool measurements of one target quantity. The evidence required by each decision differs. A numerical score for a patch is not automatically an information estimate, and the reducer does not select patches. Our implemented reducer occupies the measurement lane under stated assumptions. The scientific and security cases illustrate the same separation between candidates, executed checks and accepted claims. Next, consider what repeated checking can establish.
 
-**Say:** “The implemented numerical reducer occupies the measurement lane.”
+**Connection:** Name the population behind any continuation-success rate.
 
-**Connection:** “The work with Ori Chamo supplies a concrete scientific example of a candidate earning its evidence.”
+[Slide source and full comments](../acts/4-analysis/01-three-result-lanes.tex)
 
-### Slide 27 The Chamo project rejected a numerically unresolved cross-check.
+### Slide 25 — Checkpoint-started success is conditional on reaching that checkpoint.
 
-**On screen:** Candidate → screen → verified claim, with the required checks on the connecting arrows. Concrete outcome: an independent RK4 cross-check was unresolved and was rejected as evidence. Credit Ori Chamo beside the figure.
+**[0:50] · ILLUSTRATION / ANALOGY**
 
-**Keep the detail:** The three-body project examines 135,445 source orbit samples. The preprint reports 26 difficult links checked by bidirectional continuation, connecting apparent projected branches within the sampled component. AI/active learning proposes where to compute; Extra-Trees ranks candidates; shooting/Floquet calculations perform screening. The full project ladder is candidate → numerical screening → high-precision checks → independent reproduction → frozen claim. An independent mpmath RK4 self-test was numerically unresolved and its output was rejected as evidence. That gate is a concrete example of preventing a stronger unsupported claim. The preliminary preprint and repository retain open completeness/release obligations. Do not imply every candidate passed the full ladder or that the unresolved cross-check invalidated every other result.
+**On screen:** Task start → reached checkpoint → continuations. Illustration: 50% reaches the checkpoint, 80% succeeds given it, so end-to-end success is 40%. Retain both checkpoint and task-start populations.
 
-**Say:** “A plausible numerical proposal, a passed screen, and an admissible scientific claim have different evidence requirements.”
+**Say:** If a workflow reaches a checkpoint half the time and then succeeds with probability point eight, the corresponding end-to-end success probability is point four. Starting directly from the checkpoint observes point eight. That is a conditional question. It does not estimate how often we reach that state or establish every earlier choice. Go-Explore makes returning to reached states explicit. For our evaluation, we need to name both the checkpoint population and the task-start population, and retain which feedback shaped the candidate.
 
-**Connection:** “The factory's patch needs the same explicit distinction between those states. Across domains, we also have to identify what counts as one observation.”
+**Connection:** Retain the feedback that helped create the candidate.
 
-**Sources:** [Chamo and Eliaz preprint](https://ai.vixra.org/abs/2608.0069); [Three-Body Orbit Atlas repository](https://github.com/zozo123/threebody-closing-the-open). This project did not establish a sandbox-fork benefit.
+[Slide source and full comments](../acts/4-analysis/04-conditional-success.tex)
 
-### Slide 28 Source identities must be recorded before treating observations as separate evidence.
+### Slide 26 — Repair tests and generalization tests support different claims.
 
-**On screen:** Three identity examples: cells → patient; mining addresses → linked agents; execution IDs → observation and test-case IDs. Use two identifiers from one source as the visual, rather than a six-field catalog.
+**[0:50] · MEASURED + PUBLISHED**
 
-**Keep the detail:** The coauthored Bitcoin study linked most early mining to 64 agents; the malignant-cell study found patient identity relevant to clustering. Perception frames and physical interaction networks are additional methodological context in comments. These connections require domain-specific models and are not empirical evidence about fork outcomes. Credit collaborators in the footnotes. Put biography and full publication details in speaker notes rather than detouring into a CV slideshow.
+**On screen:** Failed test → repair → review feedback → repair again → frozen artifact. A regression receipt supports its asserted behavior; a claim about generalization or selection needs an appropriate untouched evaluation.
 
-**Say:** “The recurring habit is to identify the unit and the relationships between units before drawing a conclusion from their count.”
+**Say:** The repair sequence exposes failed tests and review feedback to the candidate. That is useful development. A regression check can still establish the deterministic behavior it actually asserts on that artifact. Claims about generalization or selection performance require a suitable evaluation beyond the development feedback. Adaptive-analysis work explains why reuse changes the interpretation. In our case, one hosted model performed the roles, but we did not estimate their dependence. The next slide separates three questions that a single green receipt cannot answer.
 
-**Connection:** “For this runtime, also specify the population from which those observations came.”
+**Connection:** Separate execution, required coverage and broader inference.
 
-### Slide 29 Checkpoint-started success is conditional on reaching that checkpoint.
+[Slide source and full comments](../acts/4-analysis/05-development-feedback.tex)
 
-**On screen:** Illustration: task reaches checkpoint with probability 0.5; continuation succeeds conditional on that checkpoint with probability 0.8; corresponding end-to-end probability 0.4.
+### Slide 27 — A check can run correctly and still miss the required behavior.
 
-**Keep the detail:** State the illustrative conditioning explicitly. A viable reached state contains information about the prefix; continuation success alone does not estimate how often the workflow reaches it or establish every earlier choice. Go-Explore makes return-to-state and exploration explicit.
+**[0:50] · MEASURED + PROPOSED**
 
-**Say:** “A checkpoint-started success rate answers a conditional question.”
+**On screen:** Three questions applied to adoption: did the check execute on this digest; did it force `CellBusy` adoption and assert one dispatch; what broader claim can repeated outcomes support? Identity, coverage and statistical support require separate mechanisms.
 
-**Connection:** “The evidence population also changes when feedback is used to choose repairs.”
+**Say:** Apply three questions to the same-owner adoption candidate. First, did a check execute on this exact artifact? Second, did it deliberately exercise the new path and assert one dispatch? Third, what broader claim does the collection of outcomes support? Artifact binding addresses the first; a targeted test the second; a suitable sampling design the third. The observed gap belongs to coverage. Rejecting duplicate evidence is useful, but it cannot discover an assertion that was never written.
 
-### Slide 30 Repair tests and generalization tests support different claims.
+**Connection:** Record observations with their actual case and ancestry identities.
 
-**On screen:** Failed test → repair → review feedback → another repair → accepted candidate. Label observations exposed during development. Reserve validation for claims about generalization or selection performance, and record the selection event.
+[Slide source and full comments](../acts/4-analysis/06-three-evidence-questions.tex)
 
-**Keep the detail:** A regression test used during repair still establishes the deterministic behavior it actually asserts on the checked artifact. Untouched evaluation is needed for appropriate claims beyond that behavior. One hosted model performed the agent roles in the case; no agent-dependence estimate was obtained. Related work: adaptive data analysis; Kimi diagnostic versus held-out verifiers; METR and ImpossibleBench as documented verifier-risk examples.
+### Slide 28 — Four runs of 100 cases produce 400 outcomes in 100 case clusters.
 
-**Say:** “Feedback changes the candidate. Keep its role visible when interpreting the final evidence.”
+**[0:50] · ILLUSTRATION / ANALOGY**
 
-**Connection:** “Three questions prevent us from asking a receipt to prove too much.”
+**On screen:** 100 case identities fan out to four runs: 400 observation IDs retain 100 shared case IDs and ancestry. A fresh outcome gets its own observation ID; a copied receipt retains its original identity.
 
-### Slide 31 A check can run correctly and still miss the required behavior.
+**Say:** Consider one hundred benchmark cases, each evaluated in four runs. We collect four hundred outcomes but retain one hundred case identities. A fresh stochastic evaluation gets a new observation identifier and keeps its case, candidate and ancestry labels. Those labels let us ask whether our variation comes from cases, repeated measurements or related continuations. The genomics case used the same distinction between technical repeats and independent experiments. A ledger preserves those relationships so that later analysis can use the appropriate unit. Next, we quantify one consequence of shared variation.
 
-**On screen:** Execution integrity: did this check run on this artifact? Behavioral coverage: did it force and assert the required path? Statistical support: does this collection support the proposed uncertainty or generalization claim?
+**Connection:** Quantify one consequence of shared variation for a mean.
 
-**Visual:** Apply the three questions to the same-owner adoption candidate from slide 12.
+[Slide source and full comments](../acts/4-analysis/07-fresh-observations.tex)
 
-**Keep the detail:** Artifact binding and an external recorder address integrity. A targeted test addresses coverage. A suitable sampling and dependence model addresses statistical support. The absent adoption test is a coverage gap; duplicate rejection cannot detect it by itself.
+### Slide 29 — At correlation 0.1, 100 measurements have the mean precision of about nine.
 
-**Say:** “These are separate checks with separate mechanisms.”
+**[0:50] · ILLUSTRATION / ANALOGY**
 
-**Connection:** “Now distinguish copied evidence from repeated observations.”
+**On screen:** Under equal variances and common pairwise ρ: `Var(mean)=σ²[ρ+(1−ρ)/N]`. For N=100, ρ=0.1 gives variance-equivalent N_eff≈9.17. The quantity is precision of a mean.
 
-### Slide 32 Distinct execution IDs do not make copied evidence new.
+**Say:** For a mean, we can show exactly how an assumed dependence affects precision. With equal marginal variances and common correlation point one, one hundred measurements have the variance-equivalent precision of about nine independent measurements. The variance stops shrinking toward zero because of the shared component. This is a calculation under stated assumptions. It is not a probability that the answer is correct, and shared bias remains. Published judge panels provide context, not a measurement of fork effects. Candidate search requires a different joint quantity.
 
-**On screen:** A and B both return evidence token e1 → duplicate rejected. A returns e1, B returns e2, both inherit parent p → different observations, unresolved dependence. One hundred cases run four times → 400 outcomes grouped within 100 case identities.
+**Connection:** Switch from mean precision to the joint event that limits search.
 
-**Keep the detail:** Distinguish execution ID, candidate digest, observation ID, and test-case ID. A genuinely fresh stochastic evaluation can get a new observation ID while retaining the case and ancestry cluster. A copied receipt remains the original observation.
+[Slide source and full comments](../acts/4-analysis/08-variance-equivalent-count.tex)
 
-**Say:** “Record freshness and relationships separately.”
+### Slide 30 — Zero pairwise correlation does not fix the all-wrong probability.
 
-**Connection:** “For averages, we can show exactly how a stated dependence assumption affects precision.”
+**[0:50] · ILLUSTRATION / ANALOGY**
 
-### Slide 33 At correlation 0.1, 100 measurements have the mean precision of about nine.
+**On screen:** Three exactly enumerated error distributions have 50% individual error and zero pairwise correlation, but all-wrong probabilities 0%, 12.5% and 25%. Search depends on the joint failure event and on recognizing an available correct candidate.
 
-**On screen:** `N_eff=N/[1+(N−1)ρ]`. Show 100 measurements → about 9.17 at ρ=0.10. Put the equal-variance/common-correlation assumption directly under the calculation.
+**Say:** Here are three exact joint distributions. Each candidate is wrong half the time and every pair has zero correlation. Yet the probability that all three are wrong is zero, one eighth or one quarter. A selector cannot return a correct member when all members are wrong, and must still recognize one when it exists. The effective-size formula for a mean therefore cannot answer the search-coverage question. We need the joint failure behavior, not only a pairwise statistic.
 
-**Keep the detail:** The underlying formula is `Var(mean)=σ²[ρ+(1−ρ)/N]`. Nine measurements give effective sizes 9 at ρ=0, 5 at ρ=0.10, and 1.8 at ρ=0.50. This is variance-equivalent sample size for a mean under the model. It is not a probability of correctness and does not remove common bias. Published judge-panel comparisons are context: Kohli's nine-judge panel had estimated effective size 2.18; 9.1% of 319 unanimous MNLI decisions were wrong. Kim's conditional wrong-answer agreement is a different statistic, not ρ. Neither result is a measurement of fork effects. Additional original-slide examples stay in comments: under independent draws, a 1% slow-request probability gives about 63% probability of at least one slow request in a 100-way fan-out; a hypothetical 10% failure rate gives 0.9^29≈0.047 probability of 29 green trials. Amdahl's similar algebra is an analogy. Poolkeh's modeled 295,951 tests for about nine million people concerns a different pooling operation.
+**Connection:** Use shared variation constructively when estimating a difference.
 
-**Say:** “Additional related observations can add information, but the independence formula can overstate it.”
+[Slide source and full comments](../acts/4-analysis/09-search-joint-errors.tex)
 
-**Connection:** “Even pairwise dependence does not completely describe candidate search.”
+### Slide 31 — Shared conditions can reduce uncertainty in a paired comparison.
 
-### Slide 34 Zero pairwise correlation does not fix the all-wrong probability.
+**[0:50] · PUBLISHED + PROPOSED**
 
-**On screen:** Three binary error indicators, each wrong with probability 1/2 and pairwise correlation zero. Equiprobable patterns `000,011,101,110` → all-wrong probability 0. All eight patterns → 1/8. Equiprobable `001,010,100,111` → 1/4.
+**On screen:** Paired comparison on the same case: `Var(A−B)=Var(A)+Var(B)−2Cov(A,B)`. Positive shared variation can reduce uncertainty in a difference. Record ancestry, fixtures, tests and feedback; control the randomness actually consumed.
 
-**Keep the detail:** Define 1 as an error. Marginals and pairwise correlations match across these three joint distributions. Search coverage depends on the joint all-fail probability. A good selector must still recognize the correct candidate when one exists.
+**Say:** Sharing can be useful when our quantity is a difference. Compare A and B under matched conditions: positive shared variation can reduce the variance of A minus B. That is the reason for paired comparisons and common random numbers. The relevant randomness must actually be controlled; cloning a guest seed does not control a hosted model. An ancestry tree is also incomplete, because fixtures, tests, retrieval and feedback can link executions. The runtime should retain these relationships and let the evaluation question determine how to use them.
 
-**Say:** “The effective-size calculation for an average cannot answer this candidate-search question.”
+**Connection:** Then distinguish comparing candidates from composing their artifacts.
 
-**Connection:** “Some sharing is deliberately useful when the question is a comparison.”
+[Slide source and full comments](../acts/4-analysis/10-paired-comparisons.tex)
 
-### Slide 35 Shared conditions can reduce uncertainty in a paired comparison.
+### Slide 32 — Passing every pair does not establish that the full composition passes.
 
-**On screen:** Compare A and B on matched conditions. `Var(A−B)=Var(A)+Var(B)−2Cov(A,B)`. Positive shared variation can reduce the variance of the difference.
+**[0:50] · ILLUSTRATION / ANALOGY**
 
-**Keep the detail:** Common random numbers require control of the relevant randomness. Cloning a guest PRNG seed does not control hosted-model sampling. Draw ancestry links separately from shared fixture, test, retrieval, evaluator, and feedback links: an execution tree alone omits important relationships.
+**On screen:** Capacity example: each patch adds one worker; all singles and pairs fit capacity two; all three fail. Eight candidates have 28 pairs and 256 subsets. Test the exact selected composition and bind its digest.
 
-**Say:** “The appropriate sharing policy depends on the quantity we want to estimate.”
+**Say:** Three patches each enable one worker. Every single patch and every pair fits within capacity two. The full composition does not. With eight candidates there are twenty-eight pairs but two hundred fifty-six subsets, so pair checks can miss higher-order interactions. Publication concerns the actual artifact we selected, not an assortment of individually green parts. We must rebuild and test that composition and bind the receipt to its digest. Statistical reduction of measurement summaries does not solve this artifact problem.
 
-**Connection:** “For patch composition, the relevant relationship can involve more than pairs.”
+**Connection:** Show what the implemented numerical lane enforces.
 
-### Slide 36 Passing every pair does not establish that the full composition passes.
+[Slide source and full comments](../acts/4-analysis/11-exact-composition.tex)
 
-**On screen:** Capacity limit of two workers. Three patches each add one worker. Every individual patch and every pair passes; all three together exceed the limit. With eight candidates, 28 pairs exist but 256 subsets exist.
+### Slide 33 — The reducer rejects a repeated evidence ID and carries lineage forward.
 
-**Keep the detail:** Pairwise conflict indicators can miss higher-order effects. Verify the exact selected composition; bind the receipt to its digest. Reduction of numerical summaries does not solve patch composition.
+**[0:50] · BUILT**
 
-**Say:** “Acceptance concerns the actual artifact we will publish.”
+**On screen:** Result record: estimate, information, n, evidence IDs, lineage, metadata. Two summaries declaring the same evidence ID cause merge to raise. Distinct summaries combine and retain lineage under the common-target model.
 
-**Connection:** “Here is the part of evidence accounting we have implemented.”
+**Say:** The reference reducer makes one ledger rule executable. A result records its estimate, information, sample count, evidence identifiers and lineage. If two results declare the same evidence identifier, merging them raises an error. Distinct observations can merge numerically, and their lineage travels with the combined record. The algebra assumes a common target and calibrated information; carrying ancestry makes later dependence analysis possible, but does not perform it automatically. This gives us a concrete implementation to test, beginning with ordinary uneven shards and then a deliberately inflated weight.
 
-## Act 5 Show the implemented evidence reducer
+**Connection:** Test the numerical reducer on uneven synthetic shards.
 
-The audience should see code-enforced behavior, quantitative checks, and the remaining trust boundary. Pages 43 and 47–49 supply the material.
+[Slide source and full comments](../acts/4-analysis/12-built-reducer.tex)
 
-### Slide 37 The reducer rejects declared duplicates and retains lineage.
+### Slide 34 — Information pooling reduced the synthetic MLE gap from 0.177 to 0.0083.
 
-**On screen:** Record: estimate, reported information or uncertainty, sample count, evidence IDs, lineage, execution metadata. Demonstrate repeated ID rejection and transport of lineage with the result. Calibration remains a statistical assumption; field validation does not establish it.
+**[0:50] · MEASURED**
 
-**Keep the detail:** The Gaussian reference reducer adds natural-parameter summaries and retains a disagreement statistic. Exact repeated declared IDs are rejected by default. Different IDs with a shared parent are accepted; dependence adjustment and conservative refusal remain proposed. Production authenticated manifests require more than worker declarations.
+**On screen:** Five logistic shards, n=60,120,400,2,000,5,000. Across eight fixed seeds, mean norm gap to centralized MLE: information pooling 0.0083 ± 0.0042 versus equal averaging 0.177 ± 0.090. Whiskers are SD.
 
-**Say:** “This is an enforceable interface boundary. The independence and common-target assumptions still belong to the caller.”
+**Say:** We split a synthetic logistic-regression dataset into five uneven shards, from sixty observations to five thousand. Equal averaging gives the smallest shard the same influence as the largest. Information pooling uses each shard's estimated precision. Across eight fixed seeds, its mean distance to the centralized maximum-likelihood estimate was point zero zero eight three, compared with point one seven seven for equal averaging. The whiskers show standard deviations. This is a concrete check of the numerical reducer under a common-parameter model. The next stress case asks what happens when the reported precision is inflated.
 
-**Connection:** “The numerical checks exercise that defined scope.”
+**Connection:** Stress the assumption that reported information is trustworthy.
 
-### Slide 38 Information pooling outperformed equal averaging on the synthetic logistic shards.
+[Slide source and full comments](../acts/4-analysis/13-synthetic-pooling.tex)
 
-**On screen:** One two-bar chart: gap to centralized MLE 0.0083 for information pooling versus 0.177 for equal averaging. Caption: five synthetic logistic shards, sizes 60–5,000; mean across eight fixed seeds. Show the SD whiskers with a label identifying them as SD.
+### Slide 35 — Inflated reported precision pushed the synthetic pooled estimate to 17.0004.
 
-**Keep the detail:** Logistic results are 0.0083 ± 0.0042 versus 0.177 ± 0.090, mean ± SD across eight fixed seeds. Sample-size weighting was not compared. Separate integration check: four workers from a named snapshot returned pooled synthetic mean 4.9422 versus full-sample mean 4.9450; concurrent restore–run–capture took 6.70 s. These checks exercise numerical pooling, provenance, and the snapshot-to-reducer path. They do not measure agent-task accuracy or dependence correction. Use the current paper title, Evidence-Aware Reduction for Forkable Compute.
+**[0:50] · MEASURED**
 
-**Say:** “The useful result is that the record and algebra execute as specified.”
+**On screen:** Synthetic 2,000-point shard reports a distant estimate and 50× inflated information. Unprotected pooled estimate: 17.0004; stress heuristic: 4.9566. Evidence identity and justified weight are separate requirements.
 
-**Connection:** “A worker can still lie about the strength of its evidence.”
+**Say:** A worker can report a real sample count and still inflate the strength of its evidence. In this synthetic stress case, a two-thousand-point shard returns a distant estimate and fiftyfold reported precision. Unprotected pooling moves to seventeen. A heuristic returns about four point nine six, without a Byzantine guarantee. Sample count alone does not detect the attack. Information needs trusted recomputation under the numerical model, while agent scores need their own validated error model. We now have enough structure to state the experiments and the acceptance policy.
 
-### Slide 39 Inflated reported precision pushed the synthetic pooled estimate to 17.0004.
+**Connection:** Turn the obligations into a concrete acceptance policy.
 
-**On screen:** A distant scalar estimate from a 2,000-point shard inflates reported precision 50×. Unprotected pooled estimate: 17.0004. Stress heuristic: 4.9566.
+[Slide source and full comments](../acts/4-analysis/14-forged-information.tex)
 
-**Keep the detail:** The heuristic illustrates one attack and is not a Byzantine guarantee. Trusted recomputation under the numerical model can validate information. Agent scores require a separately validated error model. These extensions are proposed. An external writer of receipts alone cannot establish that a reported uncertainty is calibrated.
+## Act 5 — Evaluation: let an experiment change a runtime decision
 
-**Say:** “The runtime must preserve evidence identity, and the statistical procedure must justify the weight assigned to it.”
+H1 chooses a preparation backend. H2 tests environmental co-failure. A dated analysis amendment resolves linked experimental units; targeted coverage and repair resampling answer separate questions.
 
-**Connection:** “The complete workflow can now state what each decision requires.”
+### Slide 36 — The publication gate requires the adoption test on the exact candidate.
 
-## Act 6 Evaluate the proposal and return to the original case
+**[1:10] · PROPOSED**
 
-The audience should leave with falsifiable questions and a useful next experiment. Pages 50–58 supply the material; the old detailed decision rules must be reconciled with the stated design limitations.
+**On screen:** Candidate/scope → force adoption and assert one dispatch → receipt naming exact digest → current authority. An unmet obligation retains the candidate. If selected patches are composed, verification follows composition. Export on refusal.
 
-### Slide 40 A proposed obligation gate would withhold this candidate until the missing test passes.
+**Say:** We can turn the case into a precise acceptance policy. The candidate added a same-owner adoption path. Before publication, we freeze that candidate, deliberately force the path, and assert that one dispatch occurs. The receipt must name the artifact we actually tested. If we combine candidates, we test that exact combination again. The controller then checks current authority and approval for that digest. A refusal retains the patch and its receipts. This resolves a concrete missing obligation; it does not yet establish how well an ensemble generalizes.
 
-**On screen:** Same-owner adoption candidate → scope recorded → required branch test → typed artifact-bound receipts → selection or composition → exact artifact verification → current-authority gate → publication. Durable export on every exit.
+**Connection:** Let the first experiment choose the preparation mechanism.
 
-**Keep the detail:** Use the missing test as the concrete required obligation. The proposed obligation gate would keep that item unresolved until the specified check exists. The existing reducer does not enforce this requirement. A small pilot can reveal shared failure classes; it cannot certify rare false acceptance or low dependence.
+[Slide source and full comments](../acts/5-evaluation/01-obligation-gate.tex)
 
-**Say:** “Branching creates alternatives. This contract specifies what allows an alternative to become an accepted result.”
+### Slide 37 — 20 batches at each fan-out compare restore with a warm cached template.
 
-**Connection:** “The first experiment asks whether reached-state reuse beats its strongest simple alternative.”
+**[1:10] · PROPOSED**
 
-### Slide 41 The proposed cost experiment compares restore with a warm cached template.
+**On screen:** Proposed H1: warm cached template versus restore after setup and a warm test; N={3,6,12}, 20 interleaved batches per arm/N. No model calls. Endpoint: request to the last child’s first test result. Establish fidelity and report failures/capture cost.
 
-**On screen:** Unrun preregistered H1. Warm template versus restore after setup and one warm test. N={3,6,12}; 20 interleaved batches per arm and N; no model calls. Endpoint: request to the last child's first test result. Cold start is a reference.
+**Say:** The first experiment asks which execution mechanism we should choose. We compare restore after setup and a warm test with a cached template that already has dependencies. For three, six and twelve children, we interleave twenty batches per arm and measure the time until the last child produces its first test result. There are no model calls. We establish capture semantics first and expose failures and capture cost. A win informs the backend choice for this workload. To claim a benefit from live memory, we also need useful running state and an equivalent warm reconstruction baseline.
 
-**Keep the detail:** Establish capture semantics and declared fidelity first. Report restore failures with timing. Support threshold: 95% CI lower bound on median gain above 10 s at every N; rejection threshold in the current protocol uses Bonferroni 98.3% upper bounds below 10 s at any N. Predeclare capture amortization and failure treatment. Keep resource cost separate from batch latency. A timing win justifies the exercised restore path on this workload; it does not establish that live memory was necessary. A live-state-benefit experiment additionally needs representative running state, faithful capture, children that consume that state, and a warm alternative that reconstructs equivalent usable state.
+**Connection:** Ask whether common captured ancestry affects environmental failures.
 
-**Say:** “A warm-cache win is an informative result about this workload.”
+[Slide source and full comments](../acts/5-evaluation/02-cost-experiment.tex)
 
-**Runtime decision informed:** Choose restore or a warm template for this workload and fan-out.
+### Slide 38 — 12 snapshot families compare sibling and separately prepared co-failures.
 
-**Connection:** “Speed does not establish whether sibling outcomes share environmental failure causes.”
+**[1:10] · PROPOSED**
 
-### Slide 42 The proposed sibling experiment measures environmental co-failure.
+**On screen:** Proposed H2: 12 independently prepared snapshot families, three siblings each, versus restored children from separately prepared families; matched host/start slot and ≥300 lockstep race rounds. Record binary outcomes and failure classes; confirm the test consumes a captured varying feature.
 
-**On screen:** Unrun preregistered H2. Twelve snapshot families with three siblings; compare shared-parent restores with separately prepared restores at matched host/slot. At least 300 lockstep race-test rounds per condition. Record outcome and failure class.
+**Say:** The second experiment asks whether captured ancestry changes environmental failure patterns. Twelve independently prepared families each supply three siblings. We compare them with three restores from other families, matched by host and start slot, over at least three hundred race-test rounds. We record failure classes as well as binary outcomes. Before collecting data, we must identify a varying parent-state feature that is preserved and actually consumed. If the test rebuilds the relevant state, it removes the treatment. This is an environmental experiment; the hosted model remains outside the guest snapshot.
 
-**Keep the detail:** Before collecting data, identify a varying parent-state feature that capture preserves and the test actually consumes. A test that recreates all relevant backend state may remove the proposed treatment. The protocol measures environmental co-failure, not hosted-model judgments or final patch quality. Separately prepared states may still share other causes.
+**Connection:** Choose an analysis that respects the actual experimental units.
 
-**Say:** “This experiment isolates a runtime question. It does not yet calibrate agent confidence.”
+[Slide source and full comments](../acts/5-evaluation/03-sibling-experiment.tex)
 
-**Runtime decision informed:** Decide whether captured ancestry belongs in the uncertainty model for these race-test observations.
+### Slide 39 — At correlation 0.10, nine outcomes have a variance-equivalent count of five.
 
-**Connection:** “The inference must respect how families and rounds were reused.”
+**[1:10] · PROPOSED**
 
-### Slide 43 Shared families and repeated rounds require an analysis that accounts for dependence.
+**On screen:** Reused families link comparisons; repeated rounds may share temporal effects. The proposed amendment declares independent blocks or a justified dependence model before collection. At N=9, absolute ρ=0.10 gives N_eff=5.00; ρ=0.15 gives 4.09.
 
-**On screen:** Shared families across comparisons; temporal dependence across rounds; host/scheduling assignment; restore failures; nonzero baseline dependence. Example for nine measurements: stranger ρ=0.10 → N_eff=5.0; sibling ρ=0.15 → N_eff≈4.1.
+**Say:** The comparison design determines the analysis. In the recorded protocol, families recur in several comparisons and the same cells run many rounds. We cannot treat twelve differences as independent by default. Before collection, we need independent blocks or a model that handles these links and time dependence. The example shows why baseline dependence also matters: nine measurements at correlation point one carry five independent measurements' variance-equivalent precision. Raising correlation to point fifteen gives about four point one. These are illustrative calculations, not outcomes. We retain the original preregistration and identify the amendment explicitly.
 
-**Keep the detail:** Proposed amendment: use independently assigned family blocks, or a justified model that accounts for overlap and temporal dependence. The detailed p58 independent sign-flip rule cannot be retained without resolving reused-family dependence. An excess Δρ=0.05 alone does not imply the zero-baseline value N_eff≈6.4.
+**Connection:** Return to the repair with a targeted test and a separate repeatability study.
 
-**Say:** “Declare the experimental unit and the analysis before collecting outcomes.”
+[Slide source and full comments](../acts/5-evaluation/04-dependent-analysis.tex)
 
-**Connection:** “Finally, return to the disputed repair itself.”
+### Slide 40 — One adoption test checks dispatch; nine repair samples measure repeatability.
 
-### Slide 44 Testing the disputed path and resampling the repair answer different questions.
+**[1:10] · PROPOSED**
 
-**On screen:** First: freeze the candidate and force `CellBusy` with same-owner adoption; assert one dispatch. Separately: nine repair resamples with fixed input, prompt, policy, and hosted-model endpoint; record scope edits, distinct diffs, and claimed test evidence.
+**On screen:** Two procedures: freeze digest → force same-owner `CellBusy` → assert exactly one dispatch; separately fix input/prompt/policy → nine repair samples → record scope edits and distinct diffs. One checks behavior; the other describes repeatability.
 
-**Keep the detail:** Both proposed and unrun. The recorded prediction is at least five of nine repeats of the out-of-plan edit. Exact original pre-repair tree equivalence is unconfirmed; the public substitute requires qualification. Resampling describes repeatability and cannot demonstrate an effect of the guest snapshot on hosted-model sampling.
+**Say:** We end the experiment plan where the software case began. Freeze the candidate, force same-owner CellBusy, and assert exactly one dispatch. That is the acceptance obligation for the new behavior. Separately, run nine repair samples from fixed inputs, prompt, policy and hosted endpoint. Record which samples edit outside the planned scope and how many distinct diffs they produce. Those samples describe repair repeatability. The public substitute input and the full protocol are retained in the notes. Together, the procedures distinguish a check on a concrete artifact from a measurement of the process that generated it.
 
-**Say:** “The targeted test answers the original missing behavioral question. Resampling answers a different question about repair repeatability.”
+**Connection:** Close by connecting state reuse, evidence handling and exact-result verification.
 
-**Runtime decisions informed:** Resolve this candidate's behavioral obligation; separately characterize how stable the repair behavior is under the stated sampling setup.
+[Slide source and full comments](../acts/5-evaluation/05-test-and-resample.tex)
 
-**Connection:** “We can now return to the first figure and identify exactly what is known.”
+## Act 6 — Conclusion: return a verifiable result
 
-### Slide 45 The runtime must preserve shared history and verify the result before publication.
+The closing reconnects the concrete state, evidence and verification results to the proposed lifecycle.
 
-**On screen:** Recurring lifecycle graph with three labels: state boundary, evidence boundary, authority boundary. Completed: recorded factory incidents, exercised API paths, duplicate rejection, lineage transport, artifact digest gate. Open: controlled fork benefit, environmental dependence, calibrated uncertainty, restore authority protocol.
+### Slide 41 — Reuse the useful state, retain the evidence, and verify the exact result.
 
-**Close the experimental loop:** Put H1 on the capture/fork choice; H2 on the evidence interpretation; the targeted test on the adoption candidate; resampling on repair generation. Each experiment should change a runtime decision rather than merely add another statistic.
+**[1:10] · LIFECYCLE**
 
-**Two research questions:** Can a manifest of ancestry, fixtures, and feedback support a calibrated dependence model or a justified refusal rule? Can restore renew authority and reject stale publication across failures and uncertain effects?
+**On screen:** Return to the full lifecycle. State: AFL++ 10–20×; evidence: synthetic MLE gap 0.177 → 0.0083; verification: CyberGym 56 crashes → 22 findings. Reuse useful state, preserve exact artifacts and evidence, and let current authority approve publication.
 
-**Return to the opening:** Revisit the hypothetical running failure. The next decisive systems result is a relevant reached state that survives capture, remains useful in private continuations, and costs less to restore than to reconstruct from a warm alternative. The existing artifact and evidence checks do not yet demonstrate that integrated result.
+**Say:** The story comes back to one useful reached state and several possible continuations. AFL plus plus shows a concrete performance gain from process reuse. Our synthetic reducer shows why the strength and identity of returned measurements matter. CyberGym shows the distance between a generated crash and a confirmed finding. Software repair adds the last boundary: the exact tested artifact must survive export, and current authority must approve its publication. These are separate results supporting one design. The next systems experiment compares faithful restore with equivalent warm reconstruction. The goal is useful continuations that return inspectable evidence and a verifiable artifact.
 
-**Closing words:** “Fork is an execution option. The contract records what each continuation used, what it established, and what it may publish. The experiments determine when state reuse and dependence handling improve the workflow.”
+**Connection:** The next systems experiment chooses faithful restore or equivalent warm reconstruction.
 
-## Acceptance decision tree for the concrete case
+[Slide source and full comments](../acts/6-conclusion/01-final-contract.tex)
 
-This is a proposed policy, not a description of the current implementation. The entire acceptance path records and preserves artifacts on all exits.
+## Record and next step
 
-```mermaid
-flowchart TD
-    candidate["Candidate adds same-owner adoption after CellBusy"]
-    scope{"Scope change recorded and authorized?"}
-    execute{"Receipt says the required test executed on this digest?"}
-    coverage{"Test forces same-owner CellBusy and asserts one dispatch?"}
-    exact{"Chosen composition verified at its exact digest?"}
-    approve{"Approval names that digest?"}
-    current{"Controller authority is current?"}
-    accept["Publish this artifact and preserve its receipts"]
-    hold["Keep the candidate; resolve the unmet obligation"]
-    candidate --> scope
-    scope -->|Yes| execute
-    scope -->|No| hold
-    execute -->|Yes| coverage
-    execute -->|No| hold
-    coverage -->|Yes| exact
-    coverage -->|No| hold
-    exact -->|Yes| approve
-    exact -->|No| hold
-    approve -->|Yes| current
-    approve -->|No| hold
-    current -->|Yes| accept
-    current -->|No| hold
-```
+`PREREGISTRATION.md` remains unchanged. H2 analysis changes are **proposed dated amendments before collection**, rather than silently revised decision rules. No unrun experiment has a reported outcome. The public pre-repair substitute still needs equivalence qualification.
 
-Claims about generalization, ensemble confidence, or selection accuracy require an additional suitable evaluation design. They are not implied by passing this deterministic regression path.
+The original deck’s source bibliography remains complete in `REFERENCES.md`. Older end-matter and archived slides are historical source material outside this 41-slide build. The generated presenter guide retains the detailed facts that were moved into comments, including run receipts, numerical assumptions, published endpoint definitions and domain limits.
 
-## Map from the revised PDF to this main deck
-
-| PDF pages | Where the material goes |
-|---|---|
-| 1 | Slide 1; explicit definition added on slide 2 |
-| 2–3 | Slides 4–5 |
-| 4 | Slide 28; selected personal research connections, with domain limits |
-| 5 | Self-driving workflow context incorporated into opening/slide 7; etymology and terminology politics removed |
-| 6 | Slide 6 |
-| 7–9 | Slides 7–9 |
-| 10 | Slide 10 with clearer title, actors, and timing explanation |
-| 11–13 | Slides 11–13 |
-| 14 | Slide 30; verifier-risk sources attached to the corresponding claim |
-| 15 | Slide 14 |
-| 16–17 | Slide 15 |
-| 18 | Slides 2, 17, 19 |
-| 19 | Slide 22; ideal bound retained with assumptions |
-| 20 | Slide 16; mechanism mismatches corrected |
-| 21–22 | Slide 20 |
-| 23 | Slide 3; API semantics on slide 24 |
-| 24–25 | Slides 17–18 |
-| 26 | Slide 3 |
-| 27 | Slide 29; absolute claim about prefix removed |
-| 28–29 | Slides 19–20 |
-| 30 | Slide 21 |
-| 31 | Slide 22 |
-| 32 | Slide 23; islo named |
-| 33–35 | Slide 24 with all lifecycle obligations in its content and notes |
-| 36 | Slide 25 |
-| 37 | Slide 26 |
-| 38 | Slide 30; regression evidence distinguished from held-out generalization |
-| 39 | Slide 32 |
-| 40 | Slide 34 |
-| 41–42 | Slide 33; formula scope and external-study limits retained |
-| 43–44 | Slides 35, 37; Chamo/field connections on slides 27–28 |
-| 45 | Slide 35 |
-| 46 | Slide 36 |
-| 47 | Slide 37 |
-| 48 | Slide 38 |
-| 49 | Slide 39 |
-| 50 | Slide 41 |
-| 51–52 | Slides 42–43 |
-| 53 | Slide 44 |
-| 54 | Slide 40 |
-| 55 | Slides 33 and 40; judge statistic and pilot limitation kept distinct |
-| 56–57 | Slide 45 |
-| 58 | Slides 41–43 and notes; conflicting independence assumption replaced by explicit amendment requirement |
-| 59–61 | Selected relevant work woven into slides 27–28 and speaker introduction; full bibliographic detail stays in notes |
-| 62–64 | References on their corresponding slides and in notes |
-
-The removal is material without a job in the argument: etymology, current political terminology, repeated conclusions, and a detached publication tour. The runtime, case-study, mathematical, and experimental content remains in the main sequence. Bibliography belongs alongside the claim it supports.
-
-## Main source record
-
-The 64-page user-supplied revised PDF is the primary deck source. Existing local run records were used to clarify timing, scope, test counts, and actors. Public project sources:
-
-- [Cambridge talk and preregistration](https://github.com/zozo123/cam-talk-london-26)
-- [Airflow Factory](https://github.com/zozo123/ariflow-swfactory)
-- [Evidence-Aware Reduction for Forkable Compute](https://arxiv.org/html/2607.09689v4)
-- [Reducer implementation](https://github.com/zozo123/boltzmann-mapreduce)
-- [Chamo and Eliaz continuation preprint](https://ai.vixra.org/abs/2608.0069)
-- [Three-Body Orbit Atlas](https://github.com/zozo123/threebody-closing-the-open)
-
-Keep the original slide references for the published systems, hedging, sampling, dependence, and adaptive-analysis work. The outline supplies structure and proposed narration; it does not turn unrun protocols or unimplemented mechanisms into results.
+The next useful systems result compares a faithful restore path with a warm alternative that supplies equivalent usable state. In parallel, the targeted adoption test checks the concrete disputed behavior, while a separate repair-resampling study describes the generation process. Each procedure changes a named runtime decision.
