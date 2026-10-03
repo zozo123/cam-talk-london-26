@@ -19,5 +19,5 @@
 {\small The steps touch different files, so two separate git worktrees would suffice here. A fork matters when the reached state is expensive.\par}
 \claim{A fork would have saved about three of the forty-three minutes.}
 \sources{Our experiments, Sep 2026: work-graph execution record (node timings measured; the fork lane is computed, fork cost excluded). Remote fork at scale: MITOSIS (OSDI'23).}
-\note{[0:35] The seventh and last surface is fast cloning. The executor requested a fork in this run. No provider offered one, so the executor ran in series and recorded the reason as serial fallback, missing fork. A fork would have saved three minutes of forty-three. We propose forking to obtain alternatives from expensive state.}
+\note{[0:35] The seventh and last surface is fast cloning. The executor requested a fork in this run. No provider offered one, so the executor ran in series and recorded the reason as serial fallback, missing fork. By our computation, excluding fork cost, a fork would have saved three minutes of forty-three. We propose forking to obtain alternatives from expensive state.}
 \end{frame}
