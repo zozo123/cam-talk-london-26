@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagM}The records included skipped checks, mislabeled approvals, and missing inputs.}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.3cm}Y@{}}
+\toprule
+\textbf{Recorded object} & \textbf{Limitation}\\
+\midrule
+CI success & Evaluation skipped without a key; the job passed in about 3\,s.\\
+Human approval & The harness answered, while the record named a human actor.\\
+Adapter digest & The shim's source remained outside Git and unrecoverable.\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.25cm}
+\lead{Receipts need an execution status, actual actor, and artifact identity.}
+\sources{CI, 28 September 2026; SELFHOST-2/3 approvals and adapter records.}
+\qadetail{The evals-islo Actions job passed in about three seconds while its real evaluation step was skipped because a key was absent. Approvals recorded mode human and actor admin although the harness answered. A local adapter shim outside Git had a recorded digest but no recoverable source in the repository. Another setup attempt failed while parsing stdout contaminated by status text. Typed states are executed, skipped, and failed; actors are human, harness, and service. Authenticity alone does not establish semantic accuracy. Audit inspects records; replay requires retrievable adapter bytes and recorded external responses; fresh hosted-model calls create a fresh run. Related: PASS, CamFlow, in-toto, rr, DSec, and ENCODE pipelines.}
+\note{[0:55] We found records that overstated or incompletely identified their events. A CI job succeeded with its real evaluation skipped. An approval named a human although the harness answered. The adapter digest identified a local shim whose source was not recoverable from the repository. A trusted recorder still needs accurate event semantics and retrievable inputs. We distinguish an audit from replay against recorded responses and from a fresh run with new model calls. Those records now give us specific obligations for the runtime around any future branch.}
+\end{frame}

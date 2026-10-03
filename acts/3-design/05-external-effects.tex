@@ -1,0 +1,11 @@
+\begin{frame}{Restoring local state does not undo completed external actions.\ev{\tagO\,\tagP}}
+\begin{tabularx}{\linewidth}{L{3cm}Y}\toprule
+Effect & What restore cannot undo \\\midrule
+Sent model request & The remote invocation and its cost \\
+Sent tool request & A remote action that may have completed \\
+Staged patch & Local bytes can be retained; publication needs a separate gate \\\bottomrule\end{tabularx}
+\begin{ticks}\item Proposed effect journal and buffer: reconcile uncertainty or use idempotency.\item Export artifacts and receipts before every teardown.\end{ticks}
+\sources{Speculator, SOSP 2005; external synchrony, OSDI 2006; Remus, NSDI 2008; DeepSeek-V4 §5.2.5.}
+\qadetail{Speculator, external synchrony and Remus supply precedents for delaying output. DSec can replay cached command results on resumption. A general effect buffer is proposed here. An uncertain remote action cannot be blindly retried. Export on refusal is motivated by SELFHOST-3. The factory exercised one controller-mediated publication path; it did not intercept every external effect.}
+\note{[0:55] Restoration brings back local state. It cannot unsend a model request, recover its cost, or reverse a remote tool action that already happened. Some outputs can be staged until verification; other effects need a journal, idempotency or reconciliation when the outcome is uncertain. Earlier recovery systems show ways to delay output, but a general effect buffer is still proposed here. We also export the patch and evidence before every teardown. This gives the runtime obligations beyond merely creating a child.}
+\end{frame}

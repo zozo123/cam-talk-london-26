@@ -1,0 +1,11 @@
+\begin{frame}{The factory has a publication gate, but its fork store is missing.\ev{\tagB\,\tagP}}
+\lifecycle{2}
+\begin{ticks}
+\item \textbf{Exercised:} scheduler, journal, work cell and artifact-digest gate.
+\item \textbf{Built separately:} reducer; lease broker unused in these work orders.
+\item \textbf{Missing/proposed:} fork store and external evaluator.
+\end{ticks}
+\sources{Factory records and design; arXiv:2607.09689v4.}
+\qadetail{Calls checkpoint, fork, evaluate, select, reduce and promote express different decisions. Named snapshots are exercised, numerical deduplication is built and the digest gate is exercised; integrated fork, external evaluator, calibrated dependence and epoch-fenced publication are proposed. Eight obligations: identified immutable parent; fresh child authority; no guest publishing token; input/evidence/feedback records; duplicate rejection plus retained shared factors; deterministic composition and conflict retention; exact-composition verification; durable export on every exit. Selection/composition of patches is separate from common-target numerical reduction.}
+\note{[0:55] Here is the complete lifecycle, with the evidence boundary highlighted. Our scheduler, journal, work cell and artifact-digest gate have been exercised on the serial path. The numerical reducer was built separately. A lease broker exists but was unused in these work orders. The fork store is missing and the external evaluator is proposed. The contract joins these pieces; it does not claim that the integrated system already runs. Each returned candidate needs selection or composition, exact-artifact verification and current authority before publication.}
+\end{frame}

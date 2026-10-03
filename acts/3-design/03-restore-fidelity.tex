@@ -1,0 +1,29 @@
+\begin{frame}{Restore fidelity needs checks of the state the API claims to preserve.\ev{\tagP}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=2.9cm,minimum height=.9cm] (p) at (0,0) {process holds a 128-bit nonce in RAM only};
+\node[state,minimum width=1.7cm,minimum height=.9cm] (s) at (3.6,0) {capture};
+\foreach \i/\y in {1/.56,2/0,3/-.56}{\node[candidate,minimum width=1.7cm,minimum height=.42cm,font=\footnotesize] (c\i) at (6.7,\y) {child \i};\draw[flow] (s)--(c\i);}
+\node[evidence,text width=3.0cm,minimum height=.9cm] (k) at (10.6,0) {check: process alive? same nonce?};
+\draw[flow] (p)--(s);
+\foreach \i in {1,2,3}{\draw[flow] (c\i)--(k);}
+\end{tikzpicture}
+\end{center}
+\vspace{-.1cm}
+{\small\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{@{}L{5.2cm} Y@{}}
+\toprule
+Result & Permitted description\\
+\midrule
+files survive only & filesystem restore\\
+process and RAM survive & evidence of process and memory restoration\\
+declared semantic checks match & fidelity for those checked properties only\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.02cm}
+{\footnotesize Passing is necessary for a memory claim. Full fidelity needs more. Compare declared outputs, ignoring timestamps. Worktrees, CRIU, VM snapshots and replay logs restore different state.\par}
+\claim{Gate 0 is preregistered and unrun, so we say restore fan-out.}
+\sources{Our preregistered protocol, Gate 0. \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2. CRIU and Firecracker snapshot documentation.}
+\qadetail{The RAM nonce is a necessary probe, not a complete fidelity proof. Check private writes, process identity, clocks, random state and sockets as relevant. A snapshot name does not establish memory semantics. Hosted-model weights, KV state and sampling are outside the guest. A failed nonce probe requires reporting the actual filesystem/restore semantics. A successful probe still requires useful captured state and declared semantic tests.}
+\note{[0:55] A process keeps a random nonce only in RAM. We capture, restore three children, and ask whether the process is alive with the same nonce. That is a necessary probe of the memory path, not full fidelity certification. We then compare the declared deterministic behavior between direct and restored execution. Private writes, clocks, identities, randomness and sockets need checks appropriate to the workload. The probe is preregistered and unrun. Our current measurements therefore establish restore fan-out; they do not establish a memory fork.}
+\end{frame}

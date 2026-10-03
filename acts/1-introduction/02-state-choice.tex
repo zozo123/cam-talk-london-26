@@ -1,0 +1,12 @@
+\begin{frame}[t]{\ev{\tagP}The branching mechanism must preserve the state the continuation needs.}
+\begin{center}\lifecycle{1}\end{center}
+\vspace{.1cm}
+\begin{ticks}
+\item \textbf{Source alternatives:} a worktree may suffice.
+\item \textbf{Prepared files:} compare a warm image with a disk snapshot.
+\item \textbf{Running state:} verify process or VM capture. Hosted-model sampling stays external.
+\end{ticks}
+\sources{Proposed lifecycle; the serial factory did not establish a necessary live process state.}
+\qadetail{A fork supplies several continuations from one captured parent with private writable state. Git worktrees preserve source views. Process checkpoints may preserve memory and processes. VM snapshots preserve their declared state surfaces. Filesystem snapshots do not establish memory capture. The hypothetical running-application workload differs from the actual serial repair. Remote model sessions, model randomness, and already performed external effects require separate handling. Neither setup time nor a checkpoint API name establishes whole-prefix reuse or fidelity.}
+\note{[0:45] We choose the branching mechanism from the next action's state requirements. Source alternatives may need only worktrees. Prepared files can come from a warm image or a disk snapshot. If useful process memory must survive, we need a verified process or VM checkpoint. Our serial factory establishes files and feedback, without showing that live processes must survive. The hosted model remains outside the guest. We should compare mechanisms that supply the same declared state. Existing runtimes already support several versions of this operation.}
+\end{frame}

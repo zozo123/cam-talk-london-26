@@ -1,0 +1,10 @@
+\begin{frame}{At correlation 0.1, 100 measurements have the mean precision of about nine.\ev{\tagO}}
+\begin{center}\Large
+$\operatorname{Var}(\bar Y)=\sigma^2\left[\rho+\frac{1-\rho}{N}\right]$\par\vspace{.3cm}
+$N_{\mathrm{eff}}=\frac{N}{1+(N-1)\rho}=\frac{100}{1+99(0.1)}\approx9.17$
+\end{center}
+\begin{ticks}\item Equal marginal variances; common pairwise correlation.\item Describes variance-equivalent precision of a mean.\item Does not remove shared bias or give a probability of correctness.\end{ticks}
+\sources{Variance calculation; Kish, Survey Sampling, 1965. Values are illustrative.}
+\qadetail{For N=9, effective counts are 9 at rho=0, 5 at rho=.1, 1.8 at rho=.5. Kohli 2026 preprint estimates nine frontier judges from seven families at Kish effective count 2.18, CI 2.07--2.31; 9.1 percent of 319 unanimous MNLI decisions were wrong. Kim ICML 2025 reports conditional agreement on wrong answers, 60 percent versus 33 percent by chance, not rho. Neither measures forks. Independent slow-request illustration: 1-.99^100 is about .634. A hypothetical .1 failure rate gives .9^29 about .047 probability of twenty-nine greens. Amdahl has analogous algebra, not the same causal quantity. Poolkeh models a different pooling operation, 295,951 tests for about nine million people; it was not a laboratory pooling experiment.}
+\note{[0:50] For a mean, we can show exactly how an assumed dependence affects precision. With equal marginal variances and common correlation point one, one hundred measurements have the variance-equivalent precision of about nine independent measurements. The variance stops shrinking toward zero because of the shared component. This is a calculation under stated assumptions. It is not a probability that the answer is correct, and shared bias remains. Published judge panels provide context, not a measurement of fork effects. Candidate search requires a different joint quantity.}
+\end{frame}

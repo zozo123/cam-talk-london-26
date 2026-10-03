@@ -1,0 +1,22 @@
+\begin{frame}{Published latency figures measure different operations.\ev{\tagO}}
+\vspace{0pt}
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}L{3.6cm} Y L{2.9cm} L{2.6cm}@{}}
+\toprule
+System & Operation reported & Value & Source\\
+\midrule
+DeltaBox & checkpoint & 10.83 ms & arXiv 2026\\
+Kimi K3 AgentENV & checkpoint & as low as 133 ms & tech.\ report \S5.3.2\\
+Kimi K3 AgentENV & resume & as low as 49 ms & tech.\ report \S5.3.2\\
+Shepherd & fork & 134--143 ms & arXiv 2026\\
+SnowFlock & remote fork across hosts & 600--800 ms & EuroSys'09\\
+Firecracker & boot to application code & under 125 ms & NSDI'20\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.05cm}
+{\small Each value needs its operation, workload, endpoint and timing convention. The rows cannot rank platforms.\par}
+\claim{Compare equivalent usable states before comparing latency.}
+\sources{\href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2; \href{https://arxiv.org/abs/2605.10913}{Shepherd}; Lagar-Cavilla et al., EuroSys'09; Agache et al., Firecracker, NSDI'20.}
+\qadetail{All values retain their source endpoints. The mechanism lineage includes Xen, live migration, Potemkin, SnowFlock, Catalyzer, Nephele and MITOSIS; agent checkpointing includes DeltaBox and Shepherd; Crab and Planarian address recovery. Recovery is not interchangeable with branching. Kimi reports checkpoint/resume minima, not typical latency. Workload and timing conventions differ; this table cannot rank platforms. The survey is bounded to the systems examined.}
+\note{[0:55] These published numbers locate mechanisms. DeltaBox reports checkpoint time; Kimi reports minimum checkpoint and resume times; Shepherd reports fork time. SnowFlock forks across hosts, while Firecracker measures boot to application code. They have different endpoints, workloads and accounting conventions. We therefore cannot rank them using this table. For our runtime, the useful comparison must reach equivalent usable state and include the costs the workflow pays. Before timing a live fork, we must observe the state that survives.}
+\end{frame}

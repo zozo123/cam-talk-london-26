@@ -1,23 +1,22 @@
-\begin{frame}[t]{\ev{\tagM}A two-host fix became a 43-minute loop}
-\vspace{.05cm}
+\begin{frame}[t]{\ev{\tagM}Two repairs and two reviews used 59\% of recorded stage time.}
+\vspace{0pt}
 {\small
-\begin{tabularx}{\textwidth}{@{}L{3.9cm}Y r r@{}}
+\begin{tabularx}{\textwidth}{@{}L{3.0cm}Y r r@{}}
 \toprule
-Recorded stage & Work & Time & Cost\\
+\textbf{Stage} & \textbf{Work performed} & \textbf{Time} & \textbf{Cost}\\
 \midrule
-intent, specification, plan & acceptance conditions and the six-file plan & 3:41 & \$0.96\\
-build and test & three edit tasks, suite failure, first repair & 20:01 & \$4.50\\
-review & review, second repair, tests, re-review & 18:55 & \$4.87\\
-\midrule
-\textbf{recorded stages} & & \textbf{42:38} & \textbf{\$10.33}\\
-timestamps, start to finish & 11:39:56 to 12:23:40 & 43:44 & \\
+Specification and plan & Acceptance conditions; six-file scope & 3:41 & \$0.96\\
+Build and test & Three edits; suite failure; first repair & 20:01 & \$4.50\\
+Review & Review; second repair; tests; re-review & 18:55 & \$4.87\\
 \bottomrule
 \end{tabularx}\par}
-\vspace{.15cm}
-{\small\colorbox{Sand}{\parbox{\dimexpr\textwidth-2\fboxsep}{\textbf{Two repairs and two reviews:} 25.2 minutes and \$7.75, that is 59\% of recorded stage time and 75\% of reported model cost.}}\par}
-\vspace{.08cm}
-{\small Times are agent-session durations, including tool activity. Sandbox setup took 20.3\,s. A hundredfold faster setup would save about 20\,s.\par}
-\claim{A failed test redirected the work into another subsystem.}
-\sources{Our first work order, 27 Sep 2026: stage metrics (2,557.5\,s) and agent records, cost at list price.}
-\note{[0:45] The fix needed two host names. The loop took forty-three minutes and reported ten dollars thirty-three of model cost. Specification and plan took under four minutes. Build and test took twenty, and review took nineteen. The two repairs and two reviews took twenty-five minutes and seven dollars seventy-five. These are agent sessions, including tool activity. Setup took twenty seconds. A failed test sent the work into another subsystem.}
+\vspace{.22cm}
+{\small \textbf{43:44 elapsed}\quad 42:38 recorded stages\quad \textbf{\$10.33 model cost}\par}
+\vspace{.22cm}
+\claim{Repairs and reviews: 25.2 minutes, \$7.75. That is 59\% of stage time and 75\% of model cost.}
+\vspace{.12cm}
+{\small Setup: \textbf{20.3\,s}. The whole reusable prefix was not measured.\par}
+\sources{SELFHOST-2 stage metrics and agent-session records; costs at list price.}
+\qadetail{Recorded stage sum: 2,557.517 s, rounded to 42:38. Timestamp wall time: 2,624 s, or 43:44, from 11:39:56 to 12:23:40. About 66 s lies outside those stage totals. The first row includes intent, specification, and plan. Timings are agent-session durations including tool activity, not pure inference time. Two repairs plus two reviews sum to about 25.2 min and \$7.75. Setup is 20.3 s: a 100-fold speedup saves about 20.1 s, roughly 0.8\% of recorded stages. Initial setup is not the whole reusable prefix and does not establish or rule out another reached-state workload's benefit. Sources: metrics.json and agent/stages.jsonl.}
+\note{[0:55] We recorded forty-three minutes and forty-four seconds of elapsed time and ten dollars thirty-three of model cost. The stage records sum to forty-two minutes and thirty-eight seconds. Two repair sessions and two reviews consumed twenty-five minutes, fifty-nine percent of stage time, and seventy-five percent of cost. These durations include tool activity. Initial sandbox setup took twenty seconds. That is not a measurement of the whole reusable prefix. The dominant work here followed a failed test, which sent the repair into dispatch ownership.}
 \end{frame}

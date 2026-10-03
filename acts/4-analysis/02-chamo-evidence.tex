@@ -1,0 +1,14 @@
+\begin{frame}{The Chamo project rejected a numerically unresolved cross-check.\ev{\tagB}}
+\lead{Ori Chamo and Yossi Eliaz: Three-Body Orbit Atlas.}
+\begin{center}\begin{tikzpicture}[node distance=.35cm,every node/.style={font=\small,align=center}]
+\node[candidate,text width=2.1cm](a){Candidate orbit};
+\node[evidence,text width=2.2cm,right=of a](b){Shooting / Floquet\\screen};
+\node[evidence,text width=2.5cm,right=of b](c){High-precision\\and independent checks};
+\node[state,text width=1.7cm,right=of c](d){Frozen claim};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\end{tikzpicture}\end{center}
+\begin{ticks}\item 135,445 source orbits; 26 selected difficult links continued bidirectionally.\item Apparent projected branches connected within one sampled component.\item An unresolved independent RK4 cross-check was rejected as evidence.\end{ticks}
+\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preliminary preprint}; \href{https://github.com/zozo123/threebody-closing-the-open}{Atlas records}. Completeness/release gates remain open.}
+\qadetail{Ori Chamo is the coauthor affiliated with Incredibuild. The source catalog is Li, Li and Liao unequal-mass planar periodic orbits. Extra-Trees/active learning proposes computations; deterministic shooting/Floquet screening is not final verification. The twenty-six selected connections comprise five bottleneck, twenty chart-discontinuity and one near-projected long-range connection. They are bidirectionally continued in the preliminary manuscript. Independent mpmath RK4 64/128-step self-test was numerically unresolved; its output was rejected as evidence, without invalidating every other result. Representative high-precision checks and a bounded sampled-component claim are distinct from global completeness. The project illustrates evidence admission, not sandbox-fork performance or agent dependence.}
+\note{[0:50] With Ori Chamo, we studied an atlas built from one hundred thirty-five thousand source orbits. The preliminary manuscript reports twenty-six selected difficult links crossed by bidirectional continuation, connecting apparent projected branches within a sampled component. Candidates pass through numerical screens, high-precision checks and independent reproduction before a claim is frozen. One independent RK4 cross-check was numerically unresolved, so we rejected it as evidence. The project retains open completeness obligations. The lesson for our runtime is concrete: a plausible candidate and an admissible claim occupy different states.}
+\end{frame}

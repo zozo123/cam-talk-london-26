@@ -1,0 +1,17 @@
+\begin{frame}{Shared families and repeated rounds require dependence-aware analysis.\ev{\tagP}}
+\begin{ticks}
+\item Reusing snapshot families links comparisons.
+\item Repeated rounds can share scheduling and temporal effects.
+\item Declare independent blocks or a justified dependence model before collection.
+\end{ticks}
+\vspace{.25cm}
+\begin{center}\begin{tabular}{lcc}\toprule
+Nine equal-variance measurements & Absolute $\rho$ & $N_{\mathrm{eff}}$ \\\midrule
+Separately prepared restores & 0.10 & 5.00 \\
+Shared-parent restores & 0.15 & 4.09 \\\bottomrule
+\end{tabular}\end{center}
+\claim{An excess $\Delta\rho=0.05$ is insufficient without the baseline dependence.}
+\sources{Illustrative values, not measurements. Proposed amendment; the recorded preregistration remains unchanged.}
+\qadetail{The current protocol reuses families i+1, i+2 and i+3 modulo twelve. Its independent sign-flip rule and twelve-pair t interval require exchangeability or independent experimental units that are not supplied automatically by that design. A proposed amendment should independently assign family blocks, or specify and justify an analysis of overlap and temporal dependence. The effective count N/[1+(N-1)rho] is variance-equivalent under equal variances and common pairwise correlation. The value 6.4 for nine measurements and rho=.05 assumes zero baseline correlation; it does not follow from an excess .05 over a .10 baseline. Amendments must be public and dated before collection; no outcome is reported here.}
+\note{[1:10] The comparison design determines the analysis. In the recorded protocol, families recur in several comparisons and the same cells run many rounds. We cannot treat twelve differences as independent by default. Before collection, we need independent blocks or a model that handles these links and time dependence. The example shows why baseline dependence also matters: nine measurements at correlation point one carry five independent measurements' variance-equivalent precision. Raising correlation to point fifteen gives about four point one. These are illustrative calculations, not outcomes. We retain the original preregistration and identify the amendment explicitly.}
+\end{frame}

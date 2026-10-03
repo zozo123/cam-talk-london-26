@@ -1,0 +1,20 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}Delivery was refused three times, and cleanup lost the patch.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[evidence,text width=2.3cm,minimum height=1.15cm] (b) at (0,0) {\textbf{suite}\\1,981 reported\\0 failures};
+\node[evidence,text width=1.55cm,minimum height=1.15cm] (r) at (3.0,0) {\textbf{review}\\approves};
+\node[bad,text width=2.55cm,minimum height=1.15cm] (d) at (6.1,0) {\textbf{delivery}\\unreviewed file\\refuses $3\times$};
+\node[bad,text width=2.0cm,minimum height=1.15cm] (t) at (9.65,0) {\textbf{teardown}\\removes workspace};
+\draw[flow] (b)--(r);\draw[flow] (r)--(d);\draw[flow] (d)--(t);
+\end{tikzpicture}
+\end{center}
+\vspace{.2cm}
+\begin{ticks}
+\item Separate work order: \textbf{about 26 minutes, \$3.43, no PR}.
+\item The unexpected file was our harness's review archive.
+\item \tagP\ Export the candidate and evidence before teardown.
+\end{ticks}
+\sources{SELFHOST-3 delivery and recovery records; redacted copy on request.}
+\qadetail{SELFHOST-3 recorded about 26 minutes wall time and 853.8 s of stage time, \$3.43, 1,981 reported cases with no failures, and approved review. Delivery refused three times because files lay outside the reviewed commit stream. The unexpected file was a review-diff archive mirrored into the workspace. Teardown removed the patch, and no pull request resulted. The supplied deck does not specify the original requested change; this is a delivery/recovery incident, not a full second task reconstruction. Export before cleanup is proposed, not merged. Preserve or snapshot state during long human waits without granting publication authority. Related recovery mechanisms: Planarian, Crab, DSec.}
+\note{[0:55] We observed a separate delivery failure after an approved review. The suite reported nineteen hundred eighty-one cases and no failures. Delivery found an unreviewed file, refused three times, and teardown removed the workspace. The file was our harness's review archive. The run took about twenty-six minutes, cost three dollars forty-three, and produced no pull request. Refusing publication and preserving the candidate are separate responsibilities. We propose durable export before cleanup. Preservation also depends on records that accurately state what ran, who approved, and which inputs were used.}
+\end{frame}

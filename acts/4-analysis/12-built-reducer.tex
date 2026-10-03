@@ -1,0 +1,11 @@
+\begin{frame}{The reducer rejects declared duplicates and retains lineage.\ev{\tagB\,\tagP}}
+\begin{tabularx}{\linewidth}{L{3.3cm}Y}\toprule
+Result record & Estimate, reported information, sample count, evidence IDs, lineage, execution metadata \\\midrule
+Repeated declared evidence ID & Merge raises; duplicate is rejected \\
+Distinct IDs with shared parent & Merge proceeds; lineage is retained \\
+Dependence correction / refusal & Proposed; not implemented \\\bottomrule\end{tabularx}
+\claim{Field validation does not establish calibration or a common target.}
+\sources{\href{https://github.com/zozo123/boltzmann-mapreduce}{Reference reducer}; \href{https://arxiv.org/html/2607.09689v4}{Evidence-Aware Reduction for Forkable Compute}.}
+\qadetail{The Gaussian/Wald reference reducer adds natural-parameter summaries associatively under an independence/common-target model and retains a disagreement statistic. Declared exact duplicate evidence IDs are rejected by default. Lineage is transported but not consumed for covariance. Worker declarations are not authenticated manifests. Conservative refusal when dependence is unknown, trusted evidence identity and controller-derived information remain proposed. Cochran 1954 supplies inverse-variance-estimation context.}
+\note{[0:50] This is the implemented boundary. A result records its estimate, reported information, sample count, evidence identifiers and lineage. The reference reducer combines numerical summaries and rejects an exact repeated declared evidence identifier. Different identifiers with a shared parent can merge; the lineage travels with the result, but it does not adjust covariance. Calibration, independence and a common target remain assumptions of the caller. This is useful enforceable behavior with a precise scope. The next slide shows numerical checks of that scope.}
+\end{frame}

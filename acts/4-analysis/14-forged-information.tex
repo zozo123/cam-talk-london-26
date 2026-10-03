@@ -1,0 +1,31 @@
+\begin{frame}{Inflated reported precision pushed the synthetic pooled estimate to 17.0004.\ev{\tagB\,\tagP}}
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\term{One shard inflates its precision}\\
+{\small A 2,000-point shard returns a distant estimate and inflates its reported precision a further $50\times$.\par}
+\vspace{.2cm}
+{\small
+\begin{ticks}
+\item Claimed precision raises the shard's weight.
+\item Sample count alone cannot detect inflated information per point.
+\item The stress heuristic is not a Byzantine guarantee.
+\end{ticks}\par}
+\column{.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=.09cm,every node/.style={font=\scriptsize}]
+\draw[flow] (0,0)--(0,20.5) node[above]{pooled estimate};
+\foreach \y in {0,5,10,15}{\draw (-.07,\y)--(.07,\y);\node[left] at (-.08,\y){\y};}
+\fill[Rust] (.6,0) rectangle (1.6,17.0004); \node[above] at (1.1,17.0004) {17.0004};
+\fill[Teal] (2.4,0) rectangle (3.4,4.9566); \node[above] at (2.9,4.9566) {4.9566};
+\node[below,align=center] at (1.1,0) {unprotected\\pooling};
+\node[below,align=center] at (2.9,0) {stress\\heuristic};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+\vspace{.25cm}
+{\small\tagP\ The controller sets each shard's precision by trusted recomputation or calibrated external scoring.\par}
+\claim{Evidence identity and justified statistical weight are separate requirements.}
+\sources{Synthetic check, Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S4. Not an agent-task benchmark.}
+\qadetail{The 2000-point shard returns a distant estimate and reports fiftyfold information per point. Unprotected pooling yields17.0004, stress heuristic4.9566. Sample count alone cannot detect this claim. The heuristic illustrates one stress case, not a Byzantine guarantee. Trusted recomputation under the numerical model can validate information; agent scores need a separately validated error model. These extensions are proposed. An external recorder alone does not establish statistical calibration.}
+\note{[0:50] A worker can report a real sample count and still inflate the strength of its evidence. In this synthetic stress case, a two-thousand-point shard returns a distant estimate and fiftyfold reported precision. Unprotected pooling moves to seventeen. A heuristic returns about four point nine six, without a Byzantine guarantee. Sample count alone does not detect the attack. Information needs trusted recomputation under the numerical model, while agent scores need their own validated error model. We now have enough structure to state the experiments and the acceptance policy.}
+\end{frame}

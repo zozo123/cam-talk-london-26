@@ -1,36 +1,25 @@
-\begin{frame}[t]{\ev{\tagM}The approved plan named six files}
-\lead{The plan fixed the scope before any edit. Every planned file concerns the allowlist.}
-\begin{columns}[T,onlytextwidth]
-\column{.52\textwidth}
+\begin{frame}[t]{\ev{\tagM}The approved plan limited the allowlist update to six files.}
+\vspace{0pt}
 {\small
-\begin{tabularx}{\linewidth}{@{}Y r@{}}
+\begin{tabularx}{\textwidth}{@{}Y r@{}}
 \toprule
-Planned change & Files\\
+\textbf{Planned change} & \textbf{Files}\\
 \midrule
-allowlist implementation: the Python check and the shell bootstrap & 2\\
-regression tests & 1\\
-deployment script & 1\\
-documentation & 2\\
+Python allowlist and shell bootstrap & 2\\
+Regression tests & 1\\
+Deployment script & 1\\
+Documentation & 2\\
 \midrule
-\textbf{total} & \textbf{6}\\
+\textbf{Total} & \textbf{6}\\
 \bottomrule
 \end{tabularx}\par}
-\column{.44\textwidth}
-\textbf{Acceptance conditions}
-{\small
-\begin{ticks}
-\item[\yes] both redirect hosts present in every statement of the allowlist
-\item[\yes] the policy statements agree with each other
-\item[\yes] the regression checks pass
-\end{ticks}\par}
 \vspace{.2cm}
-\textbf{Not in the plan}
-{\small
 \begin{ticks}
-\item[\no] dispatch ownership logic
-\end{ticks}\par}
-\end{columns}
-\claim{The plan defines what ``outside the plan'' means.}
-\sources{Our first work order, 27 Sep 2026: plan record and plan approval (answered by the harness).}
-\note{[0:35] The approved plan named six files. Two implement the allowlist. One holds regression tests, one is a deployment script and two are documentation. Acceptance required both hosts everywhere, agreeing policy statements and passing regression checks. The task did not include dispatch ownership logic. This gives outside the plan a precise meaning. Next, where the time went.}
+\item Both hosts must appear in code, scripts, and documentation.
+\item Hermetic checks must assert agreement between declarations.
+\item Dispatch ownership lies outside this plan.
+\end{ticks}
+\sources{SELFHOST-2 plan and plan approval; approval answered by the harness.}
+\qadetail{Declared files: src/swfactory/doctor.py, deploy/islo/bootstrap.sh, tests/test_doctor.py, deploy/islo/deploy.sh, docs/islo.md, docs/selfhost.md. The plan pinned the eight-host tuple, checked gateway command shape, parsed the shell ALLOW\_HOSTS array, checked agreement with the Python tuple, and checked prose declarations. Missing or empty parses had to fail loudly. Tests read repository files and imported doctor; no network, subprocess, islo, or curl. The full suite was also required. Dispatch logic in src/swfactory/backend/service.py was not in the approved file list. Sources: docs/factory/SELFHOST-2/plan.json.}
+\note{[0:55] We approved six files before editing. Two implement the allowlist, one contains regression tests, one is a deployment script, and two are documentation. Acceptance required both redirect hosts throughout those declarations. The tests checked agreement using repository files rather than network calls, and the full suite also had to pass. Dispatch ownership was outside this plan. That makes scope expansion observable instead of a retrospective judgment. The intended change was small, but its execution encountered a failing test. Here is the time and cost of that workflow.}
 \end{frame}

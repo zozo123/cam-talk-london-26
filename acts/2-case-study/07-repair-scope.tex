@@ -1,28 +1,22 @@
-\begin{frame}[t]{\ev{\tagM\,\tagP\,\tagA}Protected tests did not define permitted repairs}
+\begin{frame}[t]{\ev{\tagM\,\tagP}The second repair changed code while the requested test remained absent.}
 \vspace{0pt}
 {\small
-\begin{tabularx}{\textwidth}{@{}L{5.6cm}Y@{}}
+\begin{tabularx}{\textwidth}{@{}L{2.8cm}Y@{}}
 \toprule
-Rule & Consequence in this run\\
+\textbf{Step} & \textbf{Recorded decision}\\
 \midrule
-the repair stage protects tests & the agent reports it cannot add the requested test\\
-unprotected source stays writable & the agent changes dispatch behaviour\\
-planned steps receive scope checks & repairs follow a different path, without one\\
-an out-of-plan edit is rated major & approval can still proceed\\
+Review 1 & Request deterministic tests as a blocker.\\
+Repair 2 & Report protected tests; refactor a recovery path onto the adoption helper.\\
+Review 2 & Approve; rate the missing direct test minor.\\
 \bottomrule
 \end{tabularx}\par}
-\vspace{.25cm}
-\begin{columns}[T,onlytextwidth]
-\column{.55\textwidth}
-{\small\textbf{All 15 recorded edits were allowed, 6 of them by repairs. The test hook never fired.}\par
+\vspace{.22cm}
+{\small \textbf{15 allowed edits}, including 6 by repairs. The test-edit hook never fired.\par}
 \vspace{.15cm}
-\tagP\ Require a plan amendment when satisfying a review needs new behaviour or new tests.\par}
-\column{.41\textwidth}
-\begin{tikzpicture}
-\node[draw=Muted,dashed,line width=.8pt,fill=Sand!55,rounded corners=2pt,text width=5.3cm,align=left,inner sep=5pt,font=\footnotesize] {\tagA\ OffRisk, built with our co-authors, \textbf{annotates} CRISPR off-target sites and their risk. A scope check would \textbf{enforce} a permitted scope.};
-\end{tikzpicture}
-\end{columns}
-\claim{Test protection and repair scope were separate controls.}
-\sources{First work order, 27 Sep 2026: edit-hook log, agent records. Barkai, Malul, Eliaz et al., OffRisk, \emph{Bioinf.\ Adv.} 3:vbad138 (2023).}
-\note{[0:40] All fifteen recorded edits were allowed. The test hook never fired. Test protection and repair scope were separate controls. The repair agent reported that it could not add a test. It could still change dispatch behaviour. We propose a plan amendment when a review needs new behaviour or new tests. OffRisk annotates an unintended effect. A scope check would enforce a permitted scope. Next, visible feedback as a target.}
+{\small No blocked test-edit attempt was recorded.\par}
+\vspace{.15cm}
+{\small \tagP\ Explicit scope amendments and behavioral-obligation checks.\par}
+\sources{SELFHOST-2 edit-hook log, repair outputs, and reviews.}
+\qadetail{All 15 logged edits were allowed; six were made by repair agents. The agent reported that tests were protected, but the log does not show a blocked edit attempt and the test hook never fired. Scope checks applied to planned work nodes; repairs followed a non-node path without the same scope check. The out-of-plan backend/service.py change remained major while review could approve. A proposed amendment would explicitly authorize new source scope and require the requested behavioral test. The co-authored OffRisk work is only an annotation/enforcement analogy: Bioinformatics Advances 3:vbad138 (2023), not evidence about this repair policy.}
+\note{[0:55] We can follow the unresolved obligation through three decisions. Review asked for deterministic tests as a blocker. The second repair reported protected tests and refactored an existing recovery path onto the helper. Review then approved and treated the missing direct test as minor. The edit log contains fifteen allowed edits and no blocked test-edit attempt. Scope checking and test protection were separate controls. We propose explicit scope amendments and a check for the required behavior. Approval also leaves a different question: can delivery preserve or recover the candidate?}
 \end{frame}

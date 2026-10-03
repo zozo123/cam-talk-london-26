@@ -1,0 +1,23 @@
+\begin{frame}{Checkpoint-started success is conditional on reaching that checkpoint.\ev{\tagO}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=2.1cm] (a) at (0,0) {task start};
+\node[state,minimum width=2.6cm] (b) at (4.6,0) {reached checkpoint};
+\node[candidate,minimum width=2.6cm,minimum height=.6cm] (c) at (9.6,.7) {continuation A};
+\node[candidate,minimum width=2.6cm,minimum height=.6cm] (d) at (9.6,0) {continuation B};
+\node[candidate,minimum width=2.6cm,minimum height=.6cm] (e) at (9.6,-.7) {continuation C};
+\draw[flow] (a)--node[above,font=\scriptsize]{expensive prefix}node[below,font=\scriptsize,text=Teal]{reaches it: 50\%}(b);
+\draw[flow] (b)--(c);\draw[flow] (b)--(d);\draw[flow] (b)--(e);
+\node[font=\scriptsize,text=Teal] at (9.6,1.25) {each succeeds given it: 80\%};
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Illustration.}\quad end-to-end success $=0.5\times0.8=0.4$, while a checkpoint-started run shows 0.8.\par\vspace{1pt}
+\begin{ticks}
+\item A checkpoint distribution differs from the task-start distribution.
+\item When every repair inherits one plan, continuation success alone does not validate every plan choice.
+\end{ticks}\par}
+\claim{Continuation success alone does not estimate how often the checkpoint is reached.}
+\sources{\href{https://www.nature.com/articles/s41586-020-03157-9}{Ecoffet et al., First return, then explore, Nature (2021)}. Probabilities are illustrative, not measured.}
+\qadetail{Illustrative probabilities, not measured. A viable reached state contains information about the prefix; continuation success alone does not estimate how often it is reached or validate every earlier decision. Go-Explore explicitly separates return-to-state and exploration. A success rate at a selected checkpoint differs from a task-start success rate.}
+\note{[0:50] If a workflow reaches a checkpoint half the time and then succeeds with probability point eight, the corresponding end-to-end success probability is point four. Starting directly from the checkpoint observes point eight. That is a conditional question. It does not estimate how often we reach that state or establish every earlier choice. Go-Explore makes returning to reached states explicit. For our evaluation, we need to name both the checkpoint population and the task-start population, and retain which feedback shaped the candidate.}
+\end{frame}

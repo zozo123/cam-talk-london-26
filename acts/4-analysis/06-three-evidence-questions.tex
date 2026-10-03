@@ -1,0 +1,11 @@
+\begin{frame}{A check can run correctly and still miss the required behavior.\ev{\tagM\,\tagP}}
+\begin{tabularx}{\linewidth}{L{2.6cm}YL{3.3cm}}\toprule
+Question & Same-owner adoption case & Mechanism \\\midrule
+Execution integrity & Did the check run on this digest? & Artifact-bound recorder \\
+Behavioral coverage & Did it force CellBusy adoption and assert one dispatch? & Deterministic targeted test \\
+Statistical support & What broader claim do repeated outcomes support? & Suitable sampling and dependence model \\\bottomrule\end{tabularx}
+\claim{Duplicate rejection cannot detect a missing behavioral assertion.}
+\sources{SELFHOST-2 review records; proposed acceptance contract.}
+\qadetail{The adoption-path gap is behavioral coverage, not proof of a bad patch or correlation. Identity checks and external recording address integrity; they do not establish semantic adequacy or calibration. Authentication of a recorder and trust in the behavior asserted are separate. Passing the targeted test does not prove generalization, and a confidence interval does not replace the targeted test.}
+\note{[0:50] Apply three questions to the same-owner adoption candidate. First, did a check execute on this exact artifact? Second, did it deliberately exercise the new path and assert one dispatch? Third, what broader claim does the collection of outcomes support? Artifact binding addresses the first; a targeted test the second; a suitable sampling design the third. The observed gap belongs to coverage. Rejecting duplicate evidence is useful, but it cannot discover an assertion that was never written.}
+\end{frame}

@@ -1,0 +1,9 @@
+\begin{frame}{Shared conditions can reduce uncertainty in a paired comparison.\ev{\tagO\,\tagP}}
+\lead{Compare A and B on the same case and controlled conditions.}
+\begin{center}\Large $\operatorname{Var}(A-B)=\operatorname{Var}(A)+\operatorname{Var}(B)-2\operatorname{Cov}(A,B)$\end{center}
+\begin{ticks}\item Positive shared variation can reduce variance of the difference.\item Record ancestry separately from shared fixtures, tests and feedback.\item Control the relevant randomness; guest seeds do not control a hosted model.\end{ticks}
+\claim{The useful sharing policy depends on the quantity being estimated.}
+\sources{Common-random-numbers methodology; covariance identity; proposed runtime manifest.}
+\qadetail{An execution tree misses retrieval, evaluator, prompt, fixture and feedback relationships. Correlation is not uniformly harmful: positive covariance can help matched differences, while it raises mean variance. Common random numbers require control of the actual randomness consumed. A cloned guest PRNG does not control remote model sampling. Compare equivalent cases and record assignment and exclusion rules.}
+\note{[0:50] Sharing can be useful when our quantity is a difference. Compare A and B under matched conditions: positive shared variation can reduce the variance of A minus B. That is the reason for paired comparisons and common random numbers. The relevant randomness must actually be controlled; cloning a guest seed does not control a hosted model. An ancestry tree is also incomplete, because fixtures, tests, retrieval and feedback can link executions. The runtime should retain these relationships and let the evaluation question determine how to use them.}
+\end{frame}
