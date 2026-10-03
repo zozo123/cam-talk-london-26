@@ -1,12 +1,12 @@
 {\setbeamercolor{normal text}{fg=white,bg=Ink}
 \begin{frame}[plain]
 \color{white}
-\vspace{.3cm}
-{\small\color{white!65}Hedging works when failures are independent.\par}
 \vspace{.2cm}
 {\fontsize{22}{26}\selectfont\bfseries Conclusions\par}
-\vspace{.3cm}
-{\fontsize{12.5}{15}\selectfont
+\vspace{.15cm}
+{\color{white!90}\textbf{Answer.} $N$ forks give $N/(1+(N-1)\rho)$ independent observations. The runtime records the lineage needed to estimate $\rho$. Its value for forks awaits Test 2.\par}
+\vspace{.2cm}
+{\fontsize{11.5}{14}\selectfont
 \begin{tabular}{@{}l@{\enspace}L{12.2cm}@{}}
 \evtag{white}{BUILT} & a receipt contract in which reused evidence stops the merge and lineage travels with every result\\[4pt]
 \evtag{Teal!45!white}{MEASURED} & two experiments with the loop\\[4pt]
@@ -16,7 +16,7 @@
 \vspace{.3cm}
 {\small\ttfamily\color{white!80}2009:\ \ else: VM\_wait(ID)\\2026:\ \ else: reduce(receipts) $\to$ $N_{\rm eff}$, or abstain\quad{\sffamily\color{white!60}(proposed)}\par}
 \vfill
-{\fontsize{16}{20}\selectfont\bfseries\forktree[white!75]\enspace $N$ forks $\to$ $N$ executions, but $N_{\rm eff}<N$ independent observations.\par}
+{\fontsize{12}{15}\selectfont\bfseries\forktree[white!75]\enspace $N$ forks $\to$ $N$ executions, but $N_{\rm eff}<N$ independent observations.\par}
 \vspace{.15cm}
 {\small\color{white!85}We request help with estimating $\rho$ from lineage and with leases that fork.\par}
 {\small\color{white!85}arXiv:2607.09689\par}
