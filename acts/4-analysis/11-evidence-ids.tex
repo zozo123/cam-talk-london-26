@@ -1,0 +1,45 @@
+\begin{frame}[t]{\ev{\tagB\,\tagP\,\tagO}The built reducer rejects reused evidence IDs}
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\term{Case 1: one observation, two workers}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[candidate,minimum width=1.9cm] (a) at (0,0) {A uses $e_1$};
+\node[candidate,minimum width=1.9cm] (b) at (3.4,0) {B uses $e_1$};
+\node[bad,minimum width=2.6cm] (r) at (1.7,-1.5) {merge rejected};
+\draw[denied] (a)--(r);\draw[denied] (b)--(r);
+\end{tikzpicture}
+\end{center}
+{\small\color{Rust}Duplicate evidence ID $e_1$.\par}
+\column{.48\textwidth}
+\term{Case 2: two observations, one parent}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[candidate,minimum width=1.9cm,align=center] (a) at (0,0) {A uses $e_1$\\[-2pt]parent $p$};
+\node[candidate,minimum width=1.9cm,align=center] (b) at (3.4,0) {B uses $e_2$\\[-2pt]parent $p$};
+\node[proposed,minimum width=2.6cm] (r) at (1.7,-1.5) {merge accepted};
+\draw[flow] (a)--(r);\draw[flow] (b)--(r);
+\end{tikzpicture}
+\end{center}
+{\small\color{Gold!80!Ink}Distinct observations. Dependence through $p$ unresolved.\par}
+\end{columns}
+\vspace{.2cm}
+{\small
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\tagB
+\begin{ticks}
+\item duplicate evidence IDs stop the merge
+\item lineage travels with the result
+\end{ticks}
+\column{.48\textwidth}
+\tagP\ open
+\begin{ticks}
+\item dependence-adjusted uncertainty
+\item abstention when sharing is unknown
+\end{ticks}
+\end{columns}\par}
+\claim{A new execution ID does not make copied data fresh.}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S2--5. Cochran, Biometrics (1954), the inverse-variance estimator.}
+\note{[0:45] An evidence identifier names one observation. Our reducer rejects a merge when two workers return the same identifier. A new execution identifier cannot make copied data fresh. In the second case, A and B used different observations from one parent. The merge proceeds, but their dependence remains unresolved. Dependence-adjusted uncertainty and abstention are still open. These merge rules are separate from the rule that selects patches. The estimator is Cochran's. Next come synthetic checks of the pooling.}
+\end{frame}

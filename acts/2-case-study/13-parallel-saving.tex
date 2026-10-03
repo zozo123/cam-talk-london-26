@@ -1,0 +1,38 @@
+\begin{frame}[t]{\ev{\tagM}Parallel editing offered a computed 166-second saving}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+{\small\renewcommand{\arraystretch}{1.0}
+\begin{tabularx}{\linewidth}{@{}l r Y@{}}
+\toprule
+Task & Time & Depends on\\
+\midrule
+allowlist & 82.4 s & none\\
+tests & 176.7 s & none\\
+documentation & 83.5 s & allowlist\\
+\midrule
+serial, as run & 342.6 s & \\
+critical path & 176.7 s & computed\\
+difference & \textbf{165.9 s} & 6.5\% of stage time\\
+\bottomrule
+\end{tabularx}\par}
+\column{.46\textwidth}
+\begin{tikzpicture}[x=.0182cm,y=.85cm,every node/.style={font=\footnotesize}]
+\node[anchor=west,text=Muted] at (0,.55) {as run};
+\draw[fill=Sand,draw=Gold] (0,-.2) rectangle (82.4,.2) node[midway]{allow};
+\draw[fill=Sand,draw=Gold] (82.4,-.2) rectangle (259.1,.2) node[midway]{tests};
+\draw[fill=Sand,draw=Gold] (259.1,-.2) rectangle (342.6,.2) node[midway]{docs};
+\node[anchor=west,text=Muted] at (0,-.65) {computed, no fork cost};
+\draw[fill=white,draw=Gold,dashed] (0,-1.4) rectangle (82.4,-1.0) node[midway]{allow};
+\draw[fill=white,draw=Gold,dashed] (82.4,-1.4) rectangle (165.9,-1.0) node[midway]{docs};
+\draw[fill=white,draw=Gold,dashed] (0,-1.95) rectangle (176.7,-1.55) node[midway]{tests};
+\draw[Teal,dashed,line width=.8pt] (176.7,-2.1)--(176.7,-.85);
+\node[anchor=west,text=Teal] at (180,-1.75) {176.7 s};
+\end{tikzpicture}\par
+\vspace{.2cm}
+{\footnotesize\ttfamily reason: serial\_fallback\_missing\_fork\par}
+{\footnotesize recorded by the executor. The computed schedule assumes unchanged durations and excludes fork, merge, contention and extra verification. Separate worktrees could support it.\par}
+\end{columns}
+\claim{A live fork must justify itself by saving expensive reached state.}
+\sources{Our first work order, Sep 2026: work-graph record (durations measured, schedule computed); stages 2,557.5 s.}
+\note{[0:40] The executor requested a fork for three edit tasks. None was available, so it ran them in series and recorded why. A parallel schedule gives a computed critical path of one hundred seventy-seven seconds, a difference of one hundred sixty-six. That is six and a half percent of stage time, before fork, merge and contention costs. Separate worktrees would suffice here. Finally we collect the surfaces.}
+\end{frame}

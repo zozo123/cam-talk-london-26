@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagM\,\tagB\,\tagP}The loop has a gate, but no fork store}
+\vspace{.05cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.append style={minimum height=.72cm}]
+\node[state,text width=5.2cm] (s) at (0,1.35) {\textbf{scheduler and journal}\\{\footnotesize\color{Teal}exercised}};
+\node[candidate,text width=3.0cm] (c) at (0,0) {\textbf{work cells}\\{\footnotesize\color{Teal}exercised}};
+\node[state,text width=5.2cm] (g) at (0,-1.35) {\textbf{artifact-bound gate}\\{\footnotesize\color{Teal}exercised}};
+\draw[flow] (s)--(c);\draw[flow] (c)--(g);
+\node[proposed,text width=3.9cm] (l) at (5.5,1.35) {\textbf{lease broker}\\{\footnotesize\color{Gold}built, not exercised here}};
+\node[proposed,text width=3.9cm] (e) at (5.5,0) {\textbf{external evaluator}\\{\footnotesize\color{Gold}proposed}};
+\draw[flow] (l)--(c);\draw[flow] (c)--(e);\draw[flow] (e)|-(g);
+\node[missing,text width=2.6cm] (f) at (-4.9,0) {\textbf{fork store}\\{\footnotesize missing}};
+\draw[message] (f)--(c);
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+{\small Exercised path: work order $\to$ scheduler $\to$ one work cell $\to$ gate $\to$ publication.\\
+Proposed branch path: fork store $\to$ child cells with leases $\to$ external evaluator $\to$ gate.\par}
+\claim{The runtime contract was written before any fork implementation.}
+\sources{Our design documents: fork lifecycle and run recovery. Solid: exercised in our runs. Dashed gold: built but unexercised, or proposed. Dashed red: missing.}
+\note{[0:40] One work order follows the exercised path. The scheduler and journal assign it to a work cell. The cell produces a candidate, and the artifact-bound gate decides publication. A branch would start from the fork store, which is missing. The lease broker is built but unexercised here. The external evaluator is proposed. We wrote the contract first. Next, we state that contract for one branch.}
+\end{frame}

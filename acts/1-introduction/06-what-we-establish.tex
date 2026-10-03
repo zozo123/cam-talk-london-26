@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagM\,\tagB\,\tagP}What this talk establishes}
+\lead{\textbf{Question.} What counts as new evidence when an agent loop repeats work?}
+\vspace{.05cm}
+{\fontsize{11}{13.5}\selectfont
+\begin{tabularx}{\textwidth}{@{}L{4.2cm}Y@{}}
+\toprule
+\textbf{Status} & \textbf{Evidence}\\
+\midrule
+\tagM\enspace Observed & two work orders of our loop and their execution records\\
+\tagB\enspace Implemented & evidence-ID rejection and lineage transport\\
+\tagP\enspace Proposed & fork-cost and shared-ancestry experiments\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.2cm}
+{\large\bfseries No run in this case study forked.\par}
+\vspace{.15cm}
+{\small The incidents identify mechanisms worth fixing. They do not estimate failure frequencies, fork speedup or fork-induced correlation.\par}
+\vspace{.15cm}
+{\small\color{Muted}\textbf{Outline.}\enspace 2 Case study\quad$\cdot$\quad 3 Design\quad$\cdot$\quad 4 Analysis\quad$\cdot$\quad 5 Evaluation\quad$\cdot$\quad 6 Conclusion\par}
+\sources{Run records of two work orders, 27 Sep 2026. Reducer and evidence-ID check: Eliaz, arXiv:2607.09689.}
+\note{[0:50] We observed two work orders of our loop, with their execution records. We implemented the rejection of repeated evidence IDs and the transport of lineage with each result. We propose experiments on fork cost and on shared ancestry. No run in this case study forked. The incidents identify mechanisms worth fixing. They give no estimate of failure frequency, fork speedup or fork-induced correlation. The reducer's numerical checks show an implemented aggregation path. The dependence model remains a research problem. Section two presents the case study.}
+\end{frame}

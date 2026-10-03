@@ -1,0 +1,35 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}The installer needed two hosts the policy denied}
+\begin{columns}[T,onlytextwidth]
+\column{.56\textwidth}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[state,minimum width=5.3cm,minimum height=.6cm] (a) at (0,0) {astral.sh/uv/install.sh};
+\node[bad,minimum width=5.3cm,minimum height=.6cm] (b) at (0,-1.0) {releases.astral.sh};
+\node[bad,minimum width=5.3cm,minimum height=.6cm] (c) at (0,-2.0) {release-assets.githubusercontent.com};
+\node[bad,minimum width=5.3cm,minimum height=.6cm] (d) at (0,-3.0) {HTTP 403, uv unavailable};
+\draw[flow] (a)--node[labeltext,right]{301 redirect}(b);
+\draw[flow] (b)--node[labeltext,right]{GitHub fallback}(c);
+\draw[denied] (c)--(d);
+\node[labeltext,anchor=west,text=Rust] at (2.75,-1.0) {denied};
+\node[labeltext,anchor=west,text=Rust] at (2.75,-2.0) {denied};
+\end{tikzpicture}
+\column{.40\textwidth}
+{\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+initial allowlist & six hosts\\
+missing destinations & two hosts\\
+observed failure & HTTP 403\\
+\bottomrule
+\end{tabular}\par
+\vspace{.2cm}
+\begin{ticks}
+\item The fix adds both hosts to code, scripts and documentation.
+\item A shared release-asset host admits more than this installer.
+\end{ticks}\par}
+\end{columns}
+\vspace{.1cm}
+{\small\tagP\ A proxy that fetches files by digest is a refinement. This run did not build it.\par}
+\claim{A hostname permission is an imperfect boundary.}
+\sources{Observed on our sandbox platform, 27 Sep 2026. It became our first work order (work-order record).}
+\note{[0:45] The work order came from a failure on our sandbox platform. The uv installer at astral dot sh redirects to releases dot astral dot sh. It may fall back to GitHub release assets. The allowlist held six hosts and lacked both destinations. The request returned 403, and uv was unavailable. The requested fix added both hosts consistently. A shared release-asset host admits more than this installer. A digest-based proxy is a proposed refinement. Next, the approved plan.}
+\end{frame}

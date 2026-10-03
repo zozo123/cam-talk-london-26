@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP\,\tagO}The gate refused correctly, and cleanup lost the result}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[evidence,text width=2.7cm,minimum height=1.3cm] (b) at (-.2,0) {\textbf{suite}\\1,981 reported tests, 0~failures};
+\node[evidence,text width=1.7cm,minimum height=1.3cm] (r) at (3.1,0) {\textbf{review}\\approves};
+\node[bad,text width=3.1cm,minimum height=1.3cm] (d) at (6.5,0) {\textbf{delivery} finds an unreviewed file, refuses $3\times$};
+\node[bad,text width=2.2cm,minimum height=1.3cm] (t) at (10.1,0) {\textbf{teardown}\\removes the workspace};
+\draw[flow] (b)--(r);\draw[flow] (r)--(d);\draw[flow] (d)--(t);
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+{\small Our second work order: about 26 minutes, \$3.43, no delivered pull request. The unexpected file was our harness's own review-diff archive, mirrored into the workspace.\par}
+\vspace{.15cm}
+{\small \tagP\ Before teardown, export the patch, input identity, evidence and delivery state. During a long human wait, preserve or snapshot the state without granting publication permission.\par}
+\claim{A correct refusal and a failed recovery are separate events.}
+\sources{Our second work order, Sep 2026: run records (about 26 min wall clock, 853.8 s stage time, \$3.43); redacted copy on request; fix proposed, not merged. Related: Planarian statepoints (arXiv:2609.35366); Crab turn-level recovery (arXiv:2604.28138); DeepSeek-V4 DSec (arXiv:2606.19348 \S5.2.5).}
+\note{[0:45] A second work order passed its suite of one thousand nine hundred eighty-one reported tests, and review approved. Delivery then found an unreviewed file and refused three times. The file was our harness's own review archive. Teardown removed the workspace. The run took twenty-six minutes, cost three dollars forty-three and delivered nothing. The refusal was correct. The recovery failed. We propose exporting the result before teardown. Next we turn to the records themselves.}
+\end{frame}

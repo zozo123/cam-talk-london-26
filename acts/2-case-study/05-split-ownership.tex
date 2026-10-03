@@ -1,0 +1,23 @@
+\begin{frame}[t]{\ev{\tagM}Four replicas produced zero runs}
+\lead{Observed failure of a concurrency test: ``0 runs from 4 replicas''.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[state,text width=2.7cm,minimum height=1.1cm] (i) at (0,0) {four replicas claim the same intent\\{\color{Muted}zero-duration lease}};
+\node[candidate,text width=3.0cm,minimum height=.9cm] (a) at (4.3,.8) {\textbf{owner A}\\wins cell activation};
+\node[candidate,text width=3.0cm,minimum height=.9cm] (b) at (4.3,-.8) {\textbf{owner B}\\holds the valid lease token};
+\node[bad,text width=3.0cm,minimum height=.9cm] (fa) at (8.3,.8) {loses the lease while recording the epoch};
+\node[bad,text width=3.0cm,minimum height=.9cm] (fb) at (8.3,-.8) {activation fails with \textbf{CellBusy}};
+\node[bad,text width=1.3cm,minimum height=1.1cm] (z) at (11.6,0) {\textbf{0 runs}};
+\draw[flow] (i.east)--(a.west);
+\draw[flow] (i.east)--(b.west);
+\draw[denied] (a)--(fa);
+\draw[denied] (b)--(fb);
+\draw[denied] (fa.east)--(z);
+\draw[denied] (fb.east)--(z);
+\end{tikzpicture}
+\end{center}
+{\small This is the first repair's recorded diagnosis: a split-ownership race. One attempt owned the cell and another owned the dispatch, so neither dispatched a run. The incident alone does not validate the diagnosis.\par}
+\claim{A two-host allowlist fix led the repair into dispatch ownership.}
+\sources{Our first work order, 27 Sep 2026: build-stage test failure and the first repair's agent record.}
+\note{[0:40] After the build, a concurrency test failed. Four replicas produced zero runs. The first repair recorded a diagnosis of split ownership. The dispatch lease had zero duration. All replicas could claim the same intent, and only the last claimant kept a valid token. One attempt won the cell activation and then lost its lease. Another held the lease and met CellBusy. Next, the repair and its test.}
+\end{frame}

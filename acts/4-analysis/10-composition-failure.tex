@@ -1,0 +1,32 @@
+\begin{frame}[t]{\ev{\tagP\,\tagO\,\tagA}Passing pairs can conceal a failing composition}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+{\small\color{Muted}\bfseries Illustration\par}
+{\small Three patches each enable one more worker. Capacity permits two workers.\par}
+\vspace{.1cm}
+{\small
+\begin{tabular}{lcl}
+\toprule
+\textbf{Patches applied} & \textbf{Workers} & \textbf{Capacity 2}\\
+\midrule
+$\{1\}$, $\{2\}$, $\{3\}$ & 1 & \yes\ pass\\
+$\{1,2\}$, $\{1,3\}$, $\{2,3\}$ & 2 & \yes\ pass\\
+$\{1,2,3\}$ & 3 & \no\ {\color{Rust}fail}\\
+\bottomrule
+\end{tabular}\par}
+\column{.46\textwidth}
+\vspace{-.25cm}
+\[\Gamma_{ij}=U(\{i,j\})-U(\{i\})-U(\{j\})+U(\emptyset)\]
+\vspace{-.25cm}
+{\small
+\begin{ticks}
+\item $U(A)$: a fixed objective for patch set $A$ on one parent.
+\item With $U=1$ for pass and $0$ for fail, every pair has $\Gamma_{ij}=0$.
+\item Eight candidates give 28 pairs and 256 subsets.
+\item \tagP\ Rebuild and evaluate the exact composition selected for publication (contract condition 7).
+\end{ticks}\par}
+\end{columns}
+\par\vspace{.15cm}\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad Genetics calls a strongly negative interaction synthetic lethality. We screened for gene knockouts that are lethal in combination with an SRC-3 inhibitor.}}\par
+\sources{Gilad, Eliaz et al., Commun.\ Biol.\ 4:399 (2021).}
+\note{[0:45] Pair tests have a combinatorial limit. Here, three patches each enable one more worker, and capacity permits two. Every single patch and every pair passes. All three together exceed capacity and fail. Eight candidates give twenty-eight pairs and two hundred and fifty-six subsets. Genetics calls such an interaction synthetic lethality. Our 2021 screen sought knockouts lethal only with an SRC-3 inhibitor. The runtime must rebuild and evaluate the exact composition it publishes. Next, the reducer's counting rules.}
+\end{frame}

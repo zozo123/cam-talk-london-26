@@ -1,0 +1,37 @@
+\begin{frame}[t]{\ev{\tagM}The new behaviour lacked a direct deterministic test}
+\begin{columns}[T,onlytextwidth]
+\column{.36\textwidth}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[bad,text width=1.9cm,minimum height=.55cm] (c) at (0,0) {\textbf{CellBusy}};
+\node[state,text width=2.9cm,minimum height=.55cm] (r) at (0,-.85) {inspect the live cell};
+\node[evidence,text width=1.6cm,minimum height=.55cm] (ad) at (-1.25,-1.95) {\textbf{adopt}};
+\node[bad,text width=1.6cm,minimum height=.55cm] (rf) at (1.25,-1.95) {\textbf{refuse}};
+\draw[flow] (c)--(r);
+\draw[flow] (r)--node[labeltext,left]{same owner}(ad);
+\draw[flow] (r)--node[labeltext,right]{foreign}(rf);
+\node[labeltext] at (0,-2.6) {repair logic, simplified};
+\end{tikzpicture}
+\column{.60\textwidth}
+{\small
+\begin{tabularx}{\linewidth}{@{}L{1.5cm}Y@{}}
+\toprule
+Step & Decision\\
+\midrule
+review 1 & \textbf{\color{Rust}blocker}: add deterministic tests\\
+repair 2 & reuse a helper that other paths exercise\\
+review 2 & \textbf{\color{Teal}approve}, and the missing branch test becomes \emph{minor}\\
+\bottomrule
+\end{tabularx}\par
+\vspace{.15cm}
+Reported suite: 1,972 tests including skips, zero failures. The harness ran it. The repair agent had no shell.\par}
+\end{columns}
+\vspace{.15cm}
+{\small
+\begin{ticks}
+\item Existing tests exercised adoption through a crash path and refusal through a foreign-owner busy path.
+\item \textcolor{Rust}{No test deterministically established CellBusy together with same-owner adoption.}
+\end{ticks}\par}
+\claim{Both branches were tested separately. Their conjunction was not.}
+\sources{Our first work order, 27 Sep 2026: agent records of review 1, repair 2 and review 2; stage test counts.}
+\note{[0:55] This is the central incident of the case study. The repair handled CellBusy by inspecting the live cell. It adopted a cell held by the same work order and refused a foreign owner. Review one blocked the change and asked for deterministic tests. Repair two reused a helper that existing tests exercise. One test adopts after a crash. Another refuses a foreign owner of a busy cell. No test established CellBusy together with same-owner adoption. Review two approved and rated the gap minor. Next, the controls that allowed this.}
+\end{frame}

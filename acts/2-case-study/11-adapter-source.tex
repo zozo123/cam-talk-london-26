@@ -1,0 +1,31 @@
+\begin{frame}[t]{\ev{\tagM\,\tagO}We recorded the adapter digest, but not its recoverable source}
+\begin{columns}[T,onlytextwidth]
+\column{.47\textwidth}
+\textbf{Recorded in the run}
+{\small
+\begin{ticks}
+\item[\yes] input commit and dependency lock
+\item[\yes] policy digest
+\item[\yes] every agent step's output
+\item[\yes] sandbox adapter digest
+\end{ticks}\par}
+\column{.49\textwidth}
+\textbf{Missing}
+{\small
+\begin{ticks}
+\item[\no] adapter source in the repository: a local shim outside Git
+\end{ticks}\par}
+\end{columns}
+\vspace{.15cm}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{2.6cm}Y@{}}
+\toprule
+Audit & inspect the recorded run\\
+Replay & reproduce execution against recorded external responses\\
+Fresh run & obtain new external responses, including new hosted-model calls\\
+\bottomrule
+\end{tabularx}\par}
+\claim{A digest identifies what ran. It does not reconstruct it.}
+\sources{Our first work order, Sep 2026: run record. ENCODE records reference, software and parameters per data file: \href{https://doi.org/10.1101/2023.04.04.535623}{Hitz et al., bioRxiv 2023}. Record and replay: rr (USENIX ATC'17); DeepSeek-V4 DSec (\href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348} \S5.2.5).}
+\note{[0:40] The run record holds the input commit, dependency lock, policy digest, agent outputs and adapter digest. The adapter was a local shim outside Git. Its digest identifies what ran but cannot reconstruct it. An audit inspects the record. A replay needs recorded external responses. Fresh hosted-model calls produce a new run. ENCODE records software and parameters with each file. Next we ask what a snapshot captures.}
+\end{frame}

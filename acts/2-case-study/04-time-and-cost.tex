@@ -1,0 +1,23 @@
+\begin{frame}[t]{\ev{\tagM}A two-host fix became a 43-minute loop}
+\vspace{.05cm}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.9cm}Y r r@{}}
+\toprule
+Recorded stage & Work & Time & Cost\\
+\midrule
+intent, specification, plan & acceptance conditions and the six-file plan & 3:41 & \$0.96\\
+build and test & three edit tasks, suite failure, first repair & 20:01 & \$4.50\\
+review & review, second repair, tests, re-review & 18:55 & \$4.87\\
+\midrule
+\textbf{recorded stages} & & \textbf{42:38} & \textbf{\$10.33}\\
+timestamps, start to finish & 11:39:56 to 12:23:40 & 43:44 & \\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.15cm}
+{\small\colorbox{Sand}{\parbox{\dimexpr\textwidth-2\fboxsep}{\textbf{Two repairs and two reviews:} 25.2 minutes and \$7.75, that is 59\% of recorded stage time and 75\% of reported model cost.}}\par}
+\vspace{.08cm}
+{\small Times are agent-session durations, including tool activity. Sandbox setup took 20.3\,s. A hundredfold faster setup would save about 20\,s.\par}
+\claim{A failed test redirected the work into another subsystem.}
+\sources{Our first work order, 27 Sep 2026: stage metrics (2,557.5\,s) and agent records, cost at list price.}
+\note{[0:45] The fix needed two host names. The loop took forty-three minutes and reported ten dollars thirty-three of model cost. Specification and plan took under four minutes. Build and test took twenty, and review took nineteen. The two repairs and two reviews took twenty-five minutes and seven dollars seventy-five. These are agent sessions, including tool activity. Setup took twenty seconds. A failed test sent the work into another subsystem.}
+\end{frame}

@@ -1,0 +1,36 @@
+\begin{frame}[t]{\ev{\tagM}The approved plan named six files}
+\lead{The plan fixed the scope before any edit. Every planned file concerns the allowlist.}
+\begin{columns}[T,onlytextwidth]
+\column{.52\textwidth}
+{\small
+\begin{tabularx}{\linewidth}{@{}Y r@{}}
+\toprule
+Planned change & Files\\
+\midrule
+allowlist implementation: the Python check and the shell bootstrap & 2\\
+regression tests & 1\\
+deployment script & 1\\
+documentation & 2\\
+\midrule
+\textbf{total} & \textbf{6}\\
+\bottomrule
+\end{tabularx}\par}
+\column{.44\textwidth}
+\textbf{Acceptance conditions}
+{\small
+\begin{ticks}
+\item[\yes] both redirect hosts present in every statement of the allowlist
+\item[\yes] the policy statements agree with each other
+\item[\yes] the regression checks pass
+\end{ticks}\par}
+\vspace{.2cm}
+\textbf{Not in the plan}
+{\small
+\begin{ticks}
+\item[\no] dispatch ownership logic
+\end{ticks}\par}
+\end{columns}
+\claim{The plan defines what ``outside the plan'' means.}
+\sources{Our first work order, 27 Sep 2026: plan record and plan approval (answered by the harness).}
+\note{[0:35] The approved plan named six files. Two implement the allowlist. One holds regression tests, one is a deployment script and two are documentation. Acceptance required both hosts everywhere, agreeing policy statements and passing regression checks. The task did not include dispatch ownership logic. This gives outside the plan a precise meaning. Next, where the time went.}
+\end{frame}

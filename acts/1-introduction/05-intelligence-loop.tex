@@ -1,0 +1,32 @@
+\begin{frame}[t]{\ev{\tagO\,\tagA}Intelligence as choice and action}
+\vspace{0pt}
+{\small \textbf{Intelligence} derives from Latin \textit{intellegere}: \textit{inter} (between) and \textit{legere} (to choose, to read).\par}
+\vspace{.08cm}
+\lead{Intelligence means choosing between.}
+\vspace{-.1cm}
+{\small Since 29 Sep 2026, US federal agencies must say `Super Intelligence'. We say intelligence.\par}
+\vspace{.15cm}
+\begin{columns}[T,onlytextwidth]
+\column{.64\textwidth}
+{\small \tagA\ This ladder is our own framing.\par}
+\vspace{.08cm}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\small}]
+\node[state,text width=7.9cm,minimum height=.55cm,align=left,anchor=north west] (a) at (0,0) {\textbf{self-driving cars} sense, plan and act};
+\node[candidate,text width=7.9cm,minimum height=.55cm,align=left,anchor=north west] (b) at ([xshift=.25cm,yshift=-.12cm]a.south west) {\textbf{self-driving computers} write and test their own software};
+\node[evidence,text width=7.9cm,minimum height=.55cm,align=left,anchor=north west] (c) at ([xshift=.25cm,yshift=-.12cm]b.south west) {\textbf{self-driving intelligence} is an agent in a loop};
+\end{tikzpicture}
+\column{.34\textwidth}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\small}]
+\node[state,minimum width=1.2cm,minimum height=.5cm] (r) at (0,.8) {read};
+\node[candidate,minimum width=1.2cm,minimum height=.5cm] (ch) at (1.4,0) {choose};
+\node[state,minimum width=1.2cm,minimum height=.5cm] (a) at (0,-.8) {act};
+\node[evidence,minimum width=1.2cm,minimum height=.5cm] (k) at (-1.4,0) {check};
+\draw[flow] (r) to[bend left=20] (ch);\draw[flow] (ch) to[bend left=20] (a);
+\draw[flow] (a) to[bend left=20] (k);\draw[flow] (k) to[bend left=20] (r);
+\end{tikzpicture}
+\end{columns}
+\claim{Choosing between forks requires knowing what each fork established.}
+\sources{Oxford English Dictionary / Online Etymology Dictionary, `intelligence'. Executive order `Inaugurating the Era of Super Intelligence', 29 Sep 2026 (White House fact sheet). Mobileye perception work, 2021--2024.}
+\note{[0:45] Intelligence comes from the Latin intellegere, from inter, between, and legere, to choose or to read. Intelligence means choosing between. Since the twenty-ninth of September, US agencies must say Super Intelligence. We say intelligence. Our own analogy runs from self-driving cars to self-driving computers to self-driving intelligence, an agent in a loop. The loop reads, chooses, acts and checks. To choose between forks, the loop must know what each fork established. Here is what this talk establishes.}
+\end{frame}

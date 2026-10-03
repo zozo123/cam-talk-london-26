@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagO\,\tagA}Four reruns do not create four times as many test cases}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\linewidth}{@{}L{6.4cm}Y@{}}
+\toprule
+\textbf{Event} & \textbf{What is new}\\
+\midrule
+resubmit an old receipt & no new observation\\
+rerun 100 deterministic cases & new executions, same cases\\
+rerun with fresh scheduler randomness & new outcomes within repeated-case clusters\\
+evaluate new cases & new evaluation conditions\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.25cm}
+{\small\textbf{Illustration.} Four runs of 100 cases give 400 outcomes in 100 case clusters.\\[2pt]
+Keep four identifiers separate: \term{execution ID}, \term{observation ID}, \term{test-case ID}, \term{candidate ID}.\par}
+\vspace{.2cm}
+\noindent\colorbox{Sand}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\small{\color{Gold}\bfseries\fontsize{7.6}{9}\selectfont ANALOGY\,$\cdot$\,BIOLOGY}\quad Our 2021 CRISPR screen: $\geq$4 technical replicates per point, $\geq$2 independent experiments per plot.}}\par
+\claim{Deduplicate reused observations. Model dependence among new ones.}
+\sources{Gilad, Eliaz et al., Commun.\ Biol.\ 4:399 (2021), Methods.}
+\note{[0:45] Four reruns do not create four times as many test cases. A resubmitted receipt adds no observation. Rerunning one hundred deterministic cases adds executions of the same cases. Fresh scheduler randomness adds outcomes within repeated cases. Four runs give four hundred outcomes in one hundred case clusters. Biologists separate technical replicates from independent experiments for the same reason. Deduplication handles reused observations. Related new observations need a dependence model. The next slide shows a limit of pairwise correlation.}
+\end{frame}

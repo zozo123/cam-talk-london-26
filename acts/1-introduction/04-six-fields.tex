@@ -1,0 +1,26 @@
+\begin{frame}[t]{\ev{\tagO\,\tagM\,\tagA}One question across six fields}
+\vspace{0pt}
+\lead{What counts as a new, independent observation?}
+\vspace{.1cm}
+\begin{center}
+\begin{tikzpicture}[x=.98cm,y=1cm]
+\draw[Line,line width=1.2pt] (0,0)--(12.0,0);
+\draw[Line,line width=1.2pt] (12.0,0)--(12.55,.3) (12.0,0)--(12.55,-.3);
+\foreach \x/\c in {0/Teal,2.4/Teal,4.8/Teal,7.2/Teal,9.6/Teal,12.0/Gold}{\fill[\c] (\x,0) circle(3.2pt);}
+\foreach \x/\h/\q in {
+ 0/PHYSICS/{Which links make parts move together},
+ 2.4/GENOMICS/{New cell type or same patient},
+ 4.8/BITCOIN/{Decentralized network or 64 agents},
+ 7.2/{SELF-DRIVING}/{A million frames or one rare case},
+ 9.6/{AGENT\\LOOPS}/{Nine green forks or one parent},
+ 12.0/{RL TRAINING}/{Which rollouts shared a start}}{
+ \node[anchor=south,font=\footnotesize\bfseries,text=Ink,text width=2.3cm,inner xsep=0pt,align=center] at (\x,.2) {\h};
+ \node[anchor=north,text width=2.2cm,align=center,font=\small\itshape,text=Teal] at (\x,-.25) {\q};}
+\end{tikzpicture}
+\end{center}
+\vspace{.1cm}
+{\small Physics and biology give vocabulary here and no evidence about forks.\par}
+\claim{In each field, apparently independent evidence is not independent.}
+\sources{Genomics and Bitcoin are team results with co-authors. Physics: PRE 2020, PNAS 2020, JPCB 2021. Genomics: Hitz et al.\ 2023, iScience 2026. Bitcoin: arXiv:2206.02871. Self-driving: perception work at Mobileye, 2021--2024. Agent loops: our experiments, arXiv:2607.09689. RL: Kimi K3 report \S5.3.2.}
+\note{[0:45] The question is older than agents. A biological physicist meets it in six fields. In filament networks, it was which links move parts together. In genomics, a new cell type or the same patient again. In Bitcoin, a decentralized network or sixty-four agents. At Mobileye, a million frames or one rare case. In agent loops and in reinforcement learning, it is which runs shared a start. Physics and biology give vocabulary and no evidence about forks. Next, intelligence.}
+\end{frame}

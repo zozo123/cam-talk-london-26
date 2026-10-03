@@ -1,0 +1,30 @@
+\begin{frame}[t]{\ev{\tagB\,\tagP}Claimed precision can be inflated}
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\term{One shard inflates its precision}\\
+{\small A 2,000-point shard returns a distant estimate and inflates its reported precision a further $50\times$.\par}
+\vspace{.2cm}
+{\small
+\begin{ticks}
+\item Claimed precision raises the shard's weight.
+\item Sample count alone cannot detect inflated information per point.
+\item The stress heuristic is not a Byzantine guarantee.
+\end{ticks}\par}
+\column{.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=.09cm,every node/.style={font=\scriptsize}]
+\draw[flow] (0,0)--(0,20.5) node[above]{pooled estimate};
+\foreach \y in {0,5,10,15}{\draw (-.07,\y)--(.07,\y);\node[left] at (-.08,\y){\y};}
+\fill[Rust] (.6,0) rectangle (1.6,17.0004); \node[above] at (1.1,17.0004) {17.0004};
+\fill[Teal] (2.4,0) rectangle (3.4,4.9566); \node[above] at (2.9,4.9566) {4.9566};
+\node[below,align=center] at (1.1,0) {unprotected\\pooling};
+\node[below,align=center] at (2.9,0) {stress\\heuristic};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+\vspace{.25cm}
+{\small\tagP\ The controller sets each shard's precision by trusted recomputation or calibrated external scoring.\par}
+\claim{Precision must come from outside the worker.}
+\sources{Synthetic check, Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689} (2026), \S4. Not an agent-task benchmark.}
+\note{[0:35] One shard of two thousand points returns a distant estimate. It also inflates its reported precision a further fiftyfold. Unprotected pooling moves to 17.0. A stress heuristic returns 4.96. It gives no Byzantine guarantee. Sample count alone cannot detect this forgery. Precision requires trusted recomputation or calibrated external scoring. The next section turns these claims into experiments, beginning with Test 1.}
+\end{frame}

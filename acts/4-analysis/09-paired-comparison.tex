@@ -1,0 +1,31 @@
+\begin{frame}[t]{\ev{\tagO\,\tagP}Shared conditions can improve paired comparisons}
+\vspace{-.4cm}
+\[\operatorname{Var}(Y_A-Y_B)=\operatorname{Var}(Y_A)+\operatorname{Var}(Y_B)-2\operatorname{Cov}(Y_A,Y_B)\]
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=2.6cm] (r) at (0,0) {workload draw $\xi_i$};
+\node[candidate,minimum width=2.4cm] (a) at (4.2,.55) {candidate A};
+\node[candidate,minimum width=2.4cm] (b) at (4.2,-.55) {candidate B};
+\node[evidence,minimum width=2.9cm] (d) at (8.6,0) {$D_i=Y_{A,i}-Y_{B,i}$};
+\draw[flow] (r)--(a);\draw[flow] (r)--(b);\draw[message] (a)--(d);\draw[message] (b)--(d);
+\end{tikzpicture}\\[-2pt]
+{\footnotesize\color{Muted}Repeat the pair across fresh workload draws $i=1,\dots,n$.\par}
+\end{center}
+\vspace{-.05cm}
+{\small
+\begin{columns}[T,onlytextwidth]
+\column{.55\textwidth}
+\begin{tabularx}{\linewidth}{L{2.7cm}Y}
+\toprule
+\textbf{Purpose} & \textbf{Design}\\
+\midrule
+Compare A with B & Match relevant conditions\\
+Assess robustness & Vary relevant conditions\\
+\bottomrule
+\end{tabularx}
+\column{.41\textwidth}
+\tagP\ The fork API should state which randomness it copies, which it reseeds and which it leaves external.
+\end{columns}\par}
+\sources{Common random numbers: \href{https://pubsonline.informs.org/doi/abs/10.1287/mnsc.38.6.884}{Glasserman \& Yao, Management Science 38(6) (1992)}.}
+\note{[0:45] Shared conditions help comparisons. A and B receive the same workload draw, and we compare them within it. Positive covariance lowers the variance of their difference. This is the method of common random numbers. We repeat the pair across fresh draws. Copying guest randomness can help pairing. It does not control sampling in a hosted model. The fork API should state what it copies, reseeds or leaves external. Pair tests also have a limit, shown next.}
+\end{frame}
