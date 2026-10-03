@@ -2,7 +2,7 @@
 
 **The Runtime Layer for AI Software Factories.** Cambridge SRG, 15 October 2026, 15:00-16:00 BST, FW11 + Microsoft Teams.
 
-Generated from the notes in `acts/` by `tools/presenter_guide.py`. 50 main slides, 10 end-matter pages. Planned talk: **44:35**, 4409 spoken words, 99 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
+Generated from the notes in `acts/` by `tools/presenter_guide.py`. 50 main slides, 10 end-matter pages. Planned talk: **44:35**, 4406 spoken words, 99 wpm average, peak 109 wpm. These are planned cues, not a measured rehearsal.
 
 ## Run of show
 
@@ -41,17 +41,17 @@ Generated from the notes in `acts/` by `tools/presenter_guide.py`. 50 main slide
 | 31 | Work cells fork and the gate holds authority | 0:55 | 26:30-27:25 | 89 | 97 |
 | 32 | Promotion is small enough to model-check | 0:45 | 27:25-28:10 | 72 | 96 |
 | 33 | The second review was not independent | 1:05 | 28:10-29:15 | 113 | 104 |
-| 34 | A reused grader becomes a training set | 0:45 | 29:15-30:00 | 82 | 109 |
+| 34 | A reused grader becomes a training set | 0:45 | 29:15-30:00 | 81 | 108 |
 | 35 | One formula, three fields | 0:55 | 30:00-30:55 | 97 | 106 |
-| 36 | Extra forks add few witnesses | 1:50 | 30:55-32:45 | 199 | 109 |
-| 37 | The runtime holds some of the cluster labels | 0:50 | 32:45-33:35 | 86 | 103 |
+| 36 | Extra forks add few witnesses | 1:50 | 30:55-32:45 | 198 | 108 |
+| 37 | The runtime holds some of the cluster labels | 0:50 | 32:45-33:35 | 87 | 104 |
 | 38 | A fork can supply the control run | 0:45 | 33:35-34:20 | 71 | 95 |
 | 39 | When a swarm gels | 0:50 | 34:20-35:10 | 78 | 94 |
 | 40 | Two passing patches can fail together | 0:45 | 35:10-35:55 | 81 | 108 |
 | 41 | Workers return a receipt of evidence and origin | 0:55 | 35:55-36:50 | 98 | 107 |
 | 42 | A sandbox cannot verify a claim | 0:55 | 36:50-37:45 | 98 | 107 |
 | 43 | Test 1: restore versus a warm cache | 1:00 | 37:45-38:45 | 104 | 104 |
-| 44 | Why siblings may fail together | 0:35 | 38:45-39:20 | 55 | 94 |
+| 44 | Why siblings may fail together | 0:35 | 38:45-39:20 | 53 | 91 |
 | 45 | Test 2: sibling failure coupling | 1:05 | 39:20-40:25 | 112 | 103 |
 | 46 | What two tests cannot separate | 0:40 | 40:25-41:05 | 65 | 98 |
 | 47 | The same work order, run as designed | 0:50 | 41:05-41:55 | 89 | 107 |
@@ -263,7 +263,7 @@ Part three is the count. Nine agent copies say the fix works. Belief depends on 
 
 *0:45, starts at 29:15*
 
-Machine learning calls a grader you keep returning to a training set. Even a protected grader can teach the search to overfit its feedback. So we freeze the candidate and validate once. Reinforcement-learning labs do this. Kimi K3 gives feedback from public verifiers and scores with hidden ones. It caps answer length, so longer answers cannot win. Our repair two argued past review one. A grader or a reward model fails the same way. Feedback that is optimised against stops being evidence.
+In machine learning, a reused grader becomes a training set. Even a protected grader can teach the search to overfit its feedback. So the candidate should be frozen and validated once. Reinforcement-learning labs do this. Kimi K3 gives feedback from public verifiers and scores with hidden ones. It caps answer length, so longer answers cannot win. Our repair two argued past review one. A grader or a reward model fails the same way. Feedback that is optimised against stops being evidence.
 
 ### 35. One formula, three fields
 
@@ -275,13 +275,13 @@ One formula appears in three fields. Dean and Barroso report each server is slow
 
 *1:50, starts at 30:55*
 
-But forks share starting code, model, prompt and tests. If the mistake comes from something shared, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, give about nine independent witnesses. A lot, point five, gives about two. Identical means one. Take nine green repairs. [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets of one page give one witness. Their average's variance never drops below rho sigma squared. Two different models that both miss a question pick the same wrong answer sixty percent of the time, where chance would give a third. This is not rho but shows rho is nonzero. Nine frontier judges give about two independent votes. Reading rho as coupling and this result as bias is our interpretation. Systems people may recognise N over one plus N minus one times a fraction. [wait seven seconds, silently, repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law, with rho as the serial fraction of your evidence. [pause] N forks give N executions, but fewer than N independent observations.
+But forks share starting code, model, prompt and tests. If the mistake comes from something shared, all nine make it. How much they share is one number, the correlation rho. A hundred forks sharing a little, rho point one, give about nine independent witnesses. A lot, point five, gives about two. Identical means one. Take nine green repairs. [hold up nine photocopies of one page, beside the screen, in camera] Nine sheets of one page give one witness. Their average's variance never drops below rho sigma squared. Two different models that both miss a question pick the same wrong answer sixty percent of the time, where chance would give a third. This agreement rate indicates that rho is nonzero. Nine frontier judges give about two independent votes. Reading rho as coupling and this result as bias is our interpretation. Systems people may recognise N over one plus N minus one times a fraction. [wait seven seconds, silently, repeat any answer aloud for the recording] [click] Statisticians call this Kish's design effect. Systems people call it Amdahl's law, with rho as the serial fraction of your evidence. [pause] N forks give N executions, but fewer than N independent observations.
 
 ### 37. The runtime holds some of the cluster labels
 
 *0:50, starts at 32:45*
 
-The formula dates from 1965. It needs cluster labels, meaning records of shared sources, that analysts rarely get. Only the runtime knows which copies share a parent, seed or test. Its egress gateway also sees which model each copy calls. It records this lineage with every result. It cannot see blind spots that different models share. We inferred clusters from outside, in Bitcoin and tumours. Malignant cells cluster by patient tumour. Forks cluster by parent. Others must infer the clusters. A fork runtime can record them.
+The formula dates from 1965. It needs cluster labels, meaning records of shared sources, that analysts rarely get. Only the runtime knows which copies share a parent, seed or test. Its egress gateway also sees which model each copy calls. It can record this lineage with every result. It cannot see blind spots that different models share. We inferred clusters from outside, in Bitcoin and tumours. Malignant cells cluster by patient tumour. Forks cluster by parent. Others must infer the clusters. A fork runtime can record them.
 
 ### 38. A fork can supply the control run
 
@@ -299,7 +299,7 @@ Seeds couple copies by choice, but exchanged information often couples them unin
 
 *0:45, starts at 35:10*
 
-Composition hides a severe case in which two patches pass alone but fail together. Gamma measures how far the pair differs from the sum of its parts. Eight candidates give twenty-eight pair tests and two hundred and fifty-six subsets. Effects among three or more can pass every pair test. Genetics calls strongly negative gamma synthetic lethality, and we screened the genome for it. Each knockout is survivable alone but lethal together. The shipped composition must be rebuilt and evaluated (condition seven).
+Composition hides a severe case in which two patches pass alone but fail together. Gamma measures how far the pair differs from the sum of its parts. Eight candidates give twenty-eight pair tests and two hundred and fifty-six subsets. Effects among three or more can pass every pair test. Genetics calls strongly negative gamma synthetic lethality, and we screened the genome for it. Each perturbation is survivable alone but lethal together. The shipped composition must be rebuilt and evaluated (condition seven).
 
 ### 41. Workers return a receipt of evidence and origin
 
@@ -323,7 +323,7 @@ Part four presents two tests that could refute our claim. Both were written befo
 
 *0:35, starts at 38:45*
 
-Before test two, we state why siblings are expected to fail together. We simulated branched actomyosin networks and observed this behaviour. At high Arp2/3 levels the networks stall, and at low levels they contract. In between, loose clusters may collapse suddenly, in avalanches. We described the avalanches as an analogy to cytoquakes observed in cells.
+Before test two, we state why siblings may fail together. We simulated branched actomyosin networks and observed this behaviour. At high Arp2/3 levels the networks stall, and at low levels they contract. In between, loose clusters may collapse suddenly, in avalanches. We described the avalanches as an analogy to cytoquakes observed in cells.
 
 ### 45. Test 2: sibling failure coupling
 
@@ -381,7 +381,7 @@ Detail for slides 43 and 45. The protocol is PREREGISTRATION.md, tags prereg-v1 
 
 ### E5. Research record: biophysics
 
-PhD work at the University of Houston and Rice: graph theory of actomyosin network shape (PRE 2020, linker valency), Arp2/3 branching and avalanches (PNAS 2020, JPCB 2021), protein folding and calcium binding. Used on slide 7 (the journey) and slide 44, the declared prior for Test 2. It is the motivation for Test 2, not evidence for it. Team results with co-authors.
+PhD work at the University of Houston and Rice: graph theory of actomyosin network shape (PRE 2020, linker valency), Arp2/3 branching and avalanches (PNAS 2020, JPCB 2021), protein folding and calcium binding. Used on slide 7 (the journey) and slide 44, the declared prior for Test 2. It motivates Test 2 and is no evidence for it. Team results with co-authors.
 
 ### E6. Research record: genomics
 
@@ -389,7 +389,7 @@ Genome architecture, bioinformatics and cancer genomics at Baylor, NRGene, HIT a
 
 ### E7. Research record: preprints, systems and talks
 
-Preprints, systems work and talks. Poolkeh appears on slide 35 as a model of a pooling scheme. arXiv:2607.09689 appears on slides 4, 28 and 30 (API timings, named snapshots) and 41 and 42 (receipts, forged precision). Bitcoin appears on slides 7 and 37 (team result). The ENCODE pipelines appear on slides 7 and 18. The three-body e-print is on an AI-assisted server and is not peer reviewed. Say so if asked.
+Preprints, systems work and talks. Poolkeh appears on slide 35 as a model of a pooling scheme. arXiv:2607.09689 appears on slides 4, 7, 28, 30, 37, 41, 42 and 50 (timings, snapshots, receipts, forged precision). Bitcoin appears on slides 7 and 37 (team result). The ENCODE pipelines appear on slides 7 and 18. The three-body e-print is on an AI-assisted server and is not peer reviewed. Say so if asked.
 
 ### E8. References: systems
 
@@ -397,7 +397,7 @@ Systems references. Every figure on a story slide is traceable to these, to the 
 
 ### E9. References: evidence and evaluation
 
-Evidence and evaluation references. The shared-errors papers compare different models, not forks of one agent, and the 2026 arXiv items are preprints.
+Evidence and evaluation references. The shared-errors papers compare different models and do not study forks of one agent. The 2026 arXiv items are preprints.
 
 ### E10. References: own work and documentation
 

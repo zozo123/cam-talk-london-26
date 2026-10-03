@@ -12,6 +12,6 @@
 \end{tikzpicture}
 \end{center}
 \claim{A result in which the build cache wins is a valid outcome.}
-\sources{Pre-registration, tag prereg-v1, github.com/zozo123/cam-talk-london-26. Restore cost follows REAP (ASPLOS'21) and FaaSnap (EuroSys'22). Decision rules in full are in the end matter.}
+\sources{Pre-registration, tags prereg-v1 to prereg-v3, github.com/zozo123/cam-talk-london-26. Restore cost follows REAP (ASPLOS'21) and FaaSnap (EuroSys'22). Decision rules in full are in the end matter.}
 \note{[1:00] Part four presents two tests that could refute our claim. Both were written before any run. Test one measures cost, and gate zero snapshots a random RAM value and restores three children. If the value is lost, memory was not restored, so the operation is restore fan-out and not a fork. Fidelity requires matching restored and direct outputs, and a cached template is compared with a restore over twenty alternating runs per size. Restore counts as better only if the whole confidence interval of the gain exceeds ten seconds at every size. A result in which the build cache wins is a valid outcome.}
 \end{frame}

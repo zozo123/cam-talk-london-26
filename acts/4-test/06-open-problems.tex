@@ -1,11 +1,11 @@
 \begin{frame}[t]{Six open problems for the prototype}
 \begin{enumerate}
 \item \textbf{Dependence from lineage and evidence edges.} Estimate $\rho$, the amount of evidence that forks share, from fork trees and evidence manifests.
-\item \textbf{Leases that fork.} Capabilities are re-issued on restore, are revocable, and are never ambient.
+\item \textbf{Leases that fork.} Capabilities should be re-issued on restore, be revocable, and never be ambient.
 \item \textbf{Warm state and side channels.} Place forks on hosts by trust level as well as by utilisation.
-\item \textbf{Evidence commit.} Effects on remote services and on people are held until commit.
+\item \textbf{Evidence commit.} Effects on remote services and on people should be held until commit.
 \item \textbf{Layers or VM fork.} Determine when a content-addressed build is faster than a live fork.
-\item \textbf{Human-gate latency.} The system snapshots, destroys and restores the sandbox across a wait of one day.
+\item \textbf{Human-gate latency.} The sandbox should be snapshotted, destroyed and restored across a wait of one day.
 \end{enumerate}
 \claim{We ask for help with the first two problems.}
 \note{[0:35] Building the prototype raises six open problems, and we would like help with the first two. Problem one is to estimate dependence from lineage and evidence edges without running everything twice. Problem two concerns leases that fork. On restore, a child's capability should be newly issued, revocable, and never ambient. The other four problems are available for questions.}
