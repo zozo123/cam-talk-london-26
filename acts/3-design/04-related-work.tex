@@ -1,0 +1,17 @@
+\begin{frame}[t]{\surf{related work}\ev{\tagO}Cloning, checkpointing and recovery evolved differently}
+\vspace{.05cm}
+{\footnotesize\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{@{}L{4.0cm} Y L{4.9cm}@{}}
+\toprule
+Mechanism & Systems & Main concern\\
+\midrule
+virtualisation and migration & Xen (SOSP'03), live migration (NSDI'05), Potemkin (SOSP'05) & isolation, moving and cloning VMs\\
+state cloning & SnowFlock (EuroSys'09), Catalyzer (ASPLOS'20), Nephele (EuroSys'23), MITOSIS (OSDI'23) & fast start from existing state\\
+agent checkpointing & DeltaBox, Shepherd (2026) & cheap rollback and branching of agent runs\\
+recovery and replay & Crab, Planarian, DeepSeek DSec (2026) & failures and external effects\\
+\bottomrule
+\end{tabularx}\par}
+\claim{Recovery systems are not interchangeable fork implementations.}
+\sources{SOSP'03; NSDI'05; SOSP'05; EuroSys'09; ASPLOS'20; EuroSys'23; OSDI'23; \href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://arxiv.org/abs/2605.10913}{Shepherd}; \href{https://arxiv.org/abs/2604.28138}{Crab}; \href{https://arxiv.org/abs/2609.35366}{Planarian}; DeepSeek-V4, \href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348} \S5.2.5.}
+\note{[0:40] Related work divides into four lines. Xen came from this laboratory in 2003. Live migration followed, with sixty milliseconds of downtime. Potemkin cloned honeypots and timed each clone to its first reply. SnowFlock cloned across hosts. Catalyzer forked a sandbox, and MITOSIS forked remotely over RDMA. Agent checkpointing systems appeared this year. Recovery systems handle failures and external effects. Their reported numbers measure different operations.}
+\end{frame}

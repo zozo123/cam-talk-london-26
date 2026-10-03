@@ -1,0 +1,21 @@
+\begin{frame}[t]{\ev{\tagM}Candidate selection and measurement pooling answer different questions}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\linewidth}{@{}L{2.3cm}YY@{}}
+\toprule
+ & \textbf{Nine candidate patches} & \textbf{Nine measurements of one candidate}\\
+\midrule
+Object & nine different artifacts & one frozen artifact\\
+Purpose & choose which patch to validate & estimate one defined quantity\\
+Risk & selection can overfit the feedback & outcomes can be dependent\\
+Requirement & verify the selected result on fresh cases & model the uncertainty, including dependence\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.25cm}
+{\small Different patches estimate different quantities. Their summaries cannot be pooled as one parameter.\par}
+\vspace{.12cm}
+{\small In our run, one hosted model reviewed two successive repairs of one patch. The reviews guided the repair. They were not independent validation.\par}
+\claim{Repeated reviews can improve a patch without validating it independently.}
+\sources{Our experiments, Sep 2026: records of repair 1, review 1, repair 2 and review 2.}
+\note{[0:45] Section four, analysis, asks what repeated executions establish. Nine candidate patches are nine different artifacts. We choose one of them. The choice can overfit the feedback, so the selected patch needs fresh cases. Nine measurements of one frozen patch estimate one defined quantity. Their outcomes can be dependent. Different patches estimate different quantities, so their results cannot be pooled. Our two reviews helped repair one patch. The next slide shows how that feedback changed the candidate.}
+\end{frame}

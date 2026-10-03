@@ -1,0 +1,19 @@
+\begin{frame}[t]{\ev{\tagP}Repair resampling returns to the original incident}
+\lead{Descriptive proposal: nine samples of the first repair. Unrun.}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.6cm}Y@{}}
+\toprule
+Hold fixed & pre-repair input, prompt and tool policy (no shell), hosted model endpoint\\
+Record & out-of-plan edit count, distinct diff count, claimed test evidence\\
+Prediction & at least 5 of 9 samples repeat the out-of-plan edit\\
+Additional validation & freeze the disputed patch and deterministically exercise same-owner adoption\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.25cm}
+{\small Hosted-model sampling lies outside the guest snapshot. Nine samples describe repeatability. They cannot show an effect induced by the snapshot.\par}
+\vspace{.1cm}
+{\small The original in-cell pre-repair commit is unavailable. Its public substitute is the parent of the delivered repair, chosen by commit order. No tree-hash comparison confirms that they match.\par}
+\claim{The resampling describes repeatability of the repair.}
+\sources{Pre-registration, tags prereg-v1 to prereg-v3. Our incident: first work order, 27 Sep 2026, run records.}
+\note{[0:45] The third study returns to the incident. We resample the first repair nine times. The input, the prompt, the tool policy and the model endpoint stay fixed. We count out-of-plan edits and distinct diffs, and record any claimed test evidence. We predict that at least five of nine repeat the out-of-plan edit. Model sampling happens outside the snapshot, so this describes repeatability only. The original pre-repair commit is unavailable. The next slide gives the redesigned workflow.}
+\end{frame}

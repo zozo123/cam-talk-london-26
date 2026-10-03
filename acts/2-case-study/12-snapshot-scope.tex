@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagO}A snapshot captures part of the experiment}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{4.4cm}Y@{}}
+\toprule
+State surface & Record needed\\
+\midrule
+repository and dependencies & tree and dependency identities\\
+guest files and processes & declared snapshot semantics\\
+model continuation & prompts and responses\\
+evaluation & test, fixture, seed and feedback exposure\\
+external services & requests and results\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.3cm}
+{\small Known mechanisms: OBuilder snapshots each build step. Overlay layers preserve filesystem state. Process and VM checkpoints preserve more.\par}
+\vspace{.1cm}
+{\small Two children with identical files can receive different hosted-model responses. Different children can reuse the same evaluation feedback.\par}
+\claim{A successful restore does not establish complete experimental fidelity.}
+\sources{\href{https://github.com/ocurrent/obuilder}{OBuilder}; overlay layers: \href{https://www.tunbury.org/2026/02/16/day10/}{day10}, \href{https://arxiv.org/abs/2605.22781}{DeltaBox (arXiv:2605.22781)}; DeepSeek-V4 DSec (\href{https://arxiv.org/abs/2606.19348}{arXiv:2606.19348} \S5.2.5).}
+\note{[0:45] A snapshot captures part of the experiment. The repository needs tree and dependency identities. Guest files and processes need declared snapshot semantics. The model continuation needs its prompts and responses. Evaluation needs the test, fixture, seed and feedback exposure. External services need their requests and results. Two children with identical files can receive different model responses. Different children can reuse the same feedback. Next we look at the fork our loop requested.}
+\end{frame}

@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagO}VM fork already had an API in 2009}
+\vspace{.05cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,align=left,font=\footnotesize\ttfamily,inner sep=6pt,text width=5.3cm] (a) at (0,0) {\textrm{\textbf{SnowFlock, parallel computation}}\\ID = VM\_fork(N)\\if ID.isChild():\\\hspace*{1.2em}parallel\_work({\color{Teal}\bfseries data[ID]})\\\hspace*{1.2em}VM\_exit()\\else:\\\hspace*{1.2em}VM\_wait(ID)};
+\node[candidate,align=left,font=\footnotesize\ttfamily,inner sep=6pt,text width=5.3cm] (b) at (6.6,0) {\textrm{\textbf{Agent pattern, our reading}}\\ID = fork(reached\_state, N)\\if ID.isChild():\\\hspace*{1.2em}generate\_continuation()\\\hspace*{1.2em}exit()\\else:\\\hspace*{1.2em}evaluate(candidates)};
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}L{3.2cm} Y@{}}
+\toprule
+Caller & Responsibility\\
+\midrule
+data-sharded & assigns distinct work to each child\\
+searching & interprets candidates that may share assumptions and checks\\
+\bottomrule
+\end{tabularx}\par}
+\claim{The mechanism is old. The responsibility of the caller has changed.}
+\sources{Lagar-Cavilla et al., SnowFlock: rapid virtual machine cloning for cloud computing, EuroSys'09, Fig.~1(b); built on Xen (Barham et al., SOSP'03).}
+\note{[0:40] Virtual machine fork had an interface in 2009. SnowFlock, built on Xen from this laboratory, described cloning for sandboxing and parallel computation. It did not describe the agent loop. Its caller shards the data and gives each child distinct work. A searching caller forks a reached state and generates continuations. It must then interpret candidates that may share assumptions and checks. Cloning, checkpointing and recovery later developed separately.}
+\end{frame}

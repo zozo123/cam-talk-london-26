@@ -1,0 +1,21 @@
+\begin{frame}[t]{\ev{\tagO}Children can inherit secrets, identities and random state}
+\vspace{0pt}
+{\footnotesize\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{@{}L{3.3cm}L{5.2cm}Y@{}}
+\toprule
+Inherited state & Required treatment & What is known\\
+\midrule
+bearer tokens in memory & keep publishing secrets outside the guest & every child holds a live copy\\
+random-number state & declare copying or reseeding & VMGenID reseeds the kernel, userspace has no generic solution\\
+guest clock & resynchronise, or model explicitly & the child resumes at snapshot time\\
+IP and MAC identity & assign child-specific networking & clones otherwise share one identity\\
+open connections & declare the supported restore semantics & CRIU restores a connection for one restore, gVisor can reset connections\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.15cm}
+{\normalsize\bfseries Eight clones can hold eight copies of one live token.\par}
+\vspace{.05cm}
+{\small Divergence costs memory: each page a child writes becomes its private copy.\par}
+\sources{Firecracker snapshot documentation (VMGenID, random state); \href{https://arxiv.org/abs/2102.12892}{Brooker et al., arXiv:2102.12892}; CRIU and gVisor checkpoint/restore documentation.}
+\note{[0:45] A child inherits the parent's memory, including bearer tokens. Eight clones can hold eight copies of one live token, so publishing secrets stay outside the guest. VMGenID reseeds the kernel, and userspace has no generic solution. Clocks and network identities need resetting. CRIU can restore a connection, and gVisor can reset connections. Fork is cheap, but each written page costs memory per child. The next slide turns to effects that leave the sandbox.}
+\end{frame}

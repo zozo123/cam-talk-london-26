@@ -1,0 +1,20 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}Seven surfaces produced concrete runtime requirements}
+\vspace{0pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.4cm}L{5.4cm}Y@{}}
+\toprule
+Surface & Requirement & Addressed in Section 3 by\\
+\midrule
+networking and credentials & make permitted access explicit & credential kept by the controller\\
+filesystem state & identify the candidate's input state & immutable, identified parent\\
+build and tests & record the exact behavioural obligation & evaluator outside the worker\\
+recovery & preserve artifacts before cleanup & export, then tear down\\
+observability & distinguish execution from skipped work & artifact-bound evidence\\
+reproducibility & preserve adapters and external responses & recorded inputs and observations\\
+cloning & declare what children share & fork with declared sharing\\
+\bottomrule
+\end{tabularx}\par}
+\claim{Each incident identifies a mechanism. None estimates a failure rate.}
+\sources{Our two work orders, Sep 2026: run records. Mechanisms are proposed unless Section 3 marks them built or exercised.}
+\note{[0:45] The seven surfaces give seven requirements. Permitted access must be explicit. The candidate's input state must be identified. The behavioural obligation must be recorded exactly. Artifacts must leave before cleanup. Records must distinguish execution from skipped work. Adapters and external responses must be preserved. Children must declare what they share. Section three, the design, takes these in turn, starting with who may publish a candidate.}
+\end{frame}

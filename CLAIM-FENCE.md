@@ -9,7 +9,7 @@ Each evidence slide carries one or more tags:
 - **PROPOSED**: a design that has not been run.
 - **PUBLISHED**: other people's work.
 
-The scope caveats are said once, on slide 8.
+The scope caveats are said on slides 6 and 7.
 
 ## Measured: runs SELFHOST-2 and SELFHOST-3, 27 Sep 2026
 
@@ -76,8 +76,8 @@ The scope caveats are said once, on slide 8.
 - Epoch-fenced promotion.
 - A controller-measured n.
 - Replay logs.
-- The redesigned SELFHOST-2 on slide 47.
-- The runtime interface on slide 30, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
+- The redesigned SELFHOST-2 on slide 54.
+- The runtime interface on slide 33, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
 - The TLA+ promotion model (formal/authority) is a design model; no TLC run or trace check is recorded.
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
@@ -87,8 +87,8 @@ The scope caveats are said once, on slide 8.
 - Brown et al., arXiv:2407.21787: SWE-bench Lite 15.9% (1 sample) to 56% (250 samples); majority voting and reward models plateau without automatic verifiers.
 - Stroebl, Kapoor & Narayanan, arXiv:2411.17501 (current title *The Limits of Inference Scaling Through Resampling*; v1 was *Inference Scaling fLaws*): imperfect verifiers cap repeated-sampling gains; when false positives have negative utility, the best number of attempts is often under 10. Say the condition.
 - Slide 2's independence condition is Dean & Barroso's own: the techniques work only when the cause of variability does not hit several replicas at once. It is about latency, not failure; the close generalises it. Correlated wrong answers: Kim et al., ICML 2025.
-- Slide 4 borrows the format of Jeff Dean's "Numbers everyone should know" (LADIS 2009 keynote). Its run row is a run record (SELFHOST-2 metrics.json), not a paper: say "every row has a source".
-- Slide 5 stage shares are of the 2,557 s cycle (metrics.json); setup is 20.3 s (operations.jsonl).
+- Slide 25 lists published runtime operations with their endpoints. It is not a ranking. The run figures (slide 10) come from a run record (SELFHOST-2 metrics.json), not a paper.
+- Slide 10 stage times are of the 2,557.5 s cycle (metrics.json): intent, specification and plan 3:41, build and test 20:01, review 18:55. Setup is 20.3 s (operations.jsonl).
 - Blackburn et al., arXiv:2206.02871 (Eliaz 3rd of 9): most bitcoin from 3 Jan 2009 to 9 Feb 2011 was mined by 64 agents (address linking >99% sensitivity and specificity). Used as a motivating example of dependence uncovered from outside, not as evidence about forks. Say "my co-authors and I", not "I".
 - Saurty-Seerunghen et al., iScience 2026 (Eliaz 3rd of 7): malignant cells cluster by patient tumour, non-malignant cells by cell type. The patient was known metadata; this is dependence structure, not a recovered hidden label.
 - Eliaz et al. PRE 2020 is about linker valency (multilinkers), not branching. Liman et al. PNAS 2020 and Li et al. JPCB 2021 are about Arp2/3 branching and avalanches. None says branching sets global connectivity or that whole networks collapse together. The PhD also covered Hi-C loops and protein-folding hydrodynamics.
@@ -96,7 +96,7 @@ The scope caveats are said once, on slide 8.
 
 - Every system named on a story slide is cited on that slide's source line, and the three References end-matter pages collect them with the documentation used.
 - Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
-- DeltaBox: the slides use the evaluation checkpoint figure (10.83 ms; 10.8 ms on slide 4). The abstract's 14 ms / 5 ms are not used.
+- DeltaBox: the slides use the evaluation checkpoint figure (10.83 ms on slide 25). The abstract's 14 ms / 5 ms are not used.
 - Kimi K3 (Moonshot AI), §5.3.2:
   - checkpoint and resume are "as low as" 133 ms and 49 ms;
   - 51.2M sandboxes counts all K3 runtimes, across training and evaluation;
@@ -132,7 +132,7 @@ Added with the one-story restructure:
 - The variance floor assumes equal variances and a common pairwise correlation.
 - Lineage names the shared factors; it does not estimate their strength.
 - Precision pooling requires one common parameter, calibrated information and independent evidence.
-- On slide 41, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
+- On slides 47 and 48, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 - Lineage labels shared parents, seeds, tests and fixtures. It cannot label a shared model's blind spots.
 
 ## Do not say
@@ -144,7 +144,7 @@ Added with the one-story restructure:
 - That fork is faster than a good build cache.
 - That the speaker's PhD was only on branched networks, or that the papers show whole networks collapsing together.
 - "I recovered" for the Bitcoin or iScience results: they are team results.
-- That nine forks were run or came back green on slide 6: the question is hypothetical.
+- That nine forks were run or came back green: the nine candidates on slide 37 and the nine repair samples on slide 53 are hypothetical or proposed.
 - That Poolkeh pooled real samples: it is a model.
 - That clusters or networks "collapse together": say "may collapse suddenly".
 - That Kimi forks its reward judge: it forks a sandbox for judging.

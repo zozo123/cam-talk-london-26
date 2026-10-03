@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagM\,\tagO}Visible feedback can become an optimisation target}
+\lead{Read-only tests prevent test edits. They do not establish behavioural coverage.}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{3.3cm}Y@{}}
+\toprule
+Source & Reported finding\\
+\midrule
+METR (2025) & reward hacking in \textbf{30.4\%} of RE-Bench runs and \textbf{0.7\%} of HCAST runs. Visibility of the scorer is a hypothesis\\
+ImpossibleBench & read-only tests do not prevent special-casing of the code for the tests\\
+Kimi K3 \S4.2.6 & public diagnostic verifiers are paired with hidden held-out verifiers\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.15cm}
+{\small Public diagnostic feedback supports repair. Reserved validation tests the result. Our incident shows an unresolved test obligation. It shows no deliberate cheating.\par}
+\claim{Diagnostic feedback and reserved validation serve different purposes.}
+\sources{\href{https://metr.org/blog/2025-06-05-recent-reward-hacking/}{METR (June 2025)}; \href{https://arxiv.org/abs/2510.20270}{ImpossibleBench (arXiv:2510.20270)}; \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3 technical report} \S4.2.6.}
+\note{[0:45] Read-only tests stop an agent from editing the tests. They do not show that the tests cover the behaviour. METR reports reward hacking in thirty point four percent of RE-Bench runs and zero point seven percent of HCAST runs. The settings differed in more than scorer visibility, which remains their hypothesis. ImpossibleBench reports special-casing for tests. Kimi K3 pairs public and hidden verifiers. Our incident left a test obligation unresolved. The next incident is about recovery.}
+\end{frame}

@@ -1,0 +1,24 @@
+\begin{frame}[t]{\ev{\tagO}Fork saves resources when preparation dominates reuse cost}
+\vspace{.1cm}
+\begin{center}
+{\Large$(N-1)\,P \;>\; H + N\,(R+D)$\par}
+\vspace{.15cm}
+{\small preparation $P$, capture $H$, restore $R$, divergence $D$, children $N$. Additive resource-cost model.\par}
+\end{center}
+\vspace{.1cm}
+{\small\color{Muted}Calculation, not a measurement. Units: resource-seconds.\par}
+\vspace{.05cm}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{4.6cm}L{3.0cm}L{2.9cm}Y@{}}
+\toprule
+Case & Avoided preparation & Added reuse cost & Result\\
+\midrule
+$N{=}8$, $P{=}30$, $H{=}2$, $R{=}1$, $D{=}3$ & $7\times30 = 210$ & $2 + 8\times4 = 34$ & fork saves 176\\
+same, warm cache $P{=}2$ & $7\times2 = 14$ & $34$ & fork loses 20\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.15cm}
+{\small Batch elapsed time is a separate question: it depends on critical paths and contention. A faster-booting minimal image is the alternative (Jitsu, LightVM).\par}
+\sources{Madhavapeddy et al.\ NSDI'15 (Jitsu); Manco et al.\ SOSP'17 (LightVM, NEC Labs). Parameter values are illustrative.}
+\note{[0:45] Fork avoids N minus one preparations. It pays one capture, plus a restore and a divergence for each child. With eight children and a thirty-second preparation, fork avoids 210 resource-seconds and adds 34. It saves 176. With a warm cache, preparation falls to two seconds and fork loses. These are calculations. Elapsed time depends on critical paths and contention. Jitsu and LightVM show the faster-boot alternative. Next, we show what our measurements cover.}
+\end{frame}

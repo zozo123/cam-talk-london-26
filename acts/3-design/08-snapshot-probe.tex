@@ -1,0 +1,28 @@
+\begin{frame}[t]{\ev{\tagP\,\tagO}The snapshot probe defines the claimed state surface}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,text width=2.9cm,minimum height=.9cm] (p) at (0,0) {process holds a 128-bit nonce in RAM only};
+\node[state,minimum width=1.7cm,minimum height=.9cm] (s) at (3.6,0) {capture};
+\foreach \i/\y in {1/.56,2/0,3/-.56}{\node[candidate,minimum width=1.7cm,minimum height=.42cm,font=\footnotesize] (c\i) at (6.7,\y) {child \i};\draw[flow] (s)--(c\i);}
+\node[evidence,text width=3.0cm,minimum height=.9cm] (k) at (10.6,0) {check: process alive? same nonce?};
+\draw[flow] (p)--(s);
+\foreach \i in {1,2,3}{\draw[flow] (c\i)--(k);}
+\end{tikzpicture}
+\end{center}
+\vspace{-.1cm}
+{\small\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{@{}L{5.2cm} Y@{}}
+\toprule
+Result & Permitted description\\
+\midrule
+files survive only & filesystem restore\\
+process and RAM survive & evidence of process and memory restoration\\
+declared semantic checks match & fidelity for those checked properties only\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.02cm}
+{\footnotesize Passing is necessary for a memory claim. Full fidelity needs more. Compare declared outputs, ignoring timestamps. Worktrees, CRIU, VM snapshots and replay logs restore different state. Kimi reports up to 6.5$\times$ memory overcommit from copy-on-write plus page-cache optimisations.\par}
+\claim{Gate 0 is preregistered and unrun, so we say restore fan-out.}
+\sources{Our preregistered protocol, Gate 0. \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S5.3.2. CRIU and Firecracker snapshot documentation.}
+\note{[0:40] The snapshot probe defines which state we may claim. A process holds a random nonce only in memory. We capture, restore three children, and check that the process survives with the same nonce. If only files survive, we report filesystem restore. Passing it is necessary for a memory claim. The probe is preregistered and has not run. Children that keep memory also inherit secrets, identities and random state.}
+\end{frame}
