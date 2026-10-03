@@ -45,10 +45,20 @@ jobs:
           python - <<'PY'
           from pypdf import PdfReader
 
-          full = len(PdfReader("talk.pdf").pages)
-          print(f"Cambridge deck: {full} pages (57 story slides + 7 end-matter pages)")
-          if full != 64:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 64 pages; got {full}")
+          pages = PdfReader("talk.pdf").pages
+          full = len(pages)
+          print(f"Cambridge deck: {full} pages (45 story slides, no appendix)")
+          if full != 45:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 45 pages; got {full}")
+          # Guard against content accidentally consumed as a Beamer subtitle.
+          anchors = {2: ["VM_fork", "DSec"], 9: ["3:41", "20:01", "18:55"],
+                     14: ["CI success", "Human approval", "Adapter digest"],
+                     26: ["Ori Chamo", "135,445"]}
+          for page, terms in anchors.items():
+              rendered = pages[page].extract_text()
+              for term in terms:
+                  if term not in rendered:
+                      raise SystemExit(f"Missing displayed content on page {page + 1}: {term}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md

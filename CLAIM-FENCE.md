@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: 50 story slides (no backup slides) plus untimed end matter (detail pages, research record, references).
+This file applies to the canonical `talk.tex`: **45 main frames in six acts, no appendix and no overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
 
 Each evidence slide carries one or more tags:
 
@@ -9,7 +9,7 @@ Each evidence slide carries one or more tags:
 - **PROPOSED**: a design that has not been run.
 - **PUBLISHED**: other people's work.
 
-The scope caveats are said on slides 6 and 7.
+Scope boundaries attach to the relevant claims and are summarized here; this document uses titles and artifacts instead of fragile slide numbers.
 
 ## Measured: runs SELFHOST-2 and SELFHOST-3, 27 Sep 2026
 
@@ -20,7 +20,7 @@ The scope caveats are said on slides 6 and 7.
 **Setup of both runs**
 - Both ran on Docker's sandbox (`toolset:SbxCommaPolicyBackend`), not on islo.
 - The harness answered the intent and plan gates. `approvals.json` records them as `"mode": "human"`, actor `admin`.
-- Leases were not exercised (`cell.json` `managed: false`).
+- Sandbox authority leases were not exercised (`cell.json` `managed: false`); dispatch coordination leases are a separate mechanism.
 - Nothing forked. The work graph recorded `serial_fallback_missing_fork`. The 176.7 s "with a fork" figure is a computed critical path.
 
 **Observed on islo on 27 Sep (islo CLI 0.53.1)**
@@ -29,17 +29,20 @@ The scope caveats are said on slides 6 and 7.
 
 **SELFHOST-2**
 - Repair 1 (`agent/fix.4.json`) had no shell tool and did not run the tests. It changed `src/swfactory/backend/service.py`, which is outside the plan.
-- Review 1 returned `request_changes` with a blocker. Repair 2 (`fix.5.json`) could not edit `tests/` (hook-protected) and refactored.
+- Review 1 returned `request_changes` with a blocker. Repair 2 (`fix.5.json`) reported that `tests/` were protected and refactored. No blocked edit attempt is recorded; the hook never fired.
 - Review 2 returned `approve`. The out-of-plan file stayed "major", and "untested" was downgraded to minor.
 - The harness ran the full suite after each repair (`stages.py` re-runs tests after a review fix): 1,972 tests including skips, 0 failures.
 - The new CellBusy-adoption branch "lands with no test in the diff" (review 2). Its only coverage is the race, which reaches it "only when the interleaving happens to lose an activation".
 - The test hook never fired: 15 edits, all allowed.
 - All four steps used the same hosted model.
-- `cycle_s` 2557.5 (about 43 min). Total $10.33.
-- The speaker reverted the out-of-plan change by hand in PR #2351. **#2348–#2351 are open, not merged.**
+- Recorded stages total **2,557.517 s (42:37.517)**; timestamps give **43:44 wall time**. Total **$10.327824**.
+- Two repair and two review sessions total **1,514.087 s (25.235 min)** and **$7.74846**: **59.201%** of recorded stage time and **75.025%** of run cost. Session durations include agent/tool activity, not pure inference.
+- Initial setup was **20.3 s**, about **0.794%** of stage time. A 100-fold improvement would save about 20.1 s.
+- Serial edit nodes total **342.579 s**; computed critical path **176.689 s**; difference **165.890 s**, excluding fork, merge, contention, and verification overhead. Worktrees could support the file-level schedule.
+- The speaker reverted the out-of-plan change by hand in PR #2351. No merge is claimed.
 
 **SELFHOST-3**
-- 1,981 tests passed first time, and review approved.
+- The second work order reported suite count **1,981**, zero failures, and review approval. Raw records are unpublished; do not upgrade a reported suite count into a confirmed all-passed count.
 - Delivery was refused three times with "files outside the reviewed commit stream". The stray file was the harness's own review-diff archive.
 - Teardown followed, and no PR was produced. Cost $3.43. Wall clock was about 26 min; stage time was 853.8 s.
 
@@ -51,13 +54,13 @@ The scope caveats are said on slides 6 and 7.
 ## Built
 
 - The evidence-aware reduction contract and reference reducer: Eliaz, arXiv:2607.09689.
-  - **Title:** the arXiv listing says "Evidence-Aware MapReduce for Forkable Compute". The v4 PDF's first line says "Evidence-Aware Reduction". Slides cite the paper by ID.
+  - **Current v4 title:** *Evidence-Aware Reduction for Forkable Compute*. Earlier metadata used *Evidence-Aware MapReduce for Forkable Compute*; cite arXiv:2607.09689v4 for the current title.
 - **Built:**
   - an associative merge of numeric summaries;
   - a repeated evidence ID stops the merge (it raises);
   - lineage travels with the result, but nothing consumes it yet.
 - **Proposed:**
-  - one execution per evidence ID, so a retry is never counted twice;
+  - evidence identities tied to underlying observations, so declared reuse is never counted twice;
   - abstention when dependence is unknown;
   - a controller-derived precision.
 - **Measured** (paper):
@@ -76,8 +79,8 @@ The scope caveats are said on slides 6 and 7.
 - Epoch-fenced promotion.
 - A controller-measured n.
 - Replay logs.
-- The redesigned SELFHOST-2 on slide 54.
-- The runtime interface on slide 33, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
+- The redesigned SELFHOST-2.
+- The runtime interface, except `checkpoint` (islo named snapshots exist), `reduce` (merge and evidence check built) and `promote` (sha256-bound gate built; the epoch fence is proposed).
 - The TLA+ promotion model (formal/authority) is a design model; no TLC run or trace check is recorded.
 - The whole protocol in `PREREGISTRATION.md`. No result from it is claimed until it runs.
 
@@ -86,17 +89,17 @@ The scope caveats are said on slides 6 and 7.
 - Dean & Barroso, CACM 2013: hedged request after 10 ms; 99.9th-percentile latency for 1,000 BigTable keys from 1,800 ms to 74 ms with 2% more requests; "the source of latency is often not inherent in the particular request".
 - Brown et al., arXiv:2407.21787: SWE-bench Lite 15.9% (1 sample) to 56% (250 samples); majority voting and reward models plateau without automatic verifiers.
 - Stroebl, Kapoor & Narayanan, arXiv:2411.17501 (current title *The Limits of Inference Scaling Through Resampling*; v1 was *Inference Scaling fLaws*): imperfect verifiers cap repeated-sampling gains; when false positives have negative utility, the best number of attempts is often under 10. Say the condition.
-- Slide 2's independence condition is Dean & Barroso's own: the techniques work only when the cause of variability does not hit several replicas at once. It is about latency, not failure; the close generalises it. Correlated wrong answers: Kim et al., ICML 2025.
-- Slide 25 lists published runtime operations with their endpoints. It is not a ranking. The run figures (slide 10) come from a run record (SELFHOST-2 metrics.json), not a paper.
-- Slide 10 stage times are of the 2,557.5 s cycle (metrics.json): intent, specification and plan 3:41, build and test 20:01, review 18:55. Setup is 20.3 s (operations.jsonl).
+- The hedged-request example's independence condition is Dean & Barroso's own: the techniques work only when the cause of variability does not hit several replicas at once. It is about latency, not failure; the close generalises it. Correlated wrong answers: Kim et al., ICML 2025.
+- The relevant frame lists published runtime operations with their endpoints. It is not a ranking. The run figures  come from a run record (SELFHOST-2 metrics.json), not a paper.
+- The relevant frame stage times are of the 2,557.5 s cycle (metrics.json): intent, specification and plan 3:41, build and test 20:01, review 18:55. Setup is 20.3 s (operations.jsonl).
 - Blackburn et al., arXiv:2206.02871 (Eliaz 3rd of 9): most bitcoin from 3 Jan 2009 to 9 Feb 2011 was mined by 64 agents (address linking >99% sensitivity and specificity). Used as a motivating example of dependence uncovered from outside, not as evidence about forks. Say "my co-authors and I", not "I".
 - Saurty-Seerunghen et al., iScience 2026 (Eliaz 3rd of 7): malignant cells cluster by patient tumour, non-malignant cells by cell type. The patient was known metadata; this is dependence structure, not a recovered hidden label.
 - Eliaz et al. PRE 2020 is about linker valency (multilinkers), not branching. Liman et al. PNAS 2020 and Li et al. JPCB 2021 are about Arp2/3 branching and avalanches. None says branching sets global connectivity or that whole networks collapse together. The PhD also covered Hi-C loops and protein-folding hydrodynamics.
 - Hitz et al. 2023 (ENCODE pipelines): data files, reference genome versions, software versions and parameters are captured in the ENCODE Portal.
 
-- Every system named on a story slide is cited on that slide's source line, and the three References end-matter pages collect them with the documentation used.
+- Every system named on a story slide is cited on that slide's source line, and `REFERENCES.md` preserves the full bibliography and documentation.
 - Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
-- DeltaBox: the slides use the evaluation checkpoint figure (10.83 ms on slide 25). The abstract's 14 ms / 5 ms are not used.
+- DeltaBox: the slides use the evaluation checkpoint figure (10.83 ms). The abstract's 14 ms / 5 ms are not used.
 - Kimi K3 (Moonshot AI), §5.3.2:
   - checkpoint and resume are "as low as" 133 ms and 49 ms;
   - 51.2M sandboxes counts all K3 runtimes, across training and evaluation;
@@ -108,7 +111,7 @@ The scope caveats are said on slides 6 and 7.
 - Jo, Garg & Raghavan, arXiv:2602.24086 (2026 preprint; Garg is Kim et al.'s senior author): much of the "excess" agreement shrinks once the baseline accounts for question difficulty, and the measured monoculture depends on the baseline and on which models are compared. That errors are shared stands; how much is beyond difficulty is contested. For counting witnesses, total shared failure is what matters.
 - Goel et al., ICML 2025, arXiv:2502.04313: AI judges favour models similar to themselves, beyond accuracy. No number quoted.
 - Bone, Stephany & del Rio-Chanona, arXiv:2609.22169 (2026 preprint): post-training makes models from different vendors agree more; near-unanimous hiring exclusion rises from 5.6% (base models) to 17.3% (post-trained). The arXiv PDF header says COLM 2026; cite it as a preprint until the proceedings are out.
-- None of these measures forks of one agent from a shared snapshot, or multi-step agent runs. That gap is what Test 2 measures.
+- None of these measures forks of one agent from a shared snapshot or multi-step agent runs. H2 measures environmental race-test co-failure, not dependence between agent judgments. Repair resampling is descriptive.
 - LightVM is NEC Labs work, not SRG work.
 
 Added with the one-story restructure:
@@ -131,8 +134,8 @@ Added with the one-story restructure:
 
 - The variance floor assumes equal variances and a common pairwise correlation.
 - Lineage names the shared factors; it does not estimate their strength.
-- Precision pooling requires one common parameter, calibrated information and independent evidence.
-- On slides 47 and 48, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
+- Precision pooling requires one common target quantity, calibrated information and an appropriate dependence model. Selecting different patches or verifying a composition is separate.
+- On the relevant frames, θ is one candidate's quantity. Choosing among candidates is a separate selection problem.
 - Lineage labels shared parents, seeds, tests and fixtures. It cannot label a shared model's blind spots.
 
 ## Do not say
@@ -144,18 +147,18 @@ Added with the one-story restructure:
 - That fork is faster than a good build cache.
 - That the speaker's PhD was only on branched networks, or that the papers show whole networks collapsing together.
 - "I recovered" for the Bitcoin or iScience results: they are team results.
-- That nine forks were run or came back green: the nine candidates on slide 37 and the nine repair samples on slide 53 are hypothetical or proposed.
+- That nine forks were run or came back green: the nine candidates and the nine repair samples are hypothetical or proposed.
 - That Poolkeh pooled real samples: it is a model.
 - That clusters or networks "collapse together": say "may collapse suddenly".
 - That Kimi forks its reward judge: it forks a sandbox for judging.
 - That Kim et al. measured forks or repeated runs of one model.
-- That 60% is a correlation ρ.
+- That 60% is a correlation ρ, or that average pairwise correlation determines all-fail probability.
 - That the follow-up preprints are peer reviewed.
 - That SELFHOST-2 or SELFHOST-3 ran on the speaker's own sandbox platform (they ran in Docker Sandboxes through Airflow's sandbox toolset).
 
 Models were served through Databricks; that may be named. Name no model vendor or endpoint.
 
-The slides do not name the speaker's sandbox platform (speaker's choice); the disclosure stays in generic form.
+The API slide explicitly names islo. The factory work orders ran on Docker Sandboxes; the disclosure states the speaker works for a sandbox company.
 
 Do not say:
 - that repair 2 was never tested (the suite ran after it);
@@ -163,3 +166,27 @@ Do not say:
 - that the built reducer abstains;
 - that any islo snapshot is a memory fork before Gate 0 is resolved;
 - that nothing escaped. Say "nothing was pushed and nothing was denied".
+
+
+## Current story and execution boundary
+
+A fork is useful when captured state remains valid for the proposed continuations and capture/restore/divergence costs compete with rebuilding. The factory demonstrates file/dependency/feedback state, not a necessary valuable live-state workload. A running application at a reproduced failure is a **hypothetical future workload**. Source changes may require reload or restart. Hosted-model state and sampling are not captured by a guest snapshot.
+
+The proposed child pipeline is return candidate, select, verify exact artifact and required behavior, check current authority, then publish or retain/export. The host must **authenticate and authorize** the child; identity alone is not permission. Artifact-digest approval is built; clone identity generation, revocable authorization, epoch fences and external evaluator remain proposed. Preserve recoverable artifacts before teardown.
+
+## Chamo / Three-Body Atlas
+
+Ori Chamo is the coauthor affiliated with Incredibuild. The preliminary ai.viXra:2608.0069 work analyzes **135,445** source periodic orbits. **26 selected difficult bidirectional continuation links** connect the projected branches within one sampled component. Independent 60-digit calculations check representative stability transitions; this is not a global completeness proof. The Atlas workflow separates candidate, screening, high-precision verification, independent reproduction and frozen claim; an unresolved independent numerical cross-check was rejected. It illustrates evidence admission, not agent-fork performance or dependence. [Preprint](https://ai.vixra.org/pdf/2608.0069v1.pdf), [records](https://github.com/zozo123/threebody-closing-the-open).
+
+## Experiments and proposed amendments before collection
+
+**`PREREGISTRATION.md` remains unchanged.** No result is claimed. Any design or analysis change below must be a dated amendment before collection, retaining the original protocol and its history.
+
+- **H1:** compare reached-state restore with a warm cached template at N = 3, 6, 12, twenty repetitions per arm/N; batch makespan is primary. Capture accounting and total resource cost must not be confused with wall-clock makespan.
+- **H2:** compare environmental race-test co-failure among siblings and restored strangers. Reused snapshot families make pair differences dependent; temporal dependence across rounds also needs explicit treatment. The original sign-flip and t-interval analysis cannot be called exact or validated without a justified independence/exchangeability structure. An amendment is **proposed**, not implemented here.
+- A correlation excess of 0.05 is not absolute rho. Nine measurements give 6.43 variance-equivalent observations at absolute rho = 0.05; if strangers are 0.10 and siblings 0.15, siblings give 4.09. Only absolute rho belongs in that variance illustration.
+- The public pre-repair substitute is not confirmed equivalent to the unavailable in-cell state by a tree-hash comparison. Verify it or explicitly narrow reproduction claims before collection.
+- **Targeted coverage test:** force CellBusy plus same-owner adoption and foreign-owner refusal. This resolves a behavioral obligation; it is not a fork-speedup or fork-correctness experiment.
+- **Nine repair resamples:** same prompt, policy and hosted endpoint; record out-of-plan edit count and diff diversity. Descriptive repeatability is not a correlation estimate. No guest reseeding controls hosted-model sampling.
+
+The variance-equivalent sample size formula assumes equal variances and common pairwise correlation. It describes precision of a mean, not a literal independent-witness count, shared bias, search accuracy, selection success, or all-fail probability. Distinct evidence IDs and different model families do not establish independence.

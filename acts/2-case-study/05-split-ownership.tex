@@ -1,23 +1,22 @@
-\begin{frame}[t]{\ev{\tagM}Four replicas produced zero runs}
-\lead{Observed failure of a concurrency test: ``0 runs from 4 replicas''.}
+\begin{frame}[t]{\ev{\tagM}The repair agent diagnosed different owners for the lease and active cell.}
+\lead{Concurrency test: \textbf{``0 runs from 4 replicas''.}}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
-\node[state,text width=2.7cm,minimum height=1.1cm] (i) at (0,0) {four replicas claim the same intent\\{\color{Muted}zero-duration lease}};
-\node[candidate,text width=3.0cm,minimum height=.9cm] (a) at (4.3,.8) {\textbf{owner A}\\wins cell activation};
-\node[candidate,text width=3.0cm,minimum height=.9cm] (b) at (4.3,-.8) {\textbf{owner B}\\holds the valid lease token};
-\node[bad,text width=3.0cm,minimum height=.9cm] (fa) at (8.3,.8) {loses the lease while recording the epoch};
-\node[bad,text width=3.0cm,minimum height=.9cm] (fb) at (8.3,-.8) {activation fails with \textbf{CellBusy}};
-\node[bad,text width=1.3cm,minimum height=1.1cm] (z) at (11.6,0) {\textbf{0 runs}};
-\draw[flow] (i.east)--(a.west);
-\draw[flow] (i.east)--(b.west);
-\draw[denied] (a)--(fa);
-\draw[denied] (b)--(fb);
-\draw[denied] (fa.east)--(z);
-\draw[denied] (fb.east)--(z);
+\node[state,text width=2.35cm,minimum height=1.0cm] (i) at (0,0) {same intent\\zero-duration\\dispatch lease};
+\node[candidate,text width=2.45cm,minimum height=.9cm] (a) at (3.55,.85) {\textbf{A} activates the cell};
+\node[candidate,text width=2.45cm,minimum height=.9cm] (b) at (3.55,-.85) {\textbf{B} holds the valid dispatch token};
+\node[bad,text width=2.55cm,minimum height=.9cm] (fa) at (7.05,.85) {{\scriptsize\texttt{DispatchLeaseLost}}};
+\node[bad,text width=2.55cm,minimum height=.9cm] (fb) at (7.05,-.85) {\texttt{CellBusy}};
+\node[bad,text width=.9cm,minimum height=1.0cm] (z) at (10.1,0) {\textbf{0 runs}};
+\draw[flow] (i.east)--(a.west);\draw[flow] (i.east)--(b.west);
+\draw[denied] (a)--(fa);\draw[denied] (b)--(fb);
+\draw[denied] (fa.east)--(z);\draw[denied] (fb.east)--(z);
 \end{tikzpicture}
 \end{center}
-{\small This is the first repair's recorded diagnosis: a split-ownership race. One attempt owned the cell and another owned the dispatch, so neither dispatched a run. The incident alone does not validate the diagnosis.\par}
-\claim{A two-host allowlist fix led the repair into dispatch ownership.}
-\sources{Our first work order, 27 Sep 2026: build-stage test failure and the first repair's agent record.}
-\note{[0:40] After the build, a concurrency test failed. Four replicas produced zero runs. The first repair recorded a diagnosis of split ownership. The dispatch lease had zero duration. All replicas could claim the same intent, and only the last claimant kept a valid token. One attempt won the cell activation and then lost its lease. Another held the lease and met CellBusy. Next, the repair and its test.}
+{\small This is the agent's recorded diagnosis, without independent validation.\par}
+\vspace{.12cm}
+{\small This dispatch-coordination lease differs from the unused sandbox authority lease.\par}
+\sources{SELFHOST-2 first repair record, \texttt{agent/fix.4.json}.}
+\qadetail{The repair record explains that replicas can all claim an intent when its dispatch lease has zero duration; only the final claimant keeps a valid token. One attempt can win cell activation, then fail while recording the epoch with DispatchLeaseLost. The token holder encounters CellBusy. The proposed source fix inspects the active cell and adopts it when the owner is another attempt of the same work order. This records the agent's explanation, not an independently reproduced causal diagnosis. The test's dispatch lease is distinct from the sandbox authority lease disabled by the unmanaged cell.}
+\note{[0:55] We reached a concurrency test that reported zero runs from four replicas. The first repair diagnosed a split between cell activation and dispatch ownership. With the zero-duration dispatch lease, the final claimant could hold the valid token while another attempt had activated the cell. The activation winner lost its lease; the token holder encountered CellBusy. This is the agent's recorded explanation, not an independently validated diagnosis. The proposed repair allowed adoption of an active cell owned by the same work order. That introduced a specific behavioral obligation.}
 \end{frame}

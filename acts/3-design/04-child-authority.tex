@@ -1,0 +1,12 @@
+\begin{frame}{Each child needs private writable state and host-controlled authority.\ev{\tagO\,\tagP}}
+\begin{tabularx}{\linewidth}{L{3.3cm}Y}\toprule
+Inherited or shared & Required contract \\\midrule
+Immutable parent/cache & Digest identity; declared trust domain \\
+Writable branch state & Private to the child \\
+Child permissions & Host authenticates and authorizes identity, epoch, expiry and budget \\
+Publishing credential & Controller holds it; approval names the artifact \\\bottomrule\end{tabularx}
+\claim{Kernel isolation does not make a copied bearer token harmless.}
+\sources{Firecracker and gVisor documentation; Capsicum, USENIX Security 2010; CHERI, IEEE S\&P 2015.}
+\qadetail{A microVM can contain a still-valid bearer token. Guest-supplied generation strings are copied and cannot authenticate a clone. The host must authenticate and authorize each child separately. VMGenID can reseed the kernel; userspace RNG treatment is application-dependent. Refresh network identity, clock and socket semantics. Immutable caches still need a trust and leakage policy. Egress policy is distinct from withholding publication credentials. Controller-held publication is exercised; fresh clone authority remains proposed.}
+\note{[0:55] A child needs private writable state, while an immutable cache can be shared within a declared trust domain. It also needs authority assigned outside the copied guest state. A guest generation string and a bearer token can both be cloned. The host must authenticate and authorize the child, with an epoch, expiry and budget. The publishing credential stays with the controller, bound to a specific artifact decision. Kernel isolation is valuable, but it addresses a different boundary from permission to act.}
+\end{frame}

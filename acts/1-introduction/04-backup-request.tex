@@ -1,0 +1,25 @@
+\begin{frame}[t]{\ev{\tagO}A backup request reduced p99.9 latency from 1,800 ms to 74 ms.}
+\begin{columns}[T,onlytextwidth]
+\column{.45\textwidth}
+\lead{Read \textbf{1,000 BigTable keys}.}
+{\small Send the backup after \textbf{10\,ms}. Accept the first response.\par}
+\vspace{.3cm}
+{\fontsize{18}{22}\selectfont\bfseries 1,800\,ms $\to$ 74\,ms\par}
+{\small p99.9 latency, with \textbf{2\%} additional requests\par}
+\column{.51\textwidth}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,minimum width=1.45cm] (c) at (0,0) {client};
+\node[bad,minimum width=2.1cm] (s1) at (3.7,1.05) {server A\\\footnotesize slow};
+\node[evidence,minimum width=2.1cm] (s2) at (3.7,-1.05) {server B};
+\draw[flow] (c)--node[labeltext,above,sloped]{request}(s1);
+\draw[message] (c)--node[labeltext,above,sloped]{backup}(s2);
+\draw[flow,draw=Teal] (s2.west) to[bend left=32] node[labeltext,below]{first response}(c.south);
+\end{tikzpicture}
+\end{columns}
+\vspace{.2cm}
+{\small Shared latency causes limit the benefit.\par}
+\sources{Dean \& Barroso, \emph{The Tail at Scale}, CACM 56(2), 2013.}
+\qadetail{Dean and Barroso report the 99.9th-percentile latency of a 1,000-key BigTable read, using a hedged request after 10 ms and accepting the first response: 1,800 ms to 74 ms, with 2\% more requests. Their assumption is that the cause of variability does not affect multiple replicas at once. This is a published request-hedging result, not a fork benchmark or agent-correctness measurement. The second request can escape server-specific delay without changing the requested operation.}
+\note{[0:45] Dean and Barroso measured a thousand-key BigTable read. If the request had not completed after ten milliseconds, the client sent a backup to another server and accepted the first response. The 99.9th-percentile latency fell from eighteen hundred milliseconds to seventy-four, with two percent more requests. The backup can escape a delay specific to one server. Shared causes of delay limit that gain. For code generation, an alternative execution may produce a different candidate. We then have to recognize which candidate solves the task.}
+\end{frame}

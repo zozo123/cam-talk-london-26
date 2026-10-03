@@ -1,29 +1,22 @@
-\begin{frame}[t]{\ev{\tagM}The loop's execution path}
-\vspace{.1cm}
+\begin{frame}[t]{\ev{\tagM}The factory ran one hosted model through separate stages and checks.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\footnotesize}]
 \foreach \i/\n/\s in {0/work order/state,1/specification/candidate,2/plan/candidate,3/edits/candidate,4/tests/evidence,5/repair/candidate,6/review/evidence,7/delivery/evidence}{
-  \node[\s,minimum width=1.45cm,minimum height=.7cm,font=\footnotesize,inner xsep=2pt] (n\i) at (\i*1.8,0) {\n};
-}
+\node[\s,minimum width=1.43cm,minimum height=.65cm,font=\footnotesize,inner xsep=2pt] (n\i) at (\i*1.78,0) {\n};}
 \foreach \i [evaluate=\i as \j using int(\i+1)] in {0,...,6}{\draw[flow] (n\i)--(n\j);}
-\draw[flow,draw=Rust] (n6.north) to[bend right=45] node[labeltext,above,text=Rust]{changes requested} (n5.north);
-\node[labeltext,text width=3.4cm] at (3.6,-.85) {agent reads, specifies, plans and edits};
-\node[labeltext,text width=1.7cm] at (7.2,-.85) {harness runs the test contract};
-\node[labeltext,text width=1.7cm] at (9.9,-.85) {agent repairs and reviews};
-\node[labeltext,text width=1.7cm] at (12.6,-.85) {gate checks the artifact};
+\draw[flow,draw=Rust] (n6.north) to[bend right=40] node[labeltext,above,text=Rust]{changes requested}(n5.north);
+\node[labeltext,text width=3cm] at (3.6,-.85) {agent proposes and edits};
+\node[labeltext,text width=2cm] at (7.12,-.85) {harness tests};
+\node[labeltext,text width=3cm] at (11.5,-.85) {controller checks delivery};
 \end{tikzpicture}
 \end{center}
-{\footnotesize
-\begin{tabularx}{\textwidth}{@{}L{2.6cm}Y@{}}
-\toprule
-Sandbox & Docker Sandboxes, through Airflow's sandbox toolset\\
-Model & one hosted model, served through Databricks, in every agent role\\
-Approval gates & answered by the harness, recorded as \texttt{"mode": "human"}\\
-Leases & not exercised (the cell was unmanaged)\\
-Fork & unavailable: the work graph recorded \texttt{serial\_fallback\_missing\_fork}\\
-\bottomrule
-\end{tabularx}\par}
-\claim{Each stage is a separate source of claims.}
-\sources{Our first work order, 27 Sep 2026: stage, approval and work-graph records. \href{https://github.com/zozo123/ariflow-swfactory}{github.com/zozo123/ariflow-swfactory}.}
-\note{[0:40] Section two, a case study, follows one work order through our loop. It runs from specification to delivery. The agent reads and edits. The harness executes the test contract. Review examines the candidate and its findings. Delivery checks the artifact before publishing. One hosted model played several roles. Each stage is still a separate source of claims. The work order began with a network failure.}
+\vspace{.15cm}
+\begin{ticks}
+\item Docker Sandboxes through Airflow's sandbox toolset.
+\item One hosted model through Databricks across agent roles.
+\item Unmanaged cell, harness-answered gates, serial execution.
+\end{ticks}
+\sources{SELFHOST-2, 27 September 2026; \texttt{serial\_fallback\_missing\_fork}.}
+\qadetail{The factory proposed changes to its own repository. Agent stages generated specifications, plans, edits, repairs, and reviews. The harness ran the tests; the controller enforced artifact delivery. Both work orders used Docker Sandboxes through toolset:SbxCommaPolicyBackend, not islo. The cells were unmanaged, so sandbox authority leases were unused. This differs from dispatch-coordination leases exercised by a concurrency test later. Approvals recorded mode human and actor admin although the harness answered. The workgraph recorded serial\_fallback\_missing\_fork. Sources: docs/factory/SELFHOST-2 stage, approval, and workgraph records in github.com/zozo123/ariflow-swfactory.}
+\note{[0:55] We ran a software factory against its own repository. The agent produced specifications, plans, edits, repairs, and reviews. The harness executed the test contract, and the controller checked delivery. Docker Sandboxes supplied the work cell through Airflow's toolset. One model served through Databricks performed every agent role. The harness answered the approval gates. The cell was unmanaged, and execution stayed serial because fork was unavailable. These actors make different claims. The work order began with an installer failure observed on a different sandbox platform.}
 \end{frame}

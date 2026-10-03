@@ -1,0 +1,13 @@
+\begin{frame}{Testing the disputed path and resampling the repair answer different questions.\ev{\tagP}}
+\begin{tabularx}{\linewidth}{L{2.65cm}YY}\toprule
+ & Targeted behavioral test & Repair resampling \\\midrule
+Question & Does this artifact adopt once after same-owner CellBusy? & How repeatable is the out-of-plan edit? \\
+Procedure & Freeze the candidate; force the path; assert one dispatch & Nine samples; fixed input, prompt, policy and hosted endpoint \\
+Record & Executed receipt bound to digest & Scope edits, distinct diffs, claimed test evidence \\\bottomrule
+\end{tabularx}
+\claim{The targeted test resolves coverage; resampling describes repair behavior.}
+\tagline{Both are unrun. Exact equivalence of the public substitute pre-repair tree is unconfirmed.}
+\sources{Proposed regression obligation; descriptive Phase C in PREREGISTRATION.md.}
+\qadetail{The recorded Phase C prediction is at least five of nine repeats of the out-of-plan service.py edit. Original in-cell input b77afa9 is not recoverable; the public substitute c07bc4a is justified by delivered commit order, not a verified tree-hash comparison. This limits replication. Holding the hosted endpoint and prompt fixed does not move its weights, KV state or sampler into a guest snapshot. Resampling cannot establish a causal effect of guest fork on model outputs. Scope authorization and coverage remain separate checks even if all nine repairs differ. Accepted-result gains require a defined workload population, selection policy and equal-cost comparison.}
+\note{[1:10] We finish the experiments by returning to the disputed repair. The earliest useful check is a deterministic test that forces same-owner CellBusy adoption and asserts one dispatch on the frozen artifact. It may pass or fail; either outcome resolves the missing coverage. Separately, we can resample the repair nine times and describe scope edits, distinct diffs and test claims. That measures repeatability under the stated model setup. The exact original input tree is unavailable, so the public substitute needs qualification. These procedures answer different questions, and neither alone establishes a benefit from guest forking.}
+\end{frame}

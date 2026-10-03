@@ -1,0 +1,10 @@
+\begin{frame}{Repair tests and generalization tests support different claims.\ev{\tagM\,\tagO}}
+\begin{center}\begin{tikzpicture}[node distance=.35cm,every node/.style={font=\small,align=center}]
+\node[evidence,text width=1.7cm](a){Failed test};\node[candidate,text width=1.5cm,right=of a](b){Repair};\node[evidence,text width=2cm,right=of b](c){Review feedback};\node[candidate,text width=1.7cm,right=of c](d){Repair again};\node[state,text width=2cm,right=of d](e){Frozen artifact};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);\draw[flow](d)--(e);
+\end{tikzpicture}\end{center}
+\begin{ticks}\item A regression check supports the deterministic behavior it asserts.\item Feedback used in development changes the candidate.\item Generalization and selection claims need an appropriate untouched evaluation.\end{ticks}
+\sources{Dwork et al., Science 2015; Russo \& Zou, AISTATS 2016; Kimi K3 §4.2.6; factory records.}
+\qadetail{One hosted model performed all agent roles, without an agent-dependence estimate. Public diagnostics versus hidden held-out verifiers address different purposes. METR RE-Bench 30.4 percent versus HCAST .7 percent was not a controlled scorer-visibility comparison; scorer visibility was a leading hypothesis. ImpossibleBench shows read-only tests do not prevent special-casing. None establishes fork-induced judgment dependence. A regression test used during repair remains valid evidence of the behavior actually asserted on its exact artifact.}
+\note{[0:50] The repair sequence exposes failed tests and review feedback to the candidate. That is useful development. A regression check can still establish the deterministic behavior it actually asserts on that artifact. Claims about generalization or selection performance require a suitable evaluation beyond the development feedback. Adaptive-analysis work explains why reuse changes the interpretation. In our case, one hosted model performed the roles, but we did not estimate their dependence. The next slide separates three questions that a single green receipt cannot answer.}
+\end{frame}

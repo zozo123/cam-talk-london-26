@@ -1,0 +1,12 @@
+\begin{frame}{Distinct execution IDs do not make copied evidence new.\ev{\tagB\,\tagP}}
+\begin{tabularx}{\linewidth}{L{4.9cm}Y}\toprule
+Returned evidence & Treatment \\\midrule
+A and B both return observation $e_1$ & Reject declared duplication \\
+A returns $e_1$, B returns $e_2$; parent $p$ shared & Retain ancestry; dependence unresolved \\
+100 cases run four times & 400 outcomes within 100 case identities \\\bottomrule\end{tabularx}
+\claim{Keep execution, observation, case and candidate identities separate.}
+\tagline{A fresh stochastic evaluation may be new evidence while retaining its shared-source labels.}
+\sources{Reducer implementation, arXiv:2607.09689v4; technical versus independent replicates, Gilad et al., Commun. Biol. 2021.}
+\qadetail{A copied receipt remains the same observation. A genuinely fresh stochastic outcome can obtain a new observation ID but retains the case, candidate and ancestry cluster. Deterministic reruns supply execution checks, not new test cases. Four runs of one hundred cases do not establish four hundred independent cases. Distinct worker declarations do not authenticate underlying evidence.}
+\note{[0:50] We distinguish copied evidence from related new observations. If two workers return observation e one, the built reducer rejects the declared duplicate. If they return different observations from one parent, it retains the relationship but does not correct dependence. Four runs of one hundred cases produce four hundred outcomes grouped under one hundred case identities. Fresh randomness can produce a new outcome; it does not create a new case. This is why execution, observation, case and candidate identifiers need separate roles.}
+\end{frame}

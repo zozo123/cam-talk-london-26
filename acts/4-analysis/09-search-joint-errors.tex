@@ -1,0 +1,23 @@
+\begin{frame}{Zero pairwise correlation does not fix the all-wrong probability.\ev{\tagO\,\tagP}}
+\vspace{0pt}
+{\small\textbf{Calculation.} Three candidates. In each vector, 1 = candidate wrong. Listed vectors are equally likely.\par}
+\vspace{.1cm}
+{\small
+\begin{tabularx}{\linewidth}{@{}YL{3.1cm}L{3.1cm}L{1.8cm}@{}}
+\toprule
+\textbf{Error vectors} & \textbf{Individual error rate} & \textbf{Pairwise correlation} & \textbf{All wrong}\\
+\midrule
+$\{000,\,011,\,101,\,110\}$ & 50\% & 0 & 0\%\\
+all eight vectors & 50\% & 0 & 12.5\%\\
+$\{001,\,010,\,100,\,111\}$ & 50\% & 0 & 25\%\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.25cm}
+{\small Same marginals and zero pairwise correlation, yet the all-wrong rate ranges from 0\% to 25\%.\\[2pt]
+A selector that returns one candidate's answer succeeds with probability at most $1-P(\text{all wrong})$.\\[2pt]
+An effective sample size describes the precision of an average. It is not a guarantee for search.\par}
+\claim{Search coverage depends on joint failure; selection is an additional task.}
+\sources{Calculation by enumeration. Ceiling: \href{https://arxiv.org/abs/2606.27288}{Chen, arXiv:2606.27288 (2026 preprint)}, ceiling $1-\beta$, $\beta$ the all-fail rate.}
+\qadetail{One denotes an error. All three distributions have error probability one half for each candidate and zero pairwise correlation. Their all-wrong probabilities differ. A selector returning one member succeeds at most one minus the all-wrong rate and must recognize a correct member. The variance-equivalent effective count for a mean cannot substitute for this joint distribution. The enumeration is exact; the Chen preprint is cited only for the selector ceiling.}
+\note{[0:50] Here are three exact joint distributions. Each candidate is wrong half the time and every pair has zero correlation. Yet the probability that all three are wrong is zero, one eighth or one quarter. A selector cannot return a correct member when all members are wrong, and must still recognize one when it exists. The effective-size formula for a mean therefore cannot answer the search-coverage question. We need the joint failure behavior, not only a pairwise statistic.}
+\end{frame}

@@ -2,22 +2,27 @@
 \begin{frame}[plain]
 \color{white}
 \tagline{\color{white!70}CAMBRIDGE COMPUTER LABORATORY\quad SYSTEMS RESEARCH GROUP}
-\vspace{.6cm}
+\vspace{.45cm}
 {\fontsize{30}{34}\selectfont\bfseries Forkable Sandboxes\par}
 \vspace{.22cm}
-{\fontsize{19}{24}\selectfont A Runtime Layer for AI Software Factories\par}
-\vspace{.22cm}
-{\fontsize{13}{16}\selectfont\color{white!82}What counts as new evidence when an agent loop repeats work?\par}
-\vspace{.55cm}
+{\fontsize{16}{20}\selectfont\bfseries Forkable sandboxes need explicit contracts\par for state, evidence, and authority.\par}
+\vspace{.42cm}
 {\large\bfseries Yossi Eliaz\par}\vspace{.12cm}
 {\small Principal Engineer, Incredibuild\quad$\cdot$\quad Associate Professor, Holon Institute of Technology (HIT)\par}
 {\footnotesize\color{white!75}Disclosure: I work for a company that builds sandboxes.\par}
 \vfill
 \begin{tikzpicture}[x=1cm,y=1cm]
-\draw[white!45,line width=1pt] (0,0)--(2,0)--(3,.35) (2,0)--(3,-.35) (3,.35)--(4,.55) (3,.35)--(4,.15) (3,-.35)--(4,-.35);
-\foreach \x/\y in {0/0,2/0,3/.35,3/-.35,4/.55,4/.15,4/-.35}{\fill[white!75] (\x,\y) circle(2pt);}
+\node[text=white!85,font=\footnotesize] (p) at (0,0) {reached state};
+\node[text=white!85,font=\footnotesize] (a) at (3,.55) {A};
+\node[text=white!85,font=\footnotesize] (b) at (3,0) {B};
+\node[text=white!85,font=\footnotesize] (c) at (3,-.55) {C};
+\node[text=white!85,font=\footnotesize] (v) at (5.2,0) {verify};
+\node[text=white!85,font=\footnotesize] (g) at (7.4,0) {publish};
+\foreach \child in {a,b,c}{\draw[-{Latex[length=1.5mm]},white!55] (p.east)--(\child.west);\draw[-{Latex[length=1.5mm]},white!55] (\child.east)--(v.west);}
+\draw[-{Latex[length=1.5mm]},white!55] (v)--(g);
 \end{tikzpicture}\par
-\vspace{.2cm}
+\vspace{.18cm}
 {\footnotesize\color{white!70}15 October 2026\quad FW11 + Microsoft Teams\par}
-\note{[0:40] Section one, the introduction. An agent loop can generate a patch, run tests, repair and review it, several times over. We ask which of those events adds evidence about the behaviour being changed. We present a concrete incident from our own loop, the runtime contract it motivates, and experiments for the missing claims. Systems already use additional executions to escape slow replicas.}
+\qadetail{The title figure is a proposed lifecycle. A motivating future workload is a running application at a reproduced failure, with relevant process memory and local state. It has not been exercised in the factory case study. The observed serial repair establishes source files and feedback, not a demonstrated need for live fork. Select a worktree, warm image, disk snapshot, or verified process/VM checkpoint according to the required state. Disclosure and affiliations match the supplied Cambridge deck.}
+\note{[0:45] Suppose we reach a running application state and reproduce a failure. We would like several continuations from that point. A fork might preserve the relevant state while giving each continuation private changes. We first need to identify what must survive and which authority must remain unique. Our factory records expose obligations around testing, review, and delivery. They do not yet demonstrate a useful live fork. We will connect those obligations to a runtime contract and a set of experiments. What should a child inherit?}
 \end{frame}}

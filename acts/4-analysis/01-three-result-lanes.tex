@@ -1,0 +1,12 @@
+\begin{frame}{Selection, composition, and pooling require different evidence.\ev{\tagB\,\tagP}}
+\begin{tabularx}{\linewidth}{L{3.3cm}L{3.2cm}Y}\toprule
+Returned objects & Decision & Required evidence \\\midrule
+Different patches & Select one & Validate the selected artifact \\
+Compatible patches & Compose & Test the exact composition \\
+Measurements of one target & Reduce & Calibrated information and dependence model \\\bottomrule\end{tabularx}
+\claim{The implemented numerical reducer occupies the measurement lane.}
+\tagline{A patch score is not automatically a precision estimate.}
+\sources{Factory records; Evidence-Aware Reduction for Forkable Compute, arXiv:2607.09689v4.}
+\qadetail{Candidate selection needs a separately evaluated selector and cost/error model. Common-parameter pooling cannot combine different artifacts simply because each returns a number. Composition can create higher-order interactions. Fresh evaluation for generalization is different from a deterministic regression check, which can still establish its asserted behavior.}
+\note{[0:50] There are three different uses of branching. We may choose among different patches, compose compatible patches, or pool measurements of one target quantity. The evidence required by each decision differs. A numerical score for a patch is not automatically an information estimate, and the reducer does not select patches. Our implemented reducer occupies the measurement lane under stated assumptions. The work with Ori Chamo offers a scientific example of the distinction between a proposed candidate, a screen and an admissible claim.}
+\end{frame}

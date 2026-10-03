@@ -1,0 +1,12 @@
+\begin{frame}{Passing every pair does not establish that the full composition passes.\ev{\tagP}}
+\lead{Illustration: each patch enables one worker; capacity permits two.}
+\begin{center}\begin{tabular}{lcc}\toprule
+Patches applied & Workers & Capacity check \\\midrule
+Each single patch & 1 & \yes\ pass \\
+Every pair & 2 & \yes\ pass \\
+All three & 3 & \no\ fail \\\bottomrule\end{tabular}\end{center}
+\begin{ticks}\item Eight candidates have 28 pairs and 256 subsets.\item Pairwise conflict checks can miss higher-order effects.\item Verify the exact selected composition and bind its digest.\end{ticks}
+\sources{Illustrative capacity example; composition requirement in proposed branch contract.}
+\qadetail{For fixed objective U, Gamma_ij=U({i,j})-U({i})-U({j})+U(empty). With U=1 for pass, the example gives zero pair interactions and a failing triple. Numerical reduction does not solve patch composition. The biological context is synthetic lethality: Gilad et al. screened knockouts lethal with an SRC-3 inhibitor; this is an analogy, not runtime data. Deterministic composition must preserve conflicts and resulting bytes before verification.}
+\note{[0:50] Three patches each enable one worker. Every single patch and every pair fits within capacity two. The full composition does not. With eight candidates there are twenty-eight pairs but two hundred fifty-six subsets, so pair checks can miss higher-order interactions. Publication concerns the actual artifact we selected, not an assortment of individually green parts. We must rebuild and test that composition and bind the receipt to its digest. Statistical reduction of measurement summaries does not solve this artifact problem.}
+\end{frame}

@@ -1,0 +1,13 @@
+\begin{frame}{Worktrees, checkpoints, and replay preserve different kinds of state.\ev{\tagO}}
+\begin{tabularx}{\linewidth}{L{2.5cm}L{4.1cm}Y}\toprule
+State to reuse & Tools & What a continuation receives \\\midrule
+Source/build state & Git worktrees, OBuilder & Files and cached build inputs \\
+Process state & CRIU, gVisor save/restore & Supported process/kernel state \\
+VM state & Xen, SnowFlock, Firecracker & Declared memory and device state \\
+Recorded observations & rr, DSec replay & Recorded execution or responses \\\bottomrule\end{tabularx}
+\claim{Choose the mechanism for the state the continuation actually consumes.}
+\tagline{Applying a code patch may require reload or restart.}
+\sources{CRIU, gVisor, Firecracker and rr documentation; SnowFlock, EuroSys 2009; DeepSeek-V4 §5.2.5.}
+\qadetail{Worktrees parallelize edits without preserving live processes. gVisor supplies a userspace-kernel sandbox with its own supported save/restore semantics. Replay can reuse a response without reexecuting a remote service. Network, time, randomness and remote model sessions need declared semantics. The factory case establishes files, dependencies and failed-test feedback, not a necessary live process. An unchanged simulator or application at a reproduced failure is a possible useful live-state workload, not an observed property of the allowlist repair.}
+\note{[0:55] The first design choice is the state surface. Worktrees preserve files. Process checkpoints preserve supported process state. Virtual machine snapshots preserve their declared memory and device state. Replay preserves recorded observations. Each gives a continuation something different. If we edit loaded application code, we may need a reload or restart, which can destroy the state we hoped to reuse. We should first identify what the continuation consumes, then choose a mechanism and a faithful baseline. That distinction also explains the published latency figures.}
+\end{frame}

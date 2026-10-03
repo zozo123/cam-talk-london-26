@@ -1,0 +1,24 @@
+\begin{frame}{The proposed sibling experiment measures environmental co-failure.\ev{\tagP}}
+\begin{columns}[T]
+\begin{column}{.49\textwidth}
+\lead{Shared parent}
+\begin{center}\begin{tikzpicture}[node distance=.35cm]
+\node[state,text width=2.1cm] (p) {Snapshot family $i$};
+\node[candidate,below left=.5cm and .05cm of p] (a) {A};
+\node[candidate,below=.5cm of p] (b) {B};
+\node[candidate,below right=.5cm and .05cm of p] (c) {C};
+\draw[flow](p)--(a);\draw[flow](p)--(b);\draw[flow](p)--(c);
+\end{tikzpicture}\end{center}
+\end{column}
+\begin{column}{.49\textwidth}
+\lead{Separately prepared parents}
+\tagline{Three restores from families $i+1$, $i+2$, $i+3$; matched host and start slot.}
+\vspace{.2cm}
+\textbf{12 families; at least 300 lockstep rounds.}\\
+Record binary outcome and failure class.
+\end{column}\end{columns}
+\claim{Identify a parent-state feature that capture preserves and the race test consumes.}
+\sources{Unrun H2 in PREREGISTRATION.md; measures environmental outcomes, not hosted-model sampling.}
+\qadetail{Both arms restore; strangers can still share host, scheduling, fixtures or other causes. The planned race test is tests/test_dispatch_strand.py::test_two_replicas_pumping_the_same_outbox_dispatch_once. Its fresh backend construction may discard relevant restored state, so the causal treatment must be verified before collection. Guest RNG state does not control the hosted model's RNG. The overlapping family assignments and repeated rounds invalidate an automatic independent-pair analysis. This experiment does not establish judge correlation, reducer calibration, accepted-patch quality or a general effect of forked agents.}
+\note{[1:10] The second experiment asks whether captured ancestry changes environmental failure patterns. Twelve independently prepared families each supply three siblings. We compare them with three restores from other families, matched by host and start slot, over at least three hundred race-test rounds. We record failure classes as well as binary outcomes. Before collecting data, we must identify a varying parent-state feature that is preserved and actually consumed. If the test rebuilds the relevant state, it removes the treatment. This is an environmental experiment; the hosted model remains outside the guest snapshot.}
+\end{frame}

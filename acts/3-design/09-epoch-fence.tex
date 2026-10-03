@@ -1,0 +1,13 @@
+\begin{frame}{A replacement restore must invalidate the old worker epoch.\ev{\tagP}}
+\begin{center}\begin{tikzpicture}[node distance=.38cm,every node/.style={align=center,font=\small}]
+\node[state,text width=2.5cm] (a) {Worker $w$\\authorized at epoch 1};
+\node[state,text width=2.5cm,right=of a] (b) {Replacement restore\\advances $w$ to epoch 2};
+\node[bad,text width=2.4cm,right=of b] (c) {Old instance sends\\epoch-1 publication};
+\node[proposed,text width=1.8cm,right=of c] (d) {Controller\\rejects};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[denied](c)--(d);
+\end{tikzpicture}\end{center}
+\begin{ticks}\item Evidence, approval and publication name one frozen artifact.\item Concurrent fork gets a new worker identity; the parent may continue.\item TLA+ design exists; no model-checker run is recorded.\end{ticks}
+\sources{Proposed promotion protocol; Gray \& Cheriton, Leases, SOSP 1989.}
+\qadetail{The controller checks authenticated identity, current epoch, artifact, scope and budget. Replacement and concurrent fork are distinct: replacing logical worker w invalidates its old epoch; a new child identity need not revoke a continuing parent. Intended model covers clone, lease expiry, delayed approvals and uncertain effects. No TLC run or implementation trace check is recorded. State restoration and authority renewal are coupled protocol events.}
+\note{[0:55] Suppose a logical worker is replaced after a failure. The controller advances its epoch. A delayed publication from the old instance must be rejected, even if its local state still looks valid. Evidence and approval must also identify the frozen artifact being published. A concurrent fork is different: it gets a new worker identity, and the parent may continue. We have a TLA plus design, not a recorded model-checker result. Now that we have defined the execution and authority boundaries, we can interpret what comes back from branches.}
+\end{frame}

@@ -25,7 +25,8 @@ def balanced(text, i):
 def main():
     n = 0
     total = 0
-    for index in sorted(ROOT.glob("acts/*/index.tex")):
+    for include in re.findall(r"^\\input\{(acts/[^}]+/index)\}", (ROOT / "talk.tex").read_text(), re.M):
+        index = ROOT / (include + ".tex")
         act = index.parent.name
         for line in index.read_text().splitlines():
             m = re.match(r"\\input\{(acts/[^}]+)\}", line)
@@ -37,7 +38,7 @@ def main():
             if t:
                 title = src[t.end():balanced(src, t.end() - 1)]
                 title = re.sub(r"\\(?:ev|surf)\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", "", title)
-                title = re.sub(r"\\[a-zA-Z]+\*?|[{}]", "", title).strip()
+                title = re.sub(r"\\[a-zA-Z]+\*?|[{}]", "", title).replace("\\%", "%").strip()
             cue = re.search(r"\\note\{\[(\d+):(\d+)\]", src)
             if cue:
                 n += 1
