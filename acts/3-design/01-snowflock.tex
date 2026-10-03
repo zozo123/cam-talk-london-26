@@ -1,0 +1,15 @@
+\begin{frame}[t]{\ev{\tagO}SnowFlock described agent sandboxing in 2009}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[state,align=left,font=\footnotesize\ttfamily,inner sep=6pt] (a) at (0,0) {\textrm{\textbf{(a) Sandboxing}}\\state = trusted\_code()\\ID = VM\_fork(1)\\if ID.isChild():\\\hspace*{1.2em}untrusted\_code(state)\\\hspace*{1.2em}VM\_exit()\\else:\\\hspace*{1.2em}VM\_wait(ID)};
+\node[state,align=left,font=\footnotesize\ttfamily,inner sep=6pt] (b) at (6.4,0) {\textrm{\textbf{(b) Parallel Computation}}\\ID = VM\_fork(N)\\if ID.isChild():\\\hspace*{1.2em}parallel\_work({\color{Teal}\bfseries data[ID]})\\\hspace*{1.2em}VM\_exit()\\else:\\\hspace*{1.2em}VM\_wait(ID)\\\phantom{x}};
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+{\small In (b), \texttt{data[ID]} makes each child different. Forking an agent's repair nine times gives nine children and one slice.\par}
+\vspace{.05cm}
+{\footnotesize\color{Muted}Next, from Xen (2003) to training gyms (2026).\par}
+\claim{The mechanism is old, while the caller is a program that searches.}
+\sources{Lagar-Cavilla et al., SnowFlock: rapid virtual machine cloning for cloud computing, EuroSys'09, Fig.~1(a) and 1(b), built on Xen 3.0.3 (Barham et al., SOSP'03).}
+\note{[0:50] Section three designs the fork, starting from related work. SnowFlock (EuroSys 2009) forked Xen virtual machines, and Xen was built in this laboratory. In pattern (a), sandboxing, the parent forks a child to run untrusted code and waits. This is an agent sandbox, described seventeen years ago. In pattern (b), parallel work, the fork ID selects each child's slice. Nine forks of an agent's repair share state, tests and one slice. The mechanism is old, and the caller is a program that searches.}
+\end{frame}

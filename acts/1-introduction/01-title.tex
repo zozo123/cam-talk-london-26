@@ -1,0 +1,23 @@
+{\setbeamercolor{normal text}{fg=white,bg=Ink}
+\begin{frame}[plain]
+\color{white}
+\tagline{\color{white!70}CAMBRIDGE COMPUTER LABORATORY\quad SYSTEMS RESEARCH GROUP}
+\vspace{.6cm}
+{\fontsize{30}{34}\selectfont\bfseries Forkable Sandboxes\par}
+\vspace{.22cm}
+{\fontsize{19}{24}\selectfont A Runtime Layer for AI Software Factories\par}
+\vspace{.18cm}
+{\fontsize{12}{15}\selectfont\color{white!78}$N$ forks $\to$ $N$ executions, but $N_{\rm eff}<N$ independent observations.\par}
+\vspace{.55cm}
+{\large\bfseries Yossi Eliaz\par}\vspace{.12cm}
+{\small Principal Engineer, Incredibuild\quad$\cdot$\quad Associate Professor, Holon Institute of Technology (HIT)\par}
+{\footnotesize\color{white!75}Disclosure: I work for a company that builds sandboxes.\par}
+\vfill
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[white!45,line width=1pt] (0,0)--(2,0)--(3,.35) (2,0)--(3,-.35) (3,.35)--(4,.55) (3,.35)--(4,.15) (3,-.35)--(4,-.35);
+\foreach \x/\y in {0/0,2/0,3/.35,3/-.35,4/.55,4/.15,4/-.35}{\fill[white!75] (\x,\y) circle(2pt);}
+\end{tikzpicture}\par
+\vspace{.2cm}
+{\footnotesize\color{white!70}15 October 2026\quad FW11 + Microsoft Teams\par}
+\note{[0:40] A fork is a new sandbox started from a running sandbox's snapshot. In five minutes we ask how many independent observations nine passing forks provide, and by the end we answer it. We built a receipt contract, ran two experiments with a self-evolving loop, and defined two tests that could falsify our claim.}
+\end{frame}}

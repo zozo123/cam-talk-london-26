@@ -1,0 +1,17 @@
+\begin{frame}[t]{\ev{\tagM}Six findings from two experiments}
+\vspace{.1cm}
+{\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}>{\color{Teal}\bfseries}l >{\bfseries}l Y@{}}
+\toprule
+1 & {Sandbox setup took little time} & setup was under 1\% of a 43-minute work order\\
+2 & {A locked test folder did not limit the repair} & a repair rewrote code outside the plan\\
+3 & {Passing checks can test nothing} & CI skipped every step; a review approved untested code\\
+4 & {One model performed all four steps} & one model wrote, reviewed, fixed and approved\\
+5 & {Teardown can destroy the result} & an approved patch was lost with its sandbox\\
+6 & {No fork was available} & the loop requested a fork; none was offered\\
+\bottomrule
+\end{tabularx}\par}
+\claim{Across seven surfaces, trusted components should run outside the sandbox.}
+\sources{Our experiments, Sep 2026: two work orders in Docker Sandboxes, models served through Databricks. Records: \href{https://github.com/zozo123/ariflow-swfactory}{github.com/zozo123/ariflow-swfactory}.}
+\note{[0:45] The runs gave six findings. Sandbox setup took under one percent of work order time. A locked test folder did not limit repair. Passing checks can test nothing. One model in all four steps gives one review. Teardown can destroy approved results. No provider offered a fork. Across the seven surfaces, trusted components belong outside the sandbox. Next we consider copying the sandbox.}
+\end{frame}

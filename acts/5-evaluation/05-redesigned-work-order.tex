@@ -1,0 +1,16 @@
+\begin{frame}[t]{\ev{\tagP\,\tagO}The same work order, run as designed}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[candidate,text width=2.6cm,minimum height=1.45cm] (f) at (0,0) {\textbf{fork $\times3$}\\after the plan, own lease and budget};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (s) at (3.5,0) {\textbf{repair scope}\\out-of-plan edit {\color{Rust}\bfseries denied}};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (e) at (7.0,0) {\textbf{evaluator}\\other model family, hidden tests, scored once};
+\node[evidence,text width=2.6cm,minimum height=1.45cm] (r) at (10.5,0) {\textbf{reducer}\\groups by lineage, $N$, bound on $N_{\rm eff}$, or abstain};
+\node[state,text width=6.2cm,minimum height=.9cm] (g) at (8.75,-1.95) {artifact exported, \mbox{epoch-fenced} promotion, human gate};
+\draw[flow] (f)--(s);\draw[flow] (s)--(e);\draw[flow] (e)--(r);\draw[flow] (r)--(10.5,-1.5);
+\end{tikzpicture}
+\end{center}
+{\small Review 2 would not count as a second witness.\par}
+\claim{Search may run in parallel. Promotion may not.}
+\sources{A design that has not been run. Three tries, because when a wrong answer costs more than none the best number is often under ten (Stroebl et al.\ 2024). Hidden verifiers isolated from agents appear in the Kimi K3 report \S4.2.6.}
+\note{[0:45] This proposed design shows the intended work order. It forks after the plan into three children with their own leases. Stroebl reports that when a wrong answer costs more than none, the best number of tries is often under ten. The out-of-plan edit is denied. Another model family scores hidden tests once, as Kimi K3 hides its verifiers. The reducer groups results by lineage or abstains, and the artifact is exported before teardown. Search may run in parallel, but promotion may not.}
+\end{frame}

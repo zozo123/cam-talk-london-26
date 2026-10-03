@@ -1,0 +1,28 @@
+\begin{frame}[t]{\ev{\tagO\,\tagM\,\tagP}Future work: a canary for correlation}
+\vspace{.2cm}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+{\large\itshape ``a particular request exercises an untested code path''\par}
+\vspace{.1cm}
+{\small\color{Muted}Dean \& Barroso, The Tail at Scale, CACM 2013, ``Canary requests''\par}
+\vspace{.25cm}
+\begin{ticks}
+\item[\no] Thousands of servers crash or delay at once.
+\item[\yes] Sent to one or two leaf servers first, the rest only if the canary succeeds
+\end{ticks}
+\column{.46\textwidth}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[bad,text width=4.6cm,minimum height=1.2cm] (c) at (0,0) {\textbf{Our first run}\\new code, no test of its own};
+\foreach \i in {0,...,8}{\node[evidence,minimum width=.38cm,minimum height=.38cm,inner sep=0pt,font=\scriptsize] at (-2.05+\i*.51,-1.35) {\yes};}
+\node[labeltext,text width=5cm] at (0,-2.05) {nine green forks would share the gap (hypothetical)};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+\vspace{.12cm}
+{\small A proposed correlation canary runs a few siblings and strangers before a hundred forks.\\
+Agreement is no proof, as 9 frontier judges who all agreed were wrong 9.1\% of the time (Kohli).\par}
+\claim{Hedges mask slow replicas, and canaries contain shared failures.}
+\sources{Dean \& Barroso, CACM 56(2):74--80, 2013, p.\,79. Our experiments, Sep 2026, reviews 1 and 2. \href{https://arxiv.org/abs/2605.29800}{Kohli, arXiv:2605.29800 (2026 preprint)}.}
+\note{[0:45] Next is the hedging paper's second technique, for request faults. The authors describe one request reaching an untested code path and crashing thousands of servers at once. They propose a canary sent to one or two leaf servers first. Our first run's new code had no test, so nine passing forks would share that gap. Kohli reports that nine agreeing frontier judges were still wrong 9.1 percent of the time. We therefore propose a canary for correlation.}
+\end{frame}

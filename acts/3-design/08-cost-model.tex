@@ -1,0 +1,20 @@
+\begin{frame}[t]{\ev{\tagM\,\tagO\,\tagP}When fork pays, and where it loses}
+\vspace{.35cm}
+\begin{center}
+{\Large$(N-1)\,P \;>\; H + N\,(R+D)$\par}
+\vspace{.2cm}
+{\small Fork saves $N-1$ preparations $P$ and spends one capture $H$, plus a restore $R$ and a divergence $D$ per child\par}
+{\footnotesize\color{Muted}Work $W$ (model calls included) and evaluation $V$ cancel, since each child still rebuilds its patch.\par}
+\end{center}
+\vspace{.3cm}
+\textbf{Where fork loses}
+{\small
+\begin{ticks}
+\item[\no] only one child, $N=1$
+\item[\no] the state is only files and the build cache is good
+\item[\no] a minimal image boots faster (Jitsu, LightVM)
+\end{ticks}\par}
+\claim{Fork loses when the build cache is good, and it pays only for state that cannot be rebuilt.}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2; Madhavapeddy et al.\ NSDI'15 (Jitsu); Manco et al.\ SOSP'17 (LightVM, NEC Labs).}
+\note{[1:05] A safe fork pays when it trades N preparations for one capture, plus a restore and a divergence per child. It loses in three cases. The first is one child. The second is files-only state with a good build cache. The third is a faster-booting minimal image, as in Jitsu from Cambridge and LightVM from NEC Labs. Fork pays for state that cannot be rebuilt. The end matter lists API timings without ranking them. With teardown, a slot on the sandbox platform averaged 11.3 seconds. Until the snapshot is shown to hold memory, the platform's fork is restore fan-out from one snapshot.}
+\end{frame}

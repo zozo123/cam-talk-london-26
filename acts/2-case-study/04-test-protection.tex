@@ -1,0 +1,27 @@
+\begin{frame}[t]{\surf{surface 3 of 7}\ev{\tagM\,\tagO\,\tagA}Write-protected tests did not limit edits}
+\begin{columns}[T,onlytextwidth]
+\column{.52\textwidth}
+\textbf{In our run}
+{\small
+\begin{ticks}
+\item[\yes] \texttt{tests/} write-protected, and the agent was told
+\item[\yes] the test hook never fired, and all 15 edits were allowed
+\item[\no] planned steps are scope-checked, but repairs are not
+\item[\no] a repair edited code outside the plan
+\item[\no] an out-of-plan edit is rated ``major'', not blocking
+\item[\no] the writer and both reviewers use one model
+\end{ticks}\par}
+\vspace{.1cm}
+{\small\color{Muted}We propose scope-checking repairs and blocking out-of-plan edits.\par}
+\column{.44\textwidth}
+\evtag{Gold!55!Muted}{ANALOGY \textperiodcentered{} BIOLOGY}\par\vspace{.12cm}
+\begin{tikzpicture}
+\node[draw=Muted,dashed,line width=.8pt,fill=Sand!55,rounded corners=2pt,text width=5.9cm,align=left,inner sep=6pt,font=\small] {The enzyme Cas9 can cut away from its guide, at an \textbf{off-target} site.\\[3pt]
+OffRisk, a Docker image we built with our co-authors, annotates CRISPR off-target sites and labels their risk (2023).\\[3pt]
+A scope check serves the same function for code.};
+\end{tikzpicture}
+\end{columns}
+\claim{A write-protected directory does not define the scope of permitted edits.}
+\sources{Our experiments, Sep 2026. Repair 1's record (an edit outside the plan). The loop's repair stage records repairs without a scope check. Barkai, \dots, Eliaz, \dots, OffRisk, \emph{Bioinformatics Advances} 3:vbad138 (2023).}
+\note{[0:50] Surface three is build and test. The wall here was a write-protected tests directory. The hook never fired, and all fifteen edits were allowed. Repairs were not scope-checked, and one edited code outside the plan. In biology, this is an off-target edit. Biologists label that risk before they cut, and we built a tool for it with our co-authors. A scope check does the same for code. The proposed scope check and blocker change only policy. A write-protected directory defines no scope.}
+\end{frame}

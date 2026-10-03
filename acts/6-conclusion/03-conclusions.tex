@@ -1,0 +1,24 @@
+{\setbeamercolor{normal text}{fg=white,bg=Ink}
+\begin{frame}[plain]
+\color{white}
+\vspace{.2cm}
+{\fontsize{22}{26}\selectfont\bfseries Conclusions\par}
+\vspace{.15cm}
+{\color{white!90}\textbf{Answer.} $N$ forks give $N/(1+(N-1)\rho)$ independent observations. The runtime records the lineage needed to estimate $\rho$. Its value for forks awaits Test 2.\par}
+\vspace{.2cm}
+{\fontsize{11.5}{14}\selectfont
+\begin{tabular}{@{}l@{\enspace}L{12.2cm}@{}}
+\evtag{white}{BUILT} & a receipt contract in which reused evidence stops the merge and lineage travels with every result\\[4pt]
+\evtag{Teal!45!white}{MEASURED} & two experiments with the loop\\[4pt]
+\evtag{Gold!60!white}{PROPOSED} & Hypothesis H1: restore beats a warm cache by more than 10\,s\\[4pt]
+\evtag{Gold!60!white}{PROPOSED} & Hypothesis H2: siblings from one snapshot fail together more often than strangers
+\end{tabular}\par}
+\vspace{.3cm}
+{\small\ttfamily\color{white!80}2009:\ \ else: VM\_wait(ID)\\2026:\ \ else: reduce(receipts) $\to$ $N_{\rm eff}$, or abstain\quad{\sffamily\color{white!60}(proposed)}\par}
+\vfill
+{\fontsize{12}{15}\selectfont\bfseries\forktree[white!75]\enspace $N$ forks $\to$ $N$ executions, but $N_{\rm eff}<N$ independent observations.\par}
+\vspace{.15cm}
+{\small\color{white!85}We request help with estimating $\rho$ from lineage and with leases that fork.\par}
+{\small\color{white!85}arXiv:2607.09689\par}
+\note{[1:10] To conclude, hedging works when failures are independent. The runtime must detect dependence. Recent work counts independent witnesses for models and judges. We know of no such count for forks of one agent. That is the blank row, and it stays blank until test two runs. In 2009 the parent ended with a wait call. Ours must count by grouping receipts by lineage, or abstain. [pause, let them read] In physics, genomics and Bitcoin, we had to infer the clusters. A fork runtime can record them. N forks give N executions, but fewer than N independent observations. [pause] We plan to report the completed row later. [Stop. Slide stays up through questions.]}
+\end{frame}}

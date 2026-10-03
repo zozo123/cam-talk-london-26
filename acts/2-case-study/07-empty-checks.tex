@@ -1,0 +1,15 @@
+\begin{frame}[t]{\surf{surface 5 of 7}\ev{\tagM\,\tagO}Three of our check records were wrong}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (0,0) {\textbf{Sandbox evaluation CI job}\\ {\color{Teal}success} in 3\,s, with every real step skipped because the key was unset};
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (4.3,0) {\textbf{Approval record}\\ \texttt{"mode": "human"}, actor \texttt{admin}, answered by our harness};
+\node[evidence,text width=3.55cm,minimum height=2.0cm,align=left,font=\footnotesize] at (8.6,0) {\textbf{Our sandbox CLI}\\ status lines mixed into \mbox{stdout}, and an earlier attempt failed while parsing them};
+\end{tikzpicture}
+\end{center}
+{\small All three are our own receipts, records of what ran, and each was wrong.\par}
+\claim{Every check needs a receipt the sandbox cannot write.}
+\vspace{.15cm}
+{\small\colorbox{Pale}{\parbox{\dimexpr\textwidth-2\fboxsep}{\textbf{Reinforcement learning applies the same rule.} Kimi K3 grounds reward in the verifier's evaluation of the final environment state ``rather than the agent's self-reported completion'' (\S4.2.6).}}\par}
+\sources{Our CI, 28 Sep 2026; our experiments, Sep 2026: the approval record and both repair records. Provenance: PASS (USENIX ATC'06), CamFlow (SoCC'17), in-toto (USENIX Security'19). \href{https://github.com/MoonshotAI/Kimi-K3}{Kimi K3} \S4.2.6.}
+\note{[0:45] Surface five is observability. Three of our own receipts, records of what ran, were wrong. A sandbox evaluation CI job passed in three seconds with every real step skipped. Our approvals file records mode human, but our harness answered. Our sandbox CLI mixed status into its output. Every check needs a receipt the sandbox cannot write. The literature calls this provenance. Kimi K3 grounds reward in the final environment state.}
+\end{frame}

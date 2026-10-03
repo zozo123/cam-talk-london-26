@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagP\,\tagO}Threats to validity}
+\lead{A positive result does not identify its mechanism.}
+{\small
+\begin{tabularx}{\textwidth}{@{}L{4.3cm}YY@{}}
+\toprule
+\term{Vary} & \term{Observe} & \term{Question}\\\midrule
+Prefix cost and dirty pages & Resource use and memory & Condition under which reuse pays\\
+No sharing, archive, or routing & Quality at equal full cost & Condition under which communication helps\\
+Evidence overlap and coupling & Calibration and error & Whether the reducer overcounts\\
+Evaluation budget & False acceptance and time to target & Best allocation of compute\\
+Composition order and size & Joint success and regressions & Which interactions are significant\\\bottomrule
+\end{tabularx}\par}
+\vspace{.1cm}
+{\small A fast fork with a worse search policy can still lose to a slower fork with a better one.\par}
+\claim{Separate a runtime gain from a search-policy or evaluation advantage.}
+\sources{Ablation plan (proposed). The number of tries as part of the result follows Stroebl, Kapoor \& Narayanan, arXiv:2411.17501.}
+\note{[0:35] A positive result on both tests would still not explain its cause. A fast fork with a worse search policy can still lose. Forks sharing notes may win only by spending more model calls. Each row therefore changes one factor at an equal full budget. Stroebl and colleagues report that the number of paid tries is part of the result.}
+\end{frame}

@@ -1,0 +1,23 @@
+\begin{frame}[t]{\surf{surface 7 of 7}\ev{\tagM\,\tagP}The parallel-safe steps had no fork available}
+\begin{center}
+\begin{tikzpicture}[x=.0275cm,y=1cm,every node/.style={font=\footnotesize}]
+\node[anchor=east] at (-6,0) {as run};
+\draw[fill=Sand,draw=Gold] (0,-.25) rectangle (82.4,.25) node[midway]{allowlist};
+\draw[fill=Sand,draw=Gold] (82.4,-.25) rectangle (259.1,.25) node[midway]{tests};
+\draw[fill=Sand,draw=Gold] (259.1,-.25) rectangle (342.6,.25) node[midway]{docs};
+\node[anchor=west] at (346,0) {342.6 s};
+\node[anchor=east,align=right] at (-6,-1.15) {with a fork\\(projected)};
+\draw[fill=white,draw=Gold,dashed] (0,-1.0) rectangle (82.4,-.55) node[midway]{allowlist};
+\draw[fill=white,draw=Gold,dashed] (82.4,-1.0) rectangle (165.9,-.55) node[midway]{docs};
+\draw[fill=white,draw=Gold,dashed] (0,-1.75) rectangle (176.7,-1.3) node[midway]{tests};
+\draw[Teal,dashed,line width=.8pt] (176.7,-1.95)--(176.7,-.4);
+\node[anchor=west,text=Teal] at (180,-1.52) {176.7 s};
+\end{tikzpicture}
+\end{center}
+\vspace{.05cm}
+{\small\ttfamily reason: serial\_fallback\_missing\_fork {\rmfamily(the executor recorded that no fork was available)}\par}
+{\small The steps touch different files, so two separate git worktrees would suffice here. A fork matters when the reached state is expensive.\par}
+\claim{A fork would have saved about three of the forty-three minutes.}
+\sources{Our experiments, Sep 2026: work-graph execution record (node timings measured; the fork lane is computed, fork cost excluded). Remote fork at scale: MITOSIS (OSDI'23).}
+\note{[0:30] Surface seven, the last, is fast cloning. The executor requested a fork. No provider offered one, so it ran in series and recorded the reason, serial fallback, missing fork. By our computation, excluding fork cost, a fork would have saved three minutes of forty-three. We propose forking to obtain alternatives from expensive state.}
+\end{frame}

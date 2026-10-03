@@ -1,0 +1,21 @@
+\begin{frame}[t]{\ev{\tagO}Repeated sampling needs an automatic check}
+\vspace{.2cm}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+\begin{center}
+{\fontsize{34}{40}\selectfont\bfseries 16\% $\to$ 56\%\par}
+\vspace{.15cm}
+{\small SWE-bench Lite, one sample vs.\ 250\\(Brown et al.\ 2024)\par}
+\end{center}
+\column{.46\textwidth}
+{\small
+\begin{ticks}
+\item[\yes] with an automatic check, more samples solve more problems
+\item[\no] without one, majority voting and reward models stop improving
+\item[\no] a check that accepts wrong answers caps the gain, and when a wrong answer costs more than none, Stroebl et al.\ (2024) find the best number of tries is often under ten
+\end{ticks}\par}
+\end{columns}
+\claim{Hedging for correctness improves accuracy only as far as the check is reliable.}
+\sources{\href{https://arxiv.org/abs/2407.21787}{Brown et al., Large Language Monkeys: Scaling Inference Compute with Repeated Sampling, arXiv:2407.21787}; \href{https://arxiv.org/abs/2411.17501}{Stroebl, Kapoor \& Narayanan, The Limits of Inference Scaling Through Resampling (v1: Inference Scaling fLaws), arXiv:2411.17501}.}
+\note{[0:45] Hedging for correctness works in part. Brown and colleagues sampled a coding model 250 times. It solved 56 percent of SWE-bench Lite, against 16 percent for one sample. This gain requires an automatic check. Without a check, voting and reward models stop improving. A check that accepts wrong answers caps the gain. When wrong answers cost more than none, Stroebl and colleagues find the best number of tries is often under ten. In model training, this check is called the reward.}
+\end{frame}

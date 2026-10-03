@@ -1,0 +1,24 @@
+\begin{frame}[t]{\ev{\tagM\,\tagO\,\tagP}A reused grader becomes a training set}
+\lead{Even a protected evaluator can teach the search to overfit its feedback.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[candidate,minimum width=3.2cm] (a) at (0,0) {adaptive search};
+\node[evidence,minimum width=3.2cm] (b) at (5,0) {development evaluation};
+\node[evidence,minimum width=3.2cm] (c) at (10,0) {final validation};
+\draw[flow] (a.north east) to[bend left=16] (b.north west);
+\draw[message] (b.south west) to[bend left=16] node[below,font=\scriptsize]{repeated feedback} (a.south east);
+\draw[flow] (b)--node[above,font=\footnotesize]{freeze}node[below,font=\footnotesize]{validate once}(c);
+\end{tikzpicture}
+\end{center}
+\begin{columns}[T,onlytextwidth]
+\column{.485\textwidth}
+\fcolorbox{Line}{Pale}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\raggedright{\color{Teal}\bfseries STATISTICS}\\ A reused holdout overfits (Dwork et al.\ 2015), and the bias of adaptive analysis is bounded (Russo \& Zou 2016).}}
+\column{.485\textwidth}
+\fcolorbox{Line}{Pale}{\parbox{\dimexpr\linewidth-2\fboxsep-.8pt\relax}{\small\raggedright{\color{Teal}\bfseries RL TRAINING}\\ Kimi K3 uses public verifiers for diagnostic feedback and hidden ones for held-out scenarios. A verbosity cap limits reward hacking by length.}}
+\end{columns}
+\vspace{.1cm}
+{\small\tagP\ Agents need a grader outside the child, every query logged, and a freeze before the final test.\par}
+\claim{Feedback that is optimised against stops being evidence.}
+\sources{\href{https://proceedings.mlr.press/v51/russo16.html}{Russo \& Zou, AISTATS 2016}. Dwork et al., Science 2015. Kimi K3 report \S4.2.6 (verifiers), \S4.1.2 (verbosity). Visible scorer: slide 15.}
+\note{[0:45] In machine learning, a reused grader becomes a training set. Even a protected grader can let the search overfit its feedback. The candidate should be frozen and validated once. Reinforcement-learning labs do this. Kimi K3 gives feedback from public verifiers and scores with hidden ones. It caps answer length, so longer answers cannot win. Repair two argued past review one. Graders and reward models fail alike. Feedback that is optimised against stops being evidence.}
+\end{frame}

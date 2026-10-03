@@ -1,0 +1,19 @@
+\begin{frame}[t]{\ev{\tagP\,\tagA}Test 2: sibling failure coupling}
+\vspace{0pt}
+{\Large Our claim fails if the sibling excess $\Delta\rho$ is confidently below 0.05.\par}
+\vspace{.35cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,stepbox/.style={candidate,text width=4.1cm,minimum height=1.55cm,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000}}]
+\node[stepbox] (a) at (0,0) {\textbf{H2 coupling}\\12 families of 3 siblings, each vs.\ 3 strangers};
+\node[stepbox] (b) at (4.95,0) {\textbf{Race test}\\lockstep rounds, at least 300 per condition, same slot, same host};
+\node[stepbox] (h) at (9.9,0) {\textbf{The loop} (descriptive)\\repair 1 resampled 9 times, $\geq$5 of 9 expected to repeat the out-of-plan edit};
+\draw[flow] (a)--(b);\draw[flow] (b)--(h);
+\end{tikzpicture}
+\end{center}
+{\small $\Delta\rho$ is how much more siblings fail together than strangers.\\
+Siblings are technical replicates. Strangers are independent experiments, matched on slot and host.\\
+A correlation excess of 0.05 reduces 9 siblings to 6.4 independent witnesses.\par}
+\claim{Each rejection rule was written before the data.}
+\sources{Pre-registration, tags prereg-v1 to prereg-v3. Replicates follow Gilad, Eliaz et al., Commun.\ Biol.\ 2021. Decision rules in full are in the end matter.}
+\note{[1:05] Test two asks whether siblings sharing a snapshot fail together more than strangers from other snapshots. Twelve families of three siblings each pair with three strangers on the same slot and host. The statistic is delta rho, the extra correlation among siblings. The hypothesis is supported if delta rho significantly exceeds point zero five, and rejected if its interval lies below point zero five. We chose point zero five because that excess reduces nine siblings to six point four independent witnesses. For the nine imagined repairs, we resample repair one nine times and predict at least five repeats of the out-of-plan edit. When it runs, it fills the blank row.}
+\end{frame}
