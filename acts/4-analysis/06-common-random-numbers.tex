@@ -14,5 +14,5 @@
 Test 2 relies on siblings and strangers sharing slot and host, so only ancestry differs (slide 45).\par}
 \claim{Share draws to compare and vary draws to corroborate.}
 \sources{Common random numbers: \href{https://pubsonline.informs.org/doi/abs/10.1287/mnsc.38.6.884}{Glasserman \& Yao, Management Science (1992)}.}
-\note{[0:45] Positive correlation lowers the variance of the difference between two candidates. Giving A and B the same draw cancels shared noise, a technique called common random numbers. To corroborate, each copy needs a different draw, so a fork copies the seed or reseeds. The seed policy therefore belongs in the fork API. Test two uses this design, so only ancestry differs. Sharing the draw supports comparison and varying it supports corroboration.}
+\note{[0:40] Positive correlation lowers the variance of a difference between candidates. Giving A and B the same draw, called common random numbers, cancels shared noise. Corroboration needs a different draw per copy, so a fork copies the seed or reseeds. Seed policy belongs in the fork API. Test two uses this, so only ancestry differs. Sharing the draw supports comparison and varying it supports corroboration.}
 \end{frame}

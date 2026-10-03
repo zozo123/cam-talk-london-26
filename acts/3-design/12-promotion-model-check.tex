@@ -16,5 +16,5 @@
 \colorbox{Pale}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\footnotesize Dean \& Barroso note that tail-tolerant techniques suit operations without critical mutations, while consistent updates use quorum algorithms such as Paxos.}}
 \claim{Model-check the gate and count the children.}
 \sources{\href{https://github.com/zozo123/ariflow-swfactory/tree/main/formal/authority}{TLA+ authority model of our loop}. Dean \& Barroso, The tail at scale, CACM 2013 (``Mutations'').}
-\note{[0:45] The promotion gate must never race. It is small enough for a tool to model-check by trying every ordering. Evidence names only the frozen candidate. Approval needs that evidence. Publication needs all three in the current epoch. Six rules must always hold, and no model-checker run exists yet. Dean and Barroso report that consistent updates use quorum protocols such as Paxos. A child's output cannot be model-checked. It must instead be counted.}
+\note{[0:40] The promotion gate must never race. It is small enough to model-check every ordering. Evidence names only the frozen candidate. Approval needs that evidence. Publication needs all three in the current epoch. Six rules must hold, and no model-checker run exists yet. Dean and Barroso report that consistent updates use quorum protocols such as Paxos. A child's output cannot be model-checked, so it must be counted.}
 \end{frame}

@@ -19,5 +19,5 @@
 \end{ticks}\par}
 \claim{Output commit is enforced by the system structure.}
 \sources{Speculator SOSP'05; external synchrony OSDI'06; Remus NSDI'08; \href{https://arxiv.org/abs/2608.22928}{Zheng et al., arXiv:2608.22928}; DeepSeek-V4 \S5.2.5.}
-\note{[0:55] Memory can be copied or discarded, but a sent email cannot. Speculator, external synchrony and Remus all held output until it was safe. Zheng and colleagues stated in Lean that no edit undoes a sent request. DeepSeek replays logged results, so a command unsafe to repeat never runs twice. Kimi forks to judge reward because judging produces no side effects. In the prototype, children hold no publishing credential. The orchestrator delivers once, after the gate. The model API is the one unheld channel. Output commit is structural here.}
+\note{[0:50] Memory can be copied or discarded, but a sent email cannot. Speculator, external synchrony and Remus held output until safe. Zheng and colleagues stated in Lean that no edit undoes a sent request. DeepSeek replays logged results, so an unrepeatable command never runs twice. Kimi forks to judge reward because judging produces no side effects. Prototype children hold no publishing credential. The orchestrator delivers once, after the gate. The model API is the one unheld channel. Output commit is structural here.}
 \end{frame}

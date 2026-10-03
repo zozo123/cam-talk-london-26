@@ -21,5 +21,5 @@
 \end{enumerate}\par}
 \claim{The fork contract was written before the fork store existed.}}
 \sources{Our design documents: fork lifecycle and run recovery. Solid: built and ran. Dashed gold: not exercised (lease broker built; evaluator proposed). Dashed red: missing.}
-\note{[0:55] The six calls rest on an architecture labelled by status. Solid boxes are the scheduler with its journal and run lock, the work cells, and a gate bound to the artifact's hash, and all of them were built and ran. [click] Dashed gold marks the lease broker, built but unexercised, and the evaluator, only designed. [click] The diagram marks the fork store as missing. We wrote the fork contract before the fork store existed. Condition eight came from our second run. The rest of this talk concerns condition five.}
+\note{[0:50] The six calls rest on an architecture labelled by status. Solid boxes were built and ran: the scheduler with its journal and run lock, the work cells, and a gate bound to the artifact's hash. [click] Dashed gold marks the lease broker, built but unexercised, and the evaluator, only designed. [click] The fork store is missing. We wrote the fork contract before the fork store existed. Condition eight came from our second run. The rest of this talk concerns condition five.}
 \end{frame}

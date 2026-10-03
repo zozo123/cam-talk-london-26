@@ -24,5 +24,5 @@
 Agreement is no proof, as 9 frontier judges who all agreed were wrong 9.1\% of the time (Kohli).\par}
 \claim{Hedges mask slow replicas, and canaries contain shared failures.}
 \sources{Dean \& Barroso, CACM 56(2):74--80, 2013, p.\,79. Our experiments, Sep 2026, reviews 1 and 2. \href{https://arxiv.org/abs/2605.29800}{Kohli, arXiv:2605.29800 (2026 preprint)}.}
-\note{[0:50] Next is the hedging paper's second technique, for faults in the request. The authors describe a request reaching an untested code path and crashing thousands of servers at once. They propose a canary request sent to one or two leaf servers first. The new code in our first run had no test, so nine passing forks would share that gap. Kohli reports that nine frontier judges who all agreed were still wrong 9.1 percent of the time. We therefore propose a canary for correlation.}
+\note{[0:45] Next is the hedging paper's second technique, for request faults. The authors describe one request reaching an untested code path and crashing thousands of servers at once. They propose a canary sent to one or two leaf servers first. Our first run's new code had no test, so nine passing forks would share that gap. Kohli reports that nine agreeing frontier judges were still wrong 9.1 percent of the time. We therefore propose a canary for correlation.}
 \end{frame}

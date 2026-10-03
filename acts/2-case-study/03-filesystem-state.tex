@@ -14,5 +14,5 @@ external services & mediate access & \leavevmode{\color{Muted}see slide 27}\\
 \end{tabularx}\par}
 \claim{A snapshot captures only the state inside the sandbox boundary.}
 \sources{\href{https://github.com/ocurrent/obuilder}{OBuilder}; \href{https://www.tunbury.org/2026/02/16/day10/}{day10}; \href{https://arxiv.org/abs/2605.22781}{DeltaBox}; \href{https://arxiv.org/abs/2606.19348}{DeepSeek-V4} \S5.2.5.}
-\note{[0:45] Surface two is filesystem state. A snapshot, a saved copy of the sandbox, captures only the state inside that boundary. Each kind of state therefore needs its own policy. Build outputs are pinned by digest, and OBuilder snapshots every step. The workspace disk is copy-on-write, and DeepSeek's DSec already chains such snapshots. Randomness and external services come later. A filesystem snapshot cannot share memory, which the forking section addresses.}
+\note{[0:40] Surface two is filesystem state. A snapshot, a saved copy of the sandbox, captures only state inside it. Each kind needs its own policy. Build outputs are pinned by digest, and OBuilder snapshots every step. The workspace disk is copy-on-write, and DeepSeek's DSec already chains such snapshots. Randomness and external services come later. A filesystem snapshot cannot share memory, which the forking section addresses.}
 \end{frame}
