@@ -14,5 +14,5 @@ open TCP connections & cannot be cloned & CRIU hands one to one restore, gVisor 
 \end{tabularx}\par}
 \claim{Eight forks of a VM holding a token are eight live tokens.}
 \sources{Firecracker snapshotting docs; \href{https://arxiv.org/abs/2102.12892}{Brooker et al., arXiv:2102.12892}; Vrable et al.\ SOSP'05; CRIU and gVisor checkpoint/restore docs.}
-\note{[0:55] The child inherits all of memory, including what it should not. Siblings share random streams, and above the kernel there is no generic solution. Eight forks holding a token are eight live tokens, so secrets stay outside the VM. The clock resumes at snapshot time. Clones share one IP and MAC address. No one can clone an open TCP connection. All five belong in the fork contract. As an analogy, systems researchers named a remote fork mechanism MITOSIS.}
+\note{[0:55] The child inherits all of memory, including what it should not. Siblings share random streams, and above the kernel there is no generic solution. Eight forks holding a token are eight live tokens, so secrets stay outside the VM. The clock resumes at snapshot time. Clones share one IP and MAC address. No one can clone an open TCP connection. All five belong in the fork contract.}
 \end{frame}

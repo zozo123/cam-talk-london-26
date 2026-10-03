@@ -15,11 +15,11 @@
 \midrule
 Daytona & create & 1024/1024 & 0.20 s & 1.12 s\\
 Tensorlake & create & 256/256 & 3.44 s & 9.00 s\\
-My platform & restore + run + capture & 255/256 & 6.87 s & 9.04 s\\
+Sandbox platform & restore + run + capture & 255/256 & 6.87 s & 9.04 s\\
 \bottomrule
 \end{tabularx}\par}
 \vspace{.1cm}
-{\footnotesize\color{Muted}My platform: 141 MB named snapshot, concurrency 12. Different operations: not a ranking. Teardown excluded. Memory capture unverified, so that row is restore fan-out.\par}
+{\footnotesize\color{Muted}Sandbox platform: 141 MB named snapshot, concurrency 12. Different operations: not a ranking. Teardown excluded. Memory capture unverified, so that row is restore fan-out.\par}
 \end{minipage}
 \sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689}, Table 2.}
 \note{[backup] Detail for slide 28: the full cost model and the three API paths behind it.}
