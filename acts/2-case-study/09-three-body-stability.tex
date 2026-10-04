@@ -1,0 +1,22 @@
+\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}We checked two changes in orbit stability.}
+\lead{Within one orbit family, small disturbances can stay bounded or grow.}
+{\centering
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{10.5}{13}\selectfont}]
+\node[anchor=west,font=\fontsize{11}{14}\selectfont\bfseries] at (-1.8,1.05) {1. A pair meets at $+1$};
+\node[bad,text width=3.2cm,minimum height=.95cm](a)at(0,.15){Disturbances grow\\or shrink};
+\node[state,text width=3.2cm,minimum height=.95cm](b)at(4.3,.15){Growth factors meet\\at $+1$};
+\node[evidence,text width=3.2cm,minimum height=.95cm](c)at(8.6,.15){Bounded oscillations};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\node[anchor=west,font=\fontsize{11}{14}\selectfont\bfseries] at (-1.8,-.85) {2. Oscillation modes collide (Hamiltonian--Hopf)};
+\node[evidence,text width=3.2cm,minimum height=.95cm](d)at(0,-1.65){Two bounded\\oscillations};
+\node[state,text width=3.2cm,minimum height=.95cm](e)at(4.3,-1.65){Their modes meet};
+\node[bad,text width=3.2cm,minimum height=.95cm](f)at(8.6,-1.65){Oscillations grow\\or shrink};
+\draw[flow](d)--(e);\draw[flow](e)--(f);
+\end{tikzpicture}
+\par}
+\tagline{A growth factor describes how a disturbance changes after one orbit.}
+\claim{Independent 60-digit calculations reproduced one transition of each type.}
+\sources{Simplified schematic of Fig.~2, \href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint (2026)}. Stability here means \textbf{linear, planar} stability. Connectedness and stability are separate questions.}
+\qadetail{The figure supplied by the user is Figure 2 of the public Chamo--Eliaz ai.viXra:2608.0069v1 manuscript, not Figure 1's connectivity diagram. The new slide is an explicitly simplified schematic of the two representative physical Floquet mechanisms, not a measured curve or a complete stability classification. On the lower boundary, the real reciprocal multiplier pair reaches +1 and moves onto the unit circle, giving bounded linear oscillations. On the upper boundary, two unit-circle modes of opposite Krein signature collide and move off the unit circle as a reciprocal complex quartet. Reversing the parameter direction reverses the displayed before/after order. A Floquet multiplier is a growth/phase factor after one period. The neutral symmetry modes are removed before assessing the four physical multipliers. The physical trace convention uses a=tr(Mph), b=((tr Mph)^2-tr(Mph^2))/2, with characteristic polynomial lambda^4-a lambda^3+b lambda^2-a lambda+1. With t=lambda+1/lambda, P(t)=t^2-a t+b-2; stable physical spectra have both roots in [-2,2]. Boundaries G+=b-2a+2, G-=b+2a+2 and Delta=a^2-4b+8 correspond respectively to +1, -1 and mode collision; their physical mixed vertex is (0,-2). The +1 transition was independently reproduced at 60 digits with a mass-parameter bracket of width approximately 1.6e-9 and the opposite-Krein Hamiltonian-Hopf transition with width approximately 6.3e-9. The brackets are numerical reproducibility evidence, not interval-arithmetic existence proofs. The general spectral algebra is classical; the contribution is continuation connectivity and representative physical mechanisms on this sampled catalog. No nonlinear, spatial or global stability theorem, exhaustive transition map, or new priority claim for Floquet/Krein theory is made. Primary public manuscript: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent branch splitting in unequal-mass three-body orbits, ai.viXra:2608.0069v1 (2026), Fig. 2 and Supplemental Material. Do not substitute the separate internal claim-gated audit draft's eight-dimensional trace coordinates for the public paper's four-dimensional physical convention.}
+\note{[0:45] Connectedness tells us whether we can follow one repeating orbit into another. Stability asks whether a small disturbance stays bounded or grows. Those are separate questions. The paper checks two representative changes. In the first, growing and shrinking modes meet at a growth factor of plus one and become bounded oscillations. In the second, two oscillation modes collide and become growing and shrinking oscillations. An independent sixty-digit calculation reproduced each event. The result concerns linear disturbances within the plane, rather than every possible perturbation of every orbit.}
+\end{frame}

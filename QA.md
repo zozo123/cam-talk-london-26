@@ -1,6 +1,6 @@
 # Q&A: Forkable Sandboxes
 
-For the **56-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
+For the **57-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
 
 ## What changes in self-driving computation?
 
@@ -8,7 +8,7 @@ The workflow chooses its next execution from observed results. A user supplies a
 
 ## What is the contribution in the software example?
 
-Slides 26–31 explain one proposed execution/evidence/acceptance contract: reuse the useful starting state, try private alternatives, return changes with the checks that ran and their shared-input history, then validate and preserve the exact chosen output. Forking, fan-out/fan-in, testing, provenance and review are established techniques. The proposed contribution is their connected interface and its decision requirements. This is a research design rather than a demonstrated speedup or a priority claim over all prior systems. The observed factory run was serial. Costs, installer hosts, ownership diagnosis and delivery chronology remain in Q&A; the visible diagrams explain the general flows.
+Slides 27–32 explain one proposed execution/evidence/acceptance contract: reuse the useful starting state, try private alternatives, return changes with the checks that ran and their shared-input history, then validate and preserve the exact chosen output. Forking, fan-out/fan-in, testing, provenance and review are established techniques. The proposed contribution is their connected interface and its decision requirements. This is a research design rather than a demonstrated speedup or a priority claim over all prior systems. The observed factory run was serial. Costs, installer hosts, ownership diagnosis and delivery chronology remain in Q&A; the visible diagrams explain the general flows.
 
 ## What does the cinema analogy mean technically?
 
@@ -170,9 +170,9 @@ No. The historical benchmark has 1,507 patched vulnerabilities in 188 projects; 
 
 No. A TLA+ design specifies artifact/evidence/approval alignment and current authority, but no TLC run or implementation trace check is recorded. The gate's digest binding is built; epoch fencing remains proposed.
 
-## Final 56 slide revision checks
+## Final 57 slide revision checks
 
-Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 56 canonical frames, no overlays/appendix, 40:40 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The applied merge table says collection has not started; protocol confidence-bound rejection rules remain in Q&A. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.
+Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 57 canonical frames, no overlays/appendix, 41:25 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The applied merge table says collection has not started; protocol confidence-bound rejection rules remain in Q&A. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.
 
 
 ## What changed in the current startup landscape?
@@ -193,7 +193,7 @@ Slide 9 Roadbook audit: preserve the credited Manhattan photograph and personal 
 
 ## How does the biology search connect from computer to laboratory?
 
-CRISPR-IL uses researcher-led experiments to update editing predictions. OffRisk is a separate computational annotation example before focused lab follow-up: 118 predicted matches include 117 possible off-targets; four unintended sites receive high-coding priority after excluding the intended target from five such labels. That is not measured safety. The 2019 Scientific Reports study compared ten drugs in E0771, giving 45 theoretical pairs at fixed doses, and reported a selected SI-2 combination. The 2021 Communications Biology study first ran a pooled cell screen over 19,050 genes, then ranked its sequencing results to approximately 100 candidate genes. Eight drug-target candidates plus five other genes led to 13 genetic checks (10 increased sensitivity) and eight drug combinations (six improved killing). The approximately 190-fold narrowing is calculated from 19,050/~100. These are connected search principles across separate studies, not one merged experiment or a purely computational whole-genome screen.
+CRISPR-IL uses researcher-led experiments to update editing predictions. OffRisk is a separate computational annotation example before focused lab follow-up: 118 predicted matches include 117 possible off-targets; four unintended sites receive high-coding priority after excluding the intended target from five such labels. That is not measured safety. The 2019 Scientific Reports study compared ten drugs in E0771, giving 45 theoretical pairs at fixed doses, and reported a selected SI-2 combination. The 2021 Communications Biology study first ran a pooled cell screen with >120,000 guides covering 19,050 genes. Six guides target each gene. Three conditions, each with three biological replicate arms, give nine pooled arms. DRACO requires at least four of six guides to agree in direction before ranking by the strongest retained effect. The sequencing analysis nominates approximately 100 candidate genes. A derived nominal count of 19,050 x 6 x 3 x 3 = 1,028,700 gene-targeting guide/condition/replicate combinations per later sampling time describes the layout, not independent experiments or exact unique library constructs. Eight drug-target candidates plus five other genes led to 13 genetic checks (10 increased sensitivity) and eight drug combinations (six improved killing). The approximately 190-fold narrowing is calculated from 19,050/~100. These are connected search principles across separate studies, not one merged experiment or a purely computational whole-genome screen.
 
 ## What do the CyberGym counts mean?
 
@@ -211,3 +211,7 @@ On 4 October 2026 the speaker instructed the deck to assume 300 million Mobileye
 ## How do max pooling, argmax, averages and ReLU fit fan-in?
 
 Max pooling returns the largest value. Argmax returns the candidate or index that produced the largest score, so a selected code artifact retains its identity. Ordinary averaging uses equal weights; weighted pooling requires the same target and justified uncertainty, including shared errors. Code merge constructs a new artifact and requires a check of that combined version. ReLU clips negative values and is a transformation, not a fan-in reduction. Its placement matters: ReLU(-1) and ReLU(1) average to 0.5, while ReLU of their mean is 0. Union and intersection operate on identified items, with duplicates counted once. Agreement can still reflect shared error.
+
+## Why can one orbit family look like two groups?
+
+Li, Li and Liao (2021) described one catalog family; Stancevic and colleagues (2023) saw two branches in a corrected period/angular-momentum projection. Chamo and Eliaz follow actual solutions through changing masses and numerical correction, connecting the tested branches in the sampled component. A many-dimensional family can fold when projected onto two observables. The new stability slide separately simplifies the paper's +1 crossing and opposite-Krein Hamiltonian–Hopf collision, each independently reproduced at 60 digits. These are representative linear planar transitions, not global connectivity or nonlinear stability proofs.

@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: **56 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
+This file applies to the canonical `talk.tex`: **57 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
 
 Evidence labels identify the status of the particular claim:
 
@@ -38,7 +38,7 @@ The papers support the named scientific methods and endpoints. The personal moti
 
 Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/tokio/issues/8200), 8 June 2026, reports approximate compile endpoints of 46 seconds fresh, 13 seconds with a restored Incredibuild artifact cache, and 3 seconds with a hot cache. No controlled raw benchmark protocol or maintainer adoption is claimed. Separate full-test endpoints are about 75 seconds fresh and43 restored; after touching source, Cargo is about 38 seconds versus 13 restored. These are static artifact-cache endpoints, not process-memory capture or fork measurements.
 
-## Software paradigm slides 26–31
+## Software paradigm slides 27–32
 
 - The measured factory run establishes a serial proposal/test/review loop and the recorded coverage and output-loss incidents.
 - The fan-out, fan-in and returned-evidence diagrams describe proposed general flows. A/B/C trials are illustrative, not observed parallel branches.
@@ -218,7 +218,7 @@ Ori Chamo is the coauthor affiliated with Incredibuild. The preliminary ai.viXra
 
 ## Genomics, AI and security examples
 
-- **Genomics:** Gilad, Eliaz et al. (2021) used >120,000 sgRNAs targeting 19,050 genes, shortlisted about 100 candidates and reported improved killing for six of eight tested SI-12 combinations in MCF-7 cells. The ≥4 technical replicates per viability point and ≥2 independent experiments per plot are distinct from the screen's three biological replicate arms. These are in-vitro results. The 2022 Matters Arising questions several hits' target expression; repetition alone does not establish on-target biological validity. A computational fork of analysis variants is a proposed use, not an experiment in this paper.
+- **Genomics:** Gilad, Eliaz et al. (2021) used >120,000 sgRNAs covering 19,050 genes with six guides per gene across three conditions and three replicate arms per condition (nine pooled arms), then shortlisted about 100 candidate genes and reported improved killing for six of eight tested SI-12 combinations in MCF-7 cells. The ≥4 technical replicates per viability point and ≥2 independent experiments per plot are distinct from the screen's three biological replicate arms. These are in-vitro results. The 2022 Matters Arising questions several hits' target expression; repetition alone does not establish on-target biological validity. A computational fork of analysis variants is a proposed use, not an experiment in this paper.
 - **Autoresearch:** the published session report lists 126 attempts: 23 kept, 102 discarded, one crash. Validation bits per byte fell from 0.997900 to 0.969686 (2.83% relative decrease, calculated). The five-minute training budget excludes startup/compilation. This is one reported session on its hardware and validation setup, not a controlled fork experiment or a general model-capability gain.
 - **AlphaEvolve:** the technical report attributes 0.7% average fleet compute recovery to deployed scheduling heuristics. A separate kernel-tiling optimization reports 23% kernel speedup and 1% lower overall Gemini training time. Keep the two deployments and denominators separate; none is our measured result or a sandbox-fork speedup.
 - **AFL++:** official persistent-mode documentation describes typical 10–20× speed gains from many inputs in one child. A 1,000-input loop is a recommended starting point before process restart, not a universal fixed setting. Critical state must reset between inputs. This is process execution reuse, not a guarantee of independent test outcomes.
@@ -239,7 +239,7 @@ The variance-equivalent sample size formula assumes equal variances and common p
 
 ## Final storyline revision
 
-The final spoken deck has 56 main slides and 40:40 planned narration. The original 57-slide review is in DECK-REVIEW.md. The revision removes repeated architecture and moves fidelity probes, timing surveys and secondary statistics into source/Q&A; it does not turn them into results. The creation trace shows one default-environment batch: 256/256, requested concurrency eight, p50 3.44 s and p95 9.00 s, excluding teardown. Tensorlake is named in the cue; the slide is not a provider ranking.
+The final spoken deck has 57 main slides and 41:25 planned narration. The original 57-slide review is in DECK-REVIEW.md. The revision removes repeated architecture and moves fidelity probes, timing surveys and secondary statistics into source/Q&A; it does not turn them into results. The creation trace shows one default-environment batch: 256/256, requested concurrency eight, p50 3.44 s and p95 9.00 s, excluding teardown. Tensorlake is named in the cue; the slide is not a provider ranking.
 
 Twistlock's January 2017 vendor account describes per-image process/filesystem/network/syscall learning and enforcement, usually plateauing around one hour cumulative runtime. Prior employment does not attribute every feature to the speaker. The 2019 PD-L1 study supplies in-vitro expression/viability endpoints: different drugs induced approximately 10–100-fold PD-L1 mRNA in E0771 cells; abemaciclib + SI-2 moderated induction while preserving cytotoxicity in a 72-hour assay. The candidate count is six compounds across four cell models plus four additional compounds in E0771: ten distinct compounds in E0771, not ten across every model. The 45 unordered two-drug pairs (10 × 9 / 2) illustrate the search space at one chosen dose per compound. The source follows up abemaciclib + SI-2; it does not report a 45-pair screen. Fan-out/fan-in describes separate conditions and comparison, not verified simultaneous execution or computational cloning of cells. It does not establish T-cell response, patient benefit or autonomous immunotherapy.
 
@@ -262,11 +262,11 @@ The 21 July 2026 vendor release supplies >8 million REM contributing vehicles an
 
 ## Final audience-language and numeric updates, 4 October 2026
 
-- The deck has 56 frames, including a strategy menu and numeric closing slide.
+- The deck has 57 frames, including a strategy menu and numeric closing slide.
 - Mobileye 300M equipped cars is the speaker's explicitly supplied fleet assumption from firsthand experience. It is visibly attributed, with anonymized data transmission and an AV photo caption. The service acronym is removed from the slide. The public 2025 mileage metric is kept separate, with no per-car or fixed transmission-rate inference.
 - POSSUMM citation includes Eliaz without implying first authorship or sole implementation.
 - OffRisk's 118 matches contain five high-coding labels including the intended target, so four unintended higher-priority annotations is a derived count. It is not an experimental safety guarantee.
-- The 2021 screen reduction is approximately 19,050 to 100 (roughly 190-fold), followed by eight drug-target choices and five added genes. Genetic validation is 10/13; drug-combination outcome is 6/8. The initial genome-scale screen is wet-lab, with subsequent computational ranking and focused validation.
+- The 2021 screen library has >120,000 guides, with six gene-targeting variants per gene and nine pooled condition/replicate arms. The reduction is approximately 19,050 to 100 candidate genes (roughly 190-fold), followed by eight drug-target choices and five added genes. Genetic validation is 10/13; drug-combination outcome is 6/8. The initial genome-scale screen is wet-lab, with subsequent computational ranking and focused validation.
 - The 2019 SI-2 drug/PD-L1 study, 2021 SI-12 CRISPR study, CRISPR-IL platform and OffRisk annotation tool are distinct projects.
 - Restored versus hot cache describes saved artifacts copied into a fresh runner versus already available artifacts. Exact transfer, lookup, checking and memory-cache contributions are unseparated in the public demo.
 - CyberGym 431 projects, 1,748 targets, 56 crashes and 22 distinct vulnerabilities are distinct units; the funnel does not establish a disjoint 22/56 success probability or fork speedup.
@@ -275,4 +275,8 @@ The 21 July 2026 vendor release supplies >8 million REM contributing vehicles an
 
 ### Mathematical fan-in menu, 4 October 2026
 
-Slide 46 assigns an operator to each output type: set union, argmax of a fixed score among eligible candidates, a partial common-base edit merge, a normalized weighted mean of same-target estimates, and set intersection. Max yields a value; argmax preserves the selected artifact identity. Code merge may be undefined for conflicting edits or depend on conflict resolution and is checked on its final output. ReLU is a pointwise nonlinear transformation and is not claimed to combine evidence. No universal associative/commutative merge operator or statistical independence from set deduplication is asserted.
+Slide 47 assigns an operator to each output type: set union, argmax of a fixed score among eligible candidates, a partial common-base edit merge, a normalized weighted mean of same-target estimates, and set intersection. Max yields a value; argmax preserves the selected artifact identity. Code merge may be undefined for conflicting edits or depend on conflict resolution and is checked on its final output. ReLU is a pointwise nonlinear transformation and is not claimed to combine evidence. No universal associative/commutative merge operator or statistical independence from set deduplication is asserted.
+
+## Final physics visual clarification
+
+Slide 24 explicitly reconciles the 2021 one-family description with the 2023 two-branch projection using the public Chamo–Eliaz preprint Figure 1. The added slide 26 simplifies its Figure 2 into two representative linear planar stability mechanisms: a real reciprocal pair meeting at +1 and moving onto the unit circle, and opposite-Krein unit-circle modes colliding into a complex reciprocal quartet. The continuation schematic has no invented numeric axes. Stability is separate from connectivity. All 26 selected connections and the two independent 60-digit transition checks retain their actual scope. The classical spectral algebra is not a novelty claim.

@@ -12,8 +12,10 @@
 \end{tikzpicture}
 \end{center}
 \claim{The controller checks permission against its own current record.}
+\vspace{.1cm}
+\tagline{Scheduling assigns work. This version check blocks outdated publication.}
 \sources{Proposed publication protocol; leases and fencing in distributed systems.}
 
 \qadetail{This is a proposed epoch-fenced publication protocol, not an implemented or model-checked result. A TLA+ design exists; no TLC run or implementation trace check is recorded. The controller checks authenticated identity, current epoch, expiry, artifact, scope and budget. Evidence, approval and publication must name one frozen artifact. Replacement and concurrent fork are distinct: replacing logical worker w invalidates its old epoch; a concurrent child gets a new worker identity and its own epoch, and need not revoke a continuing parent's authority. Fresh identity alone does not confer authority. Intended model covers clone, lease expiry, delayed approvals and uncertain effects. State restoration and authority renewal are coupled protocol events. Authorization is checked outside restored guest state, so a copied local generation value cannot establish current permission.}
-\note{[0:40] A worker has a numbered permission. Start at version one. When we replace that worker, the controller advances the version to two. The old worker may still be alive or have a delayed message in the network. Its request still carries version one, so the controller rejects it. Epoch is simply the technical name for this permission version. The check lives outside the worker. A restored snapshot cannot revive a permission that the controller has revoked.}
+\note{[0:40] Scheduling decides which worker runs. This permission check decides whose result can be published. A worker starts with permission version one. When we replace it, the controller advances to version two. The old worker may remain alive or send a delayed message. Its request carries version one, so the controller rejects it. Epoch is the technical name for this permission version. The check lives outside the worker; restoring a snapshot cannot revive a revoked permission.}
 \end{frame}

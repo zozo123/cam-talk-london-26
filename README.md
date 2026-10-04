@@ -2,7 +2,7 @@
 
 This academic talk connects reusable execution with the evidence and authority needed to accept a result. It follows a personal path through container security, biological physics, genomics, immune-related combination assays, automotive perception and execution systems.
 
-- [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **56 main slides, 40:40 planned narration, no appendix or overlays**.
+- [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **57 main slides, 41:25 planned narration, no appendix or overlays**.
 - [Presenter guide](PRESENTER-GUIDE.md): timed spoken cues and retained Q&A detail.
 - [Review of all original 57 slides](DECK-REVIEW.md): argument, keep/rewrite/merge decisions and final locations.
 - [Story and canonical slide map](deck-storyline.md).
@@ -25,12 +25,12 @@ ComputeSDK’s **2 October 2026** Burst TTI run places Isorun first at **72.77 m
 | Act | Slides | Purpose |
 |---|---|---|
 | Motivation | 1–15 | Personal mechanisms, Python API and execution vocabulary |
-| Examples | 16–32 | Reuse, evaluated search and checked outcomes across fields |
-| Runtime | 33–41 | State choice, resource tradeoffs, effects and current authority |
-| Evidence | 42–51 | Selection, composition, identities and justified precision |
-| Acceptance | 52–54 | Exact checks, durable bytes and applied merge rules |
-| Conclusion | 55–56 | Reuse state, run alternatives, check outside the child, accept once |
+| Examples | 16–33 | Reuse, evaluated search and checked outcomes across fields |
+| Runtime | 34–42 | State choice, resource tradeoffs, effects and current authority |
+| Evidence | 43–52 | Selection, composition, identities and justified precision |
+| Acceptance | 53–55 | Exact checks, durable bytes and applied merge rules |
+| Conclusion | 56–57 | Reuse state, run alternatives, check outside the child, accept once |
 
 ## Build and edit
 
-`talk.tex` is canonical. The act indexes order active frames; other source files are retained research/Q&A records. `make dist` compiles the PDF and regenerates the presenter guide. CI verifies **56 pages**, displayed content and a 35–45 minute cue window. Every active frame has a spoken note and hidden Q&A detail. Secondary mathematics and probes remain outside the main narration. PREREGISTRATION.md is preserved unchanged.
+`talk.tex` is canonical. The act indexes order active frames; other source files are retained research/Q&A records. `make dist` compiles the PDF and regenerates the presenter guide. CI verifies **57 pages**, displayed content and a 35–45 minute cue window. Every active frame has a spoken note and hidden Q&A detail. Secondary mathematics and probes remain outside the main narration. PREREGISTRATION.md is preserved unchanged.

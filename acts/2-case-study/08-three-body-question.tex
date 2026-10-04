@@ -1,18 +1,32 @@
-\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}We tested whether apparently separate orbit families actually connect.}
-\lead{With \textbf{Ori Chamo}: 135,445 catalogued three-body orbits that repeat.}
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
-\node[state,text width=2.7cm,minimum height=1.1cm](a)at(0,0){Catalog of\\periodic orbits};
-\foreach \nn/\yy/\lab in {a/1.3/5 broad gaps,b/0/20 chart jumps,c/-1.3/1 distant pair}{
-\node[candidate,text width=2.75cm,minimum height=.75cm](b\nn)at(4,\yy){\lab};\draw[flow](a)--(b\nn);}
-\node[evidence,text width=3.6cm,minimum height=1.4cm](r)at(8.3,0){Change the masses\\in small steps\\Correct the orbit to repeat};
-\foreach \nn in {a,b,c}{\draw[flow](b\nn)--(r);}
+\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}With Chamo, we connected two apparent branches of one orbit family.}
+\tagline{Li, Li \& Liao (2021): \textbf{one family}. Stan\v{c}evi\'{c} et al. (2023): \textbf{two plotted branches}.}
+\vspace{.15cm}
+{\centering
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{10.5}{13}\selectfont}]
+\node[font=\fontsize{12}{15}\selectfont\bfseries] at (2.1,2.45) {A plot shows two branches};
+\draw[flow] (0,0)--(4.2,0) node[right,font=\fontsize{8.5}{10}\selectfont]{Scaled period};
+\draw[flow] (0,0)--(0,2.05);
+\node[anchor=east,font=\fontsize{8.5}{10}\selectfont,align=right] at (0,1.15) {Scaled angular\\momentum};
+\draw[Teal,line width=1.3pt] (.35,1.7)..controls(1.6,2.02)and(2.55,1.75)..(3.55,1.16);
+\draw[Gold,line width=1.3pt] (.35,.45)..controls(1.6,.1)and(2.55,.55)..(3.65,.93);
+\fill[Teal] (3.1,1.42) circle(.07) node[above right]{A};
+\fill[Gold] (3.25,.82) circle(.07) node[below right]{B};
+\draw[flow] (4.9,1.05)--(5.9,1.05);
+\node[text width=1.7cm,font=\fontsize{8.5}{10}\selectfont,text=Muted] at (5.4,1.7) {Follow the\\actual orbits};
+\node[font=\fontsize{12}{15}\selectfont\bfseries] at (8.4,2.45) {Continuation connects them};
+\draw[flow] (6.6,0)--(10.5,0) node[right,font=\fontsize{8.5}{10}\selectfont]{$m_1$};
+\draw[flow] (6.6,0)--(6.6,2.05);
+\node[anchor=west,font=\fontsize{8.5}{10}\selectfont] at (6.7,1.8) {$m_2$};
+\draw[Teal,line width=1.5pt,{Latex[length=2mm]}-{Latex[length=2mm]}] (7.2,.45)..controls(7.8,.9)and(8.6,1.45)..(9.95,1.83);
+\fill[Teal] (7.2,.45) circle(.07) node[below right]{A};
+\fill[Gold] (9.95,1.83) circle(.07) node[below right]{B};
+\node[anchor=north,text width=4.2cm,text=Muted,font=\fontsize{9}{11}\selectfont] at (8.6,-.25) {Change masses in small steps.\\Keep each orbit repeating.};
 \end{tikzpicture}
-\end{center}
-\tagline{\textbf{Numerical continuation:} follow a family of solutions while changing a parameter.}
-\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint (2026)}; \href{https://github.com/zozo123/threebody-closing-the-open}{Three-Body Orbit Atlas}.}
+\par}
+\claim{Two branches in a projection can belong to one connected family of solutions.}
+\sources{With \textbf{Ori Chamo}. Schematic of Fig.~1, \href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint (2026)}. The 135,445-orbit catalog is the sampled scope.}
 
-\qadetail{Full source: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent branch splitting in unequal-mass three-body orbits, ai.viXra:2608.0069v1 (2026), https://ai.vixra.org/pdf/2608.0069v1.pdf; numerical records and code at https://github.com/zozo123/threebody-closing-the-open. The 135,445 entries originate in Li, Li and Liao's catalog. The 26 selected tests comprise five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair; all succeed bidirectionally in the manuscript. This establishes a connection within the sampled continuation component, not global completeness. Representative physical Floquet transitions have independent 60-digit Verner-integrator checks; this is not a claim that every catalog orbit was checked at that precision. Extra-Trees active learning is a candidate-proposal tool in the Atlas, not the proof behind the 26 connections. A separate coarse mpmath RK4 64/128-step cross-check was numerically unresolved and rejected as evidence. The work is preliminary and not peer reviewed; it supplies an evidence-admission example, not a sandbox-fork performance result. The projected branch drawing on this slide is a schematic, not a measured orbit plot. The question concerns full solution-space connectivity of periodic Newtonian three-body solutions, rather than physical branching trajectories of a running simulation. The new diagram shows the manuscript's selected connection tests by category. It is a workflow diagram rather than measured parallel execution or a physical branching trajectory. The 5/20/1 categories are exactly the reported 26 selected tests. "Broad gaps" describes macroscopic bottlenecks and "chart jumps" describes large chart discontinuities.}
+\qadetail{Full source: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent branch splitting in unequal-mass three-body orbits, ai.viXra:2608.0069v1 (2026), https://ai.vixra.org/pdf/2608.0069v1.pdf; numerical records and code at https://github.com/zozo123/threebody-closing-the-open. The 135,445 entries originate in Li, Li and Liao's catalog. The 26 selected tests comprise five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair; all succeed bidirectionally in the manuscript. This establishes a connection within the sampled continuation component, not global completeness. Representative physical Floquet transitions have independent 60-digit Verner-integrator checks; this is not a claim that every catalog orbit was checked at that precision. Extra-Trees active learning is a candidate-proposal tool in the Atlas, not the proof behind the 26 connections. A separate coarse mpmath RK4 64/128-step cross-check was numerically unresolved and rejected as evidence. The work is preliminary and not peer reviewed; it supplies an evidence-admission example, not a sandbox-fork performance result. The projected branch drawing on this slide is a schematic, not a measured orbit plot. The question concerns full solution-space connectivity of periodic Newtonian three-body solutions, rather than physical branching trajectories of a running simulation. The revised visual is a simplified version of the public manuscript Figure 1: the same representative endpoints A and B look separated in the scale-invariant period/angular-momentum projection but connect by bidirectional continuation in mass and solution space. Axes and curves are schematic, without invented measured coordinates. Li, Li and Liao described one family in 2021; Stancevic, Vasiljevic and Dmitrasinovic interpreted the corrected projection as two independent sets in 2023. We resolve the inference from projected separation to disconnected dynamics, without disproving the 2023 analysis on its own projected-coordinate terms. The 5/20/1 categories are exactly the reported 26 selected tests. "Broad gaps" describes macroscopic bottlenecks and "chart jumps" describes large chart discontinuities.}
 % Transition: The apparent split creates a numerical question; now show the checked continuation result.
-\note{[0:45] Three-body gravity has many periodic orbits, motions that repeat. With Ori Chamo, we started from a catalog of a hundred thirty-five thousand four hundred forty-five unequal-mass solutions. A plot suggested separated families. We selected five broad gaps, twenty chart jumps and one distant pair. Numerical continuation changes the masses in small steps; shooting correction adjusts the orbit so it still repeats. We try different proposed connections and gather the checked results into a map. A visual gap alone cannot tell us whether a connection exists.}
+\note{[0:45] The two groups were describing different views of the same orbit catalog. Li, Li and Liao called it one family. Stancevic and colleagues saw two branches in a period-versus-angular-momentum plot. With Ori Chamo, we followed actual solutions as the masses changed, correcting each orbit so it still repeated. The same endpoints A and B connect in that solution space. A projection can hide a connection, much like a folded sheet viewed from one angle. Our numerical result connects the tested branches within the sampled catalog.}
 \end{frame}
