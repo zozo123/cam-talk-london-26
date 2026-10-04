@@ -189,7 +189,7 @@ For unbiased estimates of one scalar target with known positive-definite error c
 
 Slide 8 count audit: six drugs across four breast-cancer cell models plus four extra drugs in E0771 gives ten candidates in that model. Its 45 unordered pairs are theoretical possibilities at one chosen dose per drug, not a completed combination screen. Verify the ten-arm grouping, two readouts, selected abemaciclib + SI-2 follow-up and 72-hour scope in rendered output. Parallel computational forks remain an analogy.
 
-Slide 9 Roadbook audit: preserve the credited Manhattan photograph and personal junction-perception role. Verify the visibly attributed speaker-reported 300M REM count, same-road alignment, aggregation and return of the updated map. The 34 billion 2025 road-miles / 365-day year yields ~1,080 road-miles/second as an annual average, not signals/second or an every-second upload guarantee. Use HD; do not attribute REM authorship to the speaker or label all EyeQ-equipped cars as harvesters.
+Slide 9 Roadbook audit: preserve the credited Manhattan photograph and personal junction-perception role. Verify the speaker-supplied 300M Mobileye-equipped-car assumption, anonymized data transmission, same-road alignment, aggregation and return of the updated map. The photo caption must identify an autonomous test vehicle (AV), and the visible slide must omit the service acronym. The 34 billion 2025 road-miles / 365-day year yields ~1,080 road-miles/second as an annual average, not signals/second or an every-second upload guarantee. Use HD. The 2025 mapping total is a separately dated reported metric for a narrower contributing fleet. Do not derive current per-car or signal-upload rates from the 300M assumption.
 
 ## How does the biology search connect from computer to laboratory?
 
@@ -203,9 +203,9 @@ CRISPR-IL uses researcher-led experiments to update editing predictions. OffRisk
 
 The visible strategy menu maps partition-and-gather to union, alternative selection to argmax over eligible candidates, compatible code composition to a partial merge function, measurement pooling to a normalized weighted mean, and common-finding comparison to intersection. Union and difference concern item identity; intersection concerns overlap. Agreement alone does not verify truth, and clean textual merging does not verify behavior. Q&A also retains first-valid replicas for tail latency, voting with calibrated errors, paired comparisons with common randomness and adaptive branching/pruning. The output meaning determines the check.
 
-## What is the source of the 300 million REM fleet count?
+## How is the 300 million Mobileye car count used?
 
-On 4 October 2026 the speaker explicitly supplied 300 million REM vehicles from his firsthand Mobileye experience. The visible slide attributes that count to the speaker. Public releases previously examined report over eight million contributors and do not independently verify 300 million. These populations/dates have not been reconciled. The separately dated 34-billion-road-mile 2025 figure remains publicly sourced; do not infer a per-vehicle rate from the speaker count.
+On 4 October 2026 the speaker instructed the deck to assume 300 million Mobileye-equipped cars sensing roads and sending anonymized data, based on firsthand Mobileye experience. The visible slide attributes the count to the speaker. The public release supports the data flow and the separately dated 34-billion-road-mile 2025 mapping total for a narrower contributor population. It does not verify the assumed 300M fleet or establish its per-car upload rate. 34,000,000,000 / 31,536,000 = 1,078.13 road-miles/second, rounded to 1,080 as an annual average. No larger current figure is invented.
 
 
 ## How do max pooling, argmax, averages and ReLU fit fan-in?

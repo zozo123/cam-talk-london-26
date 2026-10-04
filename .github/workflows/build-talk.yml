@@ -62,7 +62,7 @@ jobs:
               6: ['14,000', 'DNA read files', 'Which data', 'Which software', 'Quality checks'],
               7: ['CRISPR', 'Choose edits', 'Test edits', 'Update', '118', '4 unintended'],
               8: ['PD-L1', 'Abemaciclib', 'SI-2', '72', '10 drugs tested separately', '10', '100', '45', 'possible two-drug pairs', '4 more in E0771'],
-              9: ['Mobileye', 'pedestrian', 'junction', 'failing test', '300M', 'speaker-reported', 'REM', 'HD Roadbook', 'Align + merge', '34 billion', '1,080', 'annual average'],
+              9: ['Mobileye', 'pedestrian', 'junction', 'failing test', '300M', 'speaker-reported', 'Mobileye-equipped cars', 'anonymized data', 'AV test vehicle', 'autonomous vehicle', 'HD Roadbook', 'Align + merge', '34 billion', '1,080', 'annual average'],
               10: ['Try action A', 'Advance the accepted state'],
               11: ['Python loop', 'Forkable API', 'checkpoint', 'evaluate', 'n=3'],
               12: ['46', '13', '3 s', '33 seconds', 'Restored cache', 'Hot cache', 'fresh runner'],

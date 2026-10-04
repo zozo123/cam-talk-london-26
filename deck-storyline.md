@@ -27,7 +27,7 @@ The story follows **reuse useful state → fan out changed trials → gather new
 | 6 | ENCODE recorded how each result came from its input data. | 0:45 | [Source](acts/1-introduction/05-encode-pipelines.tex) |
 | 7 | Computer predictions guide gene-editing experiments, then learn from them. | 0:45 | [Source](acts/1-introduction/05-crispr-design.tex) |
 | 8 | A drug pair kept killing cells while lowering an immune signal. | 0:45 | [Source](acts/1-introduction/05-immune-response.tex) |
-| 9 | Millions of cars build Mobileye's Roadbook. | 0:35 | [Source](acts/1-introduction/06-self-driving-systems.tex) |
+| 9 | 300 million cars build Mobileye's Roadbook. | 0:35 | [Source](acts/1-introduction/06-self-driving-systems.tex) |
 | 10 | Forkable computation lets us try different futures from the same state. | 0:50 | [Source](acts/1-introduction/02-executable-search.tex) |
 | 11 | The forkable API prepares once and runs alternatives in private children. | 0:40 | [Source](acts/1-introduction/02-control-comparison.tex) |
 | 12 | Caching lets repeated experiments reuse their expensive build work. | 0:45 | [Source](acts/1-introduction/07-build-reuse.tex) |
