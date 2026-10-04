@@ -1,0 +1,14 @@
+\begin{frame}[t]{Nine fixed-input repairs test whether the recorded behavior repeats.\ev{\tagP}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3.5cm] (input) at (0,0) {Freeze work order\\and repository input};
+\node[candidate,text width=3.5cm] (runs) at (5,0) {\textbf{Nine repair runs}\\retain each diff};
+\node[evidence,text width=3.5cm] (checks) at (10,0) {Record scope edits,\\test claims,\\and delivered bytes};
+\draw[flow](input)--(runs);\draw[flow](runs)--(checks);
+
+\end{tikzpicture}\end{center}
+\sources{Proposed repeated-agent experiment; exact-artifact gate remains a separate deterministic check.}
+\qadetail{PhaseC prediction and artifact reconstruction constraints remain in the unmodified original protocol. Do not equate a public substitute tree with the unavailable original input without evidence. The recorded Phase C prediction is at least five of nine repeats of the out-of-plan service.py edit. Original in-cell input b77afa9 is not recoverable; the public substitute c07bc4a is justified by delivered commit order, not a verified tree-hash comparison. This limits replication. Holding the hosted endpoint and prompt fixed does not move its weights, KV state or sampler into a guest snapshot. Resampling cannot establish a causal effect of guest fork on model outputs. Scope authorization and coverage remain separate checks even if all nine repairs differ. Accepted-result gains require a defined workload population, selection policy and equal-cost comparison.}
+\note{[0:55] The third experiment repeats the repair on fixed inputs nine times. Each run returns its diff, changed-path list, test claims, and delivered bytes. This asks whether the earlier behavior repeats across agent runs. A deterministic behavioral test asks a different question: does this exact artifact implement the required conjunction? We retain both. The original input artifact was lost, so any public substitute must be compared and its differences documented before its results are treated as equivalent.}
+\end{frame}

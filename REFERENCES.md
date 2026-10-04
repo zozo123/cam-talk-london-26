@@ -1,15 +1,21 @@
 # References and source record
 
-The canonical seminar has **41 main frames in six acts, no appendix and no overlays**. This bibliography is a repository reference, not additional deck pages. Earlier end-matter files remain in the tree as historical sources and are not part of the canonical build.
+The canonical seminar has **57 main frames in six acts, no appendix or overlays**. This bibliography is a repository reference, not additional deck pages. Earlier end-matter files remain in the tree as historical sources and are not part of the canonical build.
 
 ## Current primary sources
 
 - Yossi Eliaz. **Evidence-Aware Reduction for Forkable Compute**, arXiv:2607.09689v4 (2026). [Paper](https://arxiv.org/abs/2607.09689). Earlier metadata and source files used *Evidence-Aware MapReduce for Forkable Compute*. The current v4 title governs this deck.
 - [SELFHOST-2 public run records](https://github.com/zozo123/ariflow-swfactory/tree/main/docs/factory/SELFHOST-2): intent, plan, metrics, work graph, repair and review outputs. SELFHOST-3 raw records are unpublished.
-- [Experiment protocol](PREREGISTRATION.md), preserved unchanged. Inference changes discussed in [CLAIM-FENCE.md](CLAIM-FENCE.md) and [QA-BANK.md](QA-BANK.md) are **proposed amendments before collection**, not changes already made to that protocol.
+- [Experiment protocol](PREREGISTRATION.md), preserved unchanged. Inference changes discussed in [CLAIM-FENCE.md](CLAIM-FENCE.md) and [QA.md](QA.md) are **proposed amendments before collection**, not changes already made to that protocol.
 - Ori Chamo and Yossi Eliaz. [Continuation Geometry Resolves Apparent Branch Splitting in Unequal-Mass Three-Body Orbits](https://ai.vixra.org/pdf/2608.0069v1.pdf), ai.viXra:2608.0069 (2026), preliminary and not peer reviewed. [Three-Body Atlas code and records](https://github.com/zozo123/threebody-closing-the-open).
 
-## Primary sources for the cross-domain cases
+## Primary sources for the motivation and examples
+
+- Eliaz, Nedelec, Morrison, Levine and Cheung. [Insights from graph theory on the morphologies of actomyosin networks with multilinkers](https://doi.org/10.1103/PhysRevE.102.062420). Physical Review E 102:062420 (2020). [Author preprint](https://arxiv.org/abs/2006.06503). Linker valencies 2–7; 600 seconds of simulated physical time and 30 random starts in the reported motor-content comparisons.
+- Harris, Gu, Olshansky, Wang, Kaur, Eliaz et al. [Chromatin alternates between A and B compartments at kilobase scale for subgenic organization](https://www.nature.com/articles/s41467-023-38429-1). Nature Communications 14:3303 (2023). POSSUMM chromosome-1 endpoint: 500-bp resolution, 2.5 min, 23 GB; greater-than-4.6-TB dense memory projection.
+- Hitz et al., including Eliaz. [The ENCODE uniform analysis pipelines](https://pmc.ncbi.nlm.nih.gov/articles/PMC10371165/), DOI 10.1101/2023.04.04.535623 (2023). WDL, Cromwell, Docker, CAPER, CROO, and Portal provenance.
+- Barkai, Malul, Eliaz, Eyal and Veksler-Lublinsky. [OffRisk: a docker image for annotating CRISPR off-target sites in the human genome](https://pmc.ncbi.nlm.nih.gov/articles/PMC10568243/). Bioinformatics Advances 3:vbad138 (2023). [Official code](https://github.com/IsanaVekslerLublinsky/OffRisk).
+- [BMR synthetic mean demo](https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py#L90-L93) sets the true target to μ = 5.0. The [forged-precision block](https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py#L151-L165) injects an estimate around 17.0 from 2,000 points at SD 0.02 and inflates per-observation information 50×. This is the stress-chart reference; full-sample 4.9450 belongs to a separate snapshot integration trace.
 
 - Gilad, Eliaz et al. [A genome-scale CRISPR Cas9 dropout screen identifies synthetically lethal targets in SRC-3 inhibited cancer cells](https://doi.org/10.1038/s42003-021-01929-1). Communications Biology 4:399 (2021), Figs. 2–4 and Methods. [Full article](https://pmc.ncbi.nlm.nih.gov/articles/PMC7994904/).
 - Schultz and Coelingh Bennink. [Target expression is a relevant factor in synthetic lethal screens](https://doi.org/10.1038/s42003-022-03746-6). Communications Biology 5:835 (2022), Matters Arising on the screen above.
@@ -17,6 +23,8 @@ The canonical seminar has **41 main frames in six acts, no appendix and no overl
 - Novikov et al. [AlphaEvolve: A coding agent for scientific and algorithmic discovery](https://arxiv.org/abs/2506.13131) (2025), technical report; [original report PDF](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/AlphaEvolve.pdf).
 - AFL++ project. [LLVM persistent-mode documentation](https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md), §§1, 3–4. Describes state-reset conditions, typical throughput gains and loop-count guidance.
 - [CyberGym: Evaluating AI Agents' Cybersecurity Capabilities with Real-World Vulnerabilities at Scale](https://arxiv.org/abs/2506.02548). [ICLR 2026 conference paper](https://openreview.net/pdf/eea34d6015b8e77e38bafe756ab3d4924402b055.pdf), [Berkeley RDI campaign report](https://rdi.berkeley.edu/blog/cybergym/) and [project report](https://www.cybergym.io/cybergym/). Historical benchmark and latest-code vulnerability-discovery campaign have distinct populations.
+
+- Eliaz. [Tokio issue #8200: external Incredibuild artifact-cache demonstration](https://github.com/tokio-rs/tokio/issues/8200), 8 June 2026. Approximate compile timings 46 s fresh, 13 s restored, and 3 s hot; an author-reported demonstration rather than a controlled benchmark or maintainer adoption.
 
 ## Systems
 
@@ -163,3 +171,7 @@ The former Q&A also named Rebound, SandboxEscapeBench / EscapeBench, an unspecif
 ## Interpretation boundaries
 
 Cross-model error studies are not agent-fork experiments. Conditional wrong-answer agreement is not rho. A panel effective sample size is not a fork correctness rate. Reported runtime timings measure different operations and endpoints. The speaker’s biology, physics, genomics and Bitcoin work provides concrete methodological examples, not empirical evidence about sandbox forks.
+
+## Motivation attribution
+
+The career trajectory through Mobileye and Incredibuild is the speaker's account. Publication dates are not dates of employment transitions, and the scientific papers do not independently establish a particular Mobileye contribution. Adaptive execution choice is the talk's software-workflow framing; it does not posit a replacement for Von Neumann hardware or a new instruction set. The second act is EXAMPLES. Published results remain attributed to their authors and measured workloads.

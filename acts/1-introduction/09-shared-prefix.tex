@@ -1,0 +1,15 @@
+\begin{frame}[t]{Alternative experiments can share the work already completed.}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3.2cm] (prefix) at (0,0) {Prepare\\data, build, or simulation};
+\node[evidence,text width=3.2cm] (state) at (4.5,0) {Reached state};
+\draw[flow](prefix)--(state);
+\foreach \k/\y in {A/1.25,B/0,C/-1.25}{\node[candidate,text width=2.75cm](b\k)at(9,\y){Next action \k};\draw[flow](state)--(b\k);}
+\node[text width=12cm,font=\fontsize{15}{18}\selectfont,text=Teal] at (4.5,-2.55) {Can we branch from the state we already paid to reach?};
+
+\end{tikzpicture}\end{center}
+\sources{Design question: reusable reached state, independent private changes.}
+\qadetail{Illustrative task structure. No timing or correctness result is attributed to these three branches. The consumed state must be specified and verified; a cached file template may be an adequate and cheaper baseline. }
+\note{[0:40] Imagine that parsing data, preparing a simulator, or building dependencies has already completed. We now want to try three next actions. Starting each experiment from scratch repeats that prefix. Branching starts from the reached state and gives each continuation private changes. The useful state depends on the task: files may suffice, or a running process may contain the valuable preparation. The cost and fidelity of those choices are systems questions, not automatic benefits of adding agents.}
+\end{frame}

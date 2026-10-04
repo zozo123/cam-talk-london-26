@@ -1,0 +1,14 @@
+\begin{frame}[t]{Overlapping families and repeated rounds require grouped analysis.\ev{\tagP}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3cm] (family) at (0,0) {One checkpoint\\family};
+\foreach \k/\y in {1/1.5,2/0,3/-1.5}{\node[candidate,text width=3.7cm](r\k)at(5,\y){Round \k\\comparisons};\draw[flow](family)--(r\k);}
+\node[evidence,text width=3.6cm] (analysis) at (10,0) {Resample independent\\blocks or fit a\\dependence model};
+\foreach \k in {1,2,3}{\draw[flow](r\k)--(analysis);}
+
+\end{tikzpicture}\end{center}
+\sources{Analysis amendment required for overlap and repeated time measurements.}
+\qadetail{Preserve PREREGISTRATION.md unchanged; the design warning is recorded in analysis notes. Family-aware bootstrap alone does not resolve arbitrary time dependence without justified blocks. The current protocol reuses families i+1, i+2 and i+3 modulo twelve. Its independent sign-flip rule and twelve-pair t interval require exchangeability or independent experimental units that are not supplied automatically by that design. A proposed amendment should independently assign family blocks, or specify and justify an analysis of overlap and temporal dependence. The effective count N/[1+(N-1)rho] is variance-equivalent under equal variances and common pairwise correlation. The value 6.4 for nine measurements and rho=.05 assumes zero baseline correlation; it does not follow from an excess .05 over a .10 baseline. Amendments must be public and dated before collection; no outcome is reported here.}
+\note{[0:55] The proposed comparison groups overlap, and each family contributes repeated rounds. Treating every comparison as independent would inflate the apparent amount of evidence. The analysis should use independent blocks or an explicit dependence model that respects both family and time relationships. The original protocol is retained. Its analysis needs a dated amendment before the experiment runs. This is why the identity ledger matters operationally: the grouping information must survive execution so that the analysis can use it.}
+\end{frame}

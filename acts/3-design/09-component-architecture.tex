@@ -1,0 +1,29 @@
+\begin{frame}{The factory routes candidate digests through a controller publication gate.\ev{\tagB}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+ s/.style={state,font=\fontsize{10.5}{12.5}\selectfont},
+ c/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont},
+ e/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont},
+ p/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[s,text width=1.9cm,minimum height=1.15cm] (scheduler) at (0,0) {Airflow\\scheduler};
+\node[s,text width=1.8cm,minimum height=1.15cm] (cell) at (2.4,0) {Docker\\work cell};
+\node[c,text width=1.9cm,minimum height=1.15cm] (artifact) at (4.9,0) {Artifact\\digest};
+\node[e,text width=2.3cm,minimum height=1.15cm] (gate) at (7.7,0) {Controller\\publication gate};
+\node[s,text width=1.7cm,minimum height=1.15cm] (repo) at (10.4,0) {Repository};
+\draw[flow] (scheduler)--(cell);
+\draw[flow] (cell)--(artifact);
+\draw[flow] (artifact)--(gate);
+\draw[flow] (gate)--(repo);
+\node[p,text width=1.9cm,minimum height=1cm] (fork) at (2.4,-1.9) {Fork store\\DESIGN};
+\node[p,text width=2.2cm,minimum height=1cm] (evaluator) at (5.3,-1.9) {Evaluator\\DESIGN};
+\draw[message] (cell.south)--(fork.north);
+\draw[message] (fork.east)--(evaluator.west);
+\draw[message] (artifact.south)--(evaluator.north);
+\draw[message] (evaluator.east)-|(gate.south);
+\end{tikzpicture}
+\end{center}
+{\fontsize{10.5}{12.5}\selectfont\color{Muted}Solid: exercised serial components. Dashed: extension design.\par}
+\sources{Factory records and design; Eliaz, arXiv:2607.09689v4.}
+\qadetail{The solid path identifies exercised serial components: Airflow scheduling and journal, Docker work cells, candidate artifact digests and the controller-held publication gate. The repository is the destination behind the gate; a refusal does not imply publication occurred. No factory case-study run forked. The dashed fork-store and external-evaluator path is an extension design rather than an integrated execution result. The fork store is missing; the external evaluator is proposed. Returned evaluation receipts must name the exact candidate digest. Named-snapshot API paths were exercised separately. The numerical reducer was built separately; a lease broker exists but was unused in these work orders. Calibrated dependence and epoch-fenced publication are proposed. Calls checkpoint, fork, evaluate, select, reduce and promote express different decisions. The eight obligations retained from the prior deck are: identified immutable parent; fresh child authority; no guest publishing token; input/evidence/feedback records; duplicate rejection plus retained shared factors; deterministic composition and conflict retention; exact-composition verification; durable export on every exit. Selection/composition of patches is separate from common-target numerical reduction. An authentic receipt alone cannot establish behavioral coverage or statistical calibration.}
+\note{[0:45] The solid path is the exercised serial architecture. Airflow schedules a Docker work cell. The cell returns an artifact digest, and the controller checks artifact-bound approval before repository publication. The journal records those decisions. The dashed fork store and evaluator are designed extensions. They would bring candidate artifacts and identified evaluation receipts back to the same gate. The numerical reducer was built separately for measurement summaries. This architecture gives each component a specific job while keeping the final publication decision with the controller.}
+\end{frame}

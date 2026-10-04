@@ -1,0 +1,19 @@
+\begin{frame}[t]{\ev{\tagO}\surf{AI RESEARCH}Autoresearch kept 23 experiments and lowered validation bits per byte.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[cs,text width=2.4cm,minimum height=1.1cm](a){Incumbent\\Git commit};
+\node[cc,text width=2.4cm,minimum height=1.1cm,right=of a](b){Edit\\\texttt{train.py}};
+\node[ce,text width=2.4cm,minimum height=1.1cm,right=of b](c){Train: 5 minutes\\Score \texttt{val\_bpb}};
+\node[ce,text width=2.0cm,minimum height=1.1cm,right=of c](d){Keep\\or revert};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\draw[flow](d.south)--++(0,-.6)-|(a.south);
+\end{tikzpicture}
+\end{center}\lead{126 attempts: 23 kept, 102 discarded, 1 crash.}
+\lead{$0.997900\to0.969686$: a 2.8\% reduction; lower is better.}
+\sources{\href{https://github.com/karpathy/autoresearch/blob/master/program.md}{Karpathy, autoresearch protocol}; \href{https://github.com/karpathy/autoresearch/discussions/43}{reported session}.}
+\qadetail{This is one reported session, not a controlled average effect. The score decline is (0.997900-0.969686)/0.997900=2.827\%. The protocol holds prepare.py, data preparation, tokenizer and evaluation fixed and permits editing train.py. Five minutes is wall-clock training time; startup and compilation occur outside that budget, and crashes can end early. Sequential Git keep/revert is the actual mechanism. Forked parallel continuations are a possible implementation extension, not what produced this reported result. Repeated adaptive selection on one validation set warrants a separate held-out check before claiming generalization.}
+% Transition: The incumbent loop becomes a population loop in AlphaEvolve.
+\note{[1:00] Autoresearch edits training code while keeping the evaluator fixed. Each completed attempt receives a five-minute training budget. The agent reads validation bits per byte and keeps or reverts the change in Git. One reported session had 126 attempts: twenty-three kept changes, 102 discards and one crash. The best score fell from point nine nine seven nine to point nine six nine seven, a relative reduction of 2.8 percent. This is sequential hill climbing. A candidate, an executed evaluation and a keep decision make the improvement legible. AlphaEvolve extends this pattern to a population of programs.}
+\end{frame}

@@ -1,0 +1,16 @@
+\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}All 26 selected links connected by bidirectional continuation.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[cs,text width=3.05cm,minimum height=1.25cm](a){26 selected\\difficult links};
+\node[cc,text width=3.05cm,minimum height=1.25cm,right=of a](b){Shooting correction\\Continue both ways};
+\node[ce,text width=3.05cm,minimum height=1.25cm,right=of b](c){26 successful links\\One sampled component};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\end{tikzpicture}
+\end{center}\lead{Independent 60-digit checks confirmed representative Floquet stability transitions.}
+\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint}; \href{https://github.com/zozo123/threebody-closing-the-open}{Three-Body Orbit Atlas records}.}
+\qadetail{The 26 selected tests were five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair. All succeeded bidirectionally in the manuscript and support connectivity in one sampled component, not a global completeness proof. Floquet calculations assess stability. Independent 60-digit Verner calculations checked representative physical stability transitions, not every source orbit. Extra-Trees proposes warm starts in the Atlas and is not the proof behind the 26 connections. An unresolved coarse mpmath RK4 64/128-step cross-check was rejected as evidence. Full source and preliminary publication status are retained in the preceding question slide.}
+% Transition: Our software factory makes the cost and acceptance requirements of continuation work concrete.
+\note{[0:45] We selected twenty-six difficult links and continued each in both directions, using shooting correction to retain periodicity. All twenty-six connected within one sampled component. Floquet calculations described stability; representative transitions were independently checked at sixty digits. Extra-Trees proposes warm starts in the Atlas, while the numerical checks support the accepted connections. The scope is explicit: selected links in a sampled component. We now return to software, where our own factory exposed the cost of repairs and the checks they need.}
+\end{frame}

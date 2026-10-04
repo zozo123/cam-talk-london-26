@@ -1,0 +1,16 @@
+\begin{frame}[t]{Publication must follow a passing check of the exact artifact.\ev{\tagP}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=2.6cm] (a) at (0,0) {Freeze artifact\\digest $d$};
+\node[candidate,text width=2.9cm] (b) at (3.65,0) {Force same-owner\\CellBusy path};
+\node[evidence,text width=2.9cm] (c) at (7.45,0) {Assert exactly\\one dispatch};
+\node[evidence,text width=2.6cm] (d) at (11.1,0) {Controller\\publishes $d$};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\node[text width=12cm,font=\fontsize{14}{17}\selectfont,text=Teal] at (5.55,-1.8) {The candidate cannot authorize its own publication.};
+
+\end{tikzpicture}\end{center}
+\sources{Acceptance design tied to the recorded adoption bug; reducer and gate are separate components.}
+\qadetail{The existing gate prototype and full integration lifecycle have distinct implementation status. This frame states the proposed end-to-end behavioral obligation, not a newly measured fork deployment. Scope authorization, an executed receipt, behavioral coverage, exact-composition verification, artifact-bound approval and current controller authority are separate obligations. A valid digest proves identity, not correctness. A passing regression path supports that behavior; it does not establish held-out accuracy or ensemble confidence. The gate is proposed; the built digest gate and numerical reducer do not supply all these checks. Durable export prevents the second incident's teardown loss.}
+\note{[0:55] The missing direct adoption test becomes a concrete publication obligation. Freeze the artifact, force the same-owner CellBusy path, and assert that it produces exactly one backend dispatch. The controller then binds the resulting test receipt to the same digest before publication. Scope changes require an explicit work-order update. Export must preserve the bytes before cleanup, and stale restored authority must be rejected. This is the acceptance design motivated by the incident. It is separate from the numerical reducer and its measurement checks.}
+\end{frame}

@@ -1,0 +1,15 @@
+\begin{frame}[t]{An adaptive controller chooses programs and continuations; IF and LOOP still execute them.\ev{\tagP}}
+\vspace{0pt}
+{\fontsize{12.5}{16}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{1.35cm}L{5.25cm}Y@{}}\toprule
+ & Stored-program control & Self-driving execution layer\\\midrule
+\texttt{IF} & Choose an encoded path & Evaluate alternative executions, then choose\\[2pt]
+\texttt{LOOP} & Repeat an encoded body & Revise the next action from observations\\[2pt]
+\texttt{CALL} & Execute a routine; return a value & Run a private continuation; return artifact and evidence\\\bottomrule
+\end{tabularx}\par}
+\vspace{.15cm}
+\lead{Checkpoint $\to$ fork $\to$ execute $\to$ evaluate $\to$ select $\to$ continue.}
+\sources{Proposed orchestration layer on existing stored-program machines.}
+\qadetail{The two columns compare levels of control, not mutually exclusive hardware eras. Ordinary programs can implement search, feedback, dynamic code generation and adaptive agents. IF, LOOP and CALL remain the instructions and control constructs that execute the orchestrator and its candidates. A conditional branch normally selects a control-flow path in an execution; a runtime fork creates another execution state with private changes. The proposed controller treats reached states, returned artifacts, evidence and authority as explicit objects. It may generate candidate actions or code and dispose of private branches after required export. No new instruction set or historical invention of adaptive computation is claimed. The runtime's state-capture fidelity, external effects and code reload semantics must be specified.}
+\note{[0:45] The comparison is between layers of control. An if statement chooses an encoded path; the controller evaluates alternative executions and chooses what continues. A loop repeats its body; observations can guide the controller to revise the next action. A call returns a value; a private continuation returns an artifact and identified evidence. Ordinary programs can implement all of this. The proposed layer makes checkpoint, fork, evaluation and acceptance explicit objects. IF and LOOP still execute underneath it. Our examples show which parts already work and which connections need research.}
+\end{frame}

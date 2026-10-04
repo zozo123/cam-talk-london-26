@@ -1,0 +1,14 @@
+\begin{frame}[t]{Passing every pair does not establish that all three patches pass.\ev{\tagA}}
+\vspace{0pt}
+
+\lead{Each patch enables one worker. Capacity permits two.}
+{\fontsize{14}{18}\selectfont\begin{center}\begin{tabular}{lcc}\toprule
+Applied patches & Workers & Capacity check\\\midrule
+Each single patch & 1 & \yes\ pass\\[5pt]
+Every pair & 2 & \yes\ pass\\[5pt]
+All three & 3 & \no\ fail\\\bottomrule\end{tabular}\end{center}}
+
+\sources{Exact illustrative capacity example; test the selected composition.}
+\qadetail{The example is illustrative and exact, not a recorded software incident. For fixed objective U, Gamma_ij=U({i,j})-U({i})-U({j})+U(empty). With U=1 for pass, the example gives zero pair interactions and a failing triple. Numerical reduction does not solve patch composition. The biological context is synthetic lethality: Gilad et al. screened knockouts lethal with an SRC-3 inhibitor; this is an analogy, not runtime data. Deterministic composition must preserve conflicts and resulting bytes before verification.}
+\note{[0:45] Suppose each patch enables one worker, and capacity allows two. Every single patch passes. Every pair passes. The composition of all three fails. Pairwise compatibility cannot establish the final artifact's behavior. With eight patches, there are twenty-eight pairs and two hundred fifty-six subsets. The practical obligation is to test the exact selected composition and bind its result to the bytes that will be published. Pooling numerical summaries does not solve this problem.}
+\end{frame}

@@ -1,0 +1,17 @@
+\begin{frame}{islo completed 255/256 restore--run--capture calls at a 6.87 s median.\ev{\tagM}}
+\vspace{0pt}
+{\fontsize{12.5}{15}\selectfont\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{@{}L{4.2cm}Y@{}}
+\toprule
+Client-observed trace & Recorded value\\
+\midrule
+Operation & Restore, run command, capture\\
+Completed calls & \textbf{255 / 256}\\
+Latency & \textbf{p50 6.87 s}\qquad p95 9.04 s\\
+Input and concurrency & Named 141 MB snapshot; 12 concurrent calls\\
+\bottomrule
+\end{tabularx}\par}
+\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689v4}, Table 2. Teardown excluded from percentiles.}
+\qadetail{The complete API table is retained here: Daytona create from the default environment, requested concurrency eight, batch1024, success1024/1024, p50 .20 s, p95 1.12 s, total wall190.3 s; Tensorlake create from the default environment, requested concurrency eight, batch256, success256/256, p50 3.44 s, p95 9.00 s, total wall387.3 s; islo restore--run--capture from a named141 MB snapshot, concurrency twelve, batch256, success255/256, p50 6.87 s, p95 9.04 s, total wall240.3 s. Teardown is excluded from per-operation percentiles. The islo value is a client API round trip that includes restoration, command execution and capture. Memory preservation is unverified, so the supported description is restore fan-out. These are exercised paths rather than isolated mechanism latencies or a provider ranking. Operations, workloads, concurrency and timing endpoints differ. Higher requested concurrency encountered validation or capacity limits in some exploratory runs. The controlled reuse experiment compares equivalent usable states against a warm baseline.}
+\note{[0:45] This is our measured client path. Starting from a named hundred forty-one megabyte snapshot, islo restored a sandbox, ran a command and captured again. Two hundred fifty-five of two hundred fifty-six calls completed, at concurrency twelve. Median latency was six point eight seven seconds; the ninety-fifth percentile was nine point zero four. Teardown is outside these percentiles. The trace establishes an exercised API workflow. The memory probe and a faithful warm comparison determine what stronger reuse claim this path can support.}
+\end{frame}

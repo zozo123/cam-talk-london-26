@@ -1,0 +1,16 @@
+\begin{frame}[t]{My work connects biological experiments, genomic pipelines, and autonomous execution.}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=2.65cm] (p) at (0,0) {Biological physics\\\textbf{State and structure}};
+\node[state,text width=2.65cm] (g) at (3.5,0) {Genomics\\\textbf{Data and\\provenance}};
+\node[state,text width=2.65cm] (m) at (7,0) {Mobileye\\\textbf{Observe, act, check}};
+\node[evidence,text width=2.65cm] (c) at (10.5,0) {Builds and agents\\\textbf{Reuse and\\continuation}};
+\draw[flow](p)--(g);\draw[flow](g)--(m);\draw[flow](m)--(c);
+\node[text width=12.8cm,font=\fontsize{15}{18}\selectfont,text=Teal] at (5.25,-1.8) {What must remain valid when computation continues?};
+
+\end{tikzpicture}\end{center}
+\sources{Physics PhD, 2020; coauthored genomics work; Mobileye perception, 2021--2024; current Incredibuild and HIT roles.}
+\qadetail{The user confirmed the personal progression from biological physics through genomics and Mobileye self-driving perception to self-driving computers. Dates and Mobileye perception role are from user-provided earlier decks. This is a thematic progression, not a claim that each collaboration happened in a disjoint period or that a specific undocumented incident caused a career transition. }
+\note{[0:45] I began in biological physics, where state and interactions determined the structures we observed. Genomics added large-scale representation and reproducible pipelines. At Mobileye, I worked on perception in self-driving systems. Build acceleration then brought computation reuse into the picture, and coding agents brought active changes to the execution environment. These experiences overlap in time. They motivate one question here: what must remain valid when a computer continues from a state and tries a different next action?}
+\end{frame}

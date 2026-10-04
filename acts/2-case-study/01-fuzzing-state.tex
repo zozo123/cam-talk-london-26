@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagO}\surf{SECURITY}AFL++ forks initialized state once and resets between inputs.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[cs,text width=3.05cm,minimum height=1.1cm](a){Initialize target\\Deferred forkserver};
+\node[cc,text width=3.05cm,minimum height=1.1cm,right=of a](b){Persistent child\\Run one mutated input};
+\node[ce,text width=3.05cm,minimum height=1.1cm,right=of b](c){Record coverage/crash\\Reset mutable state};
+\draw[flow](a)--node[above=.7cm]{fork once}(b);
+\draw[flow](b)--(c);
+\draw[flow](c.south)--++(0,-.65)-|node[pos=.6,below]{next input in the same child}(b.south);
+\end{tikzpicture}
+\end{center}\lead{About 1,000 inputs per child, then restart the child.}
+\sources{\href{https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md}{AFL++ persistent-mode documentation}.}
+\qadetail{The documented 10--20x gain is for persistent mode, which avoids a process fork for every input. It must not be attributed solely to the deferred forkserver. The forkserver can defer cloning until expensive initialization is complete; a persistent child then repeatedly executes the harness, resetting mutable state between inputs. The documentation recommends roughly 1,000 iterations before restarting to contain leaks and residual state. Coverage and stability checks can expose state-reset mistakes. A newly executed input is not automatically an independent observation, and a crash is not automatically an exploitable vulnerability. This is a published defensive testing workflow, not our benchmark or an instruction to attack a live service.}
+% Transition: The persistent loop has an operational mechanism; now give its reported speed benefit.
+\note{[0:45] AFL++ is a prescribed testing loop that makes the state-reuse operation concrete. The target performs initialization, and a deferred forkserver creates a child from that reached state. The persistent child then runs many mutated inputs. After each input, the harness records coverage or a crash and resets mutable state. Around a thousand iterations is a recommended starting point before restarting the child. The repeat arrow stays inside the child; it does not fork for every input. The next slide gives the reported value of that reuse.}
+\end{frame}

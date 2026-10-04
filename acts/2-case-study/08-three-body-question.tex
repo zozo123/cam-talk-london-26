@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}We tested whether projected three-body orbit branches connect.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\lead{With Ori Chamo: 135,445 catalogued unequal-mass periodic three-body orbits.}\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[text=Muted] at (1.4,2.5){Projected view (schematic)};
+\draw[Teal,line width=1.8pt] (0,0) .. controls (.6,.2) and (1,1.2) .. (2,1.5);
+\draw[Gold,line width=1.8pt] (2.7,1.1) .. controls (3.1,1.5) and (3.2,2) .. (3.8,2.1);
+\node at (1.2,-.45){apparent branch A};\node at (3.25,.45){apparent branch B};
+\node[cp,text width=4.5cm,minimum height=1.5cm](q) at (8,1.0){Does the apparent split persist\\in full solution space?};
+\draw[flow] (4.3,1.25)--node[above]{continuation test}(q.west);
+\end{tikzpicture}
+\end{center}
+\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz, ai.viXra:2608.0069 (2026)}; preliminary three-body continuation study.}
+\qadetail{Full source: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent branch splitting in unequal-mass three-body orbits, ai.viXra:2608.0069v1 (2026), https://ai.vixra.org/pdf/2608.0069v1.pdf; numerical records and code at https://github.com/zozo123/threebody-closing-the-open. The 135,445 entries originate in Li, Li and Liao's catalog. The 26 selected tests comprise five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair; all succeed bidirectionally in the manuscript. This establishes a connection within the sampled continuation component, not global completeness. Representative physical Floquet transitions have independent 60-digit Verner-integrator checks; this is not a claim that every catalog orbit was checked at that precision. Extra-Trees active learning is a candidate-proposal tool in the Atlas, not the proof behind the 26 connections. A separate coarse mpmath RK4 64/128-step cross-check was numerically unresolved and rejected as evidence. The work is preliminary and not peer reviewed; it supplies an evidence-admission example, not a sandbox-fork performance result. The projected branch drawing on this slide is a schematic, not a measured orbit plot. The question concerns full solution-space connectivity of periodic Newtonian three-body solutions, rather than physical branching trajectories of a running simulation.}
+% Transition: The apparent split creates a numerical question; now show the checked continuation result.
+\note{[0:45] With Ori Chamo, we asked whether branches that appear separated in a projected orbit diagram really belong to different solution components. We started from a catalog of 135,445 unequal-mass periodic three-body orbits. The drawing is schematic: a gap in a projection may hide a connection in the full solution space. We selected difficult connections and tested them using numerical continuation with shooting correction. The next slide gives the checked result and its scope.}
+\end{frame}

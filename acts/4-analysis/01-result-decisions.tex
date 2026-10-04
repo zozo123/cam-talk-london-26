@@ -1,0 +1,15 @@
+\begin{frame}[t]{Selecting, composing, and pooling results require different checks.\ev{\tagB}}
+\vspace{0pt}
+
+{\fontsize{12.5}{16}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{4.0cm}L{2.5cm}Y@{}}\toprule
+Returned objects & Decision & Required check\\\midrule
+Different patches & Select one & Validate that artifact\\[5pt]
+Compatible patches & Compose & Test the exact composition\\[5pt]
+Measurements of one quantity & Pool & Justify information and dependence\\\bottomrule
+\end{tabularx}\par}
+
+\sources{Factory records; numerical reducer, arXiv:2607.09689v4.}
+\qadetail{Three result lanes describe decision semantics, not three implemented end-to-end systems. Candidate selection needs a separately evaluated selector and cost/error model. Common-parameter pooling cannot combine different artifacts simply because each returns a number. Composition can create higher-order interactions. Fresh evaluation for generalization is different from a deterministic regression check, which can still establish its asserted behavior.}
+\note{[0:45] The return path is not one universal merge. Different patches require selection. Compatible patches may be composed, followed by a test of the resulting artifact. Measurements of the same quantity may be pooled under a statistical model. These decisions require different evidence. A patch score is not automatically an estimate with calibrated precision. Our implemented numerical reducer belongs to the third lane. I will first show why composition needs an exact-artifact check, then turn to measurement evidence.}
+\end{frame}

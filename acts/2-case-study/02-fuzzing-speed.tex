@@ -1,0 +1,14 @@
+\begin{frame}[t]{\ev{\tagO}\surf{SECURITY}AFL++ reports 10--20 times faster execution in persistent mode.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[ce,text width=9.6cm,minimum height=2.3cm](gain){{\fontsize{32}{36}\selectfont\bfseries 10--20$\times$}\\[.25cm]Typical speedup reported for persistent mode};
+\end{tikzpicture}
+\end{center}\lead{One child amortizes process creation across many inputs.}
+\lead{Correct per-input reset keeps the reused state useful.}
+\sources{\href{https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md}{AFL++ documentation}; published typical gain, not our benchmark.}
+\qadetail{The 10--20x range is the persistent-mode documentation's typical speed improvement, not a measured universal multiplier. Persistent execution avoids repeatedly forking a process for every input; deferred initialization separately avoids repeating target setup. Throughput gains depend on the target and reset correctness. Approximate 1,000-iteration restarts contain leaks and residual state. No independence or vulnerability-validity claim follows from the throughput number.}
+% Transition: More cheap trials motivate the separate question of successful-candidate coverage.
+\note{[0:30] The AFL++ documentation reports typical speedups of ten to twenty times for persistent mode. The mechanism is amortization: many inputs share one child instead of paying process creation repeatedly. That value depends on a correct reset and on the target workload. Faster trials give us more opportunities to explore. The next question is what those additional attempts actually buy.}
+\end{frame}

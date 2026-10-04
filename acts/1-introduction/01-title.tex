@@ -1,28 +1,14 @@
-{\setbeamercolor{normal text}{fg=white,bg=Ink}
-\begin{frame}[plain]
-\color{white}
-\tagline{\color{white!70}CAMBRIDGE COMPUTER LABORATORY\quad SYSTEMS RESEARCH GROUP}
-\vspace{.45cm}
-{\fontsize{30}{34}\selectfont\bfseries Forkable Sandboxes\par}
-\vspace{.22cm}
-{\fontsize{16}{20}\selectfont\bfseries Forkable sandboxes reuse execution state.\par Each result needs its own verification.\par}
-\vspace{.42cm}
-{\large\bfseries Yossi Eliaz\par}\vspace{.12cm}
-{\small Principal Engineer, Incredibuild\quad$\cdot$\quad Associate Professor, Holon Institute of Technology (HIT)\par}
-{\footnotesize\color{white!75}Disclosure: I work for a company that builds sandboxes.\par}
-\vfill
-\begin{tikzpicture}[x=1cm,y=1cm]
-\node[text=white!85,font=\footnotesize] (p) at (0,0) {reached state};
-\node[text=white!85,font=\footnotesize] (a) at (3,.55) {A};
-\node[text=white!85,font=\footnotesize] (b) at (3,0) {B};
-\node[text=white!85,font=\footnotesize] (c) at (3,-.55) {C};
-\node[text=white!85,font=\footnotesize] (v) at (5.2,0) {verify};
-\node[text=white!85,font=\footnotesize] (g) at (7.4,0) {publish};
-\foreach \child in {a,b,c}{\draw[-{Latex[length=1.5mm]},white!55] (p.east)--(\child.west);\draw[-{Latex[length=1.5mm]},white!55] (\child.east)--(v.west);}
-\draw[-{Latex[length=1.5mm]},white!55] (v)--(g);
-\end{tikzpicture}\par
-\vspace{.18cm}
-{\footnotesize\color{white!70}15 October 2026\quad FW11 + Microsoft Teams\par}
-\qadetail{The title figure is a proposed lifecycle. A motivating future workload is a running application at a reproduced failure, with relevant process memory and local state. It has not been exercised in the factory case study. The observed serial repair establishes source files and feedback, not a demonstrated need for live fork. Select a worktree, warm image, disk snapshot, or verified process/VM checkpoint according to the required state. Disclosure and affiliations match the supplied Cambridge deck.}
-\note{[0:45] Suppose we reproduce a failure in a running application and want several continuations from that state. We would like to preserve the useful past while giving each continuation private changes. That requires a clear account of what survives, what each result establishes, and who can publish it. We will move from software repair to genomics, physics, AI research and security, then derive the runtime and evidence rules that connect them. The goal is a checked result from a useful continuation. First, define what a sandbox fork actually supplies.}
-\end{frame}}
+\begin{frame}[t]{Forkable sandboxes let computers explore executable alternatives.}
+\vspace{0pt}
+
+\vspace{.15cm}
+{\fontsize{23}{27}\selectfont\color{Teal}From scientific experiments to\par self-driving computers.\par}
+\vspace{.35cm}
+\forktree\quad {\fontsize{14}{17}\selectfont Reuse reached state. Run alternatives. Verify the result.\par}
+\vspace{.35cm}
+{\fontsize{12.5}{15}\selectfont Yossi Eliaz\par Principal Engineer, Incredibuild\par Associate Professor, HIT\par}
+
+\sources{Cambridge Systems Research Group, 15 October 2026. Research and engineering perspectives; employer affiliation disclosed.}
+\qadetail{The integrated architecture is a research design. Individual implementations, published examples and own measurements are labeled on their respective slides. Employer affiliation does not imply endorsement. The title figure is a proposed lifecycle. A motivating future workload is a running application at a reproduced failure, with relevant process memory and local state. It has not been exercised in the factory case study. The observed serial repair establishes source files and feedback, not a demonstrated need for live fork. Select a worktree, warm image, disk snapshot, or verified process/VM checkpoint according to the required state. Disclosure and affiliations match the supplied Cambridge deck.}
+\note{[0:35] This talk follows a question across science and systems: once we have paid to reach a useful computational state, can we explore several next steps from there? I will connect my earlier work to that question, use examples to explain the execution model, then examine what a continuation must return before we can trust and publish its result.}
+\end{frame}

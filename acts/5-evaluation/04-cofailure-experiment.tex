@@ -1,0 +1,15 @@
+\begin{frame}[t]{The cofailure experiment compares siblings with other checkpoint families.\ev{\tagP}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3.4cm] (parent) at (0,0) {12 checkpoint families};
+\node[candidate,text width=3.4cm] (siblings) at (5,1) {Three siblings\\per family};
+\node[evidence,text width=3.4cm] (strangers) at (5,-1) {Comparison group\\from other families};
+\draw[flow](parent)--(siblings);\draw[flow](parent)--(strangers);
+\node[text width=4cm] at (10,0) {\textbf{At least 300 rounds}\\joint failures\\and consumed state};
+
+\end{tikzpicture}\end{center}
+\sources{Proposed H2 protocol; causal treatment is a consumed parent-state feature.}
+\qadetail{No fork-induced correlation value has been measured by the factory incidents. This experiment targets a specified environment state, not generic family membership. Both arms restore; strangers can still share host, scheduling, fixtures or other causes. The planned race test is tests/test_dispatch_strand.py::test_two_replicas_pumping_the_same_outbox_dispatch_once. Its fresh backend construction may discard relevant restored state, so the causal treatment must be verified before collection. Guest RNG state does not control the hosted model's RNG. The overlapping family assignments and repeated rounds invalidate an automatic independent-pair analysis. This experiment does not establish judge correlation, reducer calibration, accepted-patch quality or a general effect of forked agents.}
+\note{[0:55] The second experiment compares three continuations from the same checkpoint family with a comparison group from other families. The protocol proposes twelve families and at least three hundred rounds. The treatment must be a parent-state feature that the children actually consume. Copying a file that is never read would not test the hypothesis. Outcomes include joint failure behavior. This is an environmental-dependence experiment; it does not assume that a guest checkpoint controls the sampling randomness of a hosted model.}
+\end{frame}

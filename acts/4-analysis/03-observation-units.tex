@@ -1,0 +1,15 @@
+\begin{frame}[t]{Four runs of 100 cases produce 400 outcomes in 100 case clusters.\ev{\tagA}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3cm] (cases) at (0,0) {\textbf{100 cases}\\retain case IDs};
+\node[candidate,text width=3.4cm] (runs) at (4.7,0) {\textbf{4 runs per case}\\fresh outcome IDs};
+\node[evidence,text width=3.7cm] (records) at (9.7,0) {\textbf{400 outcomes}\\\textbf{100 case clusters}};
+\draw[flow](cases)--(runs);\draw[flow](runs)--(records);
+\node[text width=12cm,font=\fontsize{15}{18}\selectfont,text=Teal] at (4.85,-1.8) {A fresh outcome retains its case and ancestry.};
+
+\end{tikzpicture}\end{center}
+\sources{Illustrative evidence ledger; analogous replicate distinction in the genomic assay.}
+\qadetail{No independence assumption follows solely from distinct IDs. A copied receipt remains the same observation. A genuinely fresh stochastic outcome can obtain a new observation ID but retains the case, candidate and ancestry cluster. Deterministic reruns supply execution checks, not new test cases. Four runs of one hundred cases do not establish four hundred independent cases. Distinct worker declarations do not authenticate underlying evidence.}
+\note{[0:45] Run one hundred cases four times. We obtain four hundred outcomes while retaining one hundred case identities. A fresh stochastic outcome can have a new observation identifier, but its case and ancestry remain attached. Copying a receipt creates no new observation. A deterministic rerun can check execution without adding a new case. The ledger gives the later analysis enough structure to distinguish repeated outcomes from independent experimental units. Our genomic assay used the same distinction between technical repeats and independent experiments.}
+\end{frame}

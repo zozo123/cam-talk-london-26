@@ -1,0 +1,16 @@
+\begin{frame}[t]{Linking Bitcoin addresses recovered 64 agents behind most early mining.\ev{\tagO}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3.7cm] (ids) at (0,0) {Many addresses\\and transactions};
+\node[evidence,text width=3.7cm] (links) at (5,0) {Link records\\by inferred ownership};
+\node[candidate,text width=3.7cm] (actors) at (10,0) {\textbf{64 underlying agents}\\mined most early Bitcoin};
+\draw[flow](ids)--(links);\draw[flow](links)--(actors);
+\node[text width=12cm,font=\fontsize{14}{17}\selectfont] at (5,-1.6) {3 January 2009--9 February 2011};
+\node[text width=12cm,font=\fontsize{15}{18}\selectfont,text=Teal] at (5,-2.5) {Distinct identifiers can conceal a common source.};
+
+\end{tikzpicture}\end{center}
+\sources{Blackburn, Huber, Eliaz et al., \href{https://arxiv.org/abs/2206.02871}{arXiv:2206.02871} (2022), coauthored study.}
+\qadetail{Period January3,2009 through February9,2011. Coauthored attribution, not individual authorship. The address-linking method reported greater-than99percent sensitivity and specificity in its validation. Early-mining identity inference is methodological background, not evidence about execution forks or agent accuracy. }
+\note{[0:45] A prior collaboration provides another reason to separate record identity from source identity. We linked early Bitcoin addresses and recovered sixty-four agents who mined most Bitcoin during the studied early period. Many visible addresses represented fewer underlying actors. The connection here is an accounting principle: distinct identifiers need not mean independent sources. This study does not measure correlations between forks. It motivates preserving both an observation's identity and the relationships that may connect it to other observations.}
+\end{frame}

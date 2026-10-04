@@ -1,15 +1,41 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: **41 main frames in six acts, no appendix and no overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
+This file applies to the canonical `talk.tex`: **57 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
 
-Each evidence slide carries one or more tags:
+Evidence labels identify the status of the particular claim:
 
-- **MEASURED**: in the speaker's own run records.
-- **BUILT**: implemented and unit-tested, or a synthetic check.
-- **PROPOSED**: a design that has not been run.
+- **MEASURED**: observed values in the speaker's records or explicitly synthetic numerical checks.
+- **BUILT**: implemented reference components and their tested behavior.
+- **DESIGN**: a proposed contract or experiment, without an execution result.
 - **PUBLISHED**: published source results, including co-authored studies.
+- **ILLUSTRATION**: a stated calculation or hypothetical example.
 
 Scope boundaries attach to the relevant claims and are summarized here; this document uses titles and artifacts instead of fragile slide numbers.
+
+## Motivation and personal trajectory
+
+The motivating claim is **self-driving computation chooses its next execution from observed results**. A prescribed program and an adaptive exploration loop both execute ordinary instructions. Goal specification, candidate generation, execution, evaluation, and the next-execution choice form a workflow above the hardware. Forkable state can enable private executable continuations; it is not required for every adaptive workflow.
+
+The cinema/plot analogy refers to private executable continuations from saved computer state. It does not rewind completed model or tool requests, incurred costs, published data, or other external-world effects. Restoring a snapshot also does not establish a child's current authority.
+
+The IF/LOOP/CALL comparison is between levels of control. Ordinary programs can already implement feedback, search, adaptive agents and dynamic code generation. Conditional branching selects an encoded control-flow path; runtime fork creates another execution state with private changes. The proposed orchestration layer makes states, artifacts, evidence and authority explicit. It does not add computational expressive power.
+
+This framing does not claim a replacement for Von Neumann hardware, a new ISA, a new processor architecture, a universally autonomous system, or an established improvement from the proposed factory forks. Autoresearch's sequential Git loop and AlphaEvolve's program search are published examples of adaptive decisions, not demonstrations of our integrated runtime.
+
+The speaker supplies the biophysics → genomics → Mobileye → Incredibuild → self-driving-computers trajectory. Do not infer Mobileye duties, performance results, or career dates from publication dates. Coauthored research results belong to the team; distinguish the speaker's own role from a project's complete implementation.
+
+**Research examples retained from the source inventory**
+
+- **Actomyosin simulations:** Eliaz, Nedelec, Morrison, Levine and Cheung, PRE 102:062420 (2020), arXiv:2006.06503. Cytosim simulations studied linker valencies 2–7. The reported low/high motor-content comparisons used 600 seconds of simulated physical time and statistics from 30 random initial conditions. Do not turn this into 30 repeats for every parameter-sweep condition. Higher valency promoted bundles and larger clusters under the studied conditions. This finding concerns physical-network morphology, not agent-fork dependence.
+- **POSSUMM:** Harris et al., Nature Communications 14:3303 (2023), DOI 10.1038/s41467-023-38429-1. The chromosome-1 A/B eigenvector at 500-bp resolution took 2.5 minutes and 23 GB RAM. The dense alternative's greater-than-4.6-TB memory requirement is projected; no measured dense runtime is claimed. A separate genome-wide first-four-components endpoint took 39 minutes and 77.65 GB. More than 42 billion paired-end read pairs yielded 33 billion quality-filtered contacts; contacts and raw reads are distinct. Sparse matrix-vector products change the computational representation. Eliaz is a coauthor; no sole implementation attribution is made.
+- **ENCODE execution:** Hitz et al., DOI 10.1101/2023.04.04.535623. More than 14,000 datasets, at least 40,000 FASTQ files, and approximately 20 assay types are distinct counts. WDL specifies workflows, Cromwell executes them, Docker supplies task environments, CAPER handles execution and I/O, and CROO organizes output relationships. Portal objects retain source files, software versions, quality metrics and provenance. Those records do not by themselves establish biological validity or uncertainty calibration.
+- **OffRisk:** Barkai, Malul, Eliaz, Eyal and Veksler-Lublinsky, Bioinformatics Advances 3:vbad138 (2023). For the reported CCR5 example, CRISPRitz with four allowed mismatches returned 118 sites: one on-target and 117 off-target. OffRisk assigned five high-coding labels, including the intended target. These annotation-derived labels prioritize sites; they do not measure toxicity.
+
+The papers support the named scientific methods and endpoints. The personal motivation connects them to the present work without treating them as empirical sandbox-fork results. Act 2 is EXAMPLES; supporting documents retain technical scope without adding appendix slides.
+
+## Reported artifact-cache example
+
+Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/tokio/issues/8200), 8 June 2026, reports approximate compile endpoints of 46 seconds fresh, 13 seconds with a restored Incredibuild artifact cache, and 3 seconds with a hot cache. No controlled raw benchmark protocol or maintainer adoption is claimed. Separate full-test endpoints are about 75 seconds fresh and43 restored; after touching source, Cargo is about 38 seconds versus 13 restored. These are static artifact-cache endpoints, not process-memory capture or fork measurements.
 
 ## Measured: runs SELFHOST-2 and SELFHOST-3, 27 Sep 2026
 
@@ -47,6 +73,8 @@ Scope boundaries attach to the relevant claims and are summarized here; this doc
 - Teardown followed, and no PR was produced. Cost $3.43. Wall clock was about 26 min; stage time was 853.8 s.
 
 **Other measured facts**
+- Approval records named mode human and actor admin, while the harness answered the intent and plan gates. This is an actor/event labeling issue; it does not mean the harness performed the human review.
+- A local adapter shim had a recorded digest but its source stayed outside Git and the exact bytes were unavailable. This source-recovery gap is distinct from SELFHOST-3, where teardown removed the candidate patch after delivery refusal.
 - Repairs are recorded without a scope check: `work_stage.py`, the non-node branch.
 - The CI job `evals-islo` in Actions run 36423283572 passed in 3 s with its real step skipped.
 - The allowlist appears in five places (`demo/selfhost-2.md`).
@@ -68,12 +96,12 @@ Scope boundaries attach to the relevant claims and are summarized here; this doc
   - Table 2: islo p50 6.87 s, p95 9.04 s, 255 of 256 succeeded at concurrency 12, with per-op teardown excluded from the percentiles.
   - These are API round trips, not a mechanism latency or a vendor ranking.
   - Whether the snapshot includes memory is **unverified**, so the talk says "restore fan-out".
-- The forged-precision result (17.0004 vs 4.9566) is a **synthetic** check. The forgery is in the information per point, so measuring n alone does not stop it. The heuristic is not a Byzantine guarantee.
+- The forged-precision result (17.0004 vs 4.9566) is a **synthetic** check with known generating target **μ = 5.0**. Primary [demo.py](https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py#L90-L93) sets true_theta=5.0. Its [injected worker](https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py#L151-L165) targets 17.0, generates 2,000 points with SD 0.02, and multiplies information per observation by 50. Measuring n alone does not stop fabricated information. The heuristic is not a Byzantine guarantee. The separate integration trace's full-sample 4.9450 is not this experiment's reference value.
 - The logistic check was not compared with sample-size weighting.
 
 ## Proposed
 
-- The gateway authenticates the child, re-minted on restore.
+- The host authenticates and authorizes each child outside copied guest state. Identity alone does not confer permission.
 - A scope check in the repair loop.
 - An evaluator outside the cell.
 - Epoch-fenced promotion.
@@ -178,7 +206,7 @@ The proposed child pipeline is return candidate, select, verify exact artifact a
 
 Ori Chamo is the coauthor affiliated with Incredibuild. The preliminary ai.viXra:2608.0069 work analyzes **135,445** source periodic orbits. **26 selected difficult bidirectional continuation links** connect the projected branches within one sampled component. Independent 60-digit calculations check representative stability transitions; this is not a global completeness proof. The Atlas workflow separates candidate, screening, high-precision verification, independent reproduction and frozen claim; an unresolved independent numerical cross-check was rejected. It illustrates evidence admission, not agent-fork performance or dependence. [Preprint](https://ai.vixra.org/pdf/2608.0069v1.pdf), [records](https://github.com/zozo123/threebody-closing-the-open).
 
-## Genomics, AI and security cases
+## Genomics, AI and security examples
 
 - **Genomics:** Gilad, Eliaz et al. (2021) used >120,000 sgRNAs targeting 19,050 genes, shortlisted about 100 candidates and reported improved killing for six of eight tested SI-12 combinations in MCF-7 cells. The ≥4 technical replicates per viability point and ≥2 independent experiments per plot are distinct from the screen's three biological replicate arms. These are in-vitro results. The 2022 Matters Arising questions several hits' target expression; repetition alone does not establish on-target biological validity. A computational fork of analysis variants is a proposed use, not an experiment in this paper.
 - **Autoresearch:** the published session report lists 126 attempts: 23 kept, 102 discarded, one crash. Validation bits per byte fell from 0.997900 to 0.969686 (2.83% relative decrease, calculated). The five-minute training budget excludes startup/compilation. This is one reported session on its hardware and validation setup, not a controlled fork experiment or a general model-capability gain.

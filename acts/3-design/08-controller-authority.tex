@@ -1,0 +1,18 @@
+\begin{frame}{The controller holds the credential that publishes a child's candidate.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+ c/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont},
+ e/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont},
+ s/.style={state,font=\fontsize{10.5}{12.5}\selectfont},
+ l/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont,text=Muted}]
+\node[c,text width=3.0cm,minimum height=1.45cm] (child) at (0,0) {Child\\Private writable state\\Candidate artifact};
+\node[e,text width=3.0cm,minimum height=1.45cm] (controller) at (5.2,0) {Controller\\Publishing credential\\Artifact approval};
+\node[s,text width=2.25cm,minimum height=1.45cm] (repo) at (10,0) {Repository};
+\draw[flow] (child)--node[l,above,text width=2.0cm]{candidate + receipts}(controller);
+\draw[flow] (controller)--node[l,above,text width=1.7cm]{authorized artifact}(repo);
+\end{tikzpicture}
+\end{center}
+\sources{Factory artifact-digest gate; Firecracker and gVisor documentation; Capsicum, USENIX Security 2010; CHERI, IEEE S\&P 2015.}
+\qadetail{Controller-held publication is exercised; fresh clone authority remains proposed. The original contract table retains immutable parent/cache digest identity and a declared trust domain, private writable child state, host-authenticated and authorized child identity/epoch/expiry/budget, and a controller-held publishing credential whose approval names the artifact. A microVM can contain a still-valid bearer token. Kernel isolation does not make that token harmless. Guest-supplied generation strings are copied and cannot authenticate a clone; fresh identity alone does not confer authority. The host must authenticate and authorize each child separately. VMGenID can reseed the kernel; userspace RNG treatment is application-dependent. Refresh network identity, clock and socket semantics. Immutable caches still need a trust and leakage policy. Egress policy is distinct from withholding publication credentials. Every candidate needs verification of its required behavior and exact digest before a current publication decision.}
+\note{[0:45] The child works in private writable state and returns a candidate. The controller holds the publishing credential and binds approval to the artifact. This keeps publication outside the copied guest state. A bearer token inside a snapshot could otherwise remain usable in every child. Each child's permissions also need host authentication and authorization, with scope, expiry and budget. The factory exercised controller-held publication; clone authorization is an extension design. The next diagram shows where these responsibilities sit in the actual serial architecture.}
+\end{frame}

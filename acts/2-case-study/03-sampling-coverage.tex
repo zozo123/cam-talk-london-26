@@ -1,0 +1,19 @@
+\begin{frame}[t]{\ev{\tagO}\surf{AI RESEARCH}250 samples raised SWE-bench Lite coverage from 15.9\% to 56\%.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[anchor=east] at (-.3,1.05){1 sample};
+\node[anchor=east] at (-.3,-.05){250 samples};
+\fill[Gold!65] (0,.75) rectangle (1.59,1.35);
+\fill[Teal] (0,-.35) rectangle (5.6,.25);
+\node[anchor=west] at (1.79,1.05){15.9\%};
+\node[anchor=west] at (5.8,-.05){56\%};
+\node[text=Muted] at (3,-1.0){DeepSeek-Coder-V2-Instruct; pass at least once};
+\end{tikzpicture}
+\end{center}\lead{Coverage means a correct patch exists; a selector must recognize it.}
+\sources{\href{https://arxiv.org/abs/2407.21787}{Brown et al., Large Language Monkeys (2024)}; SWE-bench Lite.}
+\qadetail{Dean and Barroso report the 99.9th-percentile latency of a 1,000-key BigTable read, using a hedged request after 10 ms and accepting the first response: 1,800 ms to 74 ms, with 2\% more requests. Their assumption is that the cause of variability does not affect multiple replicas at once. This is a published request-hedging result, not a fork benchmark or agent-correctness measurement. The second request can escape server-specific delay without changing the requested operation. Brown et al., Large Language Monkeys, arXiv:2407.21787: DeepSeek-Coder-V2-Instruct on SWE-bench Lite improves pass-at-least-once coverage from 15.9\% at one sample to 56\% at 250, a 40.1 percentage-point increase. This does not report production selection accuracy. Stroebl, Kapoor and Narayanan, The Limits of Inference Scaling Through Resampling, arXiv:2411.17501: when false-positive acceptance carries negative utility, the optimum is often fewer than ten attempts under their modeled conditions. This is not a universal branch-count recommendation. Neither paper measures our sandbox-fork effect.}
+% Transition: Search coverage requires a decision rule; autoresearch supplies keep or revert.
+\note{[0:45] Brown and colleagues sampled DeepSeek-Coder-V2-Instruct on SWE-bench Lite. At one sample, a correct patch appeared for fifteen point nine percent of tasks. At 250 samples, coverage reached fifty-six percent. This is pass-at-least-once coverage: some candidate solves the issue. It does not tell us whether a production selector will choose that candidate. The result motivates additional attempts and a concrete decision rule. Autoresearch gives us a simple example of that rule.}
+\end{frame}

@@ -1,0 +1,18 @@
+\begin{frame}[t]{Different parents can still share the evidence that guides their children.\ev{\tagP}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=2.75cm] (p) at (0,0) {Parent P};
+\node[state,text width=2.75cm] (q) at (8,0) {Parent Q};
+\node[candidate,text width=2.75cm] (a) at (0,-1.5) {Child A};
+\node[candidate,text width=2.75cm] (b) at (8,-1.5) {Child B};
+\node[evidence,text width=3.2cm] (test) at (4,1) {Shared evaluator\\and feedback};
+\draw[flow](p)--(a);\draw[flow](q)--(b);
+\draw[message](test)--(a);\draw[message](test)--(b);
+\node[text width=11cm,font=\fontsize{11}{13}\selectfont,text=Muted] at (4,-2.7) {Solid: execution ancestry. Dashed: shared information.};
+
+\end{tikzpicture}\end{center}
+\sources{Proposed execution manifest: ancestry, fixtures, evaluator and feedback links.}
+\qadetail{This restores the ancestry-tree versus information-graph distinction from earlier versions. The relevant links depend on the consumed state and task; identical prompts or seeds alone do not control hosted-model sampling. One hosted model performed all agent roles, without an agent-dependence estimate. Public diagnostics versus hidden held-out verifiers address different purposes. METR RE-Bench 30.4 percent versus HCAST .7 percent was not a controlled scorer-visibility comparison; scorer visibility was a leading hypothesis. ImpossibleBench shows read-only tests do not prevent special-casing. None establishes fork-induced judgment dependence. A regression test used during repair remains valid evidence of the behavior actually asserted on its exact artifact.}
+\note{[0:45] An execution tree records which state created which child. It misses another kind of sharing: two different parents may use the same evaluator, retrieval results, fixtures, or development feedback. Their children can therefore share information despite having different ancestors. The manifest should retain both execution ancestry and information links. It does not infer covariance merely by drawing them. Those links tell us what to test and which observations may need grouped analysis.}
+\end{frame}

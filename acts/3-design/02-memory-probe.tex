@@ -1,0 +1,21 @@
+\begin{frame}{A RAM-only nonce tests memory restoration in three children.\ev{\tagP}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+ s/.style={state,font=\fontsize{10.5}{12.5}\selectfont},
+ c/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont},
+ e/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[s,text width=2.8cm,minimum height=1.15cm] (parent) at (0,0) {Live process\\128-bit nonce\\held only in RAM};
+\node[s,text width=1.8cm,minimum height=1.15cm] (capture) at (3.45,0) {Capture};
+\foreach \i/\y in {1/1.2,2/0,3/-1.2}{
+ \node[c,text width=1.9cm,minimum height=.85cm] (child\i) at (6.65,\y) {Child \i};
+ \draw[flow] (capture)--(child\i);
+}
+\node[e,text width=2.65cm,minimum height=1.15cm] (check) at (10.45,0) {Check each child:\\process alive\\same nonce};
+\draw[flow] (parent)--(capture);
+\foreach \i in {1,2,3}{\draw[flow] (child\i)--(check);}
+\end{tikzpicture}
+\end{center}
+\sources{Experiment design: preregistered Gate 0; Kimi K3 \S5.3.2; CRIU and Firecracker snapshot documentation.}
+\qadetail{Gate 0 is preregistered and unrun; the diagram is an experiment design, not a result. Current API measurements establish restore fan-out without verified memory semantics. The original result-description table is: files surviving only support filesystem restore; process and RAM surviving supply evidence of process and memory restoration; matching declared semantic checks support fidelity for those checked properties only. The RAM-only 128-bit nonce is a necessary probe, not a complete fidelity proof. Compare declared deterministic outputs between direct and restored execution, ignoring timestamps only when the protocol declares them irrelevant. Check private writes, process identity, clocks, random state and sockets as relevant. Worktrees, CRIU, VM snapshots and replay logs restore different state. A snapshot name does not establish memory semantics. Hosted-model weights, KV state and sampling are outside the guest. A failed nonce probe requires reporting the actual filesystem/restore semantics. A successful probe still requires useful captured state and declared semantic tests.}
+\note{[0:45] This design makes the memory claim testable. A live process creates a hundred twenty-eight bit nonce and holds it only in RAM. Capture the parent, restore three children, and check the process and nonce in every child. The nonce must survive through the memory path. This is a necessary probe, followed by declared behavioral checks for the workload. Gate zero awaits execution. The result will tell us which state-preservation claim our restore path can support, before we time useful continuations.}
+\end{frame}

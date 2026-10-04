@@ -1,0 +1,14 @@
+\begin{frame}[t]{At correlation 0.1, 100 measurements have the mean precision of about nine.\ev{\tagA}}
+\vspace{0pt}
+
+\vspace{.2cm}
+\begin{center}{\fontsize{22}{26}\selectfont
+$N_{\mathrm{eff}}=\dfrac{N}{1+(N-1)\rho}$\par\vspace{.3cm}
+$\dfrac{100}{1+99(0.1)}=9.17$\par}\end{center}
+\vspace{.3cm}
+\lead{Equal marginal variance and common pairwise correlation.}
+
+\sources{Exact variance calculation for a mean; illustrative correlation value.}
+\qadetail{Variance is sigma squared times [rho+(1-rho)/N]. Effective count is variance-equivalent for a mean, not a literal number of independent units. For N=9, effective counts are 9 at rho=0, 5 at rho=.1, 1.8 at rho=.5. Kohli 2026 preprint estimates nine frontier judges from seven families at Kish effective count 2.18, CI 2.07--2.31; 9.1 percent of 319 unanimous MNLI decisions were wrong. Kim ICML 2025 reports conditional agreement on wrong answers, 60 percent versus 33 percent by chance, not rho. Neither measures forks. Independent slow-request illustration: 1-.99^100 is about .634. A hypothetical .1 failure rate gives .9^29 about .047 probability of twenty-nine greens. Amdahl has analogous algebra, not the same causal quantity. Poolkeh models a different pooling operation, 295,951 tests for about nine million people; it was not a laboratory pooling experiment.}
+\note{[0:45] For a mean, the consequence of assumed dependence is explicit. With equal marginal variances and common pairwise correlation point one, one hundred measurements have the variance-equivalent precision of about nine independent measurements. The shared component stops the mean's variance from shrinking toward zero. This is a calculation under stated assumptions. It does not remove shared bias or give the probability that an answer is correct. Search coverage asks a different question: can all of the proposed answers fail together?}
+\end{frame}

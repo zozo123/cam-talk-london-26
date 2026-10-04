@@ -1,0 +1,19 @@
+\begin{frame}[t]{A self-driving computer closes a feedback loop around its own actions.}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[text=Muted,font=\fontsize{11}{13}\selectfont] at (-.5,1) {Mobileye: perception work, 2021--2024};
+\node[state,text width=3.1cm] (a) at (0,0) {Observe the world};
+\node[state,text width=3.1cm] (b) at (4.5,0) {Choose an action};
+\node[state,text width=3.1cm] (c) at (9,0) {Observe its effects};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\node[evidence,text width=3.1cm] (d) at (0,-2) {Read code and state};
+\node[candidate,text width=3.1cm] (e) at (4.5,-2) {Edit and execute};
+\node[evidence,text width=3.1cm] (f) at (9,-2) {Test and revise};
+\draw[flow](d)--(e);\draw[flow](e)--(f);\draw[message](f.south)--++(0,-.45)-|(d.south);
+
+\end{tikzpicture}\end{center}
+\sources{Personal work: Mobileye perception. Lower lane is the software-agent analogy.}
+\qadetail{The lower lane is an analogy, not a claim that the upper or lower lane describes a particular deployed safety architecture. No Mobileye production performance or safety metric is asserted. }
+\note{[0:45] Self-driving cars make the feedback idea familiar: observation informs an action, and its effects inform the next action. My work at Mobileye was in perception. A self-driving computer applies a related pattern to software: read the code and execution state, edit and run tools, then use tests and failures to revise the action. The analogy explains the loop. It does not transfer automotive safety guarantees to coding agents. Next, execution reuse gives us a practical starting point.}
+\end{frame}

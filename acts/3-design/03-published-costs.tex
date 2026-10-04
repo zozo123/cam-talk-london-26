@@ -1,0 +1,15 @@
+\begin{frame}{A checkpoint and a remote fork time different operations.\ev{\tagO}}
+\vspace{0pt}
+{\fontsize{12.5}{15}\selectfont\renewcommand{\arraystretch}{1.65}
+\begin{tabularx}{\textwidth}{@{}L{3.0cm}Y r@{}}
+\toprule
+System & Reported operation & Latency\\
+\midrule
+DeltaBox & Checkpoint & \textbf{10.83 ms}\\
+SnowFlock & Remote fork across hosts & \textbf{600--800 ms}\\
+\bottomrule
+\end{tabularx}\par}
+\sources{\href{https://arxiv.org/abs/2605.22781}{DeltaBox}; Lagar-Cavilla et al., SnowFlock, EuroSys 2009. Full operation table retained in QA.}
+\qadetail{The full published-operation table retains DeltaBox checkpoint 10.83 ms (arXiv:2605.22781); Kimi K3 AgentENV checkpoint as low as 133 ms and resume as low as 49 ms (technical report \S5.3.2, https://github.com/MoonshotAI/Kimi-K3); Shepherd fork 134--143 ms (arXiv:2605.10913); SnowFlock remote fork across hosts 600--800 ms (EuroSys 2009); Firecracker boot to application code under 125 ms (NSDI 2020). Kimi values are minima rather than typical latency. All values retain their source endpoints; workloads and timing conventions differ. These rows cannot rank platforms. The mechanism lineage includes Xen, live migration, Potemkin, SnowFlock, Catalyzer, Nephele and MITOSIS. Agent checkpointing includes DeltaBox and Shepherd; Crab and Planarian address recovery. Recovery is not interchangeable with branching. The survey is bounded to the systems examined. A runtime comparison must reach equivalent usable states and include the costs paid by that workflow.}
+\note{[0:45] Two published figures show why the operation label matters. DeltaBox reports a ten point eight three millisecond checkpoint. SnowFlock reports six hundred to eight hundred milliseconds for a remote fork across hosts. One saves state; the other makes a continuation available on another host. The broader source table also includes minimum checkpoint and resume times, local forks, and boot to application code. A useful comparison matches the usable state and timing boundary. Our API trace therefore names the complete operation it actually executed.}
+\end{frame}

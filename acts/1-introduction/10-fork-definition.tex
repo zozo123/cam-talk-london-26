@@ -1,0 +1,14 @@
+\begin{frame}[t]{A fork creates private continuations from one captured execution state.}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[state,text width=3.3cm] (parent) at (0,0) {Captured parent\\state $S$};
+\foreach \k/\y in {A/1.5,B/0,C/-1.5}{\node[candidate,text width=3.4cm](b\k)at(5.5,\y){Child \k\\private $\Delta_\k$};\draw[flow](parent)--(b\k);}
+\node[evidence,text width=3.25cm] (result) at (10.5,0) {Return artifact\\and observations};
+\foreach \k in {A,B,C}{\draw[flow](b\k)--(result);}
+
+\end{tikzpicture}\end{center}
+\sources{Execution abstraction; backend-specific state and external-effect semantics.}
+\qadetail{Fork semantics are backend-specific: filesystem clone, artifact cache, process fork, guest-memory restore and remote clone differ. Fork identity is distinct from checkpoint identity and observation identity. Authority must remain outside child-owned state. A fork supplies several continuations from one captured parent with private writable state. Git worktrees preserve source views. Process checkpoints may preserve memory and processes. VM snapshots preserve their declared state surfaces. Filesystem snapshots do not establish memory capture. The hypothetical running-application workload differs from the actual serial repair. Remote model sessions, model randomness, and already performed external effects require separate handling. Neither setup time nor a checkpoint API name establishes whole-prefix reuse or fidelity. SnowFlock: Lagar-Cavilla et al., Rapid Virtual Machine Cloning for Cloud Computing, EuroSys 2009, built on Xen. Kimi K3 reports 51,219,741 sandboxes across 1,505,678 images in training and evaluation, up to 98\% of sandbox lifetime during model waits, and checkpoint/resume times as low as 133/49 ms. These are attributed infrastructure figures, not our measurements. Forking is offered for reward judging without side effects. DSec retains sandboxes when training tasks are preempted and replays cached command results on resumption. DeepSeek-V4, arXiv:2606.19348, \S5.2.5.}
+\note{[0:40] Here is the abstraction I will use. Capture a parent execution state, create private continuations, and return the artifacts and observations produced by each. A filesystem snapshot, a process fork, and a full memory checkpoint preserve different things. Privacy of child writes does not isolate remote effects or grant publication permission. The examples now explain the two questions this abstraction creates: what work can we reuse, and what evidence must come back from each alternative?}
+\end{frame}

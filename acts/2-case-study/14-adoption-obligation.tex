@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}\surf{SOFTWARE}The green suite left same-owner adoption without a direct test.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[text=Gold] at (4.1,1.55){Required deterministic check};
+\node[cp,text width=3.05cm,minimum height=1.2cm](a){Force \texttt{CellBusy}\\Same-work-order owner};
+\node[cp,text width=3.05cm,minimum height=1.2cm,right=of a](b){Exercise the new\\adoption path};
+\node[cp,text width=3.05cm,minimum height=1.2cm,right=of b](c){Assert exactly\\one dispatch};
+\draw[message](a)--(b);\draw[message](b)--(c);
+\end{tikzpicture}
+\end{center}\lead{Suite: 1,972 reported cases, including skips; zero failures.}
+\lead{Review requested this test; the direct deterministic check stayed absent.}
+\sources{\href{https://github.com/zozo123/ariflow-swfactory/blob/main/docs/factory/SELFHOST-2/agent/review.2.json}{SELFHOST-2 final review}; repairs and harness test records.}
+\qadetail{The new path combines CellBusy and an active cell owned by another attempt of the same work order. Existing tests exercise adoption after a crash and foreign-owner rejection through the busy path separately; favorable race interleavings do not replace a deterministic branch test. Review 1 requested deterministic tests as a blocker. Repair 2 refactored the helper; review 2 approved and classified the missing direct test as minor. The suite reported 1,972 cases including skips and zero failures, not 1,972 passing tests. All fifteen logged edits were allowed, six by repair agents; the test-edit hook never fired, and no blocked test edit is observed. Repair edits followed a non-node path outside the plan's scope enforcement; backend/service.py was outside the six approved files. Scope expansion requires an explicit authorization and a behavioral obligation. Full agent diagnosis, lease distinctions, source records and OffRisk analogy are retained in the preceding race slide's Q&A detail.}
+% Transition: After behavioral acceptance, preserve the candidate and evidence through delivery and cleanup.
+\note{[0:45] The suite reported nineteen hundred seventy-two cases, including skips, and zero failures. Review had requested a deterministic check of the new same-owner adoption path. The next repair refactored a helper, and the final review approved while the direct test remained absent. The obligation is precise: force CellBusy with the same-work-order owner, exercise adoption and assert exactly one dispatch. A successful suite receipt is useful, but this particular behavior still needs its own assertion. A separate delivery incident then shows why the candidate itself must survive cleanup.}
+\end{frame}

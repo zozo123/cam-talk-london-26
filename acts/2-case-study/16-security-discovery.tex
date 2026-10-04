@@ -1,0 +1,17 @@
+\begin{frame}[t]{\ev{\tagO}\surf{SECURITY}CyberGym validated 22 zero-days after a 56-crash campaign.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[cs,text width=2.35cm,minimum height=1.25cm](a){431 OSS-Fuzz projects\\1,748 executables};
+\node[cc,text width=2.35cm,minimum height=1.25cm,right=of a](b){Execute candidate inputs\\56 crashes};
+\node[ce,text width=2.35cm,minimum height=1.25cm,right=of b](c){Reproduce\\Deduplicate\\Validate findings};
+\node[ce,text width=2.15cm,minimum height=1.25cm,right=of c](d){22 confirmed\\zero-days};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\end{tikzpicture}
+\end{center}\lead{OpenHands + GPT-5 proposed inputs; sanitizer runs produced candidate crashes.}
+\sources{\href{https://rdi.berkeley.edu/blog/cybergym/}{Berkeley RDI, CyberGym}; \href{https://www.cybergym.io/cybergym/}{CyberGym report}; latest-code campaign.}
+\qadetail{The latest-code campaign used OpenHands with GPT-5 on 431 latest OSS-Fuzz projects and 1,748 executables. It reported 56 crashes and 22 confirmed previously unknown vulnerabilities. This is separate from CyberGym's historical 1,507-vulnerability benchmark across 188 projects, whose differential success criterion is that a proof of concept triggers the vulnerable version but not the patched version. Do not imply all 56 crashes were distinct vulnerabilities, or that every discovered zero-day already has a public patch. The separate GPT-4.1 campaign had different counts and overlap; counts cannot be added. CyberGym demonstrates candidate execution and independent finding validation. The reported discovery count is not evidence of gains from sandbox forking or of our own security campaign.}
+% Transition: The examples lead to the runtime contract: inherited state, private changes and returned results.
+\note{[0:50] In CyberGym's latest-code campaign, OpenHands with GPT-five explored 431 OSS-Fuzz projects and 1,748 executables. The agent proposed candidate inputs, and sanitizer executions produced fifty-six crashes. Reproduction, deduplication and finding validation established twenty-two previously unknown vulnerabilities. The units matter: a crash is an executed observation; a confirmed vulnerability is an accepted finding. Each example directs exploration toward a concrete check and an accepted result. We can now specify the runtime contract: what a continuation inherits, what it changes and what it returns.}
+\end{frame}

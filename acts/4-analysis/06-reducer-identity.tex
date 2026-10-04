@@ -1,0 +1,16 @@
+\begin{frame}[t]{The reducer rejects a repeated evidence ID and retains distinct evidence.\ev{\tagB}}
+\vspace{0pt}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\node[candidate,text width=3.6cm] (same) at (0,0) {Inputs: $e_1$ and $e_1$};
+\node[bad,text width=4.8cm] (reject) at (6.2,0) {\textbf{Reject duplicate}};
+\node[candidate,text width=3.6cm] (diff) at (0,-1.5) {Inputs: $e_1$ and $e_2$};
+\node[evidence,text width=4.8cm] (merge) at (6.2,-1.5) {\textbf{Combine summaries}\\retain IDs and lineage};
+\draw[denied](same)--(reject);\draw[flow](diff)--(merge);
+\node[text width=12cm,font=\fontsize{11.5}{14}\selectfont] at (3.1,-2.85) {Model: common parameter, calibrated information, independent noise.};
+
+\end{tikzpicture}\end{center}
+\sources{\href{https://github.com/zozo123/boltzmann-mapreduce}{Built reference reducer}; arXiv:2607.09689v4.}
+\qadetail{The two separate diagram paths make refusal and combination distinct operations. The Gaussian/Wald reference reducer adds natural-parameter summaries associatively under an independence/common-target model and retains a disagreement statistic. Declared exact duplicate evidence IDs are rejected by default. Lineage is transported but not consumed for covariance. Worker declarations are not authenticated manifests. Conservative refusal when dependence is unknown, trusted evidence identity and controller-derived information remain proposed. Cochran 1954 supplies inverse-variance-estimation context.}
+\note{[0:45] The reference reducer implements a concrete ledger rule. Inputs that declare the same evidence identifier are rejected as a duplicate. Distinct evidence can combine under the numerical model, while retaining its identifiers and lineage. The result record carries an estimate, information, count, ancestry, and execution metadata. The algebra assumes a common parameter, calibrated information, and independent noise. Lineage transport supports later analysis; it does not automatically correct covariance or authenticate a worker's declarations.}
+\end{frame}

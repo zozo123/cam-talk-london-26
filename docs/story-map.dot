@@ -1,0 +1,109 @@
+digraph ResearchToSelfDrivingCompute {
+  graph [layout=neato, bgcolor="white", pad="0.30", splines=line,
+         overlap=true, outputorder=edgesfirst, fontname="Arial", dpi=90];
+  node [shape=box, style="rounded,filled", fillcolor="#FFFFFF", color="#CAD7DC",
+        penwidth=1.2, fontname="Arial", fontsize=18, fontcolor="#142B3B",
+        margin="0.18,0.13", pin=true];
+  edge [fontname="Arial", fontsize=14, color="#536874", fontcolor="#536874",
+        penwidth=1.4, arrowsize=0.85];
+
+  title [pos="700,905!", shape=plain, label=<
+    <FONT POINT-SIZE="34"><B>Self-driving computers explore continuations and choose checked results.</B></FONT>
+  >];
+  subtitle [pos="700,859!", shape=plain,
+    label="Movie analogy: rewind a scene, fork alternative futures, keep a checked continuation.", fontsize=20];
+
+  physics [pos="140,762!", width=3.0, height=1.1, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>BIOLOGICAL PHYSICS</B><BR/><BR/><FONT POINT-SIZE="17">State and shared structure</FONT> >,
+    URL="https://arxiv.org/abs/2006.06503"];
+  genomics [pos="420,762!", width=3.0, height=1.1, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>GENOMICS</B><BR/><BR/><FONT POINT-SIZE="17">Explicit pipelines + lineage</FONT> >,
+    URL="https://pmc.ncbi.nlm.nih.gov/articles/PMC10371165/"];
+  mobileye [pos="700,762!", width=3.0, height=1.1, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>MOBILEYE</B><BR/><BR/><FONT POINT-SIZE="17">Self-driving perception</FONT> >];
+  incredibuild [pos="980,762!", width=3.0, height=1.1, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>INCREDIBUILD</B><BR/><BR/><FONT POINT-SIZE="17">Reuse compilation work</FONT> >];
+  computers [pos="1260,762!", width=3.1, height=1.1, fillcolor="#FBF3E6", color="#AD701B",
+    label=< <B>SELF-DRIVING<BR/>COMPUTERS</B><BR/><BR/><FONT POINT-SIZE="17">Propose forks + choose actions</FONT> >];
+
+  physics -> genomics [label="", tooltip="moved into"];
+  genomics -> mobileye [label="", tooltip="then joined"];
+  mobileye -> incredibuild [label="", tooltip="then joined"];
+  incredibuild -> computers [label="", tooltip="current direction"];
+
+  state [pos="140,502!", width=3.0, height=1.5, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>REACHED STATE</B><BR/><BR/><FONT POINT-SIZE="17">Useful execution prefix<BR/>Worktree, cache or<BR/>declared live checkpoint</FONT> >];
+  a [pos="420,587!", width=2.55, height=0.76, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>Continuation A</B><BR/><FONT POINT-SIZE="16">Private writable state</FONT> >];
+  b [pos="420,502!", width=2.55, height=0.76, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>Continuation B</B><BR/><FONT POINT-SIZE="16">Private writable state</FONT> >];
+  c [pos="420,417!", width=2.55, height=0.76, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>Continuation C</B><BR/><FONT POINT-SIZE="16">Private writable state</FONT> >];
+  checks [pos="700,502!", width=3.1, height=1.5, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>CHECKS</B><BR/><BR/><FONT POINT-SIZE="17">Required behavior<BR/>Artifact + fresh evidence<BR/>Failed checks remain open</FONT> >];
+  result [pos="980,502!", width=3.4, height=1.5, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>KEEP, DISCARD, CONTINUE</B><BR/><BR/><FONT POINT-SIZE="17">Keep / compose checked results<BR/>Discard a failed alternative<BR/>Continue from useful state</FONT> >];
+  controller [pos="1260,502!", width=3.0, height=1.5, color="#AD701B", fillcolor="#FBF3E6",
+    label=< <B>CONTROLLER</B><BR/><BR/><FONT POINT-SIZE="17">Verify the exact final artifact<BR/>Current authority + approval<BR/>Publish or retain / export</FONT> >];
+
+  computers -> result [label="", tooltip="controls the next action", color="#AD701B", fontcolor="#AD701B"];
+  state -> a;
+  state -> b [label="forks"];
+  state -> c;
+  a -> checks [label="", tooltip="evaluates"];
+  b -> checks [label="", tooltip="evaluates"];
+  c -> checks [label="", tooltip="evaluates"];
+  checks -> result [label="", tooltip="supports"];
+  result -> controller [label="", tooltip="submits"];
+
+  measured [pos="240,235!", width=5.4, height=1.6, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>OBSERVED WORK</B><BR/><BR/><FONT POINT-SIZE="17">Tokio compile: <B>46 → 13 → 3 s</B><BR/>Fresh → restored artifact cache → hot cache<BR/><BR/>Factory repairs + reviews: <B>25.2 min</B></FONT> >,
+    URL="https://github.com/tokio-rs/tokio/issues/8200"];
+  evidence [pos="710,235!", width=5.8, height=1.6, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>EVIDENCE CONTRACT</B><BR/><BR/><FONT POINT-SIZE="17">Retain artifact, input and lineage<BR/>Reject repeated evidence IDs<BR/><BR/>Built reducer: <B>same-quantity estimates</B><BR/>Keep incompatible patches separate</FONT> >];
+  authority [pos="1190,235!", width=4.6, height=1.6, fillcolor="#EFF5F5", color="#007E87",
+    label=< <B>FACTORY / AUTHORITY</B><BR/><BR/><FONT POINT-SIZE="17">Authenticate + authorize each child<BR/>Check current publication permission<BR/><BR/>Require the behavior test<BR/>Retain a durable candidate artifact</FONT> >];
+
+  measured -> state [label="", tooltip="shows reusable work", color="#007E87", fontcolor="#007E87"];
+  measured -> checks [label="", tooltip="locates acceptance effort", color="#007E87", fontcolor="#007E87"];
+  evidence -> checks [label="", tooltip="binds observations", color="#007E87", fontcolor="#007E87"];
+  evidence -> result [label="", tooltip="constrains combination", color="#007E87", fontcolor="#007E87"];
+  authority -> controller [label="", tooltip="authorizes publication", color="#007E87", fontcolor="#007E87"];
+
+  afl [pos="140,665!", width=3.0, height=.60, fillcolor="#FFFFFF", color="#CAD7DC", fontsize=16,
+    label=< <B>AFL++</B><BR/><FONT POINT-SIZE="15">Persistent process reuse</FONT> >,
+    URL="https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md"];
+  domain [pos="700,665!", width=3.1, height=.60, fillcolor="#FFFFFF", color="#CAD7DC", fontsize=16,
+    label=< <B>SCIENCE / SECURITY</B><BR/><FONT POINT-SIZE="15">Genomics, Chamo, CyberGym<BR/>Domain-specific validation</FONT> >,
+    URL="https://ai.vixra.org/abs/2608.0069"];
+  adaptive [pos="980,665!", width=3.2, height=.60, fillcolor="#FFFFFF", color="#CAD7DC", fontsize=16,
+    label=< <B>AUTORESEARCH / ALPHAEVOLVE</B><BR/><FONT POINT-SIZE="15">Adaptive proposal-and-check loop</FONT> >,
+    URL="https://github.com/karpathy/autoresearch/discussions/43"];
+  afl -> state [label="", tooltip="illustrates reuse", color="#007E87", fontcolor="#007E87", fontsize=13];
+  domain -> checks [label="", tooltip="illustrates checks", color="#007E87", fontcolor="#007E87", fontsize=13];
+  adaptive -> result [label="", tooltip="illustrates adaptive choice", color="#007E87", fontcolor="#007E87", fontsize=13];
+
+  label_physics_genomics [pos="280,821!", shape=plain, fontsize=14, fontcolor="#536874", label="moved into"];
+  label_genomics_mobileye [pos="560,821!", shape=plain, fontsize=14, fontcolor="#536874", label="then joined"];
+  label_mobileye_incredibuild [pos="840,821!", shape=plain, fontsize=14, fontcolor="#536874", label="then joined"];
+  label_incredibuild_computers [pos="1120,821!", shape=plain, fontsize=14, fontcolor="#536874", label="current direction"];
+  label_computers_result [pos="1230,630!", shape=plain, fontsize=14, fontcolor="#AD701B", label="controls the next action"];
+  label_b_checks [pos="560,537!", shape=plain, fontsize=13, fontcolor="#536874", label="evaluates results"];
+  label_checks_result [pos="840,581!", shape=plain, fontsize=13, fontcolor="#536874", label="supports"];
+  label_result_controller [pos="1120,581!", shape=plain, fontsize=13, fontcolor="#536874", label="submits"];
+  label_measured_state [pos="85,367!", shape=plain, fontsize=13, fontcolor="#007E87", label="shows reusable work"];
+  label_measured_checks [pos="435,337!", shape=plain, fontsize=13, fontcolor="#007E87", label="locates acceptance effort"];
+  label_evidence_checks [pos="625,354!", shape=plain, fontsize=13, fontcolor="#007E87", label="binds observations"];
+  label_evidence_result [pos="960,350!", shape=plain, fontsize=13, fontcolor="#007E87", label="constrains combination"];
+  label_authority_controller [pos="1125,370!", shape=plain, fontsize=13, fontcolor="#007E87", label="authorizes publication"];
+  label_afl_state [pos="62,609!", shape=plain, fontsize=13, fontcolor="#007E87", label="illustrates reuse"];
+  label_domain_checks [pos="790,605!", shape=plain, fontsize=13, fontcolor="#007E87", label="illustrates checks"];
+  label_adaptive_result [pos="1100,607!", shape=plain, fontsize=13, fontcolor="#007E87", label="illustrates adaptive choice"];
+
+  legend [pos="700,142!", shape=plain, fontsize=14, fontcolor="#536874", label="Amber: proposed execution loop. Teal: observations and requirements. White: motivating examples."];
+
+  interpretation [pos="700,99!", shape=plain, fontsize=18,
+    label="An orchestration model for existing computers. Restore covers captured computation; external effects need explicit control."];
+  sources [pos="700,53!", shape=plain, fontsize=13, fontcolor="#536874",
+    label="Sources: speaker-confirmed career path; coauthored research; github.com/tokio-rs/tokio/issues/8200; ariflow-swfactory SELFHOST-2.\nBuild figures describe artifact-cache reuse. Repair/review time sums four sessions. Further sources and scope: deck REFERENCES.md."];
+}

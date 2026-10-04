@@ -1,0 +1,20 @@
+\begin{frame}[t]{A forged precision report moved the synthetic pooled estimate from 5 to 17.\ev{\tagM}}
+\vspace{0pt}
+
+\lead{One 2,000-point shard targets 17 and inflates information per point $50\times$.}
+\begin{center}\begin{tikzpicture}[x=1cm,y=.12cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+
+\draw[flow](0,0)--(0,19);
+\foreach \y in {0,5,10,15}{\draw(-.07,\y)--(.07,\y);\node[left,font=\fontsize{10.5}{12}\selectfont]at(-.08,\y){\y};}
+\fill[Rust!70](1,0)rectangle(3,17.0004);\fill[Teal!65](6,0)rectangle(8,4.9566);
+\draw[Teal,dashed,line width=1.2pt](.3,5)--(9,5);
+\node[anchor=west,font=\fontsize{10.5}{12}\selectfont,text=Teal]at(9,5){True $\mu=5$};
+\node[above,font=\fontsize{16}{19}\selectfont\bfseries]at(2,17.0004){17.0004};
+\node[above,font=\fontsize{16}{19}\selectfont\bfseries]at(7,5.6){4.9566};
+\node[below,align=center]at(2,0){Unprotected\\pooling};\node[below,align=center]at(7,0){Stress\\heuristic};
+
+\end{tikzpicture}\end{center}
+\sources{Eliaz, \href{https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py}{primary demo.py} and arXiv:2607.09689. Synthetic stress case; no Byzantine guarantee.}
+\qadetail{Verified primary demo.py lines90--93 sets true_theta5.0; lines151--165 sets liar_theta=true_theta+12, SD.02, count2000, multiplier50. This target is distinct from full-sample4.9450 in the separate islo integration trace. The 2000-point shard returns a distant estimate and reports fiftyfold information per point. Unprotected pooling yields17.0004, stress heuristic4.9566. Sample count alone cannot detect this claim. The heuristic illustrates one stress case, not a Byzantine guarantee. Trusted recomputation under the numerical model can validate information; agent scores need a separately validated error model. These extensions are proposed. An external recorder alone does not establish statistical calibration.}
+\note{[0:45] Now the synthetic true mean is five. A worker targets seventeen, generates two thousand tightly concentrated points, and inflates information per point another fiftyfold. Unprotected pooling returns seventeen point zero zero zero four. A stress heuristic returns roughly four point nine six in this particular demonstration. The point is that a real count and distinct identifier do not establish a justified statistical weight. The controller needs trusted recomputation or independently calibrated information. The heuristic is not a general Byzantine guarantee.}
+\end{frame}

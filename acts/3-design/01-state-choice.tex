@@ -1,0 +1,16 @@
+\begin{frame}{The next action determines which state a continuation needs.}
+\vspace{0pt}
+{\fontsize{12.5}{15}\selectfont\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{@{}L{3.5cm}L{4.0cm}Y@{}}
+\toprule
+Next action & Mechanism & State received\\
+\midrule
+Edit source or build & Worktrees and build cache & Files and cached inputs\\
+Continue live execution & Process or VM checkpoint & Supported memory and runtime state\\
+Reuse an observation & Replay & Recorded execution or response\\
+\bottomrule
+\end{tabularx}\par}
+\sources{CRIU, gVisor, Firecracker and rr documentation; SnowFlock, EuroSys 2009; DeepSeek-V4 \S5.2.5.}
+\qadetail{The original state-surface table distinguishes source/build state (Git worktrees, OBuilder), process state (CRIU, gVisor save/restore), VM state (Xen, SnowFlock, Firecracker), and recorded observations (rr, DSec replay). The main slide groups process and VM mechanisms without equating their supported state. Worktrees parallelize edits without preserving live processes. gVisor supplies a userspace-kernel sandbox with its own supported save/restore semantics. Replay can reuse a response without reexecuting a remote service. Network, time, randomness and remote model sessions need declared semantics. The factory case establishes files, dependencies and failed-test feedback, not a necessary live process. An unchanged simulator or application at a reproduced failure is a possible useful live-state workload, not an observed property of the allowlist repair. Editing loaded code may require reload or restart and invalidate the captured live state. Hosted-model weights, KV state and sampling stay outside the guest. Choose the cheapest faithful mechanism for the next action.}
+\note{[0:45] Begin with the next action. Editing source needs files and build inputs, which worktrees and caches can supply. Continuing a live computation needs the supported memory and runtime state. Reusing a recorded observation calls for replay. These are different state surfaces with different costs. Our installer case establishes file, dependency and feedback state. A future live application workload would need its own capture checks. If changing loaded code requires a restart, that restart can remove the state we intended to reuse.}
+\end{frame}

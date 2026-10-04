@@ -1,0 +1,16 @@
+\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}A genome-scale screen ranked candidates for sensitivity to SI-12.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[cs,text width=3.05cm,minimum height=1.25cm](a){GeCKOv2 library\\$>120{,}000$ guides\\19,050 genes};
+\node[cc,text width=3.05cm,minimum height=1.25cm,right=of a](b){CRISPR dropout screen\\SRC-3 inhibitor SI-12\\versus vehicle};
+\node[ce,text width=3.05cm,minimum height=1.25cm,right=of b](c){Terrace + DRACO\\Rank candidates\\$\sim$100-gene shortlist};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\end{tikzpicture}
+\end{center}\lead{We sought perturbations that increase cancer-cell sensitivity to SI-12.}
+\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al., Communications Biology 4:399 (2021)}; screen and candidate ranking.}
+\qadetail{Full source: Yosi Gilad, Yossi Eliaz, Yang Yu, Adam M. Dean, San Jung Han, Li Qin, Bert W. O'Malley and David M. Lonard, A genome-scale CRISPR Cas9 dropout screen identifies synthetically lethal targets in SRC-3 inhibited cancer cells, Communications Biology 4, 399 (2021), DOI 10.1038/s42003-021-01929-1. The six-of-eight result is the paper's MCF-7 in-vitro drug-combination finding (efficacy level at least 3), not a clinical outcome. Three biological replicate arms per treatment in the pooled screen are distinct from the downstream viability assay's technical replicates and independent experiments. Schultz and Coelingh Bennink, Target expression is a relevant factor in synthetic lethal screens, Communications Biology 5, 835 (2022), DOI 10.1038/s42003-022-03746-6, questioned several hits' expression and recommended transcriptome checks. Replication alone does not establish on-target biological validity. Computational continuations of analysis variants would be a proposed design; this study reports no sandbox-fork experiment.}
+% Transition: Ranking nominates candidates; the following assay measures their effects.
+\note{[0:40] In our genomics work, we sought perturbations that make cancer cells more sensitive to the SRC-three inhibitor SI-twelve. The GeCKOv2 library supplied more than 120,000 guides targeting 19,050 genes. We compared dropout under the inhibitor and vehicle, then used Terrace and DRACO to rank candidates and shortlist about one hundred genes. This stage proposes promising targets. A separate assay must measure their effect.}
+\end{frame}

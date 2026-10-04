@@ -1,0 +1,15 @@
+\begin{frame}[t]{Zero pairwise correlation can coexist with an all-wrong rate of 25 percent.\ev{\tagA}}
+\vspace{0pt}
+
+\lead{Three candidates; 1 means wrong. Listed vectors are equally likely.}
+{\fontsize{12.5}{16}\selectfont\begin{tabularx}{\linewidth}{@{}YL{2.3cm}L{2.3cm}L{2.1cm}@{}}\toprule
+Error vectors & Each wrong & Pair correlation & All wrong\\\midrule
+$\{000,011,101,110\}$ & 50\% & 0 & 0\%\\[5pt]
+All eight vectors & 50\% & 0 & 12.5\%\\[5pt]
+$\{001,010,100,111\}$ & 50\% & 0 & 25\%\\\bottomrule\end{tabularx}\par}
+\vspace{.25cm}\tagline{A selector returning one candidate succeeds at most $1-P(\text{all wrong})$.}
+
+\sources{Exact enumeration; selector ceiling also discussed by Chen, arXiv:2606.27288.}
+\qadetail{All three distributions have identical Bernoulli marginals and zero pair covariance. One denotes an error. All three distributions have error probability one half for each candidate and zero pairwise correlation. Their all-wrong probabilities differ. A selector returning one member succeeds at most one minus the all-wrong rate and must recognize a correct member. The variance-equivalent effective count for a mean cannot substitute for this joint distribution. The enumeration is exact; the Chen preprint is cited only for the selector ceiling.}
+\note{[0:45] These are three exact joint distributions. Every candidate is wrong half the time, and every pair has zero correlation. Yet the probability that all three are wrong is zero, one eighth, or one quarter. A selector cannot return a correct member when all members are wrong, and must still recognize one when it exists. So a pairwise correlation, or an effective count for a mean, does not establish search coverage. We need the joint failure behavior and a separately evaluated selector.}
+\end{frame}

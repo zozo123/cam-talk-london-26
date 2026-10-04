@@ -1,0 +1,14 @@
+\begin{frame}[t]{Shared variation can make a paired comparison more precise.\ev{\tagA}}
+\vspace{0pt}
+
+\vspace{.3cm}
+\begin{center}{\fontsize{18}{22}\selectfont
+$\operatorname{Var}(A-B)$\par\vspace{.25cm}
+$=\operatorname{Var}(A)+\operatorname{Var}(B)-2\operatorname{Cov}(A,B)$\par}
+\vspace{.5cm}{\fontsize{14}{17}\selectfont Compare A and B on the same case and controlled conditions.\par}
+\end{center}
+
+\sources{Covariance identity; common-random-numbers methodology.}
+\qadetail{Illustration: VarA=VarB=1 and Cov=.8 gives Var(A-B)=.4 versus2 with covariance0. This calculation does not assert measured covariance in agent runs. An execution tree misses retrieval, evaluator, prompt, fixture and feedback relationships. Correlation is not uniformly harmful: positive covariance can help matched differences, while it raises mean variance. Common random numbers require control of the actual randomness consumed. A cloned guest PRNG does not control remote model sampling. Compare equivalent cases and record assignment and exclusion rules.}
+\note{[0:45] Sharing is not uniformly harmful. When we estimate a difference, positive covariance can reduce its variance. Comparing A and B on matched cases lets common variation cancel. That is the reason for paired comparisons and common random numbers. We must control the randomness actually consumed. A cloned guest seed does not control a hosted model's sampling. The quantity we want to estimate therefore determines which sharing helps, which sharing needs adjustment, and which identities the runtime must retain.}
+\end{frame}

@@ -1,0 +1,18 @@
+\begin{frame}[t]{\ev{\tagO}\surf{AI RESEARCH}AlphaEvolve recovered 0.7\% of Google's worldwide compute.}
+\vspace{0pt}
+\fontsize{12.5}{15}\selectfont
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
+\node[cs,text width=2.4cm,minimum height=1.15cm](a){Program\\population};
+\node[cc,text width=2.4cm,minimum height=1.15cm,right=of a](b){Gemini Flash + Pro\\propose edits};
+\node[ce,text width=2.4cm,minimum height=1.15cm,right=of b](c){Check validity\\Measure performance};
+\node[ce,text width=2.0cm,minimum height=1.15cm,right=of c](d){Evolutionary\\selection};
+\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
+\draw[flow](d.south)--++(0,-.6)-|(a.south);
+\end{tikzpicture}
+\end{center}\lead{A deployed Borg scheduling heuristic recovered 0.7\% on average.}
+\sources{\href{https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/}{Google DeepMind, AlphaEvolve (2025)}; production application.}
+\qadetail{DeepMind reports that the discovered Borg scheduling heuristic recovered an average 0.7\% of Google's worldwide compute resources, used in production for over a year at announcement. A matrix-multiplication kernel achieved a 23\% kernel speedup and reduced Gemini training time by 1\%. These are distinct workloads and endpoints, not additive gains. Gemini Flash supplies breadth and Gemini Pro supplies depth; algorithm proposals undergo automated validity and performance evaluation and evolutionary selection. The reported gains belong to the discovered algorithms. They are not measurements of a sandbox fork or of our implementation. Candidate execution can be mapped onto continuations, but that mapping is a design connection.}
+% Transition: Our genomics work separates proposal ranking from measuring the selected candidate.
+\note{[0:50] AlphaEvolve maintains a database of programs. Gemini Flash and Pro propose edits; automated evaluators check validity and performance; evolutionary selection feeds useful programs back into the population. DeepMind reports that a deployed Borg scheduling heuristic recovered an average point seven percent of Google's worldwide compute resources. The result belongs to the discovered scheduling algorithm. The loop makes the path from proposal to production value explicit. We used a related separation between candidate ranking and measured effects in our genomics work.}
+\end{frame}
