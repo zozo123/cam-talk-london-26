@@ -49,23 +49,23 @@ jobs:
 
           pages = PdfReader("talk.pdf").pages
           full = len(pages)
-          print(f"Cambridge deck: {full} pages (54 story slides, no appendix)")
-          if full != 54:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 54 pages; got {full}")
+          print(f"Cambridge deck: {full} pages (56 story slides, no appendix)")
+          if full != 56:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 56 pages; got {full}")
           # Guard against content accidentally consumed as a Beamer subtitle.
           # Keys use the slide numbers shown to the audience.
           anchors = {
               2: ['Twistlock', 'Cytosim', 'Cancer-cell assays', '2010', '2016', '2025'],
               3: ['Twistlock', '1 hour'],
               4: ['Cytosim', '600 s', '30'],
-              5: ['POSSUMM', '23 GB', '2.5 min', '4.6'],
-              6: ['14,000', 'Cromwell'],
-              7: ['CRISPR-IL', 'GoGenome'],
-              8: ['PD-L1', 'Abemaciclib', 'SI-2', '72', '10 single-drug arms', '10', '100', '45', 'possible two-drug pairs', '4 more in E0771', 'Fan-out', 'Fan-in'],
-              9: ['Mobileye', 'pedestrian', 'junction', 'failing test', '8M+', 'REM', 'HD Roadbook', 'Align + merge', '34 billion', '1,080', 'annual average'],
+              5: ['POSSUMM', '23 GB', '2.5 min', '4.6', 'including Eliaz'],
+              6: ['14,000', 'DNA read files', 'Which data', 'Which software', 'Quality checks'],
+              7: ['CRISPR', 'Choose edits', 'Test edits', 'Update', '118', '4 unintended'],
+              8: ['PD-L1', 'Abemaciclib', 'SI-2', '72', '10 drugs tested separately', '10', '100', '45', 'possible two-drug pairs', '4 more in E0771'],
+              9: ['Mobileye', 'pedestrian', 'junction', 'failing test', '300M', 'speaker-reported', 'REM', 'HD Roadbook', 'Align + merge', '34 billion', '1,080', 'annual average'],
               10: ['Try action A', 'Advance the accepted state'],
               11: ['Python loop', 'Forkable API', 'checkpoint', 'evaluate', 'n=3'],
-              12: ['46', '13', '3 s', '33 seconds'],
+              12: ['46', '13', '3 s', '33 seconds', 'Restored cache', 'Hot cache', 'fresh runner'],
               13: ['sbx', 'Databricks'],
               14: ['microVM', 'cgroups', 'Firecracker'],
               16: ['Security and AI', 'Genomics and physics', 'software factory'],
@@ -74,17 +74,17 @@ jobs:
               19: ['15.9%', '56%'],
               20: ['126', '0.969686'],
               21: ['0.7%'],
-              22: ['19,050', '120,000', 'SI-12'],
-              23: ['MCF-7', 'breast cancer', 'Six of eight'],
+              22: ['19,050', '120,000', 'SI-12', '190-fold', '8 drug targets', '5 extra genes'],
+              23: ['MCF-7', 'breast cancer', '10 of 13', '6 of 8', 'drug combinations'],
               24: ['Ori Chamo', '135,445', 'continuation'],
               25: ['26', '60-digit'],
-              26: ['releases.astral.sh', 'githubusercontent.com', 'six files'],
-              27: ['3:41', '20:01', '18:55', '10.33'],
-              28: ['59%', '75%'],
-              29: ['Worker A', 'Worker B', '0 executions', '4 replicas'],
-              30: ['1,972', 'zero failures'],
-              31: ['3 attempts', '26 minutes', '3.43'],
-              32: ['1,748', '22'],
+              26: ['feedback loop', 'Agent proposes', 'Tests exercise', 'Review inspects', 'serially'],
+              27: ['Fan-out', 'Prepared state', 'Trial A', 'Trial B', 'Trial C', 'private'],
+              28: ['Fan-in', 'Change A', 'Change B', 'Change C', 'Select one', 'compatible changes', 'final version'],
+              29: ['state reuse', 'which files', 'what ran', 'Shared inputs', 'Coordinator', 'established tools'],
+              30: ['retry', 'repaired code', 'Count job starts', 'Exactly one', 'targeted check'],
+              31: ['Checked result', 'Save outside', 'Confirm', 'Delete', 'Publishing'],
+              32: ['431', '1,748', '56 crashes', '22 distinct', 'Reproduce', 'duplicates'],
               33: ['Run', 'Gather evidence', 'Accept'],
               35: ['256 / 256', '3.44', '9.00'],
               36: ['Isorun', 'Miosa', 'Archil', '73 ms', '78 ms', '100 / 100', '2 October 2026'],
@@ -96,16 +96,18 @@ jobs:
               42: ['reduce uncertainty', 'shared'],
               43: ['Select', 'Compose', 'Pool'],
               44: ['1 GB', '2 GB', '3 GB'],
-              45: ['Union', '4 distinct', 'Intersection', '2 shared', 'Mutual information'],
-              46: ['42', '43', 'Reject the duplicate'],
-              47: ['covariance', 'weights', 'shared errors'],
-              48: ['17.0004', '4.9566', 'precision'],
-              49: ['9.17', '3.03', '0.33'],
-              50: ['100 tasks', '50 tasks', '40 tasks', '80%', '40%'],
-              51: ['receipt', '3 seconds', 'Code hash'],
-              52: ['one dispatch', 'same files'],
-              53: ['Model designs', 'Code edits', 'Measurements', 'Drug / orbit', 'Collection has not started'],
-              54: ['Trial A', 'Trial B', 'Trial C', 'accepted result', 'controller'],
+              45: ['Union', '4 distinct', 'Intersection', '2 shared', 'New from B', '1 observation', 'Mutual information'],
+              46: ['Split one dataset', 'Try different ideas', 'Edit different components', 'Repeat a measurement', 'Seek common findings', 'shared error'],
+              47: ['42', '43', 'Reject the duplicate'],
+              48: ['covariance', 'weights', 'shared errors'],
+              49: ['17.0004', '4.9566', 'precision'],
+              50: ['9.17', '3.03', '0.33'],
+              51: ['100 tasks', '50 tasks', '40 tasks', '80%', '40%'],
+              52: ['receipt', '3 seconds', 'Code hash'],
+              53: ['one dispatch', 'same files'],
+              54: ['Model designs', 'Code edits', 'Measurements', 'Drug / orbit', 'Collection has not started'],
+              55: ['Trial A', 'Trial B', 'Trial C', 'accepted result', 'controller'],
+              56: ['46 s', '13 s', '33 s', '15.9%', '56%', '250', '3.5', '9.17', 'correlation 0.1'],
           }
           for slide, terms in anchors.items():
               rendered = " ".join(pages[slide - 1].extract_text().split()).casefold()

@@ -2,7 +2,7 @@
 
 The talk asks how a computer can reuse a useful execution state, explore private next steps, and return a result that may be accepted. Its strongest contribution is the connected execution contract: reusable state, evidence about the exact returned artifact, and controller-held authority. The personal research path explains why that contract matters; the examples show its mechanisms and failure modes.
 
-The revised main deck has **54 slides and 39:05 of planned narration**. The comments below preserve the original **1–57 numbering** from the published version. Each entry names its new location or its destination in Q&A. Supplemental source files remain available; the main PDF has no appendix or overlay builds.
+The revised main deck has **56 slides and 40:40 of planned narration**. The comments below preserve the original **1–57 numbering** from the published version. Each entry names its new location or its destination in Q&A. Supplemental source files remain available; the main PDF has no appendix or overlay builds.
 
 ## The story from beginning to end
 
@@ -91,7 +91,7 @@ Explain the executable chain WDL → Cromwell → Docker and identifiable output
 
 **Keep and shorten. New main slide 9.**
 
-Keep the credited Mobileye Manhattan photograph and personal junction-perception role, 2021–2024. The updated main example shows continuous road observations from >8 million REM contributors, alignment of repeated drives along the same road, aggregation into the HD Roadbook and map distribution back to vehicles. The pedestrian/braking loop and software-edits analogy remain visible. Fleet observation/aggregation motivates the next private-alternative execution slides without calling cars checkpoint clones.
+Keep the credited Mobileye Manhattan photograph and personal junction-perception role, 2021–2024. The updated main example shows continuous road observations from a speaker-reported fleet of 300 million REM vehicles, alignment of repeated drives along the same road, aggregation into the HD Roadbook and map distribution back to vehicles. The pedestrian/braking loop and software-edits analogy remain visible. Fleet observation/aggregation motivates the next private-alternative execution slides without calling cars checkpoint clones.
 
 ### 9 Reusing build artifacts reduced a reported Tokio compile from 46 to 13 seconds.
 
@@ -151,13 +151,13 @@ Name Gemini Flash/Pro, program proposals, automated validity/performance checks 
 
 **Keep candidate generation. New main slide 22.**
 
-Define the cancer-cell question, the SI-12 condition and vehicle comparison. Retain 19,050 genes and >120,000 guides, then Terrace/DRACO ranking and the shortlist. A ranked perturbation is a proposal. The next slide measures its effect.
+Explain the laboratory screen, computational ranking and focused follow-up as separate stages. More than 120,000 guides targeted 19,050 genes; analysis narrowed the screen to about 100 candidates, approximately a 190-fold reduction. Eight drug-target choices and five additional genes led to focused checks. SI-12 blocks a protein that supports cancer-cell growth; the vehicle condition is the untreated comparison.
 
 ### 19 Six of eight combinations improved killing in MCF-7 cells.
 
 **Keep independent validation. New main slide 23.**
 
-Retain six of eight tested combinations improving killing in MCF-7 cells. Define the assay and distinguish technical replicates from independent experiments. This concretely motivates why an executed proposal needs a separate check and a correct unit of evidence.
+Show the two focused follow-up paths in MCF-7 human breast-cancer cells: genetic checks found increased SI-12 sensitivity for 10 of 13 targets, and six of eight tested drug combinations improved killing. Define the readout and distinguish technical replicates from independent experiments. These are in-vitro findings, separate from the earlier SI-2 / PD-L1 experiment.
 
 ### 20 We tested whether projected three-body orbit branches connect.
 
@@ -173,39 +173,39 @@ Retain all 26 selected links connecting bidirectionally, Floquet stability analy
 
 ### 22 The installer fix added two missing hosts across a six-file plan.
 
-**Keep the concrete software request. New main slide 26.**
+**Explain the feedback loop. New main slide 26.**
 
-Replace “two-host fix” shorthand with the actual trigger: installer redirects reached releases.astral.sh and release-assets.githubusercontent.com, absent from the allowlist, so installation failed. Explain the six-file plan and how a failing concurrency test led into dispatch code. Name the execution tools.
+Use the concrete setup goal to show agent change, behavior tests, review and the return path for failed checks or requested changes. The workflow ran serially. Move download domains, the six-file plan and tool configuration into Q&A.
 
 ### 23 The factory run took 43:44 and cost $10.33 in model calls.
 
-**Keep work beside time and cost. New main slide 27.**
+**Explain private fan-out. New main slide 27.**
 
-Use the plain title “The factory run took 43:44 and cost $10.33 in model calls.” Keep 3:41 planning, 20:01 build/test, and 18:55 review, with their actual work descriptions. Distinguish 42:38 recorded stages from 43:44 elapsed wall time. The slide should answer what happened during those minutes.
+Show one prepared state supporting three private edit/test trials. Label this proposed parallel design and keep the measured serial baseline explicit. Retain all stage timings, wall-time distinctions and model cost in Q&A rather than the main diagram.
 
 ### 24 Two repairs and two reviews used 59% of time and 75% of cost.
 
-**Keep the regrouped cost. New main slide 28.**
+**Explain result fan-in. New main slide 28.**
 
-Two repairs and two reviews used 59% of recorded stage time and 75% of reported model cost. Explain the regrouping so the audience can connect it to the stage table. This identifies the repair/check loop as the dominant work in this example; faster environment setup alone has limited leverage here.
+Collect the proposed changes with their test results, choose one or compose compatible changes, and check the exact final version. Retain the 59%/75% repair-review cost comparison in Q&A. Do not claim that the illustrated merge ran in the measured factory workflow.
 
 ### 25 The repair agent diagnosed a split between cell and dispatch ownership.
 
-**Keep one readable ownership diagram. New main slide 29.**
+**State the proposed contribution. New main slide 29.**
 
-Explain cell ownership and dispatch ownership as separate state. A busy cell alone does not establish that the current worker owns the active dispatch. Show the conjunction the repair agent diagnosed and the path it edited. Keep diagnosis and direct behavioral verification separate.
+Connect reusable execution to returned changed files, the checks that ran and shared-input history. A coordinator uses that evidence to decide what to keep. Attribute novelty to the integrated execution/evidence/acceptance contract, without priority or speedup claims. Keep the detailed dispatch race and scope diagnosis in Q&A.
 
 ### 26 The green suite left same-owner adoption without a direct test.
 
-**Keep the missing obligation. New main slide 30.**
+**Explain the targeted behavior check. New main slide 30.**
 
-Retain 1,972 reported cases, including skips, and zero failures. Specify the untested conjunction: same-owner dispatch plus the CellBusy adoption path must produce exactly one backend dispatch. The green count leaves that obligation unanswered. This does not prove the patch fails; it gives the required acceptance test.
+Use a simple retry example: force the retry, run the repaired code and count exactly one job start. Explain the observed missing direct check in plain language. Keep CellBusy, authorization, same-job ownership, the 1,972-case count and skipped-case qualifications in Q&A. This is an unresolved obligation, not proof that the patch fails.
 
 ### 27 Three delivery refusals preceded cleanup that erased an approved patch.
 
-**Keep the delivery boundary. New main slide 31.**
+**Explain durable output. New main slide 31.**
 
-Three delivery refusals preceded cleanup that erased the approved patch. Show review approval → delivery refusal → teardown → missing bytes. A legitimate refusal should preserve a recoverable artifact. This motivates durable export as part of acceptance, separate from permission to publish.
+Show the proposed order: checked result, save outside the temporary workspace, confirm the saved copy, then cleanup. Keep the observed patch loss in the separate run visible at a high level. Preserve costs, refusal count and extra archive-file cause in Q&A. Durable storage does not authorize publication.
 
 ### 28 CyberGym validated 22 zero-days after a 56-crash campaign.
 
@@ -299,13 +299,13 @@ Keep the 64-agent Bitcoin identity reconstruction as related prior work. It supp
 
 ### 43 Different parents can still share the evidence that guides their children.
 
-**Fold into the reducer slide. New main slide 46.**
+**Fold into the reducer slide. New main slide 47.**
 
 One line suffices: different parents may still use the same grader. Preserve execution ancestry and information-sharing links in Q&A. Neither graph automatically supplies a covariance estimate.
 
 ### 44 The reducer rejects a repeated evidence ID and retains distinct evidence.
 
-**Keep and separate implementation from acceptance design. New main slide 46.**
+**Keep and separate implementation from acceptance design. New main slide 47.**
 
 The built reducer rejects an exactly repeated declared evidence ID and carries lineage. Distinct IDs do not prove independence. The proposed acceptance layer refuses an unsupported pooled claim when shared information or calibration cannot be justified. Avoid describing abstention as already implemented.
 
@@ -317,13 +317,13 @@ Retain the honest synthetic pooling result 0.177 → 0.0083, five uneven shards 
 
 ### 46 A forged precision report moved the synthetic pooled estimate from 5 to 17.
 
-**Keep the synthetic precision attack. New main slide 48.**
+**Keep the synthetic precision attack. New main slide 49.**
 
 A 2,000-point shard aimed at 17 and inflated information per point 50×, moving the unprotected estimate from a true mean of 5 to 17.0004. Keep the particular heuristic result 4.9566 clearly labeled. The design requires trusted or calibrated weights; this demonstration supplies no general Byzantine guarantee.
 
 ### 47 At correlation 0.1, 100 measurements have the mean precision of about nine.
 
-**Keep one dependence number. New main slide 49.**
+**Keep one dependence number. New main slide 50.**
 
 At common correlation 0.1 and equal marginal variance, 100 measurements have the mean precision of 9.17 independent measurements. State the assumptions alongside the formula. This is variance-equivalent precision, not a probability of correctness or a literal count of independent cases.
 
@@ -341,31 +341,31 @@ Retain common-random-number/paired-comparison reasoning: sharing may help estima
 
 ### 50 Success after reaching a checkpoint does not measure success from task start.
 
-**Keep the conditioning example. New main slide 50.**
+**Keep the conditioning example. New main slide 51.**
 
 Reach the checkpoint with probability 0.5 and succeed from it with probability 0.8: task-start success is 0.4. These are illustrative probabilities. Forking after the plan inherits the selected starting point and earlier decisions; define the population behind every reported success rate.
 
 ### 51 A receipt must describe the operation that actually executed.
 
-**Keep concrete receipt semantics. New main slide 51.**
+**Keep concrete receipt semantics. New main slide 52.**
 
 CI “success” finished in three seconds because evaluation was skipped; “human approval” was answered by the harness; a digest referenced bytes outside Git. Record actor, actual check, exact artifact and durable bytes. Each positive label must identify the event it really represents.
 
 ### 52 Publication must follow a passing check of the exact artifact.
 
-**Keep the rule on the recorded bug. New main slide 52.**
+**Keep the rule on the recorded bug. New main slide 53.**
 
 Return to the missing busy-path test. Freeze the artifact; run the required behavior check outside the child; bind its receipt to the digest; let the controller publish those bytes under current authority. Export before cleanup. This is the concrete acceptance contract, not a new assertion that the observed patch was incorrect.
 
 ### 53 The runtime experiment compares faithful restore with warm reconstruction.
 
-**Retain the protocol in Q&A; main slide 53 now explains applied merge cases.**
+**Retain the protocol in Q&A; main slide 54 now explains applied merge cases.**
 
 Keep faithful restore versus equivalent warm reconstruction, fanouts 3/6/12 and 20 interleaved batches per arm. The preregistered rejection rule uses an upper 98.3% confidence bound below ten seconds at any fanout. A noisy estimate below ten seconds can remain inconclusive.
 
 ### 54 The cofailure experiment compares siblings with other checkpoint families.
 
-**Retain the protocol in Q&A; main slide 53 now explains applied merge cases.**
+**Retain the protocol in Q&A; main slide 54 now explains applied merge cases.**
 
 Keep siblings versus other checkpoint families in matched slots, with a consumed parent-state feature. The rejection rule’s upper 90% bound below 0.05 rules out the prespecified excess of that size; it does not prove all independence. State that collection has not started and preserve the original protocol and thresholds in Q&A.
 
@@ -383,7 +383,7 @@ Retain the nine fixed-input repairs as a descriptive repeatability plan, includi
 
 ### 57 A useful continuation returns its artifact, evidence, and authority context.
 
-**Close on the contract. New main slide 54.**
+**Close on the contract. New main slide 55.**
 
 Reuse the state. Run private alternatives. Check exact artifacts and evidence outside the child. Then continue or authorize publication once. The boundary the child cannot cross is the closing systems insight; the ending should introduce no new comparison, acronym or thesis.
 
@@ -399,40 +399,50 @@ Reuse the state. Run private alternatives. Check exact artifacts and evidence ou
 
 ## Complete input checklist for this revision
 
-Every supplied screenshot and the pasted original 57-slide review has a destination. The screenshot deck’s 50-slide numbering differs from the original 57-slide numbering above; this table uses the final 54-slide deck.
+Every supplied screenshot and the pasted original 57-slide review has a destination. The screenshot deck’s 50-slide numbering differs from the original 57-slide numbering above; this table uses the final 56-slide deck.
 
 | User input | Final slides | Applied change |
 |---|---|---|
-| Redo the deck end to end; review original slides 1–57 | 1–54; review entries 1–57 above | Connected six-act story, canonical map and timed notes; retained material has an explicit Q&A destination |
+| Include all final comments and finish the deck | 1–56 | Source, notes and rendered output reviewed as one cumulative task. |
+| Add Eliaz to the POSSUMM citation | 5 | Harris et al., including Eliaz, with the original paper/figure reference preserved. |
+| Replace ENCODE source-ID jargon | 6 | Traceable results: which data, which software, and quality checks. |
+| Explain CRISPR-IL, pre-lab screening and the biology reduction | 7–8, 22–23 | Plain model/experiment feedback, separate OffRisk pre-lab prioritization, and 19,050 to approximately 100 to 13 genetic targets / 8 drug combinations with distinct measured endpoints. |
+| Use 300 million REM vehicles from firsthand experience | 9 | 300M speaker-reported REM count. Public eight-million count preserved separately in Q&A; no false public verification. |
+| Explain restored versus hot cache | 12 | Saved build files copied into a fresh runner versus files already available from the previous build. |
+| Explain the CyberGym numbers and actual process | 32 | Projects, executable targets, generated crashes and distinct validated vulnerabilities have separate labels and a concrete execution/check flow. |
+| Add fan-out / fan-in strategies using set ideas | 45–46 | Union, intersection and difference; five common strategies with the matching merge and check, plus limitations in Q&A. |
+| Add an insightful numeric conclusion | 56 | 46 to 13 seconds, 15.9 to 56 percent coverage, and 100 to 9.17 effective independent estimates. No combined performance claim. |
+| Simplify slides 26–31 around paradigms, theory, contribution and flows | 26–31 | Six plain-language flows for feedback, private fan-out, fan-in, returned evidence, a targeted check and durable output. Incident detail retained in Q&A. Measured serial baseline distinguished from proposed parallel design. |
+| Redo the deck end to end; review original slides 1–57 | 1–56; review entries 1–57 above | Connected six-act story, canonical map and timed notes; retained material has an explicit Q&A destination |
 | Put the research map in the right timeline; explain the work before naming tools | 2–9 | Verified chronological milestones, action headings and definitions for CS undergraduates |
 | Make the driving example concrete and exciting | 9 | Credited official Mobileye Manhattan photograph; personal junction-perception role, pedestrian/braking feedback and software-edit analogy; later update adds REM fleet fan-in |
-| Show worldwide car observations merging into Roadbook; check the proposed 300 million/every-second claim | 9 | Verified >8 million REM contributors; continuous collection, same-road alignment and HD Roadbook feedback; 34 billion 2025 road-miles gives ~1,080/second as an annual average; EyeQ count distinguished in Q&A |
+| Show worldwide car observations merging into Roadbook; check the proposed 300 million/every-second claim | 9 | Speaker-reported 300 million REM vehicles; continuous collection, same-road alignment and HD Roadbook feedback; 34 billion 2025 road-miles gives ~1,080/second as an annual average; EyeQ count distinguished in Q&A |
 | Say sandboxes; show sbx and hosted-model execution; keep serial scope clear | 13, 26 | Sandbox wording, sbx command, Airflow and Databricks; recorded runs remain serial |
 | Compare VM, microVM, container, sandbox and cgroups together | 14 | One table distinguishes guest kernels, shared kernels, resource limits and policy boundaries |
 | Explain why caching makes repeated trials practical | 12, 37–38 | Build cache example: 46 / 13 / 3 seconds; restored artifacts save about 33 seconds; warm-cache alternative in reuse calculation |
 | Define AFL++ and correct the actors and arrows | 17–18 | Controller mutates/retains inputs; target runs/resets state; initialized forkserver and persistent-child restart |
 | Generalize the cancer example, explain SI-12 and use numbered fan-out / fan-in | 22 | >120,000 guides, 19,050 genes, control/treatment, ranking to roughly 100 candidates; perturbation and drug terms defined |
-| Explain MCF-7 and why multiple arms work; clarify merge/reduce | 23 | Human breast-cancer cells; eight conditions return to a common comparison, six improve killing; independent assays are compared, not mixed |
+| Explain MCF-7 and why multiple arms work; clarify merge/reduce | 23 | Human breast-cancer cells; 13 genetic targets and eight drug combinations are checked separately; 10/13 and 6/8 outcomes retain their distinct units; independent assays are compared, not mixed |
 | Improve physics visuals and preserve the actual question/result | 24–25 | Catalog-to-selected-links workflow; 5 + 20 + 1 checks; 26/26 bidirectional links; numerical continuation explained |
-| Add candidate / possibility counts to the PD-L1 slide and show how experiments find signal | 8 | Ten compounds in E0771 (six shared-panel + four additional); 45 theoretical pairs at one dose each; numbered treatment fan-out, two readouts and selected-pair follow-up; actual experiment scope stated |
-| Make fan-out/fan-in the examples’ recurring message | 16, 22–25, 33, 54 | Shared setup, changed alternatives, gathered observations and checked outcomes; biological/numerical analogies stated precisely |
-| Simplify installer, timing, repair and test slides | 26–30 | Concrete blocked download, work/time/cost, workspace-versus-dispatch ownership, and direct regression-test obligation |
+| Add candidate / possibility counts to the PD-L1 slide and show how experiments find signal | 8 | Ten compounds in E0771 (six shared-panel + four additional); 45 theoretical pairs at one dose each; ten-drug fan-out, two readouts and selected-pair follow-up; actual experiment scope stated |
+| Make fan-out/fan-in the examples’ recurring message | 16, 22–25, 33, 55 | Shared setup, changed alternatives, gathered observations and checked outcomes; biological/numerical analogies stated precisely |
+| Simplify installer, timing, repair and test slides | 26–30 | High-level feedback, fan-out/fan-in, returned evidence and direct behavior-check flows; all original incident details retained in Q&A |
 | Remove SELFHOST-2 metrics/repair/review footer wording | 26–30 | Plain visible source descriptions; internal record IDs retained in source/Q&A for traceability |
-| Explain delivery loss and remove SELFHOST-3 footer/separation prose | 31 | Approved patch → three blocked delivery attempts → cleanup loss; export candidate and check records first |
+| Explain delivery loss and remove SELFHOST-3 footer/separation prose | 31 | Proposed save/confirm/cleanup order; observed patch loss stated simply, original refusal chronology retained in Q&A |
 | Add transitions / sub-agendas | 16, 33, 42 | What the examples show; runtime’s three jobs; how results add information before acceptance |
 | Find the fastest current ComputeSDK result and show progress since the paper | 35–36 | Paper creation trace plus dated 2 October 2026 Burst TTI leaders; Isorun 73 ms median, 78 ms p95; endpoints kept distinct |
 | Explain reuse equation terms and improve warm-cache title | 37–38 | Plain definitions of setup, save, restore, private changes and trial count; cold/warm paired bars with fixed overhead |
 | Simplify remote effects and controller authority | 39–40 | Restoring a sandbox does not undo a completed API call or bill; publishing key stays with the controller |
 | Explain epoch in plain English | 41 | Permission version advances from 1 to 2; a late version-1 request is rejected |
-| Focus aggregation on new information and signal-to-noise | 42, 45–49 | Distinct observations, shared error, calibrated weights, variance-equivalent count and noise/SNR interpretation |
-| Explain selection, composition, pooling, union, intersection and mutual information | 43, 45, 47, 53 | Applied result menu, observation Venn diagram, separate entropy identity and covariance pooling formula |
+| Focus aggregation on new information and signal-to-noise | 42, 45–50 | Distinct observations, shared error, calibrated weights, variance-equivalent count and noise/SNR interpretation |
+| Explain selection, composition, pooling, union, intersection and mutual information | 43, 45, 48, 54 | Applied result menu, observation Venn diagram, separate entropy identity and covariance pooling formula |
 | Make the pairwise-composition counterexample concrete | 44 | Each edit starts a 1 GB worker on a 2 GB server: every pair fits; all three exceed capacity |
-| Simplify duplicate evidence and explain independence | 46 | Observation 42 twice counts once; 42 and 43 can still share errors; IDs and lineage are retained |
-| Add a concise equation to the forged-precision example | 48 | Weighted mean with inverse-variance weights; 17.0004 versus 4.9566 remains a synthetic stress result |
-| Explain the meaning of 100 measurements becoming about nine | 49 | Equal-noise/common-correlation model; 9.17 variance-equivalent independent estimates; noise 0.33 versus 0.10, SNR gain about 3 versus 10 |
-| Explain checkpoint versus end-to-end success | 50 | 100 start, 50 reach the checkpoint, 40 finish: 80% from checkpoint and 40% from task start |
-| Explain receipts, hashes, checks and publishing in undergraduate English | 51–52 | Record who ran which check on which files; preserve the code itself; publish the same tested files |
-| Remove the PREREGISTRATION.md footer; explain merge use cases | 53 | Models, code, measurements and drug/orbit candidates each get a merge rule and check; planned status remains visible, protocol unchanged |
-| Improve conclusion and final message | 54 | Reuse → three separate trials → gather/combine/check → accepted continuation; shared evidence once and controller acceptance |
+| Simplify duplicate evidence and explain independence | 47 | Observation 42 twice counts once; 42 and 43 can still share errors; IDs and lineage are retained |
+| Add a concise equation to the forged-precision example | 49 | Weighted mean with inverse-variance weights; 17.0004 versus 4.9566 remains a synthetic stress result |
+| Explain the meaning of 100 measurements becoming about nine | 50 | Equal-noise/common-correlation model; 9.17 variance-equivalent independent estimates; noise 0.33 versus 0.10, SNR gain about 3 versus 10 |
+| Explain checkpoint versus end-to-end success | 51 | 100 start, 50 reach the checkpoint, 40 finish: 80% from checkpoint and 40% from task start |
+| Explain receipts, hashes, checks and publishing in undergraduate English | 52–53 | Record who ran which check on which files; preserve the code itself; publish the same tested files |
+| Remove the PREREGISTRATION.md footer; explain merge use cases | 54 | Models, code, measurements and drug/orbit candidates each get a merge rule and check; planned status remains visible, protocol unchanged |
+| Improve conclusion and final message | 55 | Reuse → three separate trials → gather/combine/check → accepted continuation; shared evidence once and controller acceptance |
 
 The protocol remains byte-for-byte unchanged. Hidden Q&A preserves operation boundaries, source identities, biological scope, selection versus validation, and the original rejection thresholds. No supplied comment is treated as evidence of an unperformed experiment.

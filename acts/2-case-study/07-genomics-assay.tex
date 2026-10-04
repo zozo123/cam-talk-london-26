@@ -1,18 +1,18 @@
-\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}Six of eight drug combinations improved killing of breast cancer cells.}
+\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}Focused tests found promising gene targets and drug combinations.}
 \lead{\textbf{MCF-7:} human breast cancer cells grown in the laboratory.}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
-\node[state,text width=2.6cm,minimum height=1cm](a)at(0,0){Same cell model\\and viability assay};
-\foreach \yy/\nn/\lab in {1.1/a/Combination 1,0/b/Combination 2,-1.1/c/\ldots\ Combination 8}{
-\node[candidate,text width=2.8cm,minimum height=.7cm](b\nn)at(4.05,\yy){\lab};\draw[flow](a)--(b\nn);}
-\node[evidence,text width=3.5cm,minimum height=1.2cm](r)at(8.5,0){{\fontsize{24}{28}\selectfont\bfseries 6 of 8}\\Improved killing};
-\foreach \nn in {a,b,c}{\draw[flow](b\nn)--(r);}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[state,text width=2.4cm,minimum height=1.2cm](s)at(0,0){Same cancer\\cell model};
+\node[candidate,text width=3.15cm,minimum height=1.1cm](a)at(4.2,.85){13 genetic targets\\tested individually};
+\node[candidate,text width=3.15cm,minimum height=1.1cm](b)at(4.2,-.85){8 drug combinations\\tested separately};
+\node[evidence,text width=3.55cm,minimum height=1.1cm](c)at(9,.85){\textbf{10 of 13}\\Increased sensitivity to SI-12};
+\node[evidence,text width=3.55cm,minimum height=1.1cm](d)at(9,-.85){\textbf{6 of 8}\\Improved cell killing};
+\draw[flow](s.east)|-(a.west);\draw[flow](s.east)|-(b.west);\draw[flow](a)--(c);\draw[flow](b)--(d);
 \end{tikzpicture}
 \end{center}
-\tagline{\textbf{Fan-out:} separate combinations. \textbf{Fan-in:} compare measured effects and retain promising candidates.}
-\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al. (2021)}, Figs.~2--4. $\geq4$ technical repeats per point; $\geq2$ independent experiments per plot.}
+\claim{Compare separate trials with the same readout.}
+\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al. (2021)}, Fig.~3. $\geq4$ technical repeats per point; $\geq2$ independent experiments per plot. Cell assays.}
 
-\qadetail{The six-of-eight result concerns tested SI-12 drug combinations, with efficacy level at least 3, in MCF-7 cells. Downstream siRNA perturbation assays and drug-combination assays are distinct from the genome-scale ranking stage. The viability points have at least four technical replicates, and plots summarize at least two independent experiments; these are not the three biological replicate arms of the pooled screen. The result is not a clinical effect or proof that every nominated hit is on target. Full source, author list, follow-up expression criticism and proposed computational continuation scope are retained in the preceding screen slide's Q&A detail. The generic pattern resembles map then gather/rank, but the published experiment is a pooled screen followed by laboratory validation, not a MapReduce execution benchmark. Eight combinations are compared; their effects are not merged into a single universal treatment.}
-% Transition: The three-body case similarly separates an apparent pattern from a checked connection.
-\note{[0:45] MCF-seven is a human breast cancer cell line grown in the laboratory. Use the same cell model and viability readout, but test different combinations separately. Six of eight tested combinations improved killing. The common assay makes their effects comparable. Fan-out explores alternatives; fan-in brings their measurements together so we can select promising combinations. We do not mix all eight treatments into one. Each point had at least four technical repeats, and each plot at least two independent experiments. These are laboratory results rather than clinical outcomes.}
+\qadetail{The additional 10-of-13 endpoint is reported in the 2021 paper for siRNA knockdown targets increasing vulnerability to SI-12; it is distinct from the six-of-eight pharmacological combination efficacy result. Eight selected targets with drug inhibitors plus five additional genes give 13 genetic follow-up targets. These genetic perturbations do not become 13 drug combinations. Follow-up includes other cancer models, but no patient benefit or autonomous therapy-selection claim is made. The six-of-eight result concerns tested SI-12 drug combinations, with efficacy level at least 3, in MCF-7 cells. Downstream siRNA perturbation assays and drug-combination assays are distinct from the genome-scale ranking stage. The viability points have at least four technical replicates, and plots summarize at least two independent experiments; these are not the three biological replicate arms of the pooled screen. The result is not a clinical effect or proof that every nominated hit is on target. Full source, author list, follow-up expression criticism and proposed computational continuation scope are retained in the preceding screen slide's Q&A detail. The generic pattern resembles map then gather/rank, but the published experiment is a pooled screen followed by laboratory validation, not a MapReduce execution benchmark. Eight combinations are compared; their effects are not merged into a single universal treatment.}
+\note{[0:45] The shortlist led to two kinds of focused tests in MCF-seven, a human breast cancer cell line. First, thirteen genetic targets were tested individually; ten increased sensitivity to SI-twelve. Second, eight drug combinations were tested separately; six improved killing. Those are different assays and different denominators. Using the same cell model and readout makes conditions comparable. We collect their effects to choose promising candidates, rather than mixing all treatments into one. The result is a laboratory finding that still needs further biological validation.}
 \end{frame}

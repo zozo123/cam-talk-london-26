@@ -1,0 +1,15 @@
+\begin{frame}[t]{The experiment determines the rule for fan-in.\ev{\tagP}}
+\vspace{0pt}
+{\fontsize{11.5}{14}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{4.0cm}L{4.15cm}Y@{}}
+\toprule\textbf{How we fan out} & \textbf{How we fan in} & \textbf{What to check}\\\midrule
+Split one dataset & Join distinct parts ($A\cup B$) & Coverage and duplicates\\[4pt]
+Try different ideas & Choose a candidate & A common evaluator\\[4pt]
+Edit different components & Merge compatible changes & The combined version\\[4pt]
+Repeat a measurement & Pool estimates & Shared noise and uncertainty\\[4pt]
+Seek common findings & Compare overlap ($A\cap B$) & Agreement and disagreements\\\bottomrule
+\end{tabularx}\par}
+\sources{Agreement can reflect a shared error. Set operations describe items; composition and pooling need additional checks.}
+\qadetail{This is a non-exhaustive menu of common fan-out/fan-in strategies, not a measured implementation. Partitioning disjoint data supports map-and-gather; union alone does not verify completeness or processing correctness. Alternative stochastic proposals support best-candidate selection under a fixed evaluator; coverage is not selected success. Compatible partial changes require semantic integration testing, not only a clean textual merge. Repeated unbiased same-target estimates require covariance/uncertainty accounting; common input IDs do not calibrate that covariance. Intersection shows common findings but correlated checks can agree on the same wrong claim, and legitimate novel findings may appear in only one branch. Disagreement calls for an adjudicating test rather than automatic deletion. Additional strategies retained for Q&A: identical replicas with first-valid selection can reduce tail latency when stragglers have different causes; majority voting needs calibrated errors and can fail under common mistakes; matched trials sharing randomness can improve precision of a difference, while providing fewer independent witnesses for a common mean; hierarchical or beam search can prune failed branches and launch another round from a useful accepted state. Adaptivity makes selection and repeated evaluation part of the measurement protocol. Budgets, timeouts, stopping rules, incomplete returns, current authority and durable output belong to the controller. Choose a rule from output meaning rather than forcing every result through set union. No claim covers every possible parallel algorithm.}
+\note{[0:45] The rule for fan-in depends on how we created the trials. Split one dataset and we gather its parts, checking coverage and duplicates. Try different ideas and we choose a candidate under a common evaluator. Edit different components and we test their combined version. Repeat a measurement and we account for shared noise before pooling. Seek common findings and we compare overlap, then investigate disagreements. Agreement can still reflect a shared error. After checking the retained result, feedback can launch another round of trials.}
+\end{frame}

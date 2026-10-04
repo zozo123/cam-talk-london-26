@@ -1,18 +1,20 @@
-\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}Installing uv led to a 44-minute repair loop costing \$10.33.}
+\begin{frame}[t]{\ev{\tagP}\surf{SOFTWARE}Forking tests different ideas from the same prepared state.}
+\lead{\textbf{Fan-out:} create private trials from one shared start.}
 \begin{center}
-{\fontsize{12.5}{16}\selectfont
-\begin{tabularx}{\linewidth}{@{}Y r r@{}}
-\toprule\textbf{Work} & \textbf{Time} & \textbf{Model calls}\\\midrule
-Specify and plan the change & 3:41 & \$0.96\\[5pt]
-Edit, test and repair & 20:01 & \$4.50\\[5pt]
-Review, repair and recheck & 18:55 & \$4.87\\\bottomrule
-\end{tabularx}}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[state,text width=3.3cm,minimum height=1.2cm](s)at(0,0){Prepared state\\Code + dependencies};
+\node[candidate,text width=3.8cm,minimum height=.95cm](a)at(6.5,1.0){Trial A: edit + test};
+\node[candidate,text width=3.8cm,minimum height=.95cm](b)at(6.5,0){Trial B: edit + test};
+\node[candidate,text width=3.8cm,minimum height=.95cm](c)at(6.5,-1.0){Trial C: edit + test};
+\draw[draw=Ink,line width=.9pt](s.east)--(3.15,0);
+\draw[flow](3.15,0)|-(a.west);\draw[flow](3.15,0)--(b.west);\draw[flow](3.15,0)|-(c.west);
+\node[text=Teal,font=\fontsize{11}{14}\selectfont]at(3.15,1.55){Fork};
+\end{tikzpicture}
 \end{center}
-\lead{\textbf{43:44 elapsed.} Recorded stages: 42:38. Model calls: \$10.33.}
-\tagline{A failed concurrency test redirected the work from installer policy into job dispatch.}
-\sources{Recorded session times include tool activity. Model costs use reported list prices.}
+\claim{Each trial explores a different next step in its own copy.}
+\sources{Proposed parallel design. The recorded factory repair used a serial loop.}
 
-\qadetail{Recorded stage sum: 2,557.517 s, rounded to 42:38. Timestamp wall time: 2,624 s, or 43:44, from 11:39:56 to 12:23:40. About 66 s lies outside those stage totals. The first row includes intent, specification, and plan. Timings are agent-session durations including tool activity, not pure inference time. Two repairs plus two reviews sum to about 25.2 min and \$7.75. Setup is 20.3 s: a 100-fold speedup saves about 20.1 s, roughly 0.8\% of recorded stages. Initial setup is not the whole reusable prefix and does not establish or rule out another reached-state workload's benefit. Sources: metrics.json and agent/stages.jsonl. Specification and plan includes intent. Build and test includes three planned edit nodes, the failing suite and first repair. The review stage includes review, the second repair, harness tests and re-review. The row amounts are rounded and total approximately the reported $10.33; setup 20.3 s is an operation timing, not a full-prefix timing.}
-% Transition: Regroup cross-stage sessions into repairs and reviews to reveal their shared cost.
-\note{[0:40] Installing uv became a forty-three-minute forty-four-second repair loop. Specification and planning took three minutes forty-one. Editing, testing and the first repair took twenty minutes. Review, the second repair and rechecking took almost nineteen. Model calls cost ten dollars thirty-three at the reported list prices. Session times include tools; the recorded stages total forty-two minutes thirty-eight, leaving about a minute outside them. The failed concurrency test, rather than installer complexity alone, explains the detour.}
+\qadetail{The A/B/C branches are illustrative alternatives in a proposed design, not recorded simultaneous agents or observed patches. The preserved state is code and dependencies here; worktrees or warm environments could be sufficient. Useful live process state is workload dependent. Parallel speedup requires a controlled comparison including fork, merge, contention and checking overhead. All original time/cost records remain below. Recorded stage sum: 2,557.517 s, rounded to 42:38. Timestamp wall time: 2,624 s, or 43:44, from 11:39:56 to 12:23:40. About 66 s lies outside those stage totals. The first row includes intent, specification, and plan. Timings are agent-session durations including tool activity, not pure inference time. Two repairs plus two reviews sum to about 25.2 min and \$7.75. Setup is 20.3 s: a 100-fold speedup saves about 20.1 s, roughly 0.8\% of recorded stages. Initial setup is not the whole reusable prefix and does not establish or rule out another reached-state workload's benefit. Sources: metrics.json and agent/stages.jsonl. Specification and plan includes intent. Build and test includes three planned edit nodes, the failing suite and first repair. The review stage includes review, the second repair, harness tests and re-review. The row amounts are rounded and total approximately the reported $10.33; setup 20.3 s is an operation timing, not a full-prefix timing.}
+% Transition: After fan-out, define how changes and their checks return through fan-in.
+\note{[0:40] Fan-out means trying several next steps from the same prepared state. Each trial inherits the code and dependencies, then edits and tests its own private copy. One failed idea can be discarded while another continues. This avoids repeating the common preparation and prevents experiments from overwriting each other. The diagram is our proposed parallel design. The factory record supplies the serial baseline, so it does not establish a measured speedup from forking.}
 \end{frame}

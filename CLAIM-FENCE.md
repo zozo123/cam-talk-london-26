@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: **54 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
+This file applies to the canonical `talk.tex`: **56 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
 
 Evidence labels identify the status of the particular claim:
 
@@ -37,6 +37,15 @@ The papers support the named scientific methods and endpoints. The personal moti
 ## Reported artifact-cache example
 
 Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/tokio/issues/8200), 8 June 2026, reports approximate compile endpoints of 46 seconds fresh, 13 seconds with a restored Incredibuild artifact cache, and 3 seconds with a hot cache. No controlled raw benchmark protocol or maintainer adoption is claimed. Separate full-test endpoints are about 75 seconds fresh and43 restored; after touching source, Cargo is about 38 seconds versus 13 restored. These are static artifact-cache endpoints, not process-memory capture or fork measurements.
+
+## Software paradigm slides 26–31
+
+- The measured factory run establishes a serial proposal/test/review loop and the recorded coverage and output-loss incidents.
+- The fan-out, fan-in and returned-evidence diagrams describe proposed general flows. A/B/C trials are illustrative, not observed parallel branches.
+- The contribution claim is the integrated execution/evidence/acceptance contract. Forking, testing, review and provenance are established techniques; no claim of invention, comprehensive priority or measured parallel speedup is made.
+- The simple retry check abbreviates the exact same-work-order CellBusy condition. It is a required test, not a demonstrated exactly-once guarantee.
+- Save/confirm/cleanup is the proposed recovery ordering, not an observed successful export in the lost-patch run.
+- All original installer domains, costs, stage durations, review percentages, race details, suite counts and refusal chronology remain in slide Q&A.
 
 ## Measured: runs SELFHOST-2 and SELFHOST-3, 27 Sep 2026
 
@@ -120,7 +129,7 @@ Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/t
 - Stroebl, Kapoor & Narayanan, arXiv:2411.17501 (current title *The Limits of Inference Scaling Through Resampling*; v1 was *Inference Scaling fLaws*): imperfect verifiers cap repeated-sampling gains; when false positives have negative utility, the best number of attempts is often under 10. Say the condition.
 - The hedged-request example's independence condition is Dean & Barroso's own: the techniques work only when the cause of variability does not hit several replicas at once. It is about latency, not failure; the close generalises it. Correlated wrong answers: Kim et al., ICML 2025.
 - The relevant frame lists published runtime operations with their endpoints. It is not a ranking. The run figures  come from a run record (SELFHOST-2 metrics.json), not a paper.
-- The relevant frame stage times are of the 2,557.5 s cycle (metrics.json): intent, specification and plan 3:41, build and test 20:01, review 18:55. Setup is 20.3 s (operations.jsonl).
+- The retained Q&A stage times are of the 2,557.5 s cycle (metrics.json): intent, specification and plan 3:41, build and test 20:01, review 18:55. Setup is 20.3 s (operations.jsonl).
 - Blackburn et al., arXiv:2206.02871 (Eliaz 3rd of 9): most bitcoin from 3 Jan 2009 to 9 Feb 2011 was mined by 64 agents (address linking >99% sensitivity and specificity). Used as a motivating example of dependence uncovered from outside, not as evidence about forks. Say "my co-authors and I", not "I".
 - Saurty-Seerunghen et al., iScience 2026 (Eliaz 3rd of 7): malignant cells cluster by patient tumour, non-malignant cells by cell type. The patient was known metadata; this is dependence structure, not a recovered hidden label.
 - Eliaz et al. PRE 2020 is about linker valency (multilinkers), not branching. Liman et al. PNAS 2020 and Li et al. JPCB 2021 are about Arp2/3 branching and avalanches. None says branching sets global connectivity or that whole networks collapse together. The PhD also covered Hi-C loops and protein-folding hydrodynamics.
@@ -230,7 +239,7 @@ The variance-equivalent sample size formula assumes equal variances and common p
 
 ## Final storyline revision
 
-The final spoken deck has 54 main slides and 39:05 planned narration. The original 57-slide review is in DECK-REVIEW.md. The revision removes repeated architecture and moves fidelity probes, timing surveys and secondary statistics into source/Q&A; it does not turn them into results. The creation trace shows one default-environment batch: 256/256, requested concurrency eight, p50 3.44 s and p95 9.00 s, excluding teardown. Tensorlake is named in the cue; the slide is not a provider ranking.
+The final spoken deck has 56 main slides and 40:40 planned narration. The original 57-slide review is in DECK-REVIEW.md. The revision removes repeated architecture and moves fidelity probes, timing surveys and secondary statistics into source/Q&A; it does not turn them into results. The creation trace shows one default-environment batch: 256/256, requested concurrency eight, p50 3.44 s and p95 9.00 s, excluding teardown. Tensorlake is named in the cue; the slide is not a provider ranking.
 
 Twistlock's January 2017 vendor account describes per-image process/filesystem/network/syscall learning and enforcement, usually plateauing around one hour cumulative runtime. Prior employment does not attribute every feature to the speaker. The 2019 PD-L1 study supplies in-vitro expression/viability endpoints: different drugs induced approximately 10–100-fold PD-L1 mRNA in E0771 cells; abemaciclib + SI-2 moderated induction while preserving cytotoxicity in a 72-hour assay. The candidate count is six compounds across four cell models plus four additional compounds in E0771: ten distinct compounds in E0771, not ten across every model. The 45 unordered two-drug pairs (10 × 9 / 2) illustrate the search space at one chosen dose per compound. The source follows up abemaciclib + SI-2; it does not report a 45-pair screen. Fan-out/fan-in describes separate conditions and comparison, not verified simultaneous execution or computational cloning of cells. It does not establish T-cell response, patient benefit or autonomous immunotherapy.
 
@@ -249,4 +258,16 @@ The cancer fan-out/fan-in diagram shows perturbation and treatment conditions re
 
 ### Mobileye fleet fan-in (slide 9 update)
 
-The 21 July 2026 vendor release supplies >8 million REM contributing vehicles and 34 billion miles in 2025. The displayed ~1,080 road-miles/second is a 2025 annual average, not an upload interval or signal count. The EyeQ installed base (>230 million through 2025) differs from REM harvesters. A 300 million-car harvesting claim and a separate UHD designation were not verified. Multiple drives are aligned to the same road before aggregation; computational fork/merge is an analogy, not checkpoint cloning of cars. Personal junction-perception work is not presented as authorship of the fleet mapping system.
+The 21 July 2026 vendor release supplies >8 million REM contributing vehicles and 34 billion miles in 2025. The displayed ~1,080 road-miles/second is a 2025 annual average, not an upload interval or signal count. The EyeQ installed base (>230 million through 2025) differs from REM harvesters. The deck uses the speaker’s firsthand 300-million REM fleet account with visible attribution; the public release does not independently verify that figure. A separate UHD designation was not verified. Multiple drives are aligned to the same road before aggregation; computational fork/merge is an analogy, not checkpoint cloning of cars. Personal junction-perception work is not presented as authorship of the fleet mapping system.
+
+## Final audience-language and numeric updates, 4 October 2026
+
+- The deck has 56 frames, including a strategy menu and numeric closing slide.
+- Mobileye 300M REM vehicles is the speaker's explicitly supplied firsthand account. It is visibly attributed. It is not supported by the cited public eight-million release; the count discrepancy remains unreconciled.
+- POSSUMM citation includes Eliaz without implying first authorship or sole implementation.
+- OffRisk's 118 matches contain five high-coding labels including the intended target, so four unintended higher-priority annotations is a derived count. It is not an experimental safety guarantee.
+- The 2021 screen reduction is approximately 19,050 to 100 (roughly 190-fold), followed by eight drug-target choices and five added genes. Genetic validation is 10/13; drug-combination outcome is 6/8. The initial genome-scale screen is wet-lab, with subsequent computational ranking and focused validation.
+- The 2019 SI-2 drug/PD-L1 study, 2021 SI-12 CRISPR study, CRISPR-IL platform and OffRisk annotation tool are distinct projects.
+- Restored versus hot cache describes saved artifacts copied into a fresh runner versus already available artifacts. Exact transfer, lookup, checking and memory-cache contributions are unseparated in the public demo.
+- CyberGym 431 projects, 1,748 targets, 56 crashes and 22 distinct vulnerabilities are distinct units; the funnel does not establish a disjoint 22/56 success probability or fork speedup.
+- Closing values are separate reported examples and an illustrative correlated-mean calculation, not a multiplied end-to-end gain.

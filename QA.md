@@ -1,10 +1,14 @@
 # Q&A: Forkable Sandboxes
 
-For the **54-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
+For the **56-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
 
 ## What changes in self-driving computation?
 
 The workflow chooses its next execution from observed results. A user supplies a goal and constraints; the controller proposes executable alternatives, runs them, checks outcomes and chooses what to try or accept next. Each alternative still runs ordinary instructions on conventional Von Neumann hardware. The proposal concerns orchestration, search and acceptance evidence; it does not introduce a new ISA or replace the processor.
+
+## What is the contribution in the software example?
+
+Slides 26–31 explain one proposed execution/evidence/acceptance contract: reuse the useful starting state, try private alternatives, return changes with the checks that ran and their shared-input history, then validate and preserve the exact chosen output. Forking, fan-out/fan-in, testing, provenance and review are established techniques. The proposed contribution is their connected interface and its decision requirements. This is a research design rather than a demonstrated speedup or a priority claim over all prior systems. The observed factory run was serial. Costs, installer hosts, ownership diagnosis and delivery chronology remain in Q&A; the visible diagrams explain the general flows.
 
 ## What does the cinema analogy mean technically?
 
@@ -166,9 +170,9 @@ No. The historical benchmark has 1,507 patched vulnerabilities in 188 projects; 
 
 No. A TLA+ design specifies artifact/evidence/approval alignment and current authority, but no TLC run or implementation trace check is recorded. The gate's digest binding is built; epoch fencing remains proposed.
 
-## Final 54 slide revision checks
+## Final 56 slide revision checks
 
-Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 54 canonical frames, no overlays/appendix, 39:05 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The applied merge table says collection has not started; protocol confidence-bound rejection rules remain in Q&A. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.
+Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 56 canonical frames, no overlays/appendix, 40:40 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The applied merge table says collection has not started; protocol confidence-bound rejection rules remain in Q&A. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.
 
 
 ## What changed in the current startup landscape?
@@ -185,4 +189,20 @@ For unbiased estimates of one scalar target with known positive-definite error c
 
 Slide 8 count audit: six drugs across four breast-cancer cell models plus four extra drugs in E0771 gives ten candidates in that model. Its 45 unordered pairs are theoretical possibilities at one chosen dose per drug, not a completed combination screen. Verify the ten-arm grouping, two readouts, selected abemaciclib + SI-2 follow-up and 72-hour scope in rendered output. Parallel computational forks remain an analogy.
 
-Slide 9 Roadbook audit: preserve the credited Manhattan photograph and personal junction-perception role. Verify >8M REM contributors, same-road alignment, aggregation and return of the updated map. The 34 billion 2025 road-miles / 365-day year yields ~1,080 road-miles/second as an annual average, not signals/second or an every-second upload guarantee. Use HD; do not attribute REM authorship to the speaker or label all EyeQ-equipped cars as harvesters.
+Slide 9 Roadbook audit: preserve the credited Manhattan photograph and personal junction-perception role. Verify the visibly attributed speaker-reported 300M REM count, same-road alignment, aggregation and return of the updated map. The 34 billion 2025 road-miles / 365-day year yields ~1,080 road-miles/second as an annual average, not signals/second or an every-second upload guarantee. Use HD; do not attribute REM authorship to the speaker or label all EyeQ-equipped cars as harvesters.
+
+## How does the biology search connect from computer to laboratory?
+
+CRISPR-IL uses researcher-led experiments to update editing predictions. OffRisk is a separate computational annotation example before focused lab follow-up: 118 predicted matches include 117 possible off-targets; four unintended sites receive high-coding priority after excluding the intended target from five such labels. That is not measured safety. The 2019 Scientific Reports study compared ten drugs in E0771, giving 45 theoretical pairs at fixed doses, and reported a selected SI-2 combination. The 2021 Communications Biology study first ran a pooled cell screen over 19,050 genes, then ranked its sequencing results to approximately 100 candidate genes. Eight drug-target candidates plus five other genes led to 13 genetic checks (10 increased sensitivity) and eight drug combinations (six improved killing). The approximately 190-fold narrowing is calculated from 19,050/~100. These are connected search principles across separate studies, not one merged experiment or a purely computational whole-genome screen.
+
+## What do the CyberGym counts mean?
+
+431 projects supplied 1,748 runnable fuzzing targets. OpenHands/GPT-5 generated and executed inputs against current code; sanitizers reported 56 crashes. Reproduction, deduplication and analysis established 22 distinct previously unknown vulnerabilities. A project can supply several executables, and several crashes can identify one bug. No input-count or fork-count denominator is supplied by those values. The reduction is not a clean 22/56 acceptance rate.
+
+## Which fan-in strategies are covered?
+
+The visible strategy menu covers partition-and-gather, alternative selection, compatible code composition, measurement pooling and common-finding comparison. Union and difference concern item identity; intersection concerns overlap. Agreement alone does not verify truth, and clean textual merging does not verify behavior. Q&A also retains first-valid replicas for tail latency, voting with calibrated errors, paired comparisons with common randomness and adaptive branching/pruning. The output meaning determines the check.
+
+## What is the source of the 300 million REM fleet count?
+
+On 4 October 2026 the speaker explicitly supplied 300 million REM vehicles from his firsthand Mobileye experience. The visible slide attributes that count to the speaker. Public releases previously examined report over eight million contributors and do not independently verify 300 million. These populations/dates have not been reconciled. The separately dated 34-billion-road-mile 2025 figure remains publicly sourced; do not infer a per-vehicle rate from the speaker count.

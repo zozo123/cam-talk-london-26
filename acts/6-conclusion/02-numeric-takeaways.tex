@@ -1,0 +1,14 @@
+\begin{frame}[t]{Cheaper trials help when their results add useful evidence.\ev{\tagO\,\tagA}}
+\vspace{0pt}
+{\fontsize{12}{15}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{2.2cm}L{4.0cm}Y@{}}
+\toprule\textbf{Operation} & \textbf{Numeric example} & \textbf{What it teaches}\\\midrule
+Reuse & \textbf{46 s $\to$ 13 s} & About 33 s saved per reported Tokio compile\\[8pt]
+Explore & \textbf{15.9\% $\to$ 56\%} & 250 samples gave 3.5$\times$ candidate coverage\\[8pt]
+Aggregate & \textbf{100 $\to$ 9.17} & At correlation 0.1, count about nine independent equivalents\\\bottomrule
+\end{tabularx}\par}
+\claim{The goal is more useful, checked information for each unit of work.}
+\sources{Reuse: \href{https://github.com/tokio-rs/tokio/issues/8200}{Tokio report}. Explore: \href{https://arxiv.org/abs/2407.21787}{Brown et al.}, SWE-bench Lite coverage. Aggregate: equal-noise, common-correlation illustration.}
+\qadetail{These three examples use different workloads and endpoints; they cannot be multiplied into an end-to-end gain or treated as a measured benefit of the proposed integrated system. Tokio 46 and 13 seconds are approximate author-reported compile timings from an external artifact-cache demo; 46-13=33 seconds and (46-13)/46 approximately 71.7 percent is a calculation, not an extra benchmark. SWE-bench Lite 15.9 to 56 percent is at-least-one-correct-patch candidate coverage with one versus 250 samples, not selected/accepted success. The relative coverage factor is 56/15.9 approximately 3.52; the percentage-point increase is 40.1. The aggregation row is an illustrative variance-equivalent count for a simple mean with equal marginal variance and common pairwise correlation rho=0.1: N_eff=100/[1+99(0.1)]=9.1743. It is not a measured correlation of agents or a code-search success formula. This is a numeric recap of previously explained evidence, not new scientific results or a combined performance forecast.}
+\note{[0:50] The closing numbers capture three different decisions. Reusing build artifacts took the reported Tokio compile from forty-six to thirteen seconds, about thirty-three seconds saved. Exploring 250 software candidates raised at-least-one-correct-patch coverage from fifteen point nine to fifty-six percent, about three and a half times the coverage. But in the simple correlated-measurement model, a hundred estimates contain the mean precision of only about nine independent ones. These are separate examples. The goal is to spend less repeated effort, explore useful alternatives, and accept results using evidence that adds information.}
+\end{frame}

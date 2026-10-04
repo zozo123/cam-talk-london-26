@@ -2,14 +2,15 @@
 \vspace{0pt}
 \begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
 
-\foreach \blabel/\seconds/\y/\col in {Fresh compile/46/0/Gold,Restored cache/13/-1.1/Teal,Hot cache/3/-2.2/Ink}{
+\foreach \blabel/\seconds/\y/\col in {Fresh compile/46/0/Gold,Restored build files/13/-1.1/Teal,Already warm/3/-2.2/Ink}{
 \node[anchor=east,text width=3cm] at (0,\y+.25) {\blabel};
 \fill[\col!65] (.2,\y) rectangle ({.2+\seconds*.17},\y+.5);
 \node[anchor=west,font=\fontsize{16}{19}\selectfont\bfseries] at ({.45+\seconds*.17},\y+.25) {$\sim$\seconds\ s};}
 
 \end{tikzpicture}\end{center}
+\tagline{\textbf{Restored cache:} copy saved build files into a fresh runner.\\\textbf{Hot cache:} reuse build files already available from a previous build.}
 \claim{Tokio example: restoring the cache saved about 33 seconds per compile.}
 \sources{Eliaz, \href{https://github.com/tokio-rs/tokio/issues/8200}{Tokio issue \#8200}, June 2026: external Incredibuild demo. Artifact caching.}
-\qadetail{Author-reported external Incredibuild GitHub Actions demo, posted by zozo123 in Tokio issue8200 on June8,2026. Approximate timings; no controlled raw benchmark protocol is posted. Full test path approximately75s fresh and43s restored, while Cargo after touching source was approximately38s versus13s restored Incredibuild. These are cache endpoints, not memory-checkpoint or fork timings; no maintainer adoption claim. }
-\note{[0:45] In a reported Tokio build demo, a fresh compile took roughly forty-six seconds. Restoring the artifact cache brought it to thirteen seconds; a hot cache took roughly three. This is static artifact reuse, with approximate timings from my external demonstration. Caching makes repeated experiments practical by avoiding the same expensive build work. In this example, forty-six minus thirteen is thirty-three seconds saved per compile. A live-state fork must earn its place against an equivalent warm baseline for its workload, not only against the cold start.}
+\qadetail{Restored cache means Incredibuild compiler artifacts persisted across fresh GitHub Actions runners. Hot cache denotes the already available cache state in the reported demo; the issue does not publish enough configuration to isolate disk artifacts, memory/page cache, cache lookup, transfer or incremental checking costs. Do not attribute the 13-to-3-second difference entirely to download time or OS memory. Both cache modes reuse compiler work rather than live VM/process state. Author-reported external Incredibuild GitHub Actions demo, posted by zozo123 in Tokio issue8200 on June8,2026. Approximate timings; no controlled raw benchmark protocol is posted. Full test path approximately75s fresh and43s restored, while Cargo after touching source was approximately38s versus13s restored Incredibuild. These are cache endpoints, not memory-checkpoint or fork timings; no maintainer adoption claim. }
+\note{[0:45] A fresh Tokio compile took about forty-six seconds in my external demo. Restored cache means copying saved compiler artifacts into a fresh runner, so the next build can reuse previous work. That took about thirteen seconds. Hot cache means the build files are already available from the previous build; that took about three seconds. The public report does not separate every source of overhead. Caching avoids repeated preparation and can make many experiments practical. Restoring the cache saved about thirty-three seconds in this example.}
 \end{frame}

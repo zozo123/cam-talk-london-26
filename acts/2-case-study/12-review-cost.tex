@@ -1,18 +1,20 @@
-\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}Repairs and reviews consumed most of the recorded time and model cost.}
+\begin{frame}[t]{\ev{\tagP}\surf{SOFTWARE}Fan-in checks the version we choose or combine.}
+\lead{\textbf{Fan-in:} collect changes together with their test results.}
 \begin{center}
-\begin{tikzpicture}[x=.85cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
-\node[anchor=east]at(-.3,1.05){Recorded time};
-\node[anchor=east]at(-.3,-.1){Model cost};
-\fill[Pale](0,.75)rectangle(8,1.35);\fill[Teal](0,.75)rectangle(4.72,1.35);
-\fill[Pale](0,-.4)rectangle(8,.2);\fill[Gold!80](0,-.4)rectangle(6,.2);
-\node[anchor=west]at(8.3,1.05){\textbf{59\%} / 25.2 min};
-\node[anchor=west]at(8.3,-.1){\textbf{75\%} / \$7.75};
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[candidate,text width=2.65cm,minimum height=.95cm](a)at(0,1.3){Change A + checks};
+\node[candidate,text width=2.65cm,minimum height=.95cm](b)at(0,0){Change B + checks};
+\node[candidate,text width=2.65cm,minimum height=.95cm](c)at(0,-1.3){Change C + checks};
+\node[state,text width=3.0cm,minimum height=1.8cm](r)at(5,0){Select one\\or combine\\compatible changes};
+\node[evidence,text width=3.0cm,minimum height=1.8cm](v)at(10,0){Test the\\final version};
+\draw[draw=Ink,line width=.9pt](a.east)-|(2.55,0);\draw[draw=Ink,line width=.9pt](c.east)-|(2.55,0);
+\draw[flow](b.east)--(r.west);\draw[flow](r)--(v);
 \end{tikzpicture}
 \end{center}
-\lead{Two repairs + two reviews. Sandbox setup took \textbf{20.3 seconds}.}
-\tagline{The next improvement must reduce repeated repair work or improve its checks.}
+\claim{A merged change can create interactions that the separate trials never tested.}
+\sources{Proposed code-result flow. Selection and composition require checks of the exact retained version.}
 
-\qadetail{Two repair sessions and two review sessions totaled about 25.2 min and $7.75. The 59\% denominator is the 2,557.517 s recorded stage sum; the 75\% denominator is $10.33 list-price model cost. This regrouping overlaps the stage table and is not additional work to add to it. Initial setup took 20.3 s, or 0.7937\% of stage time; a calculated 100-fold setup speedup saves 20.097 s, approximately 0.8\%. Setup is not the whole reusable prefix. The case gives no controlled fork-performance estimate; worktrees and warm cached environments remain possible execution choices.}
-% Transition: The repair cost leads directly to the dispatch race that triggered the detour.
-\note{[0:40] Regroup the same run by what the agent was doing. Two repairs and two reviews consumed twenty-five point two minutes and seven dollars seventy-five: fifty-nine percent of stage time and seventy-five percent of model cost. Those percentages overlap the previous stage table; they are not extra work. Sandbox setup took twenty point three seconds. The larger opportunity in this run lies in the repair trajectory and the checks it required. To see that clearly, look at the concurrency failure that started the detour.}
+\qadetail{The visible fan-in is proposed code selection/composition. It is not numerical pooling or a claim that a code merge was executed in the factory run. Selecting one artifact can reuse valid evidence bound to its exact bytes; composition creates a new artifact and needs its own check. Compatibility involves behavior as well as textual mergeability. The original repair/review cost comparison is retained below. Two repair sessions and two review sessions totaled about 25.2 min and $7.75. The 59\% denominator is the 2,557.517 s recorded stage sum; the 75\% denominator is $10.33 list-price model cost. This regrouping overlaps the stage table and is not additional work to add to it. Initial setup took 20.3 s, or 0.7937\% of stage time; a calculated 100-fold setup speedup saves 20.097 s, approximately 0.8\%. Setup is not the whole reusable prefix. The case gives no controlled fork-performance estimate; worktrees and warm cached environments remain possible execution choices.}
+% Transition: The fan-in decision motivates the integrated returned-result contract.
+\note{[0:40] Fan-in brings the trials back together. Each returns a proposed change and the checks it actually ran. If the changes are alternatives, choose one. If they solve different parts of the problem, combine them when they are compatible. Then check the final version. Passing tests on separate patches does not establish that their merge works. This is why the return flow includes both the changes and their evidence, followed by a check of the version we keep.}
 \end{frame}

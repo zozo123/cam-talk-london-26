@@ -1,16 +1,18 @@
-\begin{frame}[t]{\ev{\tagM\,\tagP}\surf{SOFTWARE}The suite had zero failures, but the new recovery path still needed a test.}
-\lead{Reported suite: \textbf{1,972 cases, including skips; zero failures}.}
+\begin{frame}[t]{\ev{\tagM\,\tagP}\surf{SOFTWARE}A useful test checks the behavior that the change promises.}
+\lead{Example: retrying a job should start it \textbf{exactly once}.}
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
-\node[proposed,text width=3.05cm,minimum height=1.2cm](a)at(0,0){Make the workspace\\busy with the same job};
-\node[proposed,text width=3.05cm,minimum height=1.2cm](b)at(4.15,0){Exercise the new\\reuse path};
-\node[proposed,text width=3.05cm,minimum height=1.2cm](c)at(8.3,0){Assert exactly\\\textbf{one dispatch}};
+\node[proposed,text width=3.05cm,minimum height=1.2cm](a)at(0,0){Trigger\\the retry};
+\node[proposed,text width=3.05cm,minimum height=1.2cm](b)at(4.15,0){Run the\\repaired code};
+\node[proposed,text width=3.05cm,minimum height=1.2cm](c)at(8.3,0){Count job starts\\\textbf{Exactly one}};
 \draw[message](a)--(b);\draw[message](b)--(c);
 \end{tikzpicture}
 \end{center}
-\lead{Review requested this targeted test; the final patch did not contain it.}
+\lead{Our review approved a repair while this targeted check was still missing.}
+\claim{Many passing tests can still miss the behavior that changed.}
+\sources{Observed coverage gap. The diagram shows the required test.}
 
-\qadetail{The new path combines CellBusy and an active cell owned by another attempt of the same work order. Existing tests exercise adoption after a crash and foreign-owner rejection through the busy path separately; favorable race interleavings do not replace a deterministic branch test. Review 1 requested deterministic tests as a blocker. Repair 2 refactored the helper; review 2 approved and classified the missing direct test as minor. The suite reported 1,972 cases including skips and zero failures, not 1,972 passing tests. All fifteen logged edits were allowed, six by repair agents; the test-edit hook never fired, and no blocked test edit is observed. Repair edits followed a non-node path outside the plan's scope enforcement; backend/service.py was outside the six approved files. Scope expansion requires an explicit authorization and a behavioral obligation. Full agent diagnosis, lease distinctions, source records and OffRisk analogy are retained in the preceding race slide's Q&A detail.}
-% Transition: After behavioral acceptance, preserve the candidate and evidence through delivery and cleanup.
-\note{[0:40] The final suite reported nineteen hundred seventy-two cases, including skipped cases, and zero failures. That still left the newly added recovery branch without a direct deterministic test. The requested check is small: make the workspace busy with the same job, force the reuse path, and assert exactly one dispatch. Review requested it; the final approved patch did not contain it. A large green suite answers the behaviors it actually checks. We must attach a specific assertion to the behavior the repair introduced.}
+\qadetail{The high-level retry example abbreviates a specific same-work-order CellBusy-adoption path. It does not claim a general exactly-once protocol or proven exactly-once behavior. The deterministic setup must force CellBusy with an already active workspace belonging to another attempt of the same job, hold the current dispatch authorization and assert one backend dispatch. The missing test is an unresolved acceptance obligation, not proof that the patch was wrong. The original suite count and full conditions remain below. The new path combines CellBusy and an active cell owned by another attempt of the same work order. Existing tests exercise adoption after a crash and foreign-owner rejection through the busy path separately; favorable race interleavings do not replace a deterministic branch test. Review 1 requested deterministic tests as a blocker. Repair 2 refactored the helper; review 2 approved and classified the missing direct test as minor. The suite reported 1,972 cases including skips and zero failures, not 1,972 passing tests. All fifteen logged edits were allowed, six by repair agents; the test-edit hook never fired, and no blocked test edit is observed. Repair edits followed a non-node path outside the plan's scope enforcement; backend/service.py was outside the six approved files. Scope expansion requires an explicit authorization and a behavioral obligation. Full agent diagnosis, lease distinctions, source records and OffRisk analogy are retained in the preceding race slide's Q&A detail.}
+% Transition: A checked result must also survive cleanup of its temporary workspace.
+\note{[0:40] A useful test asks the question the change is supposed to answer. Suppose a repair changes how a job resumes after a failed attempt. We want that job to start exactly once. The test should force the retry, run the repaired code, and count the starts. Our review approved a repair while that direct check was still missing. Existing tests reported zero failures, but they did not settle this particular behavior. The lesson is to match the check to the claim.}
 \end{frame}
