@@ -61,7 +61,7 @@ jobs:
               5: ['POSSUMM', '23 GB', '2.5 min', '4.6'],
               6: ['14,000', 'Cromwell'],
               7: ['CRISPR-IL', 'GoGenome'],
-              8: ['PD-L1', 'Abemaciclib', 'SI-2', '72'],
+              8: ['PD-L1', 'Abemaciclib', 'SI-2', '72', '10 single-drug arms', '10', '100', '45', 'possible two-drug pairs', '4 more in E0771', 'Fan-out', 'Fan-in'],
               9: ['Mobileye', 'pedestrian', 'junction', 'failing test'],
               10: ['Try action A', 'Advance the accepted state'],
               11: ['Python loop', 'Forkable API', 'checkpoint', 'evaluate', 'n=3'],

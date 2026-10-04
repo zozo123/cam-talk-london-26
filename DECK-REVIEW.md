@@ -413,6 +413,7 @@ Every supplied screenshot and the pasted original 57-slide review has a destinat
 | Generalize the cancer example, explain SI-12 and use numbered fan-out / fan-in | 22 | >120,000 guides, 19,050 genes, control/treatment, ranking to roughly 100 candidates; perturbation and drug terms defined |
 | Explain MCF-7 and why multiple arms work; clarify merge/reduce | 23 | Human breast-cancer cells; eight conditions return to a common comparison, six improve killing; independent assays are compared, not mixed |
 | Improve physics visuals and preserve the actual question/result | 24–25 | Catalog-to-selected-links workflow; 5 + 20 + 1 checks; 26/26 bidirectional links; numerical continuation explained |
+| Add candidate / possibility counts to the PD-L1 slide and show how experiments find signal | 8 | Ten compounds in E0771 (six shared-panel + four additional); 45 theoretical pairs at one dose each; numbered treatment fan-out, two readouts and selected-pair follow-up; actual experiment scope stated |
 | Make fan-out/fan-in the examples’ recurring message | 16, 22–25, 33, 54 | Shared setup, changed alternatives, gathered observations and checked outcomes; biological/numerical analogies stated precisely |
 | Simplify installer, timing, repair and test slides | 26–30 | Concrete blocked download, work/time/cost, workspace-versus-dispatch ownership, and direct regression-test obligation |
 | Remove SELFHOST-2 metrics/repair/review footer wording | 26–30 | Plain visible source descriptions; internal record IDs retained in source/Q&A for traceability |
