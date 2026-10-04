@@ -64,7 +64,7 @@ The story follows **reuse useful state → fan out changed trials → gather new
 | 43 | Choosing a result, merging code and pooling measurements are different operations. | 0:45 | [Source](acts/4-analysis/01-result-decisions.tex) |
 | 44 | Code changes that pass in pairs can fail when all three are merged. | 0:45 | [Source](acts/4-analysis/02-exact-composition.tex) |
 | 45 | Combining results should keep shared observations once. | 0:45 | [Source](acts/4-analysis/03-information-overlap.tex) |
-| 46 | The experiment determines the rule for fan-in. | 0:45 | [Source](acts/4-analysis/04-fan-strategies.tex) |
+| 46 | The result type determines the fan-in operator. | 0:45 | [Source](acts/4-analysis/04-fan-strategies.tex) |
 | 47 | Our reducer catches duplicate observation IDs and keeps their source history. | 0:45 | [Source](acts/4-analysis/06-reducer-identity.tex) |
 | 48 | For estimates of one quantity, covariance guides the pooling weights. | 0:50 | [Source](acts/4-analysis/07-covariance-pooling.tex) |
 | 49 | A worker that exaggerates its precision can dominate a weighted average. | 0:50 | [Source](acts/4-analysis/08-precision-stress.tex) |
@@ -84,7 +84,7 @@ Installer domains, stage timings, repair/review percentages, the dispatch-owners
 
 ## Final additions
 
-Slide 46 provides a simple strategy menu linking data partitioning, alternative search, code composition, repeated measurements and common findings to their return/check rules. Slide 56 closes with three numeric examples, with reported timings and coverage distinguished from the correlation illustration. The biology sequence connects prediction, laboratory screening, computational ranking and focused validation without merging the 2019, 2021, CRISPR-IL and OffRisk studies into one experiment.
+Slide 46 gives a mathematical operator for each return path: union, argmax over eligible candidates, compatible edit merge, a normalized weighted mean and intersection. It distinguishes the maximum score from its candidate and defines ReLU as a separate pointwise transform. Slide 56 closes with three numeric examples, with reported timings and coverage distinguished from the correlation illustration. The biology sequence connects prediction, laboratory screening, computational ranking and focused validation without merging the 2019, 2021, CRISPR-IL and OffRisk studies into one experiment.
 
 ## Material retained for Q&A
 

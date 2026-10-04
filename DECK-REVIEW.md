@@ -411,6 +411,7 @@ Every supplied screenshot and the pasted original 57-slide review has a destinat
 | Explain restored versus hot cache | 12 | Saved build files copied into a fresh runner versus files already available from the previous build. |
 | Explain the CyberGym numbers and actual process | 32 | Projects, executable targets, generated crashes and distinct validated vulnerabilities have separate labels and a concrete execution/check flow. |
 | Add fan-out / fan-in strategies using set ideas | 45–46 | Union, intersection and difference; five common strategies with the matching merge and check, plus limitations in Q&A. |
+| Give every fan-in row a mathematical operator; consider max, average and ReLU | 46 | Union, eligible-candidate argmax, compatible edit merge, normalized weighted mean and intersection. Max/argmax distinction and ReLU definition are explicit. |
 | Add an insightful numeric conclusion | 56 | 46 to 13 seconds, 15.9 to 56 percent coverage, and 100 to 9.17 effective independent estimates. No combined performance claim. |
 | Simplify slides 26–31 around paradigms, theory, contribution and flows | 26–31 | Six plain-language flows for feedback, private fan-out, fan-in, returned evidence, a targeted check and durable output. Incident detail retained in Q&A. Measured serial baseline distinguished from proposed parallel design. |
 | Redo the deck end to end; review original slides 1–57 | 1–56; review entries 1–57 above | Connected six-act story, canonical map and timed notes; retained material has an explicit Q&A destination |

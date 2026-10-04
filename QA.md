@@ -201,8 +201,13 @@ CRISPR-IL uses researcher-led experiments to update editing predictions. OffRisk
 
 ## Which fan-in strategies are covered?
 
-The visible strategy menu covers partition-and-gather, alternative selection, compatible code composition, measurement pooling and common-finding comparison. Union and difference concern item identity; intersection concerns overlap. Agreement alone does not verify truth, and clean textual merging does not verify behavior. Q&A also retains first-valid replicas for tail latency, voting with calibrated errors, paired comparisons with common randomness and adaptive branching/pruning. The output meaning determines the check.
+The visible strategy menu maps partition-and-gather to union, alternative selection to argmax over eligible candidates, compatible code composition to a partial merge function, measurement pooling to a normalized weighted mean, and common-finding comparison to intersection. Union and difference concern item identity; intersection concerns overlap. Agreement alone does not verify truth, and clean textual merging does not verify behavior. Q&A also retains first-valid replicas for tail latency, voting with calibrated errors, paired comparisons with common randomness and adaptive branching/pruning. The output meaning determines the check.
 
 ## What is the source of the 300 million REM fleet count?
 
 On 4 October 2026 the speaker explicitly supplied 300 million REM vehicles from his firsthand Mobileye experience. The visible slide attributes that count to the speaker. Public releases previously examined report over eight million contributors and do not independently verify 300 million. These populations/dates have not been reconciled. The separately dated 34-billion-road-mile 2025 figure remains publicly sourced; do not infer a per-vehicle rate from the speaker count.
+
+
+## How do max pooling, argmax, averages and ReLU fit fan-in?
+
+Max pooling returns the largest value. Argmax returns the candidate or index that produced the largest score, so a selected code artifact retains its identity. Ordinary averaging uses equal weights; weighted pooling requires the same target and justified uncertainty, including shared errors. Code merge constructs a new artifact and requires a check of that combined version. ReLU clips negative values and is a transformation, not a fan-in reduction. Its placement matters: ReLU(-1) and ReLU(1) average to 0.5, while ReLU of their mean is 0. Union and intersection operate on identified items, with duplicates counted once. Agreement can still reflect shared error.

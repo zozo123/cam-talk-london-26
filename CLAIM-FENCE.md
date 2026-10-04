@@ -271,3 +271,8 @@ The 21 July 2026 vendor release supplies >8 million REM contributing vehicles an
 - Restored versus hot cache describes saved artifacts copied into a fresh runner versus already available artifacts. Exact transfer, lookup, checking and memory-cache contributions are unseparated in the public demo.
 - CyberGym 431 projects, 1,748 targets, 56 crashes and 22 distinct vulnerabilities are distinct units; the funnel does not establish a disjoint 22/56 success probability or fork speedup.
 - Closing values are separate reported examples and an illustrative correlated-mean calculation, not a multiplied end-to-end gain.
+
+
+### Mathematical fan-in menu, 4 October 2026
+
+Slide 46 assigns an operator to each output type: set union, argmax of a fixed score among eligible candidates, a partial common-base edit merge, a normalized weighted mean of same-target estimates, and set intersection. Max yields a value; argmax preserves the selected artifact identity. Code merge may be undefined for conflicting edits or depend on conflict resolution and is checked on its final output. ReLU is a pointwise nonlinear transformation and is not claimed to combine evidence. No universal associative/commutative merge operator or statistical independence from set deduplication is asserted.

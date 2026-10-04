@@ -97,7 +97,7 @@ jobs:
               43: ['Select', 'Compose', 'Pool'],
               44: ['1 GB', '2 GB', '3 GB'],
               45: ['Union', '4 distinct', 'Intersection', '2 shared', 'New from B', '1 observation', 'Mutual information'],
-              46: ['Split one dataset', 'Try different ideas', 'Edit different components', 'Repeat a measurement', 'Seek common findings', 'shared error'],
+              46: ['Split one dataset', 'Try different ideas', 'Edit different components', 'Repeat a measurement', 'Seek common findings', 'Union', 'Select', 'merge', 'Weighted average', 'Intersection', 'Argmax', 'ReLU', 'common score', 'shared error'],
               47: ['42', '43', 'Reject the duplicate'],
               48: ['covariance', 'weights', 'shared errors'],
               49: ['17.0004', '4.9566', 'precision'],
