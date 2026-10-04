@@ -1,20 +1,18 @@
-\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}The factory run took 43:44 and cost \$10.33 in model calls.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
+\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}Installing uv led to a 44-minute repair loop costing \$10.33.}
 \begin{center}
+{\fontsize{12.5}{16}\selectfont
 \begin{tabularx}{\linewidth}{@{}Y r r@{}}
-\toprule
-\textbf{Recorded stage} & \textbf{Time} & \textbf{Model cost}\\
-\midrule
-Specification and plan & 3:41 & \$0.96\\
-Build and test & 20:01 & \$4.50\\
-Review & 18:55 & \$4.87\\
-\bottomrule
-\end{tabularx}
+\toprule\textbf{Work} & \textbf{Time} & \textbf{Model calls}\\\midrule
+Specify and plan the change & 3:41 & \$0.96\\[5pt]
+Edit, test and repair & 20:01 & \$4.50\\[5pt]
+Review, repair and recheck & 18:55 & \$4.87\\\bottomrule
+\end{tabularx}}
 \end{center}
-\lead{43:44 elapsed; 42:38 in the recorded stage totals.}
-\sources{\href{https://github.com/zozo123/ariflow-swfactory/blob/main/docs/factory/SELFHOST-2/metrics.json}{SELFHOST-2 metrics}; agent-session durations and reported list-price model cost.}
+\lead{\textbf{43:44 elapsed.} Recorded stages: 42:38. Model calls: \$10.33.}
+\tagline{A failed concurrency test redirected the work from installer policy into job dispatch.}
+\sources{Recorded session times include tool activity. Model costs use reported list prices.}
+
 \qadetail{Recorded stage sum: 2,557.517 s, rounded to 42:38. Timestamp wall time: 2,624 s, or 43:44, from 11:39:56 to 12:23:40. About 66 s lies outside those stage totals. The first row includes intent, specification, and plan. Timings are agent-session durations including tool activity, not pure inference time. Two repairs plus two reviews sum to about 25.2 min and \$7.75. Setup is 20.3 s: a 100-fold speedup saves about 20.1 s, roughly 0.8\% of recorded stages. Initial setup is not the whole reusable prefix and does not establish or rule out another reached-state workload's benefit. Sources: metrics.json and agent/stages.jsonl. Specification and plan includes intent. Build and test includes three planned edit nodes, the failing suite and first repair. The review stage includes review, the second repair, harness tests and re-review. The row amounts are rounded and total approximately the reported $10.33; setup 20.3 s is an operation timing, not a full-prefix timing.}
 % Transition: Regroup cross-stage sessions into repairs and reviews to reveal their shared cost.
-\note{[0:45] The first factory run took forty-three minutes and forty-four seconds and cost ten dollars thirty-three in model calls. The recorded stages sum to forty-two minutes and thirty-eight seconds. Specification and planning took under four minutes. Build and test took twenty minutes, and the review stage took almost nineteen. These are session durations, including tool activity. The rows show where time went, but the repair and review sessions cross those stage labels. We can regroup them to see that cost directly.}
+\note{[0:40] Installing uv became a forty-three-minute forty-four-second repair loop. Specification and planning took three minutes forty-one. Editing, testing and the first repair took twenty minutes. Review, the second repair and rechecking took almost nineteen. Model calls cost ten dollars thirty-three at the reported list prices. Session times include tools; the recorded stages total forty-two minutes thirty-eight, leaving about a minute outside them. The failed concurrency test, rather than installer complexity alone, explains the detour.}
 \end{frame}

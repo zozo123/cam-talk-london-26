@@ -1,17 +1,16 @@
-\begin{frame}[t]{The reducer rejects a repeated evidence ID and retains distinct evidence.\ev{\tagB\ \tagP}}
-\vspace{0pt}
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+\begin{frame}[t]{Our reducer catches duplicate observation IDs and keeps their source history.\ev{\tagB}}
+\lead{\textbf{Reducer:} the code that combines returned numerical summaries.}
+\begin{center}
+{\fontsize{12.5}{16}\selectfont
+\begin{tabularx}{\linewidth}{@{}Y Y@{}}\toprule
+\textbf{Returned records} & \textbf{Reducer behavior}\\\midrule
+Observation 42 arrives twice & Reject the duplicate\\[7pt]
+Observations 42 and 43 arrive & Combine summaries; retain both IDs\\\bottomrule
+\end{tabularx}}
+\end{center}
+\lead{\textbf{Next step:} use recorded shared sources to calibrate statistical weights.}
+\sources{\href{https://github.com/zozo123/boltzmann-mapreduce}{Reference reducer}: IDs and history are implemented; covariance-aware weights are the proposed extension.}
 
-\node[candidate,text width=3.6cm] (same) at (0,0) {Inputs: $e_1$ and $e_1$};
-\node[bad,text width=4.8cm] (reject) at (6.2,0) {\textbf{Reject duplicate}};
-\node[candidate,text width=3.6cm] (diff) at (0,-1.5) {Inputs: $e_1$ and $e_2$};
-\node[evidence,text width=4.8cm] (merge) at (6.2,-1.5) {\textbf{Combine summaries}\\retain IDs and lineage};
-\draw[denied](same)--(reject);\draw[flow](diff)--(merge);
-\node[text width=12cm,font=\fontsize{11.5}{14}\selectfont] at (3.1,-2.85) {Different parents can still share a grader. Distinct IDs alone do not establish independence.};
-
-\end{tikzpicture}\end{center}
-\claim{Acceptance design: refuse pooling when shared information cannot be justified.}
-\sources{\href{https://github.com/zozo123/boltzmann-mapreduce}{Built reference reducer}; arXiv:2607.09689v4.}
 \qadetail{The two separate diagram paths make refusal and combination distinct operations. The Gaussian/Wald reference reducer adds natural-parameter summaries associatively under an independence/common-target model and retains a disagreement statistic. Declared exact duplicate evidence IDs are rejected by default. Lineage is transported but not consumed for covariance. Worker declarations are not authenticated manifests. Conservative refusal when dependence is unknown, trusted evidence identity and controller-derived information remain proposed. Cochran 1954 supplies inverse-variance-estimation context. Q&A extension from acts/4-analysis/03-observation-units.tex: No independence assumption follows solely from distinct IDs. A copied receipt remains the same observation. A genuinely fresh stochastic outcome can obtain a new observation ID but retains the case, candidate and ancestry cluster. Deterministic reruns supply execution checks, not new test cases. Four runs of one hundred cases do not establish four hundred independent cases. Distinct worker declarations do not authenticate underlying evidence. Q&A extension from acts/4-analysis/04-bitcoin-identities.tex: Period January3,2009 through February9,2011. Coauthored attribution, not individual authorship. The address-linking method reported greater-than99percent sensitivity and specificity in its validation. Early-mining identity inference is methodological background, not evidence about execution forks or agent accuracy.  Q&A extension from acts/4-analysis/05-information-graph.tex: This restores the ancestry-tree versus information-graph distinction from earlier versions. The relevant links depend on the consumed state and task; identical prompts or seeds alone do not control hosted-model sampling. One hosted model performed all agent roles, without an agent-dependence estimate. Public diagnostics versus hidden held-out verifiers address different purposes. METR RE-Bench 30.4 percent versus HCAST .7 percent was not a controlled scorer-visibility comparison; scorer visibility was a leading hypothesis. ImpossibleBench shows read-only tests do not prevent special-casing. None establishes fork-induced judgment dependence. A regression test used during repair remains valid evidence of the behavior actually asserted on its exact artifact.}
-\note{[0:45] The same evidence identifier twice describes one declared observation; the built reducer rejects the duplicate. Distinct identifiers and lineage remain in the result. Two different parents can still use the same grader, so identifiers alone do not justify independence or precision. Numerical pooling needs a common target and a validated information model. The acceptance design refuses an unsupported pooled claim when sharing is unknown. The current reducer transports lineage; that stronger dependence-aware gate is the next requirement.}
+\note{[0:45] A reducer is the code that combines returned numerical summaries. Our reference reducer gives every declared observation an identifier. If observation forty-two arrives twice, it rejects the duplicate. If observations forty-two and forty-three arrive, it combines their summaries and retains their IDs and source history. That history records where results came from. The current numerical model assumes independent estimates of one quantity. Using shared sources to calibrate dependence-aware weights is the proposed next step. Different identifiers can still refer to estimates with similar errors.}
 \end{frame}

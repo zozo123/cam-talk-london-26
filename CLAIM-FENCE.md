@@ -1,6 +1,6 @@
 # Claim boundaries for the Cambridge SRG seminar
 
-This file applies to the canonical `talk.tex`: **50 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
+This file applies to the canonical `talk.tex`: **54 main frames in six acts, no appendix or overlays**. Historical end-matter is preserved as bibliography in `REFERENCES.md`, outside the deck.
 
 Evidence labels identify the status of the particular claim:
 
@@ -22,7 +22,7 @@ The Python comparison uses the same three edits, equivalent prepared input state
 
 This framing does not claim a replacement for Von Neumann hardware, a new ISA, a new processor architecture, a universally autonomous system, or an established improvement from the proposed factory forks. Autoresearch's sequential Git loop and AlphaEvolve's program search are published examples of adaptive decisions, not demonstrations of our integrated runtime.
 
-The cover keeps the self-organization → cars → compute connection. The motivation map connects six themes across overlapping work: Cytosim physical self-organization, CRISPR-IL genetic design, an immunotherapy research direction, Mobileye perception, Docker/Airflow sandboxed software and proposed forkable compute. Its two lanes and experimental/software-feedback link are thematic, not a verified chronological sequence. Physical emergence does not require goal-directed agency; CRISPR-IL is researcher-led. Immunotherapy is explicitly a research direction: the supplied cancer genomics and SI-12 assays do not establish a treatment-selection policy, clinical outcome or autonomous therapeutic system. The recorded repair/test/review workflow supplies no Docker security-improvement result. Mobileye perception does not establish responsibility for the complete vehicle controller. Dates and findings retain their source and team attribution.
+The cover keeps the self-organization → cars → compute connection. Slide 2 now shows dated milestones rather than thematic arrows: the 2010–2016 band groups Twistlock and earlier systems roles; the 2016–2021 research period covers biology and genomics; the 2019 cancer-drug result is a publication event; NRGene is August 2020–November 2021; Mobileye is December 2021–March 2024; Incredibuild begins December 2025. These dates follow the speaker’s career website and the cited 2019 paper. Periods overlap; diagram spacing is not a linear calendar scale. Physical emergence does not require goal-directed agency. Researcher-led gene-editing feedback and cancer-cell assays do not establish autonomous genetics or a clinical treatment-selection system. The official Mobileye photo illustrates the field; it is not attributed to the speaker’s vehicle or team. The stated personal role is junction perception, and the pedestrian/braking example illustrates feedback rather than a particular safety architecture. Scientific results retain coauthor attribution.
 
 **Research examples retained from the source inventory**
 
@@ -42,7 +42,7 @@ Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/t
 
 **Sources**
 - SELFHOST-2: PR #2351 of `zozo123/ariflow-swfactory`, `docs/factory/SELFHOST-2/`.
-- SELFHOST-3: local run records. They are not published; the slide says "redacted copy on request".
+- SELFHOST-3: local run records. They are not published; the record identity and availability stay in Q&A rather than a visible footer.
 
 **Setup of both runs**
 - Both ran on Docker's sandbox (`toolset:SbxCommaPolicyBackend`), not on islo.
@@ -96,7 +96,7 @@ Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/t
   - the trace: a named 141 MB islo snapshot and 4 concurrent restore–run–capture round trips, 6.70 s in total, measured by the client; pooled mean 4.9422 vs full-sample 4.9450;
   - Table 2: islo p50 6.87 s, p95 9.04 s, 255 of 256 succeeded at concurrency 12, with per-op teardown excluded from the percentiles.
   - These are API round trips, not a mechanism latency or a vendor ranking.
-  - Whether the snapshot includes memory is **unverified**, so the talk says "restore fan-out".
+  - Whether the snapshot includes memory is **unverified**, so the retained Q&A says "restore fan-out"; this is not the main creation trace.
 - The forged-precision result (17.0004 vs 4.9566) is a **synthetic** check with known generating target **μ = 5.0**. Primary [demo.py](https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py#L90-L93) sets true_theta=5.0. Its [injected worker](https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py#L151-L165) targets 17.0, generates 2,000 points with SD 0.02, and multiplies information per observation by 50. Measuring n alone does not stop fabricated information. The heuristic is not a Byzantine guarantee. The separate integration trace's full-sample 4.9450 is not this experiment's reference value.
 - The logistic check was not compared with sample-size weighting.
 
@@ -128,7 +128,7 @@ Eliaz's external [Tokio issue #8200 demonstration](https://github.com/tokio-rs/t
 
 - Every system named on a story slide is cited on that slide's source line, and `REFERENCES.md` preserves the full bibliography and documentation.
 - Live migration (Clark et al., NSDI'05): 60 ms downtime for a Quake 3 server. Nephele (Lupu et al., EuroSys'23): no figure quoted.
-- DeltaBox: the slides use the evaluation checkpoint figure (10.83 ms). The abstract's 14 ms / 5 ms are not used.
+- DeltaBox: the retained Q&A uses the evaluation checkpoint figure (10.83 ms). The abstract's 14 ms / 5 ms are not used.
 - Kimi K3 (Moonshot AI), §5.3.2:
   - checkpoint and resume are "as low as" 133 ms and 49 ms;
   - 51.2M sandboxes counts all K3 runtimes, across training and evaluation;
@@ -187,7 +187,7 @@ Added with the one-story restructure:
 
 Models were served through Databricks; that may be named. Name no model vendor or endpoint.
 
-The API slide explicitly names islo. The factory work orders ran on Docker Sandboxes; the disclosure states the speaker works for a sandbox company.
+Retained API records name islo; the main Python API is a proposed sketch. The factory work orders ran on Docker Sandboxes; the disclosure states the speaker works for a sandbox company.
 
 Do not say:
 - that repair 2 was never tested (the suite ran after it);
@@ -230,8 +230,19 @@ The variance-equivalent sample size formula assumes equal variances and common p
 
 ## Final storyline revision
 
-The final spoken deck has 50 main slides and 37:10 planned narration. The original 57-slide review is in DECK-REVIEW.md. The revision removes repeated architecture and moves fidelity probes, timing surveys and secondary statistics into source/Q&A; it does not turn them into results. The creation trace shows one default-environment batch: 256/256, requested concurrency eight, p50 3.44 s and p95 9.00 s, excluding teardown. Tensorlake is named in the cue; the slide is not a provider ranking.
+The final spoken deck has 54 main slides and 39:05 planned narration. The original 57-slide review is in DECK-REVIEW.md. The revision removes repeated architecture and moves fidelity probes, timing surveys and secondary statistics into source/Q&A; it does not turn them into results. The creation trace shows one default-environment batch: 256/256, requested concurrency eight, p50 3.44 s and p95 9.00 s, excluding teardown. Tensorlake is named in the cue; the slide is not a provider ranking.
 
 Twistlock's January 2017 vendor account describes per-image process/filesystem/network/syscall learning and enforcement, usually plateauing around one hour cumulative runtime. Prior employment does not attribute every feature to the speaker. The 2019 PD-L1 study supplies in-vitro expression/viability endpoints: different drugs induced approximately 10–100-fold PD-L1 mRNA in E0771 cells; abemaciclib + SI-2 moderated induction while preserving cytotoxicity in a 72-hour assay. It does not establish T-cell response, patient benefit or autonomous immunotherapy.
 
-External artifact checking, dependence-aware abstention and generation-fenced acceptance are proposed integration requirements. The built reducer rejects repeated declared evidence IDs and transports lineage. Distinct IDs do not authenticate observations or prove independence; shared evidence can be pooled only with a justified common-target information/dependence model. The main rejection rules retain the original preregistration's confidence thresholds; point estimates or non-significance alone do not reject a hypothesis. Protocol analysis limitations remain in Q&A and require a pre-collection amendment. PREREGISTRATION.md is unchanged.
+External artifact checking, dependence-aware abstention and generation-fenced acceptance are proposed integration requirements. The built reducer rejects repeated declared evidence IDs and transports lineage. Distinct IDs do not authenticate observations or prove independence; shared evidence can be pooled only with a justified common-target information/dependence model. The Q&A rejection rules retain the original preregistration's confidence thresholds; point estimates or non-significance alone do not reject a hypothesis. Protocol analysis limitations remain in Q&A and require a pre-collection amendment. PREREGISTRATION.md is unchanged.
+
+
+## Current benchmark and information-combination additions
+
+The ComputeSDK benchmark is published external evidence, not a measurement by the speaker. Immutable results at SHA 24922f27408279200074cbc8773cbda9a4aa4785, dated 2 October 2026, place Isorun first by median and composite score among tested providers. TTI measures create through first successful command, at client concurrency 100, with 100 requests. Provider configurations/adapters and endpoints differ from the paper’s creation trace. No quotient of these numbers is presented as a controlled improvement.
+
+The Venn diagram counts declared observation IDs. Its circle areas do not represent entropy or Fisher information. H(X,Y)=H(X)+H(Y)-I(X;Y) is a Shannon entropy identity; it is not a rule for subtracting mutual information from precision. Information about a target requires a justified joint model.
+
+Covariance-weighted pooling is an explanatory design extension for unbiased estimates of one scalar with externally known positive-definite covariance. It minimizes variance within the linear unbiased class, may require negative weights, and does not remove common bias. The reference reducer does not yet implement this covariance model. The 100-estimate example holds the signal fixed and states equal marginal variance/common pairwise correlation; its SNR ratios concern standard deviation, not correctness probability.
+
+The cancer fan-out/fan-in diagram shows perturbation and treatment conditions returning to a common analysis. It does not describe copying a cell’s exact state or mixing therapies into one treatment. Numerical orbit continuation changes a solution and corrects it; it is not physical forking of nature. The selected physics checks are 5 macroscopic cuts, 20 chart jumps and one distant pair, all 26 checked bidirectionally.

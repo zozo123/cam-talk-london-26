@@ -1,19 +1,22 @@
-\begin{frame}[t]{A self-driving computer closes a feedback loop around its own actions.}
+\begin{frame}[t]{Self-driving cars react to traffic; software agents react to test results.}
 \vspace{0pt}
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
-
-\node[text=Muted,font=\fontsize{11}{13}\selectfont] at (-.5,1) {Mobileye: perception work, 2021--2024};
-\node[state,text width=3.1cm] (a) at (0,0) {Observe the world};
-\node[state,text width=3.1cm] (b) at (4.5,0) {Choose an action};
-\node[state,text width=3.1cm] (c) at (9,0) {Observe its effects};
-\draw[flow](a)--(b);\draw[flow](b)--(c);
-\node[evidence,text width=3.1cm] (d) at (0,-2) {Read code and state};
-\node[candidate,text width=3.1cm] (e) at (4.5,-2) {Edit and execute};
-\node[evidence,text width=3.1cm] (f) at (9,-2) {Test and revise};
-\draw[flow](d)--(e);\draw[flow](e)--(f);\draw[message](f.south)--++(0,-.45)-|(d.south);
-
-\end{tikzpicture}\end{center}
-\sources{Personal work: Mobileye perception. Lower lane is the software-agent analogy.}
-\qadetail{The lower lane is an analogy, not a claim that the upper or lower lane describes a particular deployed safety architecture. No Mobileye production performance or safety metric is asserted. }
-\note{[0:35] At Mobileye I worked on perception. In the driving loop, observations inform an action and its effects inform the next decision. A software agent reads code and execution state, edits and runs tools, then uses tests to revise its actions. The connection is feedback. A computer also lets us explore several private next steps, which the following analogy makes concrete.}
+\begin{columns}[T,onlytextwidth]
+\column{.53\linewidth}
+\includegraphics[width=\linewidth]{assets/mobileye-new-york-2021.png}\par
+\vspace{.08cm}
+\tagline{Mobileye test vehicle in Manhattan, June 2021.}
+\column{.43\linewidth}
+{\fontsize{12}{15}\selectfont
+\textbf{Read the road.}\par
+Find lanes, cars and pedestrians.\par
+\vspace{.15cm}
+A pedestrian steps out $\to$ brake $\to$ check the next camera frame.\par}
+\vspace{.2cm}
+\tagline{My work: junction perception at Mobileye, 2021--2024.}
+\end{columns}
+\vspace{.10cm}
+\lead{\textbf{Software:} failing test $\to$ inspect code $\to$ edit $\to$ rerun the test.}
+\sources{Photo: \href{https://www.mobileye.com/press-kit/press-kit-mobileye-new-york-city/}{Mobileye / Intel press kit}; Manhattan test drive, June 2021.}
+\qadetail{The official Mobileye press kit identifies this photo as a test vehicle navigating Manhattan in June 2021. Image URL: https://static2.mobileye.com/img?h=504\&p=auto\&s=us\%2Fcorporate\%2Fimages\%2F17b6eecccb661bef7544a8bd66cc6a2c\_1668948799742.jpg\&w=1072. The vehicle illustrates the field; it is not attributed to the speaker's particular team or work. The speaker's own career website states Mobileye employment December 2021--March 2024, deep learning and algorithms research, including production perception and road-junction semantics. Perception provides observations for a driving policy; the pedestrian/braking sequence is an introductory illustration, not a description of a specific deployed Mobileye safety architecture or a personal contribution claim about the full controller. No Mobileye production accuracy or safety metric is asserted. The software loop is read an executed failure, inspect and edit the program, rerun the check, and revise. The proposed forkable execution layer adds private alternative continuations; ordinary stored-program execution still implements their actions. The downloaded WebP was converted losslessly to PNG for TeX compatibility, with no synthetic additions; it is scaled proportionally in the deck.}
+\note{[0:35] At Mobileye I worked on junction perception. If a pedestrian steps into the road, perception detects it, the car brakes, and the next frame informs its next action. A software agent sees a failing test, edits the code and reruns the check. Both use feedback. A computer can also test several private alternatives before choosing one. That is the next step.}
 \end{frame}

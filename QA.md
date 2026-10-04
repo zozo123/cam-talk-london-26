@@ -1,6 +1,6 @@
 # Q&A: Forkable Sandboxes
 
-For the **50-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
+For the **54-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
 
 ## What changes in self-driving computation?
 
@@ -16,7 +16,7 @@ Both sketches try the same three edits against equivalent prepared input state, 
 
 ## What connects the six research themes?
 
-The map connects Cytosim physical self-organization, CRISPR-IL iterative genetic design, an immunotherapy research direction, Mobileye perception, Docker/Airflow sandboxed software and proposed forkable compute. The two lanes connect experimental and software feedback. Their arrows show thematic relationships across overlapping work, not a verified chronology. Local physical emergence needs no goal-directed controller; CRISPR-IL is researcher-led. Mobileye supplies the stated perception role, not the whole vehicle controller. The software records establish repair/test/review behavior and publication obligations, rather than a Docker security-improvement rate. Published findings retain team attribution.
+The overview has six dated milestones in chronological reading order: early systems/security, biological/genomic research, the 2019 cancer-drug paper, NRGene, Mobileye and current compute work. Verify dates against the speaker’s career website; distinguish overlapping work periods from publication dates. The 2010–2016 period includes multiple systems employers, not six years at Twistlock alone. Headings explain the work in undergraduate language, with names underneath. The driving slide uses an official, credited Mobileye Manhattan photo from June 2021, with a concrete pedestrian/braking loop and failing-test/code-edit loop. The photo is illustrative, not attributed to a particular contribution by the speaker. The personal Mobileye role is perception of road junctions; local physical self-organization, researcher-led CRISPR design and proposed computer control remain different mechanisms.
 
 ## What did the biophysics simulation measure?
 
@@ -166,6 +166,19 @@ No. The historical benchmark has 1,507 patched vulnerabilities in 188 projects; 
 
 No. A TLA+ design specifies artifact/evidence/approval alignment and current authority, but no TLC run or implementation trace check is recorded. The gate's digest binding is built; epoch fencing remains proposed.
 
-## Final 50 slide revision checks
+## Final 54 slide revision checks
 
-Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 50 canonical frames, no overlays/appendix, 37:10 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The combined experiments say not yet run and preserve confidence-bound rejection rules. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.
+Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 54 canonical frames, no overlays/appendix, 39:05 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The applied merge table says collection has not started; protocol confidence-bound rejection rules remain in Q&A. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.
+
+
+## What changed in the current startup landscape?
+
+ComputeSDK’s 2 October 2026 Burst TTI raw results rank Isorun first: median 72.77 ms, p95 78.29 ms, 100/100 success at concurrency 100. Miosa is 163.35/187.8 ms and Archil 237.77/250.34 ms. Time to interactive includes creation and the first successful command, measured by the client. The older Table 2 trace is create-only at requested concurrency eight, median 3.44 s and p95 9.00 s. This is a dated landscape update, not a controlled longitudinal speedup. Source JSON and commit are preserved in evidence/ and REFERENCES.md.
+
+## Are intersection, mutual information and precision the same thing?
+
+No. Set union counts distinct declared observations, and intersection identifies shared items. Shannon mutual information describes dependence between random variables; the entropy identity concerns uncertainty, not Fisher precision. Information about a target obeys I(theta;X,Y) = I(theta;X) + I(theta;Y | X): the second term is what Y adds after X. Pairwise overlap alone does not supply a joint model or estimate weighting.
+
+## How can aggregation improve signal-to-noise when errors are shared?
+
+For unbiased estimates of one scalar target with known positive-definite error covariance Sigma, generalized least-squares weights are Sigma-inverse times the all-ones vector, normalized to sum to one. The resulting estimate is the weighted sum and its variance is the reciprocal of 1-transpose Sigma-inverse 1. The matrix describes noise sizes and shared errors; it must be externally justified. This is a proposed extension beyond the built independent-summary reducer. Shared bias is not removed. Under the equal-noise/common-correlation illustration, 100 estimates at correlation 0.1 yield the mean variance of 9.17 independent estimates. Noise falls to about 0.33 of one estimate, giving about 3.03 times its SNR for a fixed signal; independence would give 0.10 noise and 10 times SNR.

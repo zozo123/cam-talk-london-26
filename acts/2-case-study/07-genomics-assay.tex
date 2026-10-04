@@ -1,16 +1,18 @@
-\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}Six of eight combinations improved killing in MCF-7 cells.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
+\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}Six of eight drug combinations improved killing of breast cancer cells.}
+\lead{\textbf{MCF-7:} human breast cancer cells grown in the laboratory.}
 \begin{center}
-\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[cc,text width=3.05cm,minimum height=1.2cm](a){Selected perturbations\\and drug combinations};
-\node[cs,text width=3.05cm,minimum height=1.2cm,right=of a](b){MCF-7 cells\\MTS viability assay};
-\node[ce,text width=3.05cm,minimum height=1.2cm,right=of b](c){{\fontsize{24}{28}\selectfont\bfseries 6 of 8}\\Improved killing};
-\draw[flow](a)--(b);\draw[flow](b)--(c);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
+\node[state,text width=2.6cm,minimum height=1cm](a)at(0,0){Same cell model\\and viability assay};
+\foreach \yy/\nn/\lab in {1.1/a/Combination 1,0/b/Combination 2,-1.1/c/\ldots\ Combination 8}{
+\node[candidate,text width=2.8cm,minimum height=.7cm](b\nn)at(4.05,\yy){\lab};\draw[flow](a)--(b\nn);}
+\node[evidence,text width=3.5cm,minimum height=1.2cm](r)at(8.5,0){{\fontsize{24}{28}\selectfont\bfseries 6 of 8}\\Improved killing};
+\foreach \nn in {a,b,c}{\draw[flow](b\nn)--(r);}
 \end{tikzpicture}
-\end{center}\lead{Each point: $\geq4$ technical replicates. Each plot: $\geq2$ independent experiments.}
-\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al. (2021)}, Figs.~2--4; in-vitro MCF-7 assays.}
-\qadetail{The six-of-eight result concerns tested SI-12 drug combinations, with efficacy level at least 3, in MCF-7 cells. Downstream siRNA perturbation assays and drug-combination assays are distinct from the genome-scale ranking stage. The viability points have at least four technical replicates, and plots summarize at least two independent experiments; these are not the three biological replicate arms of the pooled screen. The result is not a clinical effect or proof that every nominated hit is on target. Full source, author list, follow-up expression criticism and proposed computational continuation scope are retained in the preceding screen slide's Q&A detail.}
+\end{center}
+\tagline{\textbf{Fan-out:} separate combinations. \textbf{Fan-in:} compare measured effects and retain promising candidates.}
+\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al. (2021)}, Figs.~2--4. $\geq4$ technical repeats per point; $\geq2$ independent experiments per plot.}
+
+\qadetail{The six-of-eight result concerns tested SI-12 drug combinations, with efficacy level at least 3, in MCF-7 cells. Downstream siRNA perturbation assays and drug-combination assays are distinct from the genome-scale ranking stage. The viability points have at least four technical replicates, and plots summarize at least two independent experiments; these are not the three biological replicate arms of the pooled screen. The result is not a clinical effect or proof that every nominated hit is on target. Full source, author list, follow-up expression criticism and proposed computational continuation scope are retained in the preceding screen slide's Q&A detail. The generic pattern resembles map then gather/rank, but the published experiment is a pooled screen followed by laboratory validation, not a MapReduce execution benchmark. Eight combinations are compared; their effects are not merged into a single universal treatment.}
 % Transition: The three-body case similarly separates an apparent pattern from a checked connection.
-\note{[0:45] Separate assays tested candidate perturbations and drug combinations in MCF-seven cells. Six of eight tested combinations improved killing. Each viability point had at least four technical replicates, while each plot represented at least two independent experiments. Those repeats have different units and answer different questions. The assay result lets us distinguish a ranked candidate from an observed effect. Our recent three-body work makes that same distinction between an apparent pattern and a checked numerical connection.}
+\note{[0:45] MCF-seven is a human breast cancer cell line grown in the laboratory. Use the same cell model and viability readout, but test different combinations separately. Six of eight tested combinations improved killing. The common assay makes their effects comparable. Fan-out explores alternatives; fan-in brings their measurements together so we can select promising combinations. We do not mix all eight treatments into one. Each point had at least four technical repeats, and each plot at least two independent experiments. These are laboratory results rather than clinical outcomes.}
 \end{frame}

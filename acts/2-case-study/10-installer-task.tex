@@ -1,20 +1,19 @@
-\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}The installer fix added two missing hosts across a six-file plan.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
+\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}The installer failed because its download destinations were blocked.}
+\lead{Task: let the sandbox install \textbf{uv}, the Python package manager.}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[cs,text width=4.5cm,minimum height=.8cm](a) at (0,1.5){\texttt{astral.sh/uv/install.sh}};
-\node[cb,text width=4.2cm,minimum height=.8cm](b) at (0,0){\texttt{releases.astral.sh}};
-\node[cb,text width=7.4cm,minimum height=.8cm](c) at (0,-1.5){\texttt{release-assets.githubusercontent.com}};
-\draw[flow](a)--node[right]{301 redirect}(b);
-\draw[flow](b)--node[right]{possible fallback}(c);
-\node[cb,text width=3.1cm,minimum height=1.15cm](fail) at (6,0){Both destinations denied\\HTTP 403; no \texttt{uv}};
-\draw[denied](b.east)--(fail.west);
-\draw[denied](c.east)-|(fail.south);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
+\node[state,text width=4.9cm,minimum height=.85cm](a)at(0,1.3){\texttt{astral.sh/uv/install.sh}};
+\node[bad,text width=4.65cm,minimum height=.85cm](b)at(0,0){\texttt{releases.astral.sh}};
+\node[bad,text width=7.5cm,minimum height=.85cm](c)at(0,-1.3){\texttt{release-assets.githubusercontent.com}};
+\draw[flow](a)--node[right,font=\fontsize{9.5}{12}\selectfont]{redirect}(b);
+\draw[flow](b)--node[right,font=\fontsize{9.5}{12}\selectfont]{possible fallback}(c);
+\node[text=Rust,text width=2.8cm,font=\fontsize{15}{18}\selectfont\bfseries]at(6,.05){HTTP 403\\uv unavailable};
 \end{tikzpicture}
-\end{center}\lead{Airflow + Docker Sandboxes; six files across policy, scripts, tests and docs.}
-\sources{\href{https://github.com/zozo123/ariflow-swfactory/tree/main/docs/factory/SELFHOST-2}{SELFHOST-2 intent, plan and records}; 27 September 2026.}
+\end{center}
+\tagline{Fix: allow the two destinations; align \textbf{six files} across policy, scripts, tests and docs.}
+\sources{Our Airflow Factory ran the repair serially in sandboxes (\texttt{sbx}); hosted model through Databricks.}
+
 \qadetail{The factory proposed changes to its own repository. Agent stages generated specifications, plans, edits, repairs, and reviews. The harness ran the tests; the controller enforced artifact delivery. Both work orders used Docker Sandboxes through toolset:SbxCommaPolicyBackend, not islo. The cells were unmanaged, so sandbox authority leases were unused. This differs from dispatch-coordination leases exercised by a concurrency test later. Approvals recorded mode human and actor admin although the harness answered. The workgraph recorded serial\_fallback\_missing\_fork. Sources: docs/factory/SELFHOST-2 stage, approval, and workgraph records in github.com/zozo123/ariflow-swfactory. The source work order records curl error 22, HTTP 403, and absent uv after islo use --init minimal ran the setup script. The initial six-host policy omitted releases.astral.sh and release-assets.githubusercontent.com, the uv installer's redirect and release-asset fallback destinations. The factory fix was executed using Docker Sandboxes, not islo. Hostname permissions can allow other assets on the same host; a proxy resolving pinned artifact digests is a proposed refinement and was not built in this run. Sources: docs/factory/SELFHOST-2/intent.md, plan.json, and docs/selfhost.md. Declared files: src/swfactory/doctor.py, deploy/islo/bootstrap.sh, tests/test_doctor.py, deploy/islo/deploy.sh, docs/islo.md, docs/selfhost.md. The plan pinned the eight-host tuple, checked gateway command shape, parsed the shell ALLOW\_HOSTS array, checked agreement with the Python tuple, and checked prose declarations. Missing or empty parses had to fail loudly. Tests read repository files and imported doctor; no network, subprocess, islo, or curl. The full suite was also required. Dispatch logic in src/swfactory/backend/service.py was not in the approved file list. Sources: docs/factory/SELFHOST-2/plan.json.}
 % Transition: The small installer task developed a repair detour; first quantify the full workflow.
-\note{[0:50] Our uv installer first failed on islo. Redirects reached two destinations missing from a six-host allowlist, returning 403 and leaving uv unavailable. We executed the resulting work order through Airflow and Docker Sandboxes, with a hosted model served through Databricks. The six-file plan synchronized the Python policy, shell scripts, deployment configuration, tests and documentation. It required the declarations to agree and the regression checks to remain hermetic. A failing concurrency test then took this small task into dispatch ownership. First, here is the overall time and cost.}
+\note{[0:45] The task was simple: let our sandbox install uv, the Python package manager. The installer redirected to a host missing from the network allowlist, with another missing host as a possible fallback. The result was HTTP four-oh-three and no uv. The six-file plan aligned the policy, shell scripts, tests and documentation around the two added destinations. Our Airflow Factory executed the repair serially in Docker Sandboxes through the sbx command, using a hosted model through Databricks. A full test run then exposed a different problem, so the agent had to repair that too.}
 \end{frame}

@@ -1,20 +1,18 @@
-\begin{frame}[t]{A forged precision report moved the synthetic pooled estimate from 5 to 17.\ev{\tagM}}
-\vspace{0pt}
-
-\lead{One 2,000-point shard targets 17 and inflates information per point $50\times$.}
-\begin{center}\begin{tikzpicture}[x=1cm,y=.12cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
-
-\draw[flow](0,0)--(0,19);
-\foreach \y in {0,5,10,15}{\draw(-.07,\y)--(.07,\y);\node[left,font=\fontsize{10.5}{12}\selectfont]at(-.08,\y){\y};}
+\begin{frame}[t]{A worker that exaggerates its precision can dominate a weighted average.\ev{\tagM}}
+\lead{$\displaystyle\hat\mu=\frac{\sum_i p_i x_i}{\sum_i p_i}$\quad $p_i$: precision, or inverse variance. Larger $p_i$ means more weight.}
+\tagline{Synthetic example: one 2,000-point worker targets 17 and inflates reported information per point $50\times$.}
+\begin{center}\begin{tikzpicture}[x=1cm,y=.085cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
+\draw[flow](0,0)--(0,20);
+\foreach \y in {0,5,10,15}{\draw(-.07,\y)--(.07,\y);\node[left,font=\fontsize{9.5}{11}\selectfont]at(-.08,\y){\y};}
 \fill[Rust!70](1,0)rectangle(3,17.0004);\fill[Teal!65](6,0)rectangle(8,4.9566);
-\draw[Teal,dashed,line width=1.2pt](.3,5)--(9,5);
-\node[anchor=west,font=\fontsize{10.5}{12}\selectfont,text=Teal]at(9,5){True $\mu=5$};
+\draw[Teal,dashed,line width=1pt](.3,5)--(9,5);
+\node[anchor=west,text=Teal]at(9,5){True value: 5};
 \node[above,font=\fontsize{16}{19}\selectfont\bfseries]at(2,17.0004){17.0004};
-\node[above,font=\fontsize{16}{19}\selectfont\bfseries]at(7,5.6){4.9566};
-\node[below,align=center]at(2,0){Unprotected\\pooling};\node[below,align=center]at(7,0){Stress\\heuristic};
-
+\node[above,font=\fontsize{16}{19}\selectfont\bfseries]at(7,6){4.9566};
+\node[below]at(2,0){Trust reported\\precision};\node[below]at(7,0){Apply the demo's\\stress heuristic};
 \end{tikzpicture}\end{center}
-\sources{Eliaz, \href{https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py}{primary demo.py} and arXiv:2607.09689. Synthetic stress case; no Byzantine guarantee.}
+\sources{\href{https://github.com/zozo123/boltzmann-mapreduce/blob/main/demo.py}{Reference demo}: one synthetic stress case. The weighting rule needs trusted precision estimates.}
+
 \qadetail{Verified primary demo.py lines90--93 sets true_theta5.0; lines151--165 sets liar_theta=true_theta+12, SD.02, count2000, multiplier50. This target is distinct from full-sample4.9450 in the separate islo integration trace. The 2000-point shard returns a distant estimate and reports fiftyfold information per point. Unprotected pooling yields17.0004, stress heuristic4.9566. Sample count alone cannot detect this claim. The heuristic illustrates one stress case, not a Byzantine guarantee. Trusted recomputation under the numerical model can validate information; agent scores need a separately validated error model. These extensions are proposed. An external recorder alone does not establish statistical calibration. Q&A extension from acts/4-analysis/07-pooling-result.tex: Calibrated information and a shared parameter are prerequisites; no general agent score improvement is inferred. Five shard sizes are 60,120,400,2000,5000. Mean norm gap to centralized MLE over eight fixed seeds is .0083 plus/minus .0042 for information pooling and .177 plus/minus .090 for equal averaging. These are SD, not confidence intervals. Sample-size weighting was not compared. Separate four-worker islo integration trace from a 141 MB snapshot pooled synthetic mean4.9422 versus full-sample4.9450, gap .0028, in6.70s client restore--run--capture. This tests aggregation and an exercised integration path, not agent accuracy or dependence correction.}
-\note{[0:45] Now the synthetic true mean is five. A worker targets seventeen, generates two thousand tightly concentrated points, and inflates information per point another fiftyfold. Unprotected pooling returns seventeen point zero zero zero four. A stress heuristic returns roughly four point nine six in this particular demonstration. The point is that a real count and distinct identifier do not establish a justified statistical weight. The controller needs trusted recomputation or independently calibrated information. The heuristic is not a general Byzantine guarantee.}
+\note{[0:50] A weighted average multiplies each estimate by its precision, then divides by total precision. Precision is inverse variance: claiming very little uncertainty gives a worker a very large weight. In our synthetic example, the true value is five. One worker reports a value near seventeen, using two thousand tightly concentrated points and inflating information per point another fiftyfold. It overwhelms unprotected pooling, which returns seventeen point zero zero zero four. The demo's stress heuristic returns four point nine five six six. That one result motivates trusted weights; it does not establish a general robust aggregation guarantee.}
 \end{frame}

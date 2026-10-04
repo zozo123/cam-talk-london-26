@@ -1,4 +1,4 @@
-\begin{frame}[t]{Reusing build artifacts reduced a reported Tokio compile from 46 to 13 seconds.}
+\begin{frame}[t]{Caching lets repeated experiments reuse their expensive build work.}
 \vspace{0pt}
 \begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
 
@@ -8,7 +8,8 @@
 \node[anchor=west,font=\fontsize{16}{19}\selectfont\bfseries] at ({.45+\seconds*.17},\y+.25) {$\sim$\seconds\ s};}
 
 \end{tikzpicture}\end{center}
+\claim{Tokio example: restoring the cache saved about 33 seconds per compile.}
 \sources{Eliaz, \href{https://github.com/tokio-rs/tokio/issues/8200}{Tokio issue \#8200}, June 2026: external Incredibuild demo. Artifact caching.}
 \qadetail{Author-reported external Incredibuild GitHub Actions demo, posted by zozo123 in Tokio issue8200 on June8,2026. Approximate timings; no controlled raw benchmark protocol is posted. Full test path approximately75s fresh and43s restored, while Cargo after touching source was approximately38s versus13s restored Incredibuild. These are cache endpoints, not memory-checkpoint or fork timings; no maintainer adoption claim. }
-\note{[0:45] In a reported Tokio build demo, a fresh compile took roughly forty-six seconds. Restoring the artifact cache brought it to thirteen seconds; a hot cache took roughly three. This is static artifact reuse, with approximate timings from my external demonstration. It establishes the motivation: reconstruction can dominate useful work, and reuse changes the cost. A live-state fork must earn its place against an equivalent warm baseline for its workload, not only against the cold start.}
+\note{[0:45] In a reported Tokio build demo, a fresh compile took roughly forty-six seconds. Restoring the artifact cache brought it to thirteen seconds; a hot cache took roughly three. This is static artifact reuse, with approximate timings from my external demonstration. Caching makes repeated experiments practical by avoiding the same expensive build work. In this example, forty-six minus thirteen is thirty-three seconds saved per compile. A live-state fork must earn its place against an equivalent warm baseline for its workload, not only against the cold start.}
 \end{frame}

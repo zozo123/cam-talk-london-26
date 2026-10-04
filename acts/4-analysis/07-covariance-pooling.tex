@@ -1,0 +1,13 @@
+\begin{frame}[t]{For estimates of one quantity, covariance guides the pooling weights.\ev{\tagP}}
+\lead{Combine estimates $x_i$ using weights that sum to one: \quad $\hat\mu=\sum_i w_i x_i$.}
+\vspace{.1cm}
+\begin{center}{\fontsize{20}{24}\selectfont
+$w=\dfrac{\Sigma^{-1}\mathbf 1}{\mathbf 1^{\!T}\Sigma^{-1}\mathbf 1}$
+\par}\end{center}
+\vspace{.15cm}
+\lead{$\Sigma$: the error covariance matrix---how noisy estimates are and how their errors move together.}
+\tagline{$\mathbf1$: a vector of ones. Independent errors: weights are proportional to $1/\sigma_i^2$.\\Shared errors: use the full covariance matrix.}
+\sources{Unbiased estimates of a common target; known positive-definite covariance. \href{https://arxiv.org/abs/1307.4003}{Valassi \& Chierici (2014), correlated measurement combination}.}
+\qadetail{This is the best linear unbiased estimator for estimates with expectation mu times the all-ones vector and externally known positive-definite covariance Sigma. Pooled variance is 1/(1^T Sigma^-1 1). Under Gaussian errors it is also the maximum-likelihood estimator. Under a diagonal covariance it reduces to inverse-variance pooling, the reference reducer's model. Full covariance-aware weighting is a design extension, not implemented by the current reference reducer. Estimated covariance must be validated on appropriate independent calibration data and its estimation uncertainty retained; plug-in weights can otherwise introduce bias or unstable confidence. Common systematic bias does not disappear through averaging. Singular duplicate directions require deduplication or a justified singular model, not blind inversion. Negative optimal weights are possible; a covariance model needs domain justification rather than superficial interpretation as voting confidence. Shannon mutual information is not interchangeable with Fisher precision. The linked source is A. Valassi and R. Chierici, Information and treatment of unknown correlations in the combination of measurements using the BLUE method, European Physical Journal C 74, 2717 (2014), arXiv:1307.4003, DOI 10.1140/epjc/s10052-014-2717-6.}
+\note{[0:50] Suppose every branch estimates the same quantity. Combine their estimates with weights that sum to one. Sigma records each estimate's noise and how errors move together across estimates. The inverse covariance gives weights with the smallest variance among unbiased linear combinations, under this model. With independent errors, it reduces to familiar inverse-variance weighting: cleaner estimates get more weight. With shared errors, use the whole matrix. This is the proposed extension to our reducer. The covariance must come from justified calibration rather than a worker declaring that it deserves more trust.}
+\end{frame}

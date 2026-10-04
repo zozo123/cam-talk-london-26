@@ -1,16 +1,22 @@
-\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}All 26 selected links connected by bidirectional continuation.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
+\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}All 26 selected connections survived checks in both directions.}
 \begin{center}
-\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[cs,text width=3.05cm,minimum height=1.25cm](a){26 selected\\difficult links};
-\node[cc,text width=3.05cm,minimum height=1.25cm,right=of a](b){Shooting correction\\Continue both ways};
-\node[ce,text width=3.05cm,minimum height=1.25cm,right=of b](c){26 successful links\\One sampled component};
-\draw[flow](a)--(b);\draw[flow](b)--(c);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\fontsize{12}{15}\selectfont}]
+\node[anchor=east]at(0,1.25){Broad gaps};
+\node[anchor=east]at(0,0){Chart jumps};
+\node[anchor=east]at(0,-1.25){Distant pair};
+\foreach \i in {1,...,5}{\fill[Teal](.1+.25*\i,1.25)circle(.075);}
+\foreach \i in {1,...,20}{\fill[Teal](.1+.25*\i,0)circle(.075);}
+\fill[Teal](.35,-1.25)circle(.075);
+\node[anchor=west,text=Teal,font=\fontsize{16}{19}\selectfont\bfseries]at(5.7,1.25){5 / 5};
+\node[anchor=west,text=Teal,font=\fontsize{16}{19}\selectfont\bfseries]at(5.7,0){20 / 20};
+\node[anchor=west,text=Teal,font=\fontsize{16}{19}\selectfont\bfseries]at(5.7,-1.25){1 / 1};
 \end{tikzpicture}
-\end{center}\lead{Independent 60-digit checks confirmed representative Floquet stability transitions.}
-\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint}; \href{https://github.com/zozo123/threebody-closing-the-open}{Three-Body Orbit Atlas records}.}
+\end{center}
+\lead{The selected links connect within \textbf{one sampled solution component}.}
+\tagline{Representative stability changes were independently checked at \textbf{60-digit precision}.}
+\sources{\href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint}; \href{https://github.com/zozo123/threebody-closing-the-open}{Atlas numerical records}.}
+
 \qadetail{The 26 selected tests were five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair. All succeeded bidirectionally in the manuscript and support connectivity in one sampled component, not a global completeness proof. Floquet calculations assess stability. Independent 60-digit Verner calculations checked representative physical stability transitions, not every source orbit. Extra-Trees proposes warm starts in the Atlas and is not the proof behind the 26 connections. An unresolved coarse mpmath RK4 64/128-step cross-check was rejected as evidence. Full source and preliminary publication status are retained in the preceding question slide.}
 % Transition: Our software factory makes the cost and acceptance requirements of continuation work concrete.
-\note{[0:45] We selected twenty-six difficult links and continued each in both directions, using shooting correction to retain periodicity. All twenty-six connected within one sampled component. Floquet calculations described stability; representative transitions were independently checked at sixty digits. Extra-Trees proposes warm starts in the Atlas, while the numerical checks support the accepted connections. The scope is explicit: selected links in a sampled component. We now return to software, where our own factory exposed the cost of repairs and the checks they need.}
+\note{[0:45] Each dot is one selected connection. Five broad gaps, twenty chart jumps and one distant pair: all twenty-six connected when followed in both directions. This joins the tested links within one sampled solution component. Representative stability transitions also survived independent sixty-digit checks. Proposal and acceptance are separate: a learned model can suggest a warm start, while numerical correction and validation decide whether a connection belongs in the map. That is the fan-in step in this example. Next, our software factory shows what happens when a repair changes the task itself.}
 \end{frame}

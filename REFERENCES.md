@@ -1,6 +1,6 @@
 # References and source record
 
-The canonical seminar has **50 main frames in six acts, no appendix or overlays**. This bibliography is a repository reference, not additional deck pages. Earlier end-matter files remain in the tree as historical sources and are not part of the canonical build.
+The canonical seminar has **54 main frames in six acts, no appendix or overlays**. This bibliography is a repository reference, not additional deck pages. Earlier end-matter files remain in the tree as historical sources and are not part of the canonical build.
 
 ## Current primary sources
 
@@ -175,7 +175,7 @@ Cross-model error studies are not agent-fork experiments. Conditional wrong-answ
 
 ## Motivation attribution
 
-The six-theme map connects physical self-organization, researcher-led genetic design, an immunotherapy research direction, Mobileye perception, Docker/Airflow sandboxed software and proposed forkable compute. The two lanes link experimental and software feedback; their arrows do not establish employment chronology. The 2022 CRISPR-IL article's Noam Barkai and the 2023 OffRisk paper's Gil Ad Barkai are different coauthors. Existing cancer papers and SI-12 assays do not document an autonomous immunotherapy system or clinical controller, and the factory records do not establish Docker security improvement. Mobileye perception is the speaker's account; publication dates do not establish a specific contribution or employment transition. Adaptive execution is software-workflow framing on conventional hardware. The second act is EXAMPLES; published findings retain their authors and workloads.
+The dated overview connects systems/security, biological and genomic work, a published cancer result, NRGene gene-editing prediction, Mobileye perception and current compute. Dates follow the career website below; overlapping work periods and publication events remain distinct. The 2022 CRISPR-IL article's Noam Barkai and the 2023 OffRisk paper's Gil Ad Barkai are different coauthors. Existing cancer papers and SI-12 assays do not document an autonomous immunotherapy system or clinical controller, and the factory records do not establish Docker security improvement. Mobileye perception is the speaker's account; publication dates do not establish a specific contribution or employment transition. Adaptive execution is software-workflow framing on conventional hardware. The second act is EXAMPLES; published findings retain their authors and workloads.
 
 ## Sources added to the final motivation and terminology
 
@@ -184,3 +184,16 @@ The six-theme map connects physical self-organization, researcher-led genetic de
 - [Docker Sandboxes architecture](https://docs.docker.com/ai/sandboxes/architecture/): sbx, microVM, private Docker daemon and host policy boundary.
 - [Firecracker project](https://firecracker-microvm.github.io/): guest virtualization with a minimal device model.
 - [Linux cgroup v2 documentation](https://docs.kernel.org/admin-guide/cgroup-v2.html): resource accounting/control, distinct from the sandbox access policy.
+
+## Career chronology and driving photograph
+
+- [Yossi Eliaz’s career website](https://yossieliaz.netlify.app/), retrieved 4 October 2026. Early systems roles 2010–2016; research 2016–2021; NRGene August 2020–November 2021; Mobileye December 2021–March 2024; Incredibuild December 2025–present. The cancer-combination marker is the 2019 paper already cited above.
+- [Mobileye Now Testing AVs in New York City](https://www.mobileye.com/press-kit/press-kit-mobileye-new-york-city/), official press kit, 20 July 2021. Manhattan photograph taken June 2021; image credit Mobileye / Intel. Asset attribution is retained in assets/SOURCES.md.
+
+
+## Current startup benchmark and aggregation explanation
+
+- [ComputeSDK Burst TTI leaderboard](https://www.computesdk.com/benchmarks/sandboxes/burst-tti), latest dated run used here: 2 October 2026; retrieved 4 October 2026. [Immutable raw JSON](https://github.com/computesdk/benchmarks/blob/24922f27408279200074cbc8773cbda9a4aa4785/results/burst_tti/2026-10-02.json) is copied to [evidence/computesdk-burst-tti-2026-10-02.json](evidence/computesdk-burst-tti-2026-10-02.json). Isorun median 72.77 ms / p95 78.29 ms, Miosa 163.35 / 187.8 ms, Archil 237.77 / 250.34 ms; 100/100 success each, concurrency 100. Client create-to-first-successful-command endpoint. [Methodology](https://github.com/computesdk/benchmarks/blob/24922f27408279200074cbc8773cbda9a4aa4785/METHODOLOGY.md).
+- Polyanskiy and Wu, [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/), Chapter 2: mutual information, entropy identity and information chain rules.
+- Valassi and Chierici, [Information and treatment of unknown correlations in the combination of measurements using the BLUE method](https://arxiv.org/abs/1307.4003), European Physical Journal C 74:2717 (2014), [DOI](https://doi.org/10.1140/epjc/s10052-014-2717-6). Correlation-aware best linear unbiased estimate; externally justified error model required.
+- Chamo and Eliaz, [Three-Body Orbit Atlas source](https://github.com/zozo123/threebody-closing-the-open/tree/23640cd869720ce62bc7a5fee4d7269d860e7321), including paper/short/main_short.pdf: 135,445 catalogued orbits; selected checks 5 macroscopic MST cuts, 20 chart jumps and one distant pair; 26 bidirectional connections. This supports the numbered workflow, not a global completeness claim.

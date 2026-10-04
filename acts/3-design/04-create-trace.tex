@@ -1,17 +1,16 @@
-\begin{frame}[t]{A sandbox create batch completed 256 calls at a 3.44 s median.\ev{\tagM}}
-\vspace{0pt}
-
-{\fontsize{12.5}{15}\selectfont\renewcommand{\arraystretch}{1.4}
+\begin{frame}[t]{Our paper recorded 256 sandbox creates with a 3.44-second median.\ev{\tagM}}
+\vspace{.1cm}
+{\fontsize{12.5}{16}\selectfont
 \begin{tabularx}{\linewidth}{@{}L{4.1cm}Y@{}}\toprule
-Client trace & Recorded value\\\midrule
-Default environment & \textbf{256 / 256 completed}\\
-Concurrent calls & \textbf{8 requested}\\
-Latency & \textbf{p50 3.44 s}\quad \textbf{p95 9.00 s}\\
-Timing & API round trip; teardown excluded\\\bottomrule
+\textbf{Operation} & \textbf{Recorded result}\\\midrule
+Default sandbox environment & \textbf{256 / 256 creates completed}\\[5pt]
+Concurrency requested & \textbf{8 calls at a time}\\[5pt]
+Creation API latency & \textbf{Median 3.44 s; p95 9.00 s}\\\bottomrule
 \end{tabularx}\par}
-\claim{This measures sandbox creation from a default environment.}
-\sources{Eliaz, \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689v4}, Table 2. One exercised client path; operations and workloads differ.}
+\vspace{.25cm}
+\lead{p95 means \textbf{95\% of recorded calls completed within 9.00 seconds}.}
+\sources{\href{https://arxiv.org/abs/2607.09689}{Eliaz, arXiv:2607.09689v4}, Table~2. Creation API round trip; teardown excluded.}
 
 \qadetail{The named implementation is Tensorlake; the slide intentionally describes one modern sandbox without a vendor ranking. Requested concurrency eight, batch256, success256/256, median3.44seconds, p95 9.00seconds, total wall387.3seconds. This is create from the default environment, not a checkpoint or restore latency. Teardown is excluded from the percentiles. The complete API table is retained here: Daytona create from the default environment, requested concurrency eight, batch1024, success1024/1024, p50 .20 s, p95 1.12 s, total wall190.3 s; Tensorlake create from the default environment, requested concurrency eight, batch256, success256/256, p50 3.44 s, p95 9.00 s, total wall387.3 s; islo restore--run--capture from a named141 MB snapshot, concurrency twelve, batch256, success255/256, p50 6.87 s, p95 9.04 s, total wall240.3 s. Teardown is excluded from per-operation percentiles. The islo value is a client API round trip that includes restoration, command execution and capture. Memory preservation is unverified, so the supported description is restore fan-out. These are exercised paths rather than isolated mechanism latencies or a provider ranking. Operations, workloads, concurrency and timing endpoints differ. Higher requested concurrency encountered validation or capacity limits in some exploratory runs. The controlled reuse experiment compares equivalent usable states against a warm baseline.}
-\note{[0:45] Here is one exercised sandbox API path. We created from the default environment, requested eight calls at a time, and completed all two hundred fifty-six calls. Median client latency was three point four four seconds and the ninety-fifth percentile was nine. Teardown is outside these percentiles. The platform was Tensorlake. This is a creation measurement with its operation attached, not a comparison of checkpoint mechanisms. The resource model now asks what preparation a continuation can actually avoid.}
+\note{[0:40] Our paper measured this concrete creation path: Tensorlake, a default environment, eight calls requested at a time, and all two hundred fifty-six creates completed. The median was three point four four seconds. Ninety-five percent finished within nine seconds. These are client API round trips for creation, with teardown excluded. They are a recorded operation, not an isolated kernel or VM boot time. The next slide updates the landscape with a recent community benchmark that also runs the first command.}
 \end{frame}

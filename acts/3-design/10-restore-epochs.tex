@@ -1,19 +1,19 @@
-\begin{frame}{The controller rejects an old epoch after replacing a worker.\ev{\tagP}}
+\begin{frame}[t]{Once a worker is replaced, it can no longer publish results.\ev{\tagP}}
+\lead{An \textbf{epoch} is the current version of a worker's permission.}
+\vspace{.2cm}
 \begin{center}
-\begin{tikzpicture}[node distance=.45cm,
- s/.style={state,font=\fontsize{10.5}{12.5}\selectfont},
- b/.style={bad,font=\fontsize{10.5}{12.5}\selectfont},
- p/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[s,text width=2.4cm,minimum height=1.35cm] (first) {Worker $w$\\authorized at epoch 1};
-\node[s,text width=2.6cm,minimum height=1.35cm,right=of first] (replace) {Replace $w$\\advance current epoch to 2};
-\node[b,text width=2.45cm,minimum height=1.35cm,right=of replace] (old) {Old instance\\sends publication\\at epoch 1};
-\node[p,text width=1.7cm,minimum height=1.35cm,right=of old] (reject) {Controller\\rejects};
-\draw[flow] (first)--(replace);
-\draw[flow] (replace)--(old);
-\draw[denied] (old)--(reject);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[state,text width=3.05cm,minimum height=1.1cm](a)at(0,0){Old worker\\Permission: \textbf{1}};
+\node[state,text width=3.5cm,minimum height=1.1cm](b)at(4.35,0){Replacement starts\\Current permission: \textbf{2}};
+\node[bad,text width=3.05cm,minimum height=1.1cm](c)at(8.7,0){Late result arrives\\Permission: \textbf{1}};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\node[text=Rust,font=\fontsize{15}{18}\selectfont\bfseries](d)at(8.7,-1.4){Reject: $1\ne2$};
+\draw[denied](c)--(d);
 \end{tikzpicture}
 \end{center}
-\sources{Epoch-fenced publication design; Gray \& Cheriton, Leases, SOSP 1989.}
+\claim{The controller checks permission against its own current record.}
+\sources{Proposed publication protocol; leases and fencing in distributed systems.}
+
 \qadetail{This is a proposed epoch-fenced publication protocol, not an implemented or model-checked result. A TLA+ design exists; no TLC run or implementation trace check is recorded. The controller checks authenticated identity, current epoch, expiry, artifact, scope and budget. Evidence, approval and publication must name one frozen artifact. Replacement and concurrent fork are distinct: replacing logical worker w invalidates its old epoch; a concurrent child gets a new worker identity and its own epoch, and need not revoke a continuing parent's authority. Fresh identity alone does not confer authority. Intended model covers clone, lease expiry, delayed approvals and uncertain effects. State restoration and authority renewal are coupled protocol events. Authorization is checked outside restored guest state, so a copied local generation value cannot establish current permission.}
-\note{[0:45] A worker gets an authorized generation number. Replacement advances that generation. An old instance may still send a delayed request, but the controller rejects publication stamped with the old number. The check happens outside the restored guest. Concurrent children have separate identities and permissions. This is the proposed authority protocol: restoring state must not restore a right to publish that the controller has already revoked. We now turn from separate machines to the information their results share.}
+\note{[0:40] A worker has a numbered permission. Start at version one. When we replace that worker, the controller advances the version to two. The old worker may still be alive or have a delayed message in the network. Its request still carries version one, so the controller rejects it. Epoch is simply the technical name for this permission version. The check lives outside the worker. A restored snapshot cannot revive a permission that the controller has revoked.}
 \end{frame}

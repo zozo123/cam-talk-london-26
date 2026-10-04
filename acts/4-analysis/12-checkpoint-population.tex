@@ -1,15 +1,16 @@
-\begin{frame}[t]{Success after reaching a checkpoint does not measure success from task start.\ev{\tagA}}
-\vspace{0pt}
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+\begin{frame}[t]{If 50 of 100 tasks reach a checkpoint and 40 finish, overall success is 40\%.\ev{\tagA}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{13}{16}\selectfont}]
+\node[state,text width=3.05cm,minimum height=1.15cm](a)at(0,0){\textbf{100 tasks}\\start};
+\node[candidate,text width=3.05cm,minimum height=1.15cm](b)at(4.15,0){\textbf{50 tasks}\\reach the checkpoint};
+\node[evidence,text width=3.05cm,minimum height=1.15cm](c)at(8.3,0){\textbf{40 tasks}\\finish successfully};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\end{tikzpicture}
+\end{center}
+\lead{From the checkpoint: $40/50=80\%$. \qquad From the start: $40/100=40\%$.}
+\tagline{Both rates are useful. State which starting population you are measuring.}
+\sources{Illustrative counts: $P(\mathrm{success})=P(\mathrm{checkpoint})\,P(\mathrm{success}\mid\mathrm{checkpoint})=0.5\times0.8$.}
 
-\node[state,text width=3.4cm] (start) at (0,0) {Task start};
-\node[candidate,text width=3.4cm] (cp) at (4.8,0) {Reach checkpoint\\probability 0.5};
-\node[evidence,text width=3.4cm] (ok) at (9.6,0) {Succeed from there\\conditional probability 0.8};
-\draw[flow](start)--(cp);\draw[flow](cp)--(ok);
-\node[text=Teal,font=\fontsize{24}{28}\selectfont]at(4.8,-1.9){End-to-end success: $0.5\times0.8=0.4$};
-
-\end{tikzpicture}\end{center}
-\sources{Illustrative conditional-probability example; Go-Explore motivates returning to reached states.}
 \qadetail{The values .5 and .8 are illustrative, not Go-Explore or factory measurements. Illustrative probabilities, not measured. A viable reached state contains information about the prefix; continuation success alone does not estimate how often it is reached or validate every earlier decision. Go-Explore explicitly separates return-to-state and exploration. A success rate at a selected checkpoint differs from a task-start success rate.}
-\note{[0:45] A checkpoint changes the population we are studying. Suppose half of tasks reach a useful checkpoint, and eighty percent of continuations from that checkpoint succeed. End-to-end success is forty percent. Reporting eighty percent alone describes the selected reached-state population. Returning to a useful state can still be valuable; Go-Explore makes that strategy concrete. The evaluation must state whether it starts from tasks, from reached checkpoints, or from accepted checkpoints after a fidelity check. We now turn that distinction into acceptance obligations.}
+\note{[0:45] Start with a hundred tasks. Fifty reach the useful checkpoint; forty of those finish. From the checkpoint, success is forty out of fifty, or eighty percent. From the original task start, it is forty out of a hundred, or forty percent. Both rates answer useful but different questions. A checkpoint may make the remaining exploration easier. We should report that continuation rate alongside how often the checkpoint was reached. Otherwise a selected starting population can make the full process look more successful than it was.}
 \end{frame}

@@ -4,7 +4,7 @@ all: deck
 
 deck: talk.pdf guide
 
-SOURCES := talk.tex $(wildcard preamble/*.tex) $(wildcard acts/*/*.tex)
+SOURCES := talk.tex $(wildcard preamble/*.tex) $(wildcard acts/*/*.tex) $(wildcard assets/*)
 
 guide: $(SOURCES) tools/presenter_guide.py
 	python3 tools/presenter_guide.py --check

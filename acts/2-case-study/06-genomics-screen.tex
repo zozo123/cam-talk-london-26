@@ -1,16 +1,20 @@
-\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}A genome-scale screen ranked candidates for sensitivity to SI-12.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
+\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}A pooled gene-editing screen tested 19,050 genes to find drug partners.}
+\lead{\textbf{Perturbation:} switch off a gene, then measure the cells' response.}
 \begin{center}
-\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[cs,text width=3.05cm,minimum height=1.25cm](a){GeCKOv2 library\\$>120{,}000$ guides\\19,050 genes};
-\node[cc,text width=3.05cm,minimum height=1.25cm,right=of a](b){CRISPR dropout screen\\SRC-3 inhibitor SI-12\\versus vehicle};
-\node[ce,text width=3.05cm,minimum height=1.25cm,right=of b](c){Terrace + DRACO\\Rank candidates\\$\sim$100-gene shortlist};
-\draw[flow](a)--(b);\draw[flow](b)--(c);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
+\node[state,text width=2.6cm,minimum height=1cm](a)at(0,0){Same starting\\cancer-cell population};
+\foreach \lab/\yy/\nn in {Gene A/1.15/a,Gene B/0/b,Other genes/-1.15/c}{
+\node[candidate,text width=2.7cm,minimum height=.7cm](b\nn)at(4,\yy){\lab\ switched off};
+\draw[flow](a)--(b\nn);}
+\node[evidence,text width=3.4cm,minimum height=1.2cm](r)at(8.3,0){Count surviving guides\\Rank gene effects\\$\sim$100-gene shortlist};
+\foreach \nn in {a,b,c}{\draw[flow](b\nn)--(r);}
+\node[text=Teal]at(4,1.85){$>120{,}000$ CRISPR guides};
 \end{tikzpicture}
-\end{center}\lead{We sought perturbations that increase cancer-cell sensitivity to SI-12.}
-\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al., Communications Biology 4:399 (2021)}; screen and candidate ranking.}
-\qadetail{Full source: Yosi Gilad, Yossi Eliaz, Yang Yu, Adam M. Dean, San Jung Han, Li Qin, Bert W. O'Malley and David M. Lonard, A genome-scale CRISPR Cas9 dropout screen identifies synthetically lethal targets in SRC-3 inhibited cancer cells, Communications Biology 4, 399 (2021), DOI 10.1038/s42003-021-01929-1. The six-of-eight result is the paper's MCF-7 in-vitro drug-combination finding (efficacy level at least 3), not a clinical outcome. Three biological replicate arms per treatment in the pooled screen are distinct from the downstream viability assay's technical replicates and independent experiments. Schultz and Coelingh Bennink, Target expression is a relevant factor in synthetic lethal screens, Communications Biology 5, 835 (2022), DOI 10.1038/s42003-022-03746-6, questioned several hits' expression and recommended transcriptome checks. Replication alone does not establish on-target biological validity. Computational continuations of analysis variants would be a proposed design; this study reports no sandbox-fork experiment.}
+\end{center}
+\tagline{Compare SI-12 with a control. SI-12 inhibits SRC-3, a protein that supports cancer-cell growth.}
+\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al. (2021)}; GeCKOv2 library; Terrace + DRACO analysis.}
+
+\qadetail{Full source: Yosi Gilad, Yossi Eliaz, Yang Yu, Adam M. Dean, San Jung Han, Li Qin, Bert W. O'Malley and David M. Lonard, A genome-scale CRISPR Cas9 dropout screen identifies synthetically lethal targets in SRC-3 inhibited cancer cells, Communications Biology 4, 399 (2021), DOI 10.1038/s42003-021-01929-1. The six-of-eight result is the paper's MCF-7 in-vitro drug-combination finding (efficacy level at least 3), not a clinical outcome. Three biological replicate arms per treatment in the pooled screen are distinct from the downstream viability assay's technical replicates and independent experiments. Schultz and Coelingh Bennink, Target expression is a relevant factor in synthetic lethal screens, Communications Biology 5, 835 (2022), DOI 10.1038/s42003-022-03746-6, questioned several hits' expression and recommended transcriptome checks. Replication alone does not establish on-target biological validity. Computational continuations of analysis variants would be a proposed design; this study reports no sandbox-fork experiment. The lanes are a schematic of different gene perturbations in a pooled screen, not separate genome-wide sandbox tasks. Guide counts under treatment and vehicle are compared; biological replicate arms are retained. Aggregation ranks effects rather than averaging all perturbations as estimates of one effect.}
 % Transition: Ranking nominates candidates; the following assay measures their effects.
-\note{[0:40] In our genomics work, we sought perturbations that make cancer cells more sensitive to the SRC-three inhibitor SI-twelve. The GeCKOv2 library supplied more than 120,000 guides targeting 19,050 genes. We compared dropout under the inhibitor and vehicle, then used Terrace and DRACO to rank candidates and shortlist about one hundred genes. This stage proposes promising targets. A separate assay must measure their effect.}
+\note{[0:45] A perturbation means changing one part of a system and measuring the response. Here, CRISPR switches off genes across a population of cancer cells. More than a hundred twenty thousand guides target nineteen thousand fifty genes. We compare guide survival under SI-twelve, a molecule that inhibits the growth-supporting protein SRC-three, with a control. Counting the surviving guides lets us rank gene effects and shortlist about one hundred candidates. This is fan-out across biological perturbations, followed by fan-in of their measured effects. The next stage tests actual combinations.}
 \end{frame}

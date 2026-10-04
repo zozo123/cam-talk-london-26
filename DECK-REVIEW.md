@@ -2,7 +2,7 @@
 
 The talk asks how a computer can reuse a useful execution state, explore private next steps, and return a result that may be accepted. Its strongest contribution is the connected execution contract: reusable state, evidence about the exact returned artifact, and controller-held authority. The personal research path explains why that contract matters; the examples show its mechanisms and failure modes.
 
-The revised main deck has **50 slides and 37:10 of planned narration**. The comments below preserve the original **1–57 numbering** from the published version. Each entry names its new location or its destination in Q&A. Supplemental source files remain available; the main PDF has no appendix or overlay builds.
+The revised main deck has **54 slides and 39:05 of planned narration**. The comments below preserve the original **1–57 numbering** from the published version. Each entry names its new location or its destination in Q&A. Supplemental source files remain available; the main PDF has no appendix or overlay builds.
 
 ## The story from beginning to end
 
@@ -10,8 +10,8 @@ The revised main deck has **50 slides and 37:10 of planned narration**. The comm
 2. **Execution model.** A film analogy explains alternative futures, and two Python snippets expose the proposed interface. Cached build artifacts establish a credible alternative to live-state reuse. The factory and runtime taxonomy define where execution happens; the fork definition declares the preserved state.
 3. **Examples.** AFL++ demonstrates initialized-state reuse; sampling demonstrates candidate coverage; autoresearch and AlphaEvolve demonstrate evaluated search. Genomics and three-body continuation separate proposals from checked results. Factory repair and security validation show why passing, preserving and accepting are different operations.
 4. **Runtime.** Choose files, live state or replay from the next action. Price preparation against capture, restore and divergence, including a warm cache. Record remote effects. Keep publishing credentials and current authority outside the copied guest.
-5. **Evidence.** Select, compose and pool with different checks. Identify observations and shared information. A forged precision declaration and the 9.17 calculation show why extra execution cannot assign its own statistical weight. Conditioned checkpoint success retains its task-start denominator.
-6. **Acceptance.** Record what actually ran; check the exact artifact outside the child; preserve its bytes; authorize one result with current authority. The two preregistered experiments can change the runtime/dependence decision. Close on this contract.
+5. **Evidence.** Select, compose and pool with different checks. Identify observations and shared information. Union/intersection, covariance weights, a forged precision declaration and the 9.17 calculation show why extra execution cannot assign its own statistical weight. Conditioned checkpoint success retains its task-start denominator.
+6. **Acceptance.** Record what actually ran; check the exact artifact outside the child; preserve its bytes; authorize one result with current authority. Applied use cases match selection, code composition and numerical pooling to their checks. The planned experiments can change the runtime/dependence decision. Close on this contract.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ flowchart LR
 - Give each slide one question, mechanism or conclusion. Use a full-sentence title that answers it; put secondary methods and denominators in Q&A.
 - Define a tool when it first appears: Cytosim, POSSUMM, CRISPR-IL/GoGenome, sbx, AFL++, autoresearch and the factory. Pair its name with what it does.
 - Keep the numerical endpoints: chromosome 1 versus genome-wide data; creation versus restoration; stage time versus wall time; pass-at-least-once versus selected success; technical repeats versus independent experiments.
-- The personal path is a map of ideas across overlapping work. Physical emergence, researcher-led biological iteration, perception, adaptive security and software orchestration are different mechanisms.
+- The personal path uses dated milestones from the speaker’s own career website and the 2019 cancer-drug paper. Overlapping work periods and publication events are identified. Physical emergence, researcher-led biological iteration, perception, adaptive security and software orchestration remain different mechanisms.
 - The proposed API expresses orchestration above ordinary Python and stored-program execution. Its operational decisions include captured state, private writes, an evaluator, a selector and controller acceptance.
 - Retain the implemented behavior of each component. Duplicate rejection and lineage transport do not already implement dependence-aware abstention; a digest gate does not already supply every external behavior check.
 - Keep the preregistration rejection thresholds and uncertainty rules. A non-significant result may remain inconclusive. The original protocol is unchanged; analysis amendments must precede collection.
@@ -65,9 +65,9 @@ Show the same three edits and checks in two Python snippets. The ordinary loop p
 
 ### 4 My work connects biological experiments, genomic pipelines, and autonomous execution.
 
-**Rewrite as a thematic map. New main slide 2.**
+**Rewrite as a dated timeline. New main slide 2.**
 
-Connect six concrete themes: Twistlock behavior learning, physical self-organization, CRISPR-IL design feedback, PD-L1 combination assays and adaptive-immunotherapy direction, Mobileye perception, and forkable compute. The arrows connect ideas across overlapping work. Each field contributes a mechanism; the map should not imply a fabricated employment timeline or identical forms of autonomy.
+Put the milestones into verified chronology: protect running software (2010–2016); model cells and genomes (2016–2021); test cancer-drug combinations (2019 result); learn from gene-editing outcomes at NRGene (2020–2021); recognize roads at Mobileye (2021–2024); try and check program alternatives at Incredibuild (2025–2026). Use action titles before names. Dates are overlapping career periods except the explicitly dated 2019 paper. Keep the adaptive-immunotherapy direction in the science context rather than presenting it as an accomplished clinical system.
 
 ### 5 Higher linker valency changed simulated actomyosin structure.
 
@@ -91,7 +91,7 @@ Explain the executable chain WDL → Cromwell → Docker and identifiable output
 
 **Keep and shorten. New main slide 9.**
 
-Name Mobileye and the perception role. Compare observe → act → observe effects with read state → edit/run → test/revise. This supplies feedback control, while the next cinema/code slides introduce private alternative executions. Keep physical self-organization and goal-directed control conceptually distinct.
+Use a real, credited Mobileye test vehicle photo from its official Manhattan press kit. Explain a pedestrian stepping into the road → brake → check the next camera frame. Name the personal junction-perception role, 2021–2024. Below, use a failing test → inspect code → edit → rerun the test. The concrete examples supply the feedback connection; the next cinema/code slides introduce private alternative executions.
 
 ### 9 Reusing build artifacts reduced a reported Tokio compile from 46 to 13 seconds.
 
@@ -119,103 +119,103 @@ Capture one declared parent state; create private continuations; return artifact
 
 ### 13 AFL++ forks initialized state once and resets between inputs.
 
-**Define AFL++ before its mechanism. New main slide 16.**
+**Define AFL++ before its mechanism. New main slide 17.**
 
 AFL++ is a bug-finding fuzzer: mutate inputs, execute the target, retain inputs that reach new paths, investigate crashes. Then show deferred initialization → persistent child → reset, with about 1,000 inputs before restarting the child. This makes initialized-state reuse concrete for a non-security audience.
 
 ### 14 AFL++ reports 10–20 times faster execution in persistent mode.
 
-**Keep the attributed value. New main slide 17.**
+**Keep the attributed value. New main slide 18.**
 
 Keep the documentation’s typical 10–20× persistent-mode speedup and the reset condition. Explain that persistent execution amortizes repeated process creation. The numerical gain belongs to that mode and workload; it is not a general claim about all forks.
 
 ### 15 250 samples raised SWE-bench Lite coverage from 15.9% to 56%.
 
-**Keep coverage distinct from selection. New main slide 18.**
+**Keep coverage distinct from selection. New main slide 19.**
 
 Retain SWE-bench Lite coverage 15.9% → 56% with 250 samples. Explain that a correct patch appeared among the candidates. A separate selector must recognize and choose it. This is the transition from more trials to decision quality.
 
 ### 16 Autoresearch kept 23 experiments and lowered validation bits per byte.
 
-**Keep the experiment loop. New main slide 19.**
+**Keep the experiment loop. New main slide 20.**
 
 Name autoresearch and show edit → fixed five-minute evaluation → keep/revert. Retain 126 attempts, 23 kept changes, 102 discards, one crash, and validation bits per byte 0.997900 → 0.969686. The insight is a concrete feedback rule with a preserved evaluator.
 
 ### 17 AlphaEvolve recovered 0.7% of Google's worldwide compute.
 
-**Keep the program population and production result. New main slide 20.**
+**Keep the program population and production result. New main slide 21.**
 
 Name Gemini Flash/Pro, program proposals, automated validity/performance checks and evolutionary selection. Keep the reported 0.7% average worldwide compute recovery. Tie that value to the deployed scheduling heuristic discovered by the loop; the result is not a sandbox benchmark.
 
 ### 18 A genome-scale screen ranked candidates for sensitivity to SI-12.
 
-**Keep candidate generation. New main slide 21.**
+**Keep candidate generation. New main slide 22.**
 
 Define the cancer-cell question, the SI-12 condition and vehicle comparison. Retain 19,050 genes and >120,000 guides, then Terrace/DRACO ranking and the shortlist. A ranked perturbation is a proposal. The next slide measures its effect.
 
 ### 19 Six of eight combinations improved killing in MCF-7 cells.
 
-**Keep independent validation. New main slide 22.**
+**Keep independent validation. New main slide 23.**
 
 Retain six of eight tested combinations improving killing in MCF-7 cells. Define the assay and distinguish technical replicates from independent experiments. This concretely motivates why an executed proposal needs a separate check and a correct unit of evidence.
 
 ### 20 We tested whether projected three-body orbit branches connect.
 
-**Keep the physics question. New main slide 23.**
+**Keep the physics question. New main slide 24.**
 
 Name Ori Chamo and the 135,445-orbit catalog. A separation in a projected drawing can hide a connection in the full solution space. Explain continuation with shooting correction as the check; the audience should know what “connected” means before seeing the count.
 
 ### 21 All 26 selected links connected by bidirectional continuation.
 
-**Keep the checked result. New main slide 24.**
+**Keep the checked result. New main slide 25.**
 
 Retain all 26 selected links connecting bidirectionally, Floquet stability analysis and representative 60-digit checks. Keep Extra-Trees warm-start proposals separate from numerical acceptance. The result concerns the selected links in a sampled component, giving a clear boundary to the conclusion.
 
 ### 22 The installer fix added two missing hosts across a six-file plan.
 
-**Keep the concrete software request. New main slide 25.**
+**Keep the concrete software request. New main slide 26.**
 
 Replace “two-host fix” shorthand with the actual trigger: installer redirects reached releases.astral.sh and release-assets.githubusercontent.com, absent from the allowlist, so installation failed. Explain the six-file plan and how a failing concurrency test led into dispatch code. Name the execution tools.
 
 ### 23 The factory run took 43:44 and cost $10.33 in model calls.
 
-**Keep work beside time and cost. New main slide 26.**
+**Keep work beside time and cost. New main slide 27.**
 
 Use the plain title “The factory run took 43:44 and cost $10.33 in model calls.” Keep 3:41 planning, 20:01 build/test, and 18:55 review, with their actual work descriptions. Distinguish 42:38 recorded stages from 43:44 elapsed wall time. The slide should answer what happened during those minutes.
 
 ### 24 Two repairs and two reviews used 59% of time and 75% of cost.
 
-**Keep the regrouped cost. New main slide 27.**
+**Keep the regrouped cost. New main slide 28.**
 
 Two repairs and two reviews used 59% of recorded stage time and 75% of reported model cost. Explain the regrouping so the audience can connect it to the stage table. This identifies the repair/check loop as the dominant work in this example; faster environment setup alone has limited leverage here.
 
 ### 25 The repair agent diagnosed a split between cell and dispatch ownership.
 
-**Keep one readable ownership diagram. New main slide 28.**
+**Keep one readable ownership diagram. New main slide 29.**
 
 Explain cell ownership and dispatch ownership as separate state. A busy cell alone does not establish that the current worker owns the active dispatch. Show the conjunction the repair agent diagnosed and the path it edited. Keep diagnosis and direct behavioral verification separate.
 
 ### 26 The green suite left same-owner adoption without a direct test.
 
-**Keep the missing obligation. New main slide 29.**
+**Keep the missing obligation. New main slide 30.**
 
-Retain 1,972 passing cases. Specify the untested conjunction: same-owner dispatch plus the CellBusy adoption path must produce exactly one backend dispatch. The green count leaves that obligation unanswered. This does not prove the patch fails; it gives the required acceptance test.
+Retain 1,972 reported cases, including skips, and zero failures. Specify the untested conjunction: same-owner dispatch plus the CellBusy adoption path must produce exactly one backend dispatch. The green count leaves that obligation unanswered. This does not prove the patch fails; it gives the required acceptance test.
 
 ### 27 Three delivery refusals preceded cleanup that erased an approved patch.
 
-**Keep the delivery boundary. New main slide 30.**
+**Keep the delivery boundary. New main slide 31.**
 
 Three delivery refusals preceded cleanup that erased the approved patch. Show review approval → delivery refusal → teardown → missing bytes. A legitimate refusal should preserve a recoverable artifact. This motivates durable export as part of acceptance, separate from permission to publish.
 
 ### 28 CyberGym validated 22 zero-days after a 56-crash campaign.
 
-**Keep validated security outcomes. New main slide 31.**
+**Keep validated security outcomes. New main slide 32.**
 
 Retain the CyberGym campaign’s 56 crashes and 22 confirmed zero-days, with benchmark and latest-code campaign populations clearly separated. Crashes are leads; reproduction, confirmation and deduplication establish vulnerabilities. This closes the examples with the same proposal/check/accept pattern.
 
 ### 29 The next action determines which state a continuation needs.
 
-**Keep the state menu. New main slide 33.**
+**Keep the state menu. New main slide 34.**
 
 Three rows: files/cache/worktree for editing; process or VM snapshot for live execution; recorded calls/answers for replay. The next action determines which state is needed. Include supported memory/program-counter semantics where relevant, and explain that code reload can invalidate a previously useful live state.
 
@@ -233,31 +233,31 @@ Retain DeltaBox’s 10.83 ms checkpoint and SnowFlock’s 600–800 ms remote cl
 
 ### 32 islo completed 255/256 restore–run–capture calls at a 6.87 s median.
 
-**Replace the visible trace. New main slide 34.**
+**Replace the visible trace. New main slide 35.**
 
-Show one sandbox create batch: 256/256 completed, requested concurrency eight, median 3.44 s, p95 9.00 s. The main slide is unnamed; Tensorlake is named in the spoken note. State create-from-default-environment and the client timing endpoint. This supplies a concrete operational value without a vendor ranking.
+Show one sandbox create batch: 256/256 completed, requested concurrency eight, median 3.44 s, p95 9.00 s. The creation trace is not a vendor ranking; Tensorlake is named in the spoken note. A separate dated ComputeSDK slide updates the current startup landscape. State create-from-default-environment and the client timing endpoint. This supplies a concrete operational value without a vendor ranking.
 
 ### 33 Reuse saves resources when avoided preparation exceeds its overhead.
 
-**Keep the resource inequality. New main slide 35.**
+**Keep the resource inequality. New main slide 37.**
 
 Use (N−1)P > H + N(R+D). Define every symbol: repeated preparation, one capture, child restore, private divergence, child count. Common execution work cancels. These are additive resources; batch elapsed time also depends on scheduling and contention.
 
 ### 34 A warm cache can reverse the resource advantage of restoration.
 
-**Redraw as paired bars. New main slide 36.**
+**Redraw as paired bars. New main slide 38.**
 
 Use the same 34 resource-seconds overhead in both comparisons: 2 + 8×(1+3). Cold P=30 avoids 210 and saves 176. Warm P=2 avoids 14 and loses 20. Only repeated preparation changes. Plot avoided work and overhead on the same scale.
 
 ### 35 Restoring a guest cannot undo a completed remote model request.
 
-**Keep the irreversible remote effect. New main slide 37.**
+**Keep the irreversible remote effect. New main slide 39.**
 
 A restored guest does not undo a model request that already left, its answer or its bill. Explain staged sends where possible and durable request/response recording for supported replay. The boundary concerns external observations and effects, not just files inside the sandbox.
 
 ### 36 The controller holds the credential that publishes a child's candidate.
 
-**Keep authority outside the child. New main slide 38.**
+**Keep authority outside the child. New main slide 40.**
 
 The sandbox returns the candidate and check records; the controller owns the publishing key and verifies the exact artifact digest. State the exercised digest gate. The external-check and full acceptance requirements remain distinct design responsibilities.
 
@@ -269,19 +269,19 @@ Its solid path repeats the publication gate, while dashed future components add 
 
 ### 38 The controller rejects an old epoch after replacing a worker.
 
-**Keep replacement fencing. New main slide 39.**
+**Keep replacement fencing. New main slide 41.**
 
 Give each authorized worker a generation; replacement advances it. A delayed request from the old generation is rejected outside the guest. Concurrent forks have separate identities. Label the epoch protocol as design and connect it directly to controller-held authority.
 
 ### 39 Selecting, composing, and pooling results require different checks.
 
-**Keep as the decision menu. New main slide 41.**
+**Keep as the decision menu. New main slide 43.**
 
 Pick one patch: test that patch. Compose several: test the exact composition. Pool common-target measurements: validate identity, information and sharing. These are different acceptance operations, each with a different evidence requirement.
 
 ### 40 Passing every pair does not establish that all three patches pass.
 
-**Keep the composition counterexample. New main slide 42.**
+**Keep the composition counterexample. New main slide 44.**
 
 Each pair passes while all three together fail. One simple capacity example is enough; the important conclusion is to test the artifact actually being shipped. Pairwise compatibility and numerical pooling cannot supply that behavioral check.
 
@@ -299,13 +299,13 @@ Keep the 64-agent Bitcoin identity reconstruction as related prior work. It supp
 
 ### 43 Different parents can still share the evidence that guides their children.
 
-**Fold into the reducer slide. New main slide 43.**
+**Fold into the reducer slide. New main slide 46.**
 
 One line suffices: different parents may still use the same grader. Preserve execution ancestry and information-sharing links in Q&A. Neither graph automatically supplies a covariance estimate.
 
 ### 44 The reducer rejects a repeated evidence ID and retains distinct evidence.
 
-**Keep and separate implementation from acceptance design. New main slide 43.**
+**Keep and separate implementation from acceptance design. New main slide 46.**
 
 The built reducer rejects an exactly repeated declared evidence ID and carries lineage. Distinct IDs do not prove independence. The proposed acceptance layer refuses an unsupported pooled claim when shared information or calibration cannot be justified. Avoid describing abstention as already implemented.
 
@@ -317,13 +317,13 @@ Retain the honest synthetic pooling result 0.177 → 0.0083, five uneven shards 
 
 ### 46 A forged precision report moved the synthetic pooled estimate from 5 to 17.
 
-**Keep the synthetic precision attack. New main slide 44.**
+**Keep the synthetic precision attack. New main slide 48.**
 
 A 2,000-point shard aimed at 17 and inflated information per point 50×, moving the unprotected estimate from a true mean of 5 to 17.0004. Keep the particular heuristic result 4.9566 clearly labeled. The design requires trusted or calibrated weights; this demonstration supplies no general Byzantine guarantee.
 
 ### 47 At correlation 0.1, 100 measurements have the mean precision of about nine.
 
-**Keep one dependence number. New main slide 45.**
+**Keep one dependence number. New main slide 49.**
 
 At common correlation 0.1 and equal marginal variance, 100 measurements have the mean precision of 9.17 independent measurements. State the assumptions alongside the formula. This is variance-equivalent precision, not a probability of correctness or a literal count of independent cases.
 
@@ -341,33 +341,33 @@ Retain common-random-number/paired-comparison reasoning: sharing may help estima
 
 ### 50 Success after reaching a checkpoint does not measure success from task start.
 
-**Keep the conditioning example. New main slide 46.**
+**Keep the conditioning example. New main slide 50.**
 
 Reach the checkpoint with probability 0.5 and succeed from it with probability 0.8: task-start success is 0.4. These are illustrative probabilities. Forking after the plan inherits the selected starting point and earlier decisions; define the population behind every reported success rate.
 
 ### 51 A receipt must describe the operation that actually executed.
 
-**Keep concrete receipt semantics. New main slide 47.**
+**Keep concrete receipt semantics. New main slide 51.**
 
 CI “success” finished in three seconds because evaluation was skipped; “human approval” was answered by the harness; a digest referenced bytes outside Git. Record actor, actual check, exact artifact and durable bytes. Each positive label must identify the event it really represents.
 
 ### 52 Publication must follow a passing check of the exact artifact.
 
-**Keep the rule on the recorded bug. New main slide 48.**
+**Keep the rule on the recorded bug. New main slide 52.**
 
 Return to the missing busy-path test. Freeze the artifact; run the required behavior check outside the child; bind its receipt to the digest; let the controller publish those bytes under current authority. Export before cleanup. This is the concrete acceptance contract, not a new assertion that the observed patch was incorrect.
 
 ### 53 The runtime experiment compares faithful restore with warm reconstruction.
 
-**Merge with 54. New main slide 49.**
+**Retain the protocol in Q&A; main slide 53 now explains applied merge cases.**
 
 Keep faithful restore versus equivalent warm reconstruction, fanouts 3/6/12 and 20 interleaved batches per arm. The preregistered rejection rule uses an upper 98.3% confidence bound below ten seconds at any fanout. A noisy estimate below ten seconds can remain inconclusive.
 
 ### 54 The cofailure experiment compares siblings with other checkpoint families.
 
-**Merge with 53. New main slide 49.**
+**Retain the protocol in Q&A; main slide 53 now explains applied merge cases.**
 
-Keep siblings versus other checkpoint families in matched slots, with a consumed parent-state feature. The rejection rule’s upper 90% bound below 0.05 rules out the prespecified excess of that size; it does not prove all independence. Label both experiments “not yet run” and preserve the original protocol.
+Keep siblings versus other checkpoint families in matched slots, with a consumed parent-state feature. The rejection rule’s upper 90% bound below 0.05 rules out the prespecified excess of that size; it does not prove all independence. State that collection has not started and preserve the original protocol and thresholds in Q&A.
 
 ### 55 Overlapping families and repeated rounds require grouped analysis.
 
@@ -383,7 +383,7 @@ Retain the nine fixed-input repairs as a descriptive repeatability plan, includi
 
 ### 57 A useful continuation returns its artifact, evidence, and authority context.
 
-**Close on the contract. New main slide 50.**
+**Close on the contract. New main slide 54.**
 
 Reuse the state. Run private alternatives. Check exact artifacts and evidence outside the child. Then continue or authorize publication once. The boundary the child cannot cross is the closing systems insight; the ending should introduce no new comparison, acronym or thesis.
 
@@ -396,3 +396,41 @@ Reuse the state. Run private alternatives. Check exact artifacts and evidence ou
 - [PD-L1 combination study](https://doi.org/10.1038/s41598-019-51537-7).
 - [AFL++ technical details](https://aflplus.plus/docs/technical_details/) and [persistent mode](https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md).
 - [Docker Sandboxes architecture](https://docs.docker.com/ai/sandboxes/architecture/), [Firecracker](https://firecracker-microvm.github.io/) and [Linux cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html).
+
+## Complete input checklist for this revision
+
+Every supplied screenshot and the pasted original 57-slide review has a destination. The screenshot deck’s 50-slide numbering differs from the original 57-slide numbering above; this table uses the final 54-slide deck.
+
+| User input | Final slides | Applied change |
+|---|---|---|
+| Redo the deck end to end; review original slides 1–57 | 1–54; review entries 1–57 above | Connected six-act story, canonical map and timed notes; retained material has an explicit Q&A destination |
+| Put the research map in the right timeline; explain the work before naming tools | 2–9 | Verified chronological milestones, action headings and definitions for CS undergraduates |
+| Make the driving example concrete and exciting | 9 | Credited official Mobileye Manhattan photograph; pedestrian/braking feedback and failing-test/code-edit analogy |
+| Say sandboxes; show sbx and hosted-model execution; keep serial scope clear | 13, 26 | Sandbox wording, sbx command, Airflow and Databricks; recorded runs remain serial |
+| Compare VM, microVM, container, sandbox and cgroups together | 14 | One table distinguishes guest kernels, shared kernels, resource limits and policy boundaries |
+| Explain why caching makes repeated trials practical | 12, 37–38 | Build cache example: 46 / 13 / 3 seconds; restored artifacts save about 33 seconds; warm-cache alternative in reuse calculation |
+| Define AFL++ and correct the actors and arrows | 17–18 | Controller mutates/retains inputs; target runs/resets state; initialized forkserver and persistent-child restart |
+| Generalize the cancer example, explain SI-12 and use numbered fan-out / fan-in | 22 | >120,000 guides, 19,050 genes, control/treatment, ranking to roughly 100 candidates; perturbation and drug terms defined |
+| Explain MCF-7 and why multiple arms work; clarify merge/reduce | 23 | Human breast-cancer cells; eight conditions return to a common comparison, six improve killing; independent assays are compared, not mixed |
+| Improve physics visuals and preserve the actual question/result | 24–25 | Catalog-to-selected-links workflow; 5 + 20 + 1 checks; 26/26 bidirectional links; numerical continuation explained |
+| Make fan-out/fan-in the examples’ recurring message | 16, 22–25, 33, 54 | Shared setup, changed alternatives, gathered observations and checked outcomes; biological/numerical analogies stated precisely |
+| Simplify installer, timing, repair and test slides | 26–30 | Concrete blocked download, work/time/cost, workspace-versus-dispatch ownership, and direct regression-test obligation |
+| Remove SELFHOST-2 metrics/repair/review footer wording | 26–30 | Plain visible source descriptions; internal record IDs retained in source/Q&A for traceability |
+| Explain delivery loss and remove SELFHOST-3 footer/separation prose | 31 | Approved patch → three blocked delivery attempts → cleanup loss; export candidate and check records first |
+| Add transitions / sub-agendas | 16, 33, 42 | What the examples show; runtime’s three jobs; how results add information before acceptance |
+| Find the fastest current ComputeSDK result and show progress since the paper | 35–36 | Paper creation trace plus dated 2 October 2026 Burst TTI leaders; Isorun 73 ms median, 78 ms p95; endpoints kept distinct |
+| Explain reuse equation terms and improve warm-cache title | 37–38 | Plain definitions of setup, save, restore, private changes and trial count; cold/warm paired bars with fixed overhead |
+| Simplify remote effects and controller authority | 39–40 | Restoring a sandbox does not undo a completed API call or bill; publishing key stays with the controller |
+| Explain epoch in plain English | 41 | Permission version advances from 1 to 2; a late version-1 request is rejected |
+| Focus aggregation on new information and signal-to-noise | 42, 45–49 | Distinct observations, shared error, calibrated weights, variance-equivalent count and noise/SNR interpretation |
+| Explain selection, composition, pooling, union, intersection and mutual information | 43, 45, 47, 53 | Applied result menu, observation Venn diagram, separate entropy identity and covariance pooling formula |
+| Make the pairwise-composition counterexample concrete | 44 | Each edit starts a 1 GB worker on a 2 GB server: every pair fits; all three exceed capacity |
+| Simplify duplicate evidence and explain independence | 46 | Observation 42 twice counts once; 42 and 43 can still share errors; IDs and lineage are retained |
+| Add a concise equation to the forged-precision example | 48 | Weighted mean with inverse-variance weights; 17.0004 versus 4.9566 remains a synthetic stress result |
+| Explain the meaning of 100 measurements becoming about nine | 49 | Equal-noise/common-correlation model; 9.17 variance-equivalent independent estimates; noise 0.33 versus 0.10, SNR gain about 3 versus 10 |
+| Explain checkpoint versus end-to-end success | 50 | 100 start, 50 reach the checkpoint, 40 finish: 80% from checkpoint and 40% from task start |
+| Explain receipts, hashes, checks and publishing in undergraduate English | 51–52 | Record who ran which check on which files; preserve the code itself; publish the same tested files |
+| Remove the PREREGISTRATION.md footer; explain merge use cases | 53 | Models, code, measurements and drug/orbit candidates each get a merge rule and check; planned status remains visible, protocol unchanged |
+| Improve conclusion and final message | 54 | Reuse → three separate trials → gather/combine/check → accepted continuation; shared evidence once and controller acceptance |
+
+The protocol remains byte-for-byte unchanged. Hidden Q&A preserves operation boundaries, source identities, biological scope, selection versus validation, and the original rejection thresholds. No supplied comment is treated as evidence of an unperformed experiment.

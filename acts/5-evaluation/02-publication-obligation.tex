@@ -1,16 +1,16 @@
-\begin{frame}[t]{Publication must follow a passing check of the exact artifact.\ev{\tagP}}
-\vspace{0pt}
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
+\begin{frame}[t]{The code we publish must be the same code that passed the required check.\ev{\tagP}}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[state,text width=3.05cm,minimum height=1.1cm](a)at(0,0){Save the candidate\\and its code hash};
+\node[evidence,text width=3.05cm,minimum height=1.1cm](b)at(4.15,0){Run the required test\\on these exact files};
+\node[evidence,text width=3.05cm,minimum height=1.1cm](c)at(8.3,0){Controller publishes\\the same files};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\end{tikzpicture}
+\end{center}
+\lead{Repair example: make the workspace busy, reuse it for the same job, and assert \textbf{one dispatch}.}
+\tagline{If the files change after testing, check the new version before publishing.}
+\sources{Proposed behavioral gate; builds on the factory's existing code-hash publication check.}
 
-\node[state,text width=2.6cm] (a) at (0,0) {Freeze artifact\\digest $d$};
-\node[candidate,text width=2.9cm] (b) at (3.65,0) {Force same-owner\\CellBusy path};
-\node[evidence,text width=2.9cm] (c) at (7.45,0) {Assert exactly\\one dispatch};
-\node[evidence,text width=2.6cm] (d) at (11.1,0) {Controller\\publishes $d$};
-\draw[flow](a)--(b);\draw[flow](b)--(c);\draw[flow](c)--(d);
-\node[text width=12cm,font=\fontsize{14}{17}\selectfont,text=Teal] at (5.55,-1.8) {The candidate cannot authorize its own publication.};
-
-\end{tikzpicture}\end{center}
-\sources{Acceptance design tied to the recorded adoption bug; reducer and gate are separate components.}
 \qadetail{The existing gate prototype and full integration lifecycle have distinct implementation status. This frame states the proposed end-to-end behavioral obligation, not a newly measured fork deployment. Scope authorization, an executed receipt, behavioral coverage, exact-composition verification, artifact-bound approval and current controller authority are separate obligations. A valid digest proves identity, not correctness. A passing regression path supports that behavior; it does not establish held-out accuracy or ensemble confidence. The gate is proposed; the built digest gate and numerical reducer do not supply all these checks. Durable export prevents the second incident's teardown loss.}
-\note{[0:55] The factory recorded nineteen hundred seventy-two passing cases, while the same-owner busy-path test was absent. That missing obligation becomes a publication rule. Freeze the artifact bytes. Outside the child, force the busy path and assert exactly one backend dispatch. Bind the check to those exact bytes, then let the controller publish them once. A pass count cannot substitute for this behavior. Scope, current authority and durable export remain part of acceptance; the numerical reducer cannot supply those checks.}
+\note{[0:45] Save the candidate files and compute their hash, a fingerprint of their contents. Run the required test on exactly those files, outside the candidate's control. For the repair we saw, force the busy-workspace condition, exercise reuse for the same job, and assert one dispatch. Only then may the controller publish that same code. If any file changes afterwards, the old test result describes the old version. The new version needs its own check. Keep a durable copy even if publication is refused.}
 \end{frame}

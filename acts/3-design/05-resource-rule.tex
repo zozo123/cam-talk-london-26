@@ -1,16 +1,16 @@
-\begin{frame}{Reuse saves resources when avoided preparation exceeds its overhead.\ev{\tagA}}
-\vspace{.3cm}
-\begin{center}
-{\fontsize{22}{26}\selectfont$(N-1)P > H + N(R+D)$\par}
-\vspace{.55cm}
-{\fontsize{12.5}{15}\selectfont
-$P$: preparation per continuation\qquad $H$: capture\par
-\vspace{.18cm}
-$R$: restore\qquad $D$: incremental divergence\qquad $N$: children\par
-\vspace{.35cm}
-Additive resource cost; common continuation work cancels.\par}
-\end{center}
-\sources{Illustrative resource-cost model; Jitsu, NSDI 2015; LightVM, SOSP 2017.}
+\begin{frame}[t]{Reusing state pays off when it avoids more setup than it adds.\ev{\tagA}}
+\lead{\textbf{Saved repeated setup} $>$ \textbf{save once + restart children + private changes}}
+\vspace{.15cm}
+\begin{center}{\fontsize{22}{26}\selectfont$(N-1)P > H+N(R+D)$\par}\end{center}
+\vspace{.15cm}
+{\fontsize{12}{15}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{1cm}Y L{1cm}Y@{}}
+$N$ & Number of alternative runs & $H$ & Save the shared state once\\[7pt]
+$P$ & Setup each run would repeat & $R$ & Start a run from saved state\\[7pt]
+ & & $D$ & Extra cost of private changes\\
+\end{tabularx}\par}
+\sources{Illustrative total-resource comparison. Common experiment work cancels; elapsed time also depends on scheduling.}
+
 \qadetail{This is an additive resource-cost model, not measured elapsed time. The ordinary continuation work common to both alternatives cancels. D is incremental divergence overhead, including copy-on-write. P must be the reusable preparation rather than merely sandbox setup. Resource cost and batch elapsed time are different endpoints: elapsed time depends on critical paths and contention. The original numerical cases are retained in the next slide: N8, P30, H2, R1, D3 avoids210 resource-seconds and adds34, saving176; replacing P30 with a warm-cache P2 avoids14 and adds34, losing20. In SELFHOST-2 the three serial edit tasks sum to342.579 seconds, versus an ideal unchanged-duration critical path176.689 seconds, a computed165.890-second saving or about6.5 percent of recorded stage time, before fork, merge, contention and verification overhead. Nothing forked in that work order; worktrees may support the file-level schedule. Jitsu and LightVM illustrate cheap fresh-start alternatives.}
-\note{[0:45] The resource comparison has a simple boundary. Creating children avoids repeating preparation, but pays capture, restore and incremental divergence costs. Work that both alternatives perform cancels. The remaining question is whether avoided preparation exceeds that overhead. Preparation means the state a continuation can actually reuse. Our twenty-second sandbox setup is only one part of a possible prefix. This model counts resources; batch elapsed time also depends on scheduling and contention. The next calculation shows why a good warm alternative can change the answer.}
+\note{[0:45] Here is the simple rule: save more repeated setup than the reuse mechanism adds. N is the number of alternatives. P is the setup each one would repeat. Preparing once avoids N minus one copies of that setup. H is saving the shared state once. R is restarting each child, and D is the extra cost of keeping its changes private. All costs use the same resource unit. This compares total resources, rather than batch elapsed time. The next example shows why a warm cache can change the decision.}
 \end{frame}

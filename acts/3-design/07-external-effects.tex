@@ -1,19 +1,18 @@
-\begin{frame}{Restoring a guest cannot undo a completed remote model request.}
+\begin{frame}[t]{Restoring a sandbox does not undo an API call or its bill.}
+\lead{Example: a worker calls a hosted model after a checkpoint.}
+\vspace{.15cm}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,
- s/.style={state,font=\fontsize{10.5}{12.5}\selectfont},
- e/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont},
- l/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont,text=Muted}]
-\draw[Ink!45,dashed,line width=.8pt] (-1.8,.9) rectangle (1.8,-2.3);
-\node[l] at (0,1.2) {Guest state};
-\node[s,text width=2.8cm,minimum height=.9cm] (before) at (0,0) {Captured local state};
-\node[s,text width=2.8cm,minimum height=.9cm] (after) at (0,-1.55) {Restored local state};
-\node[e,text width=3.4cm,minimum height=1.25cm] (remote) at (7.4,0) {Remote request completed\\Invocation cost incurred};
-\draw[flow] (before)--node[l,above]{send request}(remote);
-\draw[flow] (before)--node[l,right]{restore}(after);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[state,text width=3.2cm,minimum height=1cm](a)at(0,0){Save sandbox\\before the call};
+\node[evidence,text width=3.6cm,minimum height=1cm](b)at(4.6,0){Model answers\\Request is charged};
+\node[state,text width=3.2cm,minimum height=1cm](c)at(9.2,0){Restore sandbox\\to before the call};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
+\node[text=Rust,font=\fontsize{14}{17}\selectfont\bfseries]at(4.6,-1.5){The external request has already happened.};
 \end{tikzpicture}
 \end{center}
-\sources{Speculator, SOSP 2005; external synchrony, OSDI 2006; Remus, NSDI 2008; DeepSeek-V4 \S5.2.5.}
+\lead{Record the outcome outside the sandbox before deciding to retry.}
+\sources{Output-commit precedents: Speculator (2005), external synchrony (2006), Remus (2008).}
+
 \qadetail{The original effect table retains three cases: sending a model request incurs the remote invocation and its cost; sending a tool request may complete a remote action; staging a patch retains local bytes while publication still needs a separate gate. State restoration cannot unsend an invocation or reverse a completed remote effect. Speculator, external synchrony and Remus supply precedents for delaying output. DSec can replay cached command results on resumption. A general effect journal and buffer is proposed here: stage effects where possible, reconcile uncertain outcomes, or use idempotency when the remote service supports it. An uncertain remote action cannot be blindly retried. Export patch, inputs and receipts before every teardown, including refusal; this recovery rule is motivated by SELFHOST-3. The factory exercised one controller-mediated publication path and did not intercept every external effect.}
-\note{[0:45] A snapshot controls the guest state. A completed request to a hosted model is already outside that boundary, and its cost has been incurred. Restoring the guest cannot reverse that invocation. The same issue applies when a remote tool may have completed an action. We need to record the outcome and reconcile uncertainty before retrying. Some effects can be staged; supported idempotency can make others safe to repeat. A general effect buffer remains a design. Local restoration therefore needs an explicit external-effect policy.}
+\note{[0:40] Save a sandbox, call a hosted model, then restore the saved state. The sandbox is back before the call, but the model has already answered and charged the request. Restoring local memory cannot rewind another service. Record the outcome outside the sandbox. On retry, a recorded answer may be reusable; an uncertain external action needs reconciliation. If a service supports idempotency, a repeated request can carry the same key. This boundary matters before we let workers publish anything.}
 \end{frame}

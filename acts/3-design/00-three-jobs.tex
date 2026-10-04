@@ -1,15 +1,14 @@
-\begin{frame}[t]{Forkable execution separates running, evidence collection and acceptance.\ev{\tagP}}
-\vspace{0pt}
-
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
-\node[state,text width=3.65cm,minimum height=1.7cm](run) at (0,0) {\textbf{Run}\\Reuse a state\\Start private continuations};
-\node[evidence,text width=3.65cm,minimum height=1.7cm](evidence) at (4.8,0) {\textbf{Evidence}\\Check exact artifacts\\Record outside the child};
-\node[candidate,text width=3.65cm,minimum height=1.7cm](accept) at (9.6,0) {\textbf{Accept}\\Select, compose or pool\\Authorize one result};
-\draw[flow](run)--(evidence);\draw[flow](evidence)--(accept);
-\end{tikzpicture}\end{center}
-\claim{A child may propose a result; the controller decides what continues.}
-\sources{Integrated execution contract motivated by the examples; external evidence and acceptance are design requirements.}
+\begin{frame}[t]{A forkable runtime must preserve state, gather evidence and control acceptance.\ev{\tagP}}
+\lead{The examples are complete. Now we turn their pattern into a system.}
+\vspace{.2cm}
+{\fontsize{12.5}{16}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{2.7cm}Y@{}}
+\textbf{Run} & What state is reused, and when is reuse cheaper?\\[10pt]
+\textbf{Gather evidence} & What ran, and how much information do its results add?\\[10pt]
+\textbf{Accept} & Which checked result may continue or be published?\\
+\end{tabularx}\par}
+\sources{The following chapters cover runtime costs and boundaries, information aggregation, then acceptance.}
 
 \qadetail{This is the architecture contract for the rest of the talk. Runtime starts private continuations and preserves the declared state surface. An evaluator/recorder outside child-controlled state binds executed checks to exact artifact digests. Acceptance selects or composes candidates after the appropriate check; numerical pooling requires a common target and a justified information/dependence model. Independence is sufficient for the reference reducer, not necessary for every valid pooling method: calibrated covariance may justify dependent observations. Unknown sharing or calibration calls for refusing an unsupported precision claim. External recording and abstention are integration design requirements, not features already implemented by the reference reducer. The controller retains publication authority and an idempotent acceptance identity; external effects require durable records and uncertainty handling rather than a blanket exactly-once guarantee.}
-\note{[0:45] The examples are complete. They give the runtime three jobs. Run means reuse a declared state and start private continuations. Evidence means check the exact artifact and record what executed outside the child. Acceptance means pick or compose candidates, or pool measurements under a justified model, then authorize the result. A child cannot supply its own final approval or statistical weight. We will work through the execution boundary first, then the evidence boundary, and end with the acceptance contract.}
+\note{[0:40] The examples give us three system responsibilities. Run means preserve the state the next action needs and price reuse against a faithful alternative. Gathering evidence means record what happened and determine what information the returned results add. Acceptance means choose which checked result can continue or be published. We will start with the runtime: state choice, startup cost, reuse economics, external effects and permissions. Then we will build the return path, including shared information, and finish with checks that authorize the exact result.}
 \end{frame}

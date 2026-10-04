@@ -1,14 +1,16 @@
-\begin{frame}[t]{At correlation 0.1, 100 measurements have the mean precision of about nine.\ev{\tagA}}
-\vspace{0pt}
+\begin{frame}[t]{With shared errors, 100 estimates can reduce noise like about nine independent ones.\ev{\tagA}}
+\lead{Example: 100 estimates with equal noise and pairwise correlation $\rho=0.1$.}
+\begin{center}{\fontsize{21}{25}\selectfont
+$N_{\rm eff}=\dfrac{N}{1+(N-1)\rho}=\dfrac{100}{1+99(0.1)}=9.17$
+\par}\end{center}
+\vspace{.12cm}
+{\fontsize{12.5}{16}\selectfont\begin{tabularx}{\linewidth}{@{}Y r r@{}}
+\toprule & \textbf{Independent} & \textbf{Correlation 0.1}\\\midrule
+Noise relative to one estimate & $0.10\sigma$ & $0.33\sigma$\\[4pt]
+Signal-to-noise gain for fixed signal & $10\times$ & $3.03\times$\\\bottomrule
+\end{tabularx}\par}
+\sources{Exact mean-variance illustration: same marginal noise $\sigma$, common pairwise correlation, unchanged signal.}
 
-\vspace{.2cm}
-\begin{center}{\fontsize{22}{26}\selectfont
-$N_{\mathrm{eff}}=\dfrac{N}{1+(N-1)\rho}$\par\vspace{.3cm}
-$\dfrac{100}{1+99(0.1)}=9.17$\par}\end{center}
-\vspace{.3cm}
-\lead{Equal marginal variance and common pairwise correlation.}
-
-\sources{Exact variance calculation for a mean; illustrative correlation value.}
 \qadetail{Variance is sigma squared times [rho+(1-rho)/N]. Effective count is variance-equivalent for a mean, not a literal number of independent units. For N=9, effective counts are 9 at rho=0, 5 at rho=.1, 1.8 at rho=.5. Kohli 2026 preprint estimates nine frontier judges from seven families at Kish effective count 2.18, CI 2.07--2.31; 9.1 percent of 319 unanimous MNLI decisions were wrong. Kim ICML 2025 reports conditional agreement on wrong answers, 60 percent versus 33 percent by chance, not rho. Neither measures forks. Independent slow-request illustration: 1-.99^100 is about .634. A hypothetical .1 failure rate gives .9^29 about .047 probability of twenty-nine greens. Amdahl has analogous algebra, not the same causal quantity. Poolkeh models a different pooling operation, 295,951 tests for about nine million people; it was not a laboratory pooling experiment. Q&A extension from acts/4-analysis/10-search-coverage.tex: All three distributions have identical Bernoulli marginals and zero pair covariance. One denotes an error. All three distributions have error probability one half for each candidate and zero pairwise correlation. Their all-wrong probabilities differ. A selector returning one member succeeds at most one minus the all-wrong rate and must recognize a correct member. The variance-equivalent effective count for a mean cannot substitute for this joint distribution. The enumeration is exact; the Chen preprint is cited only for the selector ceiling. Q&A extension from acts/4-analysis/11-paired-comparison.tex: Illustration: VarA=VarB=1 and Cov=.8 gives Var(A-B)=.4 versus2 with covariance0. This calculation does not assert measured covariance in agent runs. An execution tree misses retrieval, evaluator, prompt, fixture and feedback relationships. Correlation is not uniformly harmful: positive covariance can help matched differences, while it raises mean variance. Common random numbers require control of the actual randomness consumed. A cloned guest PRNG does not control remote model sampling. Compare equivalent cases and record assignment and exclusion rules.}
-\note{[0:35] Under equal marginal variance and common correlation point one, one hundred measurements have the mean precision of about nine independent measurements. Shared variation stops the variance from shrinking toward zero. This calculation concerns precision under stated assumptions; it does not remove shared bias or give answer correctness. Search coverage asks whether all the alternatives can fail together.}
+\note{[0:50] Averaging helps because independent errors can cancel. If a hundred estimates each have noise sigma and independent errors, their average has one tenth that noise. Now let every pair of errors have correlation point one. Some errors move together, so they do not cancel. The average has about one third of the original noise, equivalent in mean variance to nine point one seven independent estimates. With an unchanged signal, the signal-to-noise gain is about three, rather than ten. This is a precision calculation under a specified model, not a claim that the estimates are unbiased in practice.}
 \end{frame}

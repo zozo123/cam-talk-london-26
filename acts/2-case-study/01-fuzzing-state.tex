@@ -1,19 +1,19 @@
-\begin{frame}[t]{\ev{\tagO}\surf{SECURITY}AFL++ tests mutated inputs for bugs while reusing initialized state.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
-\lead{Fuzzing repeatedly tests a program with mutated inputs.}
+\begin{frame}[t]{\ev{\tagO}\surf{SECURITY}AFL++ finds bugs by changing inputs and reusing the initialized program.}
+\lead{\textbf{AFL++ is a fuzzer:} it tests changed inputs and follows new code paths.}
 \begin{center}
-\begin{tikzpicture}[node distance=.55cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[cs,text width=3.05cm,minimum height=1.1cm](a){Initialize target\\Deferred forkserver};
-\node[cc,text width=3.05cm,minimum height=1.1cm,right=of a](b){Persistent child\\Run one mutated input};
-\node[ce,text width=3.05cm,minimum height=1.3cm,right=of b](c){Keep new-path inputs\\Record crashes\\Reset mutable state};
-\draw[flow](a)--node[above=.7cm]{fork once}(b);
-\draw[flow](b)--(c);
-\draw[flow](c.south)--++(0,-.65)-|node[pos=.6,below]{next input in the same child}(b.south);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
+\node[evidence,text width=3.4cm,minimum height=1.2cm](f)at(0,0){\textbf{AFL++ controller}\\Mutate input\\Keep new paths / crashes};
+\node[candidate,text width=3.4cm,minimum height=1.2cm](c)at(6.1,0){\textbf{Target child}\\Run this input\\Reset mutable state};
+\node[state,text width=3.4cm,minimum height=.85cm](p)at(6.1,1.48){Initialize once\\Forkserver};
+\draw[flow](p)--(c);
+\draw[flow](f.east)--node[above]{next input}(c.west);
+\draw[message](c.south)--++(0,-.55)-|node[pos=.65,below]{coverage / crash result}(f.south);
 \end{tikzpicture}
-\end{center}\lead{About 1,000 inputs per child, then restart the child.}
-\sources{\href{https://aflplus.plus/docs/technical_details/}{AFL++ testing loop}; \href{https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md}{persistent-mode documentation}.}
+\end{center}
+\tagline{Persistent mode: about 1,000 inputs per child, then start a fresh child.}
+\sources{\href{https://aflplus.plus/docs/technical_details/}{AFL++}; \href{https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md}{persistent-mode documentation}.}
+
 \qadetail{The documented 10--20x gain is for persistent mode, which avoids a process fork for every input. It must not be attributed solely to the deferred forkserver. The forkserver can defer cloning until expensive initialization is complete; a persistent child then repeatedly executes the harness, resetting mutable state between inputs. The documentation recommends roughly 1,000 iterations before restarting to contain leaks and residual state. Coverage and stability checks can expose state-reset mistakes. A newly executed input is not automatically an independent observation, and a crash is not automatically an exploitable vulnerability. This is a published defensive testing workflow, not our benchmark or an instruction to attack a live service. AFL++ is a coverage-guided fuzzer descended from American Fuzzy Lop. Input mutations are tested against an instrumented target, and coverage feedback retains promising inputs for further mutation. Crashing inputs require investigation and deduplication. The technical whitepaper describes the foundational AFL mechanisms and labels itself outdated; current persistent-mode documentation supplies the restart recommendation and performance scope. The fuzzer maintains the input corpus; the target harness resets mutable state between persistent iterations.}
 % Transition: The persistent loop has an operational mechanism; now give its reported speed benefit.
-\note{[0:45] AFL++ is a bug-finding tool called a fuzzer. It mutates inputs, runs the target program, and keeps inputs that reach new execution paths. Crashes become candidates for investigation. The deferred forkserver clones the target after initialization. One persistent child then runs many inputs, resetting mutable state between them. About a thousand iterations is a recommended starting point before restarting the child. The repeat arrow stays inside the child; it does not fork for every input. Next, we look at the reported speed benefit.}
+\note{[0:45] AFL-plus-plus is a fuzzer, a tool that finds bugs by changing inputs and checking what the program does. The controller retains inputs that reach new code paths and records crashing inputs. Initialize the target once, then fork a child. In persistent mode, that child runs many inputs and resets its mutable state between them. Coverage and crash results return to the controller, which chooses the next input. About a thousand iterations is the documented starting recommendation before replacing the child. The controller manages discoveries; the target harness resets state.}
 \end{frame}

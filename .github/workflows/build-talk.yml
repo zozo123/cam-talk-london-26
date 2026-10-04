@@ -7,6 +7,7 @@ on:
       - "talk.tex"
       - "preamble/**"
       - "acts/**"
+      - "assets/**"
       - "Makefile"
       - "tools/**"
       - ".github/workflows/build-talk.yml"
@@ -15,6 +16,7 @@ on:
       - "talk.tex"
       - "preamble/**"
       - "acts/**"
+      - "assets/**"
       - "Makefile"
       - "tools/**"
       - ".github/workflows/build-talk.yml"
@@ -47,49 +49,69 @@ jobs:
 
           pages = PdfReader("talk.pdf").pages
           full = len(pages)
-          print(f"Cambridge deck: {full} pages (50 story slides, no appendix)")
-          if full != 50:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 50 pages; got {full}")
+          print(f"Cambridge deck: {full} pages (54 story slides, no appendix)")
+          if full != 54:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 54 pages; got {full}")
           # Guard against content accidentally consumed as a Beamer subtitle.
+          # Keys use the slide numbers shown to the audience.
           anchors = {
-              1: ['Twistlock', 'Cytosim', 'Immunotherapy'],
-              2: ['Twistlock', '1 hour'],
-              3: ['Cytosim', '600 s', '30'],
-              4: ['POSSUMM', '23 GB', '2.5 min', '4.6'],
-              5: ['14,000', 'Cromwell'],
-              6: ['CRISPR-IL', 'GoGenome'],
-              7: ['PD-L1', 'Abemaciclib', 'SI-2', '72'],
-              9: ['Try action A', 'Advance the accepted state'],
-              10: ['Python loop', 'Forkable API', 'checkpoint', 'evaluate', 'n=3'],
-              11: ['46', '13', '3 s'],
-              12: ['sbx', 'Databricks'],
-              13: ['microVM', 'cgroups', 'Firecracker'],
-              15: ['AFL++', '1,000'],
-              17: ['15.9%', '56%'],
-              18: ['126', '0.969686'],
-              19: ['0.7%'],
-              20: ['19,050', '120,000'],
-              22: ['Ori Chamo', '135,445'],
-              23: ['26', '60-digit'],
-              24: ['releases.astral.sh', 'githubusercontent.com'],
-              25: ['43:44', '3:41', '20:01', '18:55', '10.33'],
-              26: ['59%', '75%'],
-              28: ['1,972'],
-              30: ['1,748', '22'],
-              31: ['Run', 'Evidence', 'Accept'],
-              33: ['256 / 256', '3.44', '9.00'],
-              39: ['Runtime', 'Evidence', 'Acceptance'],
-              43: ['17.0004', '4.9566'],
-              44: ['9.17'],
-              47: ['one dispatch'],
-              48: ['Not yet run', '98.3', '0.05'],
-              49: ['Self-driving computers', 'acceptance boundary'],
+              2: ['Twistlock', 'Cytosim', 'Cancer-cell assays', '2010', '2016', '2025'],
+              3: ['Twistlock', '1 hour'],
+              4: ['Cytosim', '600 s', '30'],
+              5: ['POSSUMM', '23 GB', '2.5 min', '4.6'],
+              6: ['14,000', 'Cromwell'],
+              7: ['CRISPR-IL', 'GoGenome'],
+              8: ['PD-L1', 'Abemaciclib', 'SI-2', '72'],
+              9: ['Mobileye', 'pedestrian', 'junction', 'failing test'],
+              10: ['Try action A', 'Advance the accepted state'],
+              11: ['Python loop', 'Forkable API', 'checkpoint', 'evaluate', 'n=3'],
+              12: ['46', '13', '3 s', '33 seconds'],
+              13: ['sbx', 'Databricks'],
+              14: ['microVM', 'cgroups', 'Firecracker'],
+              16: ['Security and AI', 'Genomics and physics', 'software factory'],
+              17: ['AFL++', 'controller', 'Target child', '1,000'],
+              18: ['10', '20'],
+              19: ['15.9%', '56%'],
+              20: ['126', '0.969686'],
+              21: ['0.7%'],
+              22: ['19,050', '120,000', 'SI-12'],
+              23: ['MCF-7', 'breast cancer', 'Six of eight'],
+              24: ['Ori Chamo', '135,445', 'continuation'],
+              25: ['26', '60-digit'],
+              26: ['releases.astral.sh', 'githubusercontent.com', 'six files'],
+              27: ['3:41', '20:01', '18:55', '10.33'],
+              28: ['59%', '75%'],
+              29: ['Worker A', 'Worker B', '0 executions', '4 replicas'],
+              30: ['1,972', 'zero failures'],
+              31: ['3 attempts', '26 minutes', '3.43'],
+              32: ['1,748', '22'],
+              33: ['Run', 'Gather evidence', 'Accept'],
+              35: ['256 / 256', '3.44', '9.00'],
+              36: ['Isorun', 'Miosa', 'Archil', '73 ms', '78 ms', '100 / 100', '2 October 2026'],
+              37: ['setup', 'save', 'Start a run'],
+              38: ['210', '34', '176', '14', '20'],
+              39: ['bill', 'Model answers'],
+              40: ['publish key', 'Controller'],
+              41: ['Replacement starts', 'Late result', 'Reject'],
+              42: ['reduce uncertainty', 'shared'],
+              43: ['Select', 'Compose', 'Pool'],
+              44: ['1 GB', '2 GB', '3 GB'],
+              45: ['Union', '4 distinct', 'Intersection', '2 shared', 'Mutual information'],
+              46: ['42', '43', 'Reject the duplicate'],
+              47: ['covariance', 'weights', 'shared errors'],
+              48: ['17.0004', '4.9566', 'precision'],
+              49: ['9.17', '3.03', '0.33'],
+              50: ['100 tasks', '50 tasks', '40 tasks', '80%', '40%'],
+              51: ['receipt', '3 seconds', 'Code hash'],
+              52: ['one dispatch', 'same files'],
+              53: ['Model designs', 'Code edits', 'Measurements', 'Drug / orbit', 'Collection has not started'],
+              54: ['Trial A', 'Trial B', 'Trial C', 'accepted result', 'controller'],
           }
-          for page, terms in anchors.items():
-              rendered = pages[page].extract_text()
+          for slide, terms in anchors.items():
+              rendered = " ".join(pages[slide - 1].extract_text().split()).casefold()
               for term in terms:
-                  if term not in rendered:
-                      raise SystemExit(f"Missing displayed content on page {page + 1}: {term}")
+                  if term.casefold() not in rendered:
+                      raise SystemExit(f"Missing displayed content on slide {slide}: {term}")
           PY
           python tools/presenter_guide.py --check
           git diff --exit-code PRESENTER-GUIDE.md

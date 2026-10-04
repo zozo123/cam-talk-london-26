@@ -1,14 +1,13 @@
-\begin{frame}[t]{Evidence must identify what ran and what the runs shared.}
-\vspace{0pt}
-
-\vspace{.45cm}
-\lead{\textbf{Runtime} starts and copies execution environments.}
-\vspace{.2cm}
-\lead{\textbf{Evidence} records checks, artifacts and shared observations.}
-\vspace{.2cm}
-\lead{\textbf{Acceptance} authorizes the exact result outside the child.}
-\sources{The same run--evidence--acceptance contract; distinct execution does not establish distinct information.}
+\begin{frame}[t]{Combining branch results should add information while accounting for overlap.}
+\lead{\textbf{Fan-out} explores alternatives. \textbf{Fan-in} turns their results into a useful decision.}
+\vspace{.25cm}
+\lead{\textbf{Choose or merge artifacts:} check the final code, model or candidate.}
+\vspace{.15cm}
+\lead{\textbf{Pool measurements:} use their reliability and shared information.}
+\vspace{.15cm}
+\lead{\textbf{Goal:} reduce uncertainty without counting the same information twice.}
+\sources{Next: merge rules, overlapping observations, statistical weights and the resulting precision.}
 
 \qadetail{This bridge states the responsibilities without repeating the component-architecture diagram. Two private executions can use the same test fixture, prompt, grader, remote response or recorded observation. Artifact selection, exact composition and common-target measurement pooling have different checks, as the following menu explains. The integrated external recorder and abstaining evaluator are proposed; the built reducer carries declared evidence identity and lineage under its stated statistical model.}
-\note{[0:30] Private execution separates writable state. It does not establish independent information. Two runs may share an observation or a grader, even with different parents. Runtime records how environments execute; evidence records the checks and shared inputs; acceptance controls the final effect. We now distinguish choosing one artifact, composing several artifacts, and pooling measurements.}
+\note{[0:40] We have seen how to create and control alternative runs. Now comes the central fan-in question: how do we turn their results into a better decision? For code or model candidates, we select or compose an artifact and check it. For measurements of one quantity, we combine information using reliability and overlap. The aim is a clearer signal and less uncertainty, with shared information accounted for. We will distinguish these merge rules, then show an overlap diagram and the statistical calculation.}
 \end{frame}

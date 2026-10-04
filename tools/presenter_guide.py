@@ -68,7 +68,7 @@ def main():
     (ROOT/'PRESENTER-GUIDE.md').write_text('\n'.join(out))
     print(f'{len(rows)} slides; {total//60}:{total%60:02d}; {words} words; peak {max(60*len(s.split())/d for t,d,s,q in rows):.0f} wpm')
     if '--check' in sys.argv:
-        if len(rows)!=50 or not all(x[3] for x in rows) or fast or not TOTAL_WINDOW_S[0]<=total<=TOTAL_WINDOW_S[1]:
+        if len(rows)!=54 or not all(x[3] for x in rows) or fast or not TOTAL_WINDOW_S[0]<=total<=TOTAL_WINDOW_S[1]:
             raise SystemExit(f'DECK CHECK FAILED: slides={len(rows)}, fast={fast}, duration={total}')
         if re.search(r'\\(?:pause|only|uncover|onslide|visible)\b|\\begin\{frame\}\[[^]]*allowframebreaks',tex):
             raise SystemExit('Canonical deck must have no overlay/build pages')

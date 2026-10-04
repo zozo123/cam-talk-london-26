@@ -1,18 +1,16 @@
-\begin{frame}{The controller holds the credential that publishes a child's candidate.}
+\begin{frame}[t]{Workers propose patches; the controller holds the key to publish them.}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,
- c/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont},
- e/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont},
- s/.style={state,font=\fontsize{10.5}{12.5}\selectfont},
- l/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont,text=Muted}]
-\node[c,text width=3.0cm,minimum height=1.45cm] (child) at (0,0) {Child\\Private writable state\\Candidate artifact};
-\node[e,text width=3.0cm,minimum height=1.45cm] (controller) at (5.2,0) {Controller\\Publishing credential\\Artifact approval};
-\node[s,text width=2.25cm,minimum height=1.45cm] (repo) at (10,0) {Repository};
-\draw[flow] (child)--node[l,above,text width=2.0cm]{candidate + receipts}(controller);
-\draw[flow] (controller)--node[l,above,text width=1.7cm]{authorized artifact}(repo);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[candidate,text width=3.05cm,minimum height=1.3cm](a)at(0,0){\textbf{Worker}\\Patch + test records\\Private workspace};
+\node[evidence,text width=3.5cm,minimum height=1.3cm](b)at(4.5,0){\textbf{Controller}\\Checks approved bytes\\Holds the publish key};
+\node[state,text width=3.05cm,minimum height=1.3cm](c)at(9,0){\textbf{Repository}\\Receives the\\approved patch};
+\draw[flow](a)--(b);\draw[flow](b)--(c);
 \end{tikzpicture}
 \end{center}
-\sources{Factory artifact-digest gate; Firecracker and gVisor documentation; Capsicum, USENIX Security 2010; CHERI, IEEE S\&P 2015.}
+\vspace{.3cm}
+\lead{The worker can change its sandbox. Publication requires a separate decision.}
+\sources{Controller-held publication exercised in our factory; capability-security precedents: Capsicum and CHERI.}
+
 \qadetail{Controller-held publication is exercised; fresh clone authority remains proposed. The original contract table retains immutable parent/cache digest identity and a declared trust domain, private writable child state, host-authenticated and authorized child identity/epoch/expiry/budget, and a controller-held publishing credential whose approval names the artifact. A microVM can contain a still-valid bearer token. Kernel isolation does not make that token harmless. Guest-supplied generation strings are copied and cannot authenticate a clone; fresh identity alone does not confer authority. The host must authenticate and authorize each child separately. VMGenID can reseed the kernel; userspace RNG treatment is application-dependent. Refresh network identity, clock and socket semantics. Immutable caches still need a trust and leakage policy. Egress policy is distinct from withholding publication credentials. Every candidate needs verification of its required behavior and exact digest before a current publication decision. Q&A extension from acts/3-design/09-component-architecture.tex: The solid path identifies exercised serial components: Airflow scheduling and journal, Docker work cells, candidate artifact digests and the controller-held publication gate. The repository is the destination behind the gate; a refusal does not imply publication occurred. No factory case-study run forked. The dashed fork-store and external-evaluator path is an extension design rather than an integrated execution result. The fork store is missing; the external evaluator is proposed. Returned evaluation receipts must name the exact candidate digest. Named-snapshot API paths were exercised separately. The numerical reducer was built separately; a lease broker exists but was unused in these work orders. Calibrated dependence and epoch-fenced publication are proposed. Calls checkpoint, fork, evaluate, select, reduce and promote express different decisions. The eight obligations retained from the prior deck are: identified immutable parent; fresh child authority; no guest publishing token; input/evidence/feedback records; duplicate rejection plus retained shared factors; deterministic composition and conflict retention; exact-composition verification; durable export on every exit. Selection/composition of patches is separate from common-target numerical reduction. An authentic receipt alone cannot establish behavioral coverage or statistical calibration.}
-\note{[0:45] The sandbox does not hold the key that ships the result. It returns a patch and the records of its checks. The controller verifies that approval names the exact artifact and holds the publishing credential. A valid token copied into several children would otherwise let each act on the repository. The factory exercised this separation of publishing authority. Worker replacement raises one more question: when a delayed request arrives, is its authority still current?}
+\note{[0:40] A worker can edit files, run experiments and propose a patch. It returns that patch and the records of its checks. The controller checks that approval refers to these exact bytes, then uses its own credential to publish them. The worker never needs that key in its copied workspace. Our factory exercised this separation. Isolation controls where a worker can run; the controller controls which result becomes an external change. We must also reject publication from a worker whose permission has expired.}
 \end{frame}

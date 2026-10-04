@@ -1,0 +1,16 @@
+\begin{frame}[t]{Isorun led the October 2 sandbox startup benchmark at a 73 ms median.\ev{\tagO}}
+\lead{\textbf{Time to interactive:} create a sandbox and run its first command.}
+{\fontsize{12.5}{16}\selectfont
+\begin{tabularx}{\linewidth}{@{}Y r r r@{}}\toprule
+\textbf{Provider} & \textbf{Median} & \textbf{p95} & \textbf{Success}\\\midrule
+\textbf{Isorun} & \textbf{73 ms} & \textbf{78 ms} & \textbf{100 / 100}\\[3pt]
+Miosa & 163 ms & 188 ms & 100 / 100\\[3pt]
+Archil & 238 ms & 250 ms & 100 / 100\\\bottomrule
+\end{tabularx}\par}
+\vspace{.08cm}
+\tagline{ComputeSDK: 100 concurrent requests per provider, 2 October 2026.}
+\claim{Cheap starts raise the bar for state reuse.}
+\sources{\href{https://www.computesdk.com/benchmarks/sandboxes/burst-tti}{ComputeSDK Burst TTI} and \href{https://github.com/computesdk/benchmarks/blob/24922f27408279200074cbc8773cbda9a4aa4785/results/burst_tti/2026-10-02.json}{dated raw results}. Different endpoint from our creation trace.}
+\qadetail{Retrieved 4 October2026. Immutable source repository SHA24922f27408279200074cbc8773cbda9a4aa4785; results/burst_tti/2026-10-02.json timestamp2026-10-02T13:16:13.099Z; Linux x64 Node v24.21.0. Isorun median72.77ms p9578.29ms p9978.7ms, success1, concurrency100, 100iterations, composite99.25 rounded99.3. Miosa median163.35ms p95187.8ms p99188.39ms, success1, concurrency100. Archil median237.77ms p95250.34ms p99255.07ms, success1, concurrency100. The run's composite rank and median rank agree for these top three. ComputeSDK defines TTI as create-to-first successful command; measured at the client. Creation versus TTI and concurrency8 versus100 are different endpoints/protocols; do not compute a provider improvement or general fork speedup by dividing this table into our Table2. This is a dated landscape update since the paper, not a controlled same-provider longitudinal experiment. Warm pools, image/region defaults, provider adapters and infrastructure affect the result. The public runner is Namespace4vCPU/16GB Northern Virginia according to the leaderboard; this describes the benchmark runner, not a verified identical configuration of each provider sandbox. Fetch preserved raw JSON in evidence/computesdk-burst-tti-2026-10-02.json.}
+\note{[0:45] Since our paper, community benchmarks offer a broader dated view. ComputeSDK\'s October second burst test launched a hundred sandboxes concurrently per provider and timed creation through the first successful command. Isorun led at seventy-three milliseconds median, followed by Miosa at a hundred sixty-three and Archil at two hundred thirty-eight. All three completed a hundred requests. This endpoint differs from our creation trace, so it is not a measured speedup of that experiment. The systems implication is concrete: cheap starts raise the bar. Reuse should avoid useful preparation beyond merely starting a sandbox.}
+\end{frame}

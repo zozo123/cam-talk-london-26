@@ -1,19 +1,16 @@
-\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}The repair agent diagnosed a split between cell and dispatch ownership.}
-\vspace{0pt}
-\fontsize{12.5}{15}\selectfont
+\begin{frame}[t]{\ev{\tagM}\surf{SOFTWARE}One worker owned the workspace; another had permission to run.}
+\lead{The repair agent's diagnosis: workspace ownership and dispatch permission split.}
 \begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm, cs/.style={state,font=\fontsize{10.5}{12.5}\selectfont}, cc/.style={candidate,font=\fontsize{10.5}{12.5}\selectfont}, ce/.style={evidence,font=\fontsize{10.5}{12.5}\selectfont}, cb/.style={bad,font=\fontsize{10.5}{12.5}\selectfont}, cp/.style={proposed,font=\fontsize{10.5}{12.5}\selectfont}, every node/.style={align=center,font=\fontsize{10.5}{12.5}\selectfont}]
-\node[cc,text width=2.8cm,minimum height=.95cm](a) at (0,1.0){A activates the cell};
-\node[cc,text width=2.8cm,minimum height=.95cm](b) at (0,-.7){B holds the valid\\dispatch lease};
-\node[cb,text width=3.15cm,minimum height=.95cm](fa) at (4.1,1.0){A loses dispatch authority};
-\node[cb,text width=3.15cm,minimum height=.95cm](fb) at (4.1,-.7){B receives \texttt{CellBusy}};
-\draw[denied](a)--(fa);\draw[denied](b)--(fb);
-\node[cb,text width=2.1cm,minimum height=1.15cm](zero) at (8.4,.15){0 runs\\from 4 replicas};
-\draw[denied](fa.east)--(zero.west);\draw[denied](fb.east)--(zero.west);
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{15}\selectfont}]
+\node[candidate,text width=3.8cm,minimum height=1.1cm](a)at(0,1){\textbf{Worker A}\\Owns workspace\\Cannot dispatch};
+\node[candidate,text width=3.8cm,minimum height=1.1cm](b)at(0,-1){\textbf{Worker B}\\May dispatch\\Workspace is busy};
+\node[bad,text width=3.3cm,minimum height=1.2cm](c)at(6.8,0){\textbf{0 executions}\\in a test with 4 replicas};
+\draw[denied](a.east)--(c.west);\draw[denied](b.east)--(c.west);
 \end{tikzpicture}
-\end{center}\lead{Repair: adopt the active cell when it belongs to the same work order.}
-\sources{\href{https://github.com/zozo123/ariflow-swfactory/blob/main/docs/factory/SELFHOST-2/agent/fix.4.json}{SELFHOST-2 first repair diagnosis}; dispatch-concurrency test.}
+\end{center}
+\tagline{Repair: let the authorized worker reuse the active workspace for the same job.}
+
 \qadetail{The repair record explains that replicas can all claim an intent when its dispatch lease has zero duration; only the final claimant keeps a valid token. One attempt can win cell activation, then fail while recording the epoch with DispatchLeaseLost. The token holder encounters CellBusy. The proposed source fix inspects the active cell and adopts it when the owner is another attempt of the same work order. This records the agent's explanation, not an independently reproduced causal diagnosis. The test's dispatch lease is distinct from the sandbox authority lease disabled by the unmanaged cell. Existing tests exercise adoption through a crash path and refusal of a foreign owner through a busy path. They do not deterministically cover the conjunction CellBusy plus same-work-order adoption. Review 1 requested deterministic tests as a blocker; review 2 approved and rated the missing direct test minor. The suite may encounter the path through a favorable race interleaving, which is not a deterministic branch test. The harness ran the suite after repairs; the repair agents had no shell. Do not say every reported case passed: 1,972 includes skips and zero failures. Sources: agent/review.1.json, fix.5.json, review.2.json and stage records. All 15 logged edits were allowed; six were made by repair agents. The agent reported that tests were protected, but the log does not show a blocked edit attempt and the test hook never fired. Scope checks applied to planned work nodes; repairs followed a non-node path without the same scope check. The out-of-plan backend/service.py change remained major while review could approve. A proposed amendment would explicitly authorize new source scope and require the requested behavioral test. The co-authored OffRisk work is only an annotation/enforcement analogy: Bioinformatics Advances 3:vbad138 (2023), not evidence about this repair policy.}
 % Transition: The adoption repair creates a new behavioral obligation that deserves a direct test.
-\note{[0:45] The concurrency test reported zero runs from four replicas. The repair agent diagnosed a split: one replica activated the cell, while another held the valid dispatch lease. The activation winner lost dispatch authority; the valid token holder received CellBusy. The fix inspected the active cell and adopted it when its owner was another attempt of the same work order. This is the recorded diagnosis. A new recovery path now exists, so the next question is whether the checks deliberately exercise it.}
+\note{[0:40] The concurrency test reported zero executions from four replicas. The repair agent explained a split in ownership. Worker A activated the workspace but lost permission to dispatch. Worker B had dispatch permission but found the workspace busy. Each held only part of what the job needed. The repair let the authorized worker adopt the already active workspace when it belonged to the same job. This is the agent record's diagnosis. The recovery path needed a direct test of that precise combination of conditions.}
 \end{frame}
