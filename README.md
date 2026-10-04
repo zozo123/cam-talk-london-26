@@ -4,6 +4,7 @@ This academic talk connects reusable execution with the evidence and authority n
 
 - [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **57 main slides, 41:25 planned narration, no appendix or overlays**.
 - [Presenter guide](PRESENTER-GUIDE.md): timed spoken cues and retained Q&A detail.
+- [Two-sentence slide takeaways](SLIDE-TAKEAWAYS.md): the point and practical lesson of every slide.
 - [Review of all original 57 slides](DECK-REVIEW.md): argument, keep/rewrite/merge decisions and final locations.
 - [Story and canonical slide map](deck-storyline.md).
 - [References](REFERENCES.md), [claim boundaries](CLAIM-FENCE.md), [QA](QA.md) and [preregistration](PREREGISTRATION.md).
