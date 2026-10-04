@@ -91,7 +91,7 @@ Explain the executable chain WDL → Cromwell → Docker and identifiable output
 
 **Keep and shorten. New main slide 9.**
 
-Keep the credited Mobileye Manhattan photograph and personal junction-perception role, 2021–2024. The updated main example shows road sensing and anonymized data transmission from the speaker-supplied assumption of 300 million Mobileye-equipped cars, alignment of repeated drives along the same road, aggregation into the HD Roadbook and map distribution back to vehicles. The photo caption identifies an autonomous test vehicle (AV). The service acronym is removed from visible content. The pedestrian/braking loop and software-edits analogy remain visible. Fleet observation/aggregation motivates the next private-alternative execution slides without calling cars checkpoint clones.
+Keep the credited Mobileye Manhattan photograph and personal junction-perception role, 2021–2024. The updated main example shows road sensing and anonymized data transmission from the speaker-supplied assumption of 300 million Mobileye-equipped cars, alignment of repeated drives along the same road, aggregation into the HD Roadbook and map distribution back to vehicles. The photo caption identifies an autonomous test vehicle (AV). The service acronym is removed from visible content. The main figure now has one vertical flow: send anonymized observations, match the same road and combine them, return an updated Roadbook. The pedestrian/braking loop and software-edit analogy remain in Q&A. Fleet observation/aggregation motivates the next private-alternative execution slides without calling cars checkpoint clones.
 
 ### 9 Reusing build artifacts reduced a reported Tokio compile from 46 to 13 seconds.
 
@@ -416,7 +416,7 @@ Every supplied screenshot and the pasted original 57-slide review has a destinat
 | Simplify slides 26–31 around paradigms, theory, contribution and flows | 27–32 | Six plain-language flows for feedback, private fan-out, fan-in, returned evidence, a targeted check and durable output. Incident detail retained in Q&A. Measured serial baseline distinguished from proposed parallel design. |
 | Redo the deck end to end; review original slides 1–57 | 1–57; review entries 1–57 above | Connected six-act story, canonical map and timed notes; retained material has an explicit Q&A destination |
 | Put the research map in the right timeline; explain the work before naming tools | 2–9 | Verified chronological milestones, action headings and definitions for CS undergraduates |
-| Make the driving example concrete and exciting | 9 | Credited official Mobileye Manhattan photograph; personal junction-perception role, pedestrian/braking feedback and software-edit analogy; worldwide fleet fan-in uses plain wording |
+| Make the driving example concrete and exciting | 9 | Credited official Mobileye Manhattan photograph; personal junction-perception role and unchanged AV photo; one simple worldwide observation-to-map flow, with the braking/software analogy retained in Q&A |
 | Show worldwide car observations merging into Roadbook; check the proposed 300 million/every-second claim | 9 | Speaker-supplied assumption of 300 million Mobileye-equipped cars sensing and transmitting anonymized data, same-road alignment and HD Roadbook feedback. The photo is an autonomous test vehicle (AV). Separately dated 34 billion 2025 mapping road-miles gives ~1,080/second as an annual average, without implying a rate for all 300M cars |
 | Say sandboxes; show sbx and hosted-model execution; keep serial scope clear | 13, 27 | Sandbox wording, sbx command, Airflow and Databricks; recorded runs remain serial |
 | Compare VM, microVM, container, sandbox and cgroups together | 14 | One table distinguishes guest kernels, shared kernels, resource limits and policy boundaries |
@@ -453,3 +453,14 @@ The protocol remains byte-for-byte unchanged. Hidden Q&A preserves operation bou
 All 57 rendered slides were inspected together and the changed slides were inspected individually at 1,600 pixels wide. The final pass checked titles, arrow direction, branch identity, axes, units, legends, text wrapping, citations and the separation of measured results from proposed flows. Expanded labels initially crowded slides 8, 22, 24 and 26; the final layouts shorten those labels and preserve the readable type scale. The physics projection uses schematic scaled period/angular-momentum axes and the same A/B identities in both views. The two stability rows explain the public paper's representative mechanisms without treating local stability as a connectivity test. Slide 42 distinguishes scheduling from permission fencing.
 
 The full build has 57 pages and 41:25 of planned narration. Every slide has a timed cue and preserved Q&A. The render contains all required displayed content and the final TeX log has no overfull or underfull boxes. The protocol remains unchanged. The prior Mobileye update, including the 300M speaker-supplied fleet assumption, anonymized data and AV test-vehicle caption, remains present.
+
+
+## Concise figures follow-up, 4 October 2026
+
+Slides 8, 9 and 26 have simpler diagrams and language. Slide 8 uses three steps for the researcher-directed laboratory search. It keeps ten drugs, two readouts, the chosen pair, 72-hour test, 45 possible pairs and simple drug-mechanism descriptions. The six-plus-four panel scope and 10–100-fold single-drug induction range remain in Q&A. “Researcher-directed” describes who chose the follow-up, not manual pipetting.
+
+Slide 9 retains the original car image, now captioned “Mobileye autonomous test vehicle (AV).” One vertical flow shows worldwide anonymous road observations, matching and combination on the same road, and the updated map returning to cars. The speaker-supplied 300M fleet assumption and the separate 2025 mapping total remain distinct.
+
+Slide 26 explains stability through a small nudge that either stays small or grows. Two before-and-after examples show opposite changes as masses vary. Technical spectral names remain in Q&A, and the independent 60-digit calculation and linear planar scope remain visible. The arrows change orbit parameters rather than showing one fixed orbit becoming stable over time.
+
+The follow-up renders of all three slides were inspected at 1,600 pixels wide. The complete 57-page build passes the existing content checks and pacing check (41:25, 4,643 spoken words, peak 124 words/minute). The final TeX log has no layout warnings.

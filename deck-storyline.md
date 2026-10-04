@@ -26,7 +26,7 @@ The story follows **reuse useful state → fan out changed trials → gather new
 | 5 | POSSUMM computed 500-bp chromosome compartments with 23 GB of RAM. | 0:40 | [Source](acts/1-introduction/04-genome-algorithms.tex) |
 | 6 | ENCODE recorded how each result came from its input data. | 0:45 | [Source](acts/1-introduction/05-encode-pipelines.tex) |
 | 7 | Computer predictions guide gene-editing experiments, then learn from them. | 0:45 | [Source](acts/1-introduction/05-crispr-design.tex) |
-| 8 | A chosen drug pair preserved cell killing and reduced PD-L1. | 0:45 | [Source](acts/1-introduction/05-immune-response.tex) |
+| 8 | Researchers chose a drug pair to test. | 0:45 | [Source](acts/1-introduction/05-immune-response.tex) |
 | 9 | 300 million cars build Mobileye's Roadbook. | 0:35 | [Source](acts/1-introduction/06-self-driving-systems.tex) |
 | 10 | Forkable computation lets us try different futures from the same state. | 0:50 | [Source](acts/1-introduction/02-executable-search.tex) |
 | 11 | The forkable API prepares once and runs alternatives in private children. | 0:40 | [Source](acts/1-introduction/02-control-comparison.tex) |
@@ -44,7 +44,7 @@ The story follows **reuse useful state → fan out changed trials → gather new
 | 23 | Focused tests found promising gene targets and drug combinations. | 0:45 | [Source](acts/2-case-study/07-genomics-assay.tex) |
 | 24 | With Chamo, we connected two apparent branches of one orbit family. | 0:45 | [Source](acts/2-case-study/08-three-body-question.tex) |
 | 25 | All 26 selected connections survived checks in both directions. | 0:45 | [Source](acts/2-case-study/09-three-body-verification.tex) |
-| 26 | We checked two changes in orbit stability. | 0:45 | [Source](acts/2-case-study/09-three-body-stability.tex) |
+| 26 | An orbit can gain or lose stability. | 0:45 | [Source](acts/2-case-study/09-three-body-stability.tex) |
 | 27 | Software agents improve code through a feedback loop. | 0:45 | [Source](acts/2-case-study/10-installer-task.tex) |
 | 28 | Forking tests different ideas from the same prepared state. | 0:40 | [Source](acts/2-case-study/11-workflow-time.tex) |
 | 29 | Fan-in checks the version we choose or combine. | 0:40 | [Source](acts/2-case-study/12-review-cost.tex) |
