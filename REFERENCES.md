@@ -197,3 +197,9 @@ The dated overview connects systems/security, biological and genomic work, a pub
 - Polyanskiy and Wu, [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/), Chapter 2: mutual information, entropy identity and information chain rules.
 - Valassi and Chierici, [Information and treatment of unknown correlations in the combination of measurements using the BLUE method](https://arxiv.org/abs/1307.4003), European Physical Journal C 74:2717 (2014), [DOI](https://doi.org/10.1140/epjc/s10052-014-2717-6). Correlation-aware best linear unbiased estimate; externally justified error model required.
 - Chamo and Eliaz, [Three-Body Orbit Atlas source](https://github.com/zozo123/threebody-closing-the-open/tree/23640cd869720ce62bc7a5fee4d7269d860e7321), including paper/short/main_short.pdf: 135,445 catalogued orbits; selected checks 5 macroscopic MST cuts, 20 chart jumps and one distant pair; 26 bidirectional connections. This supports the numbered workflow, not a global completeness claim.
+
+## Mobileye Roadbook aggregation update
+
+- [Mobileye Stellantis announcement](https://ir.mobileye.com/news-releases/news-release-details/mobileye-supply-cloud-enhanced-adas-select-future-stellantis), 21 July 2026: >8 million REM contributing vehicles; 34 billion miles in 2025. The separate EyeQ installed-base figure is >230 million vehicles through 2025. Retrieved 4 October 2026.
+- [Mobileye REM technology](https://www.mobileye.com/technology/rem/): tagged observations, alignment/aggregation along the same road, semantic map generation and distribution to vehicles. The slide uses the sourced HD Roadbook description.
+- The displayed rate is an annual-average calculation: 34,000,000,000 / 31,536,000 = 1,078.1 road-miles of observations per second, rounded to 1,080. It is not a signals/second or instantaneous upload-rate measurement.

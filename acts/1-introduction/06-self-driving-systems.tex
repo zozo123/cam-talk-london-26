@@ -1,22 +1,31 @@
-\begin{frame}[t]{Self-driving cars react to traffic; software agents react to test results.}
+\begin{frame}[t]{Millions of cars build Mobileye's Roadbook.\ev{\tagO}}
 \vspace{0pt}
 \begin{columns}[T,onlytextwidth]
-\column{.53\linewidth}
+\column{.47\linewidth}
 \includegraphics[width=\linewidth]{assets/mobileye-new-york-2021.png}\par
-\vspace{.08cm}
-\tagline{Mobileye test vehicle in Manhattan, June 2021.}
-\column{.43\linewidth}
-{\fontsize{12}{15}\selectfont
-\textbf{Read the road.}\par
-Find lanes, cars and pedestrians.\par
-\vspace{.15cm}
-A pedestrian steps out $\to$ brake $\to$ check the next camera frame.\par}
-\vspace{.2cm}
-\tagline{My work: junction perception at Mobileye, 2021--2024.}
+\tagline{Mobileye test vehicle, Manhattan, June 2021.}
+\tagline{\textbf{My work:} junction perception, 2021--2024.\\Pedestrian $\to$ brake $\to$ next camera frame.}
+\column{.49\linewidth}
+{\fontsize{20}{23}\selectfont\color{Teal}\bfseries 8M+}\enspace{\fontsize{11}{13}\selectfont REM harvesting vehicles}\par
+\vspace{.05cm}
+\tagline{Collect road observations continuously, worldwide.}
+\vspace{.04cm}
+{\centering
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{9.5}{11.5}\selectfont}]
+\foreach \yy/\nn/\lab in {.88/a/Car 1\\Lanes,0/b/Car 2\\Signs,-.88/c/Car N\\Paths}{
+\node[candidate,text width=1.55cm,minimum height=.66cm,inner sep=1.5pt] (drive\nn) at (0,\yy) {\lab};}
+\node[evidence,text width=1.7cm,minimum height=1.35cm] (merge) at (2.35,0) {\textbf{Align + merge}\\Same road};
+\foreach \nn in {a,b,c}{\draw[flow](drive\nn.east)--(merge.west);}
+\node[evidence,text width=2.15cm,minimum height=1.35cm] (map) at (4.95,0) {\textbf{HD Roadbook}\\Lanes, signs\\and driving paths};
+\draw[flow](merge.east)--(map.west);
+\end{tikzpicture}\par}
+\tagline{\textbf{REM:} Road Experience Management.\\\textbf{HD:} high-definition road map.}
 \end{columns}
-\vspace{.10cm}
-\lead{\textbf{Software:} failing test $\to$ inspect code $\to$ edit $\to$ rerun the test.}
-\sources{Photo: \href{https://www.mobileye.com/press-kit/press-kit-mobileye-new-york-city/}{Mobileye / Intel press kit}; Manhattan test drive, June 2021.}
-\qadetail{The official Mobileye press kit identifies this photo as a test vehicle navigating Manhattan in June 2021. Image URL: https://static2.mobileye.com/img?h=504\&p=auto\&s=us\%2Fcorporate\%2Fimages\%2F17b6eecccb661bef7544a8bd66cc6a2c\_1668948799742.jpg\&w=1072. The vehicle illustrates the field; it is not attributed to the speaker's particular team or work. The speaker's own career website states Mobileye employment December 2021--March 2024, deep learning and algorithms research, including production perception and road-junction semantics. Perception provides observations for a driving policy; the pedestrian/braking sequence is an introductory illustration, not a description of a specific deployed Mobileye safety architecture or a personal contribution claim about the full controller. No Mobileye production accuracy or safety metric is asserted. The software loop is read an executed failure, inspect and edit the program, rerun the check, and revise. The proposed forkable execution layer adds private alternative continuations; ordinary stored-program execution still implements their actions. The downloaded WebP was converted losslessly to PNG for TeX compatibility, with no synthetic additions; it is scaled proportionally in the deck.}
-\note{[0:35] At Mobileye I worked on junction perception. If a pedestrian steps into the road, perception detects it, the car brakes, and the next frame informs its next action. A software agent sees a failing test, edits the code and reruns the check. Both use feedback. A computer can also test several private alternatives before choosing one. That is the next step.}
+\vspace{.03cm}
+{\fontsize{11.5}{14}\selectfont\color{Gold}\textbf{34 billion road-miles in 2025} $\approx$ \textbf{1,080 road-miles/second} (annual average).\par}
+\par\vspace{.1cm}{\fontsize{11.5}{14}\selectfont\color{Teal}\bfseries Parallel observations $\to$ align + merge $\to$ Roadbook $\to$ back to cars.\par}
+\tagline{Software forks: failing test $\to$ try separate edits $\to$ compare checked results.}
+\sources{\href{https://ir.mobileye.com/news-releases/news-release-details/mobileye-supply-cloud-enhanced-adas-select-future-stellantis}{Mobileye, 21 July 2026}; \href{https://www.mobileye.com/technology/rem/}{REM workflow}. Photo: \href{https://www.mobileye.com/press-kit/press-kit-mobileye-new-york-city/}{Mobileye / Intel press kit}. Rate is derived from the 2025 total.}
+\qadetail{REM scale and aggregation: Mobileye's 21 July 2026 Stellantis release reports more than eight million contributing vehicles and 34 billion miles covered in 2025. Source: https://ir.mobileye.com/news-releases/news-release-details/mobileye-supply-cloud-enhanced-adas-select-future-stellantis. The same release distinguishes more than 230 million vehicles built with EyeQ through 2025 from the much smaller REM harvesting fleet. The requested 300 million active harvesting cars and a fixed every-second upload interval were not verified. The slide uses continuous collection while vehicles drive. The per-second value is a derived 2025 annual average: 34,000,000,000 divided by (365 times 24 times 60 times 60) equals approximately 1,078 road-miles of observations per second, rounded to 1,080. It measures repeated driven distance, not unique road length, independent observations, data packets or simultaneous uploading cars; it is not an instantaneous throughput benchmark. Mobileye's REM technology page (https://www.mobileye.com/technology/rem/) describes anonymous tagged road observations, cloud aggregation/alignment of individual drives along the same road, road modelling and semantic interpretation, then distribution of the Roadbook to vehicles. The sourced description is high-definition (HD), not a separately established UHD product or precision claim. The diagram groups lane, sign and driving-path observations into three representative drives; actual cars can observe multiple feature types. Parallel observations and fan-in provide the analogy to computational forks. REM cars are not copies restored from one checkpoint, and shared observations do not establish independent information. The speaker's junction-perception role does not establish authorship of the REM mapping system. The official Mobileye press kit identifies this photo as a test vehicle navigating Manhattan in June 2021. Image URL: https://static2.mobileye.com/img?h=504\&p=auto\&s=us\%2Fcorporate\%2Fimages\%2F17b6eecccb661bef7544a8bd66cc6a2c\_1668948799742.jpg\&w=1072. The vehicle illustrates the field; it is not attributed to the speaker's particular team or work. The speaker's own career website states Mobileye employment December 2021--March 2024, deep learning and algorithms research, including production perception and road-junction semantics. Perception provides observations for a driving policy; the pedestrian/braking sequence is an introductory illustration, not a description of a specific deployed Mobileye safety architecture or a personal contribution claim about the full controller. No Mobileye production accuracy or safety metric is asserted. The software loop is read an executed failure, inspect and edit the program, rerun the check, and revise. The proposed forkable execution layer adds private alternative continuations; ordinary stored-program execution still implements their actions. The downloaded WebP was converted losslessly to PNG for TeX compatibility, with no synthetic additions; it is scaled proportionally in the deck.}
+\note{[0:35] At Mobileye I worked on junction perception. REM shows aggregation at fleet scale. More than eight million vehicles collect road observations worldwide. Observations of the same road are aligned and merged into the high-definition Roadbook, which goes back to vehicles. Thirty-four billion road-miles in 2025 gives the displayed annual average. For software forks, the pattern is similar: gather parallel results, align what they describe, and combine useful information.}
 \end{frame}

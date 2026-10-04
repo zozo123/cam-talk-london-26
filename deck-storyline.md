@@ -27,7 +27,7 @@ The story follows **reuse useful state → fan out changed trials → gather new
 | 6 | ENCODE linked reproducible execution to identifiable outputs. | 0:45 | [Source](acts/1-introduction/05-encode-pipelines.tex) |
 | 7 | CRISPR-IL fed measured outcomes into the next design round. | 0:45 | [Source](acts/1-introduction/05-crispr-design.tex) |
 | 8 | Ten drugs led to a pair with lower PD-L1. | 0:45 | [Source](acts/1-introduction/05-immune-response.tex) |
-| 9 | Self-driving cars react to traffic; software agents react to test results. | 0:35 | [Source](acts/1-introduction/06-self-driving-systems.tex) |
+| 9 | Millions of cars build Mobileye's Roadbook. | 0:35 | [Source](acts/1-introduction/06-self-driving-systems.tex) |
 | 10 | Forkable computation lets us try different futures from the same state. | 0:50 | [Source](acts/1-introduction/02-executable-search.tex) |
 | 11 | The forkable API prepares once and runs alternatives in private children. | 0:40 | [Source](acts/1-introduction/02-control-comparison.tex) |
 | 12 | Caching lets repeated experiments reuse their expensive build work. | 0:45 | [Source](acts/1-introduction/07-build-reuse.tex) |

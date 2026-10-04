@@ -91,7 +91,7 @@ Explain the executable chain WDL → Cromwell → Docker and identifiable output
 
 **Keep and shorten. New main slide 9.**
 
-Use a real, credited Mobileye test vehicle photo from its official Manhattan press kit. Explain a pedestrian stepping into the road → brake → check the next camera frame. Name the personal junction-perception role, 2021–2024. Below, use a failing test → inspect code → edit → rerun the test. The concrete examples supply the feedback connection; the next cinema/code slides introduce private alternative executions.
+Keep the credited Mobileye Manhattan photograph and personal junction-perception role, 2021–2024. The updated main example shows continuous road observations from >8 million REM contributors, alignment of repeated drives along the same road, aggregation into the HD Roadbook and map distribution back to vehicles. The pedestrian/braking loop and software-edits analogy remain visible. Fleet observation/aggregation motivates the next private-alternative execution slides without calling cars checkpoint clones.
 
 ### 9 Reusing build artifacts reduced a reported Tokio compile from 46 to 13 seconds.
 
@@ -405,7 +405,8 @@ Every supplied screenshot and the pasted original 57-slide review has a destinat
 |---|---|---|
 | Redo the deck end to end; review original slides 1–57 | 1–54; review entries 1–57 above | Connected six-act story, canonical map and timed notes; retained material has an explicit Q&A destination |
 | Put the research map in the right timeline; explain the work before naming tools | 2–9 | Verified chronological milestones, action headings and definitions for CS undergraduates |
-| Make the driving example concrete and exciting | 9 | Credited official Mobileye Manhattan photograph; pedestrian/braking feedback and failing-test/code-edit analogy |
+| Make the driving example concrete and exciting | 9 | Credited official Mobileye Manhattan photograph; personal junction-perception role, pedestrian/braking feedback and software-edit analogy; later update adds REM fleet fan-in |
+| Show worldwide car observations merging into Roadbook; check the proposed 300 million/every-second claim | 9 | Verified >8 million REM contributors; continuous collection, same-road alignment and HD Roadbook feedback; 34 billion 2025 road-miles gives ~1,080/second as an annual average; EyeQ count distinguished in Q&A |
 | Say sandboxes; show sbx and hosted-model execution; keep serial scope clear | 13, 26 | Sandbox wording, sbx command, Airflow and Databricks; recorded runs remain serial |
 | Compare VM, microVM, container, sandbox and cgroups together | 14 | One table distinguishes guest kernels, shared kernels, resource limits and policy boundaries |
 | Explain why caching makes repeated trials practical | 12, 37–38 | Build cache example: 46 / 13 / 3 seconds; restored artifacts save about 33 seconds; warm-cache alternative in reuse calculation |
