@@ -1,0 +1,17 @@
+\begin{frame}[t]{Twistlock learned container behavior and enforced the resulting model.}
+\vspace{.3cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+  stage/.style={draw=Teal,fill=Pale,line width=.9pt,text width=3.65cm,minimum height=1.65cm,align=center,font=\fontsize{12.5}{15}\selectfont}]
+\node[stage] (observe) at (0,0) {\textbf{Observe behavior}\\[6pt]Processes + files\\Network + syscalls};
+\node[stage] (learn) at (4.8,0) {\textbf{Learn a model}\\[6pt]Expected behavior\\for each container image};
+\node[stage] (enforce) at (9.6,0) {\textbf{Enforce the model}\\[6pt]Alert or block\\unexpected behavior};
+\draw[flow] (observe.east)--(learn.west);
+\draw[flow] (learn.east)--(enforce.west);
+\node[align=center,text width=13.4cm,font=\fontsize{12.5}{15}\selectfont] at (4.8,-2.2) {Vendor-reported learning plateau: usually about \textbf{1 hour}\\of cumulative runtime};
+\end{tikzpicture}
+\end{center}
+\sources{\href{https://cdn.twistlock.com/docs/TechNews/Twistlock_Jan17_1_7.pdf}{Twistlock 1.7 Tech News, January 2017}. Product/team mechanism.}
+\qadetail{The primary newsletter describes automatically learned per-image process, filesystem, network and system-call behavior. It reports that learning usually plateaus within approximately an hour of cumulative runtime, and that the default enforce-the-model rule can alert or block deviations. This is a vendor operational account, not our controlled benchmark or a guarantee for every workload. Learning a runtime baseline does not establish self-modifying security source code. The speaker worked at Twistlock; these sources do not establish his personal ownership of this feature. The slide uses the product mechanism to motivate adaptive execution policy, not to claim an agent-fork result.}
+\note{[0:30] I worked on container security at Twistlock. The product observed processes, files, network activity and system calls, then learned a model for each image. Its default rule could alert or block behavior outside that model. The team reported that learning usually plateaued after about an hour of cumulative runtime. This introduced an adaptive security policy around ordinary program execution.}
+\end{frame}

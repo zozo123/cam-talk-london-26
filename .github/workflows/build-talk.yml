@@ -47,25 +47,44 @@ jobs:
 
           pages = PdfReader("talk.pdf").pages
           full = len(pages)
-          print(f"Cambridge deck: {full} pages (57 story slides, no appendix)")
-          if full != 57:
-              raise SystemExit(f"ERROR: canonical Cambridge deck must be 57 pages; got {full}")
+          print(f"Cambridge deck: {full} pages (50 story slides, no appendix)")
+          if full != 50:
+              raise SystemExit(f"ERROR: canonical Cambridge deck must be 50 pages; got {full}")
           # Guard against content accidentally consumed as a Beamer subtitle.
-          anchors = {1: ["Try action A", "Advance the accepted state"],
-                     2: ["IF", "LOOP", "CALL"], 4: ["Cytosim", "600 s", "30"],
-                     5: ["POSSUMM", "23 GB", "2.5 min", "4.6"],
-                     6: ["14,000", "Cromwell"], 8: ["46", "13", "3 s"],
-                     12: ["AFL++", "1,000"], 14: ["15.9%", "56%"],
-                     15: ["126", "0.969686"], 16: ["0.7%"],
-                     17: ["19,050", "120,000"], 19: ["Ori Chamo", "135,445"],
-                     20: ["26", "60-digit"], 21: ["releases.astral.sh", "githubusercontent.com"],
-                     22: ["43:44", "3:41", "20:01", "18:55", "10.33"],
-                     23: ["59%", "75%"], 25: ["1,972"], 27: ["1,748", "22"],
-                     31: ["255/256", "6.87"], 44: ["0.0083", "0.177"],
-                     45: ["17.0004", "4.9566"], 46: ["9.17"],
-                     47: ["12.5%", "25%"], 51: ["one dispatch"],
-                     52: ["Warm baseline", "20 interleaved"],
-                     56: ["Self-driving computers", "acceptance boundary"]}
+          anchors = {
+              1: ['Twistlock', 'Cytosim', 'Immunotherapy'],
+              2: ['Twistlock', '1 hour'],
+              3: ['Cytosim', '600 s', '30'],
+              4: ['POSSUMM', '23 GB', '2.5 min', '4.6'],
+              5: ['14,000', 'Cromwell'],
+              6: ['CRISPR-IL', 'GoGenome'],
+              7: ['PD-L1', 'Abemaciclib', 'SI-2', '72'],
+              9: ['Try action A', 'Advance the accepted state'],
+              10: ['Python loop', 'Forkable API', 'checkpoint', 'evaluate', 'n=3'],
+              11: ['46', '13', '3 s'],
+              12: ['sbx', 'Databricks'],
+              13: ['microVM', 'cgroups', 'Firecracker'],
+              15: ['AFL++', '1,000'],
+              17: ['15.9%', '56%'],
+              18: ['126', '0.969686'],
+              19: ['0.7%'],
+              20: ['19,050', '120,000'],
+              22: ['Ori Chamo', '135,445'],
+              23: ['26', '60-digit'],
+              24: ['releases.astral.sh', 'githubusercontent.com'],
+              25: ['43:44', '3:41', '20:01', '18:55', '10.33'],
+              26: ['59%', '75%'],
+              28: ['1,972'],
+              30: ['1,748', '22'],
+              31: ['Run', 'Evidence', 'Accept'],
+              33: ['256 / 256', '3.44', '9.00'],
+              39: ['Runtime', 'Evidence', 'Acceptance'],
+              43: ['17.0004', '4.9566'],
+              44: ['9.17'],
+              47: ['one dispatch'],
+              48: ['Not yet run', '98.3', '0.05'],
+              49: ['Self-driving computers', 'acceptance boundary'],
+          }
           for page, terms in anchors.items():
               rendered = pages[page].extract_text()
               for term in terms:

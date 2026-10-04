@@ -1,16 +1,18 @@
-\begin{frame}[t]{My work connects biological experiments, genomic pipelines, and autonomous execution.}
+\begin{frame}[t]{My work connects self-organizing matter to systems that choose their next action.}
 \vspace{0pt}
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12.5}{15}\selectfont}]
-
-\node[state,text width=2.65cm] (p) at (0,0) {Biological physics\\\textbf{State and structure}};
-\node[state,text width=2.65cm] (g) at (3.5,0) {Genomics\\\textbf{Data and\\provenance}};
-\node[state,text width=2.65cm] (m) at (7,0) {Mobileye\\\textbf{Observe, act, check}};
-\node[evidence,text width=2.65cm] (c) at (10.5,0) {Builds and agents\\\textbf{Reuse and\\continuation}};
-\draw[flow](p)--(g);\draw[flow](g)--(m);\draw[flow](m)--(c);
-\node[text width=12.8cm,font=\fontsize{15}{18}\selectfont,text=Teal] at (5.25,-1.8) {What must remain valid when computation continues?};
-
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}, pathnode/.style={text width=4.1cm,minimum height=1.55cm}]
+\node[state,pathnode] (p) at (0,0) {\textbf{Self-organization}\\Cytosim\\Local binding rules};
+\node[state,pathnode] (g) at (4.8,0) {\textbf{Genetic design}\\CRISPR-IL / GoGenome\\Measure, then design};
+\node[proposed,pathnode] (i) at (9.6,0) {\textbf{Immunotherapy}\\PD-L1 and viability\\\textcolor{Gold}{Adaptive design (goal)}};
+\node[state,pathnode] (m) at (0,-2.05) {\textbf{Self-driving cars}\\Mobileye perception\\Observe, then act};
+\node[state,pathnode] (s) at (4.8,-2.05) {\textbf{Container security}\\Twistlock\\Learn, then enforce};
+\node[evidence,pathnode] (c) at (9.6,-2.05) {\textbf{Forkable compute}\\Private continuations\\Try, check, select};
+\draw[flow](p)--(g);\draw[flow](g)--(i);
+\draw[flow](m)--(s);\draw[flow](s)--(c);
+\draw[message](g.south)--(s.north);
+\node[text width=12.8cm,font=\fontsize{12.5}{15}\selectfont,text=Teal] at (4.8,-3.25) {Observed state shapes the next decision.};
 \end{tikzpicture}\end{center}
-\sources{Physics PhD, 2020; coauthored genomics work; Mobileye perception, 2021--2024; current Incredibuild and HIT roles.}
-\qadetail{The user confirmed the personal progression from biological physics through genomics and Mobileye self-driving perception to self-driving computers. Dates and Mobileye perception role are from user-provided earlier decks. This is a thematic progression, not a claim that each collaboration happened in a disjoint period or that a specific undocumented incident caused a career transition. }
-\note{[0:45] I began in biological physics, where state and interactions determined the structures we observed. Genomics added large-scale representation and reproducible pipelines. At Mobileye, I worked on perception in self-driving systems. Build acceleration then brought computation reuse into the picture, and coding agents brought active changes to the execution environment. These experiences overlap in time. They motivate one question here: what must remain valid when a computer continues from a state and tries a different next action?}
+\sources{Thematic connections across my research, engineering work and research directions. Coauthored results and tools are detailed on the following slides.}
+\qadetail{The user proposed six themes: self-evolving Docker security, self-organizing physical systems, self-improving genetics, self-driving immunotherapy, self-driving cars and self-driving compute. This slide maps them to specific mechanisms rather than imposing an unsupported chronological order or equivalence. Physical self-organization is collective structure from local interactions; it does not require a goal-directed controller. CRISPR-IL / GoGenome is the researcher-led iterative design/experiment/learning platform documented by Noam Barkai and Yossi Eliaz in the 2022 AWS article. The measured-data and model feedback is real; the source does not establish autonomous genetics or a quantified editing-accuracy improvement. The immunotherapy-related prior work is Gilad, Eliaz et al., Scientific Reports 9:15099 (2019), DOI 10.1038/s41598-019-51537-7: E0771-cell PD-L1 expression and cytotoxicity measured after single and combination drug exposure. Response-guided adaptive treatment is the user's proposed research direction, explicitly labeled. These assays do not establish an autonomous immunotherapy system, a treatment-selection policy, measured T-cell function or a clinical outcome. Mobileye perception is the stated role, not responsibility for the full vehicle controller. Twistlock identifies container runtime behavior modeling: observed processes, files, networks and system calls inform per-image models, which rules can enforce via alerting or blocking. The vendor's January 2017 newsletter describes the mechanism; the speaker's prior Twistlock role does not establish personal ownership of every feature. Learned security models differ from self-modifying security code. Docker and Airflow remain the later factory repair example; that workflow does not establish a vulnerability-remediation rate. Self-driving compute is the proposed orchestration of private executable alternatives. The solid arrows connect themes within two lanes; the dashed link connects experimental feedback with adaptive software behavior. These are thematic connections across overlapping work, not employment transition dates. Scientific results remain attributed to their coauthors.}
+\note{[0:45] These fields brought me back to a recurring question: how does observed state shape what happens next? Local interactions organize matter. CRISPR-IL uses measured editing outcomes in the next design. Our drug-combination work checked both cell killing and PD-L1 expression; adaptive immunotherapy is the next research direction. Mobileye perception supplies observations for driving. Twistlock learns container behavior and enforces the resulting model. Forkable compute adds private alternatives from a useful state. The arrows connect ideas across the work. The next slides give concrete methods and results.}
 \end{frame}

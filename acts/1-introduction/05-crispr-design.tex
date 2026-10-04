@@ -1,0 +1,22 @@
+\begin{frame}[t]{CRISPR-IL fed measured outcomes into the next design round.\ev{\tagO}}
+\vspace{.15cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+  crnode/.style={draw=Teal,fill=Pale,line width=.9pt,text width=2.8cm,minimum height=1.4cm,align=center,font=\fontsize{12.5}{15}\selectfont},
+  roundlabel/.style={align=center,text=Teal,font=\fontsize{11.5}{14}\selectfont}]
+\node[crnode] (design) at (0,0) {\textbf{GoGenome}\\[5pt]Editing predictions};
+\node[crnode] (experiment) at (3.7,0) {\textbf{Experiments}\\[5pt]Researchers test edits};
+\node[crnode] (process) at (7.4,0) {\textbf{Processing}\\[5pt]Nextflow +\\AWS Batch};
+\node[crnode] (learn) at (11.1,0) {\textbf{Model update}\\[5pt]SageMaker};
+\draw[flow] (design.east)--(experiment.west);
+\draw[flow] (experiment.east)--(process.west);
+\draw[flow] (process.east)--(learn.west);
+\draw[message,solid,line width=1.1pt] (learn.south)--(11.1,-1.5)--(0,-1.5)--(design.south);
+\node[roundlabel,fill=white,inner sep=3pt] at (5.55,-1.5) {Measured outcomes inform the next predictions};
+\node[align=center,text width=13.7cm,font=\fontsize{12.5}{15}\selectfont] at (5.55,-2.75) {\textbf{$>20$ TB} raw sequencing data in S3\\[5pt]GOLD: \textbf{billions of indexed rows}, reported feature lookup \textbf{$<1$ s}};
+\end{tikzpicture}
+\end{center}
+\sources{Noam Barkai \& Yossi Eliaz, \href{https://aws.amazon.com/blogs/storage/a-gene-editing-prediction-engine-with-iterative-learning-cycles-built-on-aws/}{A gene-editing prediction engine with iterative learning cycles built on AWS}, 15 Feb 2022. Consortium work.}
+\qadetail{Primary source is the dated AWS Storage Blog article by Noam Barkai and Yossi Eliaz. It describes NRGene's CRISPR-IL collaboration and the GoGenome platform. The 2022 author biographies identify Noam as NRGene VP of R\&D and Yossi as an algorithm and data scientist. The source describes researcher-run experiments whose outcomes feed feature-based and neural predictive models, with transfer learning across organisms and cell types. Nextflow bioinformatic workflows run on AWS Batch; SageMaker supports modeling and learning; EKS orchestrates services. Reported scale: more than 20 TB of raw sequencing data, hundreds of millions of feature vectors, and GOLD feature tables spanning billions of indexed rows. Sub-second latency refers to feature access, not a complete prediction, training or experiment cycle. This is a first-party architecture/operations account, not a controlled evaluation of editing success. It reports no quantified improvement in editing accuracy and establishes no fully autonomous laboratory, agent-managed fork or sandbox-speed result. The diagram summarizes a human-in-the-loop experimental learning process. The conceptual connection is that experimental feedback changes the next design round, extending a prescribed analysis pipeline toward adaptive orchestration. Noam Barkai is distinct from Gil Ad Barkai, first author of the separate OffRisk paper (Barkai, Malul, Eliaz, Eyal and Veksler-Lublinsky, Bioinformatics Advances 3:vbad138, DOI 10.1093/bioadv/vbad138). OffRisk annotates human CRISPR off-target locations and labels potential risk; it must not be substituted for the GoGenome iterative-design platform. Both projects are collaborative work, not sole-author implementations.}
+\note{[0:45] With Noam Barkai and the CRISPR-IL consortium, we built GoGenome around repeated design and measurement rounds. Researchers ran editing experiments. Nextflow workflows on AWS Batch processed the outcomes, and SageMaker supported model learning for the next round. The platform handled more than twenty terabytes of sequencing data. GOLD indexed billions of rows and reported sub-second feature access. The step beyond a prescribed pipeline is that new observations inform the next design. Researchers led this experimental iteration, which motivates the orchestration model here.}
+\end{frame}

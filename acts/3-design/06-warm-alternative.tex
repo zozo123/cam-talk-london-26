@@ -1,18 +1,20 @@
-\begin{frame}{A warm cache can reverse the resource advantage of restoration.\ev{\tagA}}
+\begin{frame}[t]{A warm cache reverses the same fork's resource advantage.\ev{\tagA}}
 \vspace{0pt}
-{\fontsize{12.5}{15}\selectfont
-\textbf{Illustrative calculation:} $N=8,\ H=2,\ R=1,\ D=3$ resource-seconds.\par
-\vspace{.35cm}
-\renewcommand{\arraystretch}{1.55}
-\begin{tabularx}{\textwidth}{@{}Y r r r@{}}
-\toprule
-Preparation & Avoided & Reuse overhead & Net saving\\
-\midrule
-$P=30$: cold preparation & 210 & 34 & \textbf{+176}\\
-$P=2$: warm cache & 14 & 34 & \textbf{--20}\\
-\bottomrule
-\end{tabularx}\par}
-\sources{Illustrative parameter values; the same capture, restore and divergence costs in both rows.}
+
+\lead{Eight children: $2+8(1+3)=34$ resource-seconds of reuse overhead.}
+\begin{center}\begin{tikzpicture}[x=1cm,y=.0088cm,every node/.style={align=center,font=\fontsize{11.5}{14}\selectfont}]
+\draw[flow](0,0)--(0,230);\node[above,font=\fontsize{10}{12}\selectfont]at(0,230){Resource-seconds};
+\foreach \y in {0,100,200}{\draw(-.07,\y)--(.07,\y);\node[left,font=\fontsize{10}{12}\selectfont]at(-.1,\y){\y};}
+\fill[Teal!65](1,0)rectangle(2.5,210);\fill[Gold!65](3,0)rectangle(4.5,34);
+\fill[Teal!65](7,0)rectangle(8.5,14);\fill[Gold!65](9,0)rectangle(10.5,34);
+\foreach \x/\y in {1.75/210,3.75/34,7.75/14,9.75/34}{\node[above]at(\x,\y){\textbf{\y}};}
+\node[below]at(1.75,0){Avoided};\node[below]at(3.75,0){Overhead};
+\node[below]at(7.75,0){Avoided};\node[below]at(9.75,0){Overhead};
+\node[text=Teal]at(2.75,-112){Cold: $P=30$\\\textbf{Save 176}};
+\node[text=Rust]at(8.75,-112){Warm: $P=2$\\\textbf{Lose 20}};
+\end{tikzpicture}\end{center}
+\sources{Illustrative additive resource model; $H=2$, $R=1$, $D=3$ in both comparisons.}
+
 \qadetail{Both rows use N8, H2, R1 and D3. Reuse overhead is H+N(R+D)=2+8(1+3)=34 resource-seconds. At P30, avoided preparation is(N-1)P=7 times30=210, so reuse saves176. At P2, avoided preparation is14, so reuse adds20. These are sample calculations rather than measured backend performance. Resource-seconds are additive resource cost rather than elapsed seconds. The comparison must reconstruct equivalent usable state; a warm cache cannot be credited for a continuation it cannot faithfully supply. The installer case shows reusable files, dependencies and feedback, without establishing a necessary valuable live-state workload. Worktrees and immutable dependency caches may suffice there. Live state is useful when captured state remains valid and is consumed by the continuations, and capture/restore/divergence compete with a faithful warm reconstruction. Cheap starts are illustrated by Jitsu and LightVM.}
-\note{[0:45] Keep eight children and the reuse overhead fixed at thirty-four resource-seconds. If each independent preparation costs thirty, the avoided work is two hundred ten and reuse saves a hundred seventy-six. If a warm cache reduces preparation to two, only fourteen are avoided and restoration costs twenty more. These values are illustrative. They show why the baseline must include the cache we would deploy. The comparison still has to supply equivalent usable state. That is how the resource rule becomes a practical backend decision.}
+\note{[0:45] Keep the fork fixed: eight children, two resource-seconds to capture, one to restore each child, and three of private divergence. Total overhead is thirty-four. Cold preparation costs thirty per child, so the avoided work is two hundred ten and the saving is a hundred seventy-six. Warm preparation costs two, so fourteen are avoided and restoration loses twenty. Only the preparation we would repeat changed. These are illustrative resource-seconds, not measured batch latency. A faithful warm alternative belongs in the comparison.}
 \end{frame}

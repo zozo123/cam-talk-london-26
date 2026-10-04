@@ -1,48 +1,34 @@
-# Forkable Sandboxes: Directing Executable Exploration
+# Forkable Sandboxes Cambridge seminar
 
-**Yossi Eliaz** — Principal Engineer, Incredibuild; Associate Professor, Holon Institute of Technology (HIT).
+This academic talk connects reusable execution with the evidence and authority needed to accept a result. It follows a personal path through container security, biological physics, genomics, immune-related combination assays, automotive perception and execution systems.
 
-Cambridge Computer Laboratory Systems Research Group seminar, **15 October 2026**, 15:00–16:00 BST, FW11 + Microsoft Teams. [Event listing](https://www.talks.cam.ac.uk/talk/index/273181).
-
-- [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **57 main frames in six acts; 44:00 of narration; no appendix or overlays**.
-- [Source and slide comments](talk.tex), [presenter guide](PRESENTER-GUIDE.md), and [complete storyline](deck-storyline.md).
-- [Claim boundaries](CLAIM-FENCE.md), [Q&A](QA.md), [bibliography](REFERENCES.md), and [experiment protocol](PREREGISTRATION.md).
+- [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **50 main slides, 37:10 planned narration, no appendix or overlays**.
+- [Presenter guide](PRESENTER-GUIDE.md): timed spoken cues and retained Q&A detail.
+- [Review of all original 57 slides](DECK-REVIEW.md): argument, keep/rewrite/merge decisions and final locations.
+- [Story and canonical slide map](deck-storyline.md).
+- [References](REFERENCES.md), [claim boundaries](CLAIM-FENCE.md), [QA](QA.md) and [preregistration](PREREGISTRATION.md).
 
 ## The story
 
-**Self-driving computation chooses its next execution from observed results.** A programmer increasingly directs exploration: specify a goal and constraints, generate executable alternatives, run them, inspect the evidence, then choose the next execution. Ordinary Von Neumann processors and instruction sets remain underneath. The change concerns how a workflow chooses and verifies its work. IF, LOOP and CALL can implement both the orchestrator and its candidates; the proposed layer makes reached states, private continuations, returned evidence and acceptance explicit.
+State and feedback recur across the speaker's work. Twistlock learned container behavior and enforced an image model. Cytosim and graph measures quantified biological self-organization. POSSUMM kept genome-contact computation sparse; ENCODE made execution traceable. CRISPR-IL/GoGenome with Noam Barkai used measured editing outcomes for subsequent designs. PD-L1 combination assays checked both cell killing and induced expression; adaptive immunotherapy is a research direction. Mobileye perception supplies the observe/action connection. These are thematic relationships across overlapping work.
 
-The opening uses a cinema analogy. A player follows a prescribed sequence. An agent can choose a reached computer state, create private alternatives, run a changed continuation, then keep or discard it from observed results. Saving and restoring computer state provides the rewind; completed remote requests and other external actions remain completed.
+Forkable compute organizes private alternative executions from a useful reached state. The proposed API is expressed in Python. Build caches, worktrees, snapshots and replay preserve different state. A warm reconstruction is a serious comparison, and copied guest state does not rewind remote effects or grant publication authority.
 
-The main path is **state → evidence → authority**: supply useful state, establish what each returned result supports, and let the controller authorize the exact artifact. The examples explain those responsibilities at the point where they matter.
+Published examples attach mechanisms to values: AFL++ persistent mode reports typical **10–20×** speedups; SWE-bench Lite sampling raises coverage from **15.9% to 56%**; autoresearch validation bits per byte fall from **0.997900 to 0.969686**; AlphaEvolve reports **0.7%** average fleet compute recovery. Coauthored examples retain separate assays and **26** checked three-body links with Ori Chamo. The factory's **43:44 / $10.33** repair, missing direct test, and later teardown loss show what acceptance needs. CyberGym distinguishes **56 crashes** from **22 confirmed zero-days**.
 
-Forkable state supplies private continuations from a reached parent when that state remains valid and useful. Worktrees, warm files, process or VM checkpoints, and replay supply different state surfaces. Published examples put mechanisms beside values: AFL++ reports **10–20×** persistent-mode speedups; SWE-bench Lite sampling raises coverage from **15.9% to 56%**; autoresearch's keep/revert loop reduces validation bits per byte from **0.997900 to 0.969686**; AlphaEvolve reports **0.7%** average fleet compute recovery.
-
-Our examples then show what acceptance requires: a separate functional assay in genomics, **26** checked three-body continuation links with Ori Chamo, a **43:44 / $10.33** factory repair with a missing direct behavior test, and an approved patch lost after delivery refusal. CyberGym distinguishes **56 crashes** from **22 confirmed zero-days**. These examples motivate concrete contracts; they do not collectively measure a fork benefit.
-
-The implemented pieces are declared duplicate-evidence rejection, lineage carriage, numerical summary merging, and artifact-digest approval. The numerical stress example has known true target **μ = 5.0**. Separate designs address useful-state fidelity, backend choice, environmental co-failure, repair repeatability, and current publication authority.
-
-## Personal motivation
-
-The speaker's path is **biophysics → genomics → Mobileye perception → Incredibuild → self-driving computers**. Simulations exposed state and shared structure; genome algorithms exposed computational limits; ENCODE pipelines linked execution to identifiable outputs. Autonomous and build systems motivate directing exploratory work under constraints. This trajectory explains the research question; it is not the main argument or evidence of a fork benefit. Career context is the speaker's account, and coauthored findings retain team attribution.
+The technical spine is **run → evidence → acceptance**. Runtime reuses state and starts continuations. Evidence names the exact artifact, executed check and shared observations. Acceptance selects, composes or pools under the appropriate checks, with publication authority outside the child. Duplicate rejection is implemented; dependence-aware refusal and the integrated external checker remain design requirements. The two preregistered tests are not yet run.
 
 ## Six acts
 
-| Act | Frames | Job in the argument |
-|---|---:|---|
-| 1 — Motivation | 1–12 | Adaptive execution choice, personal research trajectory, and private continuations |
-| 2 — Examples | 13–28 | Fuzzing, AI research, genomics, physics, factory repair, and security validation |
-| 3 — Runtime | 29–38 | Choose state, check fidelity, account for resources, and place authority outside the guest |
-| 4 — Evidence | 39–50 | Separate selection, composition and pooling; show implemented evidence handling and numerical checks |
-| 5 — Acceptance | 51–56 | Let defined behavioral and statistical experiments change a runtime decision |
-| 6 — Conclusion | 57 | Connect useful continuations to checked evidence and authorized publication |
+| Act | Slides | Purpose |
+|---|---|---|
+| Motivation | 1–15 | Personal mechanisms, Python API and execution vocabulary |
+| Examples | 16–31 | Reuse, evaluated search and checked outcomes across fields |
+| Runtime | 32–39 | State choice, resource tradeoffs, effects and current authority |
+| Evidence | 40–46 | Selection, composition, identities and justified precision |
+| Acceptance | 47–49 | Exact checks, durable bytes and preregistered decisions |
+| Conclusion | 50 | Reuse state, run alternatives, check outside the child, accept once |
 
-## Evidence and source record
+## Build and edit
 
-The factory examples ran serially through Airflow and Docker Sandboxes, with hosted models through Databricks. Separate API traces measured creation or restore–run–capture. The integrated factory branching workflow, dependence calibration, and restore authority are designs. The state probe is unrun. Precise boundaries and source identities live in [CLAIM-FENCE.md](CLAIM-FENCE.md), [QA.md](QA.md), and hidden slide comments.
-
-[PREREGISTRATION.md](PREREGISTRATION.md) is unchanged. H2 inference amendments for reused families and temporal dependence are proposed before collection. The public pre-repair substitute needs tree-equivalence verification. No experiment result is claimed.
-
-## Editing and building
-
-[talk.tex](talk.tex) is the canonical entry point; act indexes order the active frames. Use make deck and make dist. The canonical deck has **57 frames**. Each page has one semantic job, one main visual or a short list, and readable body text. Hidden qadetail comments retain secondary numbers and scope; spoken note comments set the narration cues. Historical files outside the active indexes are source records, not additional presentation pages. Their bibliography remains in [REFERENCES.md](REFERENCES.md).
+`talk.tex` is canonical. The act indexes order active frames; other source files are retained research/Q&A records. `make dist` compiles the PDF and regenerates the presenter guide. CI verifies **50 pages**, displayed content and a 35–45 minute cue window. Every active frame has a spoken note and hidden Q&A detail. Secondary mathematics and probes remain outside the main narration. PREREGISTRATION.md is preserved unchanged.

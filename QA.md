@@ -1,6 +1,6 @@
 # Q&A: Forkable Sandboxes
 
-For the **57-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
+For the **50-frame, six-act canonical deck**, without appendix or overlays. Questions refer to claims and artifacts, not old slide numbers. [Full sources](REFERENCES.md) and [precise bounds](CLAIM-FENCE.md).
 
 ## What changes in self-driving computation?
 
@@ -10,13 +10,13 @@ The workflow chooses its next execution from observed results. A user supplies a
 
 Playing a prescribed sequence corresponds to ordinary program execution. Saving a reached computation and trying private continuations corresponds to the runtime's declared snapshot or fork semantics. The agent can alter the next action, execute the alternative and decide what to keep or discard from evidence. Restoring declared computer state cannot undo a completed remote invocation, incurred cost or published action. Publication needs a current controller decision.
 
-## How does this differ from IF, LOOP and CALL?
+## What does the Python API comparison establish?
 
-Those constructs still execute the controller and candidates. A conditional selects an encoded path; an adaptive controller can run candidate executions and use evidence to choose the next one. A loop can implement that adaptation, and a call can return the artifact and evidence record. The comparison concerns a higher-level runtime interface, not a new instruction set, hardware replacement, or invention of feedback and search. Forkability and autonomy are separable: an agent can operate serially, and a runtime can fork without an agent.
+Both sketches try the same three edits against equivalent prepared input state, the same test and the same selector. The loop prepares each environment; the API prepares once, captures the required state and makes three private children. Its checkpoint/fork/execute/evaluate/select signatures are a proposed interface, not an implemented SDK. Evaluate returns an artifact and its evidence; select uses the same decision rule, without becoming an infallible verifier or numerical reducer. Ordinary Python can implement the pattern through process forks, worktrees or warm caches. The slide claims explicit reuse and isolation, without asserting concurrency or measured speedup. Changed code may need reload or restart. Forkability and adaptive control remain separate.
 
-## What connects the personal research trajectory?
+## What connects the six research themes?
 
-Biophysics made configuration, state and shared structure explicit. Genomics required efficient representations and large reproducible workflows. The speaker then describes work at Mobileye and Incredibuild and asks how computers can direct exploratory work under goals and constraints. The scientific papers support the stated research findings, not an inferred employment chronology or a specific Mobileye project. Team results retain their coauthor attribution.
+The map connects Cytosim physical self-organization, CRISPR-IL iterative genetic design, an immunotherapy research direction, Mobileye perception, Docker/Airflow sandboxed software and proposed forkable compute. The two lanes connect experimental and software feedback. Their arrows show thematic relationships across overlapping work, not a verified chronology. Local physical emergence needs no goal-directed controller; CRISPR-IL is researcher-led. Mobileye supplies the stated perception role, not the whole vehicle controller. The software records establish repair/test/review behavior and publication obligations, rather than a Docker security-improvement rate. Published findings retain team attribution.
 
 ## What did the biophysics simulation measure?
 
@@ -33,6 +33,14 @@ The speaker's external issue #8200 demonstration reports approximate compile tim
 ## What do ENCODE's provenance records establish?
 
 The pipeline collection processed more than 14,000 datasets, at least 40,000 FASTQ files, and approximately 20 assay types. WDL specifies workflows; Cromwell runs them; Docker supplies task environments; CAPER manages execution and I/O; CROO organizes outputs. Portal analysis/file objects preserve source files, versions, metrics and relationships. This makes analysis traceable. Biological correctness, authenticated receipts and calibrated uncertainty need their own checks. [Hitz et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10371165/).
+
+## What did CRISPR-IL add beyond a fixed genomic pipeline?
+
+NRGene's GoGenome linked researcher-run editing experiments to the next design through processing and model updates. It reported >20 TB sequencing data and sub-second GOLD feature lookup, not end-to-end cycle latency. [Source](https://aws.amazon.com/blogs/storage/a-gene-editing-prediction-engine-with-iterative-learning-cycles-built-on-aws/) and [bounds](CLAIM-FENCE.md#motivation-and-personal-research-themes). Noam Barkai is distinct from OffRisk's Gil Ad Barkai.
+
+## What does the immunotherapy theme establish?
+
+It identifies a proposed response-guided research direction. The supplied cancer-genomics work and SI-12 drug-combination assays are relevant methodological background, not evidence of an autonomous immunotherapy system, a clinical treatment-selection policy or a clinical outcome. The theme makes no measured performance claim.
 
 ## Does a digest recover the original source?
 
@@ -148,7 +156,7 @@ Scheduling heuristics recovered 0.7% of fleet compute on average. A separate til
 
 ## What is AFL++ reusing?
 
-An initialized forkserver supplies children; persistent mode runs many inputs inside a child and resets target state between inputs. Documentation gives typical 10–20× speed gains and 1,000 iterations as a starting point before restart. State reset is a fidelity requirement. Incomplete cleanup can affect later inputs and distort results.
+Fuzzing repeatedly tests a target with mutated inputs. Coverage feedback keeps inputs reaching new paths for further mutation; crashes require investigation and deduplication. A deferred forkserver clones initialized state; persistent mode runs many inputs in a child while its harness resets mutable state. Typical 10–20× gains and roughly 1,000 iterations before restart come from persistent-mode documentation. The repeat loop avoids a process fork for every input. Correct reset preserves test fidelity; a crash alone does not establish an exploitable vulnerability.
 
 ## Are CyberGym's 22 zero-days a benchmark success rate?
 
@@ -157,3 +165,7 @@ No. The historical benchmark has 1,507 patched vulnerabilities in 188 projects; 
 ## Is promotion model-checked?
 
 No. A TLA+ design specifies artifact/evidence/approval alignment and current authority, but no TLC run or implementation trace check is recorded. The gate's digest binding is built; epoch fencing remains proposed.
+
+## Final 50 slide revision checks
+
+Original slides 1–57 map to the final deck in DECK-REVIEW.md. Verify 50 canonical frames, no overlays/appendix, 37:10 cue total, and every frame's Q&A. ENCODE immediately precedes CRISPR-IL; the factory immediately precedes the VM/microVM/container/sandbox/cgroups table. The physics footer omits the authorship comment. The two Python examples use the same edits/checks and mark the API as proposed. The create trace retains operation, concurrency, completion and percentile endpoints. The warm comparison holds H/R/D/N fixed and changes only P. Its axis is resource-seconds. The reducer labels abstention as an acceptance design. The combined experiments say not yet run and preserve confidence-bound rejection rules. Preserve the original protocol hash and inspect all rendered pages for clipping and overlap before release.

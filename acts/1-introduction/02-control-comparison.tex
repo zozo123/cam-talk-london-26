@@ -1,15 +1,35 @@
-\begin{frame}[t]{An adaptive controller chooses programs and continuations; IF and LOOP still execute them.\ev{\tagP}}
+\begin{frame}[fragile,t]{The forkable API prepares once and runs alternatives in private children.\ev{\tagP}}
 \vspace{0pt}
-{\fontsize{12.5}{16}\selectfont
-\begin{tabularx}{\linewidth}{@{}L{1.35cm}L{5.25cm}Y@{}}\toprule
- & Stored-program control & Self-driving execution layer\\\midrule
-\texttt{IF} & Choose an encoded path & Evaluate alternative executions, then choose\\[2pt]
-\texttt{LOOP} & Repeat an encoded body & Revise the next action from observations\\[2pt]
-\texttt{CALL} & Execute a routine; return a value & Run a private continuation; return artifact and evidence\\\bottomrule
-\end{tabularx}\par}
-\vspace{.15cm}
-\lead{Checkpoint $\to$ fork $\to$ execute $\to$ evaluate $\to$ select $\to$ continue.}
-\sources{Proposed orchestration layer on existing stored-program machines.}
-\qadetail{The two columns compare levels of control, not mutually exclusive hardware eras. Ordinary programs can implement search, feedback, dynamic code generation and adaptive agents. IF, LOOP and CALL remain the instructions and control constructs that execute the orchestrator and its candidates. A conditional branch normally selects a control-flow path in an execution; a runtime fork creates another execution state with private changes. The proposed controller treats reached states, returned artifacts, evidence and authority as explicit objects. It may generate candidate actions or code and dispose of private branches after required export. No new instruction set or historical invention of adaptive computation is claimed. The runtime's state-capture fidelity, external effects and code reload semantics must be specified.}
-\note{[0:45] The comparison is between layers of control. An if statement chooses an encoded path; the controller evaluates alternative executions and chooses what continues. A loop repeats its body; observations can guide the controller to revise the next action. A call returns a value; a private continuation returns an artifact and identified evidence. Ordinary programs can implement all of this. The proposed layer makes checkpoint, fork, evaluation and acceptance explicit objects. IF and LOOP still execute underneath it. Our examples show which parts already work and which connections need research.}
+{\fontsize{12.5}{15}\selectfont Try the same three edits, run the same checks, select a result.\par}
+\vspace{.1cm}
+\begin{columns}[T,onlytextwidth]
+\column{.47\textwidth}
+{\fontsize{14}{17}\selectfont\bfseries Python loop\par}
+\vspace{.1cm}
+\begin{lstlisting}[style=slidepython]
+out = []
+for edit in edits:
+    env = prepare()
+    env.apply(edit)
+    out.append(test(env))
+best = select(out)
+\end{lstlisting}
+\vspace{.2cm}
+{\fontsize{12.5}{15}\selectfont\color{Muted}3 prepared environments.\par}
+\column{.49\textwidth}
+{\fontsize{14}{17}\selectfont\bfseries\color{Teal}Forkable API\par}
+\vspace{.1cm}
+\begin{lstlisting}[style=slidepython]
+parent = checkpoint(prepare())
+children = fork(parent, n=3)
+execute(children, edits)
+out = evaluate(children, test)
+best = select(out)
+\end{lstlisting}
+\vspace{.68cm}
+{\fontsize{12.5}{15}\selectfont\color{Teal}1 preparation; 3 private children.\par}
+\end{columns}
+\sources{Proposed API sketch. Both columns are Python; each check returns its artifact and evidence.}
+\qadetail{The snippets illustrate a proposed API surface, not an existing SDK or a claim that these exact signatures are implemented. Both operate on the same three-element edits list, equivalent prepared input state, the same test function and the same select function. prepare returns an execution environment. On the left, each iteration prepares a new environment, applies one edit and collects a test result. On the right, checkpoint captures the required reached state, fork creates three private writable children, execute applies one edit per child and evaluate invokes the same test in each child. Result records identify their child, exact artifact and evidence. select applies the same selection rule in both sketches; it is not an infallible verifier and not the built numerical reducer. execute and evaluate may dispatch asynchronously internally; no concurrency or speedup value is asserted. Other ordinary Python implementations can use process fork, worktrees or warm caches to avoid repeated preparation. The explicit API makes captured state and private continuations first-class orchestration objects; useful-state validity, code reload/restart, external effects, private writes and controller authority require their declared semantics. Python remains the programming language on both sides. The two columns compare levels of control, not mutually exclusive hardware eras. Ordinary programs can implement search, feedback, dynamic code generation and adaptive agents. IF, LOOP and CALL remain the instructions and control constructs that execute the orchestrator and its candidates. A conditional branch normally selects a control-flow path in an execution; a runtime fork creates another execution state with private changes. The proposed controller treats reached states, returned artifacts, evidence and authority as explicit objects. It may generate candidate actions or code and dispose of private branches after required export. No new instruction set or historical invention of adaptive computation is claimed. The runtime's state-capture fidelity, external effects and code reload semantics must be specified.}
+\note{[0:40] Both columns are Python and evaluate the same three edits with the same checks and selection rule. The loop makes an environment for each edit. The proposed API prepares once, captures the reached state, and creates three private children. Execute applies one edit per child; evaluate returns artifact-bound results. Select uses the same rule on both sides. Ordinary Python can implement this pattern. The API makes reuse and isolation explicit; the research concerns the semantics, cost and evidence behind those calls.}
 \end{frame}

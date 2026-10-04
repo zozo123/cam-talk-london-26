@@ -1,0 +1,19 @@
+\begin{frame}[t]{A sandbox is a policy boundary; VMs and containers are implementation choices.}
+\vspace{0pt}
+{\fontsize{11.5}{14}\selectfont
+\begin{tabularx}{\linewidth}{@{}L{2.6cm}Y L{3.3cm}@{}}
+\toprule
+Term & What it provides & Example\\\midrule
+VM & Separate guest kernel & KVM + QEMU\\[4pt]
+microVM & Guest kernel; fewer devices & Firecracker\\[4pt]
+Container & Processes share a Linux kernel & Namespaces; cgroups\\[4pt]
+Sandbox & Policy over access and actions & Container or VM\\[4pt]
+cgroups & Resource usage and limits & CPU, memory, I/O\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.03cm}
+\claim{Docker Sandboxes (\texttt{sbx}): microVM + private Docker daemon.}
+\sources{\href{https://docs.docker.com/ai/sandboxes/architecture/}{Docker Sandboxes architecture}; \href{https://firecracker-microvm.github.io/}{Firecracker}; \href{https://docs.kernel.org/admin-guide/cgroup-v2.html}{Linux cgroup v2}.}
+\qadetail{These are different dimensions rather than five interchangeable isolation levels. Conventional hardware VMs and microVMs run guest kernels through virtualization; a microVM specializes the virtual device surface rather than creating a different kind of guest-kernel boundary. Firecracker uses KVM and a minimal device model. Conventional Linux containers share a Linux kernel while namespaces provide separate resource views and cgroups control resource use. Containers inside a desktop VM share that guest kernel; the enclosing VM is a separate host boundary. A sandbox is a policy-constrained execution environment and may use a VM, container, syscall mediation, or another implementation. cgroups alone do not define file access, network policy or syscall permissions; capabilities, seccomp and LSMs are additional mechanisms. Docker Sandboxes is a named microVM-based product accessed with the sbx CLI, not a synonym for an ordinary Docker container. Its private daemon and host proxy separate Docker execution and credentials from the host daemon. Workspace mounts and network/tool policies still determine permitted effects. No universal startup-time or safety ranking is asserted. Which files, process memory, kernel state and external observations survive capture remains a separate question for the later state-choice slide.}
+\note{[0:40] These names describe different jobs. A VM runs a guest kernel behind a virtualization boundary. A microVM keeps that model with fewer virtual devices. A Linux container isolates processes that share a kernel. Namespaces separate their views; cgroups account for and limit resources. A sandbox adds policy over what execution may access and do. Docker Sandboxes, accessed through sbx, uses a microVM and its own Docker daemon. Next we define what state a fork must preserve inside the chosen environment.}
+\end{frame}
