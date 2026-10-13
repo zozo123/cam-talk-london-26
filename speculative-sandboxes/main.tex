@@ -16,10 +16,10 @@
 \definecolor{teal}{HTML}{117A81}
 \definecolor{faint}{HTML}{EEF4F6}
 \definecolor{graytext}{HTML}{536671}
-\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=teal,citecolor=teal,pdftitle={When Should a Sandbox Exist? Acceptance-Aware Forkable Compute},pdfauthor={Yossi Eliaz}}
+\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=teal,citecolor=teal,pdftitle={Speculative Sandboxes for Agentic Development: When to Fork, What to Verify, and When to Stop},pdfauthor={Yossi Eliaz}}
 \setlist[itemize]{leftmargin=*,itemsep=1pt,topsep=3pt,parsep=0pt}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3.5pt}
+\setlength{\parskip}{3.25pt}
 \setlength{\columnsep}{0.25in}
 \setlength{\abovedisplayskip}{4pt}
 \setlength{\belowdisplayskip}{4pt}
@@ -35,8 +35,8 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\A}{\mathcal{A}}
 \renewcommand{\arraystretch}{1.09}
-\title{\vspace{-1.5em}\textcolor{ink}{\bfseries When Should a Sandbox Exist?}\\[-1pt]
-\large Acceptance-Aware Speculation Without False Confidence}
+\title{\vspace{-1.5em}\textcolor{ink}{\bfseries Speculative Sandboxes for Agentic Development}\\[-1pt]
+\large When to Fork, What to Verify, and When to Stop}
 \author{Yossi Eliaz\\[-1pt]\small Cambridge SRG seminar companion \quad\textbar\quad 13 October 2026\\[-2pt]
 \small \href{https://github.com/zozo123/cam-talk-london-26}{Cambridge talk}\quad\textbar\quad
 \href{https://arxiv.org/abs/2607.09689}{Evidence-aware reduction}}
@@ -45,10 +45,13 @@
 \maketitle
 \vspace{-1.3em}
 \begin{abstract}\noindent
-An executable fork makes alternative futures cheap, but it does not manufacture independent evidence or grant a child the authority to accept its own work. We formulate a \emph{sandbox existence test} (fidelity, private divergence, authority, and economics), then borrow the useful part of speculative decoding: calibrated acceptance predictions and adaptive allocation of a finite verification budget. Exact token-sampling acceptance is distinguished from the probability that a software artifact passes a trusted verifier. Conditional acceptance handles correlated failures; lineage-aware reduction and selection-aware inference prevent false precision after choosing winners. We give a minimal controller protocol and a falsifiable experiment compatible with the Cambridge seminar's existing preregistration. All new scheduler, covariance, and selection-aware components are \textbf{design proposals}, not measured runtime gains.
+A speculative sandbox is an executable continuation that may be discarded. Its value is neither start-up speed nor the number of parallel agents, but verified progress relative to resource cost. We separate state fidelity, private divergence, authority and irreversible effects from the economic question of whether to fork at all. From speculative decoding we borrow draft/verify separation, adaptive depth/width and acceptance budgeting---\emph{not} exact-distribution preservation for arbitrary code. We derive correlated-success and marginal-coverage equations, distinguish verifier passes from correctness and independent evidence, and give a fail-closed controller protocol. An executable finite-world reference model tests admission, correlated replanning and receipt-bound promotion. Real sandbox integration, learned calibration and runtime gains remain \textbf{unmeasured proposals}.
 \end{abstract}
 \vspace{-0.5em}
-\section{First ask whether a fork is real, useful, and safe}
+\section{The framing: speculate on execution, never on authority}
+A draft model proposes tokens and a target model checks them. Likewise a software controller may explore candidate changes while a separate verifier determines which exact artifact, if any, can advance. What transfers is prediction-driven allocation of speculative width, depth and checking effort. What does \emph{not} transfer is the exact decoding theorem, cheap parallel token verification or free residual correction: failed patches need diagnosis, new executions and often new tests. This is speculative execution for agentic development, not a replacement for the build cache or a new language-model decoder.
+
+\section{First ask whether a fork should exist}
 
 A sandbox is an \emph{execution/policy boundary}, not a synonym for a microVM or a process. A \emph{forkable continuation} is a private branch of a declared reached state $S_0$. Its contents may include filesystem, environment and optionally live memory/processes; copied guest state does \emph{not} copy the external world or publication authority. The Cambridge talk distinguishes named-snapshot \emph{restore fan-out} from live-memory fork until the nonce/process-survival probe passes \cite{cam}.
 
@@ -60,7 +63,7 @@ For a task class $\mathcal T$, the following are gates, not performance results:
 Gate & Required evidence before claiming a useful fork\\
 \midrule
 State & Name the bytes, runtime state and external dependencies needed by the next action; say explicitly whether memory survives.\\
-Fidelity & On pinned tests $t\in\mathcal T$, parent and restored continuation agree on required observations under controlled inputs; record failures.\\
+Fidelity & On pinned tasks $t\in\mathcal T$, parent and restored continuation agree on required observations under controlled seeds/inputs and declared nondeterminism; record failures.\\
 Privacy & Each child gets private writes and unique runtime identity/RNG; no child can modify another's evidence or the verifier.\\
 Authority & Controller owns immutable check definitions, epoch, evidence ledger and promote permission; secrets/leases are reissued, never trusted because they were copied.\\
 Effects & Network/API/billing consequences are fenced, simulated, or idempotently reconciled; restore never undoes outside effects.\\
@@ -70,7 +73,7 @@ Cost & Compare against an equivalent \emph{warm cached} baseline, including capt
 \caption{Operational criteria; none follows from a fast create benchmark alone.}
 \end{table}
 
-\Claim{Decision rule.} Call it a \emph{forkable sandbox} only when the state semantics and isolation/authority gates hold. Call it an \emph{advantageous} fork only when the same-workload warm alternative loses after all overheads. Performance is not a security definition.
+\Claim{Three distinct decisions.} \emph{Admissible} means state, privacy, authority and external-effect gates hold. \emph{Forkable} additionally requires reproducible capture/restore semantics. \emph{Advantageous} means that a fork strategy actually improves the specified utility against the best warm alternative. If any hard gate fails, do not fork; if the warm baseline wins, \emph{choose it}. Performance cannot compensate for weak isolation.
 
 For $K$ equivalent tasks, a simple \emph{work-cost} accounting is
 \begin{equation}
@@ -80,11 +83,11 @@ C_{\mathrm{warm}}&=K(P_w+E+V),\\
 C_{\mathrm{fork}}&=P_0+H+K(R+E+V)+D.
 \end{aligned}
 \end{equation}
-Here $P_w$ is warm preparation, $P_0$ preparation of the captured parent, $H$ capture, $R$ restore, $E$ per-trial execution, $V$ exact-artifact verification, and $D$ divergence/coordination. Under this simplified additive model, fork saves work iff
+Here $P_w$ is warm preparation, $P_0$ preparing the parent, $H$ capture, $R$ restore, $E$ execution, $V$ verification and $D$ coordination. The model assumes equivalent trials and unchanged $E,V$. Under this simplified additive model, fork saves work iff
 \begin{equation}
 \boxed{K P_w>P_0+H+KR+D.}
 \end{equation}
-Latency additionally depends on critical path, contention, concurrency, and tail behavior; hedged requests are a separate tail-latency precedent \cite{tail}. Cheap restore alone never proves lower end-to-end latency. This matches the seminar's preregistered H1 comparison to a \emph{warm cache}, not merely a cold start \cite{cam}.
+For already-existing verified checkpoints, $P_0,H$ are sunk for the \emph{next} decision, but remain in complete system accounting. More generally, different execution modes can have different probabilities of success. A deadline-$T$ controller compares $U_m=B\Prb_m(\text{verified by }T)-\lambda\E_m[C]$ for $m\in\{\text{warm},\text{fork}\}$, subject to the same hard safety gates. \emph{No fork} is a first-class outcome. Tail latency and contention make wall time distinct from work cost \cite{tail}. H1 already specifies a warm-cache baseline, not a cold-start strawman \cite{cam}.
 
 \section{What speculative decoding really proves}
 
@@ -107,7 +110,15 @@ Upon rejection, sample from $r(x)=[p(x)-q(x)]_+/\TV(p,q)$ when $\TV>0$. Then
 \end{equation}
 pointwise. Thus the emitted token retains \emph{exactly} the target distribution; no coupling can reuse a $q$-sample with a higher probability of equality \cite{leviathan}. The theorem depends on \emph{known} $p,q$ and this correction rule.
 
-\Claim{Never substitute a test pass for Eq.~\eqref{eq:tv}.} For code, $A_i=\{\text{exact candidate }i\text{ passes trusted checks}\}$, and $a_i=\Prb(A_i\mid\text{history})$ is a \emph{predictive verifier-acceptance rate}. It is generally neither $1-\TV$ nor the probability of semantic correctness. A verifier can be incomplete or compromised. The controller must own it.
+\Claim{Never substitute a test pass for Eq.~\eqref{eq:tv}.} For code, $A_i=\{\text{exact candidate }i\text{ passes trusted checks}\}$ and $a_i=\Prb(A_i\mid\text{history})$ predicts \emph{verifier acceptance}. In general,
+\begin{equation}
+ 1-\TV(p,q)\ne \Prb(A_i)\ne\Prb(\text{semantically correct}_i).
+\end{equation}
+An external verifier can still miss a bug; agent approval is not correctness. In particular, if $s=\Prb(A\mid C)$ is test sensitivity, $f=\Prb(A\mid C^c)$ is the false-pass rate, and $\pi=\Prb(C)$ is prior correctness, then
+\begin{equation}
+\Prb(C\mid A)=\frac{s\pi}{s\pi+f(1-\pi)},
+\end{equation}
+when the denominator is positive. Passing a test warrants only the claims its coverage supports. The child never controls the checker.
 
 \subsection{A precise, but narrow, Gaussian bridge}
 For two normalized Gaussians $p=N(\mu_1,\Sigma)$ and $q=N(\mu_2,\Sigma)$ with the \emph{same} positive definite covariance, the paper's two-factor weighted disagreement is
@@ -121,7 +132,7 @@ Their TV overlap and KL divergence obey
 \boxed{\alpha_{\rm token}=2\Phi\!\left(-\sqrt{\Delta/2}\right),\quad
  D_{\rm KL}(p\|q)=\Delta.}
 \end{equation}
-This is an \emph{identity for these two distributions}, not a general map from worker disagreement to patch correctness. Identical Gaussian means with unequal covariances give $\Delta=0$ but nonzero TV. Identical wrong patches can have perfect apparent agreement without any new evidence \cite{eliazbmr}.
+This identity requires \emph{normalized, equal-covariance} Gaussian densities. It derives from the likelihood-ratio separating hyperplane and one-dimensional Gaussian tails. It is \emph{not} a general mapping from the reducer's disagreement to patch correctness: equal means with unequal covariances yield $\Delta=0$ but TV$>0$; identical wrong patches can agree perfectly without adding evidence \cite{eliazbmr}. The Gaussian product integral in the earlier paper is not this overlap integral.
 
 \section{Acceptance-aware fork selection}
 
@@ -135,7 +146,7 @@ The chain rule gives an \emph{exact} correlated-success identity:
 \boxed{\Prb\!\left(\bigcup_{i=1}^K A_i\middle|H\right)
 =1-\prod_{i=1}^{K}(1-a_i^-).}
 \end{equation}
-Replacing $a_i^-$ by marginal success rates silently assumes independence. The predictors must be conditioned on negative evidence from failed siblings.
+Replacing $a_i^-$ by unconditional pass rates silently assumes independence. The history must retain observed failures and shared ancestry. Cancellation or timeout is \emph{not} a verified failure and must not be substituted for $A_i^c$ in this identity.
 
 For a fixed set $S$ of candidate branches let $F(S)=\Prb(\bigcup_{i\in S}A_i)$. A new worker $j$ contributes
 \begin{equation}
@@ -143,7 +154,7 @@ For a fixed set $S$ of candidate branches let $F(S)=\Prb(\bigcup_{i\in S}A_i)$. 
 \boxed{F(S\cup\{j\})-F(S)
 =\Prb\!\left(A_j\cap\!\bigcap_{i\in S}A_i^c\right).}
 \end{equation}
-\Claim{Diversity is an objective, not decoration.} What matters is the probability that $j$ succeeds \emph{when the current workers fail}. Since the event on the right shrinks as $S$ grows, $F$ is monotone and submodular for a \emph{fixed} joint distribution. Static equal-cost greedy selection has the classic $(1-1/e)$ approximation to the optimal fixed-size set. This guarantee does \emph{not} transfer automatically to a history-dependent adaptive policy, whose conditions require separate proof \cite{golovin}.
+\Claim{Diversity is an objective, not decoration.} What matters is the probability that $j$ succeeds \emph{when the current workers fail}. Since the event on the right shrinks as $S$ grows, $F$ is monotone and submodular for a \emph{fixed} joint distribution. Static equal-cost greedy selection has the classic $(1-1/e)$ approximation to optimal \emph{fixed-budget coverage} \cite{nemhauser}. The guarantee does \emph{not} transfer automatically to adaptive policies or weighted cost/latency objectives; adaptive submodularity requires additional conditions \cite{golovin}.
 
 \subsection{Concrete correlation penalty}
 A transparent illustration takes a shared latent difficulty $Z\sim\operatorname{Beta}(u,v)$ and conditionally IID branch outcomes $A_i\mid Z\sim\operatorname{Bernoulli}(Z)$. Then
@@ -169,7 +180,22 @@ A controller can choose depth $D$, width $W$, model/prompt diversity, verifier o
 \max_{\pi}\;\Prb_{\pi}(\text{verified success by }T)
  -\lambda\E_{\pi}[C],
 \end{equation}
-subject to \emph{unrelaxed} authority and final-artifact checks. Predictive acceptance must be calibrated on held-out traces, with latency and compute jointly measured. EAGLE-2 motivates dynamic trees from context-dependent acceptance; EAGLE-3 motivates improving the drafter rather than simply widening speculation. Neither supplies a correctness theorem for arbitrary sandbox tasks \cite{eagle2,eagle3}.
+subject to \emph{unrelaxed} authority and final-artifact checks. Predictive acceptance must be calibrated on held-out tasks, with latency and resource use reported jointly. EAGLE-2 and OPT-Tree motivate context-dependent tree structure; EAGLE-3 improves the proposal mechanism itself. These are inspirations, not correctness theorems for software agents \cite{eagle2,eagle3,opttree}.
+
+\section{A runtime policy: admit, speculate, replan, stop}
+\Claim{Static versus adaptive.} Fixed-set $F(S)$ is submodular; after observed failures, a sequential controller estimates
+\begin{equation}
+ p_j(h)=\Prb(A_j\mid h),
+\end{equation}
+where $h$ includes the immutable work order and completed outcomes. A simple \emph{one-step heuristic} is
+\begin{equation}
+ G_j(h)=B\,p_j(h)-\lambda c_j(h)-\eta\ell_j(h),
+\end{equation}
+with incremental total compute/verification cost $c_j$ and latency impact $\ell_j$. If no admissible $G_j>0$, stop or use warm execution. This is neither a globally optimal stopping theorem nor a production calibration model; portfolio-level parallel choices require conditional \emph{marginal} value, not sum of standalone scores.
+
+\Claim{Which failures matter.} Distinguish \texttt{planned}, \texttt{started}, \texttt{passed}, \texttt{failed}, \texttt{timed out}, and \texttt{cancelled}. Only a trustworthy observed failure updates the \emph{success-conditioned-on-failure} probability in Eq.~\eqref{eq:chain}; absence of an outcome is censored information. When sibling failures reveal common causes, try a different hypothesis/model/fixture instead of paying for indistinguishable clones. Test the prediction on held-out workloads, not on duplicated forks of the same task.
+
+\Claim{Issue-time effects.} A speculative API call can disclose data or incur a charge \emph{before} the branch is selected; rollback cannot unsend it. This is the ghost-tool-call issue \cite{ghost}. Fence or synthesize observable tool calls before dispatch. Separately, Sherlock studies overlap of downstream agent work with verification and rollback, but its reported benefits are not forkable-sandbox measurements \cite{sherlock}.
 
 \section{Acceptance is not independent evidence}
 
@@ -217,11 +243,17 @@ So even initially valid 95\% intervals may become invalid after choosing winners
 
 \Claim{Admission.} An immutable work-order key binds repository tree, initial-state digest, tool/model/prompt versions, task and selection context. Retried evaluation of \emph{the same observation} reuses its evidence token; new samples get new tokens, but keep common ancestry. Do not count retries or speculative replicas twice.
 
-\Claim{Execution.} Keep warm compiler/dependency state where safe; restore private writable state; reseed uniqueness and remint child authority outside the copied guest. Stop or cancel losers only when their recorded outcomes are no longer necessary. A cancellation is not a successful result.
+\Claim{Execution.} Keep warm compiler/dependency state where safe, while child writes remain private; reseed uniqueness and remint authority outside copied guest state. Cheap tests may reject drafts early but cannot replace the sealed final verifier. Cancel losers only after their outcome/selection-accounting obligations are satisfied; mark cancelled outcomes \emph{unobserved}, not failed.
 
-\Claim{Verification.} An external checker binds \texttt{(input tree, output digest, verifier digest, epoch)} to a signed or controller-authenticated receipt. Keep the negative outcomes, including timeouts, refusals and missing checks. Different result types have different fan-in: choose one code patch, recheck a composed patch, or pool measurements only under a common target and justified covariance.
+\Claim{Verification.} An external checker binds \texttt{(task/input, artifact bytes, verifier digest, evaluation ID, epoch, verdict)} to a controller-authenticated receipt. Persist both passes and negative/censored outcomes. A \emph{green} receipt asserts the specified checks ran on these bytes; it does not prove general program correctness. Different result types have different fan-in: select one patch, recheck any composed patch, or pool common-target measurements only with justified covariance.
 
-\Claim{Publication.} Persist exact artifact bytes and checks before tearing down the worker. Check the current epoch/version at a single controller-owned compare-and-swap. Stale children can finish but cannot publish. An untrusted child cannot write the score, tests, receipt or publish token; network effects are fenced or reconciled. The seminar's serial factory records motivate these obligations but did not demonstrate an integrated forked version \cite{cam}.
+\Claim{Publication.} Persist exact artifact bytes and checks before teardown; compare current epoch/version at a single controller-owned compare-and-swap. Stale workers can finish but cannot publish. Untrusted children must never write scores, sealed tests, receipts or promote tokens. The seminar's serial factory records motivate these obligations but do not demonstrate the complete forked protocol \cite{cam}.
+
+\section{Executable toy and mathematical audit}
+An executable finite-world simulator and two standard-library test suites accompany this note. The \emph{finite-world model} defines explicit, hypothetical joint pass events; its probabilities are known by construction, \emph{not fitted} from real agents. It demonstrates all-or-nothing admission gates, a warm-cache win, a perfect-duplicate sibling worth no extra coverage, posterior replanning after verified failures, stopping when expected value is negative, and distinct timeout/cancellation semantics.
+
+The \emph{controller mock} persists candidate bytes, executes an externally held predicate and authenticates a digest/epoch/evaluation-ID receipt before one promotion. Tests deliberately try altered artifacts, altered receipts, repeated evaluation tokens, stale epochs and an \emph{incomplete checker that passes bad code}. The last case makes the distinction between a validated protocol and semantic correctness explicit. HMAC, in-memory persistence and the finite-world oracle are demonstration choices; no isolation, robust key service, durable atomic transaction or actual microVM is implemented.\par
+Independent checks recompute TV residual mass, Gaussian overlap by numerical quadrature, conditional chain probabilities, submodularity, beta-binomial success, expected accepted-prefix length, generalized least squares, post-selection coverage and the cost identity.
 
 \section{Falsifiable evaluation, not a speedup claim}
 
@@ -231,24 +263,28 @@ So even initially valid 95\% intervals may become invalid after choosing winners
 \item \textbf{Same tasks, same authority:} pin repositories, work orders, checker images/digests, snapshot semantics and compute/time budgets; compare serial warm, fixed-width fan-out, calibrated acceptance-only, and lineage-aware adaptive scheduling.
 \item \textbf{Predict before seeing the outcome:} train conditional pass models on disjoint historical tasks; freeze and calibrate them; record predictive log loss, Brier score and reliability by fork family, failure class and workload difficulty.
 \item \textbf{Measure complete cost:} prepare/capture/restore, agent calls, verifier executions, cancellation, external effects, queueing, memory and p50/p95 time-to-\emph{first exact verified artifact}; count CPU-seconds and dollars per success. Include no-fork/warm-cache controls.
-\item \textbf{Try hard negative controls:} cloned wrong assumptions, altered prompts/models, intentionally missing direct tests, stale publication epochs, duplicate evidence IDs, verifier-tampering attempts, unknown shared noise and post-selection intervals.
-\item \textbf{Report falsifiers:} adaptive width helps only if additional verified successes per budget exceed overhead; lineage helps only if it improves calibrated conditional success or coverage on held-out tasks; refuse unjustified precision rather than reporting a fabricated gain.
+\item \textbf{Try hard negative controls:} cloned wrong assumptions, independent model/prompt families, the \texttt{CellBusy} path without its direct deterministic test, stale epochs, duplicate evidence, tampered oracle, speculative observable API calls and post-selection intervals.
+\item \textbf{Report falsifiers:} adaptive speculation must beat the best \emph{warm} mode on cost/verified-progress or deadline performance; lineage complexity is warranted only by better held-out conditional predictions or defensible coverage. Report null, worse, timeout and verifier false-pass outcomes, not only winning attempts.
 \end{enumerate}
 
-\textbf{Talk placement.} A 90-second optional Q\&A bridge after the seminar's runtime/evidence boundary: \emph{``A fork is worthwhile only if it preserves the state we need, costs less than the warm alternative, and cannot grade or publish itself. Speculation then asks: what is the probability this \emph{next} branch succeeds \emph{when the existing branches fail}? That probability controls the scheduler, while independent evidence controls statistical confidence.''}
+\textbf{Talk placement.} A 90-second optional Q\&A bridge after the seminar's runtime/evidence boundary: \emph{``A fork is worthwhile only if it preserves useful state, beats the warm alternative on verified progress per budget, and cannot grade or publish itself. Speculation then asks: what is the probability this \emph{next} branch succeeds \emph{when the existing branches fail}? That probability controls the scheduler, while independent evidence controls statistical confidence.''}
 
 \section*{Takeaway}
-\noindent\colorbox{faint}{\parbox{0.94\columnwidth}{\vspace{4pt}\small\textbf{Speculate to save latency. Verify exact outcomes. Preserve rejected attempts.\newline
-Count evidence by provenance and calibrated dependence, never by the number of sandboxes or the number of green checks.}\vspace{4pt}}}
+\noindent\colorbox{faint}{\parbox{0.94\columnwidth}{\vspace{4pt}\small\textbf{Fork only when admissible and better than the warm alternative.\newline
+Speculate on candidates; externally verify exact bytes; replan after negative evidence; promote once. Count statistical confidence by provenance and calibrated dependence, never by green-check or worker counts.}\vspace{4pt}}}
 
 \balance
-\begin{thebibliography}{9}\footnotesize\setlength{\itemsep}{1pt}
+\begin{thebibliography}{13}\footnotesize\setlength{\itemsep}{1pt}
 \bibitem{cam} Y. Eliaz, \href{https://github.com/zozo123/cam-talk-london-26}{\emph{Forkable Sandboxes Cambridge Seminar}}, 2026. Claim fence and preregistration in the repository.
-\bibitem{eliazbmr} Y. Eliaz, \href{https://arxiv.org/abs/2607.09689}{\emph{Evidence-Aware MapReduce for Forkable Compute}}, arXiv:2607.09689, 2026.
+\bibitem{eliazbmr} Y. Eliaz, \href{https://arxiv.org/abs/2607.09689}{\emph{Evidence-Aware Reduction for Forkable Compute}}, arXiv:2607.09689v4, 2026.
 \bibitem{leviathan} Y. Leviathan, M. Kalman, Y. Matias, \href{https://proceedings.mlr.press/v202/leviathan23a.html}{\emph{Fast Inference from Transformers via Speculative Decoding}}, ICML, 2023.
 \bibitem{eagle2} Y. Li et al., \href{https://aclanthology.org/2024.emnlp-main.422/}{\emph{EAGLE-2: Faster Inference of Language Models with Dynamic Draft Trees}}, EMNLP, 2024.
 \bibitem{eagle3} Y. Li et al., \href{https://papers.neurips.cc/paper_files/paper/2025/hash/c7b5a35ea98b62512a869c19ea7b03cb-Abstract-Conference.html}{\emph{EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test}}, NeurIPS, 2025.
+\bibitem{nemhauser} G. L. Nemhauser, L. A. Wolsey, M. L. Fisher, \emph{An Analysis of Approximations for Maximizing Submodular Set Functions---I}, Mathematical Programming 14, 1978.
 \bibitem{golovin} D. Golovin, A. Krause, \href{https://arxiv.org/abs/1003.3967}{\emph{Adaptive Submodularity: Theory and Applications in Active Learning and Stochastic Optimization}}, JAIR, 2011.
+\bibitem{opttree} J. Wang et al., \href{https://aclanthology.org/2025.tacl-1.8/}{\emph{OPT-Tree: Speculative Decoding with Adaptive Draft Tree Structure}}, TACL 13, 2025.
+\bibitem{ghost} B. Mohammadi et al., \href{https://arxiv.org/abs/2606.02483}{\emph{Ghost Tool Calls: Issue-Time Privacy for Speculative Agent Tools}}, arXiv:2606.02483, 2026.
+\bibitem{sherlock} Y. Ro et al., \href{https://www.microsoft.com/en-us/research/publication/sherlock-reliable-and-efficient-workflow-execution/}{\emph{Sherlock: Reliable and Efficient Workflow Execution}}, 2025.
 \bibitem{tail} J. Dean, L. A. Barroso, \href{https://research.google/pubs/the-tail-at-scale/}{\emph{The Tail at Scale}}, CACM 56(2), 2013.
 \end{thebibliography}
 \end{document}
