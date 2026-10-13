@@ -9,6 +9,7 @@ The research question is **when to fork, which alternative to verify, when to ab
 | File | Purpose |
 |---|---|
 | [`acceptance-aware-forkable-compute.pdf`](acceptance-aware-forkable-compute.pdf) | Final 5-page mathematical and systems companion. |
+| [`physics-guided/`](physics-guided/README.md) | **Evidence Frontiers:** four-page physics-guided follow-up on committor/value-of-information scheduling, paired experiments, and a trusted evidence frontier (LaTeX + PDF + equation audit). |
 | [`main.tex`](main.tex) | Reproducible LaTeX source. |
 | [`reference.py`](reference.py) | Executable, deterministic **finite-world mock** of admission, conditional-acceptance scheduling, receipts and one-time promotion. |
 | [`test_reference.py`](test_reference.py) | Behavioral tests: safety gates, warm baseline, identical siblings, negative evidence, timeouts, forged receipts, stale epochs and intentionally weak verifier. |
