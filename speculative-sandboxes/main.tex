@@ -1,0 +1,254 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage[margin=0.73in,columnsep=0.25in]{geometry}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit}
+\usepackage{titlesec}
+\usepackage{balance}
+\usepackage{hyperref}
+\definecolor{ink}{HTML}{17354B}
+\definecolor{teal}{HTML}{117A81}
+\definecolor{faint}{HTML}{EEF4F6}
+\definecolor{graytext}{HTML}{536671}
+\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=teal,citecolor=teal,pdftitle={When Should a Sandbox Exist? Acceptance-Aware Forkable Compute},pdfauthor={Yossi Eliaz}}
+\setlist[itemize]{leftmargin=*,itemsep=1pt,topsep=3pt,parsep=0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3.5pt}
+\setlength{\columnsep}{0.25in}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+\titleformat{\section}{\large\bfseries\color{ink}}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{ink}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{9pt}{4pt}
+\titlespacing*{\subsection}{0pt}{7pt}{2pt}
+\newcommand{\Claim}[1]{\noindent\textcolor{teal}{\textbf{#1}}\;}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\TV}{\operatorname{TV}}
+\newcommand{\Prb}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\arraystretch}{1.09}
+\title{\vspace{-1.5em}\textcolor{ink}{\bfseries When Should a Sandbox Exist?}\\[-1pt]
+\large Acceptance-Aware Speculation Without False Confidence}
+\author{Yossi Eliaz\\[-1pt]\small Cambridge SRG seminar companion \quad\textbar\quad 13 October 2026\\[-2pt]
+\small \href{https://github.com/zozo123/cam-talk-london-26}{Cambridge talk}\quad\textbar\quad
+\href{https://arxiv.org/abs/2607.09689}{Evidence-aware reduction}}
+\date{}
+\begin{document}
+\maketitle
+\vspace{-1.3em}
+\begin{abstract}\noindent
+An executable fork makes alternative futures cheap, but it does not manufacture independent evidence or grant a child the authority to accept its own work. We formulate a \emph{sandbox existence test} (fidelity, private divergence, authority, and economics), then borrow the useful part of speculative decoding: calibrated acceptance predictions and adaptive allocation of a finite verification budget. Exact token-sampling acceptance is distinguished from the probability that a software artifact passes a trusted verifier. Conditional acceptance handles correlated failures; lineage-aware reduction and selection-aware inference prevent false precision after choosing winners. We give a minimal controller protocol and a falsifiable experiment compatible with the Cambridge seminar's existing preregistration. All new scheduler, covariance, and selection-aware components are \textbf{design proposals}, not measured runtime gains.
+\end{abstract}
+\vspace{-0.5em}
+\section{First ask whether a fork is real, useful, and safe}
+
+A sandbox is an \emph{execution/policy boundary}, not a synonym for a microVM or a process. A \emph{forkable continuation} is a private branch of a declared reached state $S_0$. Its contents may include filesystem, environment and optionally live memory/processes; copied guest state does \emph{not} copy the external world or publication authority. The Cambridge talk distinguishes named-snapshot \emph{restore fan-out} from live-memory fork until the nonce/process-survival probe passes \cite{cam}.
+
+For a task class $\mathcal T$, the following are gates, not performance results:
+\begin{table}[h]
+\centering\footnotesize
+\begin{tabularx}{\columnwidth}{@{}>{\bfseries}p{0.17\columnwidth}X@{}}
+\toprule
+Gate & Required evidence before claiming a useful fork\\
+\midrule
+State & Name the bytes, runtime state and external dependencies needed by the next action; say explicitly whether memory survives.\\
+Fidelity & On pinned tests $t\in\mathcal T$, parent and restored continuation agree on required observations under controlled inputs; record failures.\\
+Privacy & Each child gets private writes and unique runtime identity/RNG; no child can modify another's evidence or the verifier.\\
+Authority & Controller owns immutable check definitions, epoch, evidence ledger and promote permission; secrets/leases are reissued, never trusted because they were copied.\\
+Effects & Network/API/billing consequences are fenced, simulated, or idempotently reconciled; restore never undoes outside effects.\\
+Cost & Compare against an equivalent \emph{warm cached} baseline, including capture, restore, divergence, verification and contention.\\
+\bottomrule
+\end{tabularx}
+\caption{Operational criteria; none follows from a fast create benchmark alone.}
+\end{table}
+
+\Claim{Decision rule.} Call it a \emph{forkable sandbox} only when the state semantics and isolation/authority gates hold. Call it an \emph{advantageous} fork only when the same-workload warm alternative loses after all overheads. Performance is not a security definition.
+
+For $K$ equivalent tasks, a simple \emph{work-cost} accounting is
+\begin{equation}
+\label{eq:cost}
+\begin{aligned}
+C_{\mathrm{warm}}&=K(P_w+E+V),\\
+C_{\mathrm{fork}}&=P_0+H+K(R+E+V)+D.
+\end{aligned}
+\end{equation}
+Here $P_w$ is warm preparation, $P_0$ preparation of the captured parent, $H$ capture, $R$ restore, $E$ per-trial execution, $V$ exact-artifact verification, and $D$ divergence/coordination. Under this simplified additive model, fork saves work iff
+\begin{equation}
+\boxed{K P_w>P_0+H+KR+D.}
+\end{equation}
+Latency additionally depends on critical path, contention, concurrency, and tail behavior; hedged requests are a separate tail-latency precedent \cite{tail}. Cheap restore alone never proves lower end-to-end latency. This matches the seminar's preregistered H1 comparison to a \emph{warm cache}, not merely a cold start \cite{cam}.
+
+\section{What speculative decoding really proves}
+
+Let $q(x)$ be a cheap proposal distribution and $p(x)$ the exact target distribution over tokens. Draw $x\sim q$ and accept with probability
+\begin{equation}
+ a(x)=\min\!\left(1,\frac{p(x)}{q(x)}\right), \qquad q(x)>0.
+\end{equation}
+Averaging over proposals gives \emph{maximal-coupling} acceptance:
+\begin{equation}
+\label{eq:tv}
+\begin{aligned}
+\alpha_{\rm token}
+ &=\sum_x q(x)a(x)=\sum_x\min\{p(x),q(x)\}\\
+ &=1-\underbrace{\frac12\sum_x|p(x)-q(x)|}_{\TV(p,q)}.
+\end{aligned}
+\end{equation}
+Upon rejection, sample from $r(x)=[p(x)-q(x)]_+/\TV(p,q)$ when $\TV>0$. Then
+\begin{equation}
+\min(p,q)+\TV(p,q)r=p,
+\end{equation}
+pointwise. Thus the emitted token retains \emph{exactly} the target distribution; no coupling can reuse a $q$-sample with a higher probability of equality \cite{leviathan}. The theorem depends on \emph{known} $p,q$ and this correction rule.
+
+\Claim{Never substitute a test pass for Eq.~\eqref{eq:tv}.} For code, $A_i=\{\text{exact candidate }i\text{ passes trusted checks}\}$, and $a_i=\Prb(A_i\mid\text{history})$ is a \emph{predictive verifier-acceptance rate}. It is generally neither $1-\TV$ nor the probability of semantic correctness. A verifier can be incomplete or compromised. The controller must own it.
+
+\subsection{A precise, but narrow, Gaussian bridge}
+For two normalized Gaussians $p=N(\mu_1,\Sigma)$ and $q=N(\mu_2,\Sigma)$ with the \emph{same} positive definite covariance, the paper's two-factor weighted disagreement is
+\begin{equation}
+\label{eq:delta}
+\Delta=\tfrac12(\mu_1-\mu_2)^T\Sigma^{-1}(\mu_1-\mu_2).
+\end{equation}
+Their TV overlap and KL divergence obey
+\begin{equation}
+\label{eq:gauss}
+\boxed{\alpha_{\rm token}=2\Phi\!\left(-\sqrt{\Delta/2}\right),\quad
+ D_{\rm KL}(p\|q)=\Delta.}
+\end{equation}
+This is an \emph{identity for these two distributions}, not a general map from worker disagreement to patch correctness. Identical Gaussian means with unequal covariances give $\Delta=0$ but nonzero TV. Identical wrong patches can have perfect apparent agreement without any new evidence \cite{eliazbmr}.
+
+\section{Acceptance-aware fork selection}
+
+Let $A_i$ denote verifier acceptance and $H$ encode fork ancestors, model/prompt/test hashes, failures and known shared inputs. In a fixed trial order, define
+\begin{equation}
+ a_i^- =\Prb(A_i\mid H, A_1^c,\ldots,A_{i-1}^c).
+\end{equation}
+The chain rule gives an \emph{exact} correlated-success identity:
+\begin{equation}
+\label{eq:chain}
+\boxed{\Prb\!\left(\bigcup_{i=1}^K A_i\middle|H\right)
+=1-\prod_{i=1}^{K}(1-a_i^-).}
+\end{equation}
+Replacing $a_i^-$ by marginal success rates silently assumes independence. The predictors must be conditioned on negative evidence from failed siblings.
+
+For a fixed set $S$ of candidate branches let $F(S)=\Prb(\bigcup_{i\in S}A_i)$. A new worker $j$ contributes
+\begin{equation}
+\label{eq:marginal}
+\boxed{F(S\cup\{j\})-F(S)
+=\Prb\!\left(A_j\cap\!\bigcap_{i\in S}A_i^c\right).}
+\end{equation}
+\Claim{Diversity is an objective, not decoration.} What matters is the probability that $j$ succeeds \emph{when the current workers fail}. Since the event on the right shrinks as $S$ grows, $F$ is monotone and submodular for a \emph{fixed} joint distribution. Static equal-cost greedy selection has the classic $(1-1/e)$ approximation to the optimal fixed-size set. This guarantee does \emph{not} transfer automatically to a history-dependent adaptive policy, whose conditions require separate proof \cite{golovin}.
+
+\subsection{Concrete correlation penalty}
+A transparent illustration takes a shared latent difficulty $Z\sim\operatorname{Beta}(u,v)$ and conditionally IID branch outcomes $A_i\mid Z\sim\operatorname{Bernoulli}(Z)$. Then
+\begin{equation}
+\begin{aligned}
+\mu&=\frac{u}{u+v},\quad \rho=\frac1{u+v+1},\\
+\Prb(\exists\text{ pass})&=1-\frac{(v)_K}{(u+v)_K}.
+\end{aligned}
+\end{equation}
+With $(u,v)=(0.45,1.05)$ and $K=8$, each branch has marginal pass rate $0.30$ and pairwise outcome correlation $0.40$. The eight-branch success probability is \emph{about 65.8\%}, versus $1-0.7^8\approx94.2\%$ under independence. After four failures, the next same-family pass probability is $u/(u+v+4)=8.18\%$. These are \textbf{model calculations}, not measurements of islo or the factory.
+
+\subsection{Depth, width, and verification cost}
+For a dependent chain of $D$ speculative edits, let $L$ be the number of consecutive edits whose exact resulting artifacts pass, stopping at the first failure. The tail-sum formula is
+\begin{equation}
+\label{eq:prefix}
+\E[L]=\sum_{j=1}^D \Prb(A_1\cap\cdots\cap A_j).
+\end{equation}
+If conditional prefix survival is constant $a$, then $\E[L]=\sum_{j=1}^D a^j$. Unlike token decoding, a rejected code patch has no free residual-correction token: repair, rollback, rerun and verifier invocations all cost resources.
+
+A controller can choose depth $D$, width $W$, model/prompt diversity, verifier order and cancellation policy to maximize a budgeted objective such as
+\begin{equation}
+\label{eq:objective}
+\max_{\pi}\;\Prb_{\pi}(\text{verified success by }T)
+ -\lambda\E_{\pi}[C],
+\end{equation}
+subject to \emph{unrelaxed} authority and final-artifact checks. Predictive acceptance must be calibrated on held-out traces, with latency and compute jointly measured. EAGLE-2 motivates dynamic trees from context-dependent acceptance; EAGLE-3 motivates improving the drafter rather than simply widening speculation. Neither supplies a correctness theorem for arbitrary sandbox tasks \cite{eagle2,eagle3}.
+
+\section{Acceptance is not independent evidence}
+
+In the paper's independent Gaussian common-target model, worker $i$ returns estimate $\hat\theta_i$, information $P_i$, evidence IDs and lineage. The current reducer forms $P=\sum_iP_i$ and $q=\sum_i P_i\hat\theta_i$, rejects declared duplicate IDs and transports ancestry. It \emph{does not} infer covariance from lineage or implement selection correction \cite{eliazbmr}.
+
+If estimates share latent error $U$ and have independent noise $\varepsilon_i$, write $Y_i=\theta+U+\varepsilon_i$ with variances $\tau^2$ and $\sigma^2$. Then
+\begin{equation}
+\operatorname{Var}(\bar Y)=\tau^2+\frac{\sigma^2}{K},\quad
+K_{\rm eff}=\frac{K}{1+(K-1)\rho},
+\end{equation}
+where $\rho=\tau^2/(\tau^2+\sigma^2)$. Eight estimates with $\rho=0.4$ have $K_{\rm eff}\approx2.11$ under this model. \emph{Acceptance correlation} and \emph{estimation-error correlation} are separate quantities; this effective sample size is not a success-probability shortcut.
+
+With a \emph{justified} covariance matrix $C$ and a common-target observation map $H_0$, generalized least squares gives
+\begin{equation}
+\label{eq:gls}
+\begin{aligned}
+\hat\theta&=(H_0^TC^{-1}H_0)^{-1}H_0^TC^{-1}Y,\\
+\operatorname{Cov}(\hat\theta)&=(H_0^TC^{-1}H_0)^{-1}.
+\end{aligned}
+\end{equation}
+A candidate fork-DAG covariance model is $C_{ij}=\sum_{a\in\mathrm{Anc}(i)\cap\mathrm{Anc}(j)}T_a+\1_{i=j}R_i$. Ancestry alone does \emph{not} identify these variance components: fit/validate them externally or \textbf{abstain} from claiming increased precision.
+
+\Claim{Selection creates another bias.} Suppose 100 IID $N(\theta,1)$ estimates each report $[Y_i-1.96,Y_i+1.96]$. If we choose the largest estimate, coverage becomes
+\begin{equation}
+\Prb(\theta\in I_{\arg\max Y_i})
+=\Phi(1.96)^{100}-\Phi(-1.96)^{100}\approx 7.95\%.
+\end{equation}
+So even initially valid 95\% intervals may become invalid after choosing winners. A valid reducer must record \emph{rejections and selection history}, then use simultaneous/selection-aware or held-out inference; unchanged marginal intervals are not automatically valid after search. This is a \textbf{synthetic calculation}, not measured agent behavior.
+
+\section{A minimal end-to-end controller}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=4mm,>=Latex,
+ box/.style={draw=ink,rounded corners=1.4pt,fill=faint,align=center,inner sep=3.5pt,text width=0.82\columnwidth,font=\footnotesize},
+ flow/.style={->,line width=0.55pt,draw=teal}]
+\node[box] (root) {\textbf{Trusted controller}\\pin task, snapshot manifest, check digest, epoch};
+\node[box,below=of root] (fork) {\textbf{Admission + calibrated proposer}\\choose branch family / depth / width / budget};
+\node[box,below=of fork] (run) {\textbf{Private children}\\restore, remint identity, execute, return artifact digest};
+\node[box,below=of run] (check) {\textbf{External verifier + ledger}\\record pass/fail, cost, lineage, exact bytes};
+\node[box,below=of check] (prom) {\textbf{Controller-only decision}\\select one checked code artifact, or justified statistical reduce; epoch-fenced promote};
+\draw[flow] (root)--(fork);\draw[flow](fork)--(run);\draw[flow](run)--(check);\draw[flow](check)--(prom);
+\end{tikzpicture}
+\caption{Proposed protocol. Only the controller can issue the final promote operation.}
+\end{figure}
+
+\Claim{Admission.} An immutable work-order key binds repository tree, initial-state digest, tool/model/prompt versions, task and selection context. Retried evaluation of \emph{the same observation} reuses its evidence token; new samples get new tokens, but keep common ancestry. Do not count retries or speculative replicas twice.
+
+\Claim{Execution.} Keep warm compiler/dependency state where safe; restore private writable state; reseed uniqueness and remint child authority outside the copied guest. Stop or cancel losers only when their recorded outcomes are no longer necessary. A cancellation is not a successful result.
+
+\Claim{Verification.} An external checker binds \texttt{(input tree, output digest, verifier digest, epoch)} to a signed or controller-authenticated receipt. Keep the negative outcomes, including timeouts, refusals and missing checks. Different result types have different fan-in: choose one code patch, recheck a composed patch, or pool measurements only under a common target and justified covariance.
+
+\Claim{Publication.} Persist exact artifact bytes and checks before tearing down the worker. Check the current epoch/version at a single controller-owned compare-and-swap. Stale children can finish but cannot publish. An untrusted child cannot write the score, tests, receipt or publish token; network effects are fenced or reconciled. The seminar's serial factory records motivate these obligations but did not demonstrate an integrated forked version \cite{cam}.
+
+\section{Falsifiable evaluation, not a speedup claim}
+
+\textbf{Preserve preregistration.} The Cambridge \texttt{PREREGISTRATION.md} already fixes Gate~0 (memory nonce), fidelity, H1 warm-cache cost and H2 sibling-vs-stranger correlation, with predefined tests and rejection thresholds. Do \emph{not} change those analyses or imply they have run. The following is a separately labelled \textbf{exploratory Phase D proposal}.
+
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{Same tasks, same authority:} pin repositories, work orders, checker images/digests, snapshot semantics and compute/time budgets; compare serial warm, fixed-width fan-out, calibrated acceptance-only, and lineage-aware adaptive scheduling.
+\item \textbf{Predict before seeing the outcome:} train conditional pass models on disjoint historical tasks; freeze and calibrate them; record predictive log loss, Brier score and reliability by fork family, failure class and workload difficulty.
+\item \textbf{Measure complete cost:} prepare/capture/restore, agent calls, verifier executions, cancellation, external effects, queueing, memory and p50/p95 time-to-\emph{first exact verified artifact}; count CPU-seconds and dollars per success. Include no-fork/warm-cache controls.
+\item \textbf{Try hard negative controls:} cloned wrong assumptions, altered prompts/models, intentionally missing direct tests, stale publication epochs, duplicate evidence IDs, verifier-tampering attempts, unknown shared noise and post-selection intervals.
+\item \textbf{Report falsifiers:} adaptive width helps only if additional verified successes per budget exceed overhead; lineage helps only if it improves calibrated conditional success or coverage on held-out tasks; refuse unjustified precision rather than reporting a fabricated gain.
+\end{enumerate}
+
+\textbf{Talk placement.} A 90-second optional Q\&A bridge after the seminar's runtime/evidence boundary: \emph{``A fork is worthwhile only if it preserves the state we need, costs less than the warm alternative, and cannot grade or publish itself. Speculation then asks: what is the probability this \emph{next} branch succeeds \emph{when the existing branches fail}? That probability controls the scheduler, while independent evidence controls statistical confidence.''}
+
+\section*{Takeaway}
+\noindent\colorbox{faint}{\parbox{0.94\columnwidth}{\vspace{4pt}\small\textbf{Speculate to save latency. Verify exact outcomes. Preserve rejected attempts.\newline
+Count evidence by provenance and calibrated dependence, never by the number of sandboxes or the number of green checks.}\vspace{4pt}}}
+
+\balance
+\begin{thebibliography}{9}\footnotesize\setlength{\itemsep}{1pt}
+\bibitem{cam} Y. Eliaz, \href{https://github.com/zozo123/cam-talk-london-26}{\emph{Forkable Sandboxes Cambridge Seminar}}, 2026. Claim fence and preregistration in the repository.
+\bibitem{eliazbmr} Y. Eliaz, \href{https://arxiv.org/abs/2607.09689}{\emph{Evidence-Aware MapReduce for Forkable Compute}}, arXiv:2607.09689, 2026.
+\bibitem{leviathan} Y. Leviathan, M. Kalman, Y. Matias, \href{https://proceedings.mlr.press/v202/leviathan23a.html}{\emph{Fast Inference from Transformers via Speculative Decoding}}, ICML, 2023.
+\bibitem{eagle2} Y. Li et al., \href{https://aclanthology.org/2024.emnlp-main.422/}{\emph{EAGLE-2: Faster Inference of Language Models with Dynamic Draft Trees}}, EMNLP, 2024.
+\bibitem{eagle3} Y. Li et al., \href{https://papers.neurips.cc/paper_files/paper/2025/hash/c7b5a35ea98b62512a869c19ea7b03cb-Abstract-Conference.html}{\emph{EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test}}, NeurIPS, 2025.
+\bibitem{golovin} D. Golovin, A. Krause, \href{https://arxiv.org/abs/1003.3967}{\emph{Adaptive Submodularity: Theory and Applications in Active Learning and Stochastic Optimization}}, JAIR, 2011.
+\bibitem{tail} J. Dean, L. A. Barroso, \href{https://research.google/pubs/the-tail-at-scale/}{\emph{The Tail at Scale}}, CACM 56(2), 2013.
+\end{thebibliography}
+\end{document}
