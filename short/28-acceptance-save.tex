@@ -1,0 +1,19 @@
+% Act 5, rule three: the second factory run's loss and the proposed save order. Split from the old publish-once slide.
+\begin{frame}[t]{\ev{\tagM\,\tagP}\surf{PUBLISH ONCE}Our second factory run lost an approved patch.}
+\vspace{.3cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{13}{16}\selectfont}]
+\useasboundingbox (0,.75) rectangle (14.4,-2.95);
+\node[anchor=west,inner sep=0pt] at (0,.4) {\tagM};
+\node[anchor=west,inner sep=0pt,font=\fontsize{13.5}{16.5}\selectfont] at (0,-.15) {Delivery refused three times; then cleanup \textcolor{Rust}{\textbf{erased the approved patch}}.};
+\node[anchor=west,inner sep=0pt] at (0,-1.1) {\tagP};
+\node[state,text width=2.75cm,minimum height=1.4cm] (a) at (1.6,-2.15) {Checked\\result};
+\node[proposed,text width=2.75cm,minimum height=1.4cm] (b) at (5.33,-2.15) {Save a copy\\outside};
+\node[proposed,text width=2.75cm,minimum height=1.4cm] (c) at (9.06,-2.15) {Confirm\\the copy};
+\node[state,text width=2.75cm,minimum height=1.4cm] (d) at (12.8,-2.15) {Delete the\\workspace};
+\draw[flow] (a)--(b);\draw[flow] (b)--(c);\draw[flow] (c)--(d);
+\end{tikzpicture}
+\claim{Save outside the child before cleanup.}
+\sources{Second factory run (SELFHOST-3, 27 Sep 2026): serial, Docker sandboxes, nothing forked; local records. Save order: proposed, not executed in the incident.}
+\qadetail{MEASURED scope: SELFHOST-3, from local run records that are not published; about 26 minutes wall time, 853.8 s of stage time, \$3.43, a reported suite count of 1,981 with no failures, and an approved review. Do not upgrade the reported count into a confirmed all-passed count. Delivery was refused three times with files outside the reviewed commit stream; the stray file was the harness's own review-diff archive mirrored into the workspace. Teardown removed the patch and no pull request resulted. It ran on Docker sandboxes, serially; nothing forked. This is a delivery and recovery incident, not a full second task reconstruction. DESIGN scope: the save, confirm, delete order is a proposed recovery rule; it was not executed in the incident, and export before cleanup is proposed, not merged. Confirming a saved copy requires retrievable exact artifact bytes and their evidence, not a hash alone: a hash is a fingerprint, not a backup. An approved review is distinct from a passed required behavioral check and from publication authorization; preserving refused candidates does not bypass the delivery gate.}
+\note{[0:45] In a second factory run, review approved a patch. But delivery was refused three times, over a stray file. That file was the harness's own review archive. Then cleanup deleted the workspace, and the approved patch with it. The fix is an order. Save a copy outside the child, confirm the copy, then delete. A hash alone is not a copy. The order is proposed. The loss was real. But saving is not permission to publish. A replaced or restored worker may still try to deliver.}
+\end{frame}

@@ -1,0 +1,22 @@
+% Act 5, rule three: the proposed gate that would have refused the factory patch. Split from the factory-run slide.
+\begin{frame}[t]{\ev{\tagB\,\tagP}\surf{PUBLISH ONCE}Accept only bytes whose promise was tested.}
+\vspace{.6cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{13}{16}\selectfont},
+  num/.style={circle,fill=Teal,text=white,inner sep=1.5pt,minimum size=.62cm,font=\fontsize{12}{12}\selectfont\bfseries},
+  lab/.style={inner sep=0pt,font=\fontsize{12}{14.5}\selectfont,text=Muted}]
+\useasboundingbox (0,1.05) rectangle (14.4,-1.95);
+\node[state,text width=3.95cm,minimum height=1.6cm] (g1) at (2.45,0) {Freeze the candidate\\and its hash};
+\node[proposed,text width=3.95cm,minimum height=1.6cm] (g2) at (7.3,0) {Test each promise\\on those exact files};
+\node[evidence,text width=3.95cm,minimum height=1.6cm] (g3) at (12.15,0) {Controller publishes\\ only that hash};
+\draw[flow] (g1)--(g2);\draw[flow] (g2)--(g3);
+\foreach \n/\k in {g1/1,g2/2,g3/3}{\node[num] at (\n.north west) {\k};}
+\node[lab,anchor=north] at (2.45,-.95) {proves identity,\\not correctness};
+\node[lab,anchor=north] at (7.3,-.95) {\tagP};
+\node[lab,anchor=north] at (12.15,-.95) {\tagB};
+\end{tikzpicture}
+\par\vspace{.55cm}
+{\centering\fontsize{17}{21}\selectfont\color{Rust}\bfseries No test for the promise, no acceptance.\par}
+\sources{Gate: proposed; the sha256-bound publication check it builds on is built. Promises come from the approved plan and from review findings.}
+\qadetail{DESIGN scope: the gate is proposed and builds on the built sha256-bound publication check. Step 1 freezes the candidate and its hash: the hash that keyed the cache now names the bytes the controller may publish. A valid digest proves identity, not correctness. Step 2 requires and runs a test for each promise the change makes, on those exact files. For the factory patch, the required test forces CellBusy with an active workspace owned by another attempt of the same job, holds the current dispatch authorization and asserts one backend dispatch; if no test exercises a promise the change makes, the gate refuses. Promises come from the approved plan and from review findings; a change outside the plan's files needs explicit scope authorization plus its own test. A test counts only if it forces the path and asserts the promise (CellBusy, same job, one dispatch); execution without the assertion does not. In this case the gate refuses on both grounds: scope (service.py was outside the six approved files) and a reviewer-named promise with no test. Step 3: the controller publishes only the frozen hash; that hash-bound publish check is built. Scope authorization, an executed receipt, behavioral coverage, exact-composition verification, artifact-bound approval and current controller authority are separate obligations. The suite in the factory run did run on the exact candidate bytes and was green; the gate addresses the missing promise test, not changed bytes.}
+\note{[0:50] Three steps. First, freeze the candidate and its hash. The hash that keyed the cache now names the bytes the controller may publish. It proves identity, not correctness. Second, require a test for each promise the change makes. Run it on those exact files. Here, force the retry onto a busy workspace and assert one dispatch. Third, the controller publishes only those bytes. That hash-bound publish check is built, but the promise test is proposed. No test for the promise, no acceptance: this gate would have refused our patch. A checked result also has to survive.}
+\end{frame}

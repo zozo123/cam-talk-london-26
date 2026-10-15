@@ -1,0 +1,40 @@
+% Act 3, rule one: the cost rule, then the cold and warm cases. BUILD 3: rule, cold bars, warm bars + claim.
+\begin{frame}[t]{\ev{\tagA}\surf{COMPUTE ONCE}A restore pays only if it beats a warm cache.}
+\vspace{.1cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{14.5}\selectfont},
+  val/.style={above,inner sep=2pt,font=\fontsize{15}{17}\selectfont\bfseries},
+  key/.style={inner sep=1pt,font=\fontsize{12}{14}\selectfont\bfseries}]
+\useasboundingbox (0,.55) rectangle (14.4,-4.36);
+% Step 1: the rule. Gold side = setup avoided; grey side = overhead paid.
+\node[anchor=west,inner sep=1pt,font=\fontsize{21}{25}\selectfont,text=Gold] (lhs) at (.1,0) {$(N{-}1)P$};
+\node[anchor=west,inner sep=3pt,font=\fontsize{21}{25}\selectfont] (gt) at (lhs.east) {$>$};
+\node[anchor=west,inner sep=1pt,font=\fontsize{21}{25}\selectfont] (rhs) at (gt.east) {$H+N(R+D)$};
+\node[key,text=Gold,below=2pt of lhs] {avoided};
+\node[key,text=Muted,below=2pt of rhs] {overhead};
+\node[anchor=north west,inner sep=0pt,align=left] at (.3,-1.12) {\fontsize{12.5}{15}\selectfont\renewcommand{\arraystretch}{1.22}%
+\begin{tabular}{@{}l@{\enspace}l@{}}
+$N$ & runs {\color{Muted}(8)}\\
+$P$ & setup per run\\
+$H$ & save once {\color{Muted}(2)}\\
+$R{+}D$ & restart, private writes {\color{Muted}(1+3)}\\
+\end{tabular}};
+% Bars: one scale, resource-seconds; 210 units = 2 cm.
+\begin{scope}[shift={(0,-3.3)},y=.00952cm]
+\draw[Line,line width=.8pt,visible on=<2->] (7.45,0)--(14.1,0);
+\fill[Gold!65,visible on=<2->] (7.7,0) rectangle (8.8,210);
+\fill[Ink!35,visible on=<2->] (9.0,0) rectangle (10.1,34);
+\node[val,visible on=<2->] at (8.25,210) {210};
+\node[val,visible on=<2->] at (9.55,34) {34};
+\fill[Gold!65,visible on=<3->] (11.45,0) rectangle (12.55,14);
+\fill[Ink!35,visible on=<3->] (12.75,0) rectangle (13.85,34);
+\node[val,visible on=<3->] at (12.0,14) {14};
+\node[val,visible on=<3->] at (13.3,34) {34};
+\node[below,text=Teal,visible on=<2->] at (8.9,-8) {Cold setup, $P=30$\\\textbf{save 176}};
+\node[below,text=Rust,visible on=<3->] at (12.65,-8) {Warm cache, $P=2$\\\textbf{spend 20 more}};
+\end{scope}
+\end{tikzpicture}
+\uncover<3->{\claim{Price a restore against a warm cache, not a cold start.}}
+\sources{Illustrative model, resource-seconds. Starts: 73~ms median to first command (\href{https://www.computesdk.com/benchmarks/sandboxes/burst-tti}{ComputeSDK Burst TTI}, 2 Oct 2026).}
+\qadetail{The rule is an additive total-resource model, not measured elapsed time: work common to both alternatives cancels; D is incremental divergence overhead including copy-on-write; P must be reusable preparation, not merely sandbox setup. Batch elapsed time also depends on critical paths and contention. Worked illustration: N8, H2, R1, D3 give overhead 2+8(1+3)=34 resource-seconds; at a cold P30 reuse avoids (N-1)P=7x30=210 and saves 176; at a warm-cache P2 it avoids 14 and loses 20. These are sample calculations, not measured backend performance. Restoring saved state and rebuilding with a warm cache are both reuse; the comparison is between them, and a warm cache cannot be credited for a continuation it cannot supply. The comparison must reach equivalent usable state. The Tokio cache endpoints (about 46 s fresh, 13 s restored build files, 3 s already warm; author-reported, tokio issue 8200) appear earlier as artifact-cache timings, not fork timings. Starts: ComputeSDK Burst TTI (raw results SHA 24922f27408279200074cbc8773cbda9a4aa4785): create through first successful command at client concurrency 100, Isorun median 72.77 ms, p95 78.29 ms, 100/100. Our paper also recorded one provider's create path (Tensorlake, default environment, requested concurrency 8, 256/256 succeeded, median 3.44 s, p95 9.00 s, client API round trip, teardown excluded; arXiv:2607.09689v4, Table 2). That is not our platform. Creation versus time to first command and concurrency 8 versus 100 are different endpoints and protocols; do not divide one by the other. Jitsu (Madhavapeddy et al., NSDI 2015) and LightVM (Manco et al., SOSP 2017, NEC Labs) also illustrate cheap fresh starts. Latency form, which H1 tests: with the snapshot already taken, H is off the critical path and the N cells run in parallel, so restore wins makespan when R + D is below P_warm; N enters only through contention, which is why H1 varies N = 3, 6, 12. The slide's resource form grows with N. The measured 6.87 s p50 (arXiv:2607.09689v4, Table 2) is a client restore--run--capture round trip, an upper bound that includes the run, not R itself; the R = 1 illustration is not a measured value. We do not claim that a fork is faster than a good build cache; the preregistered restore-versus-warm-cache experiment has not started.}
+\note{[1:15] Here is the rule. With N alternative runs, each would repeat a setup cost, P. Preparing once avoids N minus one setups. Against that, we pay H to save the state once. Each child pays R to restart and D to keep its writes private. Sandbox starts are already cheap. A public benchmark puts them as low as seventy-three milliseconds. So P must be real preparation. A question for you: which wins, a snapshot restore or a warm-cache rebuild? Take eight runs, H of two, R of one, D of three. That is thirty-four resource-seconds of overhead. With a cold setup of thirty, restoring avoids two hundred ten. So it saves a hundred seventy-six. With a warm cache, setup drops to two. Restoring avoids only fourteen, so it loses twenty. The warm cache wins: never build the same thing twice. But even a winning restore cannot undo everything.}
+\end{frame}

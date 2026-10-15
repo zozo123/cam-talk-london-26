@@ -1,0 +1,27 @@
+% A real worked example of the three rules (Karpathy's autoresearch), under the map's columns (x = 2.3, 7.2, 12.1).
+% BUILD 3: step 1 compute once, step 2 count once, step 3 publish once (+ the keep loop and the result).
+\begin{frame}[t]{\ev{\tagO}\surf{AI RESEARCH}A real run: an AI agent tried 126 changes to one model.}
+\vspace{.15cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  zh/.style={anchor=south,font=\fontsize{12}{14}\selectfont\bfseries,text=Teal},
+  fact/.style={anchor=north,text width=4.7cm,align=center,font=\fontsize{11.5}{14}\selectfont},
+  b/.style={text width=4.25cm,minimum height=1.15cm,align=center,font=\fontsize{12}{14.5}\selectfont},
+  every node/.style={align=center}]
+\useasboundingbox (0,.75) rectangle (14.4,-2.3);
+\node[zh] at (2.3,.15) {1\enspace COMPUTE ONCE};
+\node[state,b] (z1) at (2.3,-.55) {Start from the\\best commit};
+\node[fact] at (2.3,-1.3) {Data, tokenizer and\\evaluator: set up once};
+\node[zh,visible on=<2->] at (7.2,.15) {2\enspace COUNT ONCE};
+\node[evidence,b,visible on=<2->] (z2) at (7.2,-.55) {126 attempts,\\one validation set};
+\node[fact,text=Rust,visible on=<2->] at (7.2,-1.3) {One shared dataset:\\needs a held-out check};
+\draw[flow,visible on=<2->] (z1)--(z2);
+\node[zh,visible on=<3->] at (12.1,.15) {3\enspace PUBLISH ONCE};
+\node[evidence,b,visible on=<3->] (z3) at (12.1,-.55) {Keep or revert\\in Git};
+\node[fact,visible on=<3->] at (12.1,-1.3) {\textbf{23} kept, \textbf{102} reverted,\\\textbf{1} crashed};
+\draw[flow,visible on=<3->] (z2)--(z3);
+\end{tikzpicture}
+\uncover<3->{\claim{Validation bits per byte: 0.997900 $\to$ 0.969686, 2.8\% lower.}}
+\sources{\href{https://github.com/karpathy/autoresearch/blob/master/program.md}{Karpathy, autoresearch protocol}; \href{https://github.com/karpathy/autoresearch/discussions/43}{one reported session}: 5-minute runs, one at a time, no forks. Same loop over many programs: \href{https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/}{AlphaEvolve (2025)}, 0.7\% of Google's compute recovered, on average.}
+\qadetail{Autoresearch: one reported session, not a controlled average effect or a fork experiment. 126 attempts: 23 kept, 102 discarded (reverted), 1 crash. The score decline is (0.997900-0.969686)/0.997900=2.827\%; lower validation bits per byte is better. The protocol holds data preparation, tokenizer and evaluation fixed and permits editing train.py. Five minutes is wall-clock training time; startup and compilation are outside that budget, and crashes can end early. Sequential Git keep/revert is the actual mechanism; forked parallel continuations are a possible extension, not what produced this result. Compute once here means the fixed preparation and the incumbent commit are reused rather than rebuilt; it is not a measured saving. Count once: every keep-or-revert decision used the same validation set, so the 126 scores are not 126 independent checks; repeated adaptive selection on one validation set warrants a separate held-out check before claiming generalization. Publish once: only a kept commit advances the incumbent, one change at a time. AlphaEvolve: DeepMind reports that the discovered Borg scheduling heuristic recovered an average 0.7\% of Google's worldwide compute resources; this measures the discovered rule, not sandbox forking.}
+\note{[1:20] This is Karpathy's autoresearch. An AI agent tries to improve a language model. It may edit only one file, the training script. Data preparation, the tokenizer and the evaluator are fixed. They are set up once. Every attempt starts from the best commit so far. That is compute once. In one reported session, the agent made a hundred twenty-six attempts. Every score came from the same validation set. That set is one shared observation, reused again and again. So the gain needs a separate held-out check. That is count once. After each five-minute run, the agent keeps the change or reverts it in Git. Twenty-three were kept, a hundred two reverted, and one crashed. A kept change becomes the new best commit. That is publish once. The score fell 2.8 percent. The loop ran one attempt at a time, with no forks. AlphaEvolve runs the same loop over a population of programs. Now four more fields.}
+\end{frame}

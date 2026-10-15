@@ -1,0 +1,38 @@
+% Act 2 example 3 of 5. Shared simple template for short/12--16: three boxes (Shared state -> Alternatives -> Check),
+% one big result line, one claim with gold rule chips. The \providecommand block below is copied verbatim into
+% all five files; the first one loaded defines it, so every example draws the same geometry. Edit all five together.
+% #1 shared state, #2 alternatives, #3 check, #4 result line (use \exnum{} for the big numbers).
+\providecommand{\exnum}[1]{{\fontsize{20}{24}\selectfont\bfseries #1}}
+\providecommand{\rulechip}[1]{\tikz[baseline=(x.base)]\node[fill=Gold,text=white,rounded corners=2pt,inner xsep=3.5pt,inner ysep=2.4pt,font=\fontsize{11}{13}\selectfont\bfseries](x){#1};}
+\providecommand{\exampleflow}[4]{%
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  hd/.style={anchor=south,font=\fontsize{11.5}{13}\selectfont\bfseries,text=Teal},
+  bx/.style={text width=3.9cm,inner xsep=.15cm,minimum height=1.45cm,font=\fontsize{13.5}{16}\selectfont\bfseries},
+  stack/.style={draw=Gold,fill=Sand,line width=.9pt},
+  res/.style={anchor=west,inner sep=0pt,font=\fontsize{15}{18}\selectfont},
+  every node/.style={align=center}]
+\useasboundingbox (0,.62) rectangle (14.4,-2.85);
+\node[hd] at (2.12,.15) {Shared state};
+\node[hd] at (7.10,.15) {Alternatives};
+\node[hd] at (12.28,.15) {Check};
+\node[state,bx] (s) at (2.12,-.8) {#1};
+\node[candidate,bx] (a) at (7.10,-.8) {#2};
+\begin{scope}[on background layer]
+\draw[stack] ($(a.south west)+(.2,.2)$) rectangle ($(a.north east)+(.2,.2)$);
+\draw[stack] ($(a.south west)+(.1,.1)$) rectangle ($(a.north east)+(.1,.1)$);
+\end{scope}
+\node[evidence,bx] (c) at (12.28,-.8) {#3};
+\draw[flow] (s.east)--(a.west);
+\draw[flow] ($(a.east)+(.2,0)$)--(c.west);
+\node[res] at (0,-2.35) {#4};
+\end{tikzpicture}\par}
+\begin{frame}[t]{\ev{\tagO}\surf{SOFTWARE ENGINEERING}250 samples raised SWE-bench Lite coverage from 15.9\% to 56\%.\strut}
+\vspace{.2cm}
+\exampleflow{Repository\\at the issue}{1 to 250\\patches}{Hidden\\tests}
+{Tasks with a correct patch:\enspace\exnum{15.9\%\,$\to$\,56\%}}
+\claim{Coverage is not selection: one patch ships.\hfill\rulechip{PUBLISH ONCE}}
+\sources{\href{https://arxiv.org/abs/2407.21787}{Brown et al., Large Language Monkeys (2024)}: DeepSeek-Coder-V2-Instruct on SWE-bench Lite; coverage = tasks where at least one sampled patch passes the hidden tests.}
+\qadetail{Brown et al., Large Language Monkeys, arXiv:2407.21787: DeepSeek-Coder-V2-Instruct on SWE-bench Lite improves pass-at-least-once coverage from 15.9\% at one sample to 56\% at 250, a 40.1 percentage-point increase. Coverage is measured with the benchmark's hidden tests; it does not report production selection accuracy. Majority voting and reward models plateau without automatic verifiers. Stroebl, Kapoor and Narayanan, The Limits of Inference Scaling Through Resampling, arXiv:2411.17501: imperfect verifiers cap repeated-sampling gains, and when false-positive acceptance carries negative utility the optimum is often fewer than ten attempts under their modeled conditions; not a universal branch-count recommendation. Neither paper measures a sandbox-fork effect.}
+% Transition: from AI research; ends announcing genomics.
+\note{[1:00] The shared state is now a repository with an open issue. Brown and colleagues sampled patches from DeepSeek-Coder-V2-Instruct on SWE-bench Lite. With one sample, a correct patch appeared for 15.9 percent of tasks. With 250 samples, for 56 percent. That is coverage: at least one patch passes the hidden tests. In production there are no hidden tests. A selector must pick one patch from many wrong ones. Only that patch ships. Coverage is not selection. That is rule three, publish once. You will see our own software factory in the acceptance section. There, the suite was green but the check was incomplete. Next: from code to cells.}
+\end{frame}

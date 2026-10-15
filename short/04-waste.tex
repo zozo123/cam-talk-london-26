@@ -1,0 +1,37 @@
+% Act 1: the waste. BUILD 2: step 1 the "without reuse" panel; step 2 the "with reuse" panel, the
+% avoided setups and the three steps that remove the waste. Hidden parts keep their space (nothing moves).
+\begin{frame}[t]{\ev{\tagA}\surf{THE PROBLEM}In parallel computing, the costly work is the work done twice.}
+\vspace{.2cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  ph/.style={anchor=west,inner sep=0pt,font=\fontsize{13}{15}\selectfont\bfseries},
+  bl/.style={font=\fontsize{12.5}{15}\selectfont,text=Ink}]
+\useasboundingbox (0,.75) rectangle (14.4,-2.95);
+% Step 1. Without reuse: every trial repeats the setup.
+\node[ph] at (0,.42) {Without reuse};
+\foreach \rr/\yy in {A/-.35,B/-1.2,C/-2.05}{
+  \fill[Gold!55] (0,\yy-.31) rectangle (3.5,\yy+.31);
+  \node[bl] at (1.75,\yy) {setup $P$};
+  \fill[Teal!40] (3.5,\yy-.31) rectangle (5.05,\yy+.31);
+  \node[bl] at (4.275,\yy) {trial \rr};}
+\draw[-{Latex[length=1.6mm]},Muted,line width=.6pt] (0,-2.75)--(5.6,-2.75) node[right,labeltext,inner sep=1pt,font=\fontsize{11}{13}\selectfont] {time};
+% Step 2. With reuse: one setup, then every trial restores the saved state.
+\begin{scope}[xshift=7.6cm,visible on=<2->]
+\node[ph,visible on=<2->] at (0,.42) {With reuse};
+\foreach \rr/\yy in {A/-.35,B/-1.2,C/-2.05}{
+  \fill[Ink!22] (3.85,\yy-.31) rectangle (4.4,\yy+.31);
+  \fill[Teal!40] (4.4,\yy-.31) rectangle (5.95,\yy+.31);
+  \node[bl,visible on=<2->] at (5.175,\yy) {trial \rr};
+  \draw[Ink,line width=.8pt,-{Latex[length=1.5mm]}] (3.5,-.35)--(3.82,\yy);}
+\fill[Gold!55] (0,-.66) rectangle (3.5,-.04);
+\node[bl,visible on=<2->] at (1.75,-.35) {setup once};
+\node[labeltext,anchor=south,inner sep=1pt,font=\fontsize{11}{13}\selectfont,visible on=<2->] at (4.125,-.02) {restore};
+\node[missing,inner sep=0pt,minimum width=3.5cm,minimum height=1.47cm,font=\fontsize{12.5}{15}\selectfont,visible on=<2->] at (1.75,-1.625) {avoided:\\$(N{-}1)$ setups};
+\draw[-{Latex[length=1.6mm]},Muted,line width=.6pt] (0,-2.75)--(6.4,-2.75) node[right,labeltext,inner sep=1pt,font=\fontsize{11}{13}\selectfont,visible on=<2->] {time};
+\end{scope}
+\end{tikzpicture}
+\par\vspace{.35cm}
+\uncover<2->{\claim{Three steps remove it: cache, fork, sandbox.}}
+\sources{Schematic, one time scale in both panels. Restoring is not free; the runtime section prices it.}
+\qadetail{Illustrative task structure, not a measurement: bar lengths are schematic and use one time scale in both panels. The picture counts total work, not elapsed time; with three machines the right panel finishes slightly later, because each child restores, but it pays for one setup instead of three. Restoring is not free: saving the state once (H), restoring each child (R) and keeping each child's changes private (D) all cost, and the runtime section prices them against a warm cache, which is itself reuse. The avoided work is N-1 setups only when the restored state is what the next step reads; a cached file template may be an adequate and cheaper baseline. No timing or correctness result is attributed to these three trials. Our own factory runs were serial; nothing forked. Caches, forks and sandboxes are established mechanisms; the fence slide lists known systems.}
+\note{[0:55] Here is that problem in one picture. A question for you: how much of your last CI run had another machine already done? Often it is the same install and the same compile, again. Without reuse, three trials each repeat the same setup. With reuse, we set up once and save that state. Every trial starts from it. The setup blocks we skip are the waste. That is N minus one setups. In a parallel, distributed world, the expensive thing is doing work twice. Three steps remove it: cache, fork, sandbox. Step one is the oldest: a cache.}
+\end{frame}

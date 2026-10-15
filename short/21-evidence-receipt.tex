@@ -1,0 +1,26 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}\surf{COUNT ONCE}A receipt is evidence's cache entry, written outside the child.}
+\vspace{.15cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\fontsize{12.5}{15}\selectfont},
+  field/.style={evidence,anchor=west,text width=5.5cm,minimum height=.84cm,align=left,inner xsep=7pt},
+  found/.style={bad,anchor=west,text width=5.5cm,minimum height=.84cm,align=left,inner xsep=7pt},
+  head/.style={anchor=west,inner sep=0pt,font=\fontsize{11}{13}\selectfont\bfseries}]
+\node[head,text=Teal] at (0,.82) {RECEIPT\enspace\tagP};
+\node[head,text=Rust] at (7.5,.82) {FACTORY LOGS\enspace\tagM};
+\node[field] (f1) at (0,0)     {\makebox[2.05cm][l]{\textbf{Check}}what ran + result};
+\node[field] (f2) at (0,-1.0)  {\makebox[2.05cm][l]{\textbf{Artifact}}bytes + hash};
+\node[field] (f3) at (0,-2.0)  {\makebox[2.05cm][l]{\textbf{Actor}}who reported};
+\node[field] (f4) at (0,-3.0)  {\makebox[2.05cm][l]{\textbf{Inputs}}observation IDs};
+\node[found] (r1) at (7.5,0)    {CI passed in 3\,s; eval skipped};
+\node[found] (r2) at (7.5,-1.0) {Hash, but no source};
+\node[found] (r3) at (7.5,-2.0) {``Human''; harness answered};
+\node[anchor=west,text=Teal,font=\fontsize{12.5}{15}\selectfont\bfseries,inner xsep=7pt] (r4) at (7.5,-3.0) {counts once};
+\foreach \i in {1,2,3}{\draw[relation] (f\i.east)--(r\i.west);}
+\draw[message] (f4.east)--(r4.west);
+\end{tikzpicture}
+\end{center}
+\sources{Factory records (SELFHOST-2, 27 Sep; CI, 28 Sep 2026). Receipt fields proposed. Related: PASS, CamFlow, in-toto.}
+
+\qadetail{Who writes it: in the proposed design the harness or controller writes the receipt, outside the child's trust boundary; a report written by the child about itself is only a claim. These are reported own audit findings, not three fork-induced errors; the factory runs used Docker sandboxes, ran serially and forked nothing. The evals-islo Actions job (run 36423283572) passed in about three seconds while its real evaluation step was skipped because a key was absent. Approvals recorded mode human and actor admin although the harness answered the intent and plan gates; this is an actor/event labeling issue and does not mean the harness performed the human review. A local adapter shim outside Git had a recorded digest but no recoverable source in the repository: a code hash identifies bytes; it does not store them. Cache-entry analogy: a receipt is written after execution and carries the outcome and actor, so it is an action-cache entry (key plus result), not a key alone. As in a remote-execution ActionResult, which also records the worker, the key fields (check, artifact hash, input IDs) make the same evidence recognisable, so it counts once; a hash proves identity, not correctness. Proposed typed states are executed, skipped and failed; proposed actors are human, harness and service. Authenticity alone does not establish semantic accuracy. Audit inspects records; replay requires retrievable adapter bytes and recorded external responses; fresh hosted-model calls create a fresh run. Identity checks and external recording address integrity; they do not establish behavioral coverage or calibration. Related: PASS, CamFlow, in-toto, rr, DSec.}
+\note{[1:05] Counting once starts with a receipt. A receipt records what each trial did. It works like a cache entry. The key is what ran, on which bytes, from which inputs. A hash names the bytes, as in the cache. The value is the result and who reported it. In our design, the harness writes it, outside the child. A child's own report is only a claim. Our factory logs show why. A CI job passed in three seconds, but its evaluation was skipped. A helper's code hash was recorded, but its source was not in the repository. A hash is a fingerprint, not a backup. An approval was labelled human, but the harness had answered it. The inputs field lets a shared observation count once. Next, we combine receipts.}
+\end{frame}

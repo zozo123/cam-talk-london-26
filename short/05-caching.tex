@@ -1,0 +1,21 @@
+% Act 1, step 1: the oldest form of not doing work twice. Mechanism only; the Tokio numbers follow.
+% The hash that keys the cache starts the content-identity thread.
+\begin{frame}[t]{\ev{\tagO}\surf{STEP 1 \textperiodcentered{} CACHE}A cache skips work a previous run already did.}
+\vspace{.2cm}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{14}{17}\selectfont},
+  lab/.style={font=\fontsize{13}{15}\selectfont\bfseries}]
+\node[evidence,text width=4.3cm,minimum height=1.15cm] (k) at (0,0) {\textbf{key} $=$ hash(source,\\flags, toolchain)};
+\node[evidence,text width=3.6cm,minimum height=1.15cm] (hit) at (8.2,0) {Reuse\\stored output};
+\node[candidate,text width=4.3cm,minimum height=1.15cm] (run) at (0,-2.3) {Run in a sandbox};
+\node[state,text width=3.6cm,minimum height=1.15cm] (st) at (8.2,-2.3) {Store under key};
+\draw[flow] (k)--node[above,lab,text=Teal]{HIT}(hit);
+\draw[flow] (k)--node[right,lab,text=Gold]{MISS}(run);
+\draw[flow] (run)--(st);
+\draw[message] (st)--node[right,lab,text=Teal,align=left]{next run}(hit);
+\end{tikzpicture}\end{center}
+\vspace{.1cm}
+\claim{The key must cover every input; the sandbox hides the rest.}
+\sources{As in ccache, Bazel remote caching and Incredibuild. The hash proves identical inputs, not correct outputs.}
+\qadetail{The diagram is the generic content-addressed action cache used by ccache, Bazel remote caching and Incredibuild: the key is a hash of the declared inputs (sources, flags, toolchain); a hit reuses the stored output; a miss runs the step and stores its output under the key. Sandboxing (hermetic execution) hides undeclared files, so a step cannot silently depend on inputs the key omits; time, randomness, network and nondeterministic tools still need declaring or excluding, so the key covers every input only when the step is hermetic. Bazel's local sandbox hides undeclared workspace files, but system directories typically stay visible read-only; hermetic toolchains or a pinned remote-execution image close that gap. The hash proves identity of inputs, not correctness of outputs. This is the same content-identity thread that later binds a receipt to checked bytes and names what the controller publishes. We do not claim that a fork is faster than a good build cache.}
+\note{[0:45] Here is how a cache works. Hash a build step's inputs into a key: source, flags and toolchain. If the key is stored, that is a hit. Reuse the stored output. On a miss, run the step in a sandbox. Store its output, so the next run hits. The sandbox hides undeclared files, so the step cannot read what the key omits. This is the Incredibuild lesson: never build the same thing twice. Remember that hash, because it comes back. What does it buy?}
+\end{frame}

@@ -1,0 +1,35 @@
+% Act 1: the three steps as code -- the same three edits as a plain loop and as a proposed forkable API.
+\begin{frame}[fragile,t]{\ev{\tagP}\surf{IN CODE}The forkable API prepares once and runs alternatives in private children.}
+\vspace{.05cm}
+\begin{columns}[T,onlytextwidth]
+\column{.45\textwidth}
+{\fontsize{14}{17}\selectfont\bfseries Python loop\par}
+\begin{lstlisting}[style=slidepython,basicstyle=\ttfamily\fontsize{12}{14.6}\selectfont]
+out = []
+for edit in edits:
+    env = prepare()
+    env.apply(edit)
+    out.append(test(env))
+best = select(out)
+\end{lstlisting}
+\column{.53\textwidth}
+{\fontsize{14}{17}\selectfont\bfseries\color{Teal}Forkable API\par}
+\begin{lstlisting}[style=slidepython,basicstyle=\ttfamily\fontsize{12}{14.6}\selectfont]
+parent = checkpoint(prepare())
+children = fork(parent, n=3)
+execute(children, edits)
+out = evaluate(children, test)
+best = select(out)
+\end{lstlisting}
+\end{columns}
+\vspace{.2cm}
+\begin{columns}[T,onlytextwidth]
+\column{.45\textwidth}
+{\fontsize{14}{17}\selectfont\color{Muted}\texttt{prepare()} \textbf{3} times.\par}
+\column{.53\textwidth}
+{\fontsize{14}{17}\selectfont\color{Teal}\texttt{prepare()} \textbf{once}; \textbf{3} private children.\par}
+\end{columns}
+\sources{Proposed API sketch, not an existing SDK. Same three edits, same test, same selection rule in both columns.}
+\qadetail{The snippets illustrate a proposed API surface, not an existing SDK or a claim that these exact signatures are implemented. Both operate on the same three-element edits list, equivalent prepared input state, the same test function and the same select function. On the left, each iteration prepares a new environment, applies one edit and collects a test result. On the right, checkpoint captures the required reached state, the reused work of the cache and fork steps; fork creates three private writable children, each a sandbox; execute applies one edit per child and evaluate invokes the same test in each child. Result records identify their child, exact artifact and evidence. select applies the same selection rule in both sketches; it is not an infallible verifier and not the built numerical reducer. No concurrency or speedup value is asserted. Ordinary Python can use process fork, worktrees or warm caches to avoid repeated preparation; the interface adds no computational expressive power. The explicit API makes captured state and private continuations first-class orchestration objects; useful-state validity, code reload/restart, external effects, private writes and controller authority require their declared semantics.}
+\note{[0:45] Both columns are Python. Same three edits, same test, same selection rule. On the left, a loop prepares a fresh environment for every edit. On the right, the proposed API prepares once and checkpoints that state. Fork makes three children, each a private sandbox. Each applies one edit and returns its result with evidence. So prepare() runs once, not three times. Ordinary Python can already do this, with process forks or caches. The API makes reuse and isolation explicit. None of these pieces is new on its own.}
+\end{frame}

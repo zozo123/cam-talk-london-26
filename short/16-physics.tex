@@ -1,0 +1,38 @@
+% Act 2 example 5 of 5. Shared simple template for short/12--16: three boxes (Shared state -> Alternatives -> Check),
+% one big result line, one claim with gold rule chips. The \providecommand block below is copied verbatim into
+% all five files; the first one loaded defines it, so every example draws the same geometry. Edit all five together.
+% #1 shared state, #2 alternatives, #3 check, #4 result line (use \exnum{} for the big numbers).
+\providecommand{\exnum}[1]{{\fontsize{20}{24}\selectfont\bfseries #1}}
+\providecommand{\rulechip}[1]{\tikz[baseline=(x.base)]\node[fill=Gold,text=white,rounded corners=2pt,inner xsep=3.5pt,inner ysep=2.4pt,font=\fontsize{11}{13}\selectfont\bfseries](x){#1};}
+\providecommand{\exampleflow}[4]{%
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  hd/.style={anchor=south,font=\fontsize{11.5}{13}\selectfont\bfseries,text=Teal},
+  bx/.style={text width=3.9cm,inner xsep=.15cm,minimum height=1.45cm,font=\fontsize{13.5}{16}\selectfont\bfseries},
+  stack/.style={draw=Gold,fill=Sand,line width=.9pt},
+  res/.style={anchor=west,inner sep=0pt,font=\fontsize{15}{18}\selectfont},
+  every node/.style={align=center}]
+\useasboundingbox (0,.62) rectangle (14.4,-2.85);
+\node[hd] at (2.12,.15) {Shared state};
+\node[hd] at (7.10,.15) {Alternatives};
+\node[hd] at (12.28,.15) {Check};
+\node[state,bx] (s) at (2.12,-.8) {#1};
+\node[candidate,bx] (a) at (7.10,-.8) {#2};
+\begin{scope}[on background layer]
+\draw[stack] ($(a.south west)+(.2,.2)$) rectangle ($(a.north east)+(.2,.2)$);
+\draw[stack] ($(a.south west)+(.1,.1)$) rectangle ($(a.north east)+(.1,.1)$);
+\end{scope}
+\node[evidence,bx] (c) at (12.28,-.8) {#3};
+\draw[flow] (s.east)--(a.west);
+\draw[flow] ($(a.east)+(.2,0)$)--(c.west);
+\node[res] at (0,-2.35) {#4};
+\end{tikzpicture}\par}
+\begin{frame}[t]{\ev{\tagM}\surf{PHYSICS}With Ori Chamo, we connected two apparent branches of one orbit family.\strut}
+\vspace{.2cm}
+\exampleflow{135,445\\orbits}{Vary masses,\\correct orbits}{Retrace\\each link}
+{\exnum{26 of 26} selected connections hold both ways}
+\claim{Two plotted branches, one family.\hfill\rulechip{COUNT ONCE}}
+\sources{With \textbf{Ori Chamo}. \href{https://ai.vixra.org/abs/2608.0069}{Chamo--Eliaz preprint (2026)}, not peer reviewed; catalog of Li, Li \& Liao; \href{https://github.com/zozo123/threebody-closing-the-open}{Atlas numerical records}.}
+\qadetail{Full source: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent branch splitting in unequal-mass three-body orbits, ai.viXra:2608.0069v1 (2026); numerical records at https://github.com/zozo123/threebody-closing-the-open. The work is preliminary and not peer reviewed. The 135,445 entries originate in Li, Li and Liao's catalog, which described one family (2021); Stancevic, Vasiljevic and Dmitrasinovic (2023) interpreted the period/angular-momentum projection as two sets. We resolve the inference from projected separation to disconnected dynamics, without disproving the 2023 analysis on its own projected-coordinate terms. The 26 selected tests are five macroscopic bottlenecks, twenty large chart discontinuities and one long-range near-coincident projected pair; all succeed bidirectionally. This establishes connection within one sampled continuation component, not global completeness. Stability is separate from connectivity: two representative physical Floquet stability transitions have independent 60-digit Verner-integrator checks; not every catalog orbit was checked at that precision, and the 60-digit work is not the evidence for the 26 connections. Extra-Trees active learning proposes warm starts and is not the proof behind the 26 connections. An unresolved coarse mpmath RK4 cross-check was rejected as evidence. Numerical continuation changes a solution and corrects it; it is not physical forking. This is an evidence-admission example, not a sandbox-fork performance result.}
+% Transition: from genomics; ends with the question the synthesis map answers.
+\note{[1:00] Ori Chamo and I studied the three-body problem. The shared state is a catalog. Li, Li and Liao tabulated 135,445 periodic three-body orbits and described one family. A later analysis plotted the same catalog and saw two branches. Our alternatives are continuations. We change the masses in small steps, then correct each orbit so it keeps repeating. A connection counts only if it holds in both directions. All twenty-six selected connections did. So the two branches join, at least in the region we sampled. The plot made one family look like two. Count it once. Separately, two stability changes were re-checked at sixty-digit precision. This is a preprint, not peer reviewed. So what do all five examples share?}
+\end{frame}
