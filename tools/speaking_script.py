@@ -13,12 +13,12 @@ ACTS = {1: 'Motivation', 2: 'Examples', 3: 'Runtime: compute once', 4: 'Evidence
 # Sentence prefixes, per frame file, before which the next build step appears.
 CLICKS = {'04-waste': ['With reuse, we set up once'],
           '11-rules': ['Count once: what must', 'Publish once: who publishes'],
-          '11b-rules-example': ['Each child returns a patch', 'Now run the promised test'],
+          '11b-rules-example': ['In one reported session, the agent made', 'After each five-minute run'],
           '19-runtime-cost': ['Take eight runs', 'With a warm cache, setup drops'],
           '25-evidence-precision': ['Our heuristic caps'],
           '26-acceptance-run': ['Review approved, suite green']}
 # Sentence prefixes followed by a deliberate two-beat pause.
-PAUSES = ['That is one result, not two', 'In a parallel, distributed world', 'Review approved, suite green', 'A person caught',
+PAUSES = ['So the gain needs a separate held-out check', 'In a parallel, distributed world', 'Review approved, suite green', 'A person caught',
           'No test for the promise', 'The warm cache wins']
 STRESS = ['Compute once', 'Count once', 'Publish once', 'Step one', 'Step two', 'Step three',
           'Rule one', 'Rule two', 'Rule three']
