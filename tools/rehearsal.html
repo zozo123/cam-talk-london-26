@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk Rehearsal</title>
+<style>
+:root{--ink:#142B3B;--teal:#007E87;--gold:#AD701B;--rust:#B34233;--muted:#536874;--pale:#EFF5F5;--line:#C9D6DB;--bg:#ffffff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+header b{font-size:15px}
+.clock{font-variant-numeric:tabular-nums;font-size:22px;font-weight:700}
+.chip{padding:2px 8px;border-radius:4px;font-weight:700;font-size:13px}
+.ok{background:#e3f2f2;color:var(--teal)}.warn{background:#fbf3e6;color:var(--gold)}.late{background:#f6e3e0;color:var(--rust)}
+.keys{margin-left:auto;color:var(--muted);font-size:12px}
+main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;padding:16px}
+@media (max-width:640px){main{grid-template-columns:1fr}}
+.slide img{width:100%;border:1px solid var(--line);border-radius:6px;display:block}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:6px}
+.bar{height:6px;background:var(--pale);border-radius:3px;margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--teal)}
+.script h2{font-size:17px;margin:0 0 4px}
+.script .cue{color:var(--muted);font-size:13px;margin-bottom:10px}
+.script p{margin:0 0 7px}
+.click{color:var(--teal);font-weight:700}.ask{color:var(--gold);font-weight:700}.pause{color:var(--muted)}
+.cur{background:#e3f2f2;border-radius:4px;padding:1px 4px;margin-left:-4px}
+.next{color:var(--muted);font-size:13px;margin-top:14px;border-top:1px solid var(--line);padding-top:8px}
+#table{display:none;padding:16px}#table table{border-collapse:collapse;width:100%;font-size:14px}
+#table th,#table td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--line)}
+#table td.n{text-align:right;font-variant-numeric:tabular-nums}
+button{font:inherit;padding:4px 10px;border:1px solid var(--line);background:#fff;border-radius:4px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <b>Rehearsal</b>
+  <span class="clock" id="total">0:00</span><span id="plan" class="chip ok">plan 0:00</span>
+  <span>slide <span class="clock" id="slideclock">0:00</span></span><span id="slidechip" class="chip ok">0:00 planned</span>
+  <button id="pausebtn">Pause</button><button id="tablebtn">Table</button>
+  <span class="keys">Space / → next · ← back · P pause · R restart · T table</span>
+</header>
+<main id="view">
+  <section class="slide"><img id="img" alt="slide"><div class="meta"><span id="pos"></span><span id="step"></span></div><div class="bar"><i id="prog"></i></div></section>
+  <section class="script"><h2 id="title"></h2><div class="cue" id="cue"></div><div id="lines"></div><div class="next" id="next"></div></section>
+</main>
+<section id="table"><h2>Planned vs actual</h2><div id="tbl"></div><p><button id="csv">Download CSV</button> <button id="back">Back to slides</button></p></section>
+<script>
+const F=/*DATA*/;
+const pages=[];F.forEach((f,i)=>f.pages.forEach((p,s)=>pages.push({f:i,s,p})));
+const fmt=s=>{s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+let pos=0,paused=false,spent=F.map(()=>0),last=null,started=false;
+function tick(){const now=performance.now();if(started&&!paused&&last!==null){spent[pages[pos].f]+=(now-last)/1000}last=now;paint()}
+function chip(el,actual,plan){el.className='chip '+(actual<=plan?'ok':actual<=plan*1.15?'warn':'late')}
+function paint(){
+  const pg=pages[pos],f=F[pg.f],total=spent.reduce((a,b)=>a+b,0);
+  const planned=F.slice(0,pg.f).reduce((a,x)=>a+x.dur,0)+Math.min(spent[pg.f],f.dur);
+  document.getElementById('total').textContent=fmt(total);
+  const pl=document.getElementById('plan');const d=total-planned;pl.textContent='plan '+fmt(planned)+' · '+(Math.abs(d)<5?'on time':fmt(Math.abs(d))+(d<0?' ahead':' behind'));chip(pl,total,planned+5);
+  document.getElementById('slideclock').textContent=fmt(spent[pg.f]);
+  const sc=document.getElementById('slidechip');sc.textContent=fmt(f.dur)+' planned';chip(sc,spent[pg.f],f.dur);
+  document.getElementById('prog').style.width=(100*Math.min(1,spent[pg.f]/f.dur))+'%';
+}
+function render(){
+  const pg=pages[pos],f=F[pg.f];
+  document.getElementById('img').src='slides/'+pg.p;
+  document.getElementById('pos').textContent='Slide '+(pg.f+1)+' / '+F.length+' · page '+(pos+1)+' / '+pages.length;
+  document.getElementById('step').textContent=f.pages.length>1?('click step '+(pg.s+1)+' / '+f.pages.length):'';
+  document.getElementById('title').textContent=(pg.f+1)+'. '+f.title;
+  document.getElementById('cue').textContent=fmt(f.dur)+' planned · starts '+fmt(f.start);
+  let clickNo=0;const box=document.getElementById('lines');box.innerHTML='';
+  f.lines.forEach(l=>{const p=document.createElement('p');let h='';
+    if(l.marks.includes('CLICK')){clickNo++;h+='<span class="click">[CLICK]</span> '}
+    if(l.marks.includes('ASK'))h+='<span class="ask">[ASK]</span> ';
+    const t=document.createElement('span');t.textContent=l.text;
+    p.innerHTML=h;p.appendChild(t);if(l.pause)p.insertAdjacentHTML('beforeend',' <span class="pause">[PAUSE]</span>');
+    if(f.pages.length>1&&clickNo===pg.s)t.className='cur';box.appendChild(p)});
+  const nx=F[pg.f+1];document.getElementById('next').textContent=nx?('Next: '+(pg.f+2)+'. '+nx.title):'Last slide: leave it up for questions.';
+  paint()}
+function go(d){tick();if(!started){started=true;last=performance.now()}pos=Math.max(0,Math.min(pages.length-1,pos+d));render();if(d>0&&pos===pages.length-1){}}
+function table(show){tick();document.getElementById('view').style.display=show?'none':'grid';document.getElementById('table').style.display=show?'block':'none';
+  if(!show)return;let rows='<table><tr><th>#</th><th>Slide</th><th class="n">Planned</th><th class="n">Actual</th><th class="n">Δ</th></tr>',tp=0,ta=0;
+  F.forEach((f,i)=>{tp+=f.dur;ta+=spent[i];const d=spent[i]-f.dur;rows+=`<tr><td>${i+1}</td><td>${f.title.replace(/</g,'&lt;')}</td><td class="n">${fmt(f.dur)}</td><td class="n">${fmt(spent[i])}</td><td class="n" style="color:${d>f.dur*.15?'var(--rust)':d>0?'var(--gold)':'var(--teal)'}">${d<0?'−':'+'}${fmt(Math.abs(d))}</td></tr>`});
+  rows+=`<tr><th></th><th>Total</th><th class="n">${fmt(tp)}</th><th class="n">${fmt(ta)}</th><th class="n">${ta-tp<0?'−':'+'}${fmt(Math.abs(ta-tp))}</th></tr></table>`;
+  document.getElementById('tbl').innerHTML=rows}
+document.addEventListener('keydown',e=>{if([' ','ArrowRight','PageDown','Enter'].includes(e.key)){e.preventDefault();go(1)}
+  else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(-1)}
+  else if(e.key==='p'||e.key==='P')togglePause();else if(e.key==='r'||e.key==='R'){if(confirm('Restart the rehearsal clock?')){spent=F.map(()=>0);pos=0;started=false;last=null;render()}}
+  else if(e.key==='t'||e.key==='T')table(document.getElementById('table').style.display!=='block')});
+function togglePause(){tick();paused=!paused;document.getElementById('pausebtn').textContent=paused?'Resume':'Pause'}
+document.getElementById('pausebtn').onclick=togglePause;document.getElementById('tablebtn').onclick=()=>table(true);document.getElementById('back').onclick=()=>table(false);
+document.getElementById('csv').onclick=()=>{const c='slide,title,planned_s,actual_s\n'+F.map((f,i)=>`${i+1},"${f.title.replace(/"/g,'""')}",${f.dur},${Math.round(spent[i])}`).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));a.download='rehearsal-timing.csv';a.click()};
+setInterval(tick,250);render();
+</script>
+</body>
+</html>
