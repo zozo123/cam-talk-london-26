@@ -2,7 +2,7 @@
 
 **Reusable execution for self-driving computers.** Cambridge SRG, 15 October 2026.
 
-Generated from short-deck source. 31 main slides; no appendix. Planned duration **27:45**; 3125 spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.
+Generated from short-deck source. 31 main slides; no appendix. Planned duration **27:45**; 3121 spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.
 
 ## Run of show
 
@@ -10,34 +10,34 @@ Generated from short-deck source. 31 main slides; no appendix. Planned duration 
 |---|---|---|---|---|---|---|
 | 1 | Forkable sandboxes let computers explore alternatives without doing work twice. | 0:35 | 0:00–0:35 | 64 | 110 | 1 |
 | 2 | Each stop on my path left one lesson. | 0:55 | 0:35–1:30 | 109 | 119 | 1 |
-| 3 | A car fleet fans out, then fans in to one map. | 0:45 | 1:30–2:15 | 87 | 116 | 1 |
+| 3 | A car fleet fans out, then fans in to one map. | 0:45 | 1:30–2:15 | 86 | 115 | 1 |
 | 4 | In parallel computing, the costly work is the work done twice. | 0:55 | 2:15–3:10 | 98 | 107 | 2 |
-| 5 | A cache skips work a previous run already did. | 0:45 | 3:10–3:55 | 88 | 117 | 1 |
-| 6 | Reusing an earlier runner's build files cut a Tokio compile from about 46 s to 13 s. | 0:40 | 3:55–4:35 | 70 | 105 | 1 |
-| 7 | A fork extends caching from files to a reached execution state. | 0:45 | 4:35–5:20 | 76 | 101 | 1 |
-| 8 | A sandbox lets children share one state safely. | 0:50 | 5:20–6:10 | 99 | 119 | 1 |
-| 9 | The forkable API prepares once and runs alternatives in private children. | 0:45 | 6:10–6:55 | 89 | 119 | 1 |
-| 10 | Caches, forks and sandboxes are old; coupling them to evidence and acceptance is new. | 0:50 | 6:55–7:45 | 88 | 106 | 1 |
-| 11 | Sharing work creates three rules. | 0:50 | 7:45–8:35 | 92 | 110 | 3 |
-| 12 | Reuse makes fuzzing fast; only checks turn crashes into findings. | 1:00 | 8:35–9:35 | 109 | 109 | 1 |
-| 13 | Autoresearch kept 23 of 126 attempts against a fixed evaluator. | 1:00 | 9:35–10:35 | 109 | 109 | 1 |
-| 14 | 250 samples raised SWE-bench Lite coverage from 15.9% to 56%. | 1:00 | 10:35–11:35 | 109 | 109 | 1 |
-| 15 | Our CRISPR screen narrowed 19,050 genes to about 100 candidates. | 1:00 | 11:35–12:35 | 114 | 114 | 1 |
-| 16 | With Ori Chamo, we connected two apparent branches of one orbit family. | 1:00 | 12:35–13:35 | 113 | 113 | 1 |
-| 17 | Five fields, one loop, three rules. | 0:45 | 13:35–14:20 | 83 | 111 | 1 |
-| 18 | The next step decides which state to reuse. | 1:05 | 14:20–15:25 | 128 | 118 | 1 |
-| 19 | A restore pays only if it beats a warm cache. | 1:15 | 15:25–16:40 | 147 | 118 | 3 |
-| 20 | A restore cannot undo remote effects, and a fork must not hold the right to publish. | 1:05 | 16:40–17:45 | 119 | 110 | 1 |
-| 21 | A receipt is evidence's cache entry, written outside the child. | 1:05 | 17:45–18:50 | 128 | 118 | 1 |
-| 22 | Each fan-in operation needs its own check. | 1:00 | 18:50–19:50 | 114 | 114 | 1 |
-| 23 | Overlapping trials add less than their count. | 0:50 | 19:50–20:40 | 83 | 100 | 1 |
+| 5 | A cache skips work a previous run already did. | 0:45 | 3:10–3:55 | 84 | 112 | 1 |
+| 6 | Reusing an earlier runner's build files cut a Tokio compile from about 46 s to 13 s. | 0:40 | 3:55–4:35 | 69 | 104 | 1 |
+| 7 | A fork extends caching from files to a reached execution state. | 0:45 | 4:35–5:20 | 80 | 107 | 1 |
+| 8 | A sandbox lets children share one state safely. | 0:50 | 5:20–6:10 | 100 | 120 | 1 |
+| 9 | The forkable API prepares once and runs alternatives in private children. | 0:45 | 6:10–6:55 | 88 | 117 | 1 |
+| 10 | Caches, forks and sandboxes are old; coupling them to evidence and acceptance is new. | 0:50 | 6:55–7:45 | 86 | 103 | 1 |
+| 11 | Sharing work creates three rules. | 0:50 | 7:45–8:35 | 91 | 109 | 3 |
+| 12 | Reuse makes fuzzing fast; only checks turn crashes into findings. | 1:00 | 8:35–9:35 | 110 | 110 | 1 |
+| 13 | Autoresearch kept 23 of 126 attempts against a fixed evaluator. | 1:00 | 9:35–10:35 | 111 | 111 | 1 |
+| 14 | 250 samples raised SWE-bench Lite coverage from 15.9% to 56%. | 1:00 | 10:35–11:35 | 108 | 108 | 1 |
+| 15 | Our CRISPR screen narrowed 19,050 genes to about 100 candidates. | 1:00 | 11:35–12:35 | 117 | 117 | 1 |
+| 16 | With Ori Chamo, we connected two apparent branches of one orbit family. | 1:00 | 12:35–13:35 | 118 | 118 | 1 |
+| 17 | Five fields, one loop, three rules. | 0:45 | 13:35–14:20 | 81 | 108 | 1 |
+| 18 | The next step decides which state to reuse. | 1:05 | 14:20–15:25 | 121 | 112 | 1 |
+| 19 | A restore pays only if it beats a warm cache. | 1:15 | 15:25–16:40 | 148 | 118 | 3 |
+| 20 | A restore cannot undo remote effects, and a fork must not hold the right to publish. | 1:05 | 16:40–17:45 | 107 | 99 | 1 |
+| 21 | A receipt is evidence's cache entry, written outside the child. | 1:05 | 17:45–18:50 | 129 | 119 | 1 |
+| 22 | Each fan-in operation needs its own check. | 1:00 | 18:50–19:50 | 113 | 113 | 1 |
+| 23 | Overlapping trials add less than their count. | 0:50 | 19:50–20:40 | 88 | 106 | 1 |
 | 24 | At error correlation 0.1, a mean of 100 estimates is as precise as about nine. | 0:50 | 20:40–21:30 | 90 | 108 | 1 |
-| 25 | A worker that overstates its precision can take over the average. | 0:55 | 21:30–22:25 | 106 | 116 | 2 |
-| 26 | Our factory's patch passed every check it had. | 0:55 | 22:25–23:20 | 108 | 118 | 2 |
+| 25 | A worker that overstates its precision can take over the average. | 0:55 | 21:30–22:25 | 109 | 119 | 2 |
+| 26 | Our factory's patch passed every check it had. | 0:55 | 22:25–23:20 | 110 | 120 | 2 |
 | 27 | Accept only bytes whose promise was tested. | 0:50 | 23:20–24:10 | 96 | 115 | 1 |
-| 28 | Our second factory run lost an approved patch. | 0:45 | 24:10–24:55 | 83 | 111 | 1 |
-| 29 | The controller rejects a late result from a replaced worker. | 0:45 | 24:55–25:40 | 79 | 105 | 1 |
-| 30 | Five questions remain open; the preregistered tests have not started. | 1:05 | 25:40–26:45 | 129 | 119 | 1 |
+| 28 | Our second factory run lost an approved patch. | 0:45 | 24:10–24:55 | 86 | 115 | 1 |
+| 29 | The controller rejects a late result from a replaced worker. | 0:45 | 24:55–25:40 | 80 | 107 | 1 |
+| 30 | Five questions remain open; the preregistered tests have not started. | 1:05 | 25:40–26:45 | 126 | 116 | 1 |
 | 31 | Contributions: three rules for doing work once. | 1:00 | 26:45–27:45 | 118 | 118 | 1 |
 
 ## Script and Q&A detail
@@ -46,7 +46,7 @@ Generated from short-deck source. 31 main slides; no appendix. Planned duration 
 
 *0:35; starts 0:00*
 
-My path runs from self-organization in cells, to self-driving cars, to self-driving compute. Once we have paid to reach a useful state, can we try several next steps from there without paying for it again? My answer has three rules: compute once, count once, publish once. The corner tags mark what is published, measured, built or only designed. First, where these ideas come from.
+My path runs from self-organization in cells, to self-driving cars, to self-driving compute. Say we have paid to reach a useful state. Can we try several next steps from there without paying for it again? My answer has three rules. Compute once. Count once. Publish once. The corner tags mark what is published, measured, built or only designed. First, where these ideas come from.
 
 **Q&A detail**
 
@@ -56,7 +56,7 @@ The integrated architecture is a research design. Individual implementations, pu
 
 *0:55; starts 0:35*
 
-Here is my path, and each stop left one lesson. In early systems jobs, including Twistlock, I worked on software and container security: a sandbox bounds what a program may do. From twenty sixteen I simulated cell mechanics and analyzed genomes, where reaching a state is the expensive part, so you explore from there. Our twenty nineteen study tested drug combinations on cancer cells: many trials, few confirmations. At NRGene, editing results helped pick the next test. At Mobileye, repeated observations of one road had to count once. And at Incredibuild, the rule is simple: never build the same thing twice. These lessons come back later, starting with Mobileye.
+Here is my path. Each stop left one lesson. My early systems jobs, including Twistlock, were in software and container security. The lesson: a sandbox bounds what a program may do. From twenty sixteen I simulated cell mechanics and analyzed genomes. In both, reaching a state is the expensive part. So you explore from there. Our twenty nineteen study tested drug combinations on cancer cells. Many trials, few confirmations. At NRGene, gene-editing results helped pick the next experiment. At Mobileye, repeated observations of one road had to count once. At Incredibuild, the rule is simple. Never build the same thing twice. These lessons come back later, starting with Mobileye.
 
 **Q&A detail**
 
@@ -66,7 +66,7 @@ Chronology follows the speaker's own career website, retrieved 4 October 2026: t
 
 *0:45; starts 1:30*
 
-Mobileye's Roadbook is a fleet example. Assume three hundred million equipped cars sending anonymized road data. The cloud matches drives of the same road, combines them, and sends the updated map back to the cars. My own work there was junction perception. Notice that the map counts each road once, however many cars drove it: count once. Self-driving compute gives execution the same shape: many runs from one reached state, one combined result. But a fleet of runs keeps doing the same work. That is the problem.
+Mobileye's Roadbook is a fleet example. Assume three hundred million equipped cars sending anonymized road data. The cloud matches drives of the same road and combines them. It sends the updated map back to the cars. My own work there was junction perception. The map counts each road once, however many cars drove it. Count once. Self-driving compute gives execution the same shape. Many runs from one reached state, one combined result. But a fleet of runs keeps doing the same work. That is the problem.
 
 **Q&A detail**
 
@@ -76,7 +76,7 @@ Fleet wording follows the speaker's request of 4 October 2026: assume 300 millio
 
 *0:55; starts 2:15*
 
-Here is that problem in one picture. A question for you: how much of your last CI run was work another machine had already done? Often it is the same install and the same compile, again. Without reuse, three trials each repeat the same setup. With reuse, we set up once, save that state, and start every trial from it. The setup blocks we skip are the waste: N minus one setups. In a parallel, distributed world, the expensive thing is doing work twice. Three steps remove it: cache, fork, sandbox. Step one is the oldest: a cache.
+Here is that problem in one picture. A question for you: how much of your last CI run had another machine already done? Often it is the same install and the same compile, again. Without reuse, three trials each repeat the same setup. With reuse, we set up once and save that state. Every trial starts from it. The setup blocks we skip are the waste. That is N minus one setups. In a parallel, distributed world, the expensive thing is doing work twice. Three steps remove it: cache, fork, sandbox. Step one is the oldest: a cache.
 
 **Q&A detail**
 
@@ -86,7 +86,7 @@ Illustrative task structure, not a measurement: bar lengths are schematic and us
 
 *0:45; starts 3:10*
 
-Here is how a cache works. Hash a build step's inputs, the source, the flags and the toolchain, into a key. If the key is stored, that is a hit: reuse the stored output. On a miss, run the step in a sandbox and store its output, so the next run hits. The sandbox hides undeclared files, so the step cannot read what the key omits. This is the Incredibuild lesson: never build the same thing twice. Remember that hash; it comes back. Here is what it buys.
+Here is how a cache works. Hash a build step's inputs into a key: source, flags and toolchain. If the key is stored, that is a hit. Reuse the stored output. On a miss, run the step in a sandbox. Store its output, so the next run hits. The sandbox hides undeclared files, so the step cannot read what the key omits. This is the Incredibuild lesson: never build the same thing twice. Remember that hash, because it comes back. What does it buy?
 
 **Q&A detail**
 
@@ -96,7 +96,7 @@ The diagram is the generic content-addressed action cache used by ccache, Bazel 
 
 *0:40; starts 3:55*
 
-In my Tokio demo, a fresh compile took about forty-six seconds. Copying in an earlier runner's build files cut that to about thirteen, and an already warm cache to about three. These times are approximate and author-reported, and the copied files are build outputs, not a running program. Distributed builds rely on this: one machine reuses another's output. A cache reuses one step's output. Step two reuses a whole state.
+In my Tokio demo, a fresh compile took about forty-six seconds. Copying in an earlier runner's build files cut that to about thirteen. An already warm cache cut it to about three. These are approximate, self-reported times. The copied files are build outputs, not a running program. Distributed builds rely on this: one machine reuses another's output. A cache reuses one step's output. Step two reuses a whole state.
 
 **Q&A detail**
 
@@ -106,7 +106,7 @@ Author-reported external Incredibuild GitHub Actions demo, posted by zozo123 in 
 
 *0:45; starts 4:35*
 
-A fork goes further: it restores the state after many steps, such as installed dependencies or a warmed process. Think of a film: fixed scenes, and rewinding replays the same plot. An experiment saves a reached state, keyed by its digest like a cache entry, and tries two next actions, each in its own private sandbox. A check keeps one outcome and discards the other, and we continue from there. Step three makes that sharing safe.
+A fork goes further. It restores the state after many steps, like installed dependencies or a warmed process. Think of a film. Its scenes are fixed, and rewinding replays the same plot. An experiment is different. It saves a reached state, keyed by its hash, like a cache entry. It tries two next actions, each in its own private sandbox. A check keeps one outcome and discards the other. Then we continue from there. Step three makes that sharing safe.
 
 **Q&A detail**
 
@@ -116,7 +116,7 @@ Cache versus fork: both are reuse, and both need a key. A cache returns one step
 
 *0:50; starts 5:20*
 
-Here is the sandbox. In our design, three children share one saved state, read-only and named by its digest. Each child writes only to its own private layer, so siblings cannot overwrite each other. Undeclared inputs stay hidden, which keeps the cache key complete. Effects, like a network request, do cross the boundary; no restore rewinds them, so we propose recording them. This is the Twistlock lesson: a sandbox bounds behavior. It is a policy; a VM with its own kernel, or a container sharing one, is one way to build it. Here are the three steps as code.
+In our design, three children share one saved state. It is read-only and named by its hash. Each child writes only to its private layer, so siblings cannot overwrite each other. Hiding undeclared inputs keeps the cache key complete. Effects, like a network request, cross the boundary. No restore rewinds them, so we propose recording them. This is the Twistlock lesson: a sandbox bounds what a program may do. It is a policy. One way to build it is a VM with its own kernel. Another is a container on a shared kernel. Here are the three steps as code.
 
 **Q&A detail**
 
@@ -126,7 +126,7 @@ Proposed model: the shared parent state is immutable (read-only) and named by it
 
 *0:45; starts 6:10*
 
-Both columns are Python, with the same three edits, the same test and the same selection rule. The loop prepares a fresh environment for every edit. The proposed API prepares once and checkpoints that state; fork makes three children, each a private sandbox; each applies one edit and returns its result with evidence. prepare() is the work we stop doing three times. Ordinary Python can already do this with process forks or caches; the API makes reuse and isolation explicit. None of these pieces is new on its own.
+Both columns are Python. Same three edits, same test, same selection rule. On the left, a loop prepares a fresh environment for every edit. On the right, the proposed API prepares once and checkpoints that state. Fork makes three children, each a private sandbox. Each applies one edit and returns its result with evidence. So prepare() runs once, not three times. Ordinary Python can already do this, with process forks or caches. The API makes reuse and isolation explicit. None of these pieces is new on its own.
 
 **Q&A detail**
 
@@ -136,7 +136,7 @@ The snippets illustrate a proposed API surface, not an existing SDK or a claim t
 
 *0:50; starts 6:55*
 
-A cache keeps run outputs, as in ccache, Bazel's remote cache or Incredibuild. A fork keeps reached states: SnowFlock cloned Xen machines in two thousand nine, and Xen came from this lab. A sandbox keeps writes private, as containers, gVisor and microVMs do. What is new is what sharing requires: count shared evidence once, and publish checked bytes once. I do not claim a fork speedup, since our agent runs were serial, or that our snapshots keep live memory. So what does sharing work cost us? Three rules.
+A cache keeps run outputs, as in ccache, Bazel's remote cache or Incredibuild. A fork keeps reached states. SnowFlock cloned Xen machines in two thousand nine. Xen came from this lab. A sandbox keeps writes private, as containers, gVisor and microVMs do. What is new is what sharing requires. Count shared evidence once, and publish checked bytes once. I claim no fork speedup, since our agent runs were serial. I also do not claim our snapshots keep live memory. So what does sharing work cost us?
 
 **Q&A detail**
 
@@ -146,7 +146,7 @@ The table names established mechanisms; no claim of invention, comprehensive pri
 
 *0:50; starts 7:45*
 
-Sharing work creates three obligations, and they organize this talk. Compute once: reuse or rebuild? Reuse a state only when that beats rebuilding it, even from a warm cache. The answer is a cost rule. Count once: what must a trial return? Parallel trials share inputs and errors, so a shared observation counts once. That needs an evidence contract. Publish once: who publishes what? One controller publishes the exact bytes that passed the check, through an acceptance gate. You will leave with all three. Five examples first, then the rules in order.
+Sharing work creates three rules. They organize this talk. Compute once: reuse or rebuild? Reuse a saved state only if it beats a rebuild with a warm cache. That needs a cost rule. Count once: what must a trial return? Parallel trials share inputs and errors, so a shared observation counts once. That needs an evidence contract. Publish once: who publishes what? One controller publishes the exact bytes that passed the check. That needs an acceptance gate. You will leave with all three. Five examples first, then the rules in order.
 
 **Q&A detail**
 
@@ -156,7 +156,7 @@ This slide restates the canonical three system responsibilities. Runtime starts 
 
 *1:00; starts 8:35*
 
-First example: software security. A fuzzer runs a program on many changed inputs, hunting for crashes. AFL-plus-plus initializes the target once, then reuses one child process across many inputs. Its documentation reports typical speedups of ten to twenty times. It wins by not forking for every input, as long as state resets correctly. That is rule one, compute once. But speed only produces leads, and leads need checks. In a separate study, Berkeley's CyberGym, an AI agent wrote and ran inputs against 431 projects and produced fifty-six crashes. The researchers reproduced them and removed duplicates: twenty-two distinct new vulnerabilities. That is rule two, count once. Second example: AI research.
+First example: software security. A fuzzer runs a program on many changed inputs, hunting for crashes. AFL-plus-plus initializes the target once, then reuses one child process across many inputs. Its documentation reports typical speedups of ten to twenty times. It skips a fork for every input. That works only if state resets correctly. That is rule one, compute once. But speed only produces leads, and leads need checks. Berkeley's CyberGym is a separate study. There, an AI agent wrote test inputs for 431 projects. It produced fifty-six crashes. The researchers reproduced them and removed duplicates, leaving twenty-two distinct new vulnerabilities. That is rule two, count once. Second example: AI research.
 
 **Q&A detail**
 
@@ -166,7 +166,7 @@ Two separate sources: AFL++ documentation supplies the speed figure; CyberGym is
 
 *1:00; starts 9:35*
 
-Here, Karpathy's autoresearch starts every attempt from the incumbent commit, and the commit hash names that exact state. The evaluator stays fixed. The agent edits the training script, trains for five minutes, and reads validation bits per byte, where lower is better. Then it keeps or reverts. One reported session made 126 attempts, one at a time, and kept twenty-three. The score fell 2.8 percent. Starting from the incumbent is compute once; only the fixed evaluator promotes a change, which is publish once. AlphaEvolve extends this loop to a population of programs; one scheduling heuristic it found recovered 0.7 percent of Google's compute, on average. Third example: software engineering.
+Karpathy's autoresearch starts every attempt from the current best commit. The commit hash names that exact state. The evaluator stays fixed. The agent edits the training script and trains for five minutes. It reads validation bits per byte, where lower is better. Then it keeps or reverts. One reported session made 126 attempts, one at a time, and kept twenty-three. The score fell 2.8 percent. Starting from the best commit is compute once. Only the fixed evaluator promotes a change, and that is publish once. AlphaEvolve extends this loop to a population of programs. One scheduling heuristic it found recovered 0.7 percent of Google's compute, on average. Third example: software engineering.
 
 **Q&A detail**
 
@@ -176,7 +176,7 @@ Autoresearch: one reported session, not a controlled average effect or a fork ex
 
 *1:00; starts 10:35*
 
-The shared state is now a repository with an open issue. Brown and colleagues sampled patches from DeepSeek-Coder-V2-Instruct on SWE-bench Lite. With one sample, a correct patch appeared for 15.9 percent of tasks. With 250 samples, for 56 percent. That is coverage: at least one patch passes the hidden tests. In production there are no hidden tests. A selector must pick one patch from many wrong ones, and only that patch ships. Coverage is not selection. That is rule three, publish once. You will see our own software factory in the acceptance section, where the suite was green but the check was incomplete. Fourth example: from code to cells.
+The shared state is now a repository with an open issue. Brown and colleagues sampled patches from DeepSeek-Coder-V2-Instruct on SWE-bench Lite. With one sample, a correct patch appeared for 15.9 percent of tasks. With 250 samples, for 56 percent. That is coverage: at least one patch passes the hidden tests. In production there are no hidden tests. A selector must pick one patch from many wrong ones. Only that patch ships. Coverage is not selection. That is rule three, publish once. You will see our own software factory in the acceptance section. There, the suite was green but the check was incomplete. Fourth example: from code to cells.
 
 **Q&A detail**
 
@@ -186,7 +186,7 @@ Brown et al., Large Language Monkeys, arXiv:2407.21787: DeepSeek-Coder-V2-Instru
 
 *1:00; starts 11:35*
 
-This one is my own work with coauthors. The shared state is one pooled cell screen covering 19,050 genes. The alternatives are guides: over a hundred and twenty thousand, six per gene, across nine pooled arms. Two ranking methods narrowed nineteen thousand genes to about one hundred. Here is the counting lesson. Six guides are six looks at one gene, not six discoveries, so the gene counts once, like a road on the map. Rule two. Then the check: focused assays in MCF-seven breast cancer cells. Ten of thirteen targets increased sensitivity to the SRC-3 inhibitor SI-twelve; six of eight drug combinations improved killing. These are laboratory results, not clinical ones. Fifth example: physics.
+This one is my own work with coauthors. The shared state is one pooled cell screen covering 19,050 genes. The alternatives are over a hundred and twenty thousand guide RNAs. Six per gene, across nine pooled arms. Two ranking methods narrowed nineteen thousand genes to about one hundred. Here is the counting lesson. Six guides are six looks at one gene, not six discoveries. So the gene counts once, like a road on the map. That is rule two. Then the check: focused assays in MCF-seven breast cancer cells. Ten of thirteen targets increased sensitivity to the SRC-3 inhibitor SI-twelve. Six of eight drug combinations improved killing. These are laboratory results, not clinical ones. Fifth example: physics.
 
 **Q&A detail**
 
@@ -196,7 +196,7 @@ Count-once reading: guide effects are combined into one gene-level call, so the 
 
 *1:00; starts 12:35*
 
-Ori Chamo and I studied the three-body problem. The shared state is a catalog: Li, Li and Liao tabulated 135,445 periodic three-body orbits and described one family. A later analysis plotted the same catalog and saw two branches. Our alternatives are continuations: change the masses in small steps and correct each orbit so it keeps repeating. A connection counts only if it holds in both directions. All twenty-six selected connections did, so the links join one sampled solution component. The plot made one family look like two; count it once. Separately, two stability changes were re-checked at sixty digits. This is a preprint, not peer reviewed. So what do all five examples share?
+Ori Chamo and I studied the three-body problem. The shared state is a catalog. Li, Li and Liao tabulated 135,445 periodic three-body orbits and described one family. A later analysis plotted the same catalog and saw two branches. Our alternatives are continuations. We change the masses in small steps, then correct each orbit so it keeps repeating. A connection counts only if it holds in both directions. All twenty-six selected connections did. So the two branches join, at least in the region we sampled. The plot made one family look like two. Count it once. Separately, two stability changes were re-checked at sixty-digit precision. This is a preprint, not peer reviewed. So what do all five examples share?
 
 **Q&A detail**
 
@@ -206,7 +206,7 @@ Full source: Ori Chamo and Yossi Eliaz, Continuation geometry resolves apparent 
 
 *0:45; starts 13:35*
 
-Back to our map. Five fields, one loop: each started from a shared state, ran alternatives, and needed a check. Compute once: the fuzzer sets up its target once, and each research attempt starts from the incumbent commit. Count once: duplicate crashes, six guides for one gene, and two apparent branches that were one orbit family. Publish once: a fixed evaluator decides keep or revert, and a selector must still pick one patch. Compute once. Count once. Publish once. Rule one: compute once.
+Back to our map. Five fields, one loop. Each started from a shared state, ran alternatives, and needed a check. Compute once: the fuzzer sets up its target once. Each research attempt starts from the best commit. Count once: duplicate crashes and six guides for one gene. The two apparent branches were one orbit family. Publish once: a fixed evaluator decides keep or revert. A selector must still pick one patch. Compute once. Count once. Publish once. Rule one: compute once.
 
 **Q&A detail**
 
@@ -216,7 +216,7 @@ The map from the rules slide, now filled with the examples. AFL++ persistent mod
 
 *1:05; starts 14:20*
 
-To compute once, first ask what the reused state must hold. That depends on the next step. If it edits code and rebuilds, the cache we saw earlier supplies the files. If it continues a live run, we restore a process or VM checkpoint and get only the memory that mechanism keeps. If it needs an earlier answer, replay returns the recording. What runs today is restore fan-out on islo, our sandbox service: many restores of one named snapshot. Two hundred fifty-five of two hundred fifty-six restore-run-capture calls succeeded. Whether live memory survives is untested until Gate zero, our first preregistered probe. So pick the cheapest mechanism that supplies what the next step reads. For a step that only reads files, a restore and a warm cache compete.
+What must the reused state hold? The next step decides. If it edits code and rebuilds, the cache from earlier supplies the files. If it continues a live run, we restore a process or VM checkpoint. We get only the memory that mechanism keeps. If it needs an earlier answer, replay returns the recording. Today we run restore fan-out on islo, our sandbox service. That means many restores of one named snapshot. Two hundred fifty-five of two hundred fifty-six restore-run-capture calls succeeded. Whether live memory survives is untested until Gate zero, our first preregistered probe. So pick the cheapest mechanism that supplies what the next step reads. For a step that only reads files, a restore and a warm cache compete.
 
 **Q&A detail**
 
@@ -226,7 +226,7 @@ Fork semantics are backend-specific: filesystem clone, artifact cache, process f
 
 *1:15; starts 15:25*
 
-Here is the rule. With N alternative runs, each would repeat a setup cost, P; preparing once avoids N minus one copies. Against that we pay H to save the state once, and per child, R to restart it and D to keep its writes private. Sandbox starts are already cheap, as low as seventy-three milliseconds in a public benchmark, so P must be real preparation. A question for you: restore a snapshot, or rebuild with a warm cache: which wins? Take eight runs, H of two, R of one, D of three: thirty-four resource-seconds of overhead. With a cold setup of thirty, restoring avoids two hundred ten and saves a hundred seventy-six. With a warm cache, setup drops to two: restoring avoids only fourteen and costs twenty more. The warm cache wins: never build the same thing twice. But even a winning restore cannot undo everything.
+Here is the rule. With N alternative runs, each would repeat a setup cost, P. Preparing once avoids N minus one setups. Against that, we pay H to save the state once. Each child pays R to restart and D to keep its writes private. Sandbox starts are already cheap. A public benchmark puts them as low as seventy-three milliseconds. So P must be real preparation. A question for you: which wins, a snapshot restore or a warm-cache rebuild? Take eight runs, H of two, R of one, D of three. That is thirty-four resource-seconds of overhead. With a cold setup of thirty, restoring avoids two hundred ten. So it saves a hundred seventy-six. With a warm cache, setup drops to two. Restoring avoids only fourteen, so it loses twenty. The warm cache wins: never build the same thing twice. But even a winning restore cannot undo everything.
 
 **Q&A detail**
 
@@ -236,7 +236,7 @@ The rule is an additive total-resource model, not measured elapsed time: work co
 
 *1:05; starts 16:40*
 
-First, remote effects. Save a sandbox, call a hosted model, then restore. The sandbox is back, but the model has already answered and charged us. A restore cannot rewind another service, so an effect is not computed once; it is recorded once, outside the child. Our proposed design retries with an idempotency key that the controller mints for each child, so a fork never copies it. Second, recall the Twistlock lesson: a sandbox is a policy boundary. A fork copies every credential inside it, so the right to publish must never be inside. The worker returns a patch and its test records; only the controller holds the publish key. Our factory runs exercised that separation. Rule two: count once.
+First, remote effects. Save a sandbox, call a hosted model, then restore. The sandbox is back, but the model has already answered and charged us. A restore cannot rewind another service. So an effect is not computed once, but recorded once, outside the child. Our proposed design retries with an idempotency key. The controller gives each child its own key, so forks never share one. Second, credentials. A fork copies every credential inside the sandbox. So the publish key must stay outside. The worker returns a patch and its test records. Only the controller holds that key. Our factory runs exercised that separation. Rule two: count once.
 
 **Q&A detail**
 
@@ -246,7 +246,7 @@ Restoring state cannot unsend a model or tool request, refund its cost or revers
 
 *1:05; starts 17:45*
 
-Counting once starts with a record of what each trial did: a receipt. It works like a cache entry. The key is what ran, on which bytes, from which inputs; a hash names the bytes, as in the cache. The value is the result and who reported it. In our design the harness writes it, outside the child; a child's own report is only a claim. Our factory logs show why. A CI job passed in three seconds; its evaluation had been skipped. A helper's code hash was recorded, but its source was not in the repository: a hash is a fingerprint, not a backup. An approval was labelled human; the harness had answered it. The inputs field lets a shared observation count once. Next, we combine receipts.
+Counting once starts with a receipt. A receipt records what each trial did. It works like a cache entry. The key is what ran, on which bytes, from which inputs. A hash names the bytes, as in the cache. The value is the result and who reported it. In our design, the harness writes it, outside the child. A child's own report is only a claim. Our factory logs show why. A CI job passed in three seconds, but its evaluation was skipped. A helper's code hash was recorded, but its source was not in the repository. A hash is a fingerprint, not a backup. An approval was labelled human, but the harness had answered it. The inputs field lets a shared observation count once. Next, we combine receipts.
 
 **Q&A detail**
 
@@ -256,7 +256,7 @@ Who writes it: in the proposed design the harness or controller writes the recei
 
 *1:00; starts 18:50*
 
-Combining receipts is called fan-in, and it is not one operation. If the trials tried different ideas, we select one, like the patch selector in the software example. Selection is itself a search, so we recheck the winner on fresh data. If the trials edited different parts of a program, we compose their edits, and the merged version needs its own test. A made-up example: each change starts a one-gigabyte worker on a two-gigabyte server. Each change fits. Every pair fits. All three fail, and no pair test covered that. If the trials estimated one quantity, we pool them, and the weights must account for errors they share. So first: what do trials share?
+Combining receipts is called fan-in, and it is not one operation. If the trials tried different ideas, we select one. Recall the patch selector in the software example. Selection is itself a search. So we recheck the winner on fresh data. If the trials edited different parts of a program, we compose their edits. The merged version needs its own test. A made-up example: each change starts a one-gigabyte worker on a two-gigabyte server. Each change fits. Every pair fits. All three together fail, and no pair test catches that. If the trials estimated one quantity, we pool them. The weights must account for errors they share. So first, what do trials share?
 
 **Q&A detail**
 
@@ -266,7 +266,7 @@ The three rows describe decision semantics, not three implemented end-to-end sys
 
 *0:50; starts 19:50*
 
-The simplest thing trials share is an observation. Trial A returns a, b and c; trial B returns b, c and d. That is four distinct observations, not six, so B adds only d. We have seen this before. The Roadbook counts a road once, however many drives cross it. Six guides aimed at one gene are six looks at one gene. Today, our reducer rejects a duplicate observation ID and keeps each result's source history. But different observations can still share errors.
+The simplest thing trials share is an observation. Trial A returns a, b and c. Trial B returns b, c and d. That is four distinct observations, not six, so B adds only d. We have seen this before. The Roadbook counts a road once, however many drives cross it. Six guides aimed at one gene are six looks at one gene. Our reducer pools the results. Today, it rejects a duplicate observation ID. It also keeps each result's source history. But different observations can still share errors.
 
 **Q&A detail**
 
@@ -276,7 +276,7 @@ The set diagram counts exact illustrative observation IDs; circle areas do not r
 
 *0:50; starts 20:40*
 
-Take a hundred equally noisy estimates whose errors have pairwise correlation point one. They might share a parent state, a seed or a test fixture. Their average reduces noise only as much as about nine independent estimates, not a hundred. Shared errors count for less, and a shared bias does not average away at all. Our reducer still assumes independence. Proposed: weights that use the error covariance, and refusing a precision claim when the dependence is unknown. Worse than a shared error is a worker that overstates its own precision.
+Take a hundred equally noisy estimates. Their errors have pairwise correlation point one. They might share a parent state, a seed or a test fixture. Their average is as precise as about nine independent ones, not a hundred. Shared errors count for less. A shared bias does not average away at all. Our reducer still assumes independence. We propose weights that use the error covariance. We also propose refusing a precision claim when the dependence is unknown. A worker that overstates its own precision is worse than a shared error.
 
 **Q&A detail**
 
@@ -286,7 +286,7 @@ The 100-estimate example assumes equal marginal noise sigma and a common pairwis
 
 *0:55; starts 21:30*
 
-A weighted average multiplies each estimate by its precision, one over its variance, so a worker that claims little uncertainty gets a large weight. In our synthetic test the true value is five. One worker sends two thousand tight points near seventeen and inflates its information per point fiftyfold. Counting points would not catch it. Trusting reported precision, the average is seventeen point zero zero zero four: one worker took over. Our heuristic caps that precision and down-weights far-off estimates: four point nine five six six. One synthetic case, not a Byzantine guarantee. So check outside the child, including its error bars. Rule three: publish once.
+A weighted average multiplies each estimate by its precision, one over its variance. So a worker claiming little uncertainty gets a large weight. In our synthetic test, the true value is five. One worker sends two thousand tight points near seventeen. It claims fifty times its real precision. Counting points would not catch it. If we trust that precision, the average is seventeen point zero zero zero four. One worker took over. Our heuristic caps that precision and down-weights far-off estimates. That gives four point nine five six six. One synthetic case, not a Byzantine guarantee. So check outside the child, including its error bars. Rule three: publish once.
 
 **Q&A detail**
 
@@ -296,7 +296,7 @@ Verified primary demo.py lines 90–93 sets true_theta 5.0; lines 151–165 set 
 
 *0:55; starts 22:25*
 
-Our own factory run shows why. It was serial, on Docker sandboxes; nothing forked. A repair, a review blocker asking for tests, a second repair, then approval. After each repair the harness ran the full suite: 1,972 cases including skips, zero failures. The repairs added a code path: a retry that finds its workspace held by another attempt of the same job adopts it. The promise: the job starts once. No test forces that path. Review approved, suite green, promise untested. I reverted that path by hand; the PR merged on 3 October without it. A person caught what the gate should catch. What should that gate be?
+Start with our own factory run. It was serial, on Docker sandboxes. Nothing forked. A repair. Review blocked it and asked for tests. Then a second repair, and approval. After each repair, the harness ran the full suite. 1,972 cases, including skips, zero failures. The repairs added a code path for retries. If another attempt of the same job holds the workspace, the retry adopts it. The promise: the job starts once. No test forces that path. Review approved, suite green, promise untested. I reverted that path by hand. The PR merged on 3 October without it. A person caught what the gate should catch. What should that gate be?
 
 **Q&A detail**
 
@@ -306,7 +306,7 @@ MEASURED scope: SELFHOST-2 (27 Sep 2026; PR \#2351 of zozo123/ariflow-swfactory,
 
 *0:50; starts 23:20*
 
-Three steps. First, freeze the candidate and its hash. The hash that keyed the cache now names the bytes the controller may publish; it proves identity, not correctness. Second, require a test for each promise the change makes, and run it on those exact files. Here: force the retry onto a busy workspace and assert one dispatch. Third, the controller publishes only that hash. That hash-bound publish check is built; the promise test is proposed. No test for the promise, no acceptance: this gate would have refused our patch. A checked result also has to survive.
+Three steps. First, freeze the candidate and its hash. The hash that keyed the cache now names the bytes the controller may publish. It proves identity, not correctness. Second, require a test for each promise the change makes. Run it on those exact files. Here, force the retry onto a busy workspace and assert one dispatch. Third, the controller publishes only those bytes. That hash-bound publish check is built, but the promise test is proposed. No test for the promise, no acceptance: this gate would have refused our patch. A checked result also has to survive.
 
 **Q&A detail**
 
@@ -316,7 +316,7 @@ DESIGN scope: the gate is proposed and builds on the built sha256-bound publicat
 
 *0:45; starts 24:10*
 
-In a second factory run, review approved a patch, but delivery was refused three times over a stray file: the harness's own review archive. Then cleanup deleted the workspace, and the approved patch with it. The fix is an order: save a copy outside the child, confirm the copy, then delete. A hash alone is not a copy. The order is proposed; the loss was real. But saving is not permission to publish: a replaced or restored worker may still try to deliver.
+In a second factory run, review approved a patch. But delivery was refused three times, over a stray file. That file was the harness's own review archive. Then cleanup deleted the workspace, and the approved patch with it. The fix is an order. Save a copy outside the child, confirm the copy, then delete. A hash alone is not a copy. The order is proposed. The loss was real. But saving is not permission to publish. A replaced or restored worker may still try to deliver.
 
 **Q&A detail**
 
@@ -326,7 +326,7 @@ MEASURED scope: SELFHOST-3, from local run records that are not published; about
 
 *0:45; starts 24:55*
 
-So the controller keeps an epoch, a permission version number. Replacing a worker moves the epoch from one to two. A late result from the old worker still carries one, so the controller rejects it. The check lives in the controller, so restoring a snapshot cannot revive an old permission. And a publish keyed by the digest makes a retry a no-op, like a cache hit. Both are proposed. One controller, current epoch, publish once. What is still open?
+So the controller keeps an epoch, a permission version number. Replacing a worker moves the epoch from one to two. The old worker's late result still carries one, so the controller rejects it. The check lives in the controller. That way, restoring a snapshot cannot revive an old permission. We also key each publish by its hash. Then a retry is a no-op, like a cache hit. Both are proposed. One controller, current epoch, publish once. What is still open?
 
 **Q&A detail**
 
@@ -336,7 +336,7 @@ DESIGN scope: the epoch (a permission version number, a fencing token in the Chu
 
 *1:05; starts 25:40*
 
-Five questions remain open. Three have preregistered tests; none has started. Compute once. First, and first to run: does the snapshot we restore keep live memory? VM checkpoints can; we have not shown that ours does. A value held only in RAM must survive into three restored children. Until then, I say restore fan-out, not memory fork. Second, does restoring beat a warm cache at three, six and twelve sandboxes? Count once. Third, do restored siblings fail a race test together more than restores of other snapshots? That measures the shared environment, not agents' judgments. Fourth, a design question: when should the reducer refuse a precision claim? Publish once. Fifth, does the epoch fence hold across restores? Our TLA+ model is not yet model-checked. Now, what this talk contributes.
+Five questions remain open. Three have preregistered tests. None has started. Compute once. First comes Gate zero: does a restored snapshot keep live memory? VM checkpoints can, but we have not shown ours does. A value held only in RAM must survive into three restored children. Until it passes, I say restore fan-out, not memory fork. Second, does restoring beat a warm cache at three, six and twelve sandboxes? Count once. Third, do sibling restores fail a race test together more than unrelated ones? That measures the shared environment, not agents' judgments. Fourth, a design question: when should the reducer refuse a precision claim? Publish once. Fifth, does the epoch fence hold across restores? Our TLA+ model is not yet model-checked. Now, what this talk contributes.
 
 **Q&A detail**
 
@@ -346,7 +346,7 @@ No result is claimed until the protocol runs. No decision rule has changed since
 
 *1:00; starts 26:45*
 
-My contributions, on the same map we started with. Compute once: a cost rule. Restore saved state only when the setup it avoids exceeds the overhead it adds, priced against a warm cache. Count once: an evidence contract. The reducer I built rejects duplicate observation IDs; receipts kept outside the child and weights for shared errors are proposed. Publish once: an acceptance gate. The controller holds the key and publishes exact bytes; that check is built. A test for every promise and the epoch fence are proposed. One hash threads all three: it keys the cache, binds the receipt, and names the published bytes. It proves identity, not correctness. Compute once. Count once. Publish once. Your questions, please.
+My contributions, on the same map we started with. Compute once: a cost rule. Restore saved state only when the setup it avoids costs more than its overhead. Price it against a warm cache. Count once: an evidence contract. The reducer I built rejects duplicate observation IDs. Receipts kept outside the child and weights for shared errors are proposed. Publish once: an acceptance gate. The controller holds the publish key. Its hash-bound publish check is built. A test for every promise and the epoch fence are proposed. One hash threads all three. It keys the cache, binds the receipt, and names the published bytes. It proves identity, not correctness. Compute once. Count once. Publish once. Your questions, please.
 
 **Q&A detail**
 
