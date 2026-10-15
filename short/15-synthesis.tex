@@ -1,0 +1,31 @@
+% THE MAP, second of three uses (03, 15, 26). The \providecommand block below is copied verbatim from 03-promise.tex; keep the three identical.
+% Arguments: #1 #2 #3 = column bodies (compute once, count once, publish once); #4 = extra TikZ.
+\providecommand{\rulemap}[4]{%
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  rh/.style={evidence,text width=4.2cm,minimum height=.9cm,font=\fontsize{12}{14}\selectfont\bfseries,text=Teal},
+  rs/.style={anchor=north,inner sep=0pt,font=\fontsize{10}{12}\selectfont,text=Muted},
+  rb/.style={anchor=north,inner sep=0pt,text width=4.7cm,align=center,font=\fontsize{12}{14.5}\selectfont}]
+\useasboundingbox (0,1.05) rectangle (14.4,-3.75);
+\node[rh] (r1) at (2.3,0) {1\enspace COMPUTE ONCE};
+\node[rh] (r2) at (7.2,0) {2\enspace COUNT ONCE};
+\node[rh] (r3) at (12.1,0) {3\enspace PUBLISH ONCE};
+\draw[flow] (r1)--(r2);\draw[flow] (r2)--(r3);
+\draw[message] (r3.north)--++(0,.42)-|node[pos=.25,above,inner sep=1.5pt,font=\fontsize{9}{10}\selectfont,text=Teal]{continue} (r1.north);
+\node[rs] at (2.3,-.62) {Runtime};
+\node[rs] at (7.2,-.62) {Evidence};
+\node[rs] at (12.1,-.62) {Acceptance};
+\node[rb] at (2.3,-1.15) {#1};
+\node[rb] at (7.2,-1.15) {#2};
+\node[rb] at (12.1,-1.15) {#3};
+#4
+\end{tikzpicture}\par}
+\begin{frame}[t]{\ev{\tagP}\surf{THREE RULES}Five fields, one loop, three rules.}
+\vspace{.1cm}
+\rulemap{\fontsize{11.5}{14}\selectfont Fuzzer child set up once\\[4pt]Start from the incumbent}
+{\fontsize{11.5}{14}\selectfont Crashes deduplicated\\[4pt]Six guides, one gene\\[4pt]Two branches, one family}
+{\fontsize{11.5}{14}\selectfont Evaluator: keep or revert\\[4pt]One patch must be chosen}{}
+\claim{\centering\forktree\enspace Compute once. Count once. Publish once.}
+\sources{The five previous examples, by the rule each one shows. None measures our integrated runtime.}
+\qadetail{The map from slide 3, now filled with the examples. AFL++ persistent mode reuses one initialized child across many inputs (its documentation reports typical 10--20x speedups); it wins by not forking for every input, provided critical state resets. CyberGym is a separate study: the authors manually confirmed 22 unique zero-days from 56 crashes; crashes and confirmed vulnerabilities are different units. Autoresearch ran one attempt at a time, with sequential Git keep or revert against a fixed evaluator. SWE-bench Lite 15.9 to 56 percent is candidate coverage, not selected success; a selector must still pick one patch. Six guides per gene are repeated looks at one gene; the assays confirm with their own denominators. In the three-body work, a projection made one orbit family look like two branches; the 60-digit checks cover two representative stability transitions and are separate from connectivity; the Chamo preprint is not peer reviewed. These are published or co-authored results that share the pattern; none measures our integrated runtime, and our own factory runs were serial with nothing forked.}
+\note{[0:50] Back to our map. Five fields, one loop. Each started from a shared state, ran alternatives, and needed a check. And each one taught a rule. Compute once: the fuzzer sets up its child once, and each research attempt starts from the incumbent commit. Count once: duplicate crashes, six guides for one gene, and two apparent branches that were one orbit family. Publish once: a fixed evaluator decides keep or revert, and a selector must still choose one patch. Compute once. Count once. Publish once. Now rule one, in the runtime: what does a fork actually reuse?}
+\end{frame}

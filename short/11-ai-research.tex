@@ -1,0 +1,34 @@
+% Act 2 example: shared template for short/10--14 (same geometry; only text and rule chips change).
+% Rule chip: gold, right-aligned on the claim line; names match the map columns on slides 3, 15 and 26.
+\providecommand{\exchip}[1]{\tikz[baseline=(x.base)]\node[fill=Gold,text=white,rounded corners=1.5pt,inner xsep=2.6pt,inner ysep=1.7pt,font=\fontsize{7.6}{8.6}\selectfont\bfseries](x){#1};}
+\begin{frame}[t]{\ev{\tagO}\surf{AI RESEARCH}Autoresearch kept 23 of 126 attempts against a fixed evaluator.\strut}
+\vspace{.15cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  hd/.style={anchor=south,font=\fontsize{9.5}{11}\selectfont\bfseries,text=Teal},
+  bx/.style={text width=3.9cm,inner xsep=.15cm,minimum height=1.5cm,font=\fontsize{11.5}{14}\selectfont},
+  stack/.style={draw=Gold,fill=Sand,line width=.9pt},
+  res/.style={anchor=north west,inner sep=0pt,text width=14.4cm,align=left,font=\fontsize{14.5}{17.5}\selectfont},
+  ctx/.style={anchor=north west,inner sep=0pt,text width=14.4cm,align=left,font=\fontsize{10.5}{13}\selectfont,text=Muted},
+  every node/.style={align=center}]
+\useasboundingbox (0,.55) rectangle (14.4,-3.3);
+\node[hd] at (2.12,.15) {Shared state};
+\node[hd] at (7.10,.15) {Alternatives};
+\node[hd] at (12.28,.15) {Check};
+\node[state,bx] (s) at (2.12,-.85) {\textbf{Incumbent commit}\\fixed evaluator};
+\node[candidate,bx] (a) at (7.10,-.85) {\textbf{Edit \texttt{train.py}}\\5 min each, in turn};
+\begin{scope}[on background layer]
+\draw[stack] ($(a.south west)+(.2,.2)$) rectangle ($(a.north east)+(.2,.2)$);
+\draw[stack] ($(a.south west)+(.1,.1)$) rectangle ($(a.north east)+(.1,.1)$);
+\end{scope}
+\node[evidence,bx] (c) at (12.28,-.85) {\textbf{Score \texttt{val\_bpb}}\\keep or revert};
+\draw[flow] (s.east)--(a.west);
+\draw[flow] ($(a.east)+(.2,0)$)--(c.west);
+\node[res] at (0,-2.05) {\textbf{126} attempts, \textbf{23} kept:\enspace \textbf{0.997900}\,$\to$\,\textbf{0.969686}, \textbf{2.8\%} lower};
+\node[ctx] at (0,-2.8) {AlphaEvolve: a deployed Borg heuristic recovered 0.7\% of Google's compute, on average.};
+\end{tikzpicture}
+\claim{Reuse the incumbent; the evaluator promotes.\hspace{.8em}\hfill\exchip{COMPUTE ONCE}\enspace\exchip{PUBLISH ONCE}}
+\sources{\href{https://github.com/karpathy/autoresearch/blob/master/program.md}{Karpathy, autoresearch protocol}; \href{https://github.com/karpathy/autoresearch/discussions/43}{reported session}. \href{https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/}{Google DeepMind, AlphaEvolve (2025)}.}
+\qadetail{Autoresearch: one reported session, not a controlled average effect or a fork experiment. 126 attempts: 23 kept, 102 discarded, 1 crash. The score decline is (0.997900-0.969686)/0.997900=2.827\%; lower validation bits per byte is better. The protocol holds data preparation, tokenizer and evaluation fixed and permits editing train.py. Five minutes is wall-clock training time; startup and compilation are outside that budget, and crashes can end early. Sequential Git keep/revert is the actual mechanism; forked parallel continuations are a possible extension, not what produced this result. Repeated adaptive selection on one validation set warrants a separate held-out check before claiming generalization. AlphaEvolve: DeepMind reports that the discovered Borg scheduling heuristic recovered an average 0.7\% of Google's worldwide compute resources, in production for over a year at announcement. A separate kernel result (23\% kernel speedup, 1\% lower Gemini training time) is a different workload and endpoint; the gains are not additive. Gemini Flash and Pro propose edits; automated evaluators check validity and performance; evolutionary selection keeps useful programs. The gains belong to the discovered algorithms, not to a sandbox fork or our implementation.}
+% Transition: One attempt at a time here; the next example samples many patches from one repository.
+\note{[1:05] Second, AI research. Karpathy's autoresearch starts every attempt from the incumbent commit, and the commit hash names that exact state. The evaluator stays fixed. The agent edits the training script, trains for five minutes, reads validation bits per byte, then keeps or reverts. One reported session made 126 attempts, one at a time, and kept twenty-three. The score fell by 2.8 percent. Starting from the incumbent is compute once; only the fixed evaluator promotes a change, which is publish once. AlphaEvolve runs this loop over a population of programs; a scheduling heuristic it found recovered 0.7 percent of Google's compute, on average. Tuned on one validation set, a result still needs a held-out check. Next, many attempts from one repository.}
+\end{frame}

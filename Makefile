@@ -1,4 +1,4 @@
-.PHONY: all deck dist guide clean
+.PHONY: all deck dist guide clean short
 
 all: deck
 
@@ -17,5 +17,18 @@ talk.pdf: $(SOURCES)
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 
+# Short 20-slide version: talk-short.tex + short/*.tex, same preamble.
+SHORT_SOURCES := talk-short.tex $(wildcard preamble/*.tex) $(wildcard short/*.tex) $(wildcard assets/*)
+
+short: talk-short.pdf
+	python3 tools/presenter_guide.py --short --check
+	mkdir -p dist
+	cp talk-short.pdf dist/forkable-sandboxes-cambridge-short.pdf
+
+talk-short.pdf: $(SHORT_SOURCES)
+	pdflatex -halt-on-error -interaction=nonstopmode talk-short.tex
+	pdflatex -halt-on-error -interaction=nonstopmode talk-short.tex
+
 clean:
+	rm -f talk-short.aux talk-short.log talk-short.nav talk-short.out talk-short.snm talk-short.toc talk-short.vrb talk-short.pdf
 	rm -f talk.aux talk.log talk.nav talk.out talk.snm talk.toc talk.vrb talk.pdf

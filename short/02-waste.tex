@@ -1,0 +1,44 @@
+% Act 1: the waste. Two timing panels on one time scale, then the three old tools that remove it.
+\begin{frame}[t]{\ev{\tagA}In parallel computing, the costly work is the work done twice.}
+\vspace{.05cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  ph/.style={anchor=west,inner sep=0pt,font=\fontsize{12.5}{15}\selectfont\bfseries},
+  rl/.style={anchor=east,inner sep=0pt,font=\fontsize{10}{12}\selectfont,text=Muted},
+  bl/.style={font=\fontsize{11}{13}\selectfont,text=Ink}]
+\useasboundingbox (0,.65) rectangle (14.4,-2.3);
+% Without reuse: every trial repeats the setup.
+\node[ph] at (0,.35) {Without reuse};
+\foreach \rr/\yy in {A/-.3,B/-.95,C/-1.6}{
+  \node[rl] at (.3,\yy) {\rr};
+  \fill[Gold!55] (.45,\yy-.24) rectangle (3.65,\yy+.24);
+  \node[bl] at (2.05,\yy) {setup $P$};
+  \fill[Teal!40] (3.65,\yy-.24) rectangle (5.05,\yy+.24);
+  \node[bl] at (4.35,\yy) {trial \rr};}
+\draw[-{Latex[length=1.6mm]},Muted,line width=.6pt] (.45,-2.1)--(5.55,-2.1) node[right,labeltext,inner sep=1pt,font=\fontsize{10}{12}\selectfont] {time};
+% With reuse: one setup, then every trial restores the saved state.
+\begin{scope}[xshift=7.55cm]
+\node[ph] at (0,.35) {With reuse};
+\foreach \rr/\yy in {A/-.3,B/-.95,C/-1.6}{
+  \node[rl] at (.3,\yy) {\rr};
+  \fill[Ink!22] (3.95,\yy-.24) rectangle (4.45,\yy+.24);
+  \fill[Teal!40] (4.45,\yy-.24) rectangle (5.85,\yy+.24);
+  \node[bl] at (5.15,\yy) {trial \rr};
+  \draw[Ink,line width=.8pt,-{Latex[length=1.5mm]}] (3.65,-.3)--(3.92,\yy);}
+\fill[Gold!55] (.45,-.54) rectangle (3.65,-.06);
+\node[bl] at (2.05,-.3) {setup once};
+\node[labeltext,anchor=south,inner sep=1pt,font=\fontsize{10}{12}\selectfont] at (4.2,-.04) {restore};
+\node[missing,inner sep=0pt,minimum width=3.2cm,minimum height=1.13cm,font=\fontsize{11}{13}\selectfont] at (2.05,-1.275) {avoided:\\$(N{-}1)$ setups};
+\draw[-{Latex[length=1.6mm]},Muted,line width=.6pt] (.45,-2.1)--(6.1,-2.1) node[right,labeltext,inner sep=1pt,font=\fontsize{10}{12}\selectfont] {time};
+\end{scope}
+\end{tikzpicture}
+\par\vspace{.25cm}
+{\fontsize{13}{16}\selectfont
+\begin{tabular}{@{}l@{\quad}l@{}}
+{\color{Teal}\bfseries Cache} & reuse a previous run's output.\\
+{\color{Teal}\bfseries Fork} & reuse a reached state.\\
+{\color{Teal}\bfseries Sandbox} & keep each trial's writes private.\\
+\end{tabular}\par}
+\sources{Schematic, one time scale in both panels. Restoring is not free; the runtime section prices it.}
+\qadetail{Illustrative task structure, not a measurement: bar lengths are schematic and use one time scale in both panels. The picture counts total work, not elapsed time; with three machines the right panel finishes slightly later, because each child restores, but it pays for one setup instead of three. Restoring is not free: saving the state once (H), restoring each child (R) and keeping each child's changes private (D) all cost, and the runtime section prices them against a warm cache, which is itself reuse. The avoided work is N-1 setups only when the restored state is what the next step reads; a cached file template may be an adequate and cheaper baseline. No timing or correctness result is attributed to these three trials. Our own factory runs were serial; nothing forked. Caches, forks and sandboxes are established mechanisms; slide 9 lists known systems.}
+\note{[1:00] A question for you. How much of your last CI run was work another machine had already done? Often it is the same install and the same compile, again. On the left, three trials each repeat the same setup. On the right, we set up once, save that state, and start every trial from it. The gold blocks we skip are the waste: N minus one setups. Three old tools remove it. A cache reuses a previous run's output. A fork reuses a reached state. A sandbox keeps each trial's writes private, so sharing is safe. In a parallel, distributed world, the expensive thing is doing work twice. But sharing work creates obligations.}
+\end{frame}

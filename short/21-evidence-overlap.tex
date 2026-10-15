@@ -1,0 +1,36 @@
+\begin{frame}[t]{\ev{\tagA\,\tagB}\surf{COUNT ONCE}Overlapping trials add less than their count.}
+\vspace{.05cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\fontsize{11.5}{14}\selectfont},
+  head/.style={anchor=west,font=\fontsize{9}{10}\selectfont\bfseries,text=Teal}]
+\node[head] at (-.05,1.8) {SAME OBSERVATIONS: COUNT ONCE};
+\node[head] at (6.9,1.8) {SHARED ERRORS: COUNT FOR LESS};
+\draw[Line,line width=.6pt] (6.45,1.95)--(6.45,-1.15);
+% Left: two trials that return overlapping observation IDs.
+\fill[Teal!12](1.3,.2)circle(1.05);\fill[Gold!18](2.4,.2)circle(1.05);
+\begin{scope}\clip(1.3,.2)circle(1.05);\fill[Teal!35](2.4,.2)circle(1.05);\end{scope}
+\draw[Teal,line width=1pt](1.3,.2)circle(1.05);\draw[Gold,line width=1pt](2.4,.2)circle(1.05);
+\node[font=\fontsize{12}{14}\selectfont\bfseries,text=Teal] at (.25,1.15) {A};
+\node[font=\fontsize{12}{14}\selectfont\bfseries,text=Gold] at (3.45,1.15) {B};
+\node[font=\fontsize{12.5}{15}\selectfont] at (.8,.2) {$a$};
+\node[font=\fontsize{12.5}{15}\selectfont] at (1.85,.2) {$b,c$};
+\node[font=\fontsize{12.5}{15}\selectfont] at (2.9,.2) {$d$};
+\node[anchor=west,align=left,font=\fontsize{12}{17}\selectfont] at (4.0,.2) {\textbf{4} distinct\\\textbf{2} shared\\B adds \textbf{1}};
+% Right: correlated errors shrink the effective count.
+\node[anchor=west] at (6.9,1.0) {100 estimates, error correlation $\rho=0.1$};
+\node[anchor=west,font=\fontsize{16}{19}\selectfont] at (6.9,.0) {$N_{\rm eff}=\dfrac{100}{1+99(0.1)}=\mathbf{9.17}$};
+\node[anchor=west,text=Muted,font=\fontsize{11}{13}\selectfont] at (6.9,-.95) {Reduces noise like about 9 independent ones.};
+\end{tikzpicture}
+\end{center}
+{\centering\fontsize{11}{13}\selectfont\color{Muted}Seen before: one road, many drives (Roadbook); one gene, six guides (screen).\par}
+\vspace{.12cm}
+{\color{Line}\rule{\linewidth}{.6pt}}\par
+\vspace{.08cm}
+{\fontsize{11}{15}\selectfont
+\tagB\enspace Our reducer rejects duplicate observation IDs and carries lineage.\par
+{\color{Gold}\bfseries Proposed:}\enspace covariance-aware weights; refuse unsupported precision claims.\par}
+\sources{Illustrative: exact set IDs; equal noise, common pairwise correlation. \href{https://github.com/zozo123/boltzmann-mapreduce}{Reference reducer}; \href{https://arxiv.org/html/2607.09689v4}{arXiv:2607.09689v4}.}
+
+\qadetail{The set diagram counts exact illustrative observation IDs; circle areas do not represent entropy or Fisher information. Deduplicating declared IDs does not measure correlation between different items; distinct IDs do not authenticate observations or prove independence, and a copied receipt remains the same observation. The 100-estimate example assumes equal marginal noise sigma and a common pairwise correlation, with the signal held fixed: Var = sigma^2[rho+(1-rho)/N], so noise is 0.10 sigma independent versus 0.33 sigma at rho=0.1, and the signal-to-noise gain is 10x versus 3.03x. N_eff is variance-equivalent precision for a mean, not a count of independent units, not a probability of correctness, and it does not remove shared bias. Candidate search needs a different joint quantity (the all-wrong probability). The Roadbook and guide callbacks are analogies: matched drives of one road and six guides per gene are repeated looks at one target, not forks or measured correlations. The built Gaussian/Wald reference reducer adds natural-parameter summaries associatively under an independence/common-target model; a declared duplicate evidence ID raises; lineage is transported but not yet consumed. It does not abstain. Proposed: covariance-aware weights w = Sigma^-1 1 / (1^T Sigma^-1 1) (best linear unbiased under known positive-definite covariance; Valassi and Chierici 2014), with covariance from justified calibration rather than worker declarations; weights can be negative and common bias does not average away. Also proposed: abstention when dependence is unknown, trusted evidence identity and controller-derived information. Source: Eliaz, arXiv:2607.09689v4.}
+\note{[1:10] Overlap shows up in two ways. First, trials can return the same observations. Trial A returns a, b and c; trial B returns b, c and d. That is four distinct observations, not six, so B adds only d. Count each observation once, the way the Roadbook counts each road once. Second, different observations can still share errors, like six guides aimed at one gene. Take a hundred equally noisy estimates whose errors have pairwise correlation point one. Their average reduces noise like about nine independent estimates, not a hundred. Today, our reducer rejects a duplicate observation ID and keeps each result's source history. It does not yet use that history to set weights; covariance-aware weights, and refusing a precision claim when dependence is unknown, are proposed. Next: a worker that overstates its own precision.}
+\end{frame}

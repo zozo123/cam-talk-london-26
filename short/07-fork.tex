@@ -1,0 +1,26 @@
+% Act 1: from a cached step to a reached state; each alternative runs in a private sandbox.
+\begin{frame}[t]{\ev{\tagP}A fork extends caching from files to a reached execution state.}
+\vspace{.05cm}
+{\fontsize{12.5}{15}\selectfont\textbf{Cache:} one step's output.\qquad\textcolor{Teal}{\textbf{Fork:} the state after many steps.}\par}
+{\fontsize{10.5}{12.5}\selectfont\color{Muted}Installed dependencies, a reproduced failure, a warmed process.\par}
+\vspace{.05cm}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{14.5}\selectfont}]
+\node[text=Muted,anchor=east,text width=2.25cm] at (-.3,0) {A fixed film};
+\node[state,text width=2.5cm,minimum height=.7cm](s)at(1.3,0){Scene 1};
+\node[state,text width=2.5cm,minimum height=.7cm](t)at(5.1,0){Scene 2};
+\node[state,text width=2.5cm,minimum height=.7cm](u)at(8.9,0){Scene 3};
+\draw[flow](s)--(t);\draw[flow](t)--(u);
+\node[text=Teal,anchor=east,text width=2.25cm] at (-.3,-1.85) {An experiment};
+\node[evidence,text width=2.5cm](saved)at(1.3,-1.85){Saved state\\[-1pt]{\fontsize{9.5}{11}\selectfont\color{Muted}keyed by digest}};
+\node[candidate,text width=2.5cm,inner ysep=2pt](a)at(5.1,-1.22){Try action A\\[-1pt]{\fontsize{9.5}{11}\selectfont\color{Muted}private sandbox}};
+\node[candidate,text width=2.5cm,inner ysep=2pt](b)at(5.1,-2.48){Try action B\\[-1pt]{\fontsize{9.5}{11}\selectfont\color{Muted}private sandbox}};
+\node[evidence,text width=2.5cm](choose)at(8.9,-1.85){Check, keep,\\or discard};
+\draw[flow](saved)--(a);\draw[flow](saved)--(b);
+\draw[flow](a)--(choose);\draw[flow](b)--(choose);
+\draw[message](choose.south)--++(0,-1.07)-|(saved.south);
+\node[text=Teal,font=\fontsize{10.5}{12}\selectfont,fill=white,inner ysep=1pt]at(5.1,-3.34){Continue from the accepted state};
+\end{tikzpicture}\end{center}
+\sources{Organizing analogy and proposed execution model. Stored-program hardware remains the substrate.}
+\qadetail{Cache versus fork: both are reuse, and both need a key. Proposed: the parent is immutable and named by its digest; a child is that digest plus its private delta. Changing an input that reached the parent needs a new parent, as a cache miss would. The islo snapshots we measured are named snapshots; we do not claim they are content-addressed today. A cache returns one step's stored output, keyed by its inputs; a fork restores a captured execution state and lets several private continuations diverge from it. Which state a fork must capture depends on the next action: files and cached inputs, or supported memory and runtime state. Installed dependencies are file state; a reproduced failure in a running application is a hypothetical future live-state workload, not an observed property of our factory runs; a warmed process requires a process or VM checkpoint whose memory semantics must be checked. The comparison priced later is restoring saved state versus rebuilding with a warm cache; we do not claim that a fork is faster than a good build cache. Von Neumann is a hardware and stored-program architectural model. Adaptive planning, search, operating-system process fork and feedback control have long histories. The claim is an organizing research direction combining reusable execution with adaptive orchestration, not historical priority, a replacement ISA or new computational expressive power. Forkability and autonomy are separable: a runtime may fork without an agent, and an agent may operate serially without forks. The film analogy refers to private executable continuations from saved computer state. It does not rewind completed model or tool requests, incurred costs, published data or other external-world effects, and restoring a snapshot does not establish a child's current authority.}
+\note{[0:50] A cache reuses one step's output. A fork goes further: it reuses the state after many steps, such as installed dependencies, a reproduced failure or a warmed process. Think of a film: a fixed sequence of scenes, and rewinding replays the same plot. Now save a reached state and try two different next actions, each in its own private sandbox. A check decides which outcome to keep; the other is discarded, and we continue from the accepted state. Like a cache entry, the saved state needs a key: the parent's digest. Here is the same idea as code.}
+\end{frame}

@@ -3,6 +3,7 @@
 This academic talk connects reusable execution with the evidence and authority needed to accept a result. It follows a personal path through container security, biological physics, genomics, immune-related combination assays, automotive perception and execution systems.
 
 - [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **57 main slides, 41:25 planned narration, no appendix or overlays**.
+- [Short seminar PDF](dist/forkable-sandboxes-cambridge-short.pdf): **26 slides, 27:10 planned**, built from `talk-short.tex` and `short/` around one thesis: do work once. Caching reuses a previous run's output, a fork extends that reuse to a reached execution state, and a sandbox keeps each alternative private. The three rules are compute once (runtime), count once (evidence) and publish once (acceptance). Script and Q&A detail are in the [short presenter guide](PRESENTER-GUIDE-SHORT.md); build with `make short`.
 - [Presenter guide](PRESENTER-GUIDE.md): timed spoken cues and retained Q&A detail.
 - [Two-sentence slide takeaways](SLIDE-TAKEAWAYS.md): the point and practical lesson of every slide.
 - [Review of all original 57 slides](DECK-REVIEW.md): argument, keep/rewrite/merge decisions and final locations.

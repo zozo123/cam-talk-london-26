@@ -7,6 +7,9 @@ from texflat import flatten
 ROOT = Path(__file__).resolve().parent.parent
 MAX_WPM = 125
 TOTAL_WINDOW_S = (35 * 60, 45 * 60)
+# --short builds the 20-slide talk-short.tex deck and its own guide.
+DECKS = {'canonical': ('talk.tex', 'PRESENTER-GUIDE.md', (57, 57), TOTAL_WINDOW_S, 'canonical'),
+         'short': ('talk-short.tex', 'PRESENTER-GUIDE-SHORT.md', (18, 30), (18 * 60, 32 * 60), 'short-deck')}
 
 def argument(text, start):
     depth = 1
@@ -47,13 +50,14 @@ def frames(tex):
         yield title,dur,plain(cue.group(3)),plain(command(body,'qadetail'))
 
 def main():
-    tex=flatten(ROOT/'talk.tex')
+    src,guide,slides,window,label=DECKS['short' if '--short' in sys.argv else 'canonical']
+    tex=flatten(ROOT/src)
     rows=list(frames(tex)); total=sum(x[1] for x in rows)
     words=sum(len(x[2].split()) for x in rows)
     fast=[title for title,dur,script,qa in rows if 60*len(script.split())/dur>MAX_WPM]
     out=['# Presenter guide: Forkable Sandboxes','',
          '**Reusable execution for self-driving computers.** Cambridge SRG, 15 October 2026.','',
-         f'Generated from canonical source. {len(rows)} main slides; no appendix. Planned duration **{total//60}:{total%60:02d}**; {words} spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.','',
+         f'Generated from {label} source. {len(rows)} main slides; no appendix. Planned duration **{total//60}:{total%60:02d}**; {words} spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.','',
          '## Run of show','','| # | Slide | Cue | Clock | Words | wpm |','|---|---|---|---|---|---|']
     clock=0
     for i,(title,dur,script,qa) in enumerate(rows,1):
@@ -65,10 +69,10 @@ def main():
         out += [f'### {i:02d}. {title}','',f'*{dur//60}:{dur%60:02d}; starts {clock//60}:{clock%60:02d}*','',script,'']
         if qa:out+=['**Q&A detail**', '',qa,'']
         clock+=dur
-    (ROOT/'PRESENTER-GUIDE.md').write_text('\n'.join(out))
+    (ROOT/guide).write_text('\n'.join(out))
     print(f'{len(rows)} slides; {total//60}:{total%60:02d}; {words} words; peak {max(60*len(s.split())/d for t,d,s,q in rows):.0f} wpm')
     if '--check' in sys.argv:
-        if len(rows)!=57 or not all(x[3] for x in rows) or fast or not TOTAL_WINDOW_S[0]<=total<=TOTAL_WINDOW_S[1]:
+        if not slides[0]<=len(rows)<=slides[1] or not all(x[3] for x in rows) or fast or not window[0]<=total<=window[1]:
             raise SystemExit(f'DECK CHECK FAILED: slides={len(rows)}, fast={fast}, duration={total}')
         if re.search(r'\\(?:pause|only|uncover|onslide|visible)\b|\\begin\{frame\}\[[^]]*allowframebreaks',tex):
             raise SystemExit('Canonical deck must have no overlay/build pages')

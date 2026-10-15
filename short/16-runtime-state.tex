@@ -1,0 +1,27 @@
+\begin{frame}[t]{\ev{\tagM\,\tagP}\surf{COMPUTE ONCE}The next step decides which state to reuse.}
+\vspace{-.15cm}
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{11}{13}\selectfont}]
+\node[state,text width=2.9cm,minimum height=.7cm] (p) at (0,0) {Parent state $S$};
+\foreach \k/\y in {A/.64,B/0,C/-.64}{\node[candidate,text width=2.2cm,minimum height=.4cm,inner sep=1pt] (c\k) at (4.3,\y) {$S+\Delta_\k$};\draw[flow] (p.east)--(c\k.west);}
+\node[evidence,text width=2.9cm,minimum height=.7cm] (r) at (8.6,0) {Artifact +\\observations};
+\foreach \k in {A,B,C}{\draw[flow] (c\k.east)--(r.west);}
+\end{tikzpicture}\end{center}
+\vspace{.02cm}
+{\fontsize{11.5}{14}\selectfont\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}L{4.3cm}L{5.0cm}Y@{}}
+\toprule
+\textcolor{Teal}{\textbf{Next step}} & \textcolor{Teal}{\textbf{Reuse by}} & \textcolor{Teal}{\textbf{Supplies}}\\
+\midrule
+Edit or rebuild & \textbf{Cache} & files, cached outputs\\
+Continue a live run & \textbf{Restore} a checkpoint & the memory it keeps\\
+Reuse an answer & \textbf{Replay} & the recorded response\\
+\bottomrule
+\end{tabularx}\par}
+\vspace{.08cm}
+{\fontsize{11.5}{14}\selectfont\tagM\enspace\textbf{Restore fan-out} on islo: 255/256 restore--run--capture calls succeeded.\par
+\tagP\enspace Does live memory survive our restore? Untested until Gate~0 runs.\par}
+\claim{Choose the cheapest mechanism that supplies what the next step reads.}
+\sources{CRIU, gVisor, Firecracker, rr; SnowFlock (EuroSys 2009); DSec. Restores: \href{https://arxiv.org/abs/2607.09689}{arXiv:2607.09689v4}, Table~2.}
+\qadetail{Fork semantics are backend-specific: filesystem clone, artifact cache, process fork, guest-memory restore and remote clone differ. A fork supplies several continuations from one captured parent with private writable state; fork identity is distinct from checkpoint identity and observation identity, and authority stays outside child-owned state. The three rows are the three ways to supply what the next step reads: rebuild from a cache (worktrees parallelize edits without preserving live processes), restore a checkpoint, or replay a record. The next slide prices a restore against a warm cache for a next step that reads only files, so a restore is compared with a warm cache, not with a cold start; a warm cache cannot continue a live run. Process checkpoints (CRIU, gVisor save/restore) and VM snapshots (Xen, SnowFlock, Firecracker) preserve only their declared state surfaces; the slide groups them without equating their supported state. Replay (rr, DSec) reuses a recorded response without reexecuting a remote service. Restore fan-out, measured: a named 141 MB islo snapshot, restore--run--capture round trips, 255 of 256 succeeded at concurrency 12, p50 6.87 s, p95 9.04 s, client-measured, teardown excluded from the percentiles (arXiv:2607.09689v4, Table 2). These are API round trips, not mechanism latency or a provider ranking, and they are separate from the factory runs, which used Docker sandboxes, serially, with nothing forked. A snapshot name does not establish memory semantics: memory preservation on this path is unverified, so the supported description is restore fan-out, not a memory fork; the Gate 0 RAM-only 128-bit nonce probe is preregistered and unrun. VM and process checkpoints can capture memory by design; the open question is only whether the path we restore keeps it. Network, time, randomness and remote model sessions need declared semantics; hosted-model weights, KV state and sampling stay outside the guest. The factory runs established files, dependencies and failed-test feedback, not a necessary live process; a running application at a reproduced failure is a hypothetical future workload. Editing loaded code may require reload or restart and invalidate the captured live state. SnowFlock: Lagar-Cavilla et al., EuroSys 2009, built on Xen.}
+\note{[1:15] Rule one: compute once. Here is the fork again: a parent state S, and children that write only private changes. What S must hold depends on the next step. If it edits source or rebuilds, the first row is the cache from slide six: a worktree and build cache supply the files. If it continues a live run, we restore a process or VM checkpoint and get only the memory that mechanism supports. If it only needs an earlier answer, replay returns the recording. Restore fan-out on islo, our sandbox service: many restores of one named snapshot; two hundred fifty-five of two hundred fifty-six restore-run-capture calls succeeded. Whether live memory survives is untested until Gate zero, our first preregistered probe, runs. So choose the cheapest mechanism that supplies what the next step reads. When the next step reads only files, a restore and a warm cache both supply them.}
+\end{frame}

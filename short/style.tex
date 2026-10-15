@@ -1,0 +1,10 @@
+% Short-deck overrides, loaded after the shared preamble.
+% Landmarks: every footer shows the six sections with the current one in teal;
+% Open questions get their own act (6) so the conclusion is one slide (7).
+\renewcommand{\actstrip}{{\color{Teal}\bfseries\currentact\enspace\ifcase\currentact\or MOTIVATION\or EXAMPLES\or RUNTIME\or EVIDENCE\or ACCEPTANCE\or OPEN QUESTIONS\or CONCLUSION\fi}}
+% acts 3-5 put their rule in the gold \surf label: COMPUTE ONCE, COUNT ONCE, PUBLISH ONCE.
+% Rule chip (gold, filled) for claim lines on slides 10-14 (their \providecommand copies are no-ops);
+% slide 5 draws the same chip with \colorbox because it sits inside a TikZ node.
+\newcommand{\exchip}[1]{\tikz[baseline=(x.base)]\node[fill=Gold,text=white,rounded corners=1.5pt,inner xsep=2.6pt,inner ysep=1.7pt,font=\fontsize{7.6}{8.6}\selectfont\bfseries](x){#1};}
+\newcommand{\progitem}[2]{\ifnum\currentact=#1{\color{Teal}\bfseries #2}\else{\color{Muted!55}#2}\fi}
+\setbeamertemplate{footline}{\hspace{.8cm}{\fontsize{7}{8}\selectfont\color{Muted}Yossi Eliaz\quad Cambridge SRG}\hfill{\fontsize{7}{8}\selectfont\progitem{1}{Motivation}\enspace\progitem{2}{Examples}\enspace\progitem{3}{Runtime}\enspace\progitem{4}{Evidence}\enspace\progitem{5}{Acceptance}\enspace\progitem{6}{Open questions}\enspace\progitem{7}{Conclusion}}\hfill{\fontsize{8}{9}\selectfont\color{Muted}\insertframenumber\,/\,\inserttotalframenumber}\hspace{.8cm}\vspace{.17cm}}

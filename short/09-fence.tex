@@ -1,0 +1,20 @@
+% Act 1: fence the idea -- what is old (the three mechanisms) and what is new (coupling reuse with evidence and acceptance).
+\begin{frame}[t]{\ev{\tagO}Caches, forks and sandboxes are old; coupling them to evidence and acceptance is new.}
+\vspace{0pt}
+{\fontsize{11}{13.2}\selectfont\renewcommand{\arraystretch}{1.0}
+\begin{tabularx}{\linewidth}{@{}L{1.75cm}L{3.3cm}L{3.6cm}Y@{}}
+\toprule
+ & \textcolor{Teal}{\textbf{Reuses or protects}} & \textcolor{Teal}{\textbf{Must guarantee}} & \textcolor{Teal}{\textbf{Known systems}}\\
+\midrule
+\textbf{Cache} & a run's output & key covers all inputs & \textcolor{Muted}{ccache, Bazel remote cache, Incredibuild}\\\addlinespace[3pt]
+\textbf{Fork} & a reached state & capture keeps what the next step needs & \textcolor{Muted}{SnowFlock on Xen (2009), CRIU, Firecracker snapshots}\\\addlinespace[3pt]
+\textbf{Sandbox} & reads and writes & undeclared inputs hidden; writes private & \textcolor{Muted}{containers, gVisor, microVMs}\\
+\bottomrule
+\end{tabularx}\par}
+\claim{New: count shared evidence once; publish checked bytes once.}
+\vspace{.12cm}
+{\fontsize{10.5}{12.8}\selectfont\color{Muted}\textbf{Not claimed today:} a fork speedup (our agent runs were serial), or live-memory restore.\par}
+\sources{SnowFlock: Lagar-Cavilla et al., EuroSys 2009. Firecracker: Agache et al., NSDI 2020. CRIU, gVisor, ccache, Bazel.}
+\qadetail{The table names established mechanisms; no claim of invention, comprehensive priority or measured parallel speedup is made. Forking states to search is also old: KLEE (Cadar, Dunbar and Engler, OSDI 2008) and S2E (Chipounov, Kuznetsov and Candea, ASPLOS 2011) fork execution states; the AFL forkserver forks an initialized target per input; Potemkin (Vrable et al., SOSP 2005) flash-clones VMs. The claim is the evidence and acceptance contract around reuse, not search by forking. The contribution claim is the integrated execution, evidence and acceptance contract: reuse a state only when it beats rebuilding it, count shared observations once, and publish the exact checked bytes once from a controller. Cache guarantees hold only for hermetic steps: time, randomness, network and undeclared files must be declared or excluded. Fork semantics are backend-specific: worktrees preserve source views, process checkpoints (CRIU, gVisor save/restore) and VM snapshots (Xen, SnowFlock, Firecracker) preserve only their declared state surfaces, and filesystem snapshots do not establish memory capture. SnowFlock: Lagar-Cavilla et al., Rapid Virtual Machine Cloning for Cloud Computing, EuroSys 2009, built on Xen; Xen came from the Cambridge Computer Laboratory (Barham et al., SOSP 2003). A sandbox bounds local effects; it does not undo remote effects, and a restored child must not hold publication authority. Not claimed: our factory runs (SELFHOST-2 and SELFHOST-3, 27 September 2026) ran serially in Docker Sandboxes, not islo, and nothing forked, so no fork speedup is measured; we do not claim that a fork is faster than a good build cache. Restore fan-out means many restores of one named snapshot: a named 141 MB islo snapshot, restore--run--capture round trips, 255 of 256 succeeded at concurrency 12, p50 6.87 s, p95 9.04 s, client-measured, teardown excluded (arXiv:2607.09689v4, Table 2). These are API round trips, not mechanism latency. Memory preservation is unverified until the preregistered Gate 0 RAM-nonce probe runs, so no islo snapshot is described as a memory fork.}
+\note{[1:00] Let me fence the idea: the mechanisms are old. A cache reuses a run's output; its key must cover every input, as in ccache or Bazel's remote cache. A fork reuses a reached state, and capture must keep what the next step needs. SnowFlock forked Xen machines in two thousand nine; Xen came from this lab. A sandbox hides undeclared inputs and keeps each trial's writes private. Even forking for search is old; fuzzers do it. What is new is coupling reuse with evidence and acceptance: count once, publish once. I do not claim a fork speedup, since our agent runs were serial, or that our snapshots keep memory: we restore one snapshot many times. Now the examples.}
+\end{frame}

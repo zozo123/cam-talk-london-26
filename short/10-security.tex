@@ -1,0 +1,34 @@
+% Act 2 example: shared template for short/10--14 (same geometry; only text and rule chips change).
+% Rule chip: gold, right-aligned on the claim line; names match the map columns on slides 3, 15 and 26.
+\providecommand{\exchip}[1]{\tikz[baseline=(x.base)]\node[fill=Gold,text=white,rounded corners=1.5pt,inner xsep=2.6pt,inner ysep=1.7pt,font=\fontsize{7.6}{8.6}\selectfont\bfseries](x){#1};}
+\begin{frame}[t]{\ev{\tagO}\surf{SOFTWARE SECURITY}Reuse makes fuzzing fast; only checks turn crashes into findings.\strut}
+\vspace{.15cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  hd/.style={anchor=south,font=\fontsize{9.5}{11}\selectfont\bfseries,text=Teal},
+  bx/.style={text width=3.9cm,inner xsep=.15cm,minimum height=1.5cm,font=\fontsize{11.5}{14}\selectfont},
+  stack/.style={draw=Gold,fill=Sand,line width=.9pt},
+  res/.style={anchor=north west,inner sep=0pt,text width=14.4cm,align=left,font=\fontsize{14.5}{17.5}\selectfont},
+  ctx/.style={anchor=north west,inner sep=0pt,text width=14.4cm,align=left,font=\fontsize{10.5}{13}\selectfont,text=Muted},
+  every node/.style={align=center}]
+\useasboundingbox (0,.55) rectangle (14.4,-3.3);
+\node[hd] at (2.12,.15) {Shared state};
+\node[hd] at (7.10,.15) {Alternatives};
+\node[hd] at (12.28,.15) {Check};
+\node[state,bx] (s) at (2.12,-.85) {\textbf{Initialized target}\\no fork per input};
+\node[candidate,bx] (a) at (7.10,-.85) {\textbf{Changed inputs}\\many per child};
+\begin{scope}[on background layer]
+\draw[stack] ($(a.south west)+(.2,.2)$) rectangle ($(a.north east)+(.2,.2)$);
+\draw[stack] ($(a.south west)+(.1,.1)$) rectangle ($(a.north east)+(.1,.1)$);
+\end{scope}
+\node[evidence,bx] (c) at (12.28,-.85) {\textbf{Reproduce crashes}\\remove duplicates};
+\draw[flow] (s.east)--(a.west);
+\draw[flow] ($(a.east)+(.2,0)$)--(c.west);
+\node[res] at (0,-2.05) {AFL++: \textbf{10--20$\times$} faster;\enspace CyberGym: \textbf{56} crashes\,$\to$\,\textbf{22} confirmed};
+\node[ctx] at (0,-2.8) {CyberGym, a separate study: OpenHands + GPT-5 wrote and ran inputs on 431 projects.};
+\end{tikzpicture}
+\claim{Set up the target once; count each bug once.\hspace{.8em}\hfill\exchip{COMPUTE ONCE}\enspace\exchip{COUNT ONCE}}
+\sources{\href{https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.persistent_mode.md}{AFL++ persistent-mode docs}, typical gain vs a fork per input; \href{https://www.cybergym.io/cybergym/}{CyberGym report}, latest-code GPT-5 campaign.}
+\qadetail{Two separate sources: AFL++ documentation supplies the speed figure; CyberGym is a separate agent study that does not claim AFL++ or persistent-mode reuse. AFL++: the documented typical 10--20x gain is for persistent mode, which avoids a process fork for every input; it must not be attributed solely to the deferred forkserver. The forkserver defers cloning until initialization is complete; a persistent child then runs the harness repeatedly, resetting mutable state between inputs. About 1,000 iterations before restarting is a recommended starting point, not a fixed setting. Gains depend on the target and reset correctness. A newly executed input is not automatically an independent observation, and a crash is not automatically an exploitable vulnerability. CyberGym latest-code campaign (report checked 4 October 2026): OpenHands with GPT-5 on 431 latest OSS-Fuzz projects and 1,748 runnable executables produced 56 crashes; the authors reproduced, deduplicated and investigated them, confirming 22 distinct previously unknown vulnerabilities. Projects, targets, crashes and validated bugs are different units; the funnel is not a disjoint 22/56 success probability, and exploitability or patch status is not implied. This is separate from CyberGym's historical 1,507-vulnerability benchmark across 188 projects. The separate GPT-4.1 campaign's counts overlap and cannot be added. Neither result measures sandbox forking or our own security campaign.}
+% Transition: Duplicates count once; the same loop next runs on training code.
+\note{[1:05] Five examples, one loop: a shared state, many alternatives, one check. We go from systems toward science. First, security. AFL-plus-plus, a fuzzer, initializes the target once and reuses one child across many changed inputs. Its documentation reports typical speedups of ten to twenty times in persistent mode. Notice it wins by not forking for every input, as long as state resets correctly. That is rule one, compute once, and it returns in the runtime section. Speed produces leads, and leads need checks. In a separate study, Berkeley's CyberGym, an AI agent wrote and ran inputs against 431 projects and produced fifty-six crashes. Researchers reproduced them and removed duplicates: twenty-two distinct new vulnerabilities. Rule two, count once. Next, the same loop in AI research.}
+\end{frame}
