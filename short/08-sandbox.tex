@@ -1,0 +1,29 @@
+% Act 1, step 3 (NEW): the sandbox makes sharing safe. One read-only shared state, three children with
+% private write layers, inside one policy boundary. Facts: acts/1-introduction/08-runtime-layers.tex.
+\begin{frame}[t]{\ev{\tagP\,\tagO}\surf{STEP 3 \textperiodcentered{} SANDBOX}A sandbox lets children share one state safely.}
+\vspace{.3cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{14}{16.5}\selectfont},
+  bl/.style={font=\fontsize{13}{15.5}\selectfont\bfseries,text=Teal,align=center}]
+\useasboundingbox (0,.4) rectangle (14.4,-3.75);
+% the policy boundary
+\draw[Teal,dashed,line width=1.3pt,rounded corners=5pt] (3.85,.05) rectangle (10.55,-3.6);
+\node[fill=white,inner xsep=4pt,inner ysep=1pt,bl] at (7.2,.05) {private writes};
+% one shared, read-only state
+\node[state,minimum width=5.9cm,minimum height=1.0cm] (s) at (7.2,-2.8) {\textbf{Shared state}\enspace{\color{Muted}read-only}};
+% three children, each with its own write layer
+\foreach \c/\x in {A/5.25,B/7.2,C/9.15}{
+  \node[candidate,minimum width=1.5cm,minimum height=1.1cm,font=\fontsize{16}{19}\selectfont\bfseries] (\c) at (\x,-.85) {\c};
+  \draw[flow] (\x,-2.3)--(\c.south);}
+% undeclared inputs stop at the boundary
+\node[bl,text=Rust,anchor=east] at (3.55,-1.3) {undeclared\\inputs hidden};
+\draw[Rust,line width=1.2pt,-{Bar[width=4.5mm,line width=1.4pt]}] (1.3,-2.2)--(3.8,-2.2);
+% effects leave the boundary
+\draw[Gold,line width=1.2pt,-{Latex[length=2.6mm]}] (C.east)--(12.2,-.85);
+\node[bl,text=Gold,anchor=west] at (10.85,-1.75) {effects cross\\the boundary};
+\end{tikzpicture}
+\par\vspace{.1cm}
+\claim{A sandbox is a policy; a VM or a container is one way to build it.}
+\sources{Diagram: proposed model. Our agent runs used \href{https://docs.docker.com/ai/sandboxes/architecture/}{Docker Sandboxes}: a microVM with a private Docker daemon.}
+\qadetail{Proposed model: the shared parent state is immutable (read-only) and named by its digest; each child is that digest plus its own private write layer, so siblings cannot overwrite each other. The boundary has three jobs. Private writes keep alternatives independent until a check accepts one. Hiding undeclared inputs keeps the cache key complete (the step cannot read what the key omits). Effects that cross the boundary, such as a model request, a network call or a push, are not rewound by any restore; the proposal is to record them once (effect journal, idempotency keys), and a restored child must not hold publication authority. Runtime layers are different dimensions rather than interchangeable isolation levels: a conventional VM or microVM runs a guest kernel behind a virtualization boundary (Firecracker uses KVM and a minimal device model); a Linux container shares the host kernel, with namespaces for separate views and cgroups for resource limits; a sandbox is a policy over what execution may access and do, and may be built on a VM, a container, syscall mediation (gVisor) or another mechanism. cgroups alone do not define file access, network policy or syscall permissions; capabilities, seccomp and LSMs are additional mechanisms. Docker Sandboxes, accessed with the sbx CLI, is a microVM-based product with a private Docker daemon and host proxy, not a synonym for an ordinary Docker container. Our factory runs (SELFHOST-2 and SELFHOST-3) ran serially in Docker Sandboxes, not islo, and nothing forked. A sandbox bounds local effects; it does not undo remote ones. No universal startup-time or safety ranking is asserted.}
+\note{[0:50] Here is the sandbox. In our design, three children share one saved state, read-only and named by its digest. Each child writes only to its own private layer, so siblings cannot overwrite each other. Undeclared inputs stay hidden, which keeps the cache key complete. Effects, like a network request, do cross the boundary; no restore rewinds them, so we propose recording them. This is the Twistlock lesson: a sandbox bounds behavior. It is a policy; a VM with its own kernel, or a container sharing one, is one way to build it. Here are the three steps as code.}
+\end{frame}

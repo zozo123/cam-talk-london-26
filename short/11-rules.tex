@@ -1,0 +1,14 @@
+% THE MAP (\rulemap in short/style.tex; same geometry on the synthesis and contributions slides).
+% BUILD 3: one rule per step, each with its question and its deliverable; the promise lands on step 3.
+\begin{frame}[t]{\ev{\tagP}\surf{THREE RULES}Sharing work creates three rules.}
+\vspace{.1cm}
+\rulemap[c2/.style={visible on=<2->},c3/.style={visible on=<3->},rb/.append style={font=\fontsize{12.5}{15}\selectfont,text width=4.8cm}]
+{Reuse or rebuild?}
+{What must a trial return?}
+{Who publishes what?}
+{\foreach \xx/\lab/\cc in {2.3/cost rule/c1,7.2/evidence contract/c2,12.1/acceptance gate/c3}{\draw[flow,draw=Teal,\cc] (\xx,-1.9)--(\xx,-2.4);\node[anchor=north,inner sep=0pt,font=\fontsize{14}{16.5}\selectfont\bfseries,text=Teal,\cc] at (\xx,-2.45) {\strut\lab};}}
+\uncover<3->{\claim{\centering\forktree\enspace You will leave with all three.}}
+\sources{The talk takes the rules in order. This map returns after the examples and at the end.}
+\qadetail{This slide restates the canonical three system responsibilities. Runtime starts private continuations and supplies the state the next step reads, priced against a warm alternative such as a build cache. An evaluator or recorder outside child-controlled state binds executed checks to exact artifact digests and records which observations trials share. Acceptance selects or composes candidates after the appropriate check; the controller retains publication authority. Once is the goal of each obligation, not an exactly-once delivery guarantee: compute once means do not repeat preparation when a saved state supplies what the next step reads; count once means a shared observation contributes once to a combined result; publish once means one controller publishes one checked artifact and rejects stale results (the epoch fence is proposed). The contribution claim is the integrated execution, evidence and acceptance contract; forking, testing, review and provenance are established techniques, and no claim of invention or measured parallel speedup is made.}
+\note{[0:50] Sharing work creates three obligations, and they organize this talk. Compute once: reuse or rebuild? Reuse a state only when that beats rebuilding it, even from a warm cache. The answer is a cost rule. Count once: what must a trial return? Parallel trials share inputs and errors, so a shared observation counts once. That needs an evidence contract. Publish once: who publishes what? One controller publishes the exact bytes that passed the check, through an acceptance gate. You will leave with all three. Five examples first, then the rules in order.}
+\end{frame}

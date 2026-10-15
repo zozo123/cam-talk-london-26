@@ -1,0 +1,38 @@
+% Act 2 example 4 of 5. Shared simple template for short/12--16: three boxes (Shared state -> Alternatives -> Check),
+% one big result line, one claim with gold rule chips. The \providecommand block below is copied verbatim into
+% all five files; the first one loaded defines it, so every example draws the same geometry. Edit all five together.
+% #1 shared state, #2 alternatives, #3 check, #4 result line (use \exnum{} for the big numbers).
+\providecommand{\exnum}[1]{{\fontsize{20}{24}\selectfont\bfseries #1}}
+\providecommand{\rulechip}[1]{\tikz[baseline=(x.base)]\node[fill=Gold,text=white,rounded corners=2pt,inner xsep=3.5pt,inner ysep=2.4pt,font=\fontsize{11}{13}\selectfont\bfseries](x){#1};}
+\providecommand{\exampleflow}[4]{%
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  hd/.style={anchor=south,font=\fontsize{11.5}{13}\selectfont\bfseries,text=Teal},
+  bx/.style={text width=3.9cm,inner xsep=.15cm,minimum height=1.45cm,font=\fontsize{13.5}{16}\selectfont\bfseries},
+  stack/.style={draw=Gold,fill=Sand,line width=.9pt},
+  res/.style={anchor=west,inner sep=0pt,font=\fontsize{15}{18}\selectfont},
+  every node/.style={align=center}]
+\useasboundingbox (0,.62) rectangle (14.4,-2.85);
+\node[hd] at (2.12,.15) {Shared state};
+\node[hd] at (7.10,.15) {Alternatives};
+\node[hd] at (12.28,.15) {Check};
+\node[state,bx] (s) at (2.12,-.8) {#1};
+\node[candidate,bx] (a) at (7.10,-.8) {#2};
+\begin{scope}[on background layer]
+\draw[stack] ($(a.south west)+(.2,.2)$) rectangle ($(a.north east)+(.2,.2)$);
+\draw[stack] ($(a.south west)+(.1,.1)$) rectangle ($(a.north east)+(.1,.1)$);
+\end{scope}
+\node[evidence,bx] (c) at (12.28,-.8) {#3};
+\draw[flow] (s.east)--(a.west);
+\draw[flow] ($(a.east)+(.2,0)$)--(c.west);
+\node[res] at (0,-2.35) {#4};
+\end{tikzpicture}\par}
+\begin{frame}[t]{\ev{\tagO}\surf{GENOMICS}Our CRISPR screen narrowed 19,050 genes to about 100 candidates.\strut}
+\vspace{.2cm}
+\exampleflow{Pooled\\cell screen}{120,000+\\guides}{Rank,\\then assay}
+{Cell assays:\enspace\exnum{10 of 13} targets,\enspace\exnum{6 of 8} combinations}
+\claim{Six guides, one gene.\hfill\rulechip{COUNT ONCE}}
+\sources{\href{https://doi.org/10.1038/s42003-021-01929-1}{Gilad, Eliaz et al., Communications Biology 4:399 (2021)}, Fig.~3: six guides per gene, nine pooled arms; follow-up in MCF-7 cells, in vitro.}
+\qadetail{Count-once reading: guide effects are combined into one gene-level call, so the gene, not the guide, is the counted unit; DRACO keeps a gene only if at least four of its six guide effects agree with the mean direction, then ranks by the most extreme retained effect. Terrace and DRACO are distinct analyses of the same data, not independent evidence streams. 19,050 is the target-gene count; the library contains over 120,000 guide sequences including controls and other targets. Six guides per gene target different DNA sites. Three conditions (vehicle, SI-12, fulvestrant) with three biological replicate arms each give nine pooled arms. Cultures share the initial infected cell pool; the guide-variant and replicate structure is the fan-out analogy, without physical checkpoint copies. The approximately 190-fold narrowing is 19,050 / approximately 100 genes, not an exact unique-hit count. Eight targets with available inhibitors plus five further siRNA genes give 13 genetic follow-up targets, of which 10 increased sensitivity to SI-12; eight drug combinations were tested, of which six improved killing in MCF-7 cells (efficacy level at least 3). These are different assays and denominators. Viability points have at least four technical replicates and plots at least two independent experiments, distinct from the screen's three biological replicate arms. In-vitro results: no clinical effect, no proof every hit is on target. Schultz and Coelingh Bennink (Communications Biology 5:835, 2022) questioned several hits' target expression. The laboratory screen preceded computational ranking. A computational fork of analysis variants is a proposed use, not an experiment in this paper. The 2019 SI-2 study and this 2021 SI-12 screen are distinct projects. Full source: Gilad, Eliaz, Yu, Dean, Han, Qin, O'Malley and Lonard, Communications Biology 4, 399 (2021), DOI 10.1038/s42003-021-01929-1.}
+% Transition: from code to cells (announced at the end of the previous note); ends announcing physics.
+\note{[1:00] This one is my own work with coauthors. The shared state is one pooled cell screen covering 19,050 genes. The alternatives are guides: over a hundred and twenty thousand, six per gene, across nine pooled arms. Two ranking methods narrowed nineteen thousand genes to about one hundred. Here is the counting lesson. Six guides are six looks at one gene, not six discoveries, so the gene counts once, like a road on the map. Rule two. Then the check: focused assays in MCF-seven breast cancer cells. Ten of thirteen targets increased sensitivity to the SRC-3 inhibitor SI-twelve; six of eight drug combinations improved killing. These are laboratory results, not clinical ones. Fifth example: physics.}
+\end{frame}

@@ -1,0 +1,17 @@
+% Act 1, step 1: the cache in numbers (split from the caching slide). Author-reported Tokio demo.
+\begin{frame}[t]{\ev{\tagM}\surf{STEP 1 \textperiodcentered{} CACHE}Reusing an earlier runner's build files cut a Tokio compile from about 46 s to 13 s.}
+\vspace{.15cm}
+{\fontsize{12}{14}\selectfont\color{Teal}\bfseries TOKIO COMPILE TIME\par}
+\vspace{.25cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\fontsize{14}{17}\selectfont}]
+\foreach \blabel/\seconds/\y/\col in {Fresh compile/46/0/Muted!45,Copied-in build files/13/-1.05/Teal!55,Already warm/3/-2.1/Teal}{
+\node[anchor=east,align=right] at (4.6,\y+.33) {\blabel};
+\fill[\col] (4.8,\y) rectangle ({4.8+\seconds*.155},\y+.66);
+\node[anchor=west,font=\fontsize{20}{24}\selectfont\bfseries] at ({4.95+\seconds*.155},\y+.33) {$\sim$\seconds\ s};}
+\end{tikzpicture}
+\par\vspace{.25cm}
+\claim{Distributed builds rely on it: one machine reuses another's output.}
+\sources{Eliaz, \href{https://github.com/tokio-rs/tokio/issues/8200}{Tokio issue \#8200}, 8 June 2026: author-reported external Incredibuild demo, approximate compile times.}
+\qadetail{Author-reported external Incredibuild GitHub Actions demo, posted by zozo123 in Tokio issue 8200 on 8 June 2026; approximate compile endpoints 46 s fresh, 13 s restored, 3 s hot. Copied-in (restored cache) means Incredibuild compiler artifacts persisted across fresh GitHub Actions runners: an earlier runner's build files, not its running state. Hot (already warm) cache denotes the already available cache state in the reported demo. No controlled raw benchmark protocol is posted, and no maintainer adoption is claimed. The issue does not publish enough configuration to isolate disk artifacts, memory/page cache, cache lookup, transfer or incremental checking costs; do not attribute the 13-to-3-second difference entirely to download time or OS memory. Full test path approximately 75 s fresh and 43 s restored; Cargo after touching source approximately 38 s versus 13 s restored Incredibuild. These are static artifact-cache endpoints, not memory-checkpoint or fork timings; the slide labels the restored cache as copied-in build files so that it is not read as restoring execution state, which the runtime section prices. We do not claim that a fork is faster than a good build cache.}
+\note{[0:40] In my Tokio demo, a fresh compile took about forty-six seconds. Copying in an earlier runner's build files cut that to about thirteen, and an already warm cache to about three. These times are approximate and author-reported, and the copied files are build outputs, not a running program. Distributed builds rely on this: one machine reuses another's output. A cache reuses one step's output. Step two reuses a whole state.}
+\end{frame}

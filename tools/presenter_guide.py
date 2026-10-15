@@ -9,7 +9,7 @@ MAX_WPM = 125
 TOTAL_WINDOW_S = (35 * 60, 45 * 60)
 # --short builds the 20-slide talk-short.tex deck and its own guide.
 DECKS = {'canonical': ('talk.tex', 'PRESENTER-GUIDE.md', (57, 57), TOTAL_WINDOW_S, 'canonical'),
-         'short': ('talk-short.tex', 'PRESENTER-GUIDE-SHORT.md', (18, 30), (18 * 60, 32 * 60), 'short-deck')}
+         'short': ('talk-short.tex', 'PRESENTER-GUIDE-SHORT.md', (18, 34), (18 * 60, 32 * 60), 'short-deck')}
 
 def argument(text, start):
     depth = 1
@@ -47,22 +47,24 @@ def frames(tex):
         if not cue: raise ValueError(f'Missing timed note: {title}')
         dur=60*int(cue.group(1))+int(cue.group(2))
         if dur<=0 or int(cue.group(2))>=60:raise ValueError(f'Invalid cue: {title}')
-        yield title,dur,plain(cue.group(3)),plain(command(body,'qadetail'))
+        steps=max([int(n) for n in re.findall(r'<(\d+)',body)]+[1])
+        yield title,dur,plain(cue.group(3)),plain(command(body,'qadetail')),steps
 
 def main():
     src,guide,slides,window,label=DECKS['short' if '--short' in sys.argv else 'canonical']
     tex=flatten(ROOT/src)
-    rows=list(frames(tex)); total=sum(x[1] for x in rows)
+    allrows=list(frames(tex)); rows=[r[:4] for r in allrows]; total=sum(x[1] for x in rows)
+    builds=label!='canonical'
     words=sum(len(x[2].split()) for x in rows)
     fast=[title for title,dur,script,qa in rows if 60*len(script.split())/dur>MAX_WPM]
     out=['# Presenter guide: Forkable Sandboxes','',
          '**Reusable execution for self-driving computers.** Cambridge SRG, 15 October 2026.','',
          f'Generated from {label} source. {len(rows)} main slides; no appendix. Planned duration **{total//60}:{total%60:02d}**; {words} spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.','',
-         '## Run of show','','| # | Slide | Cue | Clock | Words | wpm |','|---|---|---|---|---|---|']
+         '## Run of show','',('| # | Slide | Cue | Clock | Words | wpm | Clicks |' if builds else '| # | Slide | Cue | Clock | Words | wpm |'),('|---|---|---|---|---|---|---|' if builds else '|---|---|---|---|---|---|')]
     clock=0
     for i,(title,dur,script,qa) in enumerate(rows,1):
         w=len(script.split())
-        out.append(f'| {i} | {title} | {dur//60}:{dur%60:02d} | {clock//60}:{clock%60:02d}–{(clock+dur)//60}:{(clock+dur)%60:02d} | {w} | {60*w/dur:.0f} |')
+        out.append(f'| {i} | {title} | {dur//60}:{dur%60:02d} | {clock//60}:{clock%60:02d}–{(clock+dur)//60}:{(clock+dur)%60:02d} | {w} | {60*w/dur:.0f} |'+(f' {allrows[i-1][4]} |' if builds else ''))
         clock+=dur
     out+=['','## Script and Q&A detail','']; clock=0
     for i,(title,dur,script,qa) in enumerate(rows,1):
@@ -74,6 +76,6 @@ def main():
     if '--check' in sys.argv:
         if not slides[0]<=len(rows)<=slides[1] or not all(x[3] for x in rows) or fast or not window[0]<=total<=window[1]:
             raise SystemExit(f'DECK CHECK FAILED: slides={len(rows)}, fast={fast}, duration={total}')
-        if re.search(r'\\(?:pause|only|uncover|onslide|visible)\b|\\begin\{frame\}\[[^]]*allowframebreaks',tex):
+        if label=='canonical' and re.search(r'\\(?:pause|only|uncover|onslide|visible)\b|\\begin\{frame\}\[[^]]*allowframebreaks',tex):
             raise SystemExit('Canonical deck must have no overlay/build pages')
 if __name__=='__main__':main()

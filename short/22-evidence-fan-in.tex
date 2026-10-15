@@ -1,0 +1,27 @@
+\begin{frame}[t]{\ev{\tagA\,\tagP}\surf{COUNT ONCE}Each fan-in operation needs its own check.}
+\vspace{.25cm}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={font=\fontsize{13}{16}\selectfont},
+  op/.style={state,anchor=west,text width=2.3cm,minimum height=.9cm,font=\fontsize{13}{16}\selectfont\bfseries},
+  chk/.style={evidence,anchor=west,text width=7.9cm,minimum height=.9cm,align=left,inner xsep=8pt},
+  head/.style={anchor=west,inner sep=0pt,font=\fontsize{11}{13}\selectfont\bfseries,text=Teal},
+  ex/.style={evidence,anchor=west,text width=1.45cm,minimum height=.78cm,font=\fontsize{12.5}{15}\selectfont}]
+\node[head] at (0,.9) {FAN-IN};
+\node[head] at (3.6,.9) {CHECK};
+\foreach \y/\o/\c in {0/Select/Recheck the winner on fresh data,-1.1/Compose/Test the merged version,-2.2/Pool/Weigh errors the trials share}{
+  \node[op] (o) at (0,\y) {\o};
+  \node[chk] (c) at (3.6,\y) {\c};
+  \draw[flow] (o)--(c);
+}
+\node[anchor=west,align=left,text=Muted,inner sep=0pt,font=\fontsize{12}{14}\selectfont] at (0,-3.75) {1\,GB each,\\2\,GB server:};
+\node[ex] at (3.6,-3.75) {A+B \yes};
+\node[ex] at (5.55,-3.75) {A+C \yes};
+\node[ex] at (7.5,-3.75) {B+C \yes};
+\node[ex,bad,text width=2.15cm] at (9.45,-3.75) {A+B+C \no};
+\end{tikzpicture}
+\end{center}
+\sources{Merge example: illustrative, not a recorded incident. Union and intersection: further fan-in rules (Q\&A).}
+
+\qadetail{The three rows describe decision semantics, not three implemented end-to-end systems. Selection needs a fixed evaluator over eligible candidates; argmax returns the candidate while max returns only its score, so keep candidate identity and a deterministic tie rule. Selection is adaptive, so the chosen candidate needs fresh evaluation for generalization; a deterministic regression check can still establish its asserted behavior. Coverage is not selected success (the patch-selector point from the software-engineering example). Code merge is a partial operation on edits from the same base: it may be undefined for conflicting edits or depend on conflict resolution, and it is checked on its final output. No universal associative or commutative code-merge law is claimed. The 1 GB example is illustrative and exact, not a recorded software incident: each of three changes starts a 1 GB worker on a 2 GB server; with U=1 for pass, Gamma_ij=U({i,j})-U({i})-U({j})+U(empty) gives zero pair interactions and a failing triple (3 GB). Pooling requires one common target, calibrated information and a dependence model; it cannot combine different artifacts simply because each returns a number. The full menu also has union for disjoint shards (check coverage and duplicates), intersection for common findings (agreement can reflect a shared error) and a weighted mean with weights summing to one. ReLU is a pointwise transform, not a fan-in rule.}
+\note{[1:00] Combining receipts is called fan-in, and it is not one operation. If the trials tried different ideas, we select one, like the patch selector in the software example. Selection is itself a search, so we recheck the winner on fresh data. If the trials edited different parts of a program, we compose their edits, and the merged version needs its own test. A made-up example: each change starts a one-gigabyte worker on a two-gigabyte server. Each change fits. Every pair fits. All three fail, and no pair test covered that. If the trials estimated one quantity, we pool them, and the weights must account for errors they share. So first: what do trials share?}
+\end{frame}

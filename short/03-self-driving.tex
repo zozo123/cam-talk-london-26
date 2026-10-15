@@ -1,0 +1,30 @@
+% Act 1: the Mobileye fleet as the fan-out/fan-in picture; the map counts each road once (count once).
+\begin{frame}[t]{\ev{\tagO\,\tagP}A car fleet fans out, then fans in to one map.}
+\vspace{.15cm}
+\begin{columns}[T,onlytextwidth]
+\column{.45\linewidth}
+\vspace{.75cm}
+\includegraphics[width=\linewidth]{assets/mobileye-new-york-2021.png}
+\column{.51\linewidth}
+{\centering
+\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{12}{14}\selectfont},
+  side/.style={font=\fontsize{11}{12.5}\selectfont\bfseries,anchor=east},
+  car/.pic={\fill[Gold,rounded corners=2pt] (-.55,0) rectangle (.55,.3);
+    \fill[Gold,rounded corners=2pt] (-.33,.28)--(-.2,.52)--(.22,.52)--(.37,.28)--cycle;
+    \fill[white] (-.2,.33)--(-.13,.46)--(-.02,.46)--(-.02,.33)--cycle (.03,.33)--(.03,.46)--(.18,.46)--(.26,.33)--cycle;
+    \fill[Ink] (-.3,0) circle(.11) (.3,0) circle(.11);\fill[white] (-.3,0) circle(.04) (.3,0) circle(.04);}]
+\node[font=\fontsize{11}{13}\selectfont\bfseries] at (-.2,3.45) {Assume 300 million cars send road data};
+\node[evidence,text width=5.1cm,minimum height=1.05cm](m)at(0,1.2){\textbf{Match the same road}\\[3pt]{\setlength{\fboxsep}{2.4pt}\colorbox{Gold}{\textcolor{white}{\fontsize{10}{12}\selectfont\bfseries COUNT ONCE}}}};
+\foreach \x in {-1.9,0,1.9}{\pic at (\x,2.55) {car};\draw[flow] (\x,2.35)--(m.north);}
+\node[evidence,text width=5.1cm,minimum height=.75cm](r)at(0,-.35){\textbf{Roadbook map}};
+\draw[flow](m)--(r);
+\draw[message](r.east)--++(.45,0)|-(2.6,2.7);
+\node[side,text=Gold]at(-2.65,2.7){FAN\\OUT};
+\node[side,text=Teal]at(-2.65,1.2){FAN\\IN};
+\end{tikzpicture}\par}
+\end{columns}
+\claim{Self-driving compute: many runs from one state, one result.}
+\sources{300M fleet: speaker-reported. \href{https://ir.mobileye.com/news-releases/news-release-details/mobileye-supply-cloud-enhanced-adas-select-future-stellantis}{Anonymized data flow}; \href{https://www.mobileye.com/technology/rem/}{Roadbook workflow}. Photo: Mobileye test vehicle, Manhattan, June 2021 (\href{https://www.mobileye.com/press-kit/press-kit-mobileye-new-york-city/}{press kit}). My work there, 2021--2024: junction perception.}
+\qadetail{Fleet wording follows the speaker's request of 4 October 2026: assume 300 million Mobileye-equipped cars sensing roads and transmitting anonymized road data. The figure is supplied by the speaker from firsthand Mobileye experience and remains visibly attributed; it is not an independently verified public contributor count. The official 21 July 2026 release supports anonymized road-feature transmission to the cloud, processing and feedback to vehicles. That release reports a different, narrower mapping population: over eight million contributing vehicles and 34 billion road-miles in 2025 (about 1,080 road-miles per second as an annual average), alongside over 230 million vehicles built with EyeQ through 2025. These populations and dates do not establish a measured rate for the assumed 300-million-car fleet; no per-car transmission rate is asserted. The Roadbook workflow aligns repeated observations from the same road before combining them into a high-definition map of lanes, signs and driving paths and returning updates to cars. The COUNT ONCE chip is the talk's reading of that alignment step (many drives of one road are not independent roads), not a claim about Mobileye's statistical model. Parallel collection and aggregation motivate the computational fan-out/fan-in analogy without treating cars as checkpoint clones or repeated observations as independent evidence. The pictured vehicle is an autonomous test vehicle from Mobileye's Manhattan fleet, June 2021, as identified by the official press kit; it is not attributed to the speaker's team. The speaker's Mobileye employment, December 2021--March 2024, covered deep learning for production perception and road-junction semantics; personal junction-perception work is not authorship of the fleet mapping system. No Mobileye production accuracy or safety metric is asserted. The photo is the official image converted losslessly to PNG and scaled proportionally.}
+\note{[0:45] Mobileye's Roadbook is a fleet example. Assume three hundred million equipped cars sending anonymized road data. The cloud matches drives of the same road, combines them, and sends the updated map back to the cars. My own work there was junction perception. Notice that the map counts each road once, however many cars drove it: count once. Self-driving compute gives execution the same shape: many runs from one reached state, one combined result. But a fleet of runs keeps doing the same work. That is the problem.}
+\end{frame}

@@ -1,0 +1,19 @@
+% Act 5, rule three: the proposed epoch fence and the digest-keyed publish. Split from the old publish-once slide.
+\begin{frame}[t]{\ev{\tagP}\surf{PUBLISH ONCE}The controller rejects a late result from a replaced worker.}
+\vspace{.3cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,every node/.style={align=center,font=\fontsize{13}{16}\selectfont}]
+\useasboundingbox (0,.75) rectangle (14.4,-2.75);
+\node[bad,text width=4.6cm,minimum height=1.3cm] (f) at (2.45,0) {Replaced worker's late\\result: epoch \textbf{1}};
+\node[state,text width=4.2cm,minimum height=1.3cm] (e) at (7.95,0) {Controller's current\\epoch: \textbf{2}};
+\node[text=Rust,font=\fontsize{16}{19}\selectfont\bfseries,anchor=west] (g) at (10.9,0) {Reject: $1\ne2$};
+\draw[flow] (f)--(e);\draw[denied] (e)--(g);
+\node[state,text width=4.6cm,minimum height=1.3cm] (p) at (2.45,-2.0) {Retried publish\\of digest $d$};
+\node[evidence,text width=4.2cm,minimum height=1.3cm] (q) at (7.95,-2.0) {$d$ already\\published};
+\node[text=Teal,font=\fontsize{16}{19}\selectfont\bfseries,anchor=west] (n) at (10.9,-2.0) {No-op};
+\draw[flow] (p)--(q);\draw[flow] (q)--(n);
+\end{tikzpicture}
+\claim{Proposed: one controller, current epoch, publish once.}
+\sources{Epoch fence and digest-keyed publish: proposed; TLA+ design, no TLC run. Prior art: leases (1989), Chubby sequencers (2006).}
+\qadetail{DESIGN scope: the epoch (a permission version number, a fencing token in the Chubby-sequencer sense) is a proposed publication protocol, not an implemented or model-checked result: a TLA+ design exists, with no TLC run or implementation trace check recorded. The controller checks authenticated identity, current epoch, expiry, artifact, scope and budget; evidence, approval and publication must name one frozen artifact. A fence rejects stale results; it does not by itself give exactly-once publication. Publish-once also needs an idempotent publish keyed by the artifact digest, so a controller crash between push and record cannot publish twice; if the controller is ever replicated, the repository itself must check the epoch. Replacement and concurrent fork are distinct: replacing logical worker w invalidates its old epoch, while a concurrent child gets a new worker identity and its own epoch and need not revoke a continuing parent. Fresh identity alone does not confer authority. Authorization is checked outside restored guest state, so a copied local generation value cannot establish current permission. Controller-held publication, with no publish key in the worker, was exercised in the factory runs. A replaced or restored worker may still try to deliver, which is why the fence lives in the controller. Prior art: leases (Gray and Cheriton, SOSP 1989); fencing tokens as in Chubby sequencers (Burrows, OSDI 2006).}
+\note{[0:45] So the controller keeps an epoch, a permission version number. Replacing a worker moves the epoch from one to two. A late result from the old worker still carries one, so the controller rejects it. The check lives in the controller, so restoring a snapshot cannot revive an old permission. And a publish keyed by the digest makes a retry a no-op, like a cache hit. Both are proposed. One controller, current epoch, publish once. What is still open?}
+\end{frame}
