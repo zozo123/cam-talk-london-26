@@ -1,0 +1,35 @@
+% One worked example of the three rules, laid out under the map's three columns (x = 2.3, 7.2, 12.1).
+% BUILD 3: step 1 compute once, step 2 count once, step 3 publish once.
+\begin{frame}[t]{\ev{\tagA}\surf{ONE EXAMPLE}Example: three agents, one failing test.}
+\vspace{.15cm}
+\noindent\begin{tikzpicture}[x=1cm,y=1cm,
+  zh/.style={anchor=south,font=\fontsize{12}{14}\selectfont\bfseries,text=Teal},
+  zc/.style={anchor=north,font=\fontsize{12}{14}\selectfont,text=Muted},
+  b/.style={font=\fontsize{12.5}{15}\selectfont,inner sep=3pt,minimum height=.8cm,align=center},
+  every node/.style={align=center}]
+\useasboundingbox (0,.95) rectangle (14.4,-3.25);
+\fill[Pale!60] (0,.3) rectangle (4.55,-2.45);
+\fill[Pale!60,visible on=<2->] (4.85,.3) rectangle (9.55,-2.45);
+\fill[Pale!60,visible on=<3->] (9.85,.3) rectangle (14.4,-2.45);
+\node[zh] at (2.3,.35) {1\enspace COMPUTE ONCE};
+\node[state,b,text width=2.3cm] (s) at (1.35,-1.05) {Install deps,\\reproduce the bug};
+\foreach \n/\y in {A/-.15,B/-1.05,C/-1.95}{\node[candidate,b,minimum width=.85cm,minimum height=.66cm,inner sep=2pt] (\n) at (3.85,\y) {\n};\draw[flow] (s.east)--(\n.west);}
+\node[zc] at (2.3,-2.55) {1 setup, not 3};
+\node[zh,visible on=<2->] at (7.2,.35) {2\enspace COUNT ONCE};
+\node[evidence,b,minimum width=2.1cm,visible on=<2->] (h1) at (7.2,-.6) {hash h1};
+\node[evidence,b,minimum width=2.1cm,visible on=<2->] (h2) at (7.2,-1.95) {hash h2};
+\draw[flow,visible on=<2->] (A.east)--(h1.west);\draw[flow,visible on=<2->] (B.east)--(h1.west);\draw[flow,visible on=<2->] (C.east)--(h2.west);
+\node[zc,visible on=<2->] at (7.2,-2.55) {3 runs, 2 results};
+\node[zh,visible on=<3->] at (12.1,.35) {3\enspace PUBLISH ONCE};
+\node[evidence,b,minimum width=2.1cm,visible on=<3->] (t1) at (11.05,-.6) {promise \yes};
+\node[bad,b,minimum width=2.1cm,visible on=<3->] (t2) at (11.05,-1.95) {promise \no};
+\draw[flow,visible on=<3->] (h1)--(t1);\draw[flow,visible on=<3->] (h2)--(t2);
+\node[state,b,text width=1.9cm,visible on=<3->] (p) at (13.35,-.6) {publish\\h1, once};
+\draw[flow,visible on=<3->] (t1)--(p);
+\node[zc,visible on=<3->] at (12.1,-2.55) {1 publish, by the controller};
+\end{tikzpicture}
+\uncover<3->{\claim{One setup. Two distinct results. One publish.}}
+\sources{Illustration, not a recorded run: our factory runs were serial, and nothing forked. A hash names a patch's exact bytes.}
+\qadetail{A made-up case in the shape of the factory work, used only to make the three rules concrete. Compute once: the expensive preparation (installing dependencies, reproducing the failure) runs once and the children start from that reached state; whether that beats rebuilding from a warm cache is the cost rule on the runtime slides, and on islo today this would be restore fan-out from one named snapshot, not a verified memory fork. Count once: two children that return byte-identical patches have the same content hash, so they are one candidate and one observation, not two; different hashes can still share errors, which the correlation slide covers. Publish once: the controller runs the test for the change's promise on the exact bytes of each distinct candidate, publishes the passing hash once, and rejects the failing one; the hash proves identity, not correctness. The sha256-bound publication check is built; testing each promise and the epoch fence are proposed.}
+\note{[1:00] Here is one small example. It is made up, but it has the shape of our factory work. An agent must fix one failing test. The slow part is setup: install the dependencies and reproduce the bug. We do that once. Then we fork three children: A, B and C. One setup, not three. That is compute once. Each child returns a patch, named by its hash. A and B made the same edit. So they have the same hash. That is one result, not two. That is count once. Now run the promised test on the exact bytes. Hash one passes. Hash two fails. The controller publishes hash one, once. That is publish once. Now five real examples.}
+\end{frame}
