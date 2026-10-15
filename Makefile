@@ -1,4 +1,4 @@
-.PHONY: all deck dist guide clean short
+.PHONY: all deck dist guide clean short pptx
 
 all: deck
 
@@ -17,7 +17,11 @@ talk.pdf: $(SOURCES)
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 	pdflatex -halt-on-error -interaction=nonstopmode talk.tex
 
-# Short 20-slide version: talk-short.tex + short/*.tex, same preamble.
+# PowerPoint copy of the short deck for Presenter View (needs python-pptx).
+pptx: short
+	python3 tools/presenter_pptx.py
+
+# Short version: talk-short.tex + short/*.tex, same preamble.
 SHORT_SOURCES := talk-short.tex $(wildcard preamble/*.tex) $(wildcard short/*.tex) $(wildcard assets/*)
 
 short: talk-short.pdf talk-short-handout.pdf
