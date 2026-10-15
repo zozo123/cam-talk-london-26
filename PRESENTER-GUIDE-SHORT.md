@@ -2,7 +2,7 @@
 
 **Reusable execution for self-driving computers.** Cambridge SRG, 15 October 2026.
 
-Generated from short-deck source. 31 main slides; no appendix. Planned duration **28:05**; 3160 spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.
+Generated from short-deck source. 31 main slides; no appendix. Planned duration **28:05**; 3158 spoken words. Cues are a plan, not a measured rehearsal. Q&A detail is retained separately from the spoken script.
 
 ## Run of show
 
@@ -19,7 +19,7 @@ Generated from short-deck source. 31 main slides; no appendix. Planned duration 
 | 9 | The forkable API prepares once and runs alternatives in private children. | 0:45 | 6:10–6:55 | 88 | 117 | 1 |
 | 10 | Caches, forks and sandboxes are old; coupling them to evidence and acceptance is new. | 0:50 | 6:55–7:45 | 86 | 103 | 1 |
 | 11 | Sharing work creates three rules. | 0:50 | 7:45–8:35 | 87 | 104 | 3 |
-| 12 | A real run: an AI agent tried 126 changes to one model. | 1:20 | 8:35–9:55 | 158 | 118 | 3 |
+| 12 | A real run: an AI agent tried 126 changes to one model. | 1:20 | 8:35–9:55 | 156 | 117 | 3 |
 | 13 | Reuse makes fuzzing fast; only checks turn crashes into findings. | 1:00 | 9:55–10:55 | 108 | 108 | 1 |
 | 14 | 250 samples raised SWE-bench Lite coverage from 15.9% to 56%. | 1:00 | 10:55–11:55 | 107 | 107 | 1 |
 | 15 | Our CRISPR screen narrowed 19,050 genes to about 100 candidates. | 1:00 | 11:55–12:55 | 116 | 116 | 1 |
@@ -156,7 +156,7 @@ This slide restates the canonical three system responsibilities. Runtime starts 
 
 *1:20; starts 8:35*
 
-First, one real example: Karpathy's autoresearch. An AI agent tries to improve a language model. It may edit only one file, the training script. Data preparation, the tokenizer and the evaluator are fixed. They are set up once. Every attempt starts from the best commit so far. That is compute once. In one reported session, the agent made a hundred twenty-six attempts. Every score came from the same validation set. That set is one shared observation, reused again and again. So the gain needs a separate held-out check. That is count once. After each five-minute run, the agent keeps the change or reverts it in Git. Twenty-three were kept, a hundred two reverted, and one crashed. A kept change becomes the new best commit. That is publish once. The score fell 2.8 percent. The loop ran one attempt at a time, with no forks. AlphaEvolve runs the same loop over a population of programs. Now four more fields.
+This is Karpathy's autoresearch. An AI agent tries to improve a language model. It may edit only one file, the training script. Data preparation, the tokenizer and the evaluator are fixed. They are set up once. Every attempt starts from the best commit so far. That is compute once. In one reported session, the agent made a hundred twenty-six attempts. Every score came from the same validation set. That set is one shared observation, reused again and again. So the gain needs a separate held-out check. That is count once. After each five-minute run, the agent keeps the change or reverts it in Git. Twenty-three were kept, a hundred two reverted, and one crashed. A kept change becomes the new best commit. That is publish once. The score fell 2.8 percent. The loop ran one attempt at a time, with no forks. AlphaEvolve runs the same loop over a population of programs. Now four more fields.
 
 **Q&A detail**
 

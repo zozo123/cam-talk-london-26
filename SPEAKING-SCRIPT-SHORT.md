@@ -224,7 +224,7 @@ Cambridge SRG, 15 October 2026. 31 slides, **28:05** planned. The words are the 
 
 *1:20 · starts 8:35*
 
-> First, one real example: Karpathy's autoresearch.  
+> This is Karpathy's autoresearch.  
 > An AI agent tries to improve a language model.  
 > It may edit only one file, the training script.  
 > Data preparation, the tokenizer and the evaluator are fixed.  
