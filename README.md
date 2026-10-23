@@ -1,6 +1,6 @@
 # Forkable Sandboxes: reusable execution for self-driving computers
 
-Seminar talk by Yossi Eliaz, Cambridge Systems Research Group (SRG), 15 October 2026. This repo holds the slides, presenter guides, references and claim boundaries. The talk connects reusable execution with the evidence and authority needed to accept a result.
+Seminar talk by Yossi Eliaz, Cambridge Systems Research Group (SRG), 15 October 2026 ([talks.cam listing](https://talks.cam.ac.uk/talk/index/273181)). This repo holds the slides, presenter guides, references and claim boundaries. The talk connects reusable execution with the evidence and authority needed to accept a result.
 
 The repo name is historical; the talk was given at Cambridge SRG.
 
