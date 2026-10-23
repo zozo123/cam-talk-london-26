@@ -1,9 +1,15 @@
-# Forkable Sandboxes Cambridge seminar
+# Forkable Sandboxes: reusable execution for self-driving computers
 
-This academic talk connects reusable execution with the evidence and authority needed to accept a result. It follows a personal path through container security, biological physics, genomics, immune-related combination assays, automotive perception and execution systems.
+Seminar talk by Yossi Eliaz, Cambridge Systems Research Group (SRG), 15 October 2026. This repo holds the slides, presenter guides, references and claim boundaries. The talk connects reusable execution with the evidence and authority needed to accept a result.
+
+The repo name is historical; the talk was given at Cambridge SRG.
 
 - [Seminar PDF](dist/forkable-sandboxes-cambridge.pdf): **57 main slides, 41:25 planned narration, no appendix or overlays**.
-- [Short seminar PDF](dist/forkable-sandboxes-cambridge-short.pdf) and [handout](dist/forkable-sandboxes-cambridge-short-handout.pdf): **31 simple slides, 27:45 planned**, built from `talk-short.tex` and `short/`. The talk moves in steps: the problem (work done twice), then step 1 cache, step 2 fork and step 3 sandbox, then what is new. Sharing work creates three rules: compute once (runtime), count once (evidence) and publish once (acceptance). The presenting PDF has click steps on six slides; the handout has one page per slide. Script, Q&A detail and clicks are in the [short presenter guide](PRESENTER-GUIDE-SHORT.md); the podium version with click and pause cues is [SPEAKING-SCRIPT-SHORT.md](SPEAKING-SCRIPT-SHORT.md) ([PDF](dist/forkable-sandboxes-cambridge-short-script.pdf)); build with `make short`. For two screens, [the PowerPoint copy](dist/forkable-sandboxes-cambridge-short.pptx) puts each click step on its own slide with only that step's lines in the speaker notes, for Presenter View or PowerPoint Live in Teams (`make pptx`, needs python-pptx).
+- Short seminar: **31 simple slides, 28:05 planned**, built from `talk-short.tex` and `short/` with `make short`.
+  - [Short seminar PDF](dist/forkable-sandboxes-cambridge-short.pdf), with click steps on six slides, and [handout](dist/forkable-sandboxes-cambridge-short-handout.pdf), one page per slide.
+  - [Short presenter guide](PRESENTER-GUIDE-SHORT.md): script, Q&A detail and clicks.
+  - Podium script with click and pause cues: [SPEAKING-SCRIPT-SHORT.md](SPEAKING-SCRIPT-SHORT.md) ([PDF](dist/forkable-sandboxes-cambridge-short-script.pdf)).
+  - [PowerPoint copy](dist/forkable-sandboxes-cambridge-short.pptx) for two screens: each click step is its own slide, with only that step's lines in the speaker notes, for Presenter View or PowerPoint Live in Teams (`make pptx`, needs python-pptx).
 - [Presenter guide](PRESENTER-GUIDE.md): timed spoken cues and retained Q&A detail.
 - [Two-sentence slide takeaways](SLIDE-TAKEAWAYS.md): the point and practical lesson of every slide.
 - [Review of all original 57 slides](DECK-REVIEW.md): argument, keep/rewrite/merge decisions and final locations.
@@ -19,6 +25,8 @@ Forkable compute organizes private alternative executions from a useful reached 
 Published examples attach mechanisms to values: AFL++ persistent mode reports typical **10–20×** speedups; SWE-bench Lite sampling raises coverage from **15.9% to 56%**; autoresearch validation bits per byte fall from **0.997900 to 0.969686**; AlphaEvolve reports **0.7%** average fleet compute recovery. Coauthored examples retain separate assays and **26** checked three-body links with Ori Chamo. The factory's **43:44 / $10.33** repair, missing direct test, and later teardown loss show what acceptance needs. CyberGym distinguishes **56 crashes** from **22 confirmed zero-days**.
 
 Section agendas introduce the examples and runtime, then the evidence bridge explains the return path. The technical spine is **run → evidence → acceptance**. Runtime reuses state and starts continuations. Evidence names the exact artifact, executed check and shared observations. Acceptance selects, composes or pools under the appropriate checks, with publication authority outside the child. Duplicate rejection is implemented; dependence-aware refusal and the integrated external checker remain design requirements. A set-union example explains duplicate observations; a covariance-weighted equation explains how a justified model can account for shared errors. The two planned experiments have not started.
+
+The short talk tells the story in steps: the problem (work done twice), then step 1 cache, step 2 fork and step 3 sandbox, then what is new. Sharing work creates three rules: compute once (runtime), count once (evidence) and publish once (acceptance).
 
 ComputeSDK’s **2 October 2026** Burst TTI run places Isorun first at **72.77 ms median**, with 100/100 successful requests. Its create-to-first-command endpoint differs from our **3.44 s** create-only trace; the new slide updates the landscape without claiming a controlled speedup. The dated raw JSON is preserved in `evidence/`.
 
@@ -36,3 +44,7 @@ ComputeSDK’s **2 October 2026** Burst TTI run places Isorun first at **72.77 m
 ## Build and edit
 
 `talk.tex` is canonical. The act indexes order active frames; other source files are retained research/Q&A records. `make dist` compiles the PDF and regenerates the presenter guide. CI verifies **57 pages**, displayed content and a 35–45 minute cue window. Every active frame has a spoken note and hidden Q&A detail. Secondary mathematics and probes remain outside the main narration. PREREGISTRATION.md is preserved unchanged.
+
+## Rights
+
+No license file has been added yet, so no reuse license is granted. Ask [the author](https://yossieliaz.netlify.app/) before reusing the slides or text. Third-party images (see [assets/SOURCES.md](assets/SOURCES.md)) remain their owners'.
